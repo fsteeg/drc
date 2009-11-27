@@ -1,0 +1,7 @@
+.metadata/
+bin/
+de.uni_koeln.spinfo.*
+de.uni_koeln.phil_fak.*
+com.*
+.DS_Store
+.svn

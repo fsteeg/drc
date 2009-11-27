@@ -1,0 +1,79 @@
+<style type="text/css"> #tableborders td {border: 1px solid #ccc;  padding: .1em .25em;} </style>
+
+h2. Problem Definition
+
+The Romansch Chrestomathy (RC), the most important collection of texts in the "Romansch language":http://www.ethnologue.com/show_language.asp?code=roh, is not available in high quality full text, and therefore not searchable or machine-readable. While being written in Latin script, the use of diacritics and historical typography prevent the creation of a high quality corpus by simple OCR alone, which can be seen in a "digitization effort":http://www.archive.org/details/rtoromanischech00camigoog of the RC by Google. A complete, reliable evaluation of the RC digitization quality is only possible by native speakers of Romansch. A similar situation is true for many other linguistic minorities.
+
+h2. Requirements Specification
+
+Below we summarize both functional requirements and quality requirements. These are largely based on our proposal approved by the "DFG":http://www.dfg.de/en/. Where available, we map the requirements to layers (data, logic, presentation for now) and components (to be determined), as well as to concrete issues in our "issue tracker":http://github.com/fsteeg/drc/issues. This is work in progress.
+
+h3. Functional Requirements
+
+Functional requirements for each work package:
+
+h4. WP1: Metadata
+
+table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
+| *Requirement* | *Layers* | *Components* | *Issues* |
+| Harvest additional metadata from RC volume 15 (index volume) | Data | New Metadata | "#3":http://github.com/fsteeg/drc/issues#issue/3  |
+| Raw OCR of the RC, stored as TEI-compliant XML | Data | Texts | "#4":http://github.com/fsteeg/drc/issues#issue/4 |
+
+h4. WP2: Prototype
+
+table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
+| *Requirement* | *Layers* | *Components* | *Issues* |
+| Wiki-like collaborative editing of the raw OCR result | Presentation | Edit | |
+| Ability to add other, already correct texts; vision: Romansch corpus research portal | Logic | Data Management | |
+| Search based on metadata, e.g. for access to individual varieties | Presentation | Search | |
+| Display assumed OCR errors as suggested starting points for editors | Presentation | Edit | |
+| Presentation of texts with and without annotations | Presentation | Search | |
+| Display text and digitized image simultaneously | Presentation | Edit | |
+| Highlight region being edited in digitized image | Presentation | Highlighting | |
+| Versioning for archiving and securing the correction process | Logic, Presentation | Versioning | |
+| User management, including geographic data (for access rights, statistics) | Logic | User Management | |
+| Community-based quality control, e.g. editing rights restrictions, peer review | Presentation | Review | |
+| Provide some sort of rich editing experience (sections, headings) | Presentation | Edit | |
+| Automatic re-indexing of data upon changes, or nightly | Logic | Index | |
+| Display user statistics, like number of edits etc. | Presentation | Review | |
+| Support internationalization (e.g. German, English, Romansch UI) | Logic, Presentation | Internationalization | |
+
+h4. WP3: Workflow
+
+table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
+| *Requirement* | *Layers* | *Components* | *Issues* |
+| Plug-in mechanism for correction dictionaries [?] | Logic | Dictionary Plug-in Mechanism | |
+| Plug-in mechanism for custom metadata (e.g. variety-specific metadata) | Logic | Metadata Plug-in Mechanism | |
+| Harvest position information from digitized images | Logic | Harvest Scans | |
+
+h4. WP4: Revision
+
+table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
+| *Requirement* | *Layers* | *Components* | *Issues* |
+| Make Romansch language community aware of the project and the beta program | | | |
+| Motivate user community (goal: 50 - 500 users), e.g. reputation, badges | Logic, Presentation | Statistics, Review | |
+| Created content is community owned (e.g. Creative Commons) | Data | Texts | |
+| Suggest similar text locations to user during editing [easy] | Logic, Presentation | Index, Edit | |
+| Learn from user edits, use machine learning to auto-correct other text passages [hard] | Logic | Machine Learning | |
+| Collect user statistics based on edits (e.g. favorite words, find similar users, etc.) | Logic | Statistics | |
+
+h4. WP5: Release
+
+table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
+| *Requirement* | *Layers* | *Components* | *Issues* |
+| Publication of resulting texts in the "Digizeitschriften":http://www.digizeitschriften.de/ project | Data | | "#4":http://github.com/fsteeg/drc/issues#issue/4 |
+| Publish corpus on USB Cologne | Data | | "#4":http://github.com/fsteeg/drc/issues#issue/4 |
+| Integrate with "Tesla":http://www.spinfo.phil-fak.uni-koeln.de/spinfo-forschung-tesla.html for usage of full text (index, concordance, etc.) | Data, Logic [?], Presentation [?] | | |
+| Make results available via web services | Logic | Webservice API | |
+| Publish methodology etc. | Presentation | Documentation | |
+
+h3. Quality Requirements
+
+table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
+| *Requirement* | *Layers* | *Components* | *Issues* |
+| Usable by linguists and literary scholars | Presentation | All Presentation | |
+| Straight-forward, uncluttered user interface and experience | Presentation | Search, Edit | |
+| High response time for highlighting functionality (0.1 - 1 s.) | Presentation | Highlighting | |
+| High availability (platform independent, at best both web-based and offline mode [?]) | All | | |
+| High data security: created content is a cultural and community-owned asset | Data, Logic | Backup | |
+| Easy deployment and maintenance of software and data | All | | |

@@ -1,0 +1,81 @@
+/* Work in progress: architecture overview diagram */
+digraph drc_architecture {
+
+  node[shape=box width=1.8 height=0.6]
+  rankdir=LR
+  
+  subgraph cluster_1{
+    label="Data"
+    
+    subgraph cluster_11 {
+      label="Existing"
+      style=dashed
+      
+      existing_meta [label="Existing\nMetadata"]
+      scans         [label="Scans"]
+      
+    } existing_meta->scans->backup[style=invis]
+    
+    subgraph cluster_12 {
+      label="New"
+      style=dashed
+      
+      new_meta      [label="New\nMetadata"]
+      texts         [label="Texts"]
+      user_data     [label="User Data"]
+      dictionaries  [label="Dictionaries [?]"]
+      
+    } new_meta->texts->user_data->dictionaries[style=invis]
+    
+    backup          [label="Backup"] 
+    
+    
+  }
+   
+  subgraph cluster_2 {
+    label="Logic"
+    
+     subgraph cluster_22 {
+      label="User-centric"
+      style=dashed
+      
+      security              [label="Security"]
+      user_management       [label="User Management"]
+      statistics            [label="Statistics"]
+      webservice_api        [label="Webservice\nAPI"]
+      internationalization  [label="Internationalization"]
+      
+    } security->user_management->statistics->webservice_api->internationalization[style=invis]
+    
+    subgraph cluster_21 {
+      label="Data-centric"
+      style=dashed
+      
+      positions         [label="Positional\nInformation"]
+      plugin_dict       [label="Dictionary\nPlug-in\nMechanism [?]"]
+      plugin_meta       [label="Metadata\nPlug-in\nMechanism [?]"]
+      index             [label="Index"]
+      machine_learning  [label="Machine\nLearning"]
+      versioning        [label="Versioning"]
+      data_management   [label="Data\nManagement"]
+      
+    } positions->plugin_dict->plugin_meta->index->machine_learning->versioning->data_management[style=invis]
+    
+  }
+  
+  subgraph cluster_3 {
+    label="Presentation"
+    
+    subgraph cluster_31 {
+      style=invis
+    
+      edit          [label="Edit"]
+      search        [label="Search"]
+      highlighting  [label="Highlighting"]
+      review        [label="Review"]
+      documentation [label="Documentation"]
+    }
+    
+  } edit->search->highlighting->review->documentation[style=invis]
+  
+}

@@ -1,0 +1,148 @@
+package de.uni_koeln.ub.drc.util
+
+import scala.xml._
+import java.io._
+
+import scala.xml._
+import scala.collection.immutable._
+import java.io.FileReader
+import java.lang.StringBuilder
+import scala.util.matching.Regex
+
+import Configuration._
+
+/** 
+ * Early experimentation: convert METS metadata (XML) for scans at http://www.digizeitschriften.de/main/dms/toc/?IDDOC=5570 
+ * (see http://www.digizeitschriften.de/main/dms/toc/?IDDOC=5570 for format info in German) to the ContentDM input format (TSV). 
+ * @see MetsTransformerSpec
+ * @author Fabian Steeg (fsteeg)
+ **/
+private[util] class MetsTransformer(xml:Elem) {
+  
+  private val mods = xml\"dmdSec"\"mdWrap"\"xmlData"\"mods"
+  private val loc = (mods\"location"\"url").text.trim
+  private val num = (mods\"part"\"detail"\"number").text.trim
+  private val date = (mods\"originInfo"\"dateIssued").text.trim
+  private val place = (mods\"originInfo"\"place"\"placeTerm").text.trim
+  private val pub = (mods\"originInfo"\"publisher").text.trim
+  
+  /* Maps used when generating the output in the transform method: */
+  private val log: (String, Map[String, (String, String)]) = buildLogMap()
+  private val fullTitle = log._1
+  private var logMap: Map[String,(String, String)] = log._2
+  private var physMap: Map[String, String] = buildPhysMap
+  private var linkMap: Map[String, String] = buildLinkMap
+  
+  private[util] def transform(): String = {
+    val builder = new StringBuilder()
+    val lines : List[String] = List()
+    
+    builder.append(tabbed(List("CDM_LVL","CDM_LVL_NAME","Titel", "Quelle", "Publikation", "Ausgabe", "Autor", "Jahr", "Verlag", "Ort", "Typ", "Dateiformat", "Bemerkungen", "Dateiname")))
+    builder.append(tabbed(List("", fullTitle, fullTitle, loc, "Romanische Forschungen", num, "C. Decurtins", date, pub, place, "Image", "image/tif")))
+    builder.append(tabbed(List("0", fullTitle, "Titelblatt", "", "", "", "", "", "", "", "", "", "o", "00000005.tif")))
+
+    xml\"fileSec"\"fileGrp"\"file" foreach{ (file) =>
+      val fileId = file\"@ID"
+      // The following line is not working with the current Scala 2.8 nightlies, work-around via regex below
+      // val fileUrlOrig = (file\"FLocat"\"@{http://www.w3.org/1999/xlink}href").toString
+      val fileUrl = attribute("href", (file\"FLocat"))
+      if(fileUrl endsWith ".tif") {
+        /** For each valid file, we get the details... */
+        xml\"structMap"\"div"\"div" foreach { (div) =>
+          div\"fptr" foreach { (fptr) =>
+            if(fptr\"@FILEID" equals fileId) {
+              /** Get the physical ID for the file... */
+              val physId = (div\"@ID").text
+              builder.append(processStructLinks(physId, fileUrl))
+            }
+          }
+        }
+      }
+    }
+    
+    def processStructLinks(physId: String, fileUrl: String) = {
+      if(linkMap.contains(physId)){
+        val logId = linkMap(physId)
+        if(logMap.contains(logId)) {
+          val vals = logMap(logId)
+          /** Print the line in the tabstop-sep. file for one scanned file: */
+          val fileName = fileUrl.substring(fileUrl.lastIndexOf('/') + 1)
+          tabbed(List("1", vals._1 + ": " + vals._2, physMap(physId) , "", "", "", "", "", "", "", "", "", "o", fileName))
+        }
+      }
+    }
+    
+    builder.toString
+    
+  }
+  
+  private def attribute(s:String, n:NodeSeq): String = {
+    val regex = new Regex("""<METS:.* xlink:""" + s + """="(.*?)".*>""")
+    val regex(fileUrl) = n.toString.split("\n")(0)
+    fileUrl
+  }
+   
+  private def tabbed(items:List[String]): String = {
+    val builder = new StringBuilder()
+    for(item <- items) {
+      if(item.trim.size > 0) builder.append("\"" + item + "\"")
+      builder.append("\t")
+    }
+    builder.append("\n").toString
+  }
+  
+  private def buildLogMap(): (String, Map[String, (String, String)]) = {
+    /* Map logical IDs to chapter numbers and labels: */
+    var logMap: Map[String,(String,String)] = Map()
+    var fullTitle = ""
+    var chapterCount = 0
+    xml\"structMap"\"div"\"div"\"div" foreach { (div) =>
+      /* Process on this level: */
+      process(div)
+      /* And one level below: */
+      div\"div" foreach { process(_) }
+    }
+    
+    def process(div:Node) = {
+      val parentLabel = (div\"@LABEL").toString.trim
+      var lastLabel = ""
+      div\"div" foreach{ (subdiv) =>
+        val label : String = (subdiv\"@LABEL").toString.trim
+        if(parentLabel.contains("Chrestomathie")) {
+          fullTitle = parentLabel
+          val typeLabel : String = (subdiv\"@TYPE").toString.trim
+          if(label!=lastLabel && typeLabel.contains("Chapter")) chapterCount += 1
+          lastLabel=label
+          val id = if(typeLabel.contains("Chapter")) " " + chapterCount else ""
+          logMap += (subdiv\"@ID").text -> (typeLabel+id, label)
+        }
+      }
+    }
+    
+    (fullTitle, logMap)
+    
+  }
+  
+  private def buildPhysMap() = {
+    /* Map physical IDs to page numbers: */
+    var physMap:Map[String,String] = Map()
+    xml\"structMap"\"div"\"div" foreach { (div) =>
+      val id = (div\"@ID").text.trim
+      var page = (div\"@ORDERLABEL").text.trim
+        if(page.length == 0) page = (div\"@ORDER").text.trim
+        if(id.length() > 0 && page.length() > 0) physMap += id -> page
+    }
+    physMap
+  }
+  
+  private def buildLinkMap = {
+    /* Map physical IDs to logical IDs: */
+    var linkMap:Map[String,String] = Map()
+    xml\"structLink"\"smLink" foreach { (link) =>
+      /* physId -> logId */
+      linkMap += attribute("to", link) -> attribute("from", link)
+    }
+    linkMap
+  }
+  
+}
