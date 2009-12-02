@@ -1,0 +1,81 @@
+/* Work in progress: architecture components diagram */
+digraph drc_architecture_components {
+
+  node[shape=box width=1.8 height=0.6 style=filled fillcolor="grey95"]
+  rankdir=LR
+  
+  subgraph cluster_1{
+    label="Data"
+    
+    subgraph cluster_11 {
+      label="Existing"
+      style=dashed
+      
+      existing_meta [label="Existing\nMetadata"]
+      scans         [label="Scans"]
+      
+    } existing_meta->scans[style=invis]
+    
+    subgraph cluster_12 {
+      label="New"
+      style=dashed
+      
+      new_meta      [label="New\nMetadata" fillcolor=white]
+      texts         [label="Texts"]
+      user_data     [label="User Data"]
+      dictionaries  [label="Dictionaries"  fillcolor=white]
+      backup        [label="Backup" fillcolor=white] 
+      
+    } scans->texts->user_data->dictionaries->new_meta->backup[style=invis]
+    
+    
+    
+  }
+   
+  subgraph cluster_2 {
+    label="Logic"
+    
+     subgraph cluster_22 {
+      label="User-centric"
+      style=dashed
+      
+      security              [label="Authentication and\nAuthorization"]
+      user_management       [label="User Management"]
+      statistics            [label="Statistics" fillcolor=white]
+      webservice_api        [label="Webservice\nAPI" fillcolor=white]
+      internationalization  [label="Internationalization"]
+      
+    } security->user_management->internationalization->statistics->webservice_api[style=invis]
+    
+    subgraph cluster_21 {
+      label="Data-centric"
+      style=dashed
+      
+      positions         [label="Positional\nInformation" fillcolor=lightgrey]
+      plugin_dict       [label="Dictionary\nPlug-in\nMechanism" fillcolor=white]
+      plugin_meta       [label="Metadata\nPlug-in\nMechanism" fillcolor=white]
+      index             [label="Index"]
+      machine_learning  [label="Machine\nLearning" fillcolor=white]
+      versioning        [label="Versioning"]
+      data_management   [label="Data\nManagement" fillcolor=white]
+      
+    } positions->versioning->index->data_management->machine_learning->plugin_dict->plugin_meta[style=invis]
+    
+  }
+  
+  subgraph cluster_3 {
+    label="Presentation"
+    
+    subgraph cluster_31 {
+      style=invis
+    
+      edit          [label="Edit"]
+      search        [label="Search"]
+      highlighting  [label="Highlighting" fillcolor=lightgrey]
+      review        [label="Review"]
+      documentation [label="Documentation" fillcolor=white]
+    }
+    
+  } highlighting->edit->search->review->documentation[style=invis]
+  
+}

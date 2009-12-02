@@ -1,0 +1,16 @@
+/* Work in progress: architecture components diagram */
+digraph drc_architecture_overview {
+
+  node[shape=box width=1.8 height=0.6 style=filled fillcolor="grey95"]
+  rankdir=LR
+  
+  user[style=empty shape=none label="User"]
+  presentation[label="Presentation\nLayer"]
+  logic[label="Logic\nLayer"]
+  data[label="Data\nLayer"]
+  
+  user->presentation[style=dashed arrowhead=open]
+  presentation->logic[dir=both]
+  logic->data[dir=both]
+  
+}
