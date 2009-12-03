@@ -10,6 +10,22 @@ The overall system architecture is a three-tier system made of a presentation la
 
 A three-tier architecture seems to be the natural solution for our problem: the main subject of the project is to produce a certain kind of data, which is identical for every user and can therefore be stored centrally (data layer). Different users should be able to access and manipulate the data, while maintaining its integrity (logic layer). The data can be accessed in different ways (read only, edit access, etc.) by different users (presentation layer).
 
+A layered architecture also makes interoperability in different areas feasible, e.g. data interoperability on the data layer or functional interoperability on the logic layer. 
+
+h3. Layers
+
+h4. Presentation
+
+The main function of the presentation layer is to provide unified access to both the original scans and the full texts. This includes a synchronization between these during editing (the part of the original scan being edited should be highlighted). The presentation layer will also provide access to searching the full text and reviewing changes made by a user himself or by other users.
+
+h4. Logic
+
+The logic layer implements the functionality provided by the presentation layer, restricts access by user roles and mediates requests of different users, maintaining data integrity. In particular the logic layer implements the core functionality of the system, including user mangement, authorization, versioning and internationalization, among others (see below).
+
+h4. Data
+
+The data layer contains all data used in the system: the original scans, the full texts, meta data for the texts and user data. The full texts and meta data are plain text (conforming to certain XML schemas). The scans are binary image files. The format of the user data is inherently structured, but the exact format is to be determined. The data layer provides a uniform access to these heterogeneous data types. 
+
 h3. Components
 
 Each layer consists of multiple components, which correspond to items from the "requirements specification":http://wiki.github.com/fsteeg/drc/requirements. Core components are darkened in the diagram, while add-on components that are likely to change are white:
@@ -18,4 +34,4 @@ Each layer consists of multiple components, which correspond to items from the "
 
 h3. Distribution
 
-The different layers are independent and can be distributed on different machines, e.g. the presentation layer could run on a client machine, while the logic and data layers run on a server machine.
+The different layers are independent and can be distributed on different machines, e.g. the presentation layer could run on a client machine, while the logic and data layers run on a server machine. This ensures scalability, as upon larger user numbers the server hardware can be upgraded or the logic and data layers can be set up on different server machines. 

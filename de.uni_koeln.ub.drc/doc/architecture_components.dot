@@ -9,7 +9,7 @@ digraph drc_architecture_components {
     
     subgraph cluster_11 {
       label="Existing"
-      style=dashed
+      //style=dotted
       
       existing_meta [label="Existing\nMetadata"]
       scans         [label="Scans"]
@@ -18,13 +18,13 @@ digraph drc_architecture_components {
     
     subgraph cluster_12 {
       label="New"
-      style=dashed
+      //style=dotted
       
-      new_meta      [label="New\nMetadata" fillcolor=white]
+      new_meta      [label="New\nMetadata" style=dotted]
       texts         [label="Texts"]
       user_data     [label="User Data"]
-      dictionaries  [label="Dictionaries"  fillcolor=white]
-      backup        [label="Backup" fillcolor=white] 
+      dictionaries  [label="Dictionaries"  style=dotted]
+      backup        [label="Backup" style=dotted] 
       
     } scans->texts->user_data->dictionaries->new_meta->backup[style=invis]
     
@@ -37,27 +37,27 @@ digraph drc_architecture_components {
     
      subgraph cluster_22 {
       label="User-centric"
-      style=dashed
+      //style=dotted
       
       security              [label="Authentication and\nAuthorization"]
       user_management       [label="User Management"]
-      statistics            [label="Statistics" fillcolor=white]
-      webservice_api        [label="Webservice\nAPI" fillcolor=white]
+      statistics            [label="Statistics" style=dotted]
+      webservice_api        [label="Webservice\nAPI" style=dotted]
       internationalization  [label="Internationalization"]
       
     } security->user_management->internationalization->statistics->webservice_api[style=invis]
     
     subgraph cluster_21 {
       label="Data-centric"
-      style=dashed
+      //style=dotted
       
       positions         [label="Positional\nInformation" fillcolor=lightgrey]
-      plugin_dict       [label="Dictionary\nPlug-in\nMechanism" fillcolor=white]
-      plugin_meta       [label="Metadata\nPlug-in\nMechanism" fillcolor=white]
+      plugin_dict       [label="Dictionary\nPlug-in\nMechanism" style=dotted]
+      plugin_meta       [label="Metadata\nPlug-in\nMechanism" style=dotted]
       index             [label="Index"]
-      machine_learning  [label="Machine\nLearning" fillcolor=white]
+      machine_learning  [label="Machine\nLearning" style=dotted]
       versioning        [label="Versioning"]
-      data_management   [label="Data\nManagement" fillcolor=white]
+      data_management   [label="Data\nManagement" style=dotted]
       
     } positions->versioning->index->data_management->machine_learning->plugin_dict->plugin_meta[style=invis]
     
@@ -73,7 +73,7 @@ digraph drc_architecture_components {
       search        [label="Search"]
       highlighting  [label="Highlighting" fillcolor=lightgrey]
       review        [label="Review"]
-      documentation [label="Documentation" fillcolor=white]
+      documentation [label="Documentation" style=dotted]
     }
     
   } highlighting->edit->search->review->documentation[style=invis]
