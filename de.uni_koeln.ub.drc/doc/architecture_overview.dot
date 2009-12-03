@@ -1,10 +1,10 @@
 /* Work in progress: architecture components diagram */
 digraph drc_architecture_overview {
 
-  node[shape=box width=1.8 height=0.6 style=filled fillcolor="grey95"]
+  node[shape=box width=1 height=0.6 style=filled fillcolor="grey95"]
   rankdir=LR
   
-  user[style=empty shape=none label="User"]
+  user[style=empty shape=box style=dashed label="User"]
   presentation[label="Presentation\nLayer"]
   logic[label="Logic\nLayer"]
   data[label="Data\nLayer"]

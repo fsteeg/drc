@@ -1,7 +1,7 @@
 /* Work in progress: architecture components diagram */
 digraph drc_architecture_components {
 
-  node[shape=box width=1.8 height=0.6 style=filled fillcolor="grey95"]
+  node[shape=box width=1.35 height=0.6 style=filled fillcolor="grey95"]
   rankdir=LR
   
   subgraph cluster_1{
@@ -28,8 +28,6 @@ digraph drc_architecture_components {
       
     } scans->texts->user_data->dictionaries->new_meta->backup[style=invis]
     
-    
-    
   }
    
   subgraph cluster_2 {
@@ -39,11 +37,11 @@ digraph drc_architecture_components {
       label="User-centric"
       //style=dotted
       
-      security              [label="Authentication and\nAuthorization"]
-      user_management       [label="User Management"]
+      security              [label="Authorization"]
+      user_management       [label="User\nManagement"]
       statistics            [label="Statistics" style=dotted]
       webservice_api        [label="Webservice\nAPI" style=dotted]
-      internationalization  [label="Internationalization"]
+      internationalization  [label="Internationaliz."]
       
     } security->user_management->internationalization->statistics->webservice_api[style=invis]
     

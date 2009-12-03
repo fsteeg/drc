@@ -2,17 +2,15 @@ h2. Architecture
 
 This document describes the overall architecture of the DRC system. It is based on the "requirements specification":http://wiki.github.com/fsteeg/drc/requirements. This is work in progress and will be evolved incrementally.
 
-h3. Overview
+h3. Layers
 
 The overall system architecture is a three-tier system made of a presentation layer, a logic layer and a data layer. The presentation layer communicates with the logic layer and the logic layer communicates with the data layer. There is no direct coupling between the presentation layer and the data layer:
 
-!{width:600px}architecture_overview.png!
+!{width:400px}architecture_overview.png!
 
 A three-tier architecture seems to be the natural solution for our problem: the main subject of the project is to produce a certain kind of data, which is identical for every user and can therefore be stored centrally (data layer). Different users should be able to access and manipulate the data, while maintaining its integrity (logic layer). The data can be accessed in different ways (read only, edit access, etc.) by different users (presentation layer).
 
 A layered architecture also makes interoperability in different areas feasible, e.g. data interoperability on the data layer or functional interoperability on the logic layer. 
-
-h3. Layers
 
 h4. Presentation
 
@@ -30,7 +28,7 @@ h3. Components
 
 Each layer consists of multiple components, which correspond to items from the "requirements specification":http://wiki.github.com/fsteeg/drc/requirements. Core components are darkened in the diagram, while add-on components that are likely to change are white:
 
-!{width:1000px}architecture_components.png!
+!{width:700px}architecture_components.png!
 
 h3. Distribution
 
