@@ -1,19 +1,17 @@
 <style type="text/css"> #tableborders td {border: 1px solid #ccc;  padding: .1em .25em;} </style>
 
-h2. Technology
-
 This document describes and justifies technology choices for the implementation of the DRC system. It is based on the "requirements":http://wiki.github.com/fsteeg/drc/requirements specification and the overall "architecture":http://wiki.github.com/fsteeg/drc/architecture. This is work in progress and will be evolved incrementally.
 
 h3. Options
 
-As specified by the architecture, we have three independent layers: presentation, logic and data. For each layer, we have different technology options. 
+As specified by the architecture, we have three independent layers: _presentation_, _logic_ and _data_. For each layer, we have different technology options. 
 
-For reasons of platform-independence, performance and internal expertise we desire a solution running on the _Java Virtual Machine_ (JVM). We therefore don't consider solutions based on other technologies like _Rails_, _Django_, _Air_ or _Silverlight_. We also want to avoid heavyweight technologies and verbose protocols, so we won't consider full _Java EE_ application servers or _SOAP_-based web service frameworks like _JAX-WS_. As the nature of our problem demands a rich desktop-style UI (editing texts based on original scans, synchronized visually), we don't consider text or form-oriented frameworks like _Grails_, _Stripes_ or _Wicket_.
+For reasons of platform independence, performance and internal expertise we desire a solution running on the _Java Virtual Machine_ (JVM). We therefore don't consider solutions based on other technologies like _Rails_, _Django_, _Air_ or _Silverlight_. We also want to avoid heavyweight technologies and verbose protocols, so we won't consider full _Java EE_ application servers or _SOAP_-based web service frameworks like _JAX-WS_. As the nature of our problem demands a rich desktop-style UI (editing texts based on the original scans, synchronized visually), we don't consider text or form-oriented frameworks like _Grails_, _Stripes_ or _Wicket_.
 
 Based on these preconditions we consider the following technology choices for the three application layers:
 
 table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
-| *Presentation* | *Logic* | *Data* | 
+| *Presentation* | *Logic* | *Data* |
 | HTML 5, JavaFX, GWT, Swing, Eclipse 3, Eclipse 4 | JAX-RS (Jersey), RAP (Jetty) | Files (XML, PDF),  JPA (EclipseLink), CouchDB, S3 |  
 
 h3. Comparison
@@ -26,22 +24,22 @@ As choices of the logic layer suggest solutions for the presentation layer  (Ecl
 
 table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
 | *Criteria*                           | *HTML5* | *JavaFX*  | *Swing* | *GWT* | *Eclipse 3* | *Eclipse 4* | *Comments* |
-| Browser access                   | +++        | +             | +           | +++    | ++             | +++           | Plug-in vs. native browser support |
-| Web standards compliance | +++        | -              | -            | ++      | ++             | ++              | Plug-ins vs. JS vs. generated JS |
-| Desktop/offline mode        | -             | +++         | +++      | -         | +++           | +++           | Desktop vs. Web frameworks |
-| Integr. client-server solution | -             | -              | -            | -         | +                | +++           | RAP vs. stand-alone presentation |
-| High-level API components | -             | ++           | +           | +        | +++           | +++           | e.g. image proc., diffs, rich editing|
-| High-level GUI language     | +             | +++        | ++         | +        | +                | ++              | JavaFX, Scala, XWT, XScalaWT |
-| Maturity                              | +             | +              | +++      | +        | +++           | +                | Unreleased, released, compatibility |
-| Tesla integeration               | -             | -              | +            | +         | +++           | ++             | Java, Eclipse 3, Eclipse 4 bundles |
-| Internal expertise                | +            | -              | +            | +        | +++           | ++              | Previous, current and future projects |
-| *Sum*                                 | *9*         | *10*         | *11*       | *10*      | *21*           | *21*            | Best fit: *Eclipse 3* or *Eclipse 4* |
+| Browser access                   | + + +        | +             | +           | + + +    | + +             | + + +           | Plug-in vs. native browser support |
+| Web standards compliance | + + +        | -              | -            | + +      | + +             | + +              | Plug-ins vs. JS vs. generated JS |
+| Desktop/offline mode        | -             | + + +         | + + +      | -         | + + +           | + + +           | Desktop vs. Web frameworks |
+| Integrated client-server solution | -             | -              | -            | -         | +                | + + +           | RAP vs. stand-alone presentation |
+| High-level API components | -             | + +           | +           | +        | + + +           | + + +           | e.g. image proc., diffs, rich editing|
+| High-level GUI language     | +             | + + +        | + +         | +        | +                | + +              | JavaFX, ScalaSwing, XWT, XScalaWT |
+| Maturity                              | +             | +              | + + +      | +        | + + +           | +                | Unreleased, released, compatibility |
+| Tesla integeration               | -             | -              | +            | +         | + + +           | + +             | Java, Eclipse 3, Eclipse 4 bundles |
+| Internal expertise                | +            | -              | +            | +        | + + +           | + +              | Previous, current and future projects |
+| *Sum*                                 | *9*         | *10*         | *12*       | *10*      | *21*           | *21*            | Best fit: *Eclipse 3* or *Eclipse 4* |
 
 Some open questions regarding Eclipse RT technology include:
 
-* How well does working with RAP work without in-depth JS expertise?
-* How much of a moving target are the Eclipse 4 APIs to start developing against now?
-* How well can the RAP-based logic layer be made interoperable for non-RAP clients? 
+# How well does using RAP work without in-depth JS expertise?
+# How much of a moving target are the Eclipse 4 APIs to start developing against now?
+# How well can the RAP-based logic layer be made interoperable for non-RAP clients? 
 
 h4. Data
 
@@ -49,11 +47,11 @@ As most of the data already exists as files (scans, metadata, raw text), we will
 
 h2. Licensing
 
-Based on usage of Eclipse RT technology, using the license that works best with the Eclipse ecosystem seems most reasonable, i.e. the _Eclipse Public License_ (EPL). The EPL is a _weak copyleft_ type of license, which allows usage in closed-source products while "changes and modifications to EPL-licensed code need to be contributed back" ("details":http://dev.eclipse.org/blogs/mike/2009/04/30/epl-asl/).
+Based on usage of Eclipse RT technology, using the license that maximizes compatibility with the Eclipse ecosystem seems most reasonable, i.e. the _Eclipse Public License_ (EPL). The EPL is a _weak copyleft_ type of license, which allows usage in closed-source products while "changes and modifications to EPL-licensed code need to be contributed back" ("details":http://dev.eclipse.org/blogs/mike/2009/04/30/epl-asl/).
 
 h2. Libraries
 
-Besides the main technology and framework choices we have options for libraries to use with individual components. This is a collection of ideas.
+Besides the main technology and framework choices we have options for libraries to use for implementing individual components. This is a collection of ideas.
 
 table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
 |  *Library* | *Components* | *License* | *Comments* |
@@ -61,6 +59,6 @@ table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-
 | iText | Positional Information | MPL or LGPL | Possible alternative: PdfBox (BSD) |
 | Eclipse Compare Editor | Review | EPL | Part of the Eclipse API |
 | Mylyn WikiText | Editing, Documentation | EPL | Part of  the Eclipse API |
-| XScalaWT | Presentation | EPL | "Simplifies SWT development":http://www.coconut-palm-software.com/the_new_visual_editor/doku.php?id=blog:simplifying_swt_with_scala |
+| XScalaWT | Presentation components | EPL | "Simplifies SWT development":http://www.coconut-palm-software.com/the_new_visual_editor/doku.php?id=blog:simplifying_swt_with_scala |
 
-Criteria for the selection of libraries include necessity (will using the library make our lives easier than not using it?), library documentation (including usage sample) and license (EPL or EPL-compatible, cf. "Orbit":http://wiki.eclipse.org/Orbit_Bundles).
+Criteria for the selection of libraries include _necessity_ (i.e. will using the library make our lives easier than not using it?), _library documentation_ (including usage sample) and _license_ (EPL or EPL-compatible, cf. "Orbit":http://wiki.eclipse.org/Orbit_Bundles).
