@@ -23,17 +23,17 @@ h4. Logic and Presentation
 As choices of the logic layer suggest solutions for the presentation layer  (Eclipse presentation suggests a RAP/Eclipse logic layer, other presentation layers suggest a JAX-RS logic layer), the comparison table below only lists presentation layer choices:
 
 table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
-| *Criteria*                           | *HTML5* | *JavaFX*  | *Swing* | *GWT* | *Eclipse 3* | *Eclipse 4* | *Comments* |
-| Browser access                   | + + +        | +             | +           | + + +    | + +             | + + +           | Plug-in vs. native browser support |
-| Web standards compliance | + + +        | -              | -            | + +      | + +             | + +              | Plug-ins vs. JS vs. generated JS |
-| Desktop/offline mode        | -             | + + +         | + + +      | -         | + + +           | + + +           | Desktop vs. Web frameworks |
-| Integrated client-server solution | -             | -              | -            | -         | +                | + + +           | RAP vs. stand-alone presentation |
-| High-level API components | -             | + +           | +           | +        | + + +           | + + +           | e.g. image proc., diffs, rich editing|
-| High-level GUI language     | +             | + + +        | + +         | +        | +                | + +              | JavaFX, ScalaSwing, XWT, XScalaWT |
-| Maturity                              | +             | +              | + + +      | +        | + + +           | +                | Unreleased, released, compatibility |
-| Tesla integeration               | -             | -              | +            | +         | + + +           | + +             | Java, Eclipse 3, Eclipse 4 bundles |
-| Internal expertise                | +            | -              | +            | +        | + + +           | + +              | Previous, current and future projects |
-| *Sum*                                 | *9*         | *10*         | *12*       | *10*      | *21*           | *21*            | Best fit: *Eclipse 3* or *Eclipse 4* |
+| *Criteria*                                    | *HTML5* | *JavaFX*  | *Swing* | *GWT* | *Eclipse 3* | *Eclipse 4* | *Comments* |
+| Browser access                            | @+++@        | @+@             | @+@           | @+++@    | @++@             | @+++@           | Plug-in vs. native browser support |
+| Web standards compliance          | @+++@        | @-@              | @-@            | @++@      | @++@             | @++@              | Plug-ins vs. JS vs. generated JS |
+| Desktop/offline mode                 | @-@             | @+++@         | @+++@      | @-@         | @+++@           | @+++@           | Desktop vs. Web frameworks |
+| Integrated client-server solution | @-@             | @-@              | @-@            | @-@         | @+@                | @+++@           | RAP vs. stand-alone presentation |
+| High-level API components         | @-@             | @++@           | @+@           | @+@        | @+++@           | @+++@           | e.g. image proc., diffs, rich editing|
+| High-level GUI language             | @+@             | @+++@        | @++@         | @+@        | @+@                | @++@              | JavaFX, ScalaSwing, XWT, XScalaWT |
+| Maturity                                      | @+@             | @+@              | @+++@      | @+@        | @+++@           | @+@                | Unreleased, released, compatibility |
+| Tesla integeration                       | @-@             | @-@              | @+@            | @+@         | @+++@           | @++@             | Java, Eclipse 3, Eclipse 4 bundles |
+| Internal expertise                       | @+@            | @-@              | @+@            | @+@        | @+++@           | @++@              | Previous, current and future projects |
+| *Sum*                                        | *9*         | *10*         | *12*       | *10*      | *21*           | *21*            | Best fit: *Eclipse 3* or *Eclipse 4* |
 
 Some open questions regarding Eclipse RT technology include:
 
@@ -56,6 +56,7 @@ Besides the main technology and framework choices we have options for libraries 
 table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
 |  *Library* | *Components* | *License* | *Comments* |
 | Lucene | Search, Index | APL | Available as Orbit bundle |
+| Solr | Search, Index | APL | Simplifies Lucene usage |
 | iText | Positional Information | MPL or LGPL | Possible alternative: PdfBox (BSD) |
 | Eclipse Compare Editor | Review | EPL | Part of the Eclipse API |
 | Mylyn WikiText | Editing, Documentation | EPL | Part of  the Eclipse API |
