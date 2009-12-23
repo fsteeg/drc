@@ -56,7 +56,8 @@ Besides the main technology and framework choices we have options for libraries 
 table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
 |  *Library* | *Components* | *License* | *Comments* |
 | Lucene | Search, Index | APL | Available as Orbit bundle |
-| Solr | Search, Index | APL | Simplifies Lucene usage |
+| Solr | Search, Index | APL | Simplifies Lucene usage (REST API, PDF support, etc.) |
+| Luke | Search, Index | APL | Simplifies Lucene usage (_Lucene Index Toolbox_) |
 | iText | Positional Information | MPL or LGPL | Possible alternative: PdfBox (BSD) |
 | Eclipse Compare Editor | Review | EPL | Part of the Eclipse API |
 | Mylyn WikiText | Editing, Documentation | EPL | Part of  the Eclipse API |
