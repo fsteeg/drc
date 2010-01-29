@@ -1,6 +1,7 @@
 .metadata/
 bin/
 org.*
+javax.*
 de.uni_koeln.spinfo.*
 de.uni_koeln.phil_fak.*
 com.*
