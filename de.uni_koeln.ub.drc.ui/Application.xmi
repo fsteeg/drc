@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2008/UIModel" id="Application">
+  <children xsi:type="application:Window" id="Window">
+    <children xsi:type="application:Part" id="ImageView" style="" URI="platform:/plugin/de.uni-koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ImageView" label="DRC" tooltip=""/>
+    <children xsi:type="application:WindowTrim">
+      <children xsi:type="application:ToolBar">
+        <children xsi:type="application:DirectToolItem" URI="platform:/plugin/de.uni-koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExitHandler" label="Exit"/>
+      </children>
+    </children>
+    <mainMenu style="">
+      <children xsi:type="application:MenuItem" label="File">
+        <children xsi:type="application:DirectMenuItem" URI="platform:/plugin/de.uni-koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExitHandler" label="Exit"/>
+      </children>
+    </mainMenu>
+  </children>
+</application:Application>

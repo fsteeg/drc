@@ -1,0 +1,3 @@
+Initial experimental DRC UI, runs on "e4 1.0M3":http://download.eclipse.org/e4/downloads/drops/S-1.0M3-201001142115/
+
+The Bundle-SymbolicName of this project is currently 'de.uni-koeln.ub.drc.ui' instead of 'de.uni_koeln.ub.drc.ui' due to a bug in Equinox (https://bugs.eclipse.org/300197), which will be fixed in the next e4 milestone (it is fixed in 3.6 M5).

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="DRC UI" uid="de.uni-koeln.ub.drc.ui" id="de.uni-koeln.ub.drc.ui.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.1" useFeatures="false" includeLaunchers="true">
+
+   <configIni use="default">
+   </configIni>
+
+   <launcherArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+   </launcherArgs>
+
+   <plugins>
+      <plugin id="de.uni-koeln.ub.drc.ui"/>
+   </plugins>
+
+
+</product>
