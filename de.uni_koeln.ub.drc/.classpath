@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src/scala"/>
 	<classpathentry kind="src" path="src/specs"/>
 	<classpathentry kind="con" path="ch.epfl.lamp.sdt.launching.SCALA_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="lib/scalatest-1.0.1-2-for-scala-2.8.0.Beta1-RC1-with-test-interfaces-0.1-SNAPSHOT.jar" sourcepath="lib/scalatest-1.0.1-2-for-scala-2.8.0.Beta1-RC1-with-test-interfaces-0.1-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/JVM 1.5.0 (MacOS X Default)"/>
+	<classpathentry kind="lib" path="lib/scalatest-1.0.1-for-scala-2.8.0.Beta1-RC8-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

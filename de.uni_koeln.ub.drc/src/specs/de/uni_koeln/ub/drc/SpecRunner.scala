@@ -5,16 +5,24 @@
  * <p/>
  * Contributors: Fabian Steeg - initial API and implementation
  *************************************************************************************************/
-package de.uni_koeln.ub.drc.util
 
-/** 
- * Configuration constants. 
- * @see ConfigurationSpec 
- * @author Fabian Steeg (fsteeg)
+package de.uni_koeln.ub.drc
+import de.uni_koeln.ub.drc.util.{MetsTransformerSpec, ConfigurationSpec}
+import de.uni_koeln.ub.drc.data._
+
+/**
+ * Main Scala app to run the Specs. Add new Specs here.
+ * @author Fabian Steeg (fsteeg) 
  **/
-private[util] object Configuration {
-  val Res = "res"
-  val Romafo = Res + "/rom/" 
-  val Cdm = Res + "/cdm/"
-  val Write = true
+private[drc] object SpecRunner {
+  
+  def main(args : Array[String]) : Unit = {
+     List(
+         new ConfigurationSpec,
+         new PageSpec,
+         new WordSpec
+         //new MetsTransformerSpec // long running and unused
+     ).foreach(_.execute)
+  }
+  
 }
