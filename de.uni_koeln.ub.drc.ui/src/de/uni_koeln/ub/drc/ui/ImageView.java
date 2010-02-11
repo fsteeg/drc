@@ -7,8 +7,6 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.eclipse.e4.core.services.Logger;
@@ -29,7 +27,11 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import de.uni_koeln.ub.drc.ui.Word.Modification;
+import scala.collection.JavaConversions;
+import de.uni_koeln.ub.drc.data.Box;
+import de.uni_koeln.ub.drc.data.Modification;
+import de.uni_koeln.ub.drc.data.Page;
+import de.uni_koeln.ub.drc.data.Word;
 
 /**
  * An experimental view that displays the original, scanned image file and a space to edit the
@@ -60,14 +62,14 @@ public class ImageView {
     Composite c = new Composite(parent, SWT.NONE);
     c.setSize(600, 960);
     c.setLayout(new GridLayout(10, false));
-    addTextFrom(Word.testData(), c, label);
+    addTextFrom(Page.mock(), c, label);
     parent.getShell().setSize(1024, 960);
   }
 
-  private void addTextFrom(List<Word> words, Composite c, Label label) {
-    for (Word word : words) {
+  private void addTextFrom(Page page, Composite c, Label label) {
+    for (Word word : JavaConversions.asIterable(page.words())) {
       Text text = new Text(c, SWT.BORDER);
-      text.setText(word.history.peek().form);
+      text.setText(word.history().top().form());
       text.setData(word);
       addListeners(label, text);
     }
@@ -84,11 +86,11 @@ public class ImageView {
         /* Update the current form of the word associated with the text widget: */
         Word word = (Word) text.getData();
         String textContent = text.getText();
-        if (textContent.length() != word.original.length()) {
+        if (textContent.length() != word.original().length()) {
           text.setForeground(text.getDisplay().getSystemColor(SWT.COLOR_RED));
         } else text.setForeground(text.getDisplay().getSystemColor(SWT.COLOR_BLACK));
         /* This is for testing; later this would only be done upon saving. */
-        word.history.push(new Modification(textContent, System.getProperty("user.name")));
+        word.history().push(new Modification(textContent, System.getProperty("user.name")));
       }
     });
   }
@@ -111,7 +113,8 @@ public class ImageView {
     Image image = loadImage();
     GC gc = new GC(image);
     gc.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_RED));
-    Rectangle rect = word.position;
+    Box box = word.position();
+    Rectangle rect = new Rectangle(box.x(), box.y(), box.width(), box.height());
     if (rect != null) {
       gc.drawRectangle(rect);
     }
