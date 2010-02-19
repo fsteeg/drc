@@ -6,7 +6,17 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>ch.epfl.lamp.sdt.core.scalabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>net.sf.eclipsecs.core.CheckstyleBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -14,5 +24,6 @@
 	<natures>
 		<nature>ch.epfl.lamp.sdt.core.scalanature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>net.sf.eclipsecs.core.CheckstyleNature</nature>
 	</natures>
 </projectDescription>
