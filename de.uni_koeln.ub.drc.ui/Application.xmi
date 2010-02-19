@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2008/UIModel" id="Application">
   <children xsi:type="application:Window" id="Window">
-    <children xsi:type="application:Part" id="ImageView" style="" URI="platform:/plugin/de.uni-koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ImageView" label="DRC" tooltip=""/>
+    <children xsi:type="application:PartSashContainer" xmi:id="_SeXUCu8EEd6FC9cDb6iV7g" id="_SeXUCu8EEd6FC9cDb6iV7g" horizontal="true">
+      <children xsi:type="application:PartStack" xmi:id="_SeXUDe8EEd6FC9cDb6iV7g" id="_SeXUDe8EEd6FC9cDb6iV7g" containerData="70">
+        <children xsi:type="application:SaveablePart" xmi:id="DetailsView" id="DetailsView" URI="platform:/plugin/de.uni-koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.PageView" label="Chrestomathie" iconURI="" tooltip="Contact Details"/>
+      </children>
+    </children>
     <children xsi:type="application:WindowTrim">
       <children xsi:type="application:ToolBar">
         <children xsi:type="application:DirectToolItem" URI="platform:/plugin/de.uni-koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExitHandler" label="Exit"/>
@@ -10,7 +14,11 @@
     <mainMenu style="">
       <children xsi:type="application:MenuItem" label="File">
         <children xsi:type="application:DirectMenuItem" URI="platform:/plugin/de.uni-koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExitHandler" label="Exit"/>
+        <children xsi:type="application:DirectMenuItem" URI="platform:/plugin/de.uni-koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.SaveHandler" label="Save"/>
       </children>
     </mainMenu>
   </children>
+  <handlers xmi:id="_SeXUGO8EEd6FC9cDb6iV7g" id="page.save.handler" URI="platform:/plugin/de.uni-koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.SaveHandler" command="page.save"/>
+  <bindings xmi:id="_SeXUHu8EEd6FC9cDb6iV7g" keySequence="CTRL+S" id="page.save.binding" command="page.save"/>
+  <commands xmi:id="page.save" id="page.save" commandName="Save" description=""/>
 </application:Application>

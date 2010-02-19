@@ -10,11 +10,11 @@ package de.uni_koeln.ub.drc.ui;
 import org.eclipse.e4.workbench.ui.IWorkbench;
 
 /**
- * Handles application exit, hooked into the menu via Application.xmi
+ * Handles application exit, hooked into the menu via Application.xmi.
  * @author Fabian Steeg (fsteeg)
  */
-public class ExitHandler {
-  public void execute(IWorkbench workbench) {
+public final class ExitHandler {
+  public void execute(final IWorkbench workbench) {
     workbench.close();
   }
 }
