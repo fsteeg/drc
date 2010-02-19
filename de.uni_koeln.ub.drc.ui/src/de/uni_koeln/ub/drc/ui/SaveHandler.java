@@ -31,7 +31,7 @@ import org.eclipse.swt.widgets.Shell;
  * Handles document saving, hooked into the menu via Application.xmi.
  * @author Fabian Steeg (fsteeg)
  */
-public class SaveHandler {
+public final class SaveHandler {
 
   public boolean canExecute(@Named( IServiceConstants.ACTIVE_PART ) MDirtyable dirtyable) {
     return dirtyable.isDirty();

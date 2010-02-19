@@ -7,7 +7,10 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -18,8 +21,11 @@ import org.eclipse.e4.ui.model.application.MDirtyable;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Text;
 
 import scala.collection.JavaConversions;
+import scala.collection.mutable.Stack;
+import de.uni_koeln.ub.drc.data.Modification;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.Word;
 
@@ -29,7 +35,7 @@ import de.uni_koeln.ub.drc.data.Word;
  * focus. Currently mock dummy test data.
  * @author Fabian Steeg (fsteeg)
  */
-public class PageView {
+public final class PageView {
 
   private final MDirtyable dirtyable;
 
@@ -42,32 +48,41 @@ public class PageView {
     parent.getShell().setLayout(new FillLayout());
     // GridLayoutFactory.fillDefaults().generateLayout(parent);
   }
+  
+  public boolean isSaveOnCloseNeeded() {
+    return true;
+  }
 
-  public void doSave(@Optional IProgressMonitor monitor) throws IOException, InterruptedException {
-    if (monitor == null) {
-      monitor = new NullProgressMonitor();
-    }
-    Page originalPage = pageComposite.getOriginalPage();
-    Page modifiedPage = pageComposite.getModifiedPage();
-    monitor.beginTask("Saving page...", modifiedPage.words().size());
-    saveToXml(modifiedPage);
-    Iterable<Word> modified = JavaConversions.asIterable(modifiedPage.words());
-    for (Word word : modified) {
-      System.out.println("Would need to update word: " + word + " on original page: "
-          + originalPage);
-      // TODO add recent modification to the word
-      Thread.sleep(50);
-      monitor.worked(1);
-    }
+  public void doSave(@Optional final IProgressMonitor m) throws IOException, InterruptedException {
+    final IProgressMonitor monitor = m == null ? new NullProgressMonitor() : m;
+    final Page page = pageComposite.getPage();
+    monitor.beginTask("Saving page...", page.words().size());
+    final Iterator<Word> modified = JavaConversions.asIterable(page.words()).iterator();
+    final List<Text> words = pageComposite.getWords();
+    
+    pageComposite.getDisplay().asyncExec(new Runnable() {
+      @Override
+      public void run() {
+        for (int i = 0; i < words.size(); i++) {
+          String newText = words.get(i).getText();
+          Stack<Modification> history = modified.next().history();
+          String oldText = history.top().form();
+          if (!newText.equals(oldText)) {
+            history.push(new Modification(newText, System.getProperty("user.name")));
+          }
+          monitor.worked(1);
+        }
+        saveToXml(page);
+      }
+    });
+    
     dirtyable.setDirty(false);
   }
 
-  private void saveToXml(final Page modifiedPage) {
-    System.out.println("Would save: \n" + modifiedPage.toXml());
-  }
-
-  public boolean isSaveOnCloseNeeded() {
-    return true;
+  private void saveToXml(final Page page) {
+    File file = pageComposite.getFile();
+    System.out.println("Saving to: " + file);
+    page.save(file);
   }
 
 }

@@ -7,8 +7,17 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.ui.model.application.MDirtyable;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
@@ -23,10 +32,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.osgi.framework.Bundle;
 
 import scala.collection.JavaConversions;
 import de.uni_koeln.ub.drc.data.Box;
-import de.uni_koeln.ub.drc.data.Modification;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.Word;
 
@@ -36,16 +45,18 @@ import de.uni_koeln.ub.drc.data.Word;
  */
 public final class PageComposite extends Composite {
 
-  private static final String IMAGE = "00000007.jpg";
+  private URL xmlFile;
+  private URL jpgFile;
   private MDirtyable dirtyable;
   private Composite parent;
-  private Page modifiedPage;
-  private Page originalPage;
+  private Page page;
   private boolean commitChanges = false;
+  private List<Text> words;
 
   @Inject
   public PageComposite(final MDirtyable dirtyable, final Composite parent, final int style) {
     super(parent, style);
+    loadStoredPage();
     this.parent = parent;
     this.dirtyable = dirtyable;
     parent.getShell().setBackgroundMode(SWT.INHERIT_DEFAULT);
@@ -54,20 +65,60 @@ public final class PageComposite extends Composite {
     label.setImage(image);
     this.setSize(600, 960);
     this.setLayout(new GridLayout(10, false));
-    addTextFrom(Page.mock(), this, label);
+    try {
+      Page page = Page.load(xmlFile.openStream());
+      words = addTextFrom(page, this, label);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     parent.getShell().setSize(1024, 960);
     commitChanges = true;
   }
+  
+  /**
+   * @return The XML file holding the content of the page being edited
+   */
+  public File getFile() {
+    try {
+      return new File(xmlFile.toURI());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 
-  private void addTextFrom(final Page page, final Composite c, final Label label) {
-    originalPage = page;
-    modifiedPage = page;
+  /**
+   * @return The text widgets representing the words in the current page
+   */
+  public List<Text> getWords() {
+    return words;
+  }
+  
+  Page getPage() {
+    return page;
+  }
+
+  private void loadStoredPage() {
+    Bundle bundle = Platform.getBundle("de.uni-koeln.ub.drc.ui"); //$NON-NLS-1$
+    try {
+      xmlFile = FileLocator.resolve((URL) bundle.getResources("pages/drc-page.xml").nextElement());
+      jpgFile = FileLocator.resolve((URL) bundle.getResources("pages/drc-page.jpg").nextElement());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  private List<Text> addTextFrom(final Page page, final Composite c, final Label label) {
+    List<Text> list = new ArrayList<Text>();
+    this.page = page;
     for (Word word : JavaConversions.asIterable(page.words())) {
       Text text = new Text(c, SWT.BORDER);
       text.setText(word.history().top().form());
       text.setData(word);
       addListeners(label, text);
+      list.add(text);
     }
+    return list;
   }
 
   private void addListeners(final Label label, final Text text) {
@@ -86,8 +137,6 @@ public final class PageComposite extends Composite {
         } else {
           text.setForeground(text.getDisplay().getSystemColor(SWT.COLOR_BLACK));
         }
-        /* This is for testing; later this would only be done upon saving. */
-        word.history().push(new Modification(textContent, System.getProperty("user.name")));
         if (commitChanges) {
           dirtyable.setDirty(true);
         }
@@ -129,16 +178,13 @@ public final class PageComposite extends Composite {
 
   private Image loadImage() {
     Display display = parent.getDisplay();
-    Image newImage = new Image(display, PageView.class.getResourceAsStream(IMAGE));
+    Image newImage = null;
+    try {
+      newImage = new Image(display, jpgFile.openStream());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     return newImage;
-  }
-
-  Page getOriginalPage() {
-    return originalPage;
-  }
-
-  Page getModifiedPage() {
-    return modifiedPage;
   }
 
 }
