@@ -31,35 +31,43 @@ class PageSpec extends Spec with ShouldMatchers {
     it("can be serialized to XML") {
         expect(1) { (page.toXml \ "word").size }
     }
+    
+    it("can save a page of words to disk") {
+      Page.mock.save(file)
+      expect(true) {file.exists}
+    }
+    
   }
   
   describe("The Page companion object") {
   
     it("should provide usable test data") { expect(5) { Page.mock.words.size } }
   
-    it("can save a page of words to disk") {
-      Page.save(Page.mock, file)
-      expect(true) {file.exists}
-    }
-    
     it("can load a page of words from disk") {
       val words: List[Word] = Page.load(file).words
       expect(Page.mock.words.size) { words.size }
       expect(Page.mock.words.toList) { words.toList }
     }
     
-    it("should serialized and deserialize added modifications") {
+    it("should serialize and deserialize added modifications") {
       val page = Page.mock
       val word = page.words(0)
       val newMod = Modification(word.original.reverse, "tests")
       word.history push newMod
       expect(true) { word.history.contains(newMod) }
-      expect(2) { word.history.size }
-      Page.save(page, file)
+      expect(1) { word.history.size }
+      page.save(file)
       val loadedWord = Page.load(file).words(0)
       val loadedMod = loadedWord.history.top
-      expect(2) { loadedWord.history.size }
+      expect(1) { loadedWord.history.size }
       expect(newMod) { loadedMod }
+    }
+    
+    it("should be desializable both from a file and an input stream") {
+        val loadedFromFile = Page.load(file).words(0)
+        expect(1) { loadedFromFile.history.size }
+        val loadedFromStream = Page.load(file.toURL.openStream).words(0)
+        expect(1) { loadedFromFile.history.size }
     }
     
   }

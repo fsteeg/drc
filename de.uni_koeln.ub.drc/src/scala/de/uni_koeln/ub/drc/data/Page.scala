@@ -15,7 +15,20 @@ import scala.xml._
  * @author Fabian Steeg
  */
 case class Page(words:List[Word]) {
+  
   def toXml = <page> { words.toList.map(_.toXml) } </page>
+  
+  def save(file:java.io.File): Node = {
+    val root = toXml
+    val formatted = new StringBuilder
+    new PrettyPrinter(120, 2).format(root, formatted)
+    // XML.saveFull("out.xml", page, "UTF-8", true, null) // FIXME hangs
+    val writer = new java.io.FileWriter(file)
+    writer.write(formatted.toString)
+    writer.close
+    root
+  }
+  
 }
 
 object Page {
@@ -28,19 +41,12 @@ object Page {
       val page:Node = XML.loadFile(file)
       Page.fromXml(page)
   }
-
-  def save(page: Page, file:java.io.File): Node = {
-    val root = page.toXml
-    val formatted = new StringBuilder
-    new PrettyPrinter(120, 2).format(root, formatted)
-    // XML.saveFull("out.xml", page, "UTF-8", true, null) // FIXME hangs
-    val writer = new java.io.FileWriter(file)
-    writer.write(formatted.toString)
-    writer.close
-//    println("Saved page as XML:\n"+formatted)
-    root
-  }
   
+  def load(stream:java.io.InputStream): Page = {
+      val page:Node = XML.load(stream)
+      Page.fromXml(page)
+  }
+
   /**
    * This models what we get from the OCR: the original word forms as recognized by the OCR,
    * together with their coordinates in the scan result (originally a PDF with absolute values).
