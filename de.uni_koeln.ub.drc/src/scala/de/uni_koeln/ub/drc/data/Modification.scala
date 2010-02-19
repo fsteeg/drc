@@ -21,5 +21,5 @@ case class Modification(form:String, author:String) {
 }
 
 object Modification {
-    def fromXml(mod:Node) = Modification((mod\"form").text.trim, (mod\"author").text.trim)
+    def fromXml(mod:Node) = Modification( (mod\"form").text.trim, (mod\"author").text.trim )
 }
