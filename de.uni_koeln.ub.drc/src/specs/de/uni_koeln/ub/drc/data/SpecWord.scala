@@ -6,24 +6,22 @@
  * Contributors: Fabian Steeg - initial API and implementation
  *************************************************************************************************/
  
-package de.uni_koeln.ub.drc.util
-
-import scala.xml._
-import java.io._
+package de.uni_koeln.ub.drc.data
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
-import Configuration._
-
 /**
- * @see Configuration
+ * @see Word
  * @author Fabian Steeg (fsteeg)
  */
-private[drc] class ConfigurationSpec extends Spec with ShouldMatchers {
+private[drc] class SpecWord extends Spec with ShouldMatchers {
 
-  describe("The Configuration") {
-    val entries = List(Romafo, Cdm, Res)
-    it("should point to existing directories") { entries.foreach(new File(_).exists) }
-    it("should point to non-empty directories") { entries.foreach(new File(_).list.length > 0) }
+  describe("A Word") {
+    val word = Word("test", Box(1,1,1,1))
+    it("should contain an original form") { expect("test") { word.original } }
+    it("should contain a position") { expect(Box(1,1,1,1)) { word.position } }
+    it("can be serialized as XML") { 
+        expect(word.original) { (word.toXml \ "original")(0).text.trim } 
+    }
   }
   
 }

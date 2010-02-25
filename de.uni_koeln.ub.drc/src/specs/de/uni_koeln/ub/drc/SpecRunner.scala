@@ -7,7 +7,7 @@
  *************************************************************************************************/
 
 package de.uni_koeln.ub.drc
-import de.uni_koeln.ub.drc.util.{MetsTransformerSpec, ConfigurationSpec}
+import de.uni_koeln.ub.drc.util.{SpecMetsTransformer, SpecConfiguration}
 import de.uni_koeln.ub.drc.data._
 
 /**
@@ -18,10 +18,10 @@ private[drc] object SpecRunner {
   
   def main(args : Array[String]) : Unit = {
      List(
-         new ConfigurationSpec,
-         new PageSpec,
-         new WordSpec
-         //new MetsTransformerSpec // long running and unused
+         new SpecConfiguration,
+         new SpecPage,
+         new SpecWord
+         //new SpecMetsTransformer // long running and unused
      ).foreach(_.execute)
   }
   

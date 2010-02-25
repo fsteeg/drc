@@ -15,7 +15,7 @@ import org.scalatest.matchers.ShouldMatchers
  * @see Page
  * @author Fabian Steeg
  */
-class PageSpec extends Spec with ShouldMatchers {
+class SpecPage extends Spec with ShouldMatchers {
 
   val file: java.io.File = java.io.File.createTempFile("testing", "scala")
   file.deleteOnExit
