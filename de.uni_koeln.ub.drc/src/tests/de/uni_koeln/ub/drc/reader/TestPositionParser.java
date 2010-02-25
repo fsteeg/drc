@@ -8,11 +8,12 @@
 
 package de.uni_koeln.ub.drc.reader;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import de.uni_koeln.ub.drc.data.Point;
 
 /**
  * @author Mihail Atanassov <saeko.bjagai@gmail.com>
@@ -33,8 +34,8 @@ public final class TestPositionParser {
       List<Line> lines = p.getLines();
       for (Line line : lines) {
         Point start = line.getStartPoint();
-        float x = start.getX();
-        float y = start.getY();
+        float x = start.x();
+        float y = start.y();
         int fontSize = line.getFontSize();
         String text = line.getText();
         System.out.println(String.format("Position: x %s , y %s / Fontsize: %s / Text: %s", x, y,
