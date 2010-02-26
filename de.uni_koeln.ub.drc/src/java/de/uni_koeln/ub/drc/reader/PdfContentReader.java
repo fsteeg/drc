@@ -8,10 +8,7 @@
 
 package de.uni_koeln.ub.drc.reader;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PRIndirectReference;
@@ -43,19 +40,6 @@ public final class PdfContentReader {
     return reader.getCropBox(1);
   }
 
-  private void toTxt(final String file, final StringBuilder sb) {
-    try {
-      String s = new String(sb);
-      PrintWriter pw = new PrintWriter(new File(txtFile), "iso-8859-1");
-      pw.write(s);
-      pw.close();
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
   private void read(final String file) {
 
     try {
@@ -68,12 +52,9 @@ public final class PdfContentReader {
         PRIndirectReference objectReference = (PRIndirectReference) page.get(PdfName.CONTENTS);
         PRStream stream = (PRStream) PdfReader.getPdfObject(objectReference);
         byte[] streamBytes = PdfReader.getStreamBytes(stream);
-        sb.append(new String(streamBytes));
+        sb.append(new String(streamBytes, "iso-8859-1"));
       }
-
-      txtFile = file.replace(".pdf", ".txt");
-      toTxt(txtFile, sb);
-
+      txtFile = new String(sb);
     } catch (IOException e) {
       e.printStackTrace();
     }

@@ -24,12 +24,13 @@ public final class TestPositionParser {
   public void parse() {
     List<Paragraph> paragraphs;
 
-    paragraphs = PositionParser.parse("res/rom/PPN345572629_0004/bd4-p1.pdf");
+    paragraphs = PositionParser.parse("res/rom/PPN345572629_0004/PPN345572629_0004-0001.pdf");
     Line testLine = paragraphs.get(2).getLines().get(0);
     System.out.println(testLine.getText());
     Point scaledStart = testLine.getStartPoint(600, 960);
     Assert.assertEquals(new Point(77, 348), scaledStart);
-
+    
+    // int scaledFontSize = testLine.getFontSize(600, 960); // TODO scaled fontsize
     for (Paragraph p : paragraphs) {
       List<Line> lines = p.getLines();
       for (Line line : lines) {
@@ -38,6 +39,7 @@ public final class TestPositionParser {
         float y = start.y();
         int fontSize = line.getFontSize();
         String text = line.getText();
+        Assert.assertFalse("Encoding should be correct", text.contains("�"));
         System.out.println(String.format("Position: x %s , y %s / Fontsize: %s / Text: %s", x, y,
             fontSize, text));
       }
