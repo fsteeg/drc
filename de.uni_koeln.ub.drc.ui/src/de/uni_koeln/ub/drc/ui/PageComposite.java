@@ -9,6 +9,7 @@ package de.uni_koeln.ub.drc.ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,8 +27,9 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
@@ -52,29 +54,35 @@ public final class PageComposite extends Composite {
   private Page page;
   private boolean commitChanges = false;
   private List<Text> words;
+  private static final Point JPG_SIZE = new Point(600, 960);
+  private static final Point SHELL_SIZE = new Point(1024, 960);
 
   @Inject
   public PageComposite(final MDirtyable dirtyable, final Composite parent, final int style) {
     super(parent, style);
-    loadStoredPage();
+    try {
+      loadStoredPage();
+    } catch (MalformedURLException e1) {
+      e1.printStackTrace();
+    }
     this.parent = parent;
     this.dirtyable = dirtyable;
     parent.getShell().setBackgroundMode(SWT.INHERIT_DEFAULT);
     final Image image = loadImage();
     final Label label = new Label(parent, SWT.BORDER);
     label.setImage(image);
-    this.setSize(600, 960);
-    this.setLayout(new GridLayout(10, false));
+    this.setSize(JPG_SIZE);
+    this.setLayout(new RowLayout(SWT.HORIZONTAL));
     try {
       Page page = Page.load(xmlFile.openStream());
       words = addTextFrom(page, this, label);
     } catch (IOException e) {
       e.printStackTrace();
     }
-    parent.getShell().setSize(1024, 960);
+    parent.getShell().setSize(SHELL_SIZE);
     commitChanges = true;
   }
-  
+
   /**
    * @return The XML file holding the content of the page being edited
    */
@@ -93,27 +101,54 @@ public final class PageComposite extends Composite {
   public List<Text> getWords() {
     return words;
   }
-  
+
   Page getPage() {
     return page;
   }
 
-  private void loadStoredPage() {
+  private void loadStoredPage() throws MalformedURLException {
+    String folderName = "pages";
+    String pageName = "bd4-p1";
+    File xml = fileFromBundle(folderName + "/" + pageName + ".xml");
+    if (xml != null && xml.exists()) {
+      xmlFile = xml.toURI().toURL();
+    } else {
+      File folder = fileFromBundle(folderName);
+      xml = new File(new File(folder.toURI()), pageName + ".xml");
+      File pdf = fileFromBundle(folderName + "/" + pageName + ".pdf");
+      Page.fromPdf(pdf.getAbsolutePath()).save(xml);
+      xmlFile = xml.toURI().toURL();
+    }
+    jpgFile = fileFromBundle(folderName + "/" + pageName + ".jpg").toURI().toURL();
+  }
+
+  private File fileFromBundle(final String location) {
     Bundle bundle = Platform.getBundle("de.uni-koeln.ub.drc.ui"); //$NON-NLS-1$
     try {
-      xmlFile = FileLocator.resolve((URL) bundle.getResources("pages/drc-page.xml").nextElement());
-      jpgFile = FileLocator.resolve((URL) bundle.getResources("pages/drc-page.jpg").nextElement());
+      URL resource = bundle.getResource(location);
+      if (resource == null) {
+        System.err.println("Could not resolve: " + location);
+        return null;
+      }
+      return new File(FileLocator.resolve(resource).toURI());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     }
+    return null;
   }
 
   private List<Text> addTextFrom(final Page page, final Composite c, final Label label) {
     List<Text> list = new ArrayList<Text>();
     this.page = page;
     for (Word word : JavaConversions.asIterable(page.words())) {
-      Text text = new Text(c, SWT.BORDER);
-      text.setText(word.history().top().form());
+      Text text = new Text(c, SWT.NONE);
+      if (word.original().equals("@")) {
+        text.setText("\n");
+      } else {
+        text.setText(word.history().top().form());
+      }
       text.setData(word);
       addListeners(label, text);
       list.add(text);

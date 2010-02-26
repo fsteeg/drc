@@ -17,6 +17,6 @@ Composite {
 }
 
 Text {
-	font: Verdana 15px;
-	background-color: #e8e8e8 #cccccc 60%;
+	font: Times 16px;
+	background-color: white; /* #e8e8e8 #cccccc 60%; */
 }

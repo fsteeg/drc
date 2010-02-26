@@ -25,4 +25,5 @@ Bundle-ClassPath: lib/scala-dbc-src.jar,
  lib/scala-swing-src.jar,
  lib/scala-swing.jar,
  lib/drc-core.jar,
+ lib/iText-5.0.1.jar,
  .
