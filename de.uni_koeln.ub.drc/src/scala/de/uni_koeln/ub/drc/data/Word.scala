@@ -25,7 +25,10 @@ import scala.xml._
 case class Word(original:String, position:Box) {
     
   /** A word's history is a stack of modifications, the top of which is the current form. */
-  val history: Stack[Modification] = new Stack[Modification]
+  val history: Stack[Modification] = new Stack[Modification]()
+  
+  if( history.size == 0 ) 
+      history.push(Modification(original, "OCR"))
   
   def formattedHistory = history mkString "\n"
   
@@ -38,10 +41,14 @@ case class Word(original:String, position:Box) {
 }
 
 object Word {
-
   def fromXml(word:Node) : Word = {
     val w = Word( (word \ "original").text.trim, Box.fromXml((word \ "position" \ "box")(0)) )
-    (word\"modification").reverse.foreach( m => w.history.push(Modification.fromXml(m)) )
+    (word\"modification").reverse.foreach( m => {
+        val mod =  Modification.fromXml(m)
+        if(!w.history.contains(mod))
+        w.history.push(mod)
+    }    
+    )
     w
   }
   

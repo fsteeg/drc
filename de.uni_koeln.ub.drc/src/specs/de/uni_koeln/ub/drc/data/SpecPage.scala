@@ -55,20 +55,30 @@ class SpecPage extends Spec with ShouldMatchers {
       val newMod = Modification(word.original.reverse, "tests")
       word.history push newMod
       expect(true) { word.history.contains(newMod) }
-      expect(1) { word.history.size }
+      expect(2) { word.history.size }
       page.save(file)
       val loadedWord = Page.load(file).words(0)
       val loadedMod = loadedWord.history.top
-      expect(1) { loadedWord.history.size }
+      expect(2) { loadedWord.history.size }
       expect(newMod) { loadedMod }
     }
     
     it("should be desializable both from a file and an input stream") {
         val loadedFromFile = Page.load(file).words(0)
-        expect(1) { loadedFromFile.history.size }
+        expect(2) { loadedFromFile.history.size }
         val loadedFromStream = Page.load(file.toURL.openStream).words(0)
-        expect(1) { loadedFromFile.history.size }
+        expect(2) { loadedFromFile.history.size }
     }
+    
+    it("provides initial import of a scanned PDF") {
+          val page : Page = Page.fromPdf("res/rom/PPN345572629_0004/bd4-p1.pdf")
+          val file = new java.io.File("res/rom/PPN345572629_0004/bd4-p1.xml")
+          val root = page.save(file)
+          val uri = file.toURL.toURI
+          expect(true) {root.size > 0}
+          expect(true) {file.exists}
+          //println(uri)
+      }
     
   }
   

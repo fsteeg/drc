@@ -19,6 +19,9 @@ private[drc] class SpecWord extends Spec with ShouldMatchers {
     val word = Word("test", Box(1,1,1,1))
     it("should contain an original form") { expect("test") { word.original } }
     it("should contain a position") { expect(Box(1,1,1,1)) { word.position } }
+    it("should contain a first history entry") { 
+        expect(Modification("test", "OCR")) { word.history(0) } 
+    } 
     it("can be serialized as XML") { 
         expect(word.original) { (word.toXml \ "original")(0).text.trim } 
     }

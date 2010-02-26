@@ -37,6 +37,8 @@ object Page {
     for(word <- (page \ "word").toList) yield Word.fromXml(word) 
   )
   
+  def fromPdf(pdf:String): Page = { PdfToPage.convert(pdf) }
+  
   def load(file:java.io.File): Page = {
       val page:Node = XML.loadFile(file)
       Page.fromXml(page)
@@ -69,4 +71,55 @@ object Page {
         yield Word(w, map(w.toLowerCase))
     )
     
+}
+
+/** 
+ *  Experimental heuristics for creating an XML page representation from a scanned PDF.
+ *  Includes computation of the highlighting box based on line start coordinated read from the PDF.
+ *  @author Fabian Steeg (fsteeg) 
+ */
+private object PdfToPage {
+    
+  import java.net.URL
+  import de.uni_koeln.ub.drc.reader._
+  import scala.collection.JavaConversions._
+  import scala.collection.mutable.Buffer
+  import java.io.File
+    
+  /* TODO: would need conversion for different page sizes */
+  /* TODO: calculate letter width based on number of letters in line */
+  /* TODO: get font size from PDF, adjust height and width accordingly */
+  /* TODO: treat capital letters differently */
+  val widths = Map('l' -> 2, 'i' -> 2, '∫' -> 4, 't' -> 4, 'f' -> 4, 'j' -> 2)
+  val defaultWidth = 7
+  val boxHeight = 15
+    
+  def convert(pdfLocation : String) : Page = {
+    val words: Buffer[Word] = Buffer()
+    val paragraphs : Buffer[Paragraph] = PositionParser.parse(pdfLocation)
+    for(p <- paragraphs) {
+      for(line <- p.getLines) {
+        var pos = line.getStartPoint(600, 960)
+        for(word <- line.getWords) {
+          val wordWidth = width(word)
+          words add Word(word, Box(pos.x.toInt, pos.y.toInt - boxHeight, wordWidth, boxHeight))
+          /* Update the starting position for the next word: */
+          pos = Point(pos.x + wordWidth + defaultWidth, pos.y)
+        }
+      }
+      words add Word("@", Box(0,0,0,0))
+    }
+    Page(words.toList)
+  }
+    
+  def width(word: String) : Int = {
+    var result = 0
+    for(c <- word.toCharArray) {
+      widths get c match {
+        case Some(x) => result += x
+        case None => result += defaultWidth
+      }
+    }
+    result
+  }
 }
