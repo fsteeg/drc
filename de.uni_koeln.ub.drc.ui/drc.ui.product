@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="DRC UI" uid="de.uni-koeln.ub.drc.ui" id="de.uni-koeln.ub.drc.ui.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.1" useFeatures="false" includeLaunchers="true">
+<product name="DRC UI" uid="de.uni_koeln.ub.drc.ui" id="de.uni_koeln.ub.drc.ui.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.1" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -11,7 +11,7 @@
    </launcherArgs>
 
    <plugins>
-      <plugin id="de.uni-koeln.ub.drc.ui"/>
+      <plugin id="de.uni_koeln.ub.drc.ui"/>
    </plugins>
 
 

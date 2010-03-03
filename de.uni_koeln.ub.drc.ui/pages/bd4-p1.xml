@@ -597,7 +597,7 @@
     </modification>
   </word>
   <word>
-    <original> d&quot;?na </original>
+    <original> d&quot;üna </original>
     <position>
       <box>
         <x> 331 </x>
@@ -607,7 +607,7 @@
       </box>
     </position>
     <modification>
-      <form> d&quot;?na </form>
+      <form> d&quot;üna </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -657,7 +657,7 @@
     </modification>
   </word>
   <word>
-    <original> ch?ra </original>
+    <original> chüra </original>
     <position>
       <box>
         <x> 54 </x>
@@ -667,7 +667,7 @@
       </box>
     </position>
     <modification>
-      <form> ch?ra </form>
+      <form> chüra </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -687,7 +687,7 @@
     </modification>
   </word>
   <word>
-    <original> Comm?n </original>
+    <original> Commün </original>
     <position>
       <box>
         <x> 110 </x>
@@ -697,7 +697,7 @@
       </box>
     </position>
     <modification>
-      <form> Comm?n </form>
+      <form> Commün </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -717,7 +717,7 @@
     </modification>
   </word>
   <word>
-    <original> F?rStenow, </original>
+    <original> FürStenow, </original>
     <position>
       <box>
         <x> 180 </x>
@@ -727,7 +727,7 @@
       </box>
     </position>
     <modification>
-      <form> F?rStenow, </form>
+      <form> FürStenow, </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -882,7 +882,7 @@
     </modification>
   </word>
   <word>
-    <original> Sal?d </original>
+    <original> Salüd </original>
     <position>
       <box>
         <x> 205 </x>
@@ -892,7 +892,7 @@
       </box>
     </position>
     <modification>
-      <form> Sal?d </form>
+      <form> Salüd </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -1126,7 +1126,7 @@
     </modification>
   </word>
   <word>
-    <original> Scritt?ra, </original>
+    <original> Scrittüra, </original>
     <position>
       <box>
         <x> 220 </x>
@@ -1137,10 +1137,6 @@
     </position>
     <modification>
       <form> Scrittüra, </form>
-      <author> fsteeg </author>
-    </modification>
-    <modification>
-      <form> Scritt?ra, </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -1695,12 +1691,16 @@
       </box>
     </position>
     <modification>
+      <form> cognuschan, </form>
+      <author> fsteeg </author>
+    </modification>
+    <modification>
       <form> cognuSchan, </form>
       <author> OCR </author>
     </modification>
   </word>
   <word>
-    <original> m? </original>
+    <original> mò </original>
     <position>
       <box>
         <x> 154 </x>
@@ -1710,7 +1710,7 @@
       </box>
     </position>
     <modification>
-      <form> m? </form>
+      <form> mò </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -1745,7 +1745,7 @@
     </modification>
   </word>
   <word>
-    <original> comm?n </original>
+    <original> commün </original>
     <position>
       <box>
         <x> 242 </x>
@@ -1755,7 +1755,7 @@
       </box>
     </position>
     <modification>
-      <form> comm?n </form>
+      <form> commün </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -2270,7 +2270,7 @@
     </modification>
   </word>
   <word>
-    <original> ?na </original>
+    <original> üna </original>
     <position>
       <box>
         <x> 327 </x>
@@ -2280,7 +2280,7 @@
       </box>
     </position>
     <modification>
-      <form> ?na </form>
+      <form> üna </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -2375,7 +2375,7 @@
     </modification>
   </word>
   <word>
-    <original> Sc? </original>
+    <original> Scò </original>
     <position>
       <box>
         <x> 81 </x>
@@ -2385,7 +2385,7 @@
       </box>
     </position>
     <modification>
-      <form> Sc? </form>
+      <form> Scò </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -2600,7 +2600,7 @@
     </modification>
   </word>
   <word>
-    <original> m?n[fol. </original>
+    <original> mün[fol. </original>
     <position>
       <box>
         <x> 147 </x>
@@ -2610,12 +2610,12 @@
       </box>
     </position>
     <modification>
-      <form> m?n[fol. </form>
+      <form> mün[fol. </form>
       <author> OCR </author>
     </modification>
   </word>
   <word>
-    <original> av]chiad?n </original>
+    <original> av]chiadün </original>
     <position>
       <box>
         <x> 202 </x>
@@ -2625,7 +2625,7 @@
       </box>
     </position>
     <modification>
-      <form> av]chiad?n </form>
+      <form> av]chiadün </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -2645,7 +2645,7 @@
     </modification>
   </word>
   <word>
-    <original> ?n </original>
+    <original> ün </original>
     <position>
       <box>
         <x> 292 </x>
@@ -2655,7 +2655,7 @@
       </box>
     </position>
     <modification>
-      <form> ?n </form>
+      <form> ün </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -2720,7 +2720,7 @@
     </modification>
   </word>
   <word>
-    <original> Scritt?ra </original>
+    <original> Scrittüra </original>
     <position>
       <box>
         <x> 449 </x>
@@ -2730,7 +2730,7 @@
       </box>
     </position>
     <modification>
-      <form> Scritt?ra </form>
+      <form> Scrittüra </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -2840,7 +2840,7 @@
     </modification>
   </word>
   <word>
-    <original> baf?nghs </original>
+    <original> bafünghs </original>
     <position>
       <box>
         <x> 268 </x>
@@ -2850,7 +2850,7 @@
       </box>
     </position>
     <modification>
-      <form> baf?nghs </form>
+      <form> bafünghs </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -2870,7 +2870,7 @@
     </modification>
   </word>
   <word>
-    <original> nu? </original>
+    <original> nuö </original>
     <position>
       <box>
         <x> 356 </x>
@@ -2880,7 +2880,7 @@
       </box>
     </position>
     <modification>
-      <form> nu? </form>
+      <form> nuö </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -2915,7 +2915,7 @@
     </modification>
   </word>
   <word>
-    <original> Giuvent?tna </original>
+    <original> Giuventütna </original>
     <position>
       <box>
         <x> 436 </x>
@@ -2925,7 +2925,7 @@
       </box>
     </position>
     <modification>
-      <form> Giuvent?tna </form>
+      <form> Giuventütna </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -3230,7 +3230,7 @@
     </modification>
   </word>
   <word>
-    <original> m?nchia </original>
+    <original> münchia </original>
     <position>
       <box>
         <x> 429 </x>
@@ -3240,7 +3240,7 @@
       </box>
     </position>
     <modification>
-      <form> m?nchia </form>
+      <form> münchia </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -3320,7 +3320,7 @@
     </modification>
   </word>
   <word>
-    <original> p?r </original>
+    <original> pür </original>
     <position>
       <box>
         <x> 156 </x>
@@ -3330,7 +3330,7 @@
       </box>
     </position>
     <modification>
-      <form> p?r </form>
+      <form> pür </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -3350,7 +3350,7 @@
     </modification>
   </word>
   <word>
-    <original> ?n </original>
+    <original> ün </original>
     <position>
       <box>
         <x> 214 </x>
@@ -3360,7 +3360,7 @@
       </box>
     </position>
     <modification>
-      <form> ?n </form>
+      <form> ün </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -3410,7 +3410,7 @@
     </modification>
   </word>
   <word>
-    <original> ?n </original>
+    <original> ün </original>
     <position>
       <box>
         <x> 350 </x>
@@ -3420,12 +3420,12 @@
       </box>
     </position>
     <modification>
-      <form> ?n </form>
+      <form> ün </form>
       <author> OCR </author>
     </modification>
   </word>
   <word>
-    <original> vent?revel </original>
+    <original> ventürevel </original>
     <position>
       <box>
         <x> 371 </x>
@@ -3435,7 +3435,7 @@
       </box>
     </position>
     <modification>
-      <form> vent?revel </form>
+      <form> ventürevel </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -3530,7 +3530,7 @@
     </modification>
   </word>
   <word>
-    <original> ?nandretg </original>
+    <original> ünandretg </original>
     <position>
       <box>
         <x> 191 </x>
@@ -3540,7 +3540,7 @@
       </box>
     </position>
     <modification>
-      <form> ?nandretg </form>
+      <form> ünandretg </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -3560,7 +3560,7 @@
     </modification>
   </word>
   <word>
-    <original> gud?r, </original>
+    <original> gudêr, </original>
     <position>
       <box>
         <x> 276 </x>
@@ -3570,7 +3570,7 @@
       </box>
     </position>
     <modification>
-      <form> gud?r, </form>
+      <form> gudêr, </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -3815,7 +3815,7 @@
     </modification>
   </word>
   <word>
-    <original> ?n </original>
+    <original> ün </original>
     <position>
       <box>
         <x> 434 </x>
@@ -3825,7 +3825,7 @@
       </box>
     </position>
     <modification>
-      <form> ?n </form>
+      <form> ün </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -3935,7 +3935,7 @@
     </modification>
   </word>
   <word>
-    <original> p? </original>
+    <original> pò </original>
     <position>
       <box>
         <x> 212 </x>
@@ -3945,7 +3945,7 @@
       </box>
     </position>
     <modification>
-      <form> p? </form>
+      <form> pò </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -3965,7 +3965,7 @@
     </modification>
   </word>
   <word>
-    <original> nag?n </original>
+    <original> nagün </original>
     <position>
       <box>
         <x> 269 </x>
@@ -3975,7 +3975,7 @@
       </box>
     </position>
     <modification>
-      <form> nag?n </form>
+      <form> nagün </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -4100,7 +4100,7 @@
     </modification>
   </word>
   <word>
-    <original> m? </original>
+    <original> mò </original>
     <position>
       <box>
         <x> 100 </x>
@@ -4110,7 +4110,7 @@
       </box>
     </position>
     <modification>
-      <form> m? </form>
+      <form> mò </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -4250,7 +4250,7 @@
     </modification>
   </word>
   <word>
-    <original> ? </original>
+    <original> à </original>
     <position>
       <box>
         <x> 414 </x>
@@ -4260,7 +4260,7 @@
       </box>
     </position>
     <modification>
-      <form> ? </form>
+      <form> à </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -4355,7 +4355,7 @@
     </modification>
   </word>
   <word>
-    <original> Giuvent?tna </original>
+    <original> Giuventütna </original>
     <position>
       <box>
         <x> 140 </x>
@@ -4365,7 +4365,7 @@
       </box>
     </position>
     <modification>
-      <form> Giuvent?tna </form>
+      <form> Giuventütna </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -4385,7 +4385,7 @@
     </modification>
   </word>
   <word>
-    <original> ?na </original>
+    <original> üna </original>
     <position>
       <box>
         <x> 241 </x>
@@ -4395,7 +4395,7 @@
       </box>
     </position>
     <modification>
-      <form> ?na </form>
+      <form> üna </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -4580,7 +4580,7 @@
     </modification>
   </word>
   <word>
-    <original> ? </original>
+    <original> à </original>
     <position>
       <box>
         <x> 242 </x>
@@ -4590,7 +4590,7 @@
       </box>
     </position>
     <modification>
-      <form> ? </form>
+      <form> à </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -4775,7 +4775,7 @@
     </modification>
   </word>
   <word>
-    <original> ? </original>
+    <original> à </original>
     <position>
       <box>
         <x> 198 </x>
@@ -4785,7 +4785,7 @@
       </box>
     </position>
     <modification>
-      <form> ? </form>
+      <form> à </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -4895,7 +4895,7 @@
     </modification>
   </word>
   <word>
-    <original> ?nandretg </original>
+    <original> ünandretg </original>
     <position>
       <box>
         <x> 461 </x>
@@ -4905,7 +4905,7 @@
       </box>
     </position>
     <modification>
-      <form> ?nandretg </form>
+      <form> ünandretg </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -5004,7 +5004,7 @@
     </modification>
   </word>
   <word>
-    <original> ? </original>
+    <original> à </original>
     <position>
       <box>
         <x> 195 </x>
@@ -5014,7 +5014,7 @@
       </box>
     </position>
     <modification>
-      <form> ? </form>
+      <form> à </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -5094,7 +5094,7 @@
     </modification>
   </word>
   <word>
-    <original> plafch?r. </original>
+    <original> plafchêr. </original>
     <position>
       <box>
         <x> 354 </x>
@@ -5104,7 +5104,7 @@
       </box>
     </position>
     <modification>
-      <form> plafch?r. </form>
+      <form> plafchêr. </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -5139,7 +5139,7 @@
     </modification>
   </word>
   <word>
-    <original> fc? </original>
+    <original> fcò </original>
     <position>
       <box>
         <x> 481 </x>
@@ -5149,7 +5149,7 @@
       </box>
     </position>
     <modification>
-      <form> fc? </form>
+      <form> fcò </form>
       <author> OCR </author>
     </modification>
   </word>

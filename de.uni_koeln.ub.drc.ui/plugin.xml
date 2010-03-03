@@ -9,7 +9,7 @@
             name="DRC e4 UI">
          <property
                name="applicationXMI"
-               value="de.uni-koeln.ub.drc.ui/Application.xmi">
+               value="de.uni_koeln.ub.drc.ui/Application.xmi">
          </property>
          <property
                name="appName"
@@ -21,7 +21,7 @@
          </property>
          <property
                name="applicationCSS"
-               value="platform:/plugin/de.uni-koeln.ub.drc.ui/css/style.css">
+               value="platform:/plugin/de.uni_koeln.ub.drc.ui/css/style.css">
          </property>
       </product>
    </extension>

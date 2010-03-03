@@ -123,7 +123,7 @@ public final class PageComposite extends Composite {
   }
 
   private File fileFromBundle(final String location) {
-    Bundle bundle = Platform.getBundle("de.uni-koeln.ub.drc.ui"); //$NON-NLS-1$
+    Bundle bundle = Platform.getBundle("de.uni_koeln.ub.drc.ui"); //$NON-NLS-1$
     try {
       URL resource = bundle.getResource(location);
       if (resource == null) {
