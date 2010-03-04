@@ -4,8 +4,8 @@
 	<classpathentry kind="src" path="src/specs"/>
 	<classpathentry kind="src" path="src/java"/>
 	<classpathentry kind="src" path="src/tests"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="ch.epfl.lamp.sdt.launching.SCALA_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/scalatest-1.0.1-for-scala-2.8.0.Beta1-RC8-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/iText-5.0.1.jar" sourcepath="lib/iText-src-5.0.1.zip"/>
 	<classpathentry kind="lib" path="lib/junit-4.8.1.jar" sourcepath="lib/junit-4.8.1-src.jar"/>

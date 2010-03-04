@@ -20,7 +20,8 @@ private[drc] object SpecRunner {
      List(
          new SpecConfiguration,
          new SpecPage,
-         new SpecWord
+         new SpecWord,
+         new SpecIndex
          //new SpecMetsTransformer // long running and unused
      ).foreach(_.execute)
   }

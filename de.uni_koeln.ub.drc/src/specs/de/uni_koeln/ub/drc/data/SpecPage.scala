@@ -22,7 +22,7 @@ class SpecPage extends Spec with ShouldMatchers {
   
   describe("A Page") {
     
-    val page = Page(List(Word("test", Box(1,1,1,1))))
+    val page = Page(List(Word("test", Box(1,1,1,1))), "mock")
       
     it("should contain words") { 
         expect(1) { page.words.size } 
@@ -66,7 +66,7 @@ class SpecPage extends Spec with ShouldMatchers {
     it("should be desializable both from a file and an input stream") {
         val loadedFromFile = Page.load(file).words(0)
         expect(2) { loadedFromFile.history.size }
-        val loadedFromStream = Page.load(file.toURL.openStream).words(0)
+        val loadedFromStream = Page.load(file.toURL.openStream, file.getName()).words(0)
         expect(2) { loadedFromFile.history.size }
     }
     

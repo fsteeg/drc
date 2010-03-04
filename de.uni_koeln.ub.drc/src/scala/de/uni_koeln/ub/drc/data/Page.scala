@@ -12,9 +12,10 @@ import scala.xml._
 /**
  * Representation of a scanned page.
  * @param words The list of words this page consists of
+ * @param id An ID for this page (TODO: update to e.g. URI)
  * @author Fabian Steeg
  */
-case class Page(words:List[Word]) {
+case class Page(words:List[Word], id: String) {
   
   def toXml = <page> { words.toList.map(_.toXml) } </page>
   
@@ -33,20 +34,20 @@ case class Page(words:List[Word]) {
 
 object Page {
 
-  def fromXml(page:Node): Page = Page( 
-    for(word <- (page \ "word").toList) yield Word.fromXml(word) 
+  def fromXml(page:Node, id: String): Page = Page( 
+    for(word <- (page \ "word").toList) yield Word.fromXml(word), id
   )
   
   def fromPdf(pdf:String): Page = { PdfToPage.convert(pdf) }
   
   def load(file:java.io.File): Page = {
       val page:Node = XML.loadFile(file)
-      Page.fromXml(page)
+      Page.fromXml(page, file.getName)
   }
   
-  def load(stream:java.io.InputStream): Page = {
+  def load(stream:java.io.InputStream, id: String): Page = {
       val page:Node = XML.load(stream)
-      Page.fromXml(page)
+      Page.fromXml(page, id)
   }
 
   /**
@@ -68,7 +69,7 @@ object Page {
   val mock: Page = 
     Page(
       for( w <- "Daniel Bonifaci Catechismus Als Slaunt".split(" ").toList ) 
-        yield Word(w, map(w.toLowerCase))
+        yield Word(w, map(w.toLowerCase)), "mock"
     )
     
 }
@@ -109,7 +110,7 @@ private object PdfToPage {
       }
       words add Word("@", Box(0,0,0,0))
     }
-    Page(words.toList)
+    Page(words.toList, new java.io.File(pdfLocation).getName().replace("pdf", "xml"))
   }
     
   def width(word: String) : Int = {
