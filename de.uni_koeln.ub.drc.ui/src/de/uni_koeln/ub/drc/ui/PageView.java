@@ -9,15 +9,24 @@ package de.uni_koeln.ub.drc.ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
+import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.services.annotations.Optional;
 import org.eclipse.e4.ui.model.application.MDirtyable;
+import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -39,6 +48,12 @@ public final class PageView {
 
   private final MDirtyable dirtyable;
 
+  @Inject
+  private EHandlerService handlerService;
+
+  @Inject
+  private ECommandService commandService;
+
   private final PageComposite pageComposite;
 
   @Inject
@@ -48,7 +63,7 @@ public final class PageView {
     parent.getShell().setLayout(new FillLayout());
     // GridLayoutFactory.fillDefaults().generateLayout(parent);
   }
-  
+
   public boolean isSaveOnCloseNeeded() {
     return true;
   }
@@ -59,7 +74,7 @@ public final class PageView {
     monitor.beginTask("Saving page...", page.words().size());
     final Iterator<Word> modified = JavaConversions.asIterable(page.words()).iterator();
     final List<Text> words = pageComposite.getWords();
-    
+
     pageComposite.getDisplay().asyncExec(new Runnable() {
       @Override
       public void run() {
@@ -75,7 +90,6 @@ public final class PageView {
         saveToXml(page);
       }
     });
-    
     dirtyable.setDirty(false);
   }
 
@@ -85,4 +99,24 @@ public final class PageView {
     page.save(file);
   }
 
+  @Inject
+  public void setSelection(@Optional @Named( IServiceConstants.SELECTION ) final Page page) {
+    if (page != null) {
+      if (dirtyable.isDirty()) {
+        MessageDialog dialog = new MessageDialog(pageComposite.getShell(), "Save page", null,
+            "The current page has been modified. Save changes?", MessageDialog.CONFIRM,
+            new String[] { IDialogConstants.YES_LABEL, IDialogConstants.NO_LABEL }, 0);
+        dialog.create();
+        if (dialog.open() == Window.OK) {
+          ParameterizedCommand saveCommand = commandService.createCommand("page.save",
+              Collections.EMPTY_MAP);
+          handlerService.executeHandler(saveCommand);
+        }
+      }
+    } else {
+      return;
+    }
+    dirtyable.setDirty(false);
+    pageComposite.update(page);
+  }
 }
