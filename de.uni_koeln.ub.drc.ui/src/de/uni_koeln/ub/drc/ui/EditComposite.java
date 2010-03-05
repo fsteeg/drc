@@ -19,67 +19,47 @@ import javax.inject.Inject;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.e4.core.services.context.IEclipseContext;
 import org.eclipse.e4.ui.model.application.MDirtyable;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.osgi.framework.Bundle;
 
 import scala.collection.JavaConversions;
-import de.uni_koeln.ub.drc.data.Box;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.Word;
 
 /**
- * Composite holding the scanned image and the edit area. Used by the {@link PageView}.
+ * Composite holding the edit area. Used by the {@link EditView}.
  * @author Fabian Steeg (fsteeg)
  */
-public final class PageComposite extends Composite {
+public final class EditComposite extends Composite {
 
   private URL xmlFile;
-  private URL jpgFile;
   private MDirtyable dirtyable;
   private Composite parent;
   private Page page;
   private boolean commitChanges = false;
   private List<Text> words;
-  private static final Point JPG_SIZE = new Point(600, 960);
-  private static final Point SHELL_SIZE = new Point(1024, 960);
-  private Label imageLabel;
+  private static final Point SHELL_SIZE = new Point(1024, 1200);
+  IEclipseContext context;
 
-  @Inject
-  public PageComposite(final MDirtyable dirtyable, final Composite parent, final int style) {
+  @Inject public EditComposite(final MDirtyable dirtyable, final Composite parent, final int style) {
     super(parent, style);
     this.parent = parent;
     this.dirtyable = dirtyable;
-    imageLabel = new Label(parent, SWT.BORDER);
     parent.getShell().setBackgroundMode(SWT.INHERIT_DEFAULT);
-    this.setSize(JPG_SIZE);
     this.setLayout(new RowLayout(SWT.HORIZONTAL));
     parent.getShell().setSize(SHELL_SIZE);
     commitChanges = true;
-  }
-
-  private void updatePage(final Composite parent) {
-    try {
-      loadStoredPage();
-    } catch (MalformedURLException e1) {
-      e1.printStackTrace();
-    }
-    final Image image = loadImage();
-    imageLabel.setImage(image);
-    words = addTextFrom(page, this);
   }
 
   /**
@@ -113,6 +93,15 @@ public final class PageComposite extends Composite {
     return page;
   }
 
+  private void updatePage(final Composite parent) {
+    try {
+      loadStoredPage();
+    } catch (MalformedURLException e1) {
+      e1.printStackTrace();
+    }
+    words = addTextFrom(page, this);
+  }
+
   private void loadStoredPage() throws MalformedURLException {
     String folderName = "pages";
     String pageName = page.id().substring(0, page.id().lastIndexOf('.'));
@@ -126,7 +115,6 @@ public final class PageComposite extends Composite {
       Page.fromPdf(pdf.getAbsolutePath()).save(xml);
       xmlFile = xml.toURI().toURL();
     }
-    jpgFile = fileFromBundle(folderName + "/" + pageName + ".jpg").toURI().toURL();
   }
 
   private List<Text> addTextFrom(final Page page, final Composite c) {
@@ -178,44 +166,14 @@ public final class PageComposite extends Composite {
   private void addFocusListener(final Text text) {
     text.addFocusListener(new FocusListener() {
       public void focusLost(final FocusEvent e) {
-        clearMarker();
+        context.modify(IServiceConstants.SELECTION, null);
       }
 
       public void focusGained(final FocusEvent e) {
-        markPosition(text);
+        context.modify(IServiceConstants.SELECTION, text);
         text.setToolTipText(((Word) text.getData()).formattedHistory());
       }
     });
-  }
-
-  private void markPosition(final Text text) {
-    Word word = (Word) text.getData();
-    System.out.println("Current word: " + word);
-    Image image = loadImage();
-    GC gc = new GC(image);
-    gc.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_RED));
-    Box box = word.position();
-    Rectangle rect = new Rectangle(box.x(), box.y(), box.width(), box.height());
-    if (rect != null) {
-      gc.drawRectangle(rect);
-    }
-    imageLabel.setImage(image);
-  }
-
-  private void clearMarker() {
-    Image image = loadImage();
-    imageLabel.setImage(image);
-  }
-
-  private Image loadImage() {
-    Display display = parent.getDisplay();
-    Image newImage = null;
-    try {
-      newImage = new Image(display, jpgFile.openStream());
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    return newImage;
   }
 
   static File fileFromBundle(final String location) { // TODO move to a utils class

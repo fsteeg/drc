@@ -22,13 +22,17 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.services.annotations.Optional;
+import org.eclipse.e4.core.services.annotations.PostConstruct;
+import org.eclipse.e4.core.services.context.IEclipseContext;
 import org.eclipse.e4.ui.model.application.MDirtyable;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
@@ -39,45 +43,66 @@ import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.Word;
 
 /**
- * An experimental view that displays the original, scanned image file and a space to edit the
- * corresponding OCR'ed text, marking the section in the image file that corresponds to the word in
- * focus. Currently mock dummy test data.
+ * A view that the area to edit the text. Marks the section in the image file that corresponds to
+ * the word in focus (in {@link CheckView}).
  * @author Fabian Steeg (fsteeg)
  */
-public final class PageView {
+public final class EditView {
+
+  @Inject private EHandlerService handlerService;
+  @Inject private ECommandService commandService;
+  @Inject private IEclipseContext context;
 
   private final MDirtyable dirtyable;
+  private final EditComposite editComposite;
 
-  @Inject
-  private EHandlerService handlerService;
-
-  @Inject
-  private ECommandService commandService;
-
-  private final PageComposite pageComposite;
-
-  @Inject
-  public PageView(final Composite parent, final MDirtyable dirtyable) {
-    pageComposite = new PageComposite(dirtyable, parent, SWT.NONE);
-    this.dirtyable = dirtyable;
-    parent.getShell().setLayout(new FillLayout());
-    // GridLayoutFactory.fillDefaults().generateLayout(parent);
+  @PostConstruct public void setContext() {
+    editComposite.context = context; // FIXME this can't be right
   }
 
-  public boolean isSaveOnCloseNeeded() {
-    return true;
+  @Inject public EditView(final Composite parent, final MDirtyable dirtyable) {
+    parent.getShell().setLayout(new FillLayout());
+    ScrolledComposite sc = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
+    editComposite = new EditComposite(dirtyable, sc, SWT.NONE);
+    RowLayout layout = new RowLayout(SWT.HORIZONTAL);
+    layout.wrap = true;
+    editComposite.setLayout(layout);
+    sc.setContent(editComposite);
+    sc.setExpandVertical(true);
+    sc.setExpandHorizontal(true);
+    sc.setMinSize(editComposite.computeSize(SWT.MAX, SWT.MAX));
+    this.dirtyable = dirtyable;
+  }
+
+  @Inject public void setSelection(@Optional @Named( IServiceConstants.SELECTION ) final Page page) {
+    if (page != null) {
+      if (dirtyable.isDirty()) {
+        MessageDialog dialog = new MessageDialog(editComposite.getShell(), "Save page", null,
+            "The current page has been modified. Save changes?", MessageDialog.CONFIRM,
+            new String[] { IDialogConstants.YES_LABEL, IDialogConstants.NO_LABEL }, 0);
+        dialog.create();
+        if (dialog.open() == Window.OK) {
+          ParameterizedCommand saveCommand = commandService.createCommand("page.save",
+              Collections.EMPTY_MAP);
+          handlerService.executeHandler(saveCommand);
+        }
+      }
+    } else {
+      return;
+    }
+    dirtyable.setDirty(false);
+    editComposite.update(page);
   }
 
   public void doSave(@Optional final IProgressMonitor m) throws IOException, InterruptedException {
     final IProgressMonitor monitor = m == null ? new NullProgressMonitor() : m;
-    final Page page = pageComposite.getPage();
+    final Page page = editComposite.getPage();
     monitor.beginTask("Saving page...", page.words().size());
     final Iterator<Word> modified = JavaConversions.asIterable(page.words()).iterator();
-    final List<Text> words = pageComposite.getWords();
+    final List<Text> words = editComposite.getWords();
 
-    pageComposite.getDisplay().asyncExec(new Runnable() {
-      @Override
-      public void run() {
+    editComposite.getDisplay().asyncExec(new Runnable() {
+      @Override public void run() {
         for (int i = 0; i < words.size(); i++) {
           String newText = words.get(i).getText();
           Stack<Modification> history = modified.next().history();
@@ -93,30 +118,13 @@ public final class PageView {
     dirtyable.setDirty(false);
   }
 
-  private void saveToXml(final Page page) {
-    File file = pageComposite.getFile();
-    System.out.println("Saving to: " + file);
-    page.save(file);
+  public boolean isSaveOnCloseNeeded() {
+    return true;
   }
 
-  @Inject
-  public void setSelection(@Optional @Named( IServiceConstants.SELECTION ) final Page page) {
-    if (page != null) {
-      if (dirtyable.isDirty()) {
-        MessageDialog dialog = new MessageDialog(pageComposite.getShell(), "Save page", null,
-            "The current page has been modified. Save changes?", MessageDialog.CONFIRM,
-            new String[] { IDialogConstants.YES_LABEL, IDialogConstants.NO_LABEL }, 0);
-        dialog.create();
-        if (dialog.open() == Window.OK) {
-          ParameterizedCommand saveCommand = commandService.createCommand("page.save",
-              Collections.EMPTY_MAP);
-          handlerService.executeHandler(saveCommand);
-        }
-      }
-    } else {
-      return;
-    }
-    dirtyable.setDirty(false);
-    pageComposite.update(page);
+  private void saveToXml(final Page page) {
+    File file = editComposite.getFile();
+    System.out.println("Saving to: " + file);
+    page.save(file);
   }
 }

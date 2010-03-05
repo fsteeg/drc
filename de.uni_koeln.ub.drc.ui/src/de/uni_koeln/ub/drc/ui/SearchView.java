@@ -41,11 +41,9 @@ public final class SearchView {
   private Text searchField;
   private TableViewer viewer;
 
-  @Inject
-  private IEclipseContext context;
+  @Inject private IEclipseContext context;
 
-  @Inject
-  public SearchView(final Composite parent) {
+  @Inject public SearchView(final Composite parent) {
     initSearchField(parent);
     initTableViewer(parent);
     GridLayoutFactory.fillDefaults().generateLayout(parent);
@@ -54,8 +52,7 @@ public final class SearchView {
   private void initSearchField(final Composite parent) {
     searchField = new Text(parent, SWT.BORDER);
     searchField.addModifyListener(new ModifyListener() {
-      @Override
-      public void modifyText(final ModifyEvent e) {
+      @Override public void modifyText(final ModifyEvent e) {
         setInput();
       }
     });
@@ -103,7 +100,7 @@ public final class SearchView {
     private Index index;
 
     private SearchViewModelProvider() {
-      index = new Index(Index.loadPagesFromFolder(PageComposite.fileFromBundle("pages")
+      index = new Index(Index.loadPagesFromFolder(EditComposite.fileFromBundle("pages")
           .getAbsolutePath()));
     }
 
@@ -113,23 +110,20 @@ public final class SearchView {
   }
 
   private static final class SearchViewContentProvider implements IStructuredContentProvider {
-    @Override
-    public Object[] getElements(final Object inputElement) {
+    @Override public Object[] getElements(final Object inputElement) {
       Object[] elements = (Object[]) inputElement;
       return elements;
     }
 
-    @Override
-    public void dispose() {}
+    @Override public void dispose() {}
 
-    @Override
-    public void inputChanged(final Viewer viewer, final Object oldInput, final Object newInput) {}
+    @Override public void inputChanged(final Viewer viewer, final Object oldInput,
+        final Object newInput) {}
   }
 
   private static final class SearchViewLabelProvider extends LabelProvider implements
       ITableLabelProvider {
-    @Override
-    public String getColumnText(final Object element, final int columnIndex) {
+    @Override public String getColumnText(final Object element, final int columnIndex) {
       Page page = (Page) element;
       switch (columnIndex) {
       case 0:
@@ -141,8 +135,7 @@ public final class SearchView {
       }
     }
 
-    @Override
-    public Image getColumnImage(final Object element, final int columnIndex) {
+    @Override public Image getColumnImage(final Object element, final int columnIndex) {
       return null;
     }
   }
