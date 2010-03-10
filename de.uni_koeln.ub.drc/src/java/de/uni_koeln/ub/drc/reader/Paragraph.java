@@ -19,11 +19,17 @@ public final class Paragraph {
 
   private List<Line> lines = new ArrayList<Line>();
 
+  /**
+   * @return The Lines of a paragraph
+   */
   public List<Line> getLines() {
     return lines;
   }
 
-  public void setLine(final Line line) {
+  /**
+   * @param line The line to be added to the paragraph
+   */
+  public void addLine(final Line line) {
     lines.add(line);
   }
 

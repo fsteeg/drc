@@ -23,7 +23,7 @@ import com.itextpdf.text.pdf.PdfReader;
  */
 public final class PdfContentReader {
 
-  String txtFile;
+  private String pdfContent;
   private PdfReader reader;
 
   /**
@@ -40,8 +40,14 @@ public final class PdfContentReader {
     return reader.getCropBox(1);
   }
 
-  private void read(final String file) {
+  /**
+   * @return The PDF content
+   */
+  public String getPdfContent() {
+    return pdfContent;
+  }
 
+  private void read(final String file) {
     try {
       StringBuilder sb = new StringBuilder();
       reader = new PdfReader(file);
@@ -54,7 +60,7 @@ public final class PdfContentReader {
         byte[] streamBytes = PdfReader.getStreamBytes(stream);
         sb.append(new String(streamBytes, "iso-8859-1"));
       }
-      txtFile = new String(sb);
+      pdfContent = new String(sb);
     } catch (IOException e) {
       e.printStackTrace();
     }
