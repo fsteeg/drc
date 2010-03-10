@@ -20,16 +20,11 @@ import de.uni_koeln.ub.drc.data.Point;
  */
 public final class TestPositionParser {
 
+  private List<Paragraph> paragraphs = PositionParser
+      .parse("res/rom/PPN345572629_0004/PPN345572629_0004-0001.pdf");
+
   @Test
   public void parse() {
-    List<Paragraph> paragraphs;
-
-    paragraphs = PositionParser.parse("res/rom/PPN345572629_0004/PPN345572629_0004-0001.pdf");
-    Line testLine = paragraphs.get(2).getLines().get(0);
-    System.out.println(testLine.getText());
-    Point scaledStart = testLine.getStartPoint(600, 960);
-    Assert.assertEquals(new Point(77, 348), scaledStart);
-    
     // int scaledFontSize = testLine.getFontSize(600, 960); // TODO scaled fontsize
     for (Paragraph p : paragraphs) {
       List<Line> lines = p.getLines();
@@ -38,7 +33,7 @@ public final class TestPositionParser {
         float x = start.x();
         float y = start.y();
         int fontSize = line.getFontSize();
-        String text = line.getText();
+        String text = line.getText().toString();
         Assert.assertFalse("Encoding should be correct", text.contains("�"));
         System.out.println(String.format("Position: x %s , y %s / Fontsize: %s / Text: %s", x, y,
             fontSize, text));
@@ -46,6 +41,20 @@ public final class TestPositionParser {
       System.out.println();
     }
 
+  }
+
+  @Test
+  public void point() {
+    Line testLine = paragraphs.get(2).getLines().get(0);
+    System.out.println(testLine.getText());
+    Point scaledStart = testLine.getStartPointScaled(600, 960);
+    Assert.assertEquals(new Point(77, 348), scaledStart);
+  }
+
+  @Test
+  public void paragraphs() {
+    Assert
+        .assertTrue(paragraphs.get(4).getLines().get(0).getText().toString().startsWith("Slaunt"));
   }
 
 }

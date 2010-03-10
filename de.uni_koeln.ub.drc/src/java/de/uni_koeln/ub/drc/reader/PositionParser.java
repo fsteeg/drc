@@ -25,55 +25,43 @@ public final class PositionParser {
   /**
    * @param pdf The PDF document to parse
    * @return The paragraphs parsed from the PDF
-   * @throws FileNotFoundException
    */
   public static List<Paragraph> parse(final String pdf) {
-    // TODO Split method into smaller methods
     PdfContentReader reader = new PdfContentReader(pdf);
     List<Paragraph> paragraphs = new ArrayList<Paragraph>();
-    Scanner s;
-    s = new Scanner(reader.txtFile);
-    StringBuilder sb = new StringBuilder();
-    List<String> result = new ArrayList<String>();
+    Scanner s = new Scanner(reader.getPdfContent());
 
     String previousTm = null;
-    float previousSize = -1;
     float fontSize = -1;
     Paragraph p = null;
+    Line currentLine = null;
 
     while (s.hasNextLine()) {
-      // FIXME last line of paragraph is first of next paragraph
       String line = s.nextLine().trim();
 
       if (line.equals("BT")) {
         p = new Paragraph();
         paragraphs.add(p);
-        result.add("\n");
       }
 
       if (line.endsWith("Tf")) {
-        previousSize = fontSize;
         fontSize = Float.parseFloat(line.split(" ")[1]);
       }
 
       if (line.endsWith("Tm")) {
-        if (sb.toString().trim().length() > 0 && previousTm != null) {
+        if (previousTm != null) {
           String[] tokens = previousTm.split(" ");
           float x = Float.parseFloat(tokens[4]);
           float y = Float.parseFloat(tokens[5]);
-          result.add(String.format("Starting at x='%.2f', y='%.2f', size='%.2f': ", x, y,
-              previousSize)
-              + sb.toString());
-          p.setLine(new Line(reader.getPdfBox(), x, y, fontSize, sb.toString()));
-          previousSize = fontSize;
+          currentLine = new Line(reader.getPdfBox(), x, y, fontSize, new StringBuilder());
+          p.addLine(currentLine);
         }
-        sb = new StringBuilder();
         previousTm = line;
       }
 
-      if (line.endsWith("Tj")) {
+      if (currentLine != null && line.endsWith("Tj")) {
         line = line.replaceAll("[\\(\\)]| Tj", "");
-        sb.append(line);
+        currentLine.getText().append(line);
       }
     }
     return paragraphs;
