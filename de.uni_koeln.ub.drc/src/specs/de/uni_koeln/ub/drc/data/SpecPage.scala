@@ -66,7 +66,7 @@ class SpecPage extends Spec with ShouldMatchers {
     it("should be desializable both from a file and an input stream") {
         val loadedFromFile = Page.load(file).words(0)
         expect(2) { loadedFromFile.history.size }
-        val loadedFromStream = Page.load(file.toURL.openStream, file.getName()).words(0)
+        val loadedFromStream = Page.load(file.toURI.toURL.openStream, file.getName()).words(0)
         expect(2) { loadedFromFile.history.size }
     }
     
@@ -74,7 +74,7 @@ class SpecPage extends Spec with ShouldMatchers {
           val page : Page = Page.fromPdf("res/rom/PPN345572629_0004/PPN345572629_0004-0001.pdf")
           val file = new java.io.File("res/rom/PPN345572629_0004/PPN345572629_0004-0001.xml")
           val root = page.save(file)
-          val uri = file.toURL.toURI
+          val uri = file.toURI.toURL.toURI
           expect(true) {root.size > 0}
           expect(true) {file.exists}
           //println(uri)

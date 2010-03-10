@@ -16,7 +16,8 @@ import java.io.File
  */
 class Index(val pages: List[Page]) {
     
-    /** 
+    /**
+     * Search for pages containing a given term.
      * @param term The term to search for
      * @return A list of pages where any word's history contains the term
      */
@@ -37,6 +38,7 @@ class Index(val pages: List[Page]) {
 object Index {
     
     /** 
+     * Load serialized XML pages from a directory.
      * @param location The directory containing the page XML files to load 
      */
     def loadPagesFromFolder(location: String): List[Page] = {
@@ -46,6 +48,7 @@ object Index {
     }
     
     /** 
+     * Import page PDF files to XML.
      * @param location The directory containing PDF files to be imported into the page XML format 
      */
     def initialImport(location: String): Unit = {
