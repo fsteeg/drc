@@ -100,7 +100,7 @@ private object PdfToPage {
     val paragraphs : Buffer[Paragraph] = PositionParser.parse(pdfLocation)
     for(p <- paragraphs) {
       for(line <- p.getLines) {
-        var pos = line.getStartPoint(600, 960)
+        var pos = line.getStartPointScaled(600, 960)
         for(word <- line.getWords) {
           val wordWidth = width(word)
           words add Word(word, Box(pos.x.toInt, pos.y.toInt - boxHeight, wordWidth, boxHeight))
