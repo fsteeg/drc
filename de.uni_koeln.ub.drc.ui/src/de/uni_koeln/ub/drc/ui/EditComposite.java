@@ -27,7 +27,6 @@ import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
@@ -49,7 +48,6 @@ public final class EditComposite extends Composite {
   private Page page;
   private boolean commitChanges = false;
   private List<Text> words;
-  private static final Point SHELL_SIZE = new Point(1024, 1200);
   IEclipseContext context;
 
   @Inject public EditComposite(final MDirtyable dirtyable, final Composite parent, final int style) {
@@ -57,8 +55,9 @@ public final class EditComposite extends Composite {
     this.parent = parent;
     this.dirtyable = dirtyable;
     parent.getShell().setBackgroundMode(SWT.INHERIT_DEFAULT);
-    this.setLayout(new RowLayout(SWT.HORIZONTAL));
-    parent.getShell().setSize(SHELL_SIZE);
+    RowLayout layout = new RowLayout(SWT.HORIZONTAL);
+    layout.wrap = true;
+    this.setLayout(layout);
     commitChanges = true;
   }
 
