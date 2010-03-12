@@ -28,14 +28,14 @@ table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-
 |Will the page move down as the text corrector moves through the corrected text?|True for ANDP beta. |Done.  |M1 |
 |Should users be correcting by character, word, line, paragraph, or article| Correction per line.| Corrections on word level only.| M1 |
 |How should we save these corrections?|Separate DB entries. |XML files for now |M1 |
-|Should there be a quick single word/line correction mode and also a ‘power use’ mode for those users who want to correct entire articles? | Only line correction in beta, 'power use' planned. | For clarity reasons there should be only one mode of correction (word level).| M1 |
-|How can we match the old words with the corrected ‘new’ words so that word highlighting will still work in searches?| |Done. | M1 |
-|Which versions should the user see before correcting – the latest only, the original or all versions?|Latest. | Latest. Allow access to older versions via change log/history? | M1 |
+|Should there be a quick single word/line correction mode and also a "power use" mode for those users who want to correct entire articles? | Only line correction in beta, 'power use' planned. | For clarity reasons there should be only one mode of correction (word level).| M1 |
+|How can we match the old words with the corrected "new" words so that word highlighting will still work in searches?| |Done. | M1 |
+|Which versions should the user see before correcting - the latest only, the original or all versions?|Latest. | Latest. Allow access to older versions via change log/history? | M1 |
 |Should we keep all changes and enable searching across all changes or just latest changes?|Keep all changes, searching across all changes. | Should be possible to search over all versions. Default: all versions, later optional| M1,M2 |
-|Users are put off seeing all the raw OCR needing correction which may be ‘gibberish’ and clutter screen| | Improve OCR. |M2 |
+|Users are put off seeing all the raw OCR needing correction which may be "gibberish" and clutter screen| | Improve OCR. |M2 |
 |Is it possible/desirable to prevent some words being changed too radically (e.g.  because it is so visually different, that it is unlikely that an OCR mistake could have been made)?|Limited length on line level, but no restrictions to what is typed. | Limit length on word level. No blanks allowed (message). | M2 |
 |Should users have keyboard shortcuts (e.g. to move to next word/skip over words)? | Shortcuts are optional, can be very useful. |Map functionality to shortcuts |M2 |
-|Is it possible to have correction “candidate” words? How could we identify the candidates and how to suggest they can be changed (dropdown?).|No such functionality in beta. |Use word lists. |M2 |
+|Is it possible to have correction "candidate" words? How could we identify the candidates and how to suggest they can be changed (dropdown?).|No such functionality in beta. |Use word lists. |M2 |
 |Moderation required? Who will do it (expert, contributors, users), how will it be done, and how time consuming will it be?|No moderation in beta.  | First phase: 'Correction manager' (for announcements, motivation, support). 2. phase: switch to self-moderation by user - users can accept corrections or re-correct ('voting'). | M3 |
 |How will we know what users are doing and gather useful statistics?|Feedback survey, personal history for registered users. |Via user profiles. Try to collect information about users via user profiles. |M3 |
 |Can we measure the improvements made to data?| | Community-based. Mark word/text as correct, accept changes by other users. |M3 |
@@ -43,12 +43,12 @@ table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-
 |Potential vandalism of text|No vandalism of text was detected in 6 months so no roll back to previous versions or moderation was required.|Rollbacks. Login/captcha. |M3, M4. |
 |Large amounts of text correction activity compromise database/service|System needs to be scalable| |M3, M4 |
 |How will we roll back and will it be at article level or whole database?| |Word level. In b2 rollback of whole database (timestamps needed) |M3, b2 |
-|Users don’t understand the concept of text correction|Need direct access to guidelines (see ANDP "help pages":http://newspapers.nla.gov.au/ndp/del/searchTips. Functionality must be as easy as possible - avoid having too many features|Need mini tutorial, screen cast? | M4 |
+|Users don't understand the concept of text correction|Need direct access to guidelines (see ANDP "help pages":http://newspapers.nla.gov.au/ndp/del/searchTips. Functionality must be as easy as possible - avoid having too many features|Need mini tutorial, screen cast? | M4 |
 |Robots and spam|Use login and/or captcha ("Completely Automated Public Turing test to tell Computers and Humans Apart.")|Login/captcha - can captcha be used to collect romansch vocabulary? | M4 |
-|Users don’t understand what OCR is or that the searching works on the OCR.|The term they agreed was meaningful instead of ‘OCR text’ was ‘electronically translated text’.| Need meaningful term for 'OCR', need mini tutorial | M4 |
+|Users don"t understand what OCR is or that the searching works on the OCR.|The term they agreed was meaningful instead of "OCR text" was "electronically translated text".| Need meaningful term for 'OCR', need mini tutorial | M4 |
 |Should login be mandatory or optional? |Optional - Mandatory would enable tracking of users but may put off casual users who just want to change a few words. To make registration attractive, registered users get more functionalities.|Optional, captcha | M4 |
 |How will we test user interface mechanisms?| Non-public prototype phase. | Internal evaluation (native speakers?) | b1 |
-|Should multiple users be able to correct articles an infinite number of times or can an article be ‘finished’ and locked down?| |Should be possible to lock articles/pages when finished. |b2 |
+|Should multiple users be able to correct articles an infinite number of times or can an article be "finished" and locked down?| |Should be possible to lock articles/pages when finished. |b2 |
 |Users are confused about the difference between text correction, adding comments and adding tags and how to do it|Clean separation of features needed| |b2 |
 |Should users be allowed to change line breaks or formatting (i.e. denote text as italic or heading?)| No such functionality in beta. | | b2 |
 
@@ -104,6 +104,7 @@ table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-
 |Print on demand?| | b2 |
 |Translations, aligned corpora| | b2 |
 
+
 h4. ANDP:  Motivational factors
 
 Users said they were motivated by addition of new content, the knowledge they were helping other people as well as themselves, the idea they were helping to record Australian history accurately, helping a good cause, being able to make a small but effective contribution to the big picture. Users said things that would increase their motivation would be public recognition, public ranking tables, user profiles, and the ability for them to communicate with other text correctors.
@@ -118,10 +119,10 @@ table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-
 |History | Helping to provide an accurate record (sometimes linked to local history research)| Cultural heritage, local history.| |
 |Family names | Helping myself and others find family names (sometimes linked to family history research)| Besides family names people could be interested in local history (place names and such). | |
 |Worthy cause | I consider this a useful cause to volunteer for (linked to helping the Australian community, the Library, themselves)| | |
-|Detailed instructions | If you want a specific result, give us specific instructions. We will work better when we know exactly what’s expected.| | |
-|Team Spirit | Create an online environment of camaraderie. We’ll work more effectively when we feel like part of team or virtual community. We don’t want to let others down.| | |
+|Detailed instructions | If you want a specific result, give us specific instructions. We will work better when we know exactly what"s expected.| | |
+|Team Spirit | Create an online environment of camaraderie. We'll work more effectively when we feel like part of team or virtual community. We don't want to let others down.| | |
 |Recognize achievement | Make a point to recognize achievements one-on-one and also in group settings. We like to think we are being noticed and are making a difference. Show us how we fit into the big picture.| Voting/badges? Overview of participants (regularly updates) | |
-|Raising the bar | The more we do the more you should expect us to do. We’ll do a lot more if you give us a lot more content. That would be our highest motivational factor.| | |
+|Raising the bar | The more we do the more you should expect us to do. We"ll do a lot more if you give us a lot more content. That would be our highest motivational factor.| | |
 
 
 h2. "Milestones":http://github.com/fsteeg/drc/issues for DRC beta release (b1)
