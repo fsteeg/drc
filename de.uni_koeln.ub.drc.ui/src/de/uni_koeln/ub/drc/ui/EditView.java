@@ -31,7 +31,6 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
@@ -62,9 +61,6 @@ public final class EditView {
   @Inject public EditView(final Composite parent, final MDirtyable dirtyable) {
     ScrolledComposite sc = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
     editComposite = new EditComposite(dirtyable, sc, SWT.NONE);
-    RowLayout layout = new RowLayout(SWT.HORIZONTAL);
-    layout.wrap = true;
-    editComposite.setLayout(layout);
     sc.setContent(editComposite);
     sc.setExpandVertical(true);
     sc.setExpandHorizontal(true);
