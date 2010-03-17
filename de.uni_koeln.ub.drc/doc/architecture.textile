@@ -26,7 +26,7 @@ h3. Components
 
 Each layer consists of multiple components, which correspond to items from the "requirements specification":http://wiki.github.com/fsteeg/drc/requirements. Core components are darkened in the diagram, while add-on components that are likely to change are white:
 
-!{width:700px}http://i40.tinypic.com/14ttpx5.png
+!{width:700px}http://i40.tinypic.com/14ttpx5.png!
 
 h3. Distribution
 
