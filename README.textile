@@ -1,6 +1,6 @@
 Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy)
 
-* "Requirements":de.uni_koeln.ub.drc/doc/requirements.textile
-* "Architecture":de.uni_koeln.ub.drc/doc/architecture.textile
-* "Technology":de.uni_koeln.ub.drc/doc/technology.textile
-* "ANDP":de.uni_koeln.ub.drc/doc/andp.textile
+* "Requirements":drc/tree/master/de.uni_koeln.ub.drc/doc/requirements.textile
+* "Architecture":drc/tree/master/de.uni_koeln.ub.drc/doc/architecture.textile
+* "Technology":drc/tree/master/de.uni_koeln.ub.drc/doc/technology.textile
+* "ANDP":drc/tree/master/de.uni_koeln.ub.drc/doc/andp.textile
