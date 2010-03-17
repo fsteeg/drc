@@ -4,7 +4,7 @@ h3. Layers
 
 The overall system architecture is a three-tier system made of a presentation layer, a logic layer and a data layer. The presentation layer communicates with the logic layer and the logic layer communicates with the data layer. There is no direct coupling between the presentation layer and the data layer:
 
-!{width:400px}http://i44.tinypic.com/23sw50l.png!
+!http://i44.tinypic.com/23sw50l.png!
 
 A three-tier architecture seems to be the natural solution for our problem: the main subject of the project is to produce a certain kind of data, which is identical for every user and can therefore be stored centrally (data layer). Different users should be able to access and manipulate the data, while maintaining its integrity (logic layer). The data can be accessed in different ways (read only, edit access, etc.) by different users (presentation layer).
 
@@ -26,7 +26,7 @@ h3. Components
 
 Each layer consists of multiple components, which correspond to items from the "requirements specification":http://wiki.github.com/fsteeg/drc/requirements. Core components are darkened in the diagram, while add-on components that are likely to change are white:
 
-!{width:700px}http://i40.tinypic.com/14ttpx5.png!
+!http://i44.tinypic.com/30v0qjc.png!
 
 h3. Distribution
 
