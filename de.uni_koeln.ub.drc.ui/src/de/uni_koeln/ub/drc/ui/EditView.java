@@ -64,7 +64,6 @@ public final class EditView {
     sc.setContent(editComposite);
     sc.setExpandVertical(true);
     sc.setExpandHorizontal(true);
-    /* FIXME: This line is required to get the scroll bar, but then the wrapping is fixed... */
     sc.setMinSize(editComposite.computeSize(SWT.MAX, SWT.MAX));
     this.dirtyable = dirtyable;
   }

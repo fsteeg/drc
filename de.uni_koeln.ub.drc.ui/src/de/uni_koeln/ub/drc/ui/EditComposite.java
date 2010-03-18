@@ -23,6 +23,8 @@ import org.eclipse.e4.core.services.context.IEclipseContext;
 import org.eclipse.e4.ui.model.application.MDirtyable;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.ModifyEvent;
@@ -61,6 +63,7 @@ public final class EditComposite extends Composite {
     GridLayout layout = new GridLayout(1, false);
     this.setLayout(layout);
     commitChanges = true;
+    addWrapOnResizeListener(parent);
   }
 
   /**
@@ -92,6 +95,21 @@ public final class EditComposite extends Composite {
 
   Page getPage() {
     return page;
+  }
+
+  private void addWrapOnResizeListener(final Composite parent) {
+    parent.addControlListener(new ControlListener() {
+      @Override public void controlResized(final ControlEvent e) {
+        for (Composite line : lines) {
+          if (!line.isDisposed()) {
+            setLineLayout(line);
+          }
+        }
+        layout();
+      }
+
+      @Override public void controlMoved(final ControlEvent e) {}
+    });
   }
 
   private void updatePage(final Composite parent) {
@@ -149,8 +167,7 @@ public final class EditComposite extends Composite {
   private void setLineLayout(final Composite lineComposite) {
     RowLayout layout = new RowLayout();
     GridData data = new GridData();
-    /* TODO we need a different approach than setting the min size to get re-wrapping to work */
-    data.widthHint = lineComposite.computeSize(parent.getSize().x, parent.getSize().y).x - 15;
+    data.widthHint = lineComposite.computeSize(parent.getSize().x, parent.getSize().y).x - 20;
     lineComposite.setLayoutData(data);
     lineComposite.setLayout(layout);
   }
