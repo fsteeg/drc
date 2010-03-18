@@ -101,17 +101,28 @@ public final class CheckView {
 
   private void markPosition(final Text text) {
     Word word = (Word) text.getData();
+    Box box = word.position();
+    Rectangle rect = new Rectangle(box.x() - 15, box.y() - 5, box.width() + 65, box.height() + 20);
     System.out.println("Current word: " + word);
     Image image = loadImage();
     GC gc = new GC(image);
-    gc.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_RED));
-    Box box = word.position();
-    Rectangle rect = new Rectangle(box.x(), box.y(), box.width(), box.height());
-    if (rect != null) {
-      gc.drawRectangle(rect);
-    }
+    drawBoxArea(rect, gc);
+    drawBoxBorder(rect, gc);
     imageLabel.setImage(image);
     scrolledComposite.setOrigin(new Point(box.x(), box.y()));
+  }
+
+  private void drawBoxBorder(final Rectangle rect, final GC gc) {
+    gc.setAlpha(200);
+    gc.setLineWidth(5);
+    gc.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_DARK_GREEN));
+    gc.drawRectangle(rect);
+  }
+
+  private void drawBoxArea(final Rectangle rect, final GC gc) {
+    gc.setAlpha(50);
+    gc.setBackground(parent.getDisplay().getSystemColor(SWT.COLOR_GREEN));
+    gc.fillRectangle(rect);
   }
 
   private void clearMarker() {
