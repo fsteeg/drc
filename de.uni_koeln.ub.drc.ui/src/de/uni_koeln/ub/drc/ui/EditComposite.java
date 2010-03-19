@@ -23,10 +23,14 @@ import org.eclipse.e4.core.services.context.IEclipseContext;
 import org.eclipse.e4.ui.model.application.MDirtyable;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
@@ -48,6 +52,7 @@ public final class EditComposite extends Composite {
   private Page page;
   private boolean commitChanges = false;
   private List<Text> words;
+  private List<Composite> lines = new ArrayList<Composite>();
   IEclipseContext context;
 
   @Inject public EditComposite(final MDirtyable dirtyable, final Composite parent, final int style) {
@@ -55,10 +60,10 @@ public final class EditComposite extends Composite {
     this.parent = parent;
     this.dirtyable = dirtyable;
     parent.getShell().setBackgroundMode(SWT.INHERIT_DEFAULT);
-    RowLayout layout = new RowLayout(SWT.HORIZONTAL);
-    layout.wrap = true;
+    GridLayout layout = new GridLayout(1, false);
     this.setLayout(layout);
     commitChanges = true;
+    addWrapOnResizeListener(parent);
   }
 
   /**
@@ -92,6 +97,21 @@ public final class EditComposite extends Composite {
     return page;
   }
 
+  private void addWrapOnResizeListener(final Composite parent) {
+    parent.addControlListener(new ControlListener() {
+      @Override public void controlResized(final ControlEvent e) {
+        for (Composite line : lines) {
+          if (!line.isDisposed()) {
+            setLineLayout(line);
+          }
+        }
+        layout();
+      }
+
+      @Override public void controlMoved(final ControlEvent e) {}
+    });
+  }
+
   private void updatePage(final Composite parent) {
     try {
       loadStoredPage();
@@ -117,17 +137,22 @@ public final class EditComposite extends Composite {
   }
 
   private List<Text> addTextFrom(final Page page, final Composite c) {
-    if (words != null) {
-      for (Text word : words) {
-        word.dispose();
+    if (lines != null) {
+      for (Composite line : lines) {
+        line.dispose();
       }
     }
     List<Text> list = new ArrayList<Text>();
     this.page = page;
+    Composite lineComposite = new Composite(c, SWT.NONE);
+    setLineLayout(lineComposite);
+    lines.add(lineComposite);
     for (Word word : JavaConversions.asIterable(page.words())) {
-      Text text = new Text(c, SWT.NONE);
+      Text text = new Text(lineComposite, SWT.NONE);
       if (word.original().equals("@")) {
-        text.setText("\n");
+        lineComposite = new Composite(c, SWT.NONE);
+        setLineLayout(lineComposite);
+        lines.add(lineComposite);
       } else {
         text.setText(word.history().top().form());
       }
@@ -137,6 +162,14 @@ public final class EditComposite extends Composite {
     }
     this.layout();
     return list;
+  }
+
+  private void setLineLayout(final Composite lineComposite) {
+    RowLayout layout = new RowLayout();
+    GridData data = new GridData();
+    data.widthHint = lineComposite.computeSize(parent.getSize().x, parent.getSize().y).x - 20;
+    lineComposite.setLayoutData(data);
+    lineComposite.setLayout(layout);
   }
 
   private void addListeners(final Text text) {
