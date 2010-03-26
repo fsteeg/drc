@@ -1,20 +1,5 @@
 <page>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> DANiEL </original>
     <position>
       <box>
@@ -371,6 +356,21 @@
     </position>
     <modification>
       <form> I.\ </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -990,21 +990,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> Signer </original>
     <position>
       <box>
@@ -1046,6 +1031,21 @@
     </position>
     <modification>
       <form> Christum. </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -4890,21 +4890,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> traer </original>
     <position>
       <box>
@@ -5126,6 +5111,81 @@
     </position>
     <modification>
       <form> fcò </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> Romaniache </original>
+    <position>
+      <box>
+        <x> 68 </x>
+        <y> 882 </y>
+        <width> 65 </width>
+        <height> 15 </height>
+      </box>
+    </position>
+    <modification>
+      <form> Romaniache </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> Forschungen </original>
+    <position>
+      <box>
+        <x> 140 </x>
+        <y> 882 </y>
+        <width> 77 </width>
+        <height> 15 </height>
+      </box>
+    </position>
+    <modification>
+      <form> Forschungen </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> IV. </original>
+    <position>
+      <box>
+        <x> 224 </x>
+        <y> 882 </y>
+        <width> 21 </width>
+        <height> 15 </height>
+      </box>
+    </position>
+    <modification>
+      <form> IV. </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> i </original>
+    <position>
+      <box>
+        <x> 252 </x>
+        <y> 882 </y>
+        <width> 2 </width>
+        <height> 15 </height>
+      </box>
+    </position>
+    <modification>
+      <form> i </form>
       <author> OCR </author>
     </modification>
   </word>

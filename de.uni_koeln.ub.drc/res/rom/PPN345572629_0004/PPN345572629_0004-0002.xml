@@ -1,20 +1,5 @@
 <page>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> 2 </original>
     <position>
       <box>
@@ -71,6 +56,21 @@
     </position>
     <modification>
       <form> Bonifaci </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -1545,21 +1545,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> ventütna </original>
     <position>
       <box>
@@ -1721,6 +1706,21 @@
     </position>
     <modification>
       <form> &amp; </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -2535,21 +2535,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> à </original>
     <position>
       <box>
@@ -2756,6 +2741,21 @@
     </position>
     <modification>
       <form> havefs </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -3540,21 +3540,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> veutüra. </original>
     <position>
       <box>
@@ -3701,6 +3686,21 @@
     </position>
     <modification>
       <form> fchkolas, </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -4410,21 +4410,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> da </original>
     <position>
       <box>
@@ -4586,6 +4571,21 @@
     </position>
     <modification>
       <form> dretgia </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -5280,21 +5280,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> Chriftianevla </original>
     <position>
       <box>
@@ -5456,6 +5441,21 @@
     </position>
     <modification>
       <form> authoritad, </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -6270,21 +6270,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> tin </original>
     <position>
       <box>
@@ -6461,6 +6446,21 @@
     </position>
     <modification>
       <form> recommendaa. </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -6900,21 +6900,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> la </original>
     <position>
       <box>
@@ -7110,6 +7095,21 @@
     </modification>
   </word>
   <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
     <original> Voluntüs, </original>
     <position>
       <box>
@@ -7170,21 +7170,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> 40 </original>
     <position>
       <box>
@@ -7241,6 +7226,51 @@
     </position>
     <modification>
       <form> cunvifchign </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> DANiEL </original>
+    <position>
+      <box>
+        <x> 353 </x>
+        <y> 839 </y>
+        <width> 37 </width>
+        <height> 15 </height>
+      </box>
+    </position>
+    <modification>
+      <form> DANiEL </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> BONiFACiUS. </original>
+    <position>
+      <box>
+        <x> 397 </x>
+        <y> 839 </y>
+        <width> 67 </width>
+        <height> 15 </height>
+      </box>
+    </position>
+    <modification>
+      <form> BONiFACiUS. </form>
       <author> OCR </author>
     </modification>
   </word>

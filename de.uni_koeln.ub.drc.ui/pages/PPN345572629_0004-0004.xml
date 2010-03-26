@@ -1,24 +1,5 @@
 <page>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> </form>
-      <author> fsteeg </author>
-    </modification>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> 4 </original>
     <position>
       <box>
@@ -43,10 +24,6 @@
         <height> 0 </height>
       </box>
     </position>
-    <modification>
-      <form> </form>
-      <author> fsteeg </author>
-    </modification>
     <modification>
       <form> @ </form>
       <author> OCR </author>
@@ -92,10 +69,6 @@
         <height> 0 </height>
       </box>
     </position>
-    <modification>
-      <form> </form>
-      <author> fsteeg </author>
-    </modification>
     <modification>
       <form> @ </form>
       <author> OCR </author>
@@ -322,10 +295,6 @@
       </box>
     </position>
     <modification>
-      <form> </form>
-      <author> fsteeg </author>
-    </modification>
-    <modification>
       <form> @ </form>
       <author> OCR </author>
     </modification>
@@ -342,6 +311,21 @@
     </position>
     <modification>
       <form> figüraa. </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -901,25 +885,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> </form>
-      <author> fsteeg </author>
-    </modification>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> ormas </original>
     <position>
       <box>
@@ -1051,6 +1016,21 @@
     </position>
     <modification>
       <form> bevrentar. </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -2315,25 +2295,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> </form>
-      <author> fsteeg </author>
-    </modification>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> 15 </original>
     <position>
       <box>
@@ -2388,10 +2349,6 @@
         <height> 0 </height>
       </box>
     </position>
-    <modification>
-      <form> </form>
-      <author> fsteeg </author>
-    </modification>
     <modification>
       <form> @ </form>
       <author> OCR </author>
@@ -2499,6 +2456,21 @@
     </position>
     <modification>
       <form> intzennas? </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -2737,10 +2709,6 @@
         <height> 15 </height>
       </box>
     </position>
-    <modification>
-      <form> caschun </form>
-      <author> fsteeg </author>
-    </modification>
     <modification>
       <form> cafchun </form>
       <author> OCR </author>
@@ -3302,25 +3270,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> </form>
-      <author> fsteeg </author>
-    </modification>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> pquri, </original>
     <position>
       <box>
@@ -3437,6 +3386,21 @@
     </position>
     <modification>
       <form> numnadas. </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -3576,25 +3540,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> </form>
-      <author> fsteeg </author>
-    </modification>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> Bein. </original>
     <position>
       <box>
@@ -3619,10 +3564,6 @@
         <height> 0 </height>
       </box>
     </position>
-    <modification>
-      <form> </form>
-      <author> fsteeg </author>
-    </modification>
     <modification>
       <form> @ </form>
       <author> OCR </author>
@@ -3655,6 +3596,21 @@
     </position>
     <modification>
       <form> Cò. </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -3854,25 +3810,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> </form>
-      <author> fsteeg </author>
-    </modification>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> einf </original>
     <position>
       <box>
@@ -3944,6 +3881,21 @@
     </position>
     <modification>
       <form> tempel. </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -4473,25 +4425,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> </form>
-      <author> fsteeg </author>
-    </modification>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> Chrifti. </original>
     <position>
       <box>
@@ -4503,6 +4436,21 @@
     </position>
     <modification>
       <form> Chrifti. </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -5362,25 +5310,6 @@
     </modification>
   </word>
   <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> </form>
-      <author> fsteeg </author>
-    </modification>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
     <original> dattan </original>
     <position>
       <box>
@@ -5512,6 +5441,21 @@
     </position>
     <modification>
       <form> ean. </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> @ </original>
+    <position>
+      <box>
+        <x> 0 </x>
+        <y> 0 </y>
+        <width> 0 </width>
+        <height> 0 </height>
+      </box>
+    </position>
+    <modification>
+      <form> @ </form>
       <author> OCR </author>
     </modification>
   </word>
@@ -5831,6 +5775,36 @@
     </modification>
   </word>
   <word>
+    <original> 40 </original>
+    <position>
+      <box>
+        <x> 40 </x>
+        <y> 859 </y>
+        <width> 14 </width>
+        <height> 15 </height>
+      </box>
+    </position>
+    <modification>
+      <form> 40 </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
+    <original> dinqq. </original>
+    <position>
+      <box>
+        <x> 61 </x>
+        <y> 859 </y>
+        <width> 37 </width>
+        <height> 15 </height>
+      </box>
+    </position>
+    <modification>
+      <form> dinqq. </form>
+      <author> OCR </author>
+    </modification>
+  </word>
+  <word>
     <original> @ </original>
     <position>
       <box>
@@ -5840,10 +5814,6 @@
         <height> 0 </height>
       </box>
     </position>
-    <modification>
-      <form> </form>
-      <author> fsteeg </author>
-    </modification>
     <modification>
       <form> @ </form>
       <author> OCR </author>

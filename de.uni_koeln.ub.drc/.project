@@ -31,4 +31,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>net.sf.eclipsecs.core.CheckstyleNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>README.textile</name>
+			<type>1</type>
+			<location>/Users/fsteeg/Documents/workspaces/drc/README.textile</location>
+		</link>
+	</linkedResources>
 </projectDescription>

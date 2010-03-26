@@ -54,11 +54,10 @@ object Index {
     def initialImport(location: String): Unit = {
         val files = new File(location).list
         for(file <- files.toList if file.endsWith("pdf") ) {
-             val xml = new File(location, file.replace("pdf", "xml"))
-             if(!(xml.exists)) { // TODO use separate test data to allow overwriting
-                val page = Page.fromPdf(new File(location, file).getAbsolutePath)
-                page.save(xml)
-            }
+            val xml = new File(location, file.replace("pdf", "xml"))
+            // TODO use separate test data (overwriting here)
+            val page = Page.fromPdf(new File(location, file).getAbsolutePath)
+            page.save(xml)
         }
     }
     
