@@ -9,6 +9,7 @@ package de.uni_koeln.ub.drc.ui;
 
 import javax.inject.Inject;
 
+import org.eclipse.e4.core.services.annotations.PostConstruct;
 import org.eclipse.e4.core.services.context.IEclipseContext;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -18,6 +19,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
@@ -47,6 +49,10 @@ public final class SearchView {
     initSearchField(parent);
     initTableViewer(parent);
     GridLayoutFactory.fillDefaults().generateLayout(parent);
+  }
+
+  @PostConstruct public void select() {
+    viewer.setSelection(new StructuredSelection(viewer.getElementAt(0)));
   }
 
   private void initSearchField(final Composite parent) {
