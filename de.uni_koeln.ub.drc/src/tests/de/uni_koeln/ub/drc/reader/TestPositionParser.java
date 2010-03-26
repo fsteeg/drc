@@ -45,16 +45,18 @@ public final class TestPositionParser {
 
   @Test
   public void point() {
-    Line testLine = paragraphs.get(2).getLines().get(0);
-    System.out.println(testLine.getText());
-    Point scaledStart = testLine.getStartPointScaled(600, 960);
-    Assert.assertEquals(new Point(77, 348), scaledStart);
+    Line testLine = paragraphs.get(1).getLines().get(0);
+    Point scaledStart = testLine.getStartPointScaled(900, 1440);
+    Assert.assertEquals(new Point(116, 522), scaledStart);
+    Assert.assertTrue(testLine.getText().toString().startsWith("CatechiSmus"));
   }
 
   @Test
   public void paragraphs() {
     Assert
-        .assertTrue(paragraphs.get(4).getLines().get(0).getText().toString().startsWith("Slaunt"));
+        .assertTrue(paragraphs.get(0).getLines().get(0).getText().toString().startsWith("DANiEL"));
+    
   }
+  
 
 }
