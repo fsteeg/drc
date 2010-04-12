@@ -75,11 +75,11 @@ public final class Line {
   }
 
   /**
-   * @param heigth The height of the JPG image
+   * @param height The height of the JPG image
    * @return The scaled font size of the line
    */
-  public int getfontSizetScaled(final int heigth) {
-    return (int) ((heigth * getFontSize()) / rectangle.getHeight());
+  public int getFontSizeScaled(final int height) {
+    return (int) ((height * getFontSize()) / rectangle.getHeight());
   }
 
   /**

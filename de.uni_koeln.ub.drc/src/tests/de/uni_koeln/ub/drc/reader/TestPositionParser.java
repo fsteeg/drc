@@ -60,11 +60,15 @@ public final class TestPositionParser {
   }
 
   @Test
-  public void fontSize() {
+  public void fontSizeScaling() {
     Line testLine = paragraphs.get(1).getLines().get(0);
-    int fontSize = paragraphs.get(1).getLines().get(0).getFontSize();
-    int scaledFontsize = testLine.getfontSizetScaled(900);
-    Assert.assertTrue(scaledFontsize > fontSize);
+    int fontSize1 = testLine.getFontSizeScaled(1000);
+    int fontSize2 = testLine.getFontSizeScaled(900);
+    Assert.assertTrue(String.format("Font size %s should be larger than %s", fontSize1, fontSize2),
+        fontSize1 > fontSize2);
+    Assert.assertTrue(String.format(
+        "Font size %s should be larger than unscaled size %s (different measure)", fontSize1,
+        testLine.getFontSize()), fontSize1 > testLine.getFontSize());
   }
 
 }
