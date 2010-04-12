@@ -25,7 +25,8 @@ public final class TestPositionParser {
 
   @Test
   public void parse() {
-    // int scaledFontSize = testLine.getFontSize(600, 960); // TODO scaled fontsize
+    // int scaledFontSize = testLine.getFontSize(600, 960); // TODO scaled
+    // fontsize
     for (Paragraph p : paragraphs) {
       List<Line> lines = p.getLines();
       for (Line line : lines) {
@@ -55,8 +56,15 @@ public final class TestPositionParser {
   public void paragraphs() {
     Assert
         .assertTrue(paragraphs.get(0).getLines().get(0).getText().toString().startsWith("DANiEL"));
-    
+
   }
-  
+
+  @Test
+  public void fontSize() {
+    Line testLine = paragraphs.get(1).getLines().get(0);
+    int fontSize = paragraphs.get(1).getLines().get(0).getFontSize();
+    int scaledFontsize = testLine.getfontSizetScaled(900);
+    Assert.assertTrue(scaledFontsize > fontSize);
+  }
 
 }
