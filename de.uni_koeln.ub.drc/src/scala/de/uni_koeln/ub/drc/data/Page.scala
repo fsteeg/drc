@@ -8,6 +8,7 @@
 
 package de.uni_koeln.ub.drc.data
 import scala.xml._
+import java.io._
 
 /**
  * Representation of a scanned page.
@@ -23,8 +24,8 @@ case class Page(words:List[Word], id: String) {
     val root = toXml
     val formatted = new StringBuilder
     new PrettyPrinter(120, 2).format(root, formatted)
-    // XML.saveFull("out.xml", page, "UTF-8", true, null) // FIXME hangs
-    val writer = new java.io.FileWriter(file)
+    // XML.saveFull("out.xml", root, "UTF-8", true, null) // FIXME hangs
+    val writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
     writer.write(formatted.toString)
     writer.close
     root
