@@ -4,9 +4,9 @@
     <position>
       <box>
         <x> 59 </x>
-        <y> 55 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <y> 57 </y>
+        <width> 10 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -34,9 +34,9 @@
     <position>
       <box>
         <x> 253 </x>
-        <y> 55 </y>
-        <width> 32 </width>
-        <height> 15 </height>
+        <y> 58 </y>
+        <width> 30 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -48,10 +48,10 @@
     <original> Bonifaci </original>
     <position>
       <box>
-        <x> 292 </x>
-        <y> 55 </y>
-        <width> 43 </width>
-        <height> 15 </height>
+        <x> 295 </x>
+        <y> 58 </y>
+        <width> 37 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -79,9 +79,9 @@
     <position>
       <box>
         <x> 75 </x>
-        <y> 88 </y>
-        <width> 42 </width>
-        <height> 15 </height>
+        <y> 91 </y>
+        <width> 40 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -93,10 +93,10 @@
     <original> ans </original>
     <position>
       <box>
-        <x> 124 </x>
-        <y> 88 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 127 </x>
+        <y> 91 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -108,10 +108,10 @@
     <original> ha </original>
     <position>
       <box>
-        <x> 152 </x>
-        <y> 88 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 157 </x>
+        <y> 91 </y>
+        <width> 12 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -123,10 +123,10 @@
     <original> Chriftus </original>
     <position>
       <box>
-        <x> 173 </x>
-        <y> 88 </y>
-        <width> 45 </width>
-        <height> 15 </height>
+        <x> 181 </x>
+        <y> 91 </y>
+        <width> 37 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -138,10 +138,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 225 </x>
-        <y> 88 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 230 </x>
+        <y> 91 </y>
+        <width> 8 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -153,10 +153,10 @@
     <original> feu </original>
     <position>
       <box>
-        <x> 243 </x>
-        <y> 88 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 250 </x>
+        <y> 91 </y>
+        <width> 13 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -168,10 +168,10 @@
     <original> corp </original>
     <position>
       <box>
-        <x> 268 </x>
-        <y> 88 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 275 </x>
+        <y> 91 </y>
+        <width> 24 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -183,10 +183,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 303 </x>
-        <y> 88 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 311 </x>
+        <y> 91 </y>
+        <width> 10 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -198,10 +198,10 @@
     <original> faung </original>
     <position>
       <box>
-        <x> 317 </x>
-        <y> 88 </y>
-        <width> 32 </width>
-        <height> 15 </height>
+        <x> 333 </x>
+        <y> 91 </y>
+        <width> 25 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -213,10 +213,10 @@
     <original> tras </original>
     <position>
       <box>
-        <x> 356 </x>
-        <y> 88 </y>
-        <width> 25 </width>
-        <height> 15 </height>
+        <x> 370 </x>
+        <y> 91 </y>
+        <width> 19 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -228,10 +228,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 388 </x>
-        <y> 88 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 401 </x>
+        <y> 91 </y>
+        <width> 8 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -243,10 +243,10 @@
     <original> paun </original>
     <position>
       <box>
-        <x> 406 </x>
-        <y> 88 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 421 </x>
+        <y> 91 </y>
+        <width> 24 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -258,10 +258,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 441 </x>
-        <y> 88 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 457 </x>
+        <y> 91 </y>
+        <width> 10 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -273,10 +273,10 @@
     <original> vign </original>
     <position>
       <box>
-        <x> 455 </x>
-        <y> 88 </y>
-        <width> 23 </width>
-        <height> 15 </height>
+        <x> 479 </x>
+        <y> 91 </y>
+        <width> 19 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -304,9 +304,9 @@
     <position>
       <box>
         <x> 272 </x>
-        <y> 106 </y>
-        <width> 48 </width>
-        <height> 15 </height>
+        <y> 109 </y>
+        <width> 42 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -334,9 +334,9 @@
     <position>
       <box>
         <x> 87 </x>
-        <y> 125 </y>
+        <y> 127 </y>
         <width> 51 </width>
-        <height> 15 </height>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -348,10 +348,10 @@
     <original> cha </original>
     <position>
       <box>
-        <x> 145 </x>
-        <y> 125 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 151 </x>
+        <y> 127 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -363,10 +363,10 @@
     <original> ingualifmeng </original>
     <position>
       <box>
-        <x> 173 </x>
-        <y> 125 </y>
-        <width> 66 </width>
-        <height> 15 </height>
+        <x> 184 </x>
+        <y> 127 </y>
+        <width> 57 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -378,10 +378,10 @@
     <original> fcò </original>
     <position>
       <box>
-        <x> 246 </x>
-        <y> 125 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 254 </x>
+        <y> 127 </y>
+        <width> 14 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -393,10 +393,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 271 </x>
-        <y> 125 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 281 </x>
+        <y> 127 </y>
+        <width> 9 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -408,10 +408,10 @@
     <original> pqun </original>
     <position>
       <box>
-        <x> 289 </x>
-        <y> 125 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 303 </x>
+        <y> 127 </y>
+        <width> 26 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -423,10 +423,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 324 </x>
-        <y> 125 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 342 </x>
+        <y> 127 </y>
+        <width> 10 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -438,10 +438,10 @@
     <original> vign </original>
     <position>
       <box>
-        <x> 338 </x>
-        <y> 125 </y>
-        <width> 23 </width>
-        <height> 15 </height>
+        <x> 365 </x>
+        <y> 127 </y>
+        <width> 21 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -453,10 +453,10 @@
     <original> han </original>
     <position>
       <box>
-        <x> 368 </x>
-        <y> 125 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 399 </x>
+        <y> 127 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -468,10 +468,10 @@
     <original> quella </original>
     <position>
       <box>
-        <x> 396 </x>
-        <y> 125 </y>
-        <width> 32 </width>
-        <height> 15 </height>
+        <x> 432 </x>
+        <y> 127 </y>
+        <width> 29 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -483,10 +483,10 @@
     <original> natüra </original>
     <position>
       <box>
-        <x> 435 </x>
-        <y> 125 </y>
-        <width> 39 </width>
-        <height> 15 </height>
+        <x> 474 </x>
+        <y> 127 </y>
+        <width> 34 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -498,10 +498,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 481 </x>
-        <y> 125 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 521 </x>
+        <y> 127 </y>
+        <width> 10 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -514,9 +514,9 @@
     <position>
       <box>
         <x> 57 </x>
-        <y> 143 </y>
-        <width> 41 </width>
-        <height> 15 </height>
+        <y> 145 </y>
+        <width> 39 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -528,10 +528,10 @@
     <original> ils </original>
     <position>
       <box>
-        <x> 105 </x>
-        <y> 143 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 109 </x>
+        <y> 145 </y>
+        <width> 9 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -543,10 +543,10 @@
     <original> nofs </original>
     <position>
       <box>
-        <x> 123 </x>
-        <y> 143 </y>
-        <width> 25 </width>
-        <height> 15 </height>
+        <x> 131 </x>
+        <y> 145 </y>
+        <width> 21 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -558,10 +558,10 @@
     <original> corps </original>
     <position>
       <box>
-        <x> 155 </x>
-        <y> 143 </y>
-        <width> 35 </width>
-        <height> 15 </height>
+        <x> 165 </x>
+        <y> 145 </y>
+        <width> 33 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -573,10 +573,10 @@
     <original> tier </original>
     <position>
       <box>
-        <x> 197 </x>
-        <y> 143 </y>
-        <width> 20 </width>
-        <height> 15 </height>
+        <x> 211 </x>
+        <y> 145 </y>
+        <width> 16 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -588,10 +588,10 @@
     <original> üna </original>
     <position>
       <box>
-        <x> 224 </x>
-        <y> 143 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 240 </x>
+        <y> 145 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -603,10 +603,10 @@
     <original> vita </original>
     <position>
       <box>
-        <x> 252 </x>
-        <y> 143 </y>
-        <width> 20 </width>
-        <height> 15 </height>
+        <x> 273 </x>
+        <y> 145 </y>
+        <width> 16 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -618,10 +618,10 @@
     <original> temporala </original>
     <position>
       <box>
-        <x> 279 </x>
-        <y> 143 </y>
-        <width> 55 </width>
-        <height> 15 </height>
+        <x> 302 </x>
+        <y> 145 </y>
+        <width> 48 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -633,10 +633,10 @@
     <original> da </original>
     <position>
       <box>
-        <x> 341 </x>
-        <y> 143 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 363 </x>
+        <y> 145 </y>
+        <width> 13 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -648,10 +648,10 @@
     <original> fpyfentar </original>
     <position>
       <box>
-        <x> 362 </x>
-        <y> 143 </y>
-        <width> 54 </width>
-        <height> 15 </height>
+        <x> 389 </x>
+        <y> 145 </y>
+        <width> 43 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -663,10 +663,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 423 </x>
-        <y> 143 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 445 </x>
+        <y> 145 </y>
+        <width> 10 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -678,10 +678,10 @@
     <original> bevrètar: </original>
     <position>
       <box>
-        <x> 437 </x>
-        <y> 143 </y>
-        <width> 60 </width>
-        <height> 15 </height>
+        <x> 468 </x>
+        <y> 145 </y>
+        <width> 57 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -694,9 +694,9 @@
     <position>
       <box>
         <x> 47 </x>
-        <y> 162 </y>
-        <width> 43 </width>
-        <height> 15 </height>
+        <y> 164 </y>
+        <width> 40 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -708,10 +708,10 @@
     <original> ha </original>
     <position>
       <box>
-        <x> 97 </x>
-        <y> 162 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 100 </x>
+        <y> 164 </y>
+        <width> 13 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -723,10 +723,10 @@
     <original> ear </original>
     <position>
       <box>
-        <x> 118 </x>
-        <y> 162 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 126 </x>
+        <y> 164 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -738,10 +738,10 @@
     <original> la </original>
     <position>
       <box>
-        <x> 146 </x>
-        <y> 162 </y>
-        <width> 9 </width>
-        <height> 15 </height>
+        <x> 159 </x>
+        <y> 164 </y>
+        <width> 8 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -753,10 +753,10 @@
     <original> chiarn </original>
     <position>
       <box>
-        <x> 162 </x>
-        <y> 162 </y>
-        <width> 37 </width>
-        <height> 15 </height>
+        <x> 180 </x>
+        <y> 164 </y>
+        <width> 34 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -768,10 +768,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 206 </x>
-        <y> 162 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 227 </x>
+        <y> 164 </y>
+        <width> 10 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -783,10 +783,10 @@
     <original> fqung </original>
     <position>
       <box>
-        <x> 220 </x>
-        <y> 162 </y>
-        <width> 32 </width>
-        <height> 15 </height>
+        <x> 250 </x>
+        <y> 164 </y>
+        <width> 27 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -798,10 +798,10 @@
     <original> da </original>
     <position>
       <box>
-        <x> 259 </x>
-        <y> 162 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 290 </x>
+        <y> 164 </y>
+        <width> 13 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -813,10 +813,10 @@
     <original> Chrifti </original>
     <position>
       <box>
-        <x> 280 </x>
-        <y> 162 </y>
-        <width> 33 </width>
-        <height> 15 </height>
+        <x> 316 </x>
+        <y> 164 </y>
+        <width> 29 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -828,10 +828,10 @@
     <original> quella </original>
     <position>
       <box>
-        <x> 320 </x>
-        <y> 162 </y>
-        <width> 32 </width>
-        <height> 15 </height>
+        <x> 358 </x>
+        <y> 164 </y>
+        <width> 29 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -843,10 +843,10 @@
     <original> virteu, </original>
     <position>
       <box>
-        <x> 359 </x>
-        <y> 162 </y>
-        <width> 41 </width>
-        <height> 15 </height>
+        <x> 400 </x>
+        <y> 164 </y>
+        <width> 39 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -858,10 +858,10 @@
     <original> las </original>
     <position>
       <box>
-        <x> 407 </x>
-        <y> 162 </y>
-        <width> 16 </width>
-        <height> 15 </height>
+        <x> 452 </x>
+        <y> 164 </y>
+        <width> 14 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -873,10 +873,10 @@
     <original> naffas </original>
     <position>
       <box>
-        <x> 430 </x>
-        <y> 162 </y>
-        <width> 36 </width>
-        <height> 15 </height>
+        <x> 479 </x>
+        <y> 164 </y>
+        <width> 29 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -889,9 +889,9 @@
     <position>
       <box>
         <x> 58 </x>
-        <y> 180 </y>
-        <width> 35 </width>
-        <height> 15 </height>
+        <y> 182 </y>
+        <width> 33 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -903,10 +903,10 @@
     <original> tier </original>
     <position>
       <box>
-        <x> 100 </x>
-        <y> 180 </y>
-        <width> 20 </width>
-        <height> 15 </height>
+        <x> 104 </x>
+        <y> 182 </y>
+        <width> 16 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -918,10 +918,10 @@
     <original> la </original>
     <position>
       <box>
-        <x> 127 </x>
-        <y> 180 </y>
-        <width> 9 </width>
-        <height> 15 </height>
+        <x> 133 </x>
+        <y> 182 </y>
+        <width> 8 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -933,10 +933,10 @@
     <original> vita </original>
     <position>
       <box>
-        <x> 143 </x>
-        <y> 180 </y>
-        <width> 20 </width>
-        <height> 15 </height>
+        <x> 154 </x>
+        <y> 182 </y>
+        <width> 16 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -948,10 +948,10 @@
     <original> perpetua </original>
     <position>
       <box>
-        <x> 170 </x>
-        <y> 180 </y>
-        <width> 53 </width>
-        <height> 15 </height>
+        <x> 183 </x>
+        <y> 182 </y>
+        <width> 47 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -963,10 +963,10 @@
     <original> da </original>
     <position>
       <box>
-        <x> 230 </x>
-        <y> 180 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 243 </x>
+        <y> 182 </y>
+        <width> 13 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -978,10 +978,10 @@
     <original> fpyfentar </original>
     <position>
       <box>
-        <x> 251 </x>
-        <y> 180 </y>
-        <width> 54 </width>
-        <height> 15 </height>
+        <x> 269 </x>
+        <y> 182 </y>
+        <width> 43 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -993,10 +993,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 312 </x>
-        <y> 180 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 325 </x>
+        <y> 182 </y>
+        <width> 10 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -1008,10 +1008,10 @@
     <original> bevrentar. </original>
     <position>
       <box>
-        <x> 326 </x>
-        <y> 180 </y>
-        <width> 67 </width>
-        <height> 15 </height>
+        <x> 348 </x>
+        <y> 182 </y>
+        <width> 64 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -1039,9 +1039,9 @@
     <position>
       <box>
         <x> 58 </x>
-        <y> 205 </y>
-        <width> 35 </width>
-        <height> 15 </height>
+        <y> 208 </y>
+        <width> 37 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1053,10 +1053,10 @@
     <original> 61]. </original>
     <position>
       <box>
-        <x> 100 </x>
-        <y> 205 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 107 </x>
+        <y> 208 </y>
+        <width> 38 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1068,10 +1068,10 @@
     <original> Per </original>
     <position>
       <box>
-        <x> 135 </x>
-        <y> 205 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 157 </x>
+        <y> 208 </y>
+        <width> 22 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1083,10 +1083,10 @@
     <original> che </original>
     <position>
       <box>
-        <x> 163 </x>
-        <y> 205 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 191 </x>
+        <y> 208 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1098,10 +1098,10 @@
     <original> numna </original>
     <position>
       <box>
-        <x> 191 </x>
-        <y> 205 </y>
-        <width> 35 </width>
-        <height> 15 </height>
+        <x> 221 </x>
+        <y> 208 </y>
+        <width> 30 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1113,10 +1113,10 @@
     <original> Chriftus </original>
     <position>
       <box>
-        <x> 233 </x>
-        <y> 205 </y>
-        <width> 45 </width>
-        <height> 15 </height>
+        <x> 263 </x>
+        <y> 208 </y>
+        <width> 37 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1128,10 +1128,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 285 </x>
-        <y> 205 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 312 </x>
+        <y> 208 </y>
+        <width> 8 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1143,10 +1143,10 @@
     <original> paun </original>
     <position>
       <box>
-        <x> 303 </x>
-        <y> 205 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 332 </x>
+        <y> 208 </y>
+        <width> 24 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1158,10 +1158,10 @@
     <original> feu </original>
     <position>
       <box>
-        <x> 338 </x>
-        <y> 205 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 368 </x>
+        <y> 208 </y>
+        <width> 13 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1173,10 +1173,10 @@
     <original> corp, </original>
     <position>
       <box>
-        <x> 363 </x>
-        <y> 205 </y>
-        <width> 35 </width>
-        <height> 15 </height>
+        <x> 393 </x>
+        <y> 208 </y>
+        <width> 34 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1188,10 +1188,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 405 </x>
-        <y> 205 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 439 </x>
+        <y> 208 </y>
+        <width> 10 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1203,10 +1203,10 @@
     <original> la </original>
     <position>
       <box>
-        <x> 419 </x>
-        <y> 205 </y>
-        <width> 9 </width>
-        <height> 15 </height>
+        <x> 461 </x>
+        <y> 208 </y>
+        <width> 7 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1218,10 +1218,10 @@
     <original> bevraunda </original>
     <position>
       <box>
-        <x> 435 </x>
-        <y> 205 </y>
-        <width> 63 </width>
-        <height> 15 </height>
+        <x> 480 </x>
+        <y> 208 </y>
+        <width> 54 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1233,10 +1233,10 @@
     <original> feu </original>
     <position>
       <box>
-        <x> 505 </x>
-        <y> 205 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 546 </x>
+        <y> 208 </y>
+        <width> 13 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1249,9 +1249,9 @@
     <position>
       <box>
         <x> 58 </x>
-        <y> 225 </y>
-        <width> 39 </width>
-        <height> 15 </height>
+        <y> 228 </y>
+        <width> 35 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1263,10 +1263,10 @@
     <original> vignan </original>
     <position>
       <box>
-        <x> 104 </x>
-        <y> 225 </y>
-        <width> 37 </width>
-        <height> 15 </height>
+        <x> 105 </x>
+        <y> 228 </y>
+        <width> 31 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1279,9 +1279,9 @@
     <position>
       <box>
         <x> 148 </x>
-        <y> 225 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <y> 228 </y>
+        <width> 14 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1293,10 +1293,10 @@
     <original> paun </original>
     <position>
       <box>
-        <x> 173 </x>
-        <y> 225 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 174 </x>
+        <y> 228 </y>
+        <width> 24 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1308,10 +1308,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 208 </x>
-        <y> 225 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 210 </x>
+        <y> 228 </y>
+        <width> 10 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1323,10 +1323,10 @@
     <original> vign </original>
     <position>
       <box>
-        <x> 222 </x>
-        <y> 225 </y>
-        <width> 23 </width>
-        <height> 15 </height>
+        <x> 232 </x>
+        <y> 228 </y>
+        <width> 19 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1338,10 +1338,10 @@
     <original> eintin </original>
     <position>
       <box>
-        <x> 252 </x>
-        <y> 225 </y>
-        <width> 29 </width>
-        <height> 15 </height>
+        <x> 263 </x>
+        <y> 228 </y>
+        <width> 22 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1353,10 +1353,10 @@
     <original> la </original>
     <position>
       <box>
-        <x> 288 </x>
-        <y> 225 </y>
-        <width> 9 </width>
-        <height> 15 </height>
+        <x> 297 </x>
+        <y> 228 </y>
+        <width> 7 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1368,10 +1368,10 @@
     <original> veera </original>
     <position>
       <box>
-        <x> 304 </x>
-        <y> 225 </y>
-        <width> 35 </width>
-        <height> 15 </height>
+        <x> 316 </x>
+        <y> 228 </y>
+        <width> 30 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1383,10 +1383,10 @@
     <original> fubftantiala </original>
     <position>
       <box>
-        <x> 346 </x>
-        <y> 225 </y>
-        <width> 62 </width>
-        <height> 15 </height>
+        <x> 358 </x>
+        <y> 228 </y>
+        <width> 43 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1398,10 +1398,10 @@
     <original> Chiarn </original>
     <position>
       <box>
-        <x> 415 </x>
-        <y> 225 </y>
-        <width> 37 </width>
-        <height> 15 </height>
+        <x> 413 </x>
+        <y> 228 </y>
+        <width> 35 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1413,10 +1413,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 459 </x>
-        <y> 225 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 460 </x>
+        <y> 228 </y>
+        <width> 10 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1428,10 +1428,10 @@
     <original> faung </original>
     <position>
       <box>
-        <x> 473 </x>
-        <y> 225 </y>
-        <width> 32 </width>
-        <height> 15 </height>
+        <x> 482 </x>
+        <y> 228 </y>
+        <width> 25 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1444,9 +1444,9 @@
     <position>
       <box>
         <x> 150 </x>
-        <y> 245 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <y> 248 </y>
+        <width> 12 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1458,10 +1458,10 @@
     <original> Chrifti </original>
     <position>
       <box>
-        <x> 171 </x>
-        <y> 245 </y>
-        <width> 33 </width>
-        <height> 15 </height>
+        <x> 174 </x>
+        <y> 248 </y>
+        <width> 26 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1473,10 +1473,10 @@
     <original> fchmidaa, </original>
     <position>
       <box>
-        <x> 211 </x>
-        <y> 245 </y>
-        <width> 55 </width>
-        <height> 15 </height>
+        <x> 212 </x>
+        <y> 248 </y>
+        <width> 48 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1488,10 +1488,10 @@
     <original> fcò </original>
     <position>
       <box>
-        <x> 273 </x>
-        <y> 245 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 272 </x>
+        <y> 248 </y>
+        <width> 13 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1503,10 +1503,10 @@
     <original> ünchüns </original>
     <position>
       <box>
-        <x> 298 </x>
-        <y> 245 </y>
-        <width> 49 </width>
-        <height> 15 </height>
+        <x> 297 </x>
+        <y> 248 </y>
+        <width> 42 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1518,10 +1518,10 @@
     <original> manegian? </original>
     <position>
       <box>
-        <x> 354 </x>
-        <y> 245 </y>
-        <width> 58 </width>
-        <height> 15 </height>
+        <x> 351 </x>
+        <y> 248 </y>
+        <width> 53 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1534,9 +1534,9 @@
     <position>
       <box>
         <x> 39 </x>
-        <y> 265 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <y> 268 </y>
+        <width> 19 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1548,10 +1548,10 @@
     <original> Zunt </original>
     <position>
       <box>
-        <x> 60 </x>
-        <y> 265 </y>
-        <width> 25 </width>
-        <height> 15 </height>
+        <x> 70 </x>
+        <y> 268 </y>
+        <width> 23 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1563,10 +1563,10 @@
     <original> bigchia: </original>
     <position>
       <box>
-        <x> 92 </x>
-        <y> 265 </y>
-        <width> 46 </width>
-        <height> 15 </height>
+        <x> 105 </x>
+        <y> 268 </y>
+        <width> 42 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1578,10 +1578,10 @@
     <original> Perche </original>
     <position>
       <box>
-        <x> 145 </x>
-        <y> 265 </y>
-        <width> 42 </width>
-        <height> 15 </height>
+        <x> 159 </x>
+        <y> 268 </y>
+        <width> 40 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1593,10 +1593,10 @@
     <original> cha </original>
     <position>
       <box>
-        <x> 194 </x>
-        <y> 265 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 211 </x>
+        <y> 268 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1608,10 +1608,10 @@
     <original> in </original>
     <position>
       <box>
-        <x> 222 </x>
-        <y> 265 </y>
-        <width> 9 </width>
-        <height> 15 </height>
+        <x> 241 </x>
+        <y> 268 </y>
+        <width> 7 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1623,10 +1623,10 @@
     <original> quella </original>
     <position>
       <box>
-        <x> 238 </x>
-        <y> 265 </y>
-        <width> 32 </width>
-        <height> 15 </height>
+        <x> 260 </x>
+        <y> 268 </y>
+        <width> 26 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1638,10 +1638,10 @@
     <original> guifa </original>
     <position>
       <box>
-        <x> 277 </x>
-        <y> 265 </y>
-        <width> 27 </width>
-        <height> 15 </height>
+        <x> 298 </x>
+        <y> 268 </y>
+        <width> 20 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1653,10 +1653,10 @@
     <original> fufs </original>
     <position>
       <box>
-        <x> 311 </x>
-        <y> 265 </y>
-        <width> 22 </width>
-        <height> 15 </height>
+        <x> 330 </x>
+        <y> 268 </y>
+        <width> 14 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1668,10 +1668,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 340 </x>
-        <y> 265 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 356 </x>
+        <y> 268 </y>
+        <width> 8 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1683,10 +1683,10 @@
     <original> nagün </original>
     <position>
       <box>
-        <x> 358 </x>
-        <y> 265 </y>
-        <width> 35 </width>
-        <height> 15 </height>
+        <x> 376 </x>
+        <y> 268 </y>
+        <width> 30 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1698,10 +1698,10 @@
     <original> Sacrameint. </original>
     <position>
       <box>
-        <x> 400 </x>
-        <y> 265 </y>
-        <width> 69 </width>
-        <height> 15 </height>
+        <x> 418 </x>
+        <y> 268 </y>
+        <width> 64 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1714,9 +1714,9 @@
     <position>
       <box>
         <x> 175 </x>
-        <y> 285 </y>
-        <width> 42 </width>
-        <height> 15 </height>
+        <y> 287 </y>
+        <width> 43 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -1728,10 +1728,10 @@
     <original> numn'ell </original>
     <position>
       <box>
-        <x> 224 </x>
-        <y> 285 </y>
+        <x> 231 </x>
+        <y> 287 </y>
         <width> 46 </width>
-        <height> 15 </height>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -1743,10 +1743,10 @@
     <original> pija </original>
     <position>
       <box>
-        <x> 277 </x>
-        <y> 285 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 290 </x>
+        <y> 287 </y>
+        <width> 16 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -1758,10 +1758,10 @@
     <original> in </original>
     <position>
       <box>
-        <x> 302 </x>
-        <y> 285 </y>
-        <width> 9 </width>
-        <height> 15 </height>
+        <x> 319 </x>
+        <y> 287 </y>
+        <width> 8 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -1773,10 +1773,10 @@
     <original> quella </original>
     <position>
       <box>
-        <x> 318 </x>
-        <y> 285 </y>
-        <width> 32 </width>
-        <height> 15 </height>
+        <x> 340 </x>
+        <y> 287 </y>
+        <width> 29 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -1788,10 +1788,10 @@
     <original> guifa? </original>
     <position>
       <box>
-        <x> 357 </x>
-        <y> 285 </y>
-        <width> 34 </width>
-        <height> 15 </height>
+        <x> 382 </x>
+        <y> 287 </y>
+        <width> 33 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -1804,9 +1804,9 @@
     <position>
       <box>
         <x> 88 </x>
-        <y> 305 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <y> 308 </y>
+        <width> 22 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1818,10 +1818,10 @@
     <original> quegl </original>
     <position>
       <box>
-        <x> 116 </x>
-        <y> 305 </y>
-        <width> 30 </width>
-        <height> 15 </height>
+        <x> 122 </x>
+        <y> 308 </y>
+        <width> 25 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1833,10 +1833,10 @@
     <original> ch'ell </original>
     <position>
       <box>
-        <x> 153 </x>
-        <y> 305 </y>
-        <width> 32 </width>
-        <height> 15 </height>
+        <x> 159 </x>
+        <y> 308 </y>
+        <width> 30 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1848,10 +1848,10 @@
     <original> ans </original>
     <position>
       <box>
-        <x> 192 </x>
-        <y> 305 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 201 </x>
+        <y> 308 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1863,10 +1863,10 @@
     <original> fagürig, </original>
     <position>
       <box>
-        <x> 220 </x>
-        <y> 305 </y>
-        <width> 48 </width>
-        <height> 15 </height>
+        <x> 231 </x>
+        <y> 308 </y>
+        <width> 42 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1878,10 +1878,10 @@
     <original> cha </original>
     <position>
       <box>
-        <x> 275 </x>
-        <y> 305 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 285 </x>
+        <y> 308 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1893,10 +1893,10 @@
     <original> nus </original>
     <position>
       <box>
-        <x> 303 </x>
-        <y> 305 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 315 </x>
+        <y> 308 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1908,10 +1908,10 @@
     <original> afchi </original>
     <position>
       <box>
-        <x> 331 </x>
-        <y> 305 </y>
-        <width> 27 </width>
-        <height> 15 </height>
+        <x> 345 </x>
+        <y> 308 </y>
+        <width> 20 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1923,10 +1923,10 @@
     <original> veerameng </original>
     <position>
       <box>
-        <x> 365 </x>
-        <y> 305 </y>
-        <width> 63 </width>
-        <height> 15 </height>
+        <x> 377 </x>
+        <y> 308 </y>
+        <width> 54 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1938,10 +1938,10 @@
     <original> digl </original>
     <position>
       <box>
-        <x> 435 </x>
-        <y> 305 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 443 </x>
+        <y> 308 </y>
+        <width> 14 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1953,10 +1953,10 @@
     <original> feu </original>
     <position>
       <box>
-        <x> 460 </x>
-        <y> 305 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 469 </x>
+        <y> 308 </y>
+        <width> 13 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1968,10 +1968,10 @@
     <original> veer </original>
     <position>
       <box>
-        <x> 485 </x>
-        <y> 305 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 494 </x>
+        <y> 308 </y>
+        <width> 24 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -1984,9 +1984,9 @@
     <position>
       <box>
         <x> 59 </x>
-        <y> 325 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <y> 327 </y>
+        <width> 26 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -1998,10 +1998,10 @@
     <original> tâfqung </original>
     <position>
       <box>
-        <x> 94 </x>
-        <y> 325 </y>
-        <width> 43 </width>
-        <height> 15 </height>
+        <x> 98 </x>
+        <y> 327 </y>
+        <width> 35 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2013,10 +2013,10 @@
     <original> eintin </original>
     <position>
       <box>
-        <x> 144 </x>
-        <y> 325 </y>
-        <width> 29 </width>
-        <height> 15 </height>
+        <x> 146 </x>
+        <y> 327 </y>
+        <width> 23 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2028,10 +2028,10 @@
     <original> la </original>
     <position>
       <box>
-        <x> 180 </x>
-        <y> 325 </y>
-        <width> 9 </width>
-        <height> 15 </height>
+        <x> 182 </x>
+        <y> 327 </y>
+        <width> 8 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2043,10 +2043,10 @@
     <original> Cretta </original>
     <position>
       <box>
-        <x> 196 </x>
-        <y> 325 </y>
-        <width> 36 </width>
-        <height> 15 </height>
+        <x> 203 </x>
+        <y> 327 </y>
+        <width> 33 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2058,10 +2058,10 @@
     <original> daventein </original>
     <position>
       <box>
-        <x> 239 </x>
-        <y> 325 </y>
-        <width> 55 </width>
-        <height> 15 </height>
+        <x> 249 </x>
+        <y> 327 </y>
+        <width> 48 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2073,10 +2073,10 @@
     <original> perfnavels, </original>
     <position>
       <box>
-        <x> 301 </x>
-        <y> 325 </y>
-        <width> 69 </width>
-        <height> 15 </height>
+        <x> 310 </x>
+        <y> 327 </y>
+        <width> 65 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2088,10 +2088,10 @@
     <original> fcò </original>
     <position>
       <box>
-        <x> 377 </x>
-        <y> 325 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 388 </x>
+        <y> 327 </y>
+        <width> 14 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2103,10 +2103,10 @@
     <original> nus </original>
     <position>
       <box>
-        <x> 402 </x>
-        <y> 325 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 415 </x>
+        <y> 327 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2118,10 +2118,10 @@
     <original> queftas </original>
     <position>
       <box>
-        <x> 430 </x>
-        <y> 325 </y>
-        <width> 43 </width>
-        <height> 15 </height>
+        <x> 448 </x>
+        <y> 327 </y>
+        <width> 35 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2133,10 +2133,10 @@
     <original> vifiblas, </original>
     <position>
       <box>
-        <x> 480 </x>
-        <y> 325 </y>
-        <width> 45 </width>
-        <height> 15 </height>
+        <x> 496 </x>
+        <y> 327 </y>
+        <width> 42 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2149,9 +2149,9 @@
     <position>
       <box>
         <x> 55 </x>
-        <y> 345 </y>
-        <width> 48 </width>
-        <height> 15 </height>
+        <y> 347 </y>
+        <width> 42 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2164,9 +2164,9 @@
     <position>
       <box>
         <x> 110 </x>
-        <y> 345 </y>
-        <width> 55 </width>
-        <height> 15 </height>
+        <y> 347 </y>
+        <width> 48 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2178,10 +2178,10 @@
     <original> cun </original>
     <position>
       <box>
-        <x> 172 </x>
-        <y> 345 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 171 </x>
+        <y> 347 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2193,10 +2193,10 @@
     <original> la </original>
     <position>
       <box>
-        <x> 200 </x>
-        <y> 345 </y>
-        <width> 9 </width>
-        <height> 15 </height>
+        <x> 204 </x>
+        <y> 347 </y>
+        <width> 8 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2208,10 +2208,10 @@
     <original> bucca </original>
     <position>
       <box>
-        <x> 216 </x>
-        <y> 345 </y>
-        <width> 35 </width>
-        <height> 15 </height>
+        <x> 225 </x>
+        <y> 347 </y>
+        <width> 33 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2223,10 +2223,10 @@
     <original> corporala </original>
     <position>
       <box>
-        <x> 258 </x>
-        <y> 345 </y>
-        <width> 58 </width>
-        <height> 15 </height>
+        <x> 271 </x>
+        <y> 347 </y>
+        <width> 53 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2238,10 +2238,10 @@
     <original> per </original>
     <position>
       <box>
-        <x> 323 </x>
-        <y> 345 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 337 </x>
+        <y> 347 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2253,10 +2253,10 @@
     <original> üna </original>
     <position>
       <box>
-        <x> 351 </x>
-        <y> 345 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 370 </x>
+        <y> 347 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2268,10 +2268,10 @@
     <original> fia </original>
     <position>
       <box>
-        <x> 379 </x>
-        <y> 345 </y>
-        <width> 13 </width>
-        <height> 15 </height>
+        <x> 403 </x>
+        <y> 347 </y>
+        <width> 9 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2283,10 +2283,10 @@
     <original> recordientfcha </original>
     <position>
       <box>
-        <x> 399 </x>
-        <y> 345 </y>
-        <width> 87 </width>
-        <height> 15 </height>
+        <x> 425 </x>
+        <y> 347 </y>
+        <width> 75 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2299,9 +2299,9 @@
     <position>
       <box>
         <x> 40 </x>
-        <y> 365 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <y> 367 </y>
+        <width> 21 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2313,10 +2313,10 @@
     <original> veerameng </original>
     <position>
       <box>
-        <x> 61 </x>
-        <y> 365 </y>
-        <width> 63 </width>
-        <height> 15 </height>
+        <x> 74 </x>
+        <y> 367 </y>
+        <width> 59 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2328,10 +2328,10 @@
     <original> retfchevein. </original>
     <position>
       <box>
-        <x> 131 </x>
-        <y> 365 </y>
-        <width> 73 </width>
-        <height> 15 </height>
+        <x> 146 </x>
+        <y> 367 </y>
+        <width> 66 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2359,9 +2359,9 @@
     <position>
       <box>
         <x> 123 </x>
-        <y> 388 </y>
-        <width> 48 </width>
-        <height> 15 </height>
+        <y> 391 </y>
+        <width> 42 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -2373,10 +2373,10 @@
     <original> qua </original>
     <position>
       <box>
-        <x> 178 </x>
-        <y> 388 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 177 </x>
+        <y> 391 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -2388,10 +2388,10 @@
     <original> nagüna </original>
     <position>
       <box>
-        <x> 206 </x>
-        <y> 388 </y>
-        <width> 42 </width>
-        <height> 15 </height>
+        <x> 207 </x>
+        <y> 391 </y>
+        <width> 36 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -2404,9 +2404,9 @@
     <position>
       <box>
         <x> 255 </x>
-        <y> 388 </y>
-        <width> 55 </width>
-        <height> 15 </height>
+        <y> 391 </y>
+        <width> 44 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -2418,10 +2418,10 @@
     <original> da </original>
     <position>
       <box>
-        <x> 317 </x>
-        <y> 388 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 311 </x>
+        <y> 391 </y>
+        <width> 12 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -2433,10 +2433,10 @@
     <original> quellas </original>
     <position>
       <box>
-        <x> 338 </x>
-        <y> 388 </y>
-        <width> 39 </width>
-        <height> 15 </height>
+        <x> 335 </x>
+        <y> 391 </y>
+        <width> 32 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -2448,10 +2448,10 @@
     <original> intzennas? </original>
     <position>
       <box>
-        <x> 384 </x>
-        <y> 388 </y>
-        <width> 62 </width>
-        <height> 15 </height>
+        <x> 379 </x>
+        <y> 391 </y>
+        <width> 54 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -2479,9 +2479,9 @@
     <position>
       <box>
         <x> 88 </x>
-        <y> 410 </y>
-        <width> 30 </width>
-        <height> 15 </height>
+        <y> 412 </y>
+        <width> 35 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2493,10 +2493,10 @@
     <original> Numnadameng </original>
     <position>
       <box>
-        <x> 125 </x>
-        <y> 410 </y>
-        <width> 77 </width>
-        <height> 15 </height>
+        <x> 136 </x>
+        <y> 412 </y>
+        <width> 75 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2508,10 +2508,10 @@
     <original> üna </original>
     <position>
       <box>
-        <x> 209 </x>
-        <y> 410 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 224 </x>
+        <y> 412 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2523,10 +2523,10 @@
     <original> Sacramentala, </original>
     <position>
       <box>
-        <x> 237 </x>
-        <y> 410 </y>
-        <width> 83 </width>
-        <height> 15 </height>
+        <x> 257 </x>
+        <y> 412 </y>
+        <width> 82 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2538,10 +2538,10 @@
     <original> quegl </original>
     <position>
       <box>
-        <x> 327 </x>
-        <y> 410 </y>
-        <width> 30 </width>
-        <height> 15 </height>
+        <x> 352 </x>
+        <y> 412 </y>
+        <width> 27 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2553,10 +2553,10 @@
     <original> ees </original>
     <position>
       <box>
-        <x> 364 </x>
-        <y> 410 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 392 </x>
+        <y> 412 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2568,10 +2568,10 @@
     <original> üna </original>
     <position>
       <box>
-        <x> 392 </x>
-        <y> 410 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 425 </x>
+        <y> 412 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2583,10 +2583,10 @@
     <original> fgürala </original>
     <position>
       <box>
-        <x> 420 </x>
-        <y> 410 </y>
-        <width> 41 </width>
-        <height> 15 </height>
+        <x> 458 </x>
+        <y> 412 </y>
+        <width> 35 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2598,10 +2598,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 468 </x>
-        <y> 410 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 506 </x>
+        <y> 412 </y>
+        <width> 10 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2614,9 +2614,9 @@
     <position>
       <box>
         <x> 59 </x>
-        <y> 428 </y>
-        <width> 39 </width>
-        <height> 15 </height>
+        <y> 430 </y>
+        <width> 35 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2628,10 +2628,10 @@
     <original> fubftantiala, </original>
     <position>
       <box>
-        <x> 105 </x>
-        <y> 428 </y>
-        <width> 69 </width>
-        <height> 15 </height>
+        <x> 107 </x>
+        <y> 430 </y>
+        <width> 57 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2643,10 +2643,10 @@
     <original> fcò </original>
     <position>
       <box>
-        <x> 181 </x>
-        <y> 428 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 177 </x>
+        <y> 430 </y>
+        <width> 14 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2658,10 +2658,10 @@
     <original> ünchüns </original>
     <position>
       <box>
-        <x> 206 </x>
-        <y> 428 </y>
-        <width> 49 </width>
-        <height> 15 </height>
+        <x> 204 </x>
+        <y> 430 </y>
+        <width> 46 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2673,10 +2673,10 @@
     <original> manegian, </original>
     <position>
       <box>
-        <x> 262 </x>
-        <y> 428 </y>
-        <width> 58 </width>
-        <height> 15 </height>
+        <x> 263 </x>
+        <y> 430 </y>
+        <width> 57 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2688,10 +2688,10 @@
     <original> per </original>
     <position>
       <box>
-        <x> 327 </x>
-        <y> 428 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 333 </x>
+        <y> 430 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2703,10 +2703,10 @@
     <original> cafchun </original>
     <position>
       <box>
-        <x> 355 </x>
-        <y> 428 </y>
-        <width> 46 </width>
-        <height> 15 </height>
+        <x> 366 </x>
+        <y> 430 </y>
+        <width> 40 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2718,10 +2718,10 @@
     <original> cha </original>
     <position>
       <box>
-        <x> 408 </x>
-        <y> 428 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 419 </x>
+        <y> 430 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2733,10 +2733,10 @@
     <original> or </original>
     <position>
       <box>
-        <x> 436 </x>
-        <y> 428 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 452 </x>
+        <y> 430 </y>
+        <width> 13 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2748,10 +2748,10 @@
     <original> da </original>
     <position>
       <box>
-        <x> 457 </x>
-        <y> 428 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 478 </x>
+        <y> 430 </y>
+        <width> 13 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2764,9 +2764,9 @@
     <position>
       <box>
         <x> 59 </x>
-        <y> 446 </y>
-        <width> 56 </width>
-        <height> 15 </height>
+        <y> 448 </y>
+        <width> 52 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2778,10 +2778,10 @@
     <original> intzennas </original>
     <position>
       <box>
-        <x> 122 </x>
-        <y> 446 </y>
-        <width> 55 </width>
-        <height> 15 </height>
+        <x> 124 </x>
+        <y> 448 </y>
+        <width> 48 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2793,10 +2793,10 @@
     <original> vignan </original>
     <position>
       <box>
-        <x> 184 </x>
-        <y> 446 </y>
-        <width> 37 </width>
-        <height> 15 </height>
+        <x> 185 </x>
+        <y> 448 </y>
+        <width> 34 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2808,10 +2808,10 @@
     <original> à </original>
     <position>
       <box>
-        <x> 228 </x>
-        <y> 446 </y>
+        <x> 232 </x>
+        <y> 448 </y>
         <width> 7 </width>
-        <height> 15 </height>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2823,10 +2823,10 @@
     <original> qua </original>
     <position>
       <box>
-        <x> 242 </x>
-        <y> 446 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 252 </x>
+        <y> 448 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2838,10 +2838,10 @@
     <original> tras </original>
     <position>
       <box>
-        <x> 270 </x>
-        <y> 446 </y>
-        <width> 25 </width>
-        <height> 15 </height>
+        <x> 285 </x>
+        <y> 448 </y>
+        <width> 21 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2853,10 +2853,10 @@
     <original> Ordinatiun </original>
     <position>
       <box>
-        <x> 302 </x>
-        <y> 446 </y>
-        <width> 57 </width>
-        <height> 15 </height>
+        <x> 319 </x>
+        <y> 448 </y>
+        <width> 53 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2868,10 +2868,10 @@
     <original> da </original>
     <position>
       <box>
-        <x> 366 </x>
-        <y> 446 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 385 </x>
+        <y> 448 </y>
+        <width> 13 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2883,10 +2883,10 @@
     <original> Deu </original>
     <position>
       <box>
-        <x> 387 </x>
-        <y> 446 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 411 </x>
+        <y> 448 </y>
+        <width> 23 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2898,10 +2898,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 415 </x>
-        <y> 446 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 447 </x>
+        <y> 448 </y>
+        <width> 10 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2913,10 +2913,10 @@
     <original> la </original>
     <position>
       <box>
-        <x> 429 </x>
-        <y> 446 </y>
-        <width> 9 </width>
-        <height> 15 </height>
+        <x> 470 </x>
+        <y> 448 </y>
+        <width> 8 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2928,10 +2928,10 @@
     <original> fia </original>
     <position>
       <box>
-        <x> 445 </x>
-        <y> 446 </y>
-        <width> 13 </width>
-        <height> 15 </height>
+        <x> 491 </x>
+        <y> 448 </y>
+        <width> 9 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2944,9 +2944,9 @@
     <position>
       <box>
         <x> 40 </x>
-        <y> 465 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <y> 467 </y>
+        <width> 21 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2958,10 +2958,10 @@
     <original> benedictiun, </original>
     <position>
       <box>
-        <x> 61 </x>
-        <y> 465 </y>
-        <width> 71 </width>
-        <height> 15 </height>
+        <x> 74 </x>
+        <y> 467 </y>
+        <width> 66 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2973,10 +2973,10 @@
     <original> fqnghias </original>
     <position>
       <box>
-        <x> 139 </x>
-        <y> 465 </y>
-        <width> 48 </width>
-        <height> 15 </height>
+        <x> 153 </x>
+        <y> 467 </y>
+        <width> 42 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -2988,10 +2988,10 @@
     <original> chiqufas </original>
     <position>
       <box>
-        <x> 194 </x>
-        <y> 465 </y>
-        <width> 48 </width>
-        <height> 15 </height>
+        <x> 208 </x>
+        <y> 467 </y>
+        <width> 42 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3003,10 +3003,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 249 </x>
-        <y> 465 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 263 </x>
+        <y> 467 </y>
+        <width> 10 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3018,10 +3018,10 @@
     <original> intzennas: </original>
     <position>
       <box>
-        <x> 263 </x>
-        <y> 465 </y>
-        <width> 62 </width>
-        <height> 15 </height>
+        <x> 286 </x>
+        <y> 467 </y>
+        <width> 59 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3033,10 +3033,10 @@
     <original> Nundarnâ </original>
     <position>
       <box>
-        <x> 332 </x>
-        <y> 465 </y>
+        <x> 358 </x>
+        <y> 467 </y>
         <width> 56 </width>
-        <height> 15 </height>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3048,10 +3048,10 @@
     <original> retfchevan </original>
     <position>
       <box>
-        <x> 395 </x>
-        <y> 465 </y>
-        <width> 64 </width>
-        <height> 15 </height>
+        <x> 427 </x>
+        <y> 467 </y>
+        <width> 55 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3063,10 +3063,10 @@
     <original> [pag. </original>
     <position>
       <box>
-        <x> 466 </x>
-        <y> 465 </y>
-        <width> 35 </width>
-        <height> 15 </height>
+        <x> 495 </x>
+        <y> 467 </y>
+        <width> 40 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3078,10 +3078,10 @@
     <original> 62] </original>
     <position>
       <box>
-        <x> 508 </x>
-        <y> 465 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 548 </x>
+        <y> 467 </y>
+        <width> 31 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3094,9 +3094,9 @@
     <position>
       <box>
         <x> 59 </x>
-        <y> 483 </y>
-        <width> 25 </width>
-        <height> 15 </height>
+        <y> 485 </y>
+        <width> 22 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3108,10 +3108,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 91 </x>
-        <y> 483 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 94 </x>
+        <y> 485 </y>
+        <width> 9 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3123,10 +3123,10 @@
     <original> numm </original>
     <position>
       <box>
-        <x> 109 </x>
-        <y> 483 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 116 </x>
+        <y> 485 </y>
+        <width> 26 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3138,10 +3138,10 @@
     <original> da </original>
     <position>
       <box>
-        <x> 144 </x>
-        <y> 483 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 155 </x>
+        <y> 485 </y>
+        <width> 13 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3153,10 +3153,10 @@
     <original> quegl </original>
     <position>
       <box>
-        <x> 165 </x>
-        <y> 483 </y>
-        <width> 30 </width>
-        <height> 15 </height>
+        <x> 181 </x>
+        <y> 485 </y>
+        <width> 27 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3168,10 +3168,10 @@
     <original> ch'ellas </original>
     <position>
       <box>
-        <x> 202 </x>
-        <y> 483 </y>
+        <x> 221 </x>
+        <y> 485 </y>
         <width> 46 </width>
-        <height> 15 </height>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3183,10 +3183,10 @@
     <original> muntan, </original>
     <position>
       <box>
-        <x> 255 </x>
-        <y> 483 </y>
-        <width> 46 </width>
-        <height> 15 </height>
+        <x> 280 </x>
+        <y> 485 </y>
+        <width> 44 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3198,10 +3198,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 308 </x>
-        <y> 483 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 337 </x>
+        <y> 485 </y>
+        <width> 10 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3213,10 +3213,10 @@
     <original> vignan </original>
     <position>
       <box>
-        <x> 322 </x>
-        <y> 483 </y>
-        <width> 37 </width>
-        <height> 15 </height>
+        <x> 360 </x>
+        <y> 485 </y>
+        <width> 34 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3228,10 +3228,10 @@
     <original> bigchia </original>
     <position>
       <box>
-        <x> 366 </x>
-        <y> 483 </y>
-        <width> 39 </width>
-        <height> 15 </height>
+        <x> 407 </x>
+        <y> 485 </y>
+        <width> 35 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3243,10 +3243,10 @@
     <original> namce </original>
     <position>
       <box>
-        <x> 412 </x>
-        <y> 483 </y>
-        <width> 35 </width>
-        <height> 15 </height>
+        <x> 455 </x>
+        <y> 485 </y>
+        <width> 33 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3258,10 +3258,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 454 </x>
-        <y> 483 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 501 </x>
+        <y> 485 </y>
+        <width> 9 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3274,9 +3274,9 @@
     <position>
       <box>
         <x> 56 </x>
-        <y> 501 </y>
-        <width> 37 </width>
-        <height> 15 </height>
+        <y> 503 </y>
+        <width> 38 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3288,10 +3288,10 @@
     <original> mò </original>
     <position>
       <box>
-        <x> 100 </x>
-        <y> 501 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 107 </x>
+        <y> 503 </y>
+        <width> 13 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3303,10 +3303,10 @@
     <original> ear </original>
     <position>
       <box>
-        <x> 121 </x>
-        <y> 501 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 133 </x>
+        <y> 503 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3318,10 +3318,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 149 </x>
-        <y> 501 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 166 </x>
+        <y> 503 </y>
+        <width> 9 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3333,10 +3333,10 @@
     <original> corp </original>
     <position>
       <box>
-        <x> 167 </x>
-        <y> 501 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 188 </x>
+        <y> 503 </y>
+        <width> 26 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3348,10 +3348,10 @@
     <original> da </original>
     <position>
       <box>
-        <x> 202 </x>
-        <y> 501 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 227 </x>
+        <y> 503 </y>
+        <width> 13 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3363,10 +3363,10 @@
     <original> Chrifti </original>
     <position>
       <box>
-        <x> 223 </x>
-        <y> 501 </y>
-        <width> 33 </width>
-        <height> 15 </height>
+        <x> 253 </x>
+        <y> 503 </y>
+        <width> 29 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3378,10 +3378,10 @@
     <original> numnadas. </original>
     <position>
       <box>
-        <x> 263 </x>
-        <y> 501 </y>
-        <width> 63 </width>
-        <height> 15 </height>
+        <x> 295 </x>
+        <y> 503 </y>
+        <width> 62 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3409,9 +3409,9 @@
     <position>
       <box>
         <x> 105 </x>
-        <y> 526 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <y> 529 </y>
+        <width> 22 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3423,10 +3423,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 133 </x>
-        <y> 526 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 139 </x>
+        <y> 529 </y>
+        <width> 8 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3438,10 +3438,10 @@
     <original> nofs </original>
     <position>
       <box>
-        <x> 151 </x>
-        <y> 526 </y>
-        <width> 25 </width>
-        <height> 15 </height>
+        <x> 159 </x>
+        <y> 529 </y>
+        <width> 19 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3453,10 +3453,10 @@
     <original> Salvader </original>
     <position>
       <box>
-        <x> 183 </x>
-        <y> 526 </y>
-        <width> 51 </width>
-        <height> 15 </height>
+        <x> 190 </x>
+        <y> 529 </y>
+        <width> 47 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3468,10 +3468,10 @@
     <original> Chriftus </original>
     <position>
       <box>
-        <x> 241 </x>
-        <y> 526 </y>
-        <width> 45 </width>
-        <height> 15 </height>
+        <x> 249 </x>
+        <y> 529 </y>
+        <width> 37 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3483,10 +3483,10 @@
     <original> bigch'ear </original>
     <position>
       <box>
-        <x> 293 </x>
-        <y> 526 </y>
-        <width> 58 </width>
-        <height> 15 </height>
+        <x> 298 </x>
+        <y> 529 </y>
+        <width> 53 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3498,10 +3498,10 @@
     <original> eintin </original>
     <position>
       <box>
-        <x> 358 </x>
-        <y> 526 </y>
-        <width> 29 </width>
-        <height> 15 </height>
+        <x> 363 </x>
+        <y> 529 </y>
+        <width> 22 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3513,10 +3513,10 @@
     <original> la </original>
     <position>
       <box>
-        <x> 394 </x>
-        <y> 526 </y>
-        <width> 9 </width>
-        <height> 15 </height>
+        <x> 397 </x>
+        <y> 529 </y>
+        <width> 7 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3528,10 +3528,10 @@
     <original> Tfcheina? </original>
     <position>
       <box>
-        <x> 410 </x>
-        <y> 526 </y>
-        <width> 55 </width>
-        <height> 15 </height>
+        <x> 416 </x>
+        <y> 529 </y>
+        <width> 44 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3544,9 +3544,9 @@
     <position>
       <box>
         <x> 88 </x>
-        <y> 545 </y>
-        <width> 30 </width>
-        <height> 15 </height>
+        <y> 548 </y>
+        <width> 32 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3574,9 +3574,9 @@
     <position>
       <box>
         <x> 39 </x>
-        <y> 564 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <y> 567 </y>
+        <width> 19 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3588,10 +3588,10 @@
     <original> Cò. </original>
     <position>
       <box>
-        <x> 60 </x>
-        <y> 564 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 70 </x>
+        <y> 567 </y>
+        <width> 25 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3619,9 +3619,9 @@
     <position>
       <box>
         <x> 89 </x>
-        <y> 582 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <y> 584 </y>
+        <width> 23 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3633,10 +3633,10 @@
     <original> feas </original>
     <position>
       <box>
-        <x> 117 </x>
-        <y> 582 </y>
-        <width> 25 </width>
-        <height> 15 </height>
+        <x> 125 </x>
+        <y> 584 </y>
+        <width> 21 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3648,10 +3648,10 @@
     <original> Spiert, </original>
     <position>
       <box>
-        <x> 149 </x>
-        <y> 582 </y>
-        <width> 41 </width>
-        <height> 15 </height>
+        <x> 159 </x>
+        <y> 584 </y>
+        <width> 43 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3663,10 +3663,10 @@
     <original> virteu </original>
     <position>
       <box>
-        <x> 197 </x>
-        <y> 582 </y>
-        <width> 34 </width>
-        <height> 15 </height>
+        <x> 215 </x>
+        <y> 584 </y>
+        <width> 29 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3678,10 +3678,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 238 </x>
-        <y> 582 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 257 </x>
+        <y> 584 </y>
+        <width> 10 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3693,10 +3693,10 @@
     <original> operatiun </original>
     <position>
       <box>
-        <x> 252 </x>
-        <y> 582 </y>
-        <width> 55 </width>
-        <height> 15 </height>
+        <x> 280 </x>
+        <y> 584 </y>
+        <width> 48 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3708,10 +3708,10 @@
     <original> einf </original>
     <position>
       <box>
-        <x> 314 </x>
-        <y> 582 </y>
-        <width> 20 </width>
-        <height> 15 </height>
+        <x> 341 </x>
+        <y> 584 </y>
+        <width> 16 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3723,10 +3723,10 @@
     <original> ils </original>
     <position>
       <box>
-        <x> 341 </x>
-        <y> 582 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 370 </x>
+        <y> 584 </y>
+        <width> 9 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3738,10 +3738,10 @@
     <original> còrs </original>
     <position>
       <box>
-        <x> 359 </x>
-        <y> 582 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 392 </x>
+        <y> 584 </y>
+        <width> 26 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3753,10 +3753,10 @@
     <original> dels </original>
     <position>
       <box>
-        <x> 394 </x>
-        <y> 582 </y>
-        <width> 23 </width>
-        <height> 15 </height>
+        <x> 431 </x>
+        <y> 584 </y>
+        <width> 21 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3768,10 +3768,10 @@
     <original> feas </original>
     <position>
       <box>
-        <x> 424 </x>
-        <y> 582 </y>
-        <width> 25 </width>
-        <height> 15 </height>
+        <x> 465 </x>
+        <y> 584 </y>
+        <width> 21 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3783,10 +3783,10 @@
     <original> fidêlSy </original>
     <position>
       <box>
-        <x> 456 </x>
-        <y> 582 </y>
-        <width> 36 </width>
-        <height> 15 </height>
+        <x> 499 </x>
+        <y> 584 </y>
+        <width> 34 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3798,10 +3798,10 @@
     <original> fcò </original>
     <position>
       <box>
-        <x> 499 </x>
-        <y> 582 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 546 </x>
+        <y> 584 </y>
+        <width> 14 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3814,9 +3814,9 @@
     <position>
       <box>
         <x> 59 </x>
-        <y> 601 </y>
-        <width> 20 </width>
-        <height> 15 </height>
+        <y> 603 </y>
+        <width> 16 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3828,10 +3828,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 86 </x>
-        <y> 601 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 88 </x>
+        <y> 603 </y>
+        <width> 9 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3843,10 +3843,10 @@
     <original> feu </original>
     <position>
       <box>
-        <x> 104 </x>
-        <y> 601 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 110 </x>
+        <y> 603 </y>
+        <width> 14 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3858,10 +3858,10 @@
     <original> fqngh </original>
     <position>
       <box>
-        <x> 129 </x>
-        <y> 601 </y>
-        <width> 32 </width>
-        <height> 15 </height>
+        <x> 137 </x>
+        <y> 603 </y>
+        <width> 27 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3873,10 +3873,10 @@
     <original> tempel. </original>
     <position>
       <box>
-        <x> 168 </x>
-        <y> 601 </y>
-        <width> 41 </width>
-        <height> 15 </height>
+        <x> 177 </x>
+        <y> 603 </y>
+        <width> 39 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -3904,9 +3904,9 @@
     <position>
       <box>
         <x> 59 </x>
-        <y> 620 </y>
-        <width> 69 </width>
-        <height> 15 </height>
+        <y> 623 </y>
+        <width> 60 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3918,10 +3918,10 @@
     <original> ch'igl </original>
     <position>
       <box>
-        <x> 135 </x>
-        <y> 620 </y>
-        <width> 32 </width>
-        <height> 15 </height>
+        <x> 131 </x>
+        <y> 623 </y>
+        <width> 30 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3933,10 +3933,10 @@
     <original> corp </original>
     <position>
       <box>
-        <x> 174 </x>
-        <y> 620 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 173 </x>
+        <y> 623 </y>
+        <width> 24 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3949,9 +3949,9 @@
     <position>
       <box>
         <x> 209 </x>
-        <y> 620 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <y> 623 </y>
+        <width> 12 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3963,10 +3963,10 @@
     <original> Chrifti </original>
     <position>
       <box>
-        <x> 230 </x>
-        <y> 620 </y>
-        <width> 33 </width>
-        <height> 15 </height>
+        <x> 233 </x>
+        <y> 623 </y>
+        <width> 26 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3978,10 +3978,10 @@
     <original> fubftantialameng, </original>
     <position>
       <box>
-        <x> 270 </x>
-        <y> 620 </y>
-        <width> 97 </width>
-        <height> 15 </height>
+        <x> 271 </x>
+        <y> 623 </y>
+        <width> 77 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -3993,10 +3993,10 @@
     <original> bigch'ees </original>
     <position>
       <box>
-        <x> 374 </x>
-        <y> 620 </y>
-        <width> 58 </width>
-        <height> 15 </height>
+        <x> 360 </x>
+        <y> 623 </y>
+        <width> 53 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4008,10 +4008,10 @@
     <original> eint' </original>
     <position>
       <box>
-        <x> 439 </x>
-        <y> 620 </y>
-        <width> 27 </width>
-        <height> 15 </height>
+        <x> 425 </x>
+        <y> 623 </y>
+        <width> 24 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4023,10 +4023,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 473 </x>
-        <y> 620 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 461 </x>
+        <y> 623 </y>
+        <width> 8 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4038,10 +4038,10 @@
     <original> paü </original>
     <position>
       <box>
-        <x> 491 </x>
-        <y> 620 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 481 </x>
+        <y> 623 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4053,10 +4053,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 519 </x>
-        <y> 620 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 511 </x>
+        <y> 623 </y>
+        <width> 10 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4069,9 +4069,9 @@
     <position>
       <box>
         <x> 66 </x>
-        <y> 640 </y>
-        <width> 29 </width>
-        <height> 15 </height>
+        <y> 643 </y>
+        <width> 25 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4083,10 +4083,10 @@
     <original> Cò </original>
     <position>
       <box>
-        <x> 102 </x>
-        <y> 640 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 103 </x>
+        <y> 643 </y>
+        <width> 16 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4098,10 +4098,10 @@
     <original> pò </original>
     <position>
       <box>
-        <x> 123 </x>
-        <y> 640 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 131 </x>
+        <y> 643 </y>
+        <width> 12 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4113,10 +4113,10 @@
     <original> ün </original>
     <position>
       <box>
-        <x> 144 </x>
-        <y> 640 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 155 </x>
+        <y> 643 </y>
+        <width> 12 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4128,10 +4128,10 @@
     <original> pija </original>
     <position>
       <box>
-        <x> 165 </x>
-        <y> 640 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 179 </x>
+        <y> 643 </y>
+        <width> 14 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4143,10 +4143,10 @@
     <original> mangear </original>
     <position>
       <box>
-        <x> 190 </x>
-        <y> 640 </y>
-        <width> 49 </width>
-        <height> 15 </height>
+        <x> 205 </x>
+        <y> 643 </y>
+        <width> 42 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4158,10 +4158,10 @@
     <original> landarvij </original>
     <position>
       <box>
-        <x> 246 </x>
-        <y> 640 </y>
-        <width> 48 </width>
-        <height> 15 </height>
+        <x> 259 </x>
+        <y> 643 </y>
+        <width> 40 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4173,10 +4173,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 301 </x>
-        <y> 640 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 311 </x>
+        <y> 643 </y>
+        <width> 8 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4188,10 +4188,10 @@
     <original> iudicij </original>
     <position>
       <box>
-        <x> 319 </x>
-        <y> 640 </y>
-        <width> 29 </width>
-        <height> 15 </height>
+        <x> 331 </x>
+        <y> 643 </y>
+        <width> 23 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4203,10 +4203,10 @@
     <original> guar </original>
     <position>
       <box>
-        <x> 355 </x>
-        <y> 640 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 366 </x>
+        <y> 643 </y>
+        <width> 24 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4218,10 +4218,10 @@
     <original> condemnatiun? </original>
     <position>
       <box>
-        <x> 390 </x>
-        <y> 640 </y>
-        <width> 83 </width>
-        <height> 15 </height>
+        <x> 402 </x>
+        <y> 643 </y>
+        <width> 72 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4234,9 +4234,9 @@
     <position>
       <box>
         <x> 40 </x>
-        <y> 660 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <y> 663 </y>
+        <width> 19 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4248,10 +4248,10 @@
     <original> Per </original>
     <position>
       <box>
-        <x> 61 </x>
-        <y> 660 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 71 </x>
+        <y> 663 </y>
+        <width> 22 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4263,10 +4263,10 @@
     <original> mur </original>
     <position>
       <box>
-        <x> 89 </x>
-        <y> 660 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 105 </x>
+        <y> 663 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4278,10 +4278,10 @@
     <original> da </original>
     <position>
       <box>
-        <x> 117 </x>
-        <y> 660 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 135 </x>
+        <y> 663 </y>
+        <width> 12 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4293,10 +4293,10 @@
     <original> quegl, </original>
     <position>
       <box>
-        <x> 138 </x>
-        <y> 660 </y>
-        <width> 37 </width>
-        <height> 15 </height>
+        <x> 159 </x>
+        <y> 663 </y>
+        <width> 35 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4308,10 +4308,10 @@
     <original> cha </original>
     <position>
       <box>
-        <x> 182 </x>
-        <y> 660 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 206 </x>
+        <y> 663 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4323,10 +4323,10 @@
     <original> bigchia </original>
     <position>
       <box>
-        <x> 210 </x>
-        <y> 660 </y>
-        <width> 39 </width>
-        <height> 15 </height>
+        <x> 236 </x>
+        <y> 663 </y>
+        <width> 32 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4338,10 +4338,10 @@
     <original> fefa </original>
     <position>
       <box>
-        <x> 256 </x>
-        <y> 660 </y>
-        <width> 22 </width>
-        <height> 15 </height>
+        <x> 280 </x>
+        <y> 663 </y>
+        <width> 14 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4353,10 +4353,10 @@
     <original> üna </original>
     <position>
       <box>
-        <x> 285 </x>
-        <y> 660 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 306 </x>
+        <y> 663 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4368,10 +4368,10 @@
     <original> differentia </original>
     <position>
       <box>
-        <x> 313 </x>
-        <y> 660 </y>
-        <width> 58 </width>
-        <height> 15 </height>
+        <x> 336 </x>
+        <y> 663 </y>
+        <width> 42 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4383,10 +4383,10 @@
     <original> digl </original>
     <position>
       <box>
-        <x> 378 </x>
-        <y> 660 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 390 </x>
+        <y> 663 </y>
+        <width> 14 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4398,10 +4398,10 @@
     <original> corp </original>
     <position>
       <box>
-        <x> 403 </x>
-        <y> 660 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 416 </x>
+        <y> 663 </y>
+        <width> 24 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4413,10 +4413,10 @@
     <original> da </original>
     <position>
       <box>
-        <x> 438 </x>
-        <y> 660 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 452 </x>
+        <y> 663 </y>
+        <width> 12 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4429,9 +4429,9 @@
     <position>
       <box>
         <x> 60 </x>
-        <y> 679 </y>
-        <width> 40 </width>
-        <height> 15 </height>
+        <y> 681 </y>
+        <width> 39 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -4459,9 +4459,9 @@
     <position>
       <box>
         <x> 66 </x>
-        <y> 701 </y>
-        <width> 30 </width>
-        <height> 15 </height>
+        <y> 704 </y>
+        <width> 29 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4473,10 +4473,10 @@
     <original> fan </original>
     <position>
       <box>
-        <x> 103 </x>
-        <y> 701 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 107 </x>
+        <y> 704 </y>
+        <width> 13 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4488,10 +4488,10 @@
     <original> bigchia </original>
     <position>
       <box>
-        <x> 128 </x>
-        <y> 701 </y>
-        <width> 39 </width>
-        <height> 15 </height>
+        <x> 132 </x>
+        <y> 704 </y>
+        <width> 32 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4503,10 +4503,10 @@
     <original> üna </original>
     <position>
       <box>
-        <x> 174 </x>
-        <y> 701 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 176 </x>
+        <y> 704 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4518,10 +4518,10 @@
     <original> dretchia </original>
     <position>
       <box>
-        <x> 202 </x>
-        <y> 701 </y>
-        <width> 48 </width>
-        <height> 15 </height>
+        <x> 206 </x>
+        <y> 704 </y>
+        <width> 38 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4533,10 +4533,10 @@
     <original> differentia </original>
     <position>
       <box>
-        <x> 257 </x>
-        <y> 701 </y>
-        <width> 58 </width>
-        <height> 15 </height>
+        <x> 256 </x>
+        <y> 704 </y>
+        <width> 42 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4548,10 +4548,10 @@
     <original> intraunter </original>
     <position>
       <box>
-        <x> 322 </x>
-        <y> 701 </y>
-        <width> 59 </width>
-        <height> 15 </height>
+        <x> 310 </x>
+        <y> 704 </y>
+        <width> 46 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4563,10 +4563,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 388 </x>
-        <y> 701 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 368 </x>
+        <y> 704 </y>
+        <width> 8 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4578,10 +4578,10 @@
     <original> corp </original>
     <position>
       <box>
-        <x> 406 </x>
-        <y> 701 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 388 </x>
+        <y> 704 </y>
+        <width> 24 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4593,10 +4593,10 @@
     <original> da </original>
     <position>
       <box>
-        <x> 441 </x>
-        <y> 701 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 424 </x>
+        <y> 704 </y>
+        <width> 12 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4608,10 +4608,10 @@
     <original> Chrifti? </original>
     <position>
       <box>
-        <x> 462 </x>
-        <y> 701 </y>
-        <width> 40 </width>
-        <height> 15 </height>
+        <x> 448 </x>
+        <y> 704 </y>
+        <width> 36 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4624,9 +4624,9 @@
     <position>
       <box>
         <x> 89 </x>
-        <y> 720 </y>
-        <width> 29 </width>
-        <height> 15 </height>
+        <y> 723 </y>
+        <width> 17 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4638,10 +4638,10 @@
     <original> quels </original>
     <position>
       <box>
-        <x> 125 </x>
-        <y> 720 </y>
-        <width> 30 </width>
-        <height> 15 </height>
+        <x> 118 </x>
+        <y> 723 </y>
+        <width> 25 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4653,10 +4653,10 @@
     <original> ils </original>
     <position>
       <box>
-        <x> 162 </x>
-        <y> 720 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 155 </x>
+        <y> 723 </y>
+        <width> 8 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4668,10 +4668,10 @@
     <original> quals </original>
     <position>
       <box>
-        <x> 180 </x>
-        <y> 720 </y>
-        <width> 30 </width>
-        <height> 15 </height>
+        <x> 175 </x>
+        <y> 723 </y>
+        <width> 25 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4683,10 +4683,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 217 </x>
-        <y> 720 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 212 </x>
+        <y> 723 </y>
+        <width> 8 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4698,10 +4698,10 @@
     <original> nofs </original>
     <position>
       <box>
-        <x> 235 </x>
-        <y> 720 </y>
-        <width> 25 </width>
-        <height> 15 </height>
+        <x> 232 </x>
+        <y> 723 </y>
+        <width> 19 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4713,10 +4713,10 @@
     <original> Signer </original>
     <position>
       <box>
-        <x> 267 </x>
-        <y> 720 </y>
-        <width> 37 </width>
-        <height> 15 </height>
+        <x> 263 </x>
+        <y> 723 </y>
+        <width> 35 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4728,10 +4728,10 @@
     <original> lefum </original>
     <position>
       <box>
-        <x> 311 </x>
-        <y> 720 </y>
-        <width> 27 </width>
-        <height> 15 </height>
+        <x> 310 </x>
+        <y> 723 </y>
+        <width> 20 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4743,10 +4743,10 @@
     <original> Chriftum, </original>
     <position>
       <box>
-        <x> 345 </x>
-        <y> 720 </y>
-        <width> 52 </width>
-        <height> 15 </height>
+        <x> 342 </x>
+        <y> 723 </y>
+        <width> 47 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4758,10 +4758,10 @@
     <original> bigchia </original>
     <position>
       <box>
-        <x> 404 </x>
-        <y> 720 </y>
-        <width> 39 </width>
-        <height> 15 </height>
+        <x> 401 </x>
+        <y> 723 </y>
+        <width> 32 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4773,10 +4773,10 @@
     <original> per </original>
     <position>
       <box>
-        <x> 450 </x>
-        <y> 720 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 445 </x>
+        <y> 723 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4788,10 +4788,10 @@
     <original> lur </original>
     <position>
       <box>
-        <x> 478 </x>
-        <y> 720 </y>
-        <width> 16 </width>
-        <height> 15 </height>
+        <x> 475 </x>
+        <y> 723 </y>
+        <width> 13 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -4804,9 +4804,9 @@
     <position>
       <box>
         <x> 55 </x>
-        <y> 739 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <y> 741 </y>
+        <width> 18 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -4818,10 +4818,10 @@
     <original> Spindrader </original>
     <position>
       <box>
-        <x> 90 </x>
-        <y> 739 </y>
-        <width> 65 </width>
-        <height> 15 </height>
+        <x> 86 </x>
+        <y> 741 </y>
+        <width> 64 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -4833,10 +4833,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 162 </x>
-        <y> 739 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 163 </x>
+        <y> 741 </y>
+        <width> 10 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -4848,10 +4848,10 @@
     <original> [pag. </original>
     <position>
       <box>
-        <x> 176 </x>
-        <y> 739 </y>
-        <width> 35 </width>
-        <height> 15 </height>
+        <x> 186 </x>
+        <y> 741 </y>
+        <width> 40 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -4863,10 +4863,10 @@
     <original> 63] </original>
     <position>
       <box>
-        <x> 218 </x>
-        <y> 739 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 239 </x>
+        <y> 741 </y>
+        <width> 31 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -4878,10 +4878,10 @@
     <original> Salvader </original>
     <position>
       <box>
-        <x> 246 </x>
-        <y> 739 </y>
+        <x> 283 </x>
+        <y> 741 </y>
         <width> 51 </width>
-        <height> 15 </height>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -4893,10 +4893,10 @@
     <original> incognufchan </original>
     <position>
       <box>
-        <x> 304 </x>
-        <y> 739 </y>
-        <width> 76 </width>
-        <height> 15 </height>
+        <x> 347 </x>
+        <y> 741 </y>
+        <width> 68 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -4908,10 +4908,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 387 </x>
-        <y> 739 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 428 </x>
+        <y> 741 </y>
+        <width> 10 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -4923,10 +4923,10 @@
     <original> creen, </original>
     <position>
       <box>
-        <x> 401 </x>
-        <y> 739 </y>
-        <width> 42 </width>
-        <height> 15 </height>
+        <x> 451 </x>
+        <y> 741 </y>
+        <width> 43 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -4938,10 +4938,10 @@
     <original> remifchiun </original>
     <position>
       <box>
-        <x> 450 </x>
-        <y> 739 </y>
-        <width> 57 </width>
-        <height> 15 </height>
+        <x> 507 </x>
+        <y> 741 </y>
+        <width> 49 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -4954,9 +4954,9 @@
     <position>
       <box>
         <x> 40 </x>
-        <y> 759 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <y> 761 </y>
+        <width> 21 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -4968,10 +4968,10 @@
     <original> dels </original>
     <position>
       <box>
-        <x> 61 </x>
-        <y> 759 </y>
-        <width> 23 </width>
-        <height> 15 </height>
+        <x> 74 </x>
+        <y> 761 </y>
+        <width> 21 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -4983,10 +4983,10 @@
     <original> peccqqs </original>
     <position>
       <box>
-        <x> 91 </x>
-        <y> 759 </y>
-        <width> 49 </width>
-        <height> 15 </height>
+        <x> 108 </x>
+        <y> 761 </y>
+        <width> 46 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -4998,10 +4998,10 @@
     <original> eint7 </original>
     <position>
       <box>
-        <x> 147 </x>
-        <y> 759 </y>
-        <width> 27 </width>
-        <height> 15 </height>
+        <x> 167 </x>
+        <y> 761 </y>
+        <width> 26 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5013,10 +5013,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 181 </x>
-        <y> 759 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 206 </x>
+        <y> 761 </y>
+        <width> 9 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5028,10 +5028,10 @@
     <original> feu </original>
     <position>
       <box>
-        <x> 199 </x>
-        <y> 759 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 228 </x>
+        <y> 761 </y>
+        <width> 14 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5043,10 +5043,10 @@
     <original> fqung </original>
     <position>
       <box>
-        <x> 224 </x>
-        <y> 759 </y>
-        <width> 32 </width>
-        <height> 15 </height>
+        <x> 255 </x>
+        <y> 761 </y>
+        <width> 27 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5058,10 +5058,10 @@
     <original> bigchia </original>
     <position>
       <box>
-        <x> 263 </x>
-        <y> 759 </y>
-        <width> 39 </width>
-        <height> 15 </height>
+        <x> 295 </x>
+        <y> 761 </y>
+        <width> 35 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5073,10 +5073,10 @@
     <original> tfchearchian, </original>
     <position>
       <box>
-        <x> 309 </x>
-        <y> 759 </y>
-        <width> 80 </width>
-        <height> 15 </height>
+        <x> 343 </x>
+        <y> 761 </y>
+        <width> 73 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5088,10 +5088,10 @@
     <original> &amp; </original>
     <position>
       <box>
-        <x> 396 </x>
-        <y> 759 </y>
-        <width> 7 </width>
-        <height> 15 </height>
+        <x> 429 </x>
+        <y> 761 </y>
+        <width> 10 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5103,10 +5103,10 @@
     <original> nagutta </original>
     <position>
       <box>
-        <x> 410 </x>
-        <y> 759 </y>
-        <width> 43 </width>
-        <height> 15 </height>
+        <x> 452 </x>
+        <y> 761 </y>
+        <width> 35 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5118,10 +5118,10 @@
     <original> tqunt </original>
     <position>
       <box>
-        <x> 460 </x>
-        <y> 759 </y>
-        <width> 29 </width>
-        <height> 15 </height>
+        <x> 500 </x>
+        <y> 761 </y>
+        <width> 22 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5134,9 +5134,9 @@
     <position>
       <box>
         <x> 59 </x>
-        <y> 778 </y>
-        <width> 34 </width>
-        <height> 15 </height>
+        <y> 780 </y>
+        <width> 29 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5148,10 +5148,10 @@
     <original> per </original>
     <position>
       <box>
-        <x> 100 </x>
-        <y> 778 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 101 </x>
+        <y> 780 </y>
+        <width> 20 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5163,10 +5163,10 @@
     <original> members </original>
     <position>
       <box>
-        <x> 128 </x>
-        <y> 778 </y>
-        <width> 49 </width>
-        <height> 15 </height>
+        <x> 134 </x>
+        <y> 780 </y>
+        <width> 46 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5178,10 +5178,10 @@
     <original> digl </original>
     <position>
       <box>
-        <x> 184 </x>
-        <y> 778 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 193 </x>
+        <y> 780 </y>
+        <width> 16 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5193,10 +5193,10 @@
     <original> feu </original>
     <position>
       <box>
-        <x> 209 </x>
-        <y> 778 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 222 </x>
+        <y> 780 </y>
+        <width> 14 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5208,10 +5208,10 @@
     <original> corp </original>
     <position>
       <box>
-        <x> 234 </x>
-        <y> 778 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 249 </x>
+        <y> 780 </y>
+        <width> 26 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5223,10 +5223,10 @@
     <original> tras </original>
     <position>
       <box>
-        <x> 269 </x>
-        <y> 778 </y>
-        <width> 25 </width>
-        <height> 15 </height>
+        <x> 288 </x>
+        <y> 780 </y>
+        <width> 21 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5238,10 +5238,10 @@
     <original> diever </original>
     <position>
       <box>
-        <x> 301 </x>
-        <y> 778 </y>
-        <width> 37 </width>
-        <height> 15 </height>
+        <x> 322 </x>
+        <y> 780 </y>
+        <width> 34 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5253,10 +5253,10 @@
     <original> dels </original>
     <position>
       <box>
-        <x> 345 </x>
-        <y> 778 </y>
-        <width> 23 </width>
-        <height> 15 </height>
+        <x> 369 </x>
+        <y> 780 </y>
+        <width> 21 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5268,10 +5268,10 @@
     <original> fqnqhs </original>
     <position>
       <box>
-        <x> 375 </x>
-        <y> 778 </y>
-        <width> 39 </width>
-        <height> 15 </height>
+        <x> 403 </x>
+        <y> 780 </y>
+        <width> 34 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5283,10 +5283,10 @@
     <original> Sacraments </original>
     <position>
       <box>
-        <x> 421 </x>
-        <y> 778 </y>
-        <width> 67 </width>
-        <height> 15 </height>
+        <x> 450 </x>
+        <y> 780 </y>
+        <width> 64 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5298,10 +5298,10 @@
     <original> fe </original>
     <position>
       <box>
-        <x> 495 </x>
-        <y> 778 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 527 </x>
+        <y> 780 </y>
+        <width> 8 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5314,9 +5314,9 @@
     <position>
       <box>
         <x> 59 </x>
-        <y> 797 </y>
-        <width> 36 </width>
-        <height> 15 </height>
+        <y> 799 </y>
+        <width> 29 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5328,10 +5328,10 @@
     <original> ora, </original>
     <position>
       <box>
-        <x> 102 </x>
-        <y> 797 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 101 </x>
+        <y> 799 </y>
+        <width> 30 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5343,10 +5343,10 @@
     <original> mò </original>
     <position>
       <box>
-        <x> 137 </x>
-        <y> 797 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 144 </x>
+        <y> 799 </y>
+        <width> 13 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5358,10 +5358,10 @@
     <original> eint' </original>
     <position>
       <box>
-        <x> 158 </x>
-        <y> 797 </y>
-        <width> 27 </width>
-        <height> 15 </height>
+        <x> 170 </x>
+        <y> 799 </y>
+        <width> 26 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5373,10 +5373,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 192 </x>
-        <y> 797 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 209 </x>
+        <y> 799 </y>
+        <width> 9 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5388,10 +5388,10 @@
     <original> coor </original>
     <position>
       <box>
-        <x> 210 </x>
-        <y> 797 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 231 </x>
+        <y> 799 </y>
+        <width> 26 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5403,10 +5403,10 @@
     <original> quegl </original>
     <position>
       <box>
-        <x> 245 </x>
-        <y> 797 </y>
-        <width> 30 </width>
-        <height> 15 </height>
+        <x> 270 </x>
+        <y> 799 </y>
+        <width> 27 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5418,10 +5418,10 @@
     <original> bich! </original>
     <position>
       <box>
-        <x> 282 </x>
-        <y> 797 </y>
-        <width> 30 </width>
-        <height> 15 </height>
+        <x> 310 </x>
+        <y> 799 </y>
+        <width> 31 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5433,10 +5433,10 @@
     <original> ean. </original>
     <position>
       <box>
-        <x> 319 </x>
-        <y> 797 </y>
-        <width> 28 </width>
-        <height> 15 </height>
+        <x> 354 </x>
+        <y> 799 </y>
+        <width> 30 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5464,9 +5464,9 @@
     <position>
       <box>
         <x> 140 </x>
-        <y> 819 </y>
+        <y> 822 </y>
         <width> 18 </width>
-        <height> 15 </height>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5478,10 +5478,10 @@
     <original> de </original>
     <position>
       <box>
-        <x> 165 </x>
-        <y> 819 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <x> 170 </x>
+        <y> 822 </y>
+        <width> 12 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5493,10 +5493,10 @@
     <original> far </original>
     <position>
       <box>
-        <x> 186 </x>
-        <y> 819 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 194 </x>
+        <y> 822 </y>
+        <width> 13 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5508,10 +5508,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 211 </x>
-        <y> 819 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 219 </x>
+        <y> 822 </y>
+        <width> 8 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5523,10 +5523,10 @@
     <original> offici </original>
     <position>
       <box>
-        <x> 229 </x>
-        <y> 819 </y>
-        <width> 26 </width>
-        <height> 15 </height>
+        <x> 239 </x>
+        <y> 822 </y>
+        <width> 17 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5538,10 +5538,10 @@
     <original> della </original>
     <position>
       <box>
-        <x> 262 </x>
-        <y> 819 </y>
-        <width> 25 </width>
-        <height> 15 </height>
+        <x> 268 </x>
+        <y> 822 </y>
+        <width> 20 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5553,10 +5553,10 @@
     <original> Tfcheina </original>
     <position>
       <box>
-        <x> 294 </x>
-        <y> 819 </y>
-        <width> 48 </width>
-        <height> 15 </height>
+        <x> 300 </x>
+        <y> 822 </y>
+        <width> 35 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5568,10 +5568,10 @@
     <original> digl </original>
     <position>
       <box>
-        <x> 349 </x>
-        <y> 819 </y>
-        <width> 18 </width>
-        <height> 15 </height>
+        <x> 347 </x>
+        <y> 822 </y>
+        <width> 14 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5583,10 +5583,10 @@
     <original> Signer? </original>
     <position>
       <box>
-        <x> 374 </x>
-        <y> 819 </y>
+        <x> 373 </x>
+        <y> 822 </y>
         <width> 44 </width>
-        <height> 15 </height>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5599,9 +5599,9 @@
     <position>
       <box>
         <x> 89 </x>
-        <y> 839 </y>
-        <width> 35 </width>
-        <height> 15 </height>
+        <y> 842 </y>
+        <width> 34 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5613,10 +5613,10 @@
     <original> quter </original>
     <position>
       <box>
-        <x> 131 </x>
-        <y> 839 </y>
-        <width> 32 </width>
-        <height> 15 </height>
+        <x> 135 </x>
+        <y> 842 </y>
+        <width> 25 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5628,10 +5628,10 @@
     <original> cha </original>
     <position>
       <box>
-        <x> 170 </x>
-        <y> 839 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 172 </x>
+        <y> 842 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5643,10 +5643,10 @@
     <original> quell, </original>
     <position>
       <box>
-        <x> 198 </x>
-        <y> 839 </y>
-        <width> 32 </width>
-        <height> 15 </height>
+        <x> 202 </x>
+        <y> 842 </y>
+        <width> 30 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5658,10 +5658,10 @@
     <original> cha </original>
     <position>
       <box>
-        <x> 237 </x>
-        <y> 839 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 244 </x>
+        <y> 842 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5673,10 +5673,10 @@
     <original> tier </original>
     <position>
       <box>
-        <x> 265 </x>
-        <y> 839 </y>
-        <width> 20 </width>
-        <height> 15 </height>
+        <x> 274 </x>
+        <y> 842 </y>
+        <width> 14 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5688,10 +5688,10 @@
     <original> igl </original>
     <position>
       <box>
-        <x> 292 </x>
-        <y> 839 </y>
-        <width> 11 </width>
-        <height> 15 </height>
+        <x> 300 </x>
+        <y> 842 </y>
+        <width> 8 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5703,10 +5703,10 @@
     <original> fervetfch </original>
     <position>
       <box>
-        <x> 310 </x>
-        <y> 839 </y>
-        <width> 54 </width>
-        <height> 15 </height>
+        <x> 320 </x>
+        <y> 842 </y>
+        <width> 40 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5718,10 +5718,10 @@
     <original> della </original>
     <position>
       <box>
-        <x> 371 </x>
-        <y> 839 </y>
-        <width> 25 </width>
-        <height> 15 </height>
+        <x> 372 </x>
+        <y> 842 </y>
+        <width> 20 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5733,10 +5733,10 @@
     <original> Bafelgia </original>
     <position>
       <box>
-        <x> 403 </x>
-        <y> 839 </y>
-        <width> 43 </width>
-        <height> 15 </height>
+        <x> 404 </x>
+        <y> 842 </y>
+        <width> 37 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5749,9 +5749,9 @@
     <position>
       <box>
         <x> 453 </x>
-        <y> 839 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <y> 842 </y>
+        <width> 18 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5763,10 +5763,10 @@
     <original> or- </original>
     <position>
       <box>
-        <x> 481 </x>
-        <y> 839 </y>
-        <width> 21 </width>
-        <height> 15 </height>
+        <x> 483 </x>
+        <y> 842 </y>
+        <width> 22 </width>
+        <height> 12 </height>
       </box>
     </position>
     <modification>
@@ -5779,9 +5779,9 @@
     <position>
       <box>
         <x> 40 </x>
-        <y> 859 </y>
-        <width> 14 </width>
-        <height> 15 </height>
+        <y> 861 </y>
+        <width> 21 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>
@@ -5793,10 +5793,10 @@
     <original> dinqq. </original>
     <position>
       <box>
-        <x> 61 </x>
-        <y> 859 </y>
-        <width> 37 </width>
-        <height> 15 </height>
+        <x> 74 </x>
+        <y> 861 </y>
+        <width> 38 </width>
+        <height> 13 </height>
       </box>
     </position>
     <modification>

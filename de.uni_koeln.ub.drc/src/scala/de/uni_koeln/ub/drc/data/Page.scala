@@ -88,25 +88,21 @@ private object PdfToPage {
   import scala.collection.mutable.Buffer
   import java.io.File
     
-  /* TODO: would need conversion for different page sizes */
-  /* TODO: calculate letter width based on number of letters in line */
-  /* TODO: get font size from PDF, adjust height and width accordingly */
-  /* TODO: treat capital letters differently */
-  val widths = Map('l' -> 2, 'i' -> 2, '∫' -> 4, 't' -> 4, 'f' -> 4, 'j' -> 2)
-  val defaultWidth = 7
   val boxHeight = 15
     
   def convert(pdfLocation : String) : Page = {
     val words: Buffer[Word] = Buffer()
     val paragraphs : Buffer[Paragraph] = PositionParser.parse(pdfLocation)
+    val pageHeight = 960
     for(p <- paragraphs) {
       for(line <- p.getLines) {
-        var pos = line.getStartPointScaled(600, 960)
+        var pos = line.getStartPointScaled(600, pageHeight)
         for(word <- line.getWords) {
-          val wordWidth = width(word)
-          words add Word(word, Box(pos.x.toInt, pos.y.toInt - boxHeight, wordWidth, boxHeight))
+          val scaled = line.getFontSizeScaled(pageHeight)
+          val wordWidth = width(word, scaled)
+          words add Word(word, Box(pos.x.toInt, pos.y.toInt - scaled, wordWidth, scaled))
           /* Update the starting position for the next word: */
-          pos = Point(pos.x + wordWidth + defaultWidth, pos.y)
+          pos = Point(pos.x + wordWidth + scaled, pos.y)
         }
       }
       words add Word("@", Box(0,0,0,0))
@@ -114,14 +110,18 @@ private object PdfToPage {
     Page(words.toList, new java.io.File(pdfLocation).getName().replace("pdf", "xml"))
   }
     
-  def width(word: String) : Int = {
-    var result = 0
+  def width(word: String, height: Int) : Int = {
+    /* TODO: calculate letter width based on number of letters in line */
+    /* TODO: get font spacing and style from PDF, adjust width accordingly */
+    var result = 0f
+    val narrow = "li∫tfj"
     for(c <- word.toCharArray) {
-      widths get c match {
-        case Some(x) => result += x
-        case None => result += defaultWidth
-      }
+      /* heuristic: provide width as percentage of height, depending on letter and case: */
+      if(narrow.contains(c.toLower)) 
+        result += height * (if(c.isLower) .1f else .2f)
+      else 
+        result += height * (if(c.isLower) .5f else .8f)
     }
-    result
+    result.round
   }
 }
