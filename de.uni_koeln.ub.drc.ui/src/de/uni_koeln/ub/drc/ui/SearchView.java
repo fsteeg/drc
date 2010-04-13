@@ -82,7 +82,7 @@ public final class SearchView {
   private void initTable() {
     final int[] columns = new int[] { 185, 800 };
     createColumn("File", columns[0]);
-    createColumn("Description", columns[1]);
+    createColumn("Text", columns[1]);
     Table table = viewer.getTable();
     table.setHeaderVisible(true);
     table.setLinesVisible(true);
@@ -135,7 +135,7 @@ public final class SearchView {
       case 0:
         return page.id();
       case 1:
-        return page.toString();
+        return page.toText();
       default:
         return page.toString();
       }

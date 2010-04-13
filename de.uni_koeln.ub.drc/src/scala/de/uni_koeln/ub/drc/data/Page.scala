@@ -20,6 +20,8 @@ case class Page(words:List[Word], id: String) {
   
   def toXml = <page> { words.toList.map(_.toXml) } </page>
   
+  def toText = ("" /: words) (_ + " " + _.history.top.form.replace("@", "|")) 
+  
   def save(file:java.io.File): Node = {
     val root = toXml
     val formatted = new StringBuilder
