@@ -23,86 +23,86 @@ table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-
 h4. ANDP: Risks and technical questions
 
 table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
-| *Risk/question* | *Findings/solution by ANDP* | *Suggestion for DRC* | *DRC-Milestone* |
-| No such functionality has been implemented before | Prototype with evaluation survey, in the next step evaluation of user feedback for beta version. | Read this doc. | -  |
-| Will the page move down as the text corrector moves through the corrected text? | True for ANDP beta. | Done.  | M1 |
-| Should users be correcting by character, word, line, paragraph, or article | Correction per line. | Corrections on word level only. | M1 |
-| How should we save these corrections? | Separate DB entries. |XML files for now | M1 |
-| Should there be a quick single word/line correction mode and also a "power use" mode for those users who want to correct entire articles? | Only line correction in beta, 'power use' planned. | For clarity reasons there should be only one mode of correction (word level). | M1 |
-| How can we match the old words with the corrected "new" words so that word highlighting will still work in searches? | | Done. | M1 |
-| Which versions should the user see before correcting - the latest only, the original or all versions? | Latest. | Latest. Allow access to older versions via change log/history? | M1 |
-| Should we keep all changes and enable searching across all changes or just latest changes? | Keep all changes, searching across all changes. | Should be possible to search over all versions. Default: all versions, later optional | M1,M2 |
-| Users are put off seeing all the raw OCR needing correction which may be "gibberish" and clutter screen | | Improve OCR. | M2 |
-| Is it possible/desirable to prevent some words being changed too radically (e.g.  because it is so visually different, that it is unlikely that an OCR mistake could have been made)? | Limited length on line level, but no restrictions to what is typed. | Limit length on word level. No blanks allowed (message). | M2 |
-| Should users have keyboard shortcuts (e.g. to move to next word/skip over words)? | Shortcuts are optional, can be very useful. | Map functionality to shortcuts | M2 |
-| Is it possible to have correction "candidate" words? How could we identify the candidates and how to suggest they can be changed (dropdown?).|No such functionality in beta. |Use word lists. | M2 |
-|Moderation required? Who will do it (expert, contributors, users), how will it be done, and how time consuming will it be?| No moderation in beta.  | First phase: 'Correction manager' (for announcements, motivation, support). 2. phase: switch to self-moderation by user - users can accept corrections or re-correct ('voting'). | M3 |
-| How will we know what users are doing and gather useful statistics?|Feedback survey, personal history for registered users. | Via user profiles. Try to collect information about users via user profiles. | M3 |
-| Can we measure the improvements made to data? | | Community-based. Mark word/text as correct, accept changes by other users. | M3 |
-| How to determine when no further correction is needed? "Close" text/line/word? | No such functionality in beta. | Mark words as correct? Votes? | M3 |
-| Potential vandalism of text|No vandalism of text was detected in 6 months so no roll back to previous versions or moderation was required. |Rollbacks. Login/captcha. | M3, M4. |
-| Large amounts of text correction activity compromise database/service|System needs to be scalable | | M3, M4 |
-| How will we roll back and will it be at article level or whole database? | | Word level. In b2 rollback of whole database (timestamps needed) | M3, b2 |
-| Users don't understand the concept of text correction|Need direct access to guidelines (see ANDP "help pages":http://newspapers.nla.gov.au/ndp/del/searchTips. Functionality must be as easy as possible - avoid having too many features|Need mini tutorial, screen cast? | M4 |
-| Robots and spam|Use login and/or captcha ("Completely Automated Public Turing test to tell Computers and Humans Apart.") | Login/captcha - can captcha be used to collect romansch vocabulary? | M4 |
-| Users don"t understand what OCR is or that the searching works on the OCR. | The term they agreed was meaningful instead of "OCR text" was "electronically translated text". | Need meaningful term for 'OCR', need mini tutorial | M4 |
-| Should login be mandatory or optional? | Optional - Mandatory would enable tracking of users but may put off casual users who just want to change a few words. To make registration attractive, registered users get more functionalities. | Optional, captcha | M4 |
-| How will we test user interface mechanisms?| Non-public prototype phase. | Internal evaluation (native speakers?) | b1 |
-| Should multiple users be able to correct articles an infinite number of times or can an article be "finished" and locked down? | | Should be possible to lock articles/pages when finished. | b2 |
-| Users are confused about the difference between text correction, adding comments and adding tags and how to do it | Clean separation of features needed | | b2 |
-| Should users be allowed to change line breaks or formatting (i.e. denote text as italic or heading?) | No such functionality in beta. | | b2 |
+| *Risk/question* | *Findings/solution by ANDP* | *Suggestion for DRC* | *DRC-Milestone* | *Issue* |
+|No such functionality has been implemented before | Prototype with evaluation survey, in the next step evaluation of user feedback for beta version. | Read this doc. | -  | |
+|Will the page move down as the text corrector moves through the corrected text?|True for ANDP beta. |Done.  |M1 | |
+|Should users be correcting by character, word, line, paragraph, or article| Correction per line.| Done. Corrections on word level only.| M1 | |
+|How should we save these corrections?|Separate DB entries. |Done. XML files for now |M1 | |
+|Should there be a quick single word/line correction mode and also a "power use" mode for those users who want to correct entire articles? | Only line correction in beta, 'power use' planned. | Done. For clarity reasons there should be only one mode of correction (word level).| M1 | |
+|How can we match the old words with the corrected "new" words so that word highlighting will still work in searches?| |Done. | M1 | |
+|Which versions should the user see before correcting - the latest only, the original or all versions?|Latest. | Latest. Allow access to older versions via change log/history? | M1 |"#34":http://github.com/fsteeg/drc/issues#issue/34 |
+|Should we keep all changes and enable searching across all changes or just latest changes?|Keep all changes, searching across all changes. | Should be possible to search over all versions. Default: all versions, later optional| M2 |"#35":http://github.com/fsteeg/drc/issues#issue/35 |
+|Users are put off seeing all the raw OCR needing correction which may be "gibberish" and clutter screen| | Improve OCR. |M2 |"#36":http://github.com/fsteeg/drc/issues#issue/36 |
+|Is it possible/desirable to prevent some words being changed too radically (e.g.  because it is so visually different, that it is unlikely that an OCR mistake could have been made)?|Limited length on line level, but no restrictions to what is typed. | Limit length on word level. No blanks allowed (message). | M2 |"#37":http://github.com/fsteeg/drc/issues#issue/37 |
+|Should users have keyboard shortcuts (e.g. to move to next word/skip over words)? | Shortcuts are optional, can be very useful. |Map functionality to shortcuts |M2 |"#38":http://github.com/fsteeg/drc/issues#issue/38 |
+|Is it possible to have correction "candidate" words? How could we identify the candidates and how to suggest they can be changed (dropdown?).|No such functionality in beta. |Use word lists. |M2 |"#20":http://github.com/fsteeg/drc/issues#issue/20 |
+|Moderation required? Who will do it (expert, contributors, users), how will it be done, and how time consuming will it be?|No moderation in beta.  | First phase: 'Correction manager' (for announcements, motivation, support). 2. phase: switch to self-moderation by user - users can accept corrections or re-correct ('voting'). | M3 |"#39":http://github.com/fsteeg/drc/issues#issue/39 |
+|How will we know what users are doing and gather useful statistics?|Feedback survey, personal history for registered users. |Via user profiles. Try to collect information about users via user profiles. |M3 |"#40":http://github.com/fsteeg/drc/issues#issue/40 |
+|Can we measure the improvements made to data?| | Community-based. Mark word/text as correct, accept changes by other users. |M3 |"#39":http://github.com/fsteeg/drc/issues#issue/39, "#41":http://github.com/fsteeg/drc/issues#issue/41 |
+|How to determine when no further correction is needed? "Close" text/line/word? | No such functionality in beta. | Mark words as correct? Votes? |M3 |"#42":http://github.com/fsteeg/drc/issues#issue/42 |
+|Potential vandalism of text|No vandalism of text was detected in 6 months so no roll back to previous versions or moderation was required.|Rollbacks. Login/captcha. |M3, M4. |"#43":http://github.com/fsteeg/drc/issues#issue/43, "#44":http://github.com/fsteeg/drc/issues#issue/44 |
+|Large amounts of text correction activity compromise database/service|System needs to be scalable| |M3, M4 | |
+|How will we roll back and will it be at article level or whole database?| |Word level. In b2 rollback of whole database (timestamps needed) |M3, b2 |"#45":http://github.com/fsteeg/drc/issues#issue/45 |
+|Users don't understand the concept of text correction|Need direct access to guidelines (see ANDP "help pages":http://newspapers.nla.gov.au/ndp/del/searchTips. Functionality must be as easy as possible - avoid having too many features|Need mini tutorial, screen cast? | M4 |"#46":http://github.com/fsteeg/drc/issues#issue/46 |
+|Robots and spam|Use login and/or captcha ("Completely Automated Public Turing test to tell Computers and Humans Apart.")|Login/captcha - can captcha be used to collect romansch vocabulary? | M4 |"#44":http://github.com/fsteeg/drc/issues#issue/44 |
+|Users don"t understand what OCR is or that the searching works on the OCR.|The term they agreed was meaningful instead of "OCR text" was "electronically translated text".| Need meaningful term for 'OCR', need mini tutorial | M4 |"#46":http://github.com/fsteeg/drc/issues#issue/46 |
+|Should login be mandatory or optional? |Optional - Mandatory would enable tracking of users but may put off casual users who just want to change a few words. To make registration attractive, registered users get more functionalities.|Optional, captcha | M4 | |
+|How will we test user interface mechanisms?| Non-public prototype phase. | Internal evaluation (native speakers?) | b1 |"#47":http://github.com/fsteeg/drc/issues#issue/47 |
+|Should multiple users be able to correct articles an infinite number of times or can an article be "finished" and locked down?| |Should be possible to lock articles/pages when finished. |b2 |"#48":http://github.com/fsteeg/drc/issues#issue/48 |
+|Users are confused about the difference between text correction, adding comments and adding tags and how to do it|Clean separation of features needed| |b2 | |
+|Should users be allowed to change line breaks or formatting (i.e. denote text as italic or heading?)| No such functionality in beta. | | b2 |"#49":http://github.com/fsteeg/drc/issues#issue/49 |
 
 
 h4. ANDP: Basic functionalities/features/services
 
 table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
-| *Functionality* | *Solution in ANDP* | *Suggestion for DRC* | *DRC-Milestone* |
-|Highlighting | Line-based, kept seperately in Index.|Word-level, highlighting should always work, even  after words are corrected.|M1 |
-|Interactive Correction | Line-based | Word-level |M1 |
-|Correction history|Attached to articles| page level needed. | M2 |
-|Special characters, keyboard shortcuts|Dropdown attached to article| |M2 |
-|Help text, cheat sheet | | | M2 |
-|Keyword Searching|Lucene, search in OCR and corrected text. Filter search results by title, category, date, length. Possible to do new search in results only.| Corrected words should be immediately searchable (frequent re-indexing) |M2,M3|
-|Accounts|User activities (tags, latest corrections) are visible for others| | M3 |
-|Accounts | Optional.  |Optional |M3|
-|User Feedback | Now closed - users could leave feedback to beta version. |Send feedback-button, forum |M4 |
-|Terms of use, disclaimer|Separate page. | |M4 |
-|Instructions/support |Separate help pages for overview, pop-ups for quick help on certain functionalities (e.g. on login page: reasons to register)| |M4, b2 |
-|Browsing|By title, state, date, category, tag.|Use existing metadata, add further metadata |b2 |
-|Advanced Searching|By zones, date, title, category, article length |See browsing above. |b2 |
-|Metadata|Only basic Metadata like Title, Page, Issue| Additional Metadata from DRC ("Registerband"): To be determined |b2 |
-|Tags | Unrestricted Tagging, "social Metadata" - browsing, but no searching in tags. | Include tags in searching? Tag suggestions? Basic tag vocabulary?| b2 |
-|Comments | Like Tagging, no URLs | Should be unrestricted text, possibility to link Texts to each other/to external resources | b2 |
-|Versioning | | Rollbacks for single article/full DB| b2 |
-|Hall of fame|Top 5 on main page, best for each month on separate page ('hall of fame')| |b2 |
+| *Functionality* | *Solution in ANDP* | *Suggestion for DRC* | *DRC-Milestone* |*Issue* |
+|Highlighting | Line-based, kept seperately in Index.|Word-level, highlighting should always work, even  after words are corrected.|M1 | |
+|Interactive Correction | Line-based | Word-level |M1 |  |
+|Correction history|Attached to articles| page level needed. | M2 |"#50":http://github.com/fsteeg/drc/issues#issue/50 |
+|Special characters, keyboard shortcuts|Dropdown attached to article| |M2 |"#51":http://github.com/fsteeg/drc/issues#issue/51 |
+|Help text, cheat sheet | | | M2 |"#46":http://github.com/fsteeg/drc/issues#issue/46 |
+|Keyword Searching|Lucene, search in OCR and corrected text. Filter search results by title, category, date, length. Possible to do new search in results only.| Corrected words should be immediately searchable (frequent re-indexing) |M2,M3|"#13":http://github.com/fsteeg/drc/issues#issue/13 |
+|Accounts|User activities (tags, latest corrections) are visible for others| | M3 | |
+|Accounts | Optional.  |Optional |M3| |
+|User Feedback | Now closed - users could leave feedback to beta version. |Send feedback-button, forum |M4 |"#52":http://github.com/fsteeg/drc/issues#issue/52 |
+|Terms of use, disclaimer|Separate page. | |M4 |"#53":http://github.com/fsteeg/drc/issues#issue/53 |
+|Instructions/support |Separate help pages for overview, pop-ups for quick help on certain functionalities (e.g. on login page: reasons to register)| |M4, b2 |"#54":http://github.com/fsteeg/drc/issues#issue/54 |
+|Browsing|By title, state, date, category, tag.|Use existing metadata, add further metadata |b2 |"#55":http://github.com/fsteeg/drc/issues#issue/55 |
+|Advanced Searching|By zones, date, title, category, article length |See browsing above. |b2 |"#56":http://github.com/fsteeg/drc/issues#issue/56 |
+|Metadata|Only basic Metadata like Title, Page, Issue| Additional Metadata from DRC ("Registerband"): To be determined |b2 |"#57":http://github.com/fsteeg/drc/issues#issue/57 |
+|Tags | Unrestricted Tagging, "social Metadata" - browsing, but no searching in tags. | Include tags in searching? Tag suggestions? Basic tag vocabulary?| b2 |"#58":http://github.com/fsteeg/drc/issues#issue/58 |
+|Comments | Like Tagging, no URLs | Should be unrestricted text, possibility to link Texts to each other/to external resources | b2 |"#59":http://github.com/fsteeg/drc/issues#issue/59  |
+|Versioning | | Rollbacks for single article/full DB| b2 |   |
+|Hall of fame|Top 5 on main page, best for each month on separate page ('hall of fame')| |b2 |"#60":http://github.com/fsteeg/drc/issues#issue/60 |
 
 
 h4. ANDP: Additional functionalities and features requested by users and/or ANDP team
 
 table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
-| *Functionality/feature* | *Approach in ANDP* | *Suggestion for DRC* | *DRC-Milestone* |
-|Mark potential errors | |OCR-output/Word lists/Lexicon? | M2 |
-|Suggestions for correction| |How to compute? How to present (dropdown lists)? | M2 |
-|Moderation| |By expert or by users? | M3, M4 |
-|Forum | | Blog, Wiki? | M4, b1 |
-|Activity logs/user statistics | |Via user profiles | b2 |
-|'Related article' feature| Modify 'comment'-function |Paste links to other pages/external resources|b2 |
-|Postprocessing of OCR| |Spell checking algorithms (lexicon-based, edit distance, machine learning, confusion matrix) |b2 |
+| *Functionality/feature* | *Approach in ANDP* | *Suggestion for DRC* | *DRC-Milestone* |*Issue* |
+|Mark potential errors | |OCR-output/Word lists/Lexicon? | M2 |"#61":http://github.com/fsteeg/drc/issues#issue/61 |
+|Suggestions for correction| |How to compute? How to present (dropdown lists)? | M2 |"#20":http://github.com/fsteeg/drc/issues#issue/20 |
+|Moderation| |By expert or by users? | M3, M4 | |
+|Forum | | Blog, Wiki? | M4, b1 | "#62":http://github.com/fsteeg/drc/issues#issue/62|
+|Activity logs/user statistics | |Via user profiles | b2 |"#63":http://github.com/fsteeg/drc/issues#issue/63 |
+|'Related article' feature| Modify 'comment'-function |Paste links to other pages/external resources|b2 |"#59":http://github.com/fsteeg/drc/issues#issue/59 | 
+|Postprocessing of OCR| |Spell checking algorithms (lexicon-based, edit distance, machine learning, confusion matrix) |b2 |"#64":http://github.com/fsteeg/drc/issues#issue/64 |
 
 
 h4. DRC: Project-specific risks and technical questions not mentioned above
 
 table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; width:100%;}.
-| *Risk/question* | *Suggestion for DRC* | *DRC-Milestone* |
-|Export function| |M2|
-|Small community - only small number of correctors | Implement 'Correction Manager' to coordinate users - see also section "Motivational factors" below. Wikipedia, publications in general |b1 |
-|Chrestomathy less 'useful'/attractive than newspapers |Reader friendly UI, emphasize cultural value | b1 |
-|Integrate formatting options in text correction mode?| |b2 |
-|Typographically correct reproduction|Allow special characters (as in ANDP beta)| b2 |
-|Integration of multiple facsimiles for single text (different source manuscripts etc)| |b2|
-|Musical notation, transcriptions| | b2 |
-|Print on demand?| | b2 |
-|Translations, aligned corpora| | b2 |
+| *Risk/question* | *Suggestion for DRC* | *DRC-Milestone* |*Issue* |
+|Export function| |M2|"#65":http://github.com/fsteeg/drc/issues#issue/65 |
+|Small community - only small number of correctors | Implement 'Correction Manager' to coordinate users - see also section "Motivational factors" below. Wikipedia, publications in general |b1 |"#66":http://github.com/fsteeg/drc/issues#issue/66 |
+|Chrestomathy less 'useful'/attractive than newspapers |Reader friendly UI, emphasize cultural value | b1 | |
+|Integrate formatting options in text correction mode?| |b2 |"#49":http://github.com/fsteeg/drc/issues#issue/49 |
+|Typographically correct reproduction|Allow special characters (as in ANDP beta)| b2 |"#67":http://github.com/fsteeg/drc/issues#issue/67 |
+|Integration of multiple facsimiles for single text (different source manuscripts etc)| |b2|"#68":http://github.com/fsteeg/drc/issues#issue/68 |
+|Musical notation, transcriptions| | b2 |"#69":http://github.com/fsteeg/drc/issues#issue/69 |
+|Print on demand?| | b2 |"#70":http://github.com/fsteeg/drc/issues#issue/70 |
+|Translations, aligned corpora| | b2 |"#71":http://github.com/fsteeg/drc/issues#issue/71 |
 
 
 h4. ANDP:  Motivational factors
@@ -115,7 +115,7 @@ table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-
 |Short and long term goals | Many people have their own (research) goals. This guides their actions and the amount of work they do.| Correction manager could set up school projects, quizes and the like. | |
 |Concentrating on outcomes | We made it clear what our desired overall outcome was (to improve the data quality for everyone) and left it up to the community to help achieve this in their own ways and they responded well.| Emphasize the "good cause" of the project - users can help in the conservation of their cultural heritage. | |
 |Trust and respect | We gave people a high level of trust and respect which motivated them to do their best.| | |
-|Create challenges | Lots of people liked the idea of having the opportunity to face new and difficult problems and were enthusiastic about it.| Voting/Badges? | |
+|Create challenges | Lots of people liked the idea of having the opportunity to face new and difficult problems and were enthusiastic about it.| Voting/Badges? | | 
 |History | Helping to provide an accurate record (sometimes linked to local history research)| Cultural heritage, local history.| |
 |Family names | Helping myself and others find family names (sometimes linked to family history research)| Besides family names people could be interested in local history (place names and such). | |
 |Worthy cause | I consider this a useful cause to volunteer for (linked to helping the Australian community, the Library, themselves)| | |
@@ -136,4 +136,3 @@ h2. "Milestones":http://github.com/fsteeg/drc/issues for DRC beta release (b1)
 * *M4* - 31.08.2010
 ** Web deployment of local prototype. Internationalization. Localization
 * *b2* - estimated beta release 2011
-
