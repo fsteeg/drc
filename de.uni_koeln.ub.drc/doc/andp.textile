@@ -86,7 +86,7 @@ table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-
 |Moderation| |By expert or by users? | M3, M4 | |
 |Forum | | Blog, Wiki? | M4, b1 | "#62":http://github.com/fsteeg/drc/issues#issue/62|
 |Activity logs/user statistics | |Via user profiles | b2 |"#63":http://github.com/fsteeg/drc/issues#issue/63 |
-|'Related article' feature| Modify 'comment'-function |Paste links to other pages/external resources|b2 |"#59":http://github.com/fsteeg/drc/issues#issue/59 | 
+|'Related article' feature| Modify 'comment'-function |Paste links to other pages/external resources|b2 |"#59":http://github.com/fsteeg/drc/issues#issue/59 |
 |Postprocessing of OCR| |Spell checking algorithms (lexicon-based, edit distance, machine learning, confusion matrix) |b2 |"#64":http://github.com/fsteeg/drc/issues#issue/64 |
 
 
@@ -115,7 +115,7 @@ table(#tableborders){ border: 2px solid #ccc; border-collapse: collapse; border-
 |Short and long term goals | Many people have their own (research) goals. This guides their actions and the amount of work they do.| Correction manager could set up school projects, quizes and the like. | |
 |Concentrating on outcomes | We made it clear what our desired overall outcome was (to improve the data quality for everyone) and left it up to the community to help achieve this in their own ways and they responded well.| Emphasize the "good cause" of the project - users can help in the conservation of their cultural heritage. | |
 |Trust and respect | We gave people a high level of trust and respect which motivated them to do their best.| | |
-|Create challenges | Lots of people liked the idea of having the opportunity to face new and difficult problems and were enthusiastic about it.| Voting/Badges? | | 
+|Create challenges | Lots of people liked the idea of having the opportunity to face new and difficult problems and were enthusiastic about it.| Voting/Badges? | |
 |History | Helping to provide an accurate record (sometimes linked to local history research)| Cultural heritage, local history.| |
 |Family names | Helping myself and others find family names (sometimes linked to family history research)| Besides family names people could be interested in local history (place names and such). | |
 |Worthy cause | I consider this a useful cause to volunteer for (linked to helping the Australian community, the Library, themselves)| | |
