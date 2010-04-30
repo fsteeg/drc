@@ -10,6 +10,7 @@ package de.uni_koeln.ub.drc.data
 import scala.xml._
 import java.io._
 import java.util.zip._
+import de.uni_koeln.ub.drc.reader.Point
 
 /**
  * Representation of a scanned page.
@@ -127,9 +128,9 @@ private object PdfToPage {
         for(word <- line.getWords) {
           val scaled = line.getFontSizeScaled(pageHeight)
           val wordWidth = width(word, scaled)
-          words add Word(word, Box(pos.x.toInt, pos.y.toInt - scaled, wordWidth, scaled))
+          words add Word(word, Box(pos.getX.toInt, pos.getY.toInt - scaled, wordWidth, scaled))
           /* Update the starting position for the next word: */
-          pos = Point(pos.x + wordWidth + scaled, pos.y)
+          pos = new Point(pos.getX + wordWidth + scaled, pos.getY)
         }
       }
       words add Word("@", Box(0,0,0,0))

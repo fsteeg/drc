@@ -24,7 +24,7 @@
 	<!-- Scala-specific properties: -->
 	<property name="build.prod.dir.scala" location="${build.dir}/classes/scala/prod" />
 	<property name="build.test.dir.scala" location="${build.dir}/classes/scala/test" />
-	<property name="build.dist.dir.scala" location="lib" />
+	<property name="build.dist.dir.scala" location="${build.dir}/dist" />
 	<property name="doc.dir.scala" location="${build.dir}/doc-gen/scaladoc" />
 	<property name="src.dir.scala" location="src/scala" />
 	<property name="test.dir.scala" location="src/specs" />
