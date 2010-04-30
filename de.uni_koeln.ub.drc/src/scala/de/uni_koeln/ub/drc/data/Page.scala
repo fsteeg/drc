@@ -9,6 +9,7 @@
 package de.uni_koeln.ub.drc.data
 import scala.xml._
 import java.io._
+import java.util.zip._
 
 /**
  * Representation of a scanned page.
@@ -18,11 +19,27 @@ import java.io._
  */
 case class Page(words:List[Word], id: String) {
   
+  var image: Option[ZipEntry] = None
+  var zip: Option[ZipFile] = None
+  
   def toXml = <page> { words.toList.map(_.toXml) } </page>
   
   def toText = ("" /: words) (_ + " " + _.history.top.form.replace("@", "|")) 
   
-  def save(file:java.io.File): Node = {
+  def save(): Node = {
+    println("Attempting to save to: " + id)
+    val file = new de.schlichtherle.io.File(id)
+    val root = toXml
+    val formatted = new StringBuilder
+    new PrettyPrinter(120, 2).format(root, formatted)
+    // XML.saveFull("out.xml", root, "UTF-8", true, null) // FIXME hangs
+    val writer = new OutputStreamWriter(new de.schlichtherle.io.FileOutputStream(file), "UTF-8");
+    writer.write(formatted.toString)
+    writer.close
+    root
+  }
+  
+  def save(file:File): Node = {
     val root = toXml
     val formatted = new StringBuilder
     new PrettyPrinter(120, 2).format(root, formatted)
@@ -51,6 +68,14 @@ object Page {
   def load(stream:java.io.InputStream, id: String): Page = {
       val page:Node = XML.load(stream)
       Page.fromXml(page, id)
+  }
+  
+  def load(id: String, zip: ZipFile, xml: ZipEntry, image: ZipEntry): Page = {
+      val page:Node = XML.load(zip.getInputStream(xml))
+      val result = Page.fromXml(page, id)
+      result.image = Some(image)
+      result.zip = Some(zip)
+      result
   }
 
   /**

@@ -31,7 +31,7 @@ class SpecIndex extends Spec with ShouldMatchers {
     }
     
     describe("The Index companion object") {
-        val folder = "res/rom/PPN345572629_0004"
+        val folder = "res/rom/PPN345572629_0004-600"
         it("provides initial import of PDF documents") {
             Index.initialImport(folder)
         }

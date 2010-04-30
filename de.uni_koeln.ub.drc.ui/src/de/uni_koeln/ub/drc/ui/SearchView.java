@@ -7,6 +7,8 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui;
 
+import java.io.File;
+
 import javax.inject.Inject;
 
 import org.eclipse.e4.core.services.annotations.PostConstruct;
@@ -133,7 +135,7 @@ public final class SearchView {
       Page page = (Page) element;
       switch (columnIndex) {
       case 0:
-        return page.id();
+        return page.id().substring(page.id().lastIndexOf(File.separatorChar) + 1);
       case 1:
         return page.toText();
       default:

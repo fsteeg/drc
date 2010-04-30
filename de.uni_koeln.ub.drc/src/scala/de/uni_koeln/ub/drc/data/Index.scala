@@ -7,7 +7,8 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.data
 import java.io.File
-
+import java.util.zip._
+import scala.collection.mutable.ListBuffer
 /**
  * Simple experimental index for initial page selection.
  * @param pages The pages to index
@@ -43,8 +44,20 @@ object Index {
      */
     def loadPagesFromFolder(location: String): List[Page] = {
         val files = new File(location).list
-        for(file <- files.toList if file.endsWith("xml") && file.contains("-"))
-            yield Page.load(new File(location, file))
+        val buffer = new ListBuffer[Page]
+        for(file <- files.toList if file.endsWith("zip")) {
+          val zip = new ZipFile(new File(location, file), ZipFile.OPEN_READ)
+          val entries = zip.entries
+          while(entries.hasMoreElements) {
+            val entry = entries.nextElement
+            if(entry.getName.endsWith(".xml") && entry.getName.contains("-")) {
+              val xmlStream = zip.getInputStream(entry)
+              val imageEntry:ZipEntry = zip.getEntry(entry.getName.replace("xml", "jpg"))
+              buffer += Page.load(location + "/" + file + "/" + entry.getName, zip, entry, imageEntry)
+            }
+          }
+        }
+        buffer.sortBy(_.id).toList
     }
     
     /** 

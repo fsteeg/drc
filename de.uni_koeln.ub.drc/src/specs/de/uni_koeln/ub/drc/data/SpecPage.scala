@@ -71,13 +71,12 @@ class SpecPage extends Spec with ShouldMatchers {
     }
     
     it("provides initial import of a scanned PDF") {
-          val page : Page = Page.fromPdf("res/rom/PPN345572629_0004/PPN345572629_0004-0001.pdf")
-          val file = new java.io.File("res/rom/PPN345572629_0004/PPN345572629_0004-0001.xml")
+          val page : Page = Page.fromPdf("res/rom/PPN345572629_0004-600/PPN345572629_0004-0001.pdf")
+          val file = new java.io.File("res/rom/PPN345572629_0004-600/PPN345572629_0004-0001.xml")
           val root = page.save(file)
           val uri = file.toURI.toURL.toURI
           expect(true) {root.size > 0}
           expect(true) {file.exists}
-          //println(uri)
       }
     
   }

@@ -21,7 +21,7 @@ import de.uni_koeln.ub.drc.data.Point;
 public final class TestPositionParser {
 
   private List<Paragraph> paragraphs = PositionParser
-      .parse("res/rom/PPN345572629_0004/PPN345572629_0004-0001.pdf");
+      .parse("res/rom/PPN345572629_0004-600/PPN345572629_0004-0001.pdf");
 
   @Test
   public void parse() {

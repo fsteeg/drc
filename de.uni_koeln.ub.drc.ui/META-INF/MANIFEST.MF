@@ -31,6 +31,7 @@ Bundle-ClassPath: lib/scala-dbc-src.jar,
  lib/iText-5.0.1.jar,
  lib/drc-java.jar,
  lib/drc-scala.jar,
+ lib/truezip-6.jar,
  .
 Bundle-Activator: de.uni_koeln.ub.drc.ui.Activator
 Bundle-ActivationPolicy: lazy
