@@ -13,8 +13,6 @@ import java.util.List;
 
 import com.itextpdf.text.Rectangle;
 
-import de.uni_koeln.ub.drc.data.Point;
-
 /**
  * Represents a line in the scanned page.
  * @author Mihail Atanassov <saeko.bjagai@gmail.com>
@@ -68,8 +66,8 @@ public final class Line {
    */
   public Point getStartPointScaled(final int width, final int height) {
     Point boxPoint = getStartPoint();
-    int x = getX(rectangle, boxPoint.x(), width);
-    int y = getY(rectangle, boxPoint.y(), height);
+    int x = getX(rectangle, boxPoint.getX(), width);
+    int y = getY(rectangle, boxPoint.getY(), height);
     Point scaledPoint = new Point(x, y);
     return scaledPoint;
   }

@@ -13,8 +13,6 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import de.uni_koeln.ub.drc.data.Point;
-
 /**
  * @author Mihail Atanassov <saeko.bjagai@gmail.com>
  */
@@ -25,14 +23,12 @@ public final class TestPositionParser {
 
   @Test
   public void parse() {
-    // int scaledFontSize = testLine.getFontSize(600, 960); // TODO scaled
-    // fontsize
     for (Paragraph p : paragraphs) {
       List<Line> lines = p.getLines();
       for (Line line : lines) {
         Point start = line.getStartPoint();
-        float x = start.x();
-        float y = start.y();
+        float x = start.getX();
+        float y = start.getY();
         int fontSize = line.getFontSize();
         String text = line.getText().toString();
         Assert.assertFalse("Encoding should be correct", text.contains("�"));
