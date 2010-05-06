@@ -16,16 +16,28 @@ import scala.collection.mutable.ListBuffer
  *
  */
 class Index(val pages: List[Page]) {
-    
+  
     /**
      * Search for pages containing a given term.
      * @param term The term to search for
      * @return A list of pages where any word's history contains the term
      */
-    def search(term: String): Array[Page] =  
-        for { page <- pages.toArray 
-            if page.words.exists(_.history.exists(_.form.toLowerCase contains term.toLowerCase))
-        } yield page
+    def search(term: String): Array[Page] = search(term, SearchOption.all)
+    
+    /**
+     * Search for pages containing a given term.
+     * @param term The term to search for
+     * @param option The search option, a SearchOption.Value
+     * @return A list of pages where any word contains the term according to the specified option
+     */
+    def search(term: String, option: SearchOption.Value): Array[Page] =
+      for { page <- pages.toArray if page.words.exists( 
+          option match {
+            case SearchOption.all => _.history.exists(_.form.toLowerCase contains term.toLowerCase)
+            case SearchOption.latest => _.history.top.form.toLowerCase contains term.toLowerCase
+            case SearchOption.original => _.history.toList.last.form.toLowerCase contains term.toLowerCase
+          })
+      } yield page
     
     override def toString = "Index with " + pages.length + " pages"
     override def hashCode = pages.hashCode
@@ -33,7 +45,15 @@ class Index(val pages: List[Page]) {
         case that: Index => this.pages == that.pages
         case _ => false
     }
-    
+        
+}
+
+object SearchOption extends Enumeration {
+    type SearchOption = Value
+    val latest = Value("Latest")
+    val all = Value("All")
+    val original = Value("Original")
+    def toStrings = Array[String]() ++ SearchOption.values map (_.toString)
 }
 
 object Index {

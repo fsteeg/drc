@@ -26,15 +26,21 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
+import de.uni_koeln.ub.drc.data.SearchOption;
 
 /**
  * View containing a search field and a table viewer displaying pages.
@@ -43,24 +49,47 @@ import de.uni_koeln.ub.drc.data.Page;
 public final class SearchView {
 
   private Text searchField;
+  private static CCombo searchOptions;
   private TableViewer viewer;
 
   @Inject private IEclipseContext context;
 
   @Inject public SearchView(final Composite parent) {
-    initSearchField(parent);
+    Composite searchComposite = new Composite(parent, SWT.NONE);
+    searchComposite.setLayout(new GridLayout(2, false));
+    initSearchField(searchComposite);
+    initOptionsCombo(searchComposite);
     initTableViewer(parent);
     GridLayoutFactory.fillDefaults().generateLayout(parent);
   }
 
   @PostConstruct public void select() {
+    if (viewer.getElementAt(0) == null) {
+      throw new IllegalArgumentException("No entries in initial search view");
+    }
     viewer.setSelection(new StructuredSelection(viewer.getElementAt(0)));
   }
 
   private void initSearchField(final Composite parent) {
     searchField = new Text(parent, SWT.BORDER);
+    searchField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
     searchField.addModifyListener(new ModifyListener() {
       @Override public void modifyText(final ModifyEvent e) {
+        setInput();
+      }
+    });
+  }
+
+  private void initOptionsCombo(final Composite searchComposite) {
+    searchOptions = new CCombo(searchComposite, SWT.NONE);
+    searchOptions.setItems(SearchOption.toStrings());
+    searchOptions.select(SearchOption.all().id());
+    searchOptions.addSelectionListener(new SelectionListener() {
+      @Override public void widgetSelected(final SelectionEvent e) {
+        setInput();
+      }
+
+      @Override public void widgetDefaultSelected(final SelectionEvent e) {
         setInput();
       }
     });
@@ -113,7 +142,8 @@ public final class SearchView {
     }
 
     public Page[] getPages(final String term) {
-      return index.search(term);
+      String selectedSearchOption = searchOptions.getItem(searchOptions.getSelectionIndex());
+      return index.search(term, SearchOption.withName(selectedSearchOption));
     }
   }
 
