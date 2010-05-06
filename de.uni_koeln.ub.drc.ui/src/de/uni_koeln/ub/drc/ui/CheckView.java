@@ -47,7 +47,6 @@ public final class CheckView {
     scrolledComposite = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
     imageLabel = new Label(scrolledComposite, SWT.BORDER);
     scrolledComposite.setContent(imageLabel);
-    scrolledComposite.setContent(imageLabel);
     scrolledComposite.setExpandVertical(true);
     scrolledComposite.setExpandHorizontal(true);
     scrolledComposite.setMinSize(imageLabel.computeSize(SWT.MAX, SWT.MAX));

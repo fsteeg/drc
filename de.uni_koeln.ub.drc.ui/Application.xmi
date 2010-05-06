@@ -21,6 +21,10 @@
         <tags>newtablook</tags>
         <children xsi:type="application:Part" xmi:id="CheckView" id="CheckView" URI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.CheckView" label="Check" iconURI="" tooltip="Check View"/>
       </children>
+      <children xsi:type="application:PartStack" containerData="1000" selectedElement="WordView">
+        <tags>newtablook</tags>
+        <children xsi:type="application:Part" xmi:id="WordView" id="WordView" URI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.WordView" label="Word" iconURI="" tooltip="Word View"/>
+      </children>
     </children>
     <variables>selection</variables>
     <mainMenu>
