@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: DRC UI
 Bundle-SymbolicName: de.uni_koeln.ub.drc.ui;singleton:=true
 Bundle-Version: 0.0.1.qualifier
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.e4.ui.workbench;bundle-version="0.9.1",
  org.eclipse.e4.ui.workbench.renderers.swt;bundle-version="0.9.1",
  org.eclipse.e4.ui.workbench.renderers.swt.contributions;bundle-version="0.9.1",
@@ -17,7 +17,10 @@ Require-Bundle: org.eclipse.e4.ui.workbench;bundle-version="0.9.1",
  org.eclipse.swt;bundle-version="3.6.0",
  org.junit,
  org.eclipse.jface;bundle-version="3.6.0",
- org.eclipse.e4.core.commands;bundle-version="0.9.0"
+ org.eclipse.e4.core.commands;bundle-version="0.9.0",
+ org.eclipse.osgi.services;bundle-version="3.2.100",
+ org.eclipse.core.databinding;bundle-version="1.3.0",
+ org.eclipse.jface.databinding;bundle-version="1.4.0"
 Bundle-Vendor: University of Cologne
 Bundle-ClassPath: lib/scala-dbc-src.jar,
  lib/scala-dbc.jar,
@@ -28,4 +31,7 @@ Bundle-ClassPath: lib/scala-dbc-src.jar,
  lib/iText-5.0.1.jar,
  lib/drc-java.jar,
  lib/drc-scala.jar,
+ lib/truezip-6.jar,
  .
+Bundle-Activator: de.uni_koeln.ub.drc.ui.Activator
+Bundle-ActivationPolicy: lazy

@@ -8,6 +8,8 @@
 
 package de.uni_koeln.ub.drc.data
 import scala.xml._
+import java.io._
+import java.util.zip._
 import de.uni_koeln.ub.drc.reader.Point
 
 /**
@@ -18,14 +20,32 @@ import de.uni_koeln.ub.drc.reader.Point
  */
 case class Page(words:List[Word], id: String) {
   
+  var image: Option[ZipEntry] = None
+  var zip: Option[ZipFile] = None
+  
   def toXml = <page> { words.toList.map(_.toXml) } </page>
   
-  def save(file:java.io.File): Node = {
+  def toText = ("" /: words) (_ + " " + _.history.top.form.replace("@", "|")) 
+  
+  def save(): Node = {
+    println("Attempting to save to: " + id)
+    val file = new de.schlichtherle.io.File(id)
     val root = toXml
     val formatted = new StringBuilder
     new PrettyPrinter(120, 2).format(root, formatted)
-    // XML.saveFull("out.xml", page, "UTF-8", true, null) // FIXME hangs
-    val writer = new java.io.FileWriter(file)
+    // XML.saveFull("out.xml", root, "UTF-8", true, null) // FIXME hangs
+    val writer = new OutputStreamWriter(new de.schlichtherle.io.FileOutputStream(file), "UTF-8");
+    writer.write(formatted.toString)
+    writer.close
+    root
+  }
+  
+  def save(file:File): Node = {
+    val root = toXml
+    val formatted = new StringBuilder
+    new PrettyPrinter(120, 2).format(root, formatted)
+    // XML.saveFull("out.xml", root, "UTF-8", true, null) // FIXME hangs
+    val writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
     writer.write(formatted.toString)
     writer.close
     root
@@ -49,6 +69,14 @@ object Page {
   def load(stream:java.io.InputStream, id: String): Page = {
       val page:Node = XML.load(stream)
       Page.fromXml(page, id)
+  }
+  
+  def load(id: String, zip: ZipFile, xml: ZipEntry, image: ZipEntry): Page = {
+      val page:Node = XML.load(zip.getInputStream(xml))
+      val result = Page.fromXml(page, id)
+      result.image = Some(image)
+      result.zip = Some(zip)
+      result
   }
 
   /**
@@ -88,25 +116,21 @@ private object PdfToPage {
   import scala.collection.mutable.Buffer
   import java.io.File
     
-  /* TODO: would need conversion for different page sizes */
-  /* TODO: calculate letter width based on number of letters in line */
-  /* TODO: get font size from PDF, adjust height and width accordingly */
-  /* TODO: treat capital letters differently */
-  val widths = Map('l' -> 2, 'i' -> 2, '∫' -> 4, 't' -> 4, 'f' -> 4, 'j' -> 2)
-  val defaultWidth = 7
   val boxHeight = 15
     
   def convert(pdfLocation : String) : Page = {
     val words: Buffer[Word] = Buffer()
     val paragraphs : Buffer[Paragraph] = PositionParser.parse(pdfLocation)
+    val pageHeight = 960
     for(p <- paragraphs) {
       for(line <- p.getLines) {
-        var pos = line.getStartPointScaled(600, 960)
+        var pos = line.getStartPointScaled(600, pageHeight)
         for(word <- line.getWords) {
-          val wordWidth = width(word)
-          words add Word(word, Box(pos.getX.toInt, pos.getY.toInt - boxHeight, wordWidth, boxHeight))
+          val scaled = line.getFontSizeScaled(pageHeight)
+          val wordWidth = width(word, scaled)
+          words add Word(word, Box(pos.getX.toInt, pos.getY.toInt - scaled, wordWidth, scaled))
           /* Update the starting position for the next word: */
-          pos = new Point(pos.getX + wordWidth + defaultWidth, pos.getY)
+          pos = new Point(pos.getX + wordWidth + scaled, pos.getY)
         }
       }
       words add Word("@", Box(0,0,0,0))
@@ -114,14 +138,18 @@ private object PdfToPage {
     Page(words.toList, new java.io.File(pdfLocation).getName().replace("pdf", "xml"))
   }
     
-  def width(word: String) : Int = {
-    var result = 0
+  def width(word: String, height: Int) : Int = {
+    /* TODO: calculate letter width based on number of letters in line */
+    /* TODO: get font spacing and style from PDF, adjust width accordingly */
+    var result = 0f
+    val narrow = "li∫tfj"
     for(c <- word.toCharArray) {
-      widths get c match {
-        case Some(x) => result += x
-        case None => result += defaultWidth
-      }
+      /* heuristic: provide width as percentage of height, depending on letter and case: */
+      if(narrow.contains(c.toLower)) 
+        result += height * (if(c.isLower) .1f else .2f)
+      else 
+        result += height * (if(c.isLower) .5f else .8f)
     }
-    result
+    result.round
   }
 }

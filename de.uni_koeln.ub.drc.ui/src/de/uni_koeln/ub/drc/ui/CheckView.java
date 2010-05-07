@@ -9,7 +9,6 @@ package de.uni_koeln.ub.drc.ui;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -37,17 +36,16 @@ import de.uni_koeln.ub.drc.data.Word;
  * @author Fabian Steeg (fsteeg)
  */
 public final class CheckView {
-  private URL jpgFile;
   private Composite parent;
   private Label imageLabel;
   private boolean imageLoaded = false;
   private ScrolledComposite scrolledComposite;
+  private Image image;
 
   @Inject public CheckView(final Composite parent) {
     this.parent = parent;
     scrolledComposite = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
     imageLabel = new Label(scrolledComposite, SWT.BORDER);
-    scrolledComposite.setContent(imageLabel);
     scrolledComposite.setContent(imageLabel);
     scrolledComposite.setExpandVertical(true);
     scrolledComposite.setExpandHorizontal(true);
@@ -59,13 +57,19 @@ public final class CheckView {
       try {
         updateImage(page);
       } catch (MalformedURLException e) {
-        MessageDialog.openError(parent.getShell(), "Could not load scan",
-            "Could not load the image file for the current page");
-        e.printStackTrace();
+        handle(e);
+      } catch (IOException e) {
+        handle(e);
       }
     } else {
       return;
     }
+  }
+
+  private void handle(Exception e) {
+    MessageDialog.openError(parent.getShell(), "Could not load scan",
+        "Could not load the image file for the current page");
+    e.printStackTrace();
   }
 
   @Inject public void setSelection(@Optional @Named( IServiceConstants.SELECTION ) final Text word) {
@@ -79,32 +83,32 @@ public final class CheckView {
     }
   }
 
-  private void updateImage(final Page page) throws MalformedURLException {
-    String folderName = "pages";
-    String pageName = page.id().substring(0, page.id().lastIndexOf('.'));
-    jpgFile = EditComposite.fileFromBundle(folderName + "/" + pageName + ".jpg").toURI().toURL();
-    final Image image = loadImage();
+  private void updateImage(final Page page) throws IOException {
+    image = loadImage(page);
     imageLabel.setImage(image);
     imageLoaded = true;
   }
 
-  private Image loadImage() {
+  private Image reloadImage() {
+    Display display = parent.getDisplay();
+    Image newImage = new Image(display, image.getImageData());
+    return newImage;
+  }
+
+  private Image loadImage(final Page page) throws IOException {
     Display display = parent.getDisplay();
     Image newImage = null;
-    try {
-      newImage = new Image(display, jpgFile.openStream());
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    newImage = new Image(display, page.zip().get().getInputStream(page.image().get()));
     return newImage;
   }
 
   private void markPosition(final Text text) {
     Word word = (Word) text.getData();
     Box box = word.position();
-    Rectangle rect = new Rectangle(box.x() - 15, box.y() - 5, box.width() + 65, box.height() + 20);
+    // TODO these values cannot be fixed, depend on image size
+    Rectangle rect = new Rectangle(box.x() - 15, box.y() - 10, box.width() + 65, box.height() + 20);
     System.out.println("Current word: " + word);
-    Image image = loadImage();
+    Image image = reloadImage();
     GC gc = new GC(image);
     drawBoxArea(rect, gc);
     drawBoxBorder(rect, gc);
@@ -126,8 +130,7 @@ public final class CheckView {
   }
 
   private void clearMarker() {
-    Image image = loadImage();
-    imageLabel.setImage(image);
+    imageLabel.setImage(reloadImage());
   }
 
 }

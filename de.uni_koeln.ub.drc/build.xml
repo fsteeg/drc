@@ -4,7 +4,12 @@
 	<!-- Folders: the project setup -->
 	<property name="build.dir" location="build" />
 	<property name="lib.dir" location="lib" />
-	<property name="deploy.dir" location="../de.uni_koeln.ub.drc.ui/lib" />
+	<property name="deploy.dir.root" location="../de.uni_koeln.ub.drc.ui/" />
+	<property name="deploy.dir.lib" location="${deploy.dir.root}/lib" />
+	<property name="deploy.dir.data" location="${deploy.dir.root}/pages" />
+	<!-- Currently working with volume 4 only: -->
+	<property name="data.volume" value="PPN345572629_0004-600"/>
+	<property name="src.dir.data" location="res/rom/${data.volume}" />
 
 	<!-- Java-specific properties: -->
 	<property name="build.prod.dir.java" location="${build.dir}/classes/java/prod" />
@@ -19,7 +24,7 @@
 	<!-- Scala-specific properties: -->
 	<property name="build.prod.dir.scala" location="${build.dir}/classes/scala/prod" />
 	<property name="build.test.dir.scala" location="${build.dir}/classes/scala/test" />
-	<property name="build.dist.dir.scala" location="lib" />
+	<property name="build.dist.dir.scala" location="${build.dir}/dist" />
 	<property name="doc.dir.scala" location="${build.dir}/doc-gen/scaladoc" />
 	<property name="src.dir.scala" location="src/scala" />
 	<property name="test.dir.scala" location="src/specs" />
@@ -48,7 +53,7 @@
 	</path>
 
 	<!-- The main target to do all work -->
-	<target name="all" depends="clean, deploy, doc, test-report" />
+	<target name="all" depends="clean, deploy, doc, test-report, zip, deploy-data" />
 
 	<!-- Prepare the build: create folders -->
 	<target name="prepare">
@@ -117,7 +122,7 @@
 
 	<!-- Deploy our jar and the libraries -->
 	<target name="deploy" depends="jar">
-		<copy todir="${deploy.dir}">
+		<copy todir="${deploy.dir.lib}">
 			<!-- deploy our jars -->
 			<fileset dir="${build.dist.dir.java}" casesensitive="yes">
 				<include name="*.jar" />
@@ -126,6 +131,20 @@
 			<fileset dir="${lib.dir}" casesensitive="yes">
 				<include name="*.jar" />
 			</fileset>
+		</copy>
+	</target>
+
+	<target name="zip">
+		<zip destfile="${src.dir.data}/${data.volume}.zip" update="true">
+			<!-- Files copied here are currently generated during test run  -->
+			<fileset dir="${src.dir.data}" includes="**/PPN*_*-*.xml,**/PPN*_*-*.jpg" />
+		</zip>
+	</target>
+
+	<target name="deploy-data">
+		<copy todir="${deploy.dir.data}">
+			<!-- Files copied here are currently generated during test run -->
+			<fileset dir="${src.dir.data}" includes="*.zip" />
 		</copy>
 	</target>
 

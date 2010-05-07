@@ -1,5 +1,22 @@
 Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy)
 
+h1. Beta 1 - Milestone 1 (2010 April 13)
+
+h2. Overview
+
+Beta 1 milestone 1 (tag: b1-m1) provides a basic local, single-user implementation of the DRC system. It features basic search and page selection, editing and persistence, word-based edit history and highlighting of the currently selected word in the original scan (see screenshot below).
+
+!http://i43.tinypic.com/micwah.png!
+
+h2. Dependencies and Setup
+
+* Beta 1 milestone 1 requires Eclipse "e4 1.0M4":http://download.eclipse.org/e4/downloads/drops/S-1.0M4-201002271345/index.html; other requirements (Scala, iText) are included in the @lib@ folder in the @de.uni_koeln.ub.drc@ bundle
+* Core components (Scala) are built and deployed with Ant to be used in the UI (e4); see the @build.xml@ file in the @de.uni_koeln.ub.drc@ bundle
+* Tests for the core components can be run with Ant, UI tests by running the @AllTestsSuite@ in the @de.uni_koeln.ub.drc.ui@ bundle (Run As > Plug-in Test)
+* The UI can be started by running the @drc.ui.product@ in the @de.uni_koeln.ub.drc.ui@ bundle (Run As > Eclipse Application)
+
+h1. General Documentation
+
 * "Requirements":drc/tree/master/de.uni_koeln.ub.drc/doc/requirements.textile
 * "Architecture":drc/tree/master/de.uni_koeln.ub.drc/doc/architecture.textile
 * "Technology":drc/tree/master/de.uni_koeln.ub.drc/doc/technology.textile

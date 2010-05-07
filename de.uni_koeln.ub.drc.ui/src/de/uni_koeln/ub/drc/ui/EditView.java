@@ -7,7 +7,6 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Iterator;
@@ -117,8 +116,7 @@ public final class EditView {
   }
 
   private void saveToXml(final Page page) {
-    File file = editComposite.getFile();
-    System.out.println("Saving to: " + file);
-    page.save(file);
+    System.out.println("Saving page: " + page);
+    page.save();
   }
 }

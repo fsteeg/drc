@@ -9,7 +9,6 @@ package de.uni_koeln.ub.drc.ui;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -46,7 +45,6 @@ import de.uni_koeln.ub.drc.data.Word;
  */
 public final class EditComposite extends Composite {
 
-  private URL xmlFile;
   private MDirtyable dirtyable;
   private Composite parent;
   private Page page;
@@ -64,18 +62,6 @@ public final class EditComposite extends Composite {
     this.setLayout(layout);
     commitChanges = true;
     addWrapOnResizeListener(parent);
-  }
-
-  /**
-   * @return The XML file holding the content of the page being edited
-   */
-  public File getFile() {
-    try {
-      return new File(xmlFile.toURI());
-    } catch (URISyntaxException e) {
-      e.printStackTrace();
-    }
-    return null;
   }
 
   /**
@@ -113,27 +99,7 @@ public final class EditComposite extends Composite {
   }
 
   private void updatePage(final Composite parent) {
-    try {
-      loadStoredPage();
-    } catch (MalformedURLException e1) {
-      e1.printStackTrace();
-    }
     words = addTextFrom(page, this);
-  }
-
-  private void loadStoredPage() throws MalformedURLException {
-    String folderName = "pages";
-    String pageName = page.id().substring(0, page.id().lastIndexOf('.'));
-    File xml = fileFromBundle(folderName + "/" + pageName + ".xml");
-    if (xml != null && xml.exists()) {
-      xmlFile = xml.toURI().toURL();
-    } else {
-      File folder = fileFromBundle(folderName);
-      xml = new File(new File(folder.toURI()), pageName + ".xml");
-      File pdf = fileFromBundle(folderName + "/" + pageName + ".pdf");
-      Page.fromPdf(pdf.getAbsolutePath()).save(xml);
-      xmlFile = xml.toURI().toURL();
-    }
   }
 
   private List<Text> addTextFrom(final Page page, final Composite c) {
