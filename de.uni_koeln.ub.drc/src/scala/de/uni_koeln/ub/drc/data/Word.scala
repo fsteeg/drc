@@ -10,7 +10,7 @@ package de.uni_koeln.ub.drc.data
 import scala.collection.mutable.Stack
 import scala.xml._
 import java.io.{InputStreamReader, FileInputStream, BufferedReader}
-import scala.io.Source._
+
 import scala.collection.mutable
 
 /**
@@ -35,11 +35,10 @@ case class Word(original:String, position:Box) {
   
   def formattedHistory = history mkString "\n"
   
-  lazy val suggestions: List[String] = lexicon.sortBy(distance(_)) take 10
+  lazy val suggestions: List[String] = (List() ++ Index.lexicon).sortBy(distance(_)) take 10
   
-  lazy val lexicon: List[String] =
-    List() ++ fromInputStream(Index.getClass.getResourceAsStream("words.txt"))("ISO-8859-1").getLines().map(_.trim)
-  
+  def isPossibleError : Boolean = !Index.lexicon.contains(original) && history.size == 1
+    
   private def distance(s1: String, s2: String): Int = {
     val table = Array.ofDim[Int](s1.length + 1, s2.length + 1)
     for (i <- table.indices; j <- table(i).indices) table(i)(j) = distance(table, i, j, s1, s2)
@@ -59,7 +58,7 @@ case class Word(original:String, position:Box) {
   private val distances = new mutable.HashMap[String, Int]() with mutable.SynchronizedMap[String, Int]
   def distance(other: String): Int = {
     if (!distances.contains(other)) {
-      distances += other -> distance(original, other)
+      distances += other -> distance(original.toLowerCase, other)
     }
     distances(other)
   }
@@ -69,7 +68,7 @@ case class Word(original:String, position:Box) {
   var cancelled = false
   def prepSuggestions: Boolean = {
     if(!prepDone) {
-      lexicon.foreach(if(cancelled) return false else distance(_)) // init all distances
+      Index.lexicon.foreach(if(cancelled) return false else distance(_)) // init all distances
       prepDone = true
     }
     true

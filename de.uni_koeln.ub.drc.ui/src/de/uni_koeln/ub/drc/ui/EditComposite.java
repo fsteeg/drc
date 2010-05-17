@@ -121,6 +121,9 @@ public final class EditComposite extends Composite {
         lines.add(lineComposite);
       } else {
         text.setText(word.history().top().form());
+        if (word.isPossibleError()) {
+          text.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_DARK_GRAY));
+        }
       }
       text.setData(word);
       addListeners(text);

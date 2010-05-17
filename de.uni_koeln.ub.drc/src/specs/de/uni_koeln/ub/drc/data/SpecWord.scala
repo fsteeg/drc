@@ -29,7 +29,7 @@ private[drc] class SpecWord extends Spec with ShouldMatchers {
       val suggestions = Word("slaunt", Box(1,1,1,1)).suggestions
       println("Suggestions: " + suggestions.mkString(", "))
       expect(10) { suggestions.size }
-      expect(33577) {word.lexicon.size}
+      expect(33568) {Index.lexicon.size}
     }
   }
   
