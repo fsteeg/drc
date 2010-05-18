@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.core.services.context.IEclipseContext;
 import org.eclipse.e4.ui.model.application.MDirtyable;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
@@ -149,14 +150,8 @@ public final class EditComposite extends Composite {
   private void addModifyListener(final Text text) {
     text.addModifyListener(new ModifyListener() {
       public void modifyText(final ModifyEvent e) {
-        /* Update the current form of the word associated with the text widget: */
-        Word word = (Word) text.getData();
-        String textContent = text.getText();
-        if (textContent.length() != word.original().length()) {
-          text.setForeground(text.getDisplay().getSystemColor(SWT.COLOR_RED));
-        } else {
-          text.setForeground(text.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-        }
+        /* Reset any warning color during editing (we check when focus is lost, see below): */
+        text.setForeground(text.getDisplay().getSystemColor(SWT.COLOR_BLACK));
         if (commitChanges) {
           dirtyable.setDirty(true);
         }
@@ -168,6 +163,19 @@ public final class EditComposite extends Composite {
     text.addFocusListener(new FocusListener() {
       public void focusLost(final FocusEvent e) {
         context.modify(IServiceConstants.SELECTION, null);
+        checkWordValidity(text);
+      }
+
+      private void checkWordValidity(final Text text) {
+        String current = text.getText();
+        Word word = (Word) text.getData();
+        if (current.length() != word.original().length() || current.contains(" ")) {
+          text.setForeground(text.getDisplay().getSystemColor(SWT.COLOR_RED));
+          MessageDialog.openWarning(text.getShell(), "Questionable Edit Operation",
+              "Your recent edit operation changed a word in a dubious way (e.g. by adding a blank into "
+                  + "what should be a single word or by changing the length of a word) - it has "
+                  + "been marked red");
+        }
       }
 
       public void focusGained(final FocusEvent e) {
