@@ -9,6 +9,7 @@ package de.uni_koeln.ub.drc.ui;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -52,8 +53,10 @@ public final class CheckView {
     scrolledComposite.setMinSize(imageLabel.computeSize(SWT.MAX, SWT.MAX));
   }
 
-  @Inject public void setSelection(@Optional @Named( IServiceConstants.SELECTION ) final Page page) {
-    if (page != null) {
+  @Inject public void setSelection(
+      @Optional @Named( IServiceConstants.SELECTION ) final List<Page> pages) {
+    if (pages != null && pages.size() > 0) {
+      Page page = pages.get(0);
       try {
         updateImage(page);
       } catch (MalformedURLException e) {
