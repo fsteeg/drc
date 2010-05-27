@@ -14,7 +14,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.eclipse.e4.core.services.annotations.Optional;
+import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.workbench.ui.IWorkbench;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -32,11 +33,11 @@ import de.uni_koeln.ub.drc.data.Page;
 public final class ExportHandler {
   private List<Page> pages;
 
-  @Inject @Optional public void setSelection(
-      @Named( IServiceConstants.SELECTION ) final List<Page> pages) {
+  @Inject public void setSelection(
+      @Optional @Named( IServiceConstants.SELECTION ) final List<Page> pages) {
     this.pages = pages;
   }
-
+  @Execute
   public void execute(final IWorkbench workbench) {
     Shell shell = Display.getCurrent().getActiveShell();
     if (pages == null) {

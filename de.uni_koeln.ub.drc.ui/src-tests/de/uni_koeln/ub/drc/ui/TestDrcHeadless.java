@@ -8,34 +8,26 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.commands.contexts.ContextManager;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.EclipseContextFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.IDisposable;
 import org.eclipse.e4.core.internal.services.EclipseAdapter;
-import org.eclipse.e4.core.services.Adapter;
-import org.eclipse.e4.core.services.IContributionFactory;
-import org.eclipse.e4.core.services.IDisposable;
-import org.eclipse.e4.core.services.Logger;
-import org.eclipse.e4.core.services.context.EclipseContextFactory;
-import org.eclipse.e4.core.services.context.IEclipseContext;
-import org.eclipse.e4.core.services.context.spi.ContextInjectionFactory;
-import org.eclipse.e4.core.services.context.spi.IContextConstants;
-import org.eclipse.e4.core.services.context.spi.ISchedulerStrategy;
+import org.eclipse.e4.core.services.adapter.Adapter;
+import org.eclipse.e4.core.services.contributions.IContributionFactory;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.internal.services.ActiveContextsFunction;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.MApplicationElement;
-import org.eclipse.e4.ui.model.application.MPart;
-import org.eclipse.e4.ui.model.application.MUIElement;
-import org.eclipse.e4.ui.model.application.MWindow;
+import org.eclipse.e4.ui.model.application.ui.MUIElement;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.swt.Activator;
 import org.eclipse.e4.workbench.ui.IExceptionHandler;
@@ -69,7 +61,7 @@ public class TestDrcHeadless {
     osgiContext = EclipseContextFactory.getServiceContext(Activator.getDefault().getBundle()
         .getBundleContext());
     applicationContext = createApplicationContext(osgiContext);
-    applicationContext.set(IContextConstants.DEBUG_STRING, "Application Context"); //$NON-NLS-1$
+    //applicationContext.set(IContextConstants.DEBUG_STRING, "Application Context"); //$NON-NLS-1$
     applicationElement = HeadlessSetup.createApplicationElement(applicationContext, getUri());
     renderer = createPresentationEngine(getEngineURI(), applicationContext);
     // Hook the global notifications
@@ -90,47 +82,49 @@ public class TestDrcHeadless {
 
   @Test public void switchActivePart1InContext() throws Exception {
     IEclipseContext context = application.getContext();
-    MPart[] parts = getThreeParts();
+    MPart[] parts = getFourParts();
     switchTo(context, parts[0]);
   }
 
   @Test public void switchActivePart2InContext() throws Exception {
     IEclipseContext context = application.getContext();
-    MPart[] parts = getThreeParts();
+    MPart[] parts = getFourParts();
     switchTo(context, parts[1]);
   }
 
   @Test public void switchActivePart3InContext() throws Exception {
     IEclipseContext context = application.getContext();
-    MPart[] parts = getThreeParts();
+    MPart[] parts = getFourParts();
     switchTo(context, parts[2]);
+  }
+  
+  @Test public void switchActivePart4InContext() throws Exception {
+    IEclipseContext context = application.getContext();
+    MPart[] parts = getFourParts();
+    switchTo(context, parts[3]);
   }
 
   /* Tests unspecific to UI, should always pass: */
 
   @Test public final void getActiveContexts() throws Exception {
-    assertNotNull(application.getContext().get(IServiceConstants.ACTIVE_CONTEXTS));
+    Assert.assertNotNull(application.getContext().get(IServiceConstants.ACTIVE_CONTEXTS));
   }
 
   @Test public final void getSelection() throws Exception {
     // Selection is null in headless mode - is this correct?
-    assertNull(application.getContext().get(IServiceConstants.SELECTION));
+    Assert.assertNull(application.getContext().get(IServiceConstants.SELECTION));
   }
 
   @Test public final void getActivePart() throws Exception {
-    assertNull(application.getContext().get(IServiceConstants.ACTIVE_PART));
-  }
-
-  @Test public final void getInput() throws Exception {
-    assertNull(application.getContext().get(IServiceConstants.INPUT));
+    Assert.assertNull(application.getContext().get(IServiceConstants.ACTIVE_PART));
   }
 
   @Test public final void getPersistedState() throws Exception {
-    assertNull(application.getContext().get(IServiceConstants.PERSISTED_STATE));
+    Assert.assertNull(application.getContext().get(IServiceConstants.PERSISTED_STATE));
   }
 
   @Test public final void getActivePartId() throws Exception {
-    assertNull(application.getContext().get(IServiceConstants.ACTIVE_PART_ID));
+    Assert.assertNull(application.getContext().get(IServiceConstants.ACTIVE_PART_ID));
   }
 
   protected String getUri() {
@@ -141,26 +135,21 @@ public class TestDrcHeadless {
     return find(AllTestsSuite.PART_NAMES);
   }
 
-  protected ISchedulerStrategy getApplicationSchedulerStrategy() {
-    return null;
-  }
-
   protected IEclipseContext createApplicationContext(IEclipseContext osgiContext) {
-    assertNotNull(osgiContext);
-    final IEclipseContext appContext = EclipseContextFactory.create(osgiContext,
-        getApplicationSchedulerStrategy());
+    Assert.assertNotNull(osgiContext);
+    final IEclipseContext appContext = osgiContext.createChild("Application Context");
     appContext.set(IEclipseContext.class.getName(), appContext);
     appContext.set(IContributionFactory.class.getName(), new ReflectionContributionFactory(
         (IExtensionRegistry) appContext.get(IExtensionRegistry.class.getName())));
     appContext.set(IExceptionHandler.class.getName(), new ExceptionHandler());
     appContext.set(Logger.class.getName(), new WorkbenchLogger());
-    appContext.set(Adapter.class.getName(), ContextInjectionFactory.inject(new EclipseAdapter(),
-        appContext));
+    appContext.set(Adapter.class.getName(),
+        ContextInjectionFactory.make(EclipseAdapter.class, appContext));
     appContext.set(ContextManager.class.getName(), new ContextManager());
     appContext.set(IServiceConstants.ACTIVE_CONTEXTS, new ActiveContextsFunction());
     appContext.set(IServiceConstants.ACTIVE_PART, new ActivePartLookupFunction());
     /* For testing part switching: */
-    appContext.runAndTrack(HeadlessSetup.RUNNABLE, null);
+    appContext.runAndTrack(HeadlessSetup.RUNNABLE);
     return appContext;
   }
 
@@ -174,22 +163,25 @@ public class TestDrcHeadless {
 
   private void switchTo(IEclipseContext context, MPart part) {
     context.set(IServiceConstants.ACTIVE_PART, part);
-    assertEquals(part.getId(), context.get(IServiceConstants.ACTIVE_PART_ID));
+    Assert.assertEquals(part.getElementId(), context.get(IServiceConstants.ACTIVE_PART_ID));
     // the OSGi context should not have been affected:
-    assertNull(osgiContext.get(IServiceConstants.ACTIVE_PART));
-    assertNull(osgiContext.get(IServiceConstants.ACTIVE_PART_ID));
+    Assert.assertNull(osgiContext.get(IServiceConstants.ACTIVE_PART));
+    Assert.assertNull(osgiContext.get(IServiceConstants.ACTIVE_PART_ID));
   }
 
-  protected MPart[] getThreeParts() {
+  protected MPart[] getFourParts() {
     MPart firstPart = getParts()[0];
-    assertNotNull(firstPart);
+    Assert.assertNotNull(firstPart);
     MPart secondPart = getParts()[1];
-    assertNotNull(secondPart);
-    assertFalse(firstPart.equals(secondPart));
+    Assert.assertNotNull(secondPart);
+    Assert.assertFalse(firstPart.equals(secondPart));
     MPart thirdPart = getParts()[2];
-    assertNotNull(thirdPart);
-    assertFalse(secondPart.equals(thirdPart));
-    return new MPart[] { firstPart, secondPart, thirdPart };
+    Assert.assertNotNull(thirdPart);
+    Assert.assertFalse(secondPart.equals(thirdPart));
+    MPart fourthPart = getParts()[3];
+    Assert.assertNotNull(fourthPart);
+    Assert.assertFalse(thirdPart.equals(fourthPart));
+    return new MPart[] { firstPart, secondPart, thirdPart, fourthPart };
   }
 
   protected void createGUI(MUIElement uiRoot) {
@@ -197,7 +189,7 @@ public class TestDrcHeadless {
       renderer.createGui(uiRoot);
     } catch (Exception x) {
       x.printStackTrace();
-      fail("Could not create GUI: " + x.getMessage());
+      Assert.fail("Could not create GUI: " + x.getMessage());
     }
   }
 

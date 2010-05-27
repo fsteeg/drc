@@ -24,3 +24,7 @@ Text {
 	font: Times 14px;
 	background-color: white; /* #e8e8e8 #cccccc 60%; */
 }
+
+CTabFolder {
+  tab-renderer: url('platform:/plugin/org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.workbench.ui.renderers.swt.CTabRendering');
+}
