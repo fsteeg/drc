@@ -10,6 +10,10 @@ package de.uni_koeln.ub.drc.ui;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.services.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -35,19 +39,59 @@ import de.uni_koeln.ub.drc.data.Word;
  */
 public final class WordView {
 
-  private TableViewer viewer;
   private Word word;
+  private TableViewer viewer;
+  private Text suggestions;
+  private Job job;
 
   @Inject public WordView(final Composite parent) {
     initTableViewer(parent);
+    suggestions = new Text(parent, SWT.NONE);
     GridLayoutFactory.fillDefaults().generateLayout(parent);
   }
 
-  @Inject public void setSelection(@Optional @Named( IServiceConstants.SELECTION ) final Text word) {
-    if (word != null) {
-      this.word = (Word) word.getData();
-      setInput();
+  @Inject public void setSelection(@Optional @Named( IServiceConstants.SELECTION ) final Text text) {
+    if (job != null) {
+      /* If a word is selected while we had a Job running for the previous word, cancel that: */
+      job.cancel();
     }
+    if (text == null) {
+      suggestions.setText("No word selected.");
+    } else {
+      this.word = (Word) text.getData();
+      setTableInput();
+      findEditSuggestions();
+      job.setPriority(Job.DECORATE);
+      job.schedule();
+    }
+  }
+
+  private void findEditSuggestions() {
+    suggestions.setText("Finding edit suggestions...");
+    job = new Job("Edit suggestions search job") {
+      protected IStatus run(final IProgressMonitor monitor) {
+        final boolean complete = word.prepSuggestions();
+        suggestions.getDisplay().asyncExec(new Runnable() {
+          @Override public void run() {
+            if (!complete) {
+              suggestions.setText("Finding edit suggestions...");
+            } else {
+              final String s = "Suggestions for " + word.original() + ": "
+                  + word.suggestions().mkString(", ");
+              if (!suggestions.isDisposed()) {
+                suggestions.setText(s);
+              }
+            }
+          }
+        });
+        return Status.OK_STATUS;
+      }
+
+      @Override protected void canceling() {
+        word.cancelled_$eq(true);
+        suggestions.setText("Finding edit suggestions...");
+      };
+    };
   }
 
   private void initTableViewer(final Composite parent) {
@@ -55,7 +99,7 @@ public final class WordView {
     initTable();
     viewer.setContentProvider(new WordViewContentProvider());
     viewer.setLabelProvider(new WordViewLabelProvider());
-    setInput();
+    setTableInput();
   }
 
   private void initTable() {
@@ -66,7 +110,7 @@ public final class WordView {
     table.setHeaderVisible(true);
     table.setLinesVisible(true);
   }
-  
+
   void createColumn(final String name, final int width, final TableViewer viewer) {
     TableViewerColumn column1 = new TableViewerColumn(viewer, SWT.NONE);
     column1.getColumn().setText(name);
@@ -75,7 +119,7 @@ public final class WordView {
     column1.getColumn().setMoveable(true);
   }
 
-  private void setInput() {
+  private void setTableInput() {
     if (word != null) {
       viewer.setInput(WordViewModelProvider.CONTENT.getDetails(word));
     }

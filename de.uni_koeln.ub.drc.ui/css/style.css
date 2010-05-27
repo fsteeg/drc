@@ -7,13 +7,17 @@
  *************************************************************************************************/
 
 Label {
-	font: Verdana 20px;
-	color: rgb(178, 34, 34);
+	font: Verdana 14px;
+	color: black /* rgb(178, 34, 34) */;
 	background-color: white;
 }
 
 Composite {
 	background-color: white;
+}
+
+Shell {
+  background-color: white;
 }
 
 Text {

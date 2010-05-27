@@ -2,9 +2,11 @@
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2008/UIModel" id="Application" selectedElement="//@children.0">
   <children xsi:type="application:Window" id="Window" selectedElement="_SeXUCu8EEd6FC9cDb6iV7g" y="22" width="1024" height="1200">
     <tags>newtablook</tags>
+    <variables>selection</variables>
     <children xsi:type="application:WindowTrim">
       <children xsi:type="application:ToolBar">
-        <children xsi:type="application:HandledToolItem" containerData="" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/save.gif" tooltip="Save" command="page.save"/>
+        <children xsi:type="application:HandledToolItem" containerData="" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/save.gif" tooltip="Save current page" command="page.save"/>
+        <children xsi:type="application:DirectToolItem" URI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExportHandler" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/export.gif" tooltip="Export selected pages"/>
       </children>
     </children>
     <children xsi:type="application:PartSashContainer" xmi:id="_SeXUCu8EEd6FC9cDb6iV7g" id="_SeXUCu8EEd6FC9cDb6iV7g" selectedElement="_SeXUDe8EEd6FC9cDb6iV7g">
@@ -26,15 +28,18 @@
         <children xsi:type="application:Part" xmi:id="WordView" id="WordView" URI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.WordView" label="Word" iconURI="" tooltip="Word View"/>
       </children>
     </children>
-    <variables>selection</variables>
     <mainMenu>
       <children xsi:type="application:MenuItem" label="File">
         <children xsi:type="application:DirectMenuItem" URI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExitHandler" label="Exit"/>
         <children xsi:type="application:DirectMenuItem" URI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.SaveHandler" label="Save"/>
+        <children xsi:type="application:DirectMenuItem" URI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExportHandler" label="Export"/>
       </children>
     </mainMenu>
   </children>
   <handlers xmi:id="_SeXUGO8EEd6FC9cDb6iV7g" id="page.save.handler" URI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.SaveHandler" command="page.save"/>
   <bindings xmi:id="_SeXUHu8EEd6FC9cDb6iV7g" keySequence="CTRL+S" id="page.save.binding" command="page.save"/>
   <commands xmi:id="page.save" id="page.save" commandName="Save" description=""/>
+  <handlers id="page.export.handler" URI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExportHandler" command="page.export"/>
+  <bindings keySequence="CTRL+E" id="page.export.binding" command="page.export"/>
+  <commands xmi:id="page.export" id="page.export" commandName="Export" description=""/>
 </application:Application>

@@ -9,6 +9,9 @@ package de.uni_koeln.ub.drc.data
 
 import scala.collection.mutable.Stack
 import scala.xml._
+import java.io.{InputStreamReader, FileInputStream, BufferedReader}
+
+import scala.collection.mutable
 
 /**
  * Experimental representation of a Word, the basic unit of work when editing. Conceptually, it is
@@ -31,6 +34,45 @@ case class Word(original:String, position:Box) {
       history.push(Modification(original, "OCR"))
   
   def formattedHistory = history mkString "\n"
+  
+  lazy val suggestions: List[String] = (List() ++ Index.lexicon).sortBy(distance(_)) take 10
+  
+  def isPossibleError : Boolean = !Index.lexicon.contains(original) && history.size == 1
+    
+  private def distance(s1: String, s2: String): Int = {
+    val table = Array.ofDim[Int](s1.length + 1, s2.length + 1)
+    for (i <- table.indices; j <- table(i).indices) table(i)(j) = distance(table, i, j, s1, s2)
+    table(s1.length)(s2.length)
+  }
+  
+  private def distance(table:Array[Array[Int]], i:Int, j:Int, s1:String, s2:String): Int = {
+    if (i == 0) j else if (j == 0) i else {
+      val del: Int = table(i - 1)(j) + 1
+      val ins: Int = table(i)(j - 1) + 1
+      val rep: Int = table(i - 1)(j - 1) + (if(s1(i - 1) == s2(j - 1)) 0 else 1)
+      List(del, ins, rep) min
+    }
+  }
+  
+  /* Cached distances from this word to the other words in the lexicon */
+  private val distances = new mutable.HashMap[String, Int]() with mutable.SynchronizedMap[String, Int]
+  def distance(other: String): Int = {
+    if (!distances.contains(other)) {
+      distances += other -> distance(original.toLowerCase, other)
+    }
+    distances(other)
+  }
+  
+  /* Cancellable computation of edit ditances from this to the other words in the lexicon */
+  private var prepDone = false
+  var cancelled = false
+  def prepSuggestions: Boolean = {
+    if(!prepDone) {
+      Index.lexicon.foreach(if(cancelled) return false else distance(_)) // init all distances
+      prepDone = true
+    }
+    true
+  }
   
   def toXml = 
     <word> 

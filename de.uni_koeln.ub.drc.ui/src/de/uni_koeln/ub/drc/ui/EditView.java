@@ -67,8 +67,10 @@ public final class EditView {
     this.dirtyable = dirtyable;
   }
 
-  @Inject public void setSelection(@Optional @Named( IServiceConstants.SELECTION ) final Page page) {
-    if (page != null) {
+  @Inject public void setSelection(
+      @Optional @Named( IServiceConstants.SELECTION ) final List<Page> pages) {
+    if (pages != null && pages.size() > 0) {
+      Page page = pages.get(0);
       if (dirtyable.isDirty()) {
         MessageDialog dialog = new MessageDialog(editComposite.getShell(), "Save page", null,
             "The current page has been modified. Save changes?", MessageDialog.CONFIRM,
@@ -80,11 +82,11 @@ public final class EditView {
           handlerService.executeHandler(saveCommand);
         }
       }
+      editComposite.update(page);
     } else {
       return;
     }
     dirtyable.setDirty(false);
-    editComposite.update(page);
   }
 
   public void doSave(@Optional final IProgressMonitor m) throws IOException, InterruptedException {
