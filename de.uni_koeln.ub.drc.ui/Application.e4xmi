@@ -20,21 +20,21 @@
     <mainMenu xmi:id="menu:org.eclipse.ui.main.menu" elementId="menu:org.eclipse.ui.main.menu">
       <children xsi:type="menu:Menu" xmi:id="_SeXUGO8EtzuFC9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g" label="File">
         <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUGO8EEzuiC9cDb6iV7g" elementId="exit.menu.item" label="Exit" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExitHandler"/>
-        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUGO8EEd6Fuiob6iV7g" elementId="save.menu.item" label="Save" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.SaveHandler"/>
-        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUGO8EEd6FC9iop6iV7g" elementId="export.meu.item" label="Export" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExportHandler"/>
+        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUGO8EEd6Fuiob6iV7g" elementId="save.menu.item" label="Save (CTRL+S)" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.SaveHandler"/>
+        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUGO8EEd6FC9iop6iV7g" elementId="export.meu.item" label="Export (CTRL+E)" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExportHandler"/>
       </children>
     </mainMenu>
     <trimBars xmi:id="_SeXUGO8dfgFC9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g">
       <children xsi:type="menu:ToolBar" xmi:id="_SeXUGO8fghFC9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_SeXghjEd6FC9cDb6iV7g" elementId="save.tool.item" containerData="" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/save.gif" tooltip="Save current page" command="page.save"/>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_SeXUGOhjk6FC9cDb6iV7g" elementId="export.tool.item" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/export.gif" tooltip="Export selected pages" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExportHandler"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_SeXghjEd6FC9cDb6iV7g" elementId="save.tool.item" containerData="" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/save.gif" tooltip="Save current page (CTRL+S)" command="page.save"/>
+        <children xsi:type="menu:DirectToolItem" xmi:id="_SeXUGOhjk6FC9cDb6iV7g" elementId="export.tool.item" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/export.gif" tooltip="Export selected pages (CTRL+E)" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExportHandler"/>
       </children>
     </trimBars>
   </children>
   <handlers xmi:id="_SeXUGOyxcd6FC9cDb6iV7g" elementId="save.handler" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.SaveHandler" command="page.save"/>
   <handlers xmi:id="_SeXUGO8EExcvC9cDb6iV7f" elementId="export.handler" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExportHandler" command="page.export"/>
   <bindingTables xmi:id="_SeXUEOnm,d6FC9cDb6iV7x" elementId="_SeXUAu8EEd6FC9cDb6iV7g" bindingContextId="org.eclipse.ui.contexts.dialogAndWindow">
-    <!-- bindings xmi:id="_SeXUHu8EEd6FmmmDb6iV7g" keySequence="CTRL+E" elementId="export.binding" command="page.export"/> --> <!-- Does not see selection -->
+    <bindings xmi:id="_SeXUHu8EEd6FmmmDb6iV7g" keySequence="CTRL+E" elementId="export.binding" command="page.export"/>
     <bindings xmi:id="_SeXUHu8EEiop9cDb6iV7g" keySequence="CTRL+S" elementId="save.binding" command="page.save"/>
   </bindingTables>
   <rootContext xmi:id="_SeXUHO8EEdcvbcDb6iV7y" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
