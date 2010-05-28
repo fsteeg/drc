@@ -87,7 +87,7 @@ public final class ExportHandler {
   private String concat(final List<Page> pages) {
     StringBuilder builder = new StringBuilder();
     for (Page page : pages) {
-      builder.append(page.id()).append("\n\n").append(page.toText().replace(" | ", "\n\n"))
+      builder.append(page.id()).append("\n\n").append(page.toText("\n\n"))
           .append("\n\n");
     }
     return builder.toString();

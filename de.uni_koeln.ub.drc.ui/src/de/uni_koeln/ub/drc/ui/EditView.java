@@ -102,9 +102,10 @@ public final class EditView {
       @Override public void run() {
         for (int i = 0; i < words.size(); i++) {
           String newText = words.get(i).getText();
-          Stack<Modification> history = modified.next().history();
+          Word word = modified.next();
+          Stack<Modification> history = word.history();
           String oldText = history.top().form();
-          if (!newText.equals(oldText)) {
+          if (!newText.equals(oldText) && !word.original().trim().equals(Page.ParagraphMarker())) {
             history.push(new Modification(newText, System.getProperty("user.name")));
           }
           monitor.worked(1);

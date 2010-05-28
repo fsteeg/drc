@@ -166,7 +166,7 @@ public final class SearchView {
       case 0:
         return page.id().substring(page.id().lastIndexOf(File.separatorChar) + 1);
       case 1:
-        return page.toText();
+        return page.toText("|");
       default:
         return page.toString();
       }
