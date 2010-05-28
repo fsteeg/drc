@@ -1,5 +1,17 @@
 Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy)
 
+h1. Beta 1 - Milestone 2 (2010 May 28)
+
+h2. Overview
+
+Beta 1 milestone 2 (tag: b1-m2) adds options for searching in the entire history, the original, or the latest form only, as well as a new word details view containing the edit history and edit suggestions for the current word. It also adds basic warnings about probable errors, as well as support for exporting pages as plain text files. Internal resources (scans, text, metadata) are now bundled in zip files.
+
+!http://i46.tinypic.com/2roicna.png!
+
+h2. Dependencies and Setup
+
+Beta 1 milestone 2 requires Eclipse "4.0 M6":http://download.eclipse.org/e4/downloads/drops/S-1.0M6-201005232015/index.html; other requirements (Scala 2.8 RC3, iText) are included in the @lib@ folder in the @de.uni_koeln.ub.drc@ bundle. See below for general instructions on building and running.
+
 h1. Beta 1 - Milestone 1 (2010 April 13)
 
 h2. Overview
@@ -10,12 +22,17 @@ Beta 1 milestone 1 (tag: b1-m1) provides a basic local, single-user implementati
 
 h2. Dependencies and Setup
 
-* Beta 1 milestone 1 requires Eclipse "e4 1.0M4":http://download.eclipse.org/e4/downloads/drops/S-1.0M4-201002271345/index.html; other requirements (Scala, iText) are included in the @lib@ folder in the @de.uni_koeln.ub.drc@ bundle
-* Core components (Scala) are built and deployed with Ant to be used in the UI (e4); see the @build.xml@ file in the @de.uni_koeln.ub.drc@ bundle
+* Beta 1 milestone 1 requires Eclipse "4.0 M4":http://download.eclipse.org/e4/downloads/drops/S-1.0M4-201002271345/index.html; other requirements (Scala, iText) are included in the @lib@ folder in the @de.uni_koeln.ub.drc@ bundle. See below for general instructions on building and running.
+
+h1. General Documentation
+
+h2. Building and Running
+
+* Core components (Scala) are built and deployed with Ant to be used in the UI (Eclipse 4); see the @build.xml@ file in the @de.uni_koeln.ub.drc@ bundle
 * Tests for the core components can be run with Ant, UI tests by running the @AllTestsSuite@ in the @de.uni_koeln.ub.drc.ui@ bundle (Run As > Plug-in Test)
 * The UI can be started by running the @drc.ui.product@ in the @de.uni_koeln.ub.drc.ui@ bundle (Run As > Eclipse Application)
 
-h1. General Documentation
+h2. Other Resources
 
 * "Requirements":drc/tree/master/de.uni_koeln.ub.drc/doc/requirements.textile
 * "Architecture":drc/tree/master/de.uni_koeln.ub.drc/doc/architecture.textile
