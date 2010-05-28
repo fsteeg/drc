@@ -37,7 +37,13 @@ public final class ExportHandler {
 
   /* This one is required for the binding */
   @CanExecute boolean canExecute(@Named( IServiceConstants.ACTIVE_PART ) MContext context) {
-    pages = (List<Page>) context.getContext().get(IServiceConstants.SELECTION);
+    Object selected = context.getContext().get(IServiceConstants.SELECTION);
+    if (!(selected instanceof List && ((List<?>) selected).get(0) instanceof Page)) {
+      return false;
+    }
+    @SuppressWarnings( "unchecked" ) /* Safe, since we checked above */
+    List<Page> selectedPages = (List<Page>) selected;
+    pages = selectedPages;
     return pages != null;
   }
 
