@@ -10,37 +10,38 @@ package de.uni_koeln.ub.drc.ui;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.eclipse.core.commands.Category;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.e4.core.commands.ECommandService;
-import org.eclipse.e4.core.services.IContributionFactory;
-import org.eclipse.e4.core.services.IDisposable;
-import org.eclipse.e4.core.services.annotations.PostConstruct;
-import org.eclipse.e4.core.services.context.ContextChangeEvent;
-import org.eclipse.e4.core.services.context.EclipseContextFactory;
-import org.eclipse.e4.core.services.context.IEclipseContext;
-import org.eclipse.e4.core.services.context.IRunAndTrack;
-import org.eclipse.e4.core.services.context.spi.IContextConstants;
+import org.eclipse.e4.core.contexts.EclipseContextFactory;
+import org.eclipse.e4.core.contexts.IContextConstants;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.contexts.RunAndTrack;
+import org.eclipse.e4.core.di.IDisposable;
+import org.eclipse.e4.core.services.contributions.IContributionFactory;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.MApplicationElement;
-import org.eclipse.e4.ui.model.application.MApplicationFactory;
-import org.eclipse.e4.ui.model.application.MApplicationPackage;
-import org.eclipse.e4.ui.model.application.MCommand;
-import org.eclipse.e4.ui.model.application.MContext;
 import org.eclipse.e4.ui.model.application.MContribution;
-import org.eclipse.e4.ui.model.application.MElementContainer;
-import org.eclipse.e4.ui.model.application.MPSCElement;
-import org.eclipse.e4.ui.model.application.MPart;
-import org.eclipse.e4.ui.model.application.MPartStack;
-import org.eclipse.e4.ui.model.application.MUIElement;
-import org.eclipse.e4.ui.model.application.MWindow;
+import org.eclipse.e4.ui.model.application.commands.MCommand;
+import org.eclipse.e4.ui.model.application.impl.ApplicationPackageImpl;
+import org.eclipse.e4.ui.model.application.ui.MContext;
+import org.eclipse.e4.ui.model.application.ui.MElementContainer;
+import org.eclipse.e4.ui.model.application.ui.MUIElement;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.basic.MPartSashContainerElement;
+import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
+import org.eclipse.e4.ui.model.application.ui.basic.MStackElement;
+import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
+import org.eclipse.e4.ui.model.application.ui.basic.impl.BasicFactoryImpl;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.workbench.ui.IPresentationEngine;
 import org.eclipse.e4.workbench.ui.UIEvents;
-import org.eclipse.e4.workbench.ui.internal.Workbench;
+import org.eclipse.e4.workbench.ui.internal.E4Workbench;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -57,18 +58,21 @@ import org.osgi.service.event.EventHandler;
 final class HeadlessSetup {
   private HeadlessSetup() {}
 
-  static final IRunAndTrack RUNNABLE = new IRunAndTrack() {
-    public boolean notify(final ContextChangeEvent event) {
-      IEclipseContext eventsContext = event.getContext();
+  static final RunAndTrack RUNNABLE = 
+    new RunAndTrack() {
+    public boolean changed(IEclipseContext eventsContext) {
       Object o = eventsContext.get(IServiceConstants.ACTIVE_PART);
       if (o instanceof MPart) {
-        eventsContext.set(IServiceConstants.ACTIVE_PART_ID, ((MPart) o).getId());
+        eventsContext.set(IServiceConstants.ACTIVE_PART_ID,
+            ((MPart) o).getElementId());
       }
       return true;
     }
 
-    @Override public String toString() {
-      return "HeadlessStartupTest$RunAndTrack[" + IServiceConstants.ACTIVE_PART_ID + ']';
+    @Override
+    public String toString() {
+      return "HeadlessStartupTest$RunAndTrack[" //$NON-NLS-1$
+          + IServiceConstants.ACTIVE_PART_ID + ']';
     }
   };
 
@@ -82,7 +86,7 @@ final class HeadlessSetup {
   }
 
   static MApplicationElement findElement(final MElementContainer<?> container, final String id) {
-    if (id.equals(container.getId())) {
+    if (id.equals(container.getElementId())) {
       return container;
     }
     for (Object child : container.getChildren()) {
@@ -92,7 +96,7 @@ final class HeadlessSetup {
         if (found != null) {
           return found;
         }
-      } else if (id.equals(element.getId())) {
+      } else if (id.equals(element.getElementId())) {
         return element;
       }
     }
@@ -103,21 +107,22 @@ final class HeadlessSetup {
       throws Exception {
     URI initialWorkbenchDefinitionInstance = URI.createPlatformPluginURI(appURI, true);
     ResourceSet set = new ResourceSetImpl();
-    set.getPackageRegistry().put("http://MApplicationPackage/", MApplicationPackage.eINSTANCE);
+    set.getPackageRegistry().put("http://MApplicationPackage/",
+        ApplicationPackageImpl.eINSTANCE);
     Resource resource = set.getResource(initialWorkbenchDefinitionInstance, true);
     MApplication application = (MApplication) resource.getContents().get(0);
     application.setContext(appContext);
     appContext.set(MApplication.class.getName(), application);
     defineCommands(appContext, application);
     initializeContexts(appContext, application);
-    Workbench.processHierarchy(application);
+    E4Workbench.processHierarchy(application);
     processPartContributions(application.getContext(), resource);
     return application;
   }
 
   private void initializeContexts(final IEclipseContext appContext, final MApplication application) {
     for (MWindow window : application.getChildren()) {
-      Workbench.initializeContext(appContext, window);
+      E4Workbench.initializeContext(appContext, window);
     }
   }
 
@@ -125,7 +130,7 @@ final class HeadlessSetup {
     ECommandService cs = (ECommandService) appContext.get(ECommandService.class.getName());
     Category cat = cs.defineCategory(MApplication.class.getName(), "Application Category", null); //$NON-NLS-1$
     for (MCommand cmd : application.getCommands()) {
-      String id = cmd.getId();
+      String id = cmd.getElementId();
       String name = cmd.getCommandName();
       cs.defineCommand(id, name, null, cat, null);
     }
@@ -138,19 +143,19 @@ final class HeadlessSetup {
     IConfigurationElement[] parts = registry.getConfigurationElementsFor(extId);
 
     for (int i = 0; i < parts.length; i++) {
-      MPart part = MApplicationFactory.eINSTANCE.createPart();
+      MPart part = BasicFactoryImpl.eINSTANCE.createPart();
       part.setLabel(parts[i].getAttribute("label")); //$NON-NLS-1$
       part.setIconURI("platform:/plugin/" //$NON-NLS-1$
           + parts[i].getContributor().getName() + "/" //$NON-NLS-1$
           + parts[i].getAttribute("icon")); //$NON-NLS-1$
-      part.setURI("platform:/plugin/" //$NON-NLS-1$
+      part.setContributionURI("platform:/plugin/" //$NON-NLS-1$
           + parts[i].getContributor().getName() + "/" //$NON-NLS-1$
           + parts[i].getAttribute("class")); //$NON-NLS-1$
       String parentId = parts[i].getAttribute("parentId"); //$NON-NLS-1$
 
       Object parent = findObject(resource.getAllContents(), parentId);
       if (parent instanceof MElementContainer<?>) {
-        ((MElementContainer<MPSCElement>) parent).getChildren().add(part);
+        ((MElementContainer<MPartSashContainerElement>) parent).getChildren().add(part);
       }
     }
   }
@@ -174,7 +179,7 @@ final class HeadlessSetup {
     private static final String NAME = HeadlessEngine.class.getPackage().getName();
     static final String ENGINE_URI = "platform:/plugin/" + NAME + "/"
         + HeadlessEngine.class.getName();
-    @Inject private org.eclipse.e4.ui.services.events.IEventBroker eventBroker;
+    @Inject private IEventBroker eventBroker;
     @Inject private IContributionFactory contributionFactory;
     private EventHandler childHandler;
     private EventHandler activeChildHandler;
@@ -233,7 +238,7 @@ final class HeadlessSetup {
               createGui((MUIElement) element, parent);
               if (parent instanceof MPartStack) {
                 MPartStack stack = (MPartStack) parent;
-                List<MPart> children = stack.getChildren();
+                List<MStackElement> children = stack.getChildren();
                 if (children.size() == 1) {
                   stack.setSelectedElement((MPart) element);
                 }
@@ -277,14 +282,14 @@ final class HeadlessSetup {
 
     private void createGuiFromPartStack(final MUIElement element) {
       MPartStack container = (MPartStack) element;
-      MPart active = container.getSelectedElement();
+      MStackElement active = container.getSelectedElement();
       if (active != null) {
         createGui(active, container);
         IEclipseContext childContext = ((MContext) active).getContext();
         IEclipseContext parentContext = getParentContext(active);
         parentContext.set(IContextConstants.ACTIVE_CHILD, childContext);
       } else {
-        List<MPart> children = container.getChildren();
+        List<MStackElement> children = container.getChildren();
         if (!children.isEmpty()) {
           container.setSelectedElement(children.get(0));
         }
@@ -293,10 +298,7 @@ final class HeadlessSetup {
 
     private void setupContext(final MUIElement element, final MContext mcontext) {
       final IEclipseContext parentContext = getParentContext(element);
-      final IEclipseContext createdContext = EclipseContextFactory.create(parentContext, null);
-      createdContext.set(IContextConstants.DEBUG_STRING, element.getClass().getInterfaces()[0]
-          .getName()
-          + " eclipse context"); //$NON-NLS-1$
+      final IEclipseContext createdContext = EclipseContextFactory.create(/*parentContext, null*/);
       populateModelInterfaces(mcontext, createdContext, element.getClass().getInterfaces());
       for (String variable : mcontext.getVariables()) {
         createdContext.declareModifiable(variable);
@@ -304,7 +306,7 @@ final class HeadlessSetup {
       mcontext.setContext(createdContext);
       if (element instanceof MContribution) {
         MContribution contribution = (MContribution) element;
-        String uri = contribution.getURI();
+        String uri = contribution.getContributionURI();
         if (uri != null) {
           Object clientObject = contributionFactory.create(uri, createdContext);
           contribution.setObject(clientObject);

@@ -8,31 +8,24 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
-
 import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.e4.core.services.context.IEclipseContext;
-import org.eclipse.e4.core.services.context.spi.IContextConstants;
-import org.eclipse.e4.core.services.context.spi.ISchedulerStrategy;
+import org.eclipse.e4.core.contexts.IContextConstants;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.model.application.MApplication;
-import org.eclipse.e4.ui.model.application.MContext;
-import org.eclipse.e4.ui.model.application.MElementContainer;
-import org.eclipse.e4.ui.model.application.MPSCElement;
-import org.eclipse.e4.ui.model.application.MPart;
-import org.eclipse.e4.ui.model.application.MUIElement;
+import org.eclipse.e4.ui.model.application.ui.MContext;
+import org.eclipse.e4.ui.model.application.ui.MElementContainer;
+import org.eclipse.e4.ui.model.application.ui.MUIElement;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.basic.MWindowElement;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.IStylingEngine;
 import org.eclipse.e4.ui.workbench.swt.internal.PartRenderingEngine;
 import org.eclipse.e4.ui.workbench.swt.internal.ResourceUtility;
 import org.eclipse.e4.workbench.ui.IResourceUtiltities;
-import org.eclipse.e4.workbench.ui.internal.UISchedulerStrategy;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.swt.widgets.Display;
 import org.junit.After;
@@ -71,7 +64,7 @@ public final class TestDrcUi extends TestDrcHeadless {
   }
   
   @Test public void bundleContext() {
-    assertEquals(Activator.PLUGIN_ID, bundleContext.getBundle().getSymbolicName());
+    Assert.assertEquals(Activator.PLUGIN_ID, bundleContext.getBundle().getSymbolicName());
   }
 
   @Test public void firstPartGetContext() {
@@ -87,41 +80,37 @@ public final class TestDrcUi extends TestDrcHeadless {
   }
 
   @Test public void getActiveShell() throws Exception {
-    assertNull(application.getContext().get(IServiceConstants.ACTIVE_SHELL));
+    Assert.assertNull(application.getContext().get(IServiceConstants.ACTIVE_SHELL));
   }
 
   @Test public void getActiveChild() throws Exception {
-    assertNotNull("Active child of application context should not be null", application
+    Assert.assertNotNull("Active child of application context should not be null", application
         .getContext().get(IContextConstants.ACTIVE_CHILD));
   }
 
   @Test public void getActiveContextsUi() throws Exception {
-    assertNotNull(getActiveChildContext(application).get(IServiceConstants.ACTIVE_CONTEXTS));
+    Assert.assertNotNull(getActiveChildContext(application).get(IServiceConstants.ACTIVE_CONTEXTS));
   }
 
   @Test public void getSelectionUi() throws Exception {
-    assertNotNull(getActiveChildContext(application).get(IServiceConstants.SELECTION));
+    Assert.assertNotNull(getActiveChildContext(application).get(IServiceConstants.SELECTION));
   }
 
   @Test public void getActiveChildUi() throws Exception {
-    assertNotNull(getActiveChildContext(application).get(IContextConstants.ACTIVE_CHILD));
-  }
-
-  @Test public void getInputUi() throws Exception {
-    assertNull(getActiveChildContext(application).get(IServiceConstants.INPUT));
+    Assert.assertNotNull(getActiveChildContext(application).get(IContextConstants.ACTIVE_CHILD));
   }
 
   @Test public void getActiveShellUi() throws Exception {
-    assertNull(getActiveChildContext(application).get(IServiceConstants.ACTIVE_SHELL));
+    Assert.assertNull(getActiveChildContext(application).get(IServiceConstants.ACTIVE_SHELL));
   }
 
   @Test public void getPersistedStateUi() throws Exception {
-    assertNull(getActiveChildContext(application).get(IServiceConstants.PERSISTED_STATE));
+    Assert.assertNull(getActiveChildContext(application).get(IServiceConstants.PERSISTED_STATE));
   }
 
   @Test @Override public void switchActivePart1InContext() throws Exception {
     final IEclipseContext context = application.getContext();
-    final MPart[] parts = getThreeParts();
+    final MPart[] parts = getFourParts();
     Realm.runWithDefault(SWTObservables.getRealm(display), new Runnable() {
       public void run() {
         switchTo(context, parts[1]);
@@ -131,7 +120,7 @@ public final class TestDrcUi extends TestDrcHeadless {
 
   @Test @Override public void switchActivePart2InContext() throws Exception {
     final IEclipseContext context = application.getContext();
-    final MPart[] parts = getThreeParts();
+    final MPart[] parts = getFourParts();
     Realm.runWithDefault(SWTObservables.getRealm(display), new Runnable() {
       public void run() {
         switchTo(context, parts[1]);
@@ -141,7 +130,7 @@ public final class TestDrcUi extends TestDrcHeadless {
 
   @Test @Override public void switchActivePart3InContext() throws Exception {
     final IEclipseContext context = application.getContext();
-    final MPart[] parts = getThreeParts();
+    final MPart[] parts = getFourParts();
     Realm.runWithDefault(SWTObservables.getRealm(display), new Runnable() {
       public void run() {
         switchTo(context, parts[2]);
@@ -152,11 +141,7 @@ public final class TestDrcUi extends TestDrcHeadless {
   private void switchTo(final IEclipseContext context, final MPart part) {
     context.set(IServiceConstants.ACTIVE_PART, part);
     while (display.readAndDispatch()) {};
-    assertEquals(part.getId(), context.get(IServiceConstants.ACTIVE_PART_ID));
-  }
-
-  @Override protected ISchedulerStrategy getApplicationSchedulerStrategy() {
-    return UISchedulerStrategy.getInstance();
+    Assert.assertEquals(part.getElementId(), context.get(IServiceConstants.ACTIVE_PART_ID));
   }
 
   @Override protected IEclipseContext createApplicationContext(final IEclipseContext osgiContext) {
@@ -185,7 +170,7 @@ public final class TestDrcUi extends TestDrcHeadless {
           TestDrcUi.super.createGUI(uiRoot);
         } catch (Exception x) {
           x.printStackTrace();
-          fail("Could not create GUI: " + x.getMessage());
+          Assert.fail("Could not create GUI: " + x.getMessage());
         }
       }
     });
@@ -202,7 +187,7 @@ public final class TestDrcUi extends TestDrcHeadless {
     Realm.runWithDefault(SWTObservables.getRealm(display), new Runnable() {
       public void run() {
         part.getParent().setSelectedElement(part);
-        assertNotNull("Part context should not be null", part.getContext());
+        Assert.assertNotNull("Part context should not be null", part.getContext());
         testModify(part);
       }
     });
@@ -225,7 +210,7 @@ public final class TestDrcUi extends TestDrcHeadless {
     for (String variable : variables) {
       Object newValue = new Object();
       context.modify(variable, newValue);
-      assertEquals(newValue, context.get(variable));
+      Assert.assertEquals(newValue, context.get(variable));
     }
   }
 
@@ -243,17 +228,17 @@ public final class TestDrcUi extends TestDrcHeadless {
     return variables;
   }
 
-  private static MPSCElement getNonContainer(MPSCElement activeChild) {
+  private static MWindowElement getNonContainer(MWindowElement activeChild) {
     if (activeChild instanceof MElementContainer<?>) {
-      activeChild = (MPSCElement) ((MElementContainer<?>) activeChild).getSelectedElement();
-      assertNotNull(activeChild);
+      activeChild = (MWindowElement) ((MElementContainer<?>) activeChild).getSelectedElement();
+      Assert.assertNotNull(activeChild);
       activeChild = getNonContainer(activeChild);
     }
     return activeChild;
   }
 
   private static IEclipseContext getActiveChildContext(final MApplication application) {
-    MPSCElement nonContainer = getNonContainer(application.getSelectedElement()
+    MWindowElement nonContainer = getNonContainer(application.getSelectedElement()
         .getSelectedElement());
     return ((MContext) nonContainer).getContext();
   }

@@ -25,7 +25,8 @@ case class Page(words:List[Word], id: String) {
   
   def toXml = <page> { words.toList.map(_.toXml) } </page>
   
-  def toText = ("" /: words) (_ + " " + _.history.top.form.replace("@", "|")) 
+  def toText(delim: String) = 
+    ("" /: words) (_ + " " + _.history.top.form.replace(Page.ParagraphMarker, delim)) 
   
   def save(): Node = {
     println("Attempting to save to: " + id)
@@ -54,6 +55,8 @@ case class Page(words:List[Word], id: String) {
 }
 
 object Page {
+  
+  val ParagraphMarker = "@"
 
   def fromXml(page:Node, id: String): Page = Page( 
     for(word <- (page \ "word").toList) yield Word.fromXml(word), id
@@ -133,7 +136,7 @@ private object PdfToPage {
           pos = new Point(pos.getX + wordWidth + scaled, pos.getY)
         }
       }
-      words add Word("@", Box(0,0,0,0))
+      words add Word(Page.ParagraphMarker, Box(0,0,0,0))
     }
     Page(words.toList, new java.io.File(pdfLocation).getName().replace("pdf", "xml"))
   }

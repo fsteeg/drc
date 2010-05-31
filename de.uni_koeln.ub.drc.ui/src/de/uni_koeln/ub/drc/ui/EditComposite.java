@@ -18,8 +18,8 @@ import javax.inject.Inject;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.e4.core.services.context.IEclipseContext;
-import org.eclipse.e4.ui.model.application.MDirtyable;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
@@ -116,7 +116,7 @@ public final class EditComposite extends Composite {
     lines.add(lineComposite);
     for (Word word : JavaConversions.asIterable(page.words())) {
       Text text = new Text(lineComposite, SWT.NONE);
-      if (word.original().equals("@")) {
+      if (word.original().equals(Page.ParagraphMarker())) {
         lineComposite = new Composite(c, SWT.NONE);
         setLineLayout(lineComposite);
         lines.add(lineComposite);

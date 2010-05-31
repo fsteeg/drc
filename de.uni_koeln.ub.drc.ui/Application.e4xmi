@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ASCII"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xsi:schemaLocation="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic http://www.eclipse.org/ui/2010/UIModel/application#//ui/basic http://www.eclipse.org/ui/2010/UIModel/application/ui/menu http://www.eclipse.org/ui/2010/UIModel/application#//ui/menu" xmi:id="_dwLg8GjeEd-A-okc5hAzKQ">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_SeXUGO8EsdfC9cDb6iV7g" elementId="_SeXUAe8EEd6FC9cDb6iV7g" selectedElement="_SeXUCujkld6FC9cDb6iV7g" y="22" width="1024" height="1200">
+    <children xsi:type="basic:PartSashContainer" xmi:id="_SeXUCujkld6FC9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g" selectedElement="_SeXUDe8klkFC9cDb6iV7f">
+      <children xsi:type="basic:PartStack" xmi:id="_SeXUDe8klkFC9cDb6iV7f" elementId="_SeXUAu8EEd6FC9cDb6iV7g" containerData="1000" selectedElement="SearchView">
+        <children xsi:type="basic:Part" xmi:id="SearchView" elementId="SearchView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.SearchView" label="Search" iconURI="" tooltip="Search View"/>
+      </children>
+      <children xsi:type="basic:PartStack" xmi:id="_SeXUDewerb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g" containerData="1000" selectedElement="EditView">
+        <children xsi:type="basic:Part" xmi:id="EditView" elementId="EditView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.EditView" label="Edit" iconURI="" tooltip="Edit View"/>
+      </children>
+      <children xsi:type="basic:PartStack" xmi:id="_SeXUertEd6FC9cDb6iV7h" elementId="_SeXUAu8EEd6FC9cDb6iV7g" containerData="1000" selectedElement="CheckView">
+        <children xsi:type="basic:Part" xmi:id="CheckView" elementId="CheckView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.CheckView" label="Check" iconURI="" tooltip="Check View"/>
+      </children>
+      <children xsi:type="basic:PartStack" xmi:id="_SeXUGO8EErtz9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g" containerData="1000" selectedElement="WordView">
+        <children xsi:type="basic:Part" xmi:id="WordView" elementId="WordView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.WordView" label="Word" iconURI="" tooltip="Word View"/>
+      </children>
+    </children>
+    <variables>selection</variables>
+    <variables>input</variables>
+    <mainMenu xmi:id="menu:org.eclipse.ui.main.menu" elementId="menu:org.eclipse.ui.main.menu">
+      <children xsi:type="menu:Menu" xmi:id="_SeXUGO8EtzuFC9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g" label="File">
+        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUGO8EEzuiC9cDb6iV7g" elementId="exit.menu.item" label="Exit" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExitHandler"/>
+        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUGO8EEd6Fuiob6iV7g" elementId="save.menu.item" label="Save (CTRL+S)" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.SaveHandler"/>
+        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUGO8EEd6FC9iop6iV7g" elementId="export.meu.item" label="Export (CTRL+E)" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExportHandler"/>
+      </children>
+    </mainMenu>
+    <trimBars xmi:id="_SeXUGO8dfgFC9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g">
+      <children xsi:type="menu:ToolBar" xmi:id="_SeXUGO8fghFC9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_SeXghjEd6FC9cDb6iV7g" elementId="save.tool.item" containerData="" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/save.gif" tooltip="Save current page (CTRL+S)" command="page.save"/>
+        <children xsi:type="menu:DirectToolItem" xmi:id="_SeXUGOhjk6FC9cDb6iV7g" elementId="export.tool.item" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/export.gif" tooltip="Export selected pages (CTRL+E)" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExportHandler"/>
+      </children>
+    </trimBars>
+  </children>
+  <handlers xmi:id="_SeXUGOyxcd6FC9cDb6iV7g" elementId="save.handler" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.SaveHandler" command="page.save"/>
+  <handlers xmi:id="_SeXUGO8EExcvC9cDb6iV7f" elementId="export.handler" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.ExportHandler" command="page.export"/>
+  <bindingTables xmi:id="_SeXUEOnm,d6FC9cDb6iV7x" elementId="_SeXUAu8EEd6FC9cDb6iV7g" bindingContextId="org.eclipse.ui.contexts.dialogAndWindow">
+    <bindings xmi:id="_SeXUHu8EEd6FmmmDb6iV7g" keySequence="CTRL+E" elementId="export.binding" command="page.export"/>
+    <bindings xmi:id="_SeXUHu8EEiop9cDb6iV7g" keySequence="CTRL+S" elementId="save.binding" command="page.save"/>
+  </bindingTables>
+  <rootContext xmi:id="_SeXUHO8EEdcvbcDb6iV7y" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
+    <children xmi:id="_SeXUEO8EEd6FC9cDbvbn7w" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
+    <children xmi:id="_SeXUEO8EEd6FC9cDb6ibnm" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
+  </rootContext>
+  <bindingContexts>org.eclipse.ui.contexts.dialogAndWindow</bindingContexts>
+  <commands xmi:id="page.export" elementId="page.export" commandName="Export" description=""/>
+  <commands xmi:id="page.save" elementId="page.save" commandName="Save" description=""/>
+</application:Application>

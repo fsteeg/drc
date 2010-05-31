@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,11 +21,11 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
-import org.eclipse.e4.core.services.annotations.Optional;
-import org.eclipse.e4.core.services.annotations.PostConstruct;
-import org.eclipse.e4.core.services.context.IEclipseContext;
-import org.eclipse.e4.ui.model.application.MDirtyable;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.e4.workbench.ui.Persist;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
@@ -88,7 +89,8 @@ public final class EditView {
     }
     dirtyable.setDirty(false);
   }
-
+  
+  @Persist
   public void doSave(@Optional final IProgressMonitor m) throws IOException, InterruptedException {
     final IProgressMonitor monitor = m == null ? new NullProgressMonitor() : m;
     final Page page = editComposite.getPage();
@@ -100,9 +102,10 @@ public final class EditView {
       @Override public void run() {
         for (int i = 0; i < words.size(); i++) {
           String newText = words.get(i).getText();
-          Stack<Modification> history = modified.next().history();
+          Word word = modified.next();
+          Stack<Modification> history = word.history();
           String oldText = history.top().form();
-          if (!newText.equals(oldText)) {
+          if (!newText.equals(oldText) && !word.original().trim().equals(Page.ParagraphMarker())) {
             history.push(new Modification(newText, System.getProperty("user.name")));
           }
           monitor.worked(1);
