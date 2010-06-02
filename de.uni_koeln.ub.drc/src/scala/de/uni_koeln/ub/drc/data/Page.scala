@@ -119,15 +119,13 @@ private object PdfToPage {
   import scala.collection.mutable.Buffer
   import java.io.File
     
-  val boxHeight = 15
-    
   def convert(pdfLocation : String) : Page = {
     val words: Buffer[Word] = Buffer()
     val paragraphs : Buffer[Paragraph] = PositionParser.parse(pdfLocation)
-    val pageHeight = 960
+    val pageHeight = 1440 // IMG_SIZE
     for(p <- paragraphs) {
       for(line <- p.getLines) {
-        var pos = line.getStartPointScaled(600, pageHeight)
+        var pos = line.getStartPointScaled(900, pageHeight) // IMG_SIZE
         for(word <- line.getWords) {
           val scaled = line.getFontSizeScaled(pageHeight)
           val wordWidth = width(word, scaled)

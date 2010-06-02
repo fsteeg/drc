@@ -50,7 +50,8 @@ public final class CheckView {
     scrolledComposite.setContent(imageLabel);
     scrolledComposite.setExpandVertical(true);
     scrolledComposite.setExpandHorizontal(true);
-    scrolledComposite.setMinSize(imageLabel.computeSize(SWT.MAX, SWT.MAX));
+    // scrolledComposite.setMinSize(imageLabel.computeSize(SWT.MAX, SWT.MAX));
+    scrolledComposite.setMinSize(new Point(900, 1440)); // IMG_SIZE
   }
 
   @Inject public void setSelection(
@@ -108,15 +109,14 @@ public final class CheckView {
   private void markPosition(final Text text) {
     Word word = (Word) text.getData();
     Box box = word.position();
-    // TODO these values cannot be fixed, depend on image size
-    Rectangle rect = new Rectangle(box.x() - 15, box.y() - 10, box.width() + 65, box.height() + 20);
+    Rectangle rect = new Rectangle(box.x() - 22, box.y() - 15, box.width() + 98, box.height() + 30); // IMG_SIZE
     System.out.println("Current word: " + word);
     Image image = reloadImage();
     GC gc = new GC(image);
     drawBoxArea(rect, gc);
     drawBoxBorder(rect, gc);
     imageLabel.setImage(image);
-    scrolledComposite.setOrigin(new Point(box.x(), box.y()));
+    scrolledComposite.setOrigin(new Point(rect.x - 10, rect.y - 10)); // IMG_SIZE
   }
 
   private void drawBoxBorder(final Rectangle rect, final GC gc) {

@@ -8,7 +8,7 @@
 	<property name="deploy.dir.lib" location="${deploy.dir.root}/lib" />
 	<property name="deploy.dir.data" location="${deploy.dir.root}/pages" />
 	<!-- Currently working with volume 4 only: -->
-	<property name="data.volume" value="PPN345572629_0004-600"/>
+	<property name="data.volume" value="PPN345572629_0004"/>
 	<property name="src.dir.data" location="res/rom/${data.volume}" />
 
 	<!-- Java-specific properties: -->
