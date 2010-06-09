@@ -5,7 +5,7 @@
       <children xsi:type="basic:PartStack" xmi:id="_SeXUDe8klkFC9cDb6iV7f" elementId="_SeXUAu8EEd6FC9cDb6iV7g" containerData="1000" selectedElement="SearchView">
         <children xsi:type="basic:Part" xmi:id="SearchView" elementId="SearchView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.SearchView" label="Search" iconURI="" tooltip="Search View"/>
       </children>
-      <children xsi:type="basic:PartStack" xmi:id="_SeXUDewerb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g" containerData="1000" selectedElement="EditView">
+      <children xsi:type="basic:PartStack" xmi:id="_SeXUDewerb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g" containerData="2000" selectedElement="EditView">
         <children xsi:type="basic:Part" xmi:id="EditView" elementId="EditView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.EditView" label="Edit" iconURI="" tooltip="Edit View"/>
       </children>
       <children xsi:type="basic:PartStack" xmi:id="_SeXUertEd6FC9cDb6iV7h" elementId="_SeXUAu8EEd6FC9cDb6iV7g" containerData="1000" selectedElement="CheckView">
