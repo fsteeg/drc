@@ -5,7 +5,7 @@
  * <p/>
  * Contributors: Fabian Steeg - initial API and implementation
  *************************************************************************************************/
-package de.uni_koeln.ub.drc.ui;
+package de.uni_koeln.ub.drc.ui.handlers;
 
 import org.eclipse.e4.workbench.ui.IWorkbench;
 

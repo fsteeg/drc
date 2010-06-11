@@ -25,6 +25,8 @@
          </property>
       </product>
    </extension>
+   
+   <!-- Theming -->
    <extension
          point="org.eclipse.e4.ui.css.swt.theme">
       <theme
@@ -33,4 +35,29 @@
             label="Default DRC Theme">
       </theme>
    </extension>
+  
+  <!-- Authentication, Login, Security -->
+   <extension
+         id="simpleLoginModule"
+         point="org.eclipse.equinox.security.loginModule">
+      <loginModule
+            class="de.uni_koeln.ub.drc.ui.login.SimpleLoginModule"
+            description="Simple Login Module">
+      </loginModule>
+   </extension>
+   <extension
+         id="simpleCallbackHandler"
+         point="org.eclipse.equinox.security.callbackHandler">
+      <callbackHandler
+            class="de.uni_koeln.ub.drc.ui.login.SimpleLoginDialog">
+      </callbackHandler>
+   </extension>
+   <extension
+         point="org.eclipse.equinox.security.callbackHandlerMapping">
+      <callbackHandlerMapping
+            callbackHandlerId="de.uni_koeln.ub.drc.ui.simpleCallbackHandler"
+            configName="SIMPLE">
+      </callbackHandlerMapping>
+   </extension>
+   
 </plugin>

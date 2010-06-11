@@ -5,7 +5,7 @@
  * <p/>
  * Contributors: Fabian Steeg - initial API and implementation
  *************************************************************************************************/
-package de.uni_koeln.ub.drc.ui;
+package de.uni_koeln.ub.drc.ui.views;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -15,6 +15,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.security.auth.login.LoginException;
 
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -39,6 +40,7 @@ import scala.collection.mutable.Stack;
 import de.uni_koeln.ub.drc.data.Modification;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.Word;
+import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
  * A view that the area to edit the text. Marks the section in the image file that corresponds to
@@ -89,9 +91,9 @@ public final class EditView {
     }
     dirtyable.setDirty(false);
   }
-  
-  @Persist
-  public void doSave(@Optional final IProgressMonitor m) throws IOException, InterruptedException {
+
+  @Persist public void doSave(@Optional final IProgressMonitor m) throws IOException,
+      InterruptedException {
     final IProgressMonitor monitor = m == null ? new NullProgressMonitor() : m;
     final Page page = editComposite.getPage();
     monitor.beginTask("Saving page...", page.words().size());
@@ -106,7 +108,12 @@ public final class EditView {
           Stack<Modification> history = word.history();
           String oldText = history.top().form();
           if (!newText.equals(oldText) && !word.original().trim().equals(Page.ParagraphMarker())) {
-            history.push(new Modification(newText, System.getProperty("user.name")));
+            try {
+              history.push(new Modification(newText, DrcUiActivator.instance().getLoginContext()
+                  .getSubject().getPublicCredentials().iterator().next().toString()));
+            } catch (LoginException e) {
+              e.printStackTrace();
+            } /* System.getProperty("user.name") */
           }
           monitor.worked(1);
         }

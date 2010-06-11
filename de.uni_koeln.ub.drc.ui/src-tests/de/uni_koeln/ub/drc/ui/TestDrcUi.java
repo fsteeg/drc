@@ -49,7 +49,7 @@ public final class TestDrcUi extends TestDrcHeadless {
 
   @Before @Override public void setUp() throws Exception {
     Assert.assertTrue("Tests should run as JUnit Plug-in Tests", Platform.isRunning());
-    bundleContext = Activator.getDefault().getBundle().getBundleContext();
+    bundleContext = DrcUiActivator.instance().getBundle().getBundleContext();
     display = Display.getDefault();
     super.setUp();
     while (display.readAndDispatch()) {};
@@ -64,7 +64,7 @@ public final class TestDrcUi extends TestDrcHeadless {
   }
   
   @Test public void bundleContext() {
-    Assert.assertEquals(Activator.PLUGIN_ID, bundleContext.getBundle().getSymbolicName());
+    Assert.assertEquals(DrcUiActivator.PLUGIN_ID, bundleContext.getBundle().getSymbolicName());
   }
 
   @Test public void firstPartGetContext() {

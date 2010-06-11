@@ -5,7 +5,7 @@
  * <p/>
  * Contributors: Fabian Steeg - initial API and implementation
  *************************************************************************************************/
-package de.uni_koeln.ub.drc.ui;
+package de.uni_koeln.ub.drc.ui.views;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
