@@ -19,7 +19,7 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.model.application.ui.MContext;
 import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.e4.workbench.ui.IWorkbench;
+import org.eclipse.e4.ui.workbench.IWorkbench;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
@@ -37,7 +37,7 @@ public final class ExportHandler {
 
   /* This one is required for the binding */
   @CanExecute boolean canExecute(@Named( IServiceConstants.ACTIVE_PART ) MContext context) {
-    Object selected = context.getContext().get(IServiceConstants.SELECTION);
+    Object selected = context.getContext().get(IServiceConstants.ACTIVE_SELECTION);
     if (!(selected instanceof List && ((List<?>) selected).get(0) instanceof Page)) {
       return false;
     }
@@ -49,7 +49,7 @@ public final class ExportHandler {
 
   /* This one is required for menu and tool bar items */
   @Inject public void setSelection(
-      @Optional @Named( IServiceConstants.SELECTION ) final List<Page> pages) {
+      @Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final List<Page> pages) {
     this.pages = pages;
   }
 

@@ -55,7 +55,7 @@ public final class CheckView {
   }
 
   @Inject public void setSelection(
-      @Optional @Named( IServiceConstants.SELECTION ) final List<Page> pages) {
+      @Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final List<Page> pages) {
     if (pages != null && pages.size() > 0) {
       Page page = pages.get(0);
       try {
@@ -76,7 +76,7 @@ public final class CheckView {
     e.printStackTrace();
   }
 
-  @Inject public void setSelection(@Optional @Named( IServiceConstants.SELECTION ) final Text word) {
+  @Inject public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text word) {
     if (imageLoaded) {
       if (word != null) {
         markPosition(word);

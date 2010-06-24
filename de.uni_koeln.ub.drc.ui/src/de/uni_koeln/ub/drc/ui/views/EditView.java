@@ -24,9 +24,9 @@ import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.e4.workbench.ui.Persist;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
@@ -71,7 +71,7 @@ public final class EditView {
   }
 
   @Inject public void setSelection(
-      @Optional @Named( IServiceConstants.SELECTION ) final List<Page> pages) {
+      @Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final List<Page> pages) {
     if (pages != null && pages.size() > 0) {
       Page page = pages.get(0);
       if (dirtyable.isDirty()) {

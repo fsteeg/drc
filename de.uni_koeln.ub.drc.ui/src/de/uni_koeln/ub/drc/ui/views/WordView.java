@@ -50,7 +50,7 @@ public final class WordView {
     GridLayoutFactory.fillDefaults().generateLayout(parent);
   }
 
-  @Inject public void setSelection(@Optional @Named( IServiceConstants.SELECTION ) final Text text) {
+  @Inject public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text text) {
     if (job != null) {
       /* If a word is selected while we had a Job running for the previous word, cancel that: */
       job.cancel();

@@ -7,7 +7,8 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.handlers;
 
-import org.eclipse.e4.workbench.ui.IWorkbench;
+import org.eclipse.e4.ui.workbench.IWorkbench;
+
 
 /**
  * Handles application exit, hooked into the menu via Application.xmi.

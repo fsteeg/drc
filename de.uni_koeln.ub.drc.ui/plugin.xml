@@ -6,7 +6,7 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="org.eclipse.e4.ui.workbench.swt.E4Application"
-            name="DRC e4 UI">
+            name="DRC UI">
          <property
                name="applicationXMI"
                value="de.uni_koeln.ub.drc.ui/Application.e4xmi">
@@ -20,7 +20,7 @@
                value="plugin_customization.ini">
          </property>
          <property
-               name="applicationCSS"
+               name="cssTheme"
                value="de.uni_koeln.ub.drc.ui.themes.default">
          </property>
       </product>

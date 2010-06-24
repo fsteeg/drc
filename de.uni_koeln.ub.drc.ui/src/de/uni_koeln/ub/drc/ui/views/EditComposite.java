@@ -162,7 +162,7 @@ public final class EditComposite extends Composite {
   private void addFocusListener(final Text text) {
     text.addFocusListener(new FocusListener() {
       public void focusLost(final FocusEvent e) {
-        context.modify(IServiceConstants.SELECTION, null);
+        context.modify(IServiceConstants.ACTIVE_SELECTION, null);
         checkWordValidity(text);
       }
 
@@ -179,7 +179,7 @@ public final class EditComposite extends Composite {
       }
 
       public void focusGained(final FocusEvent e) {
-        context.modify(IServiceConstants.SELECTION, text);
+        context.modify(IServiceConstants.ACTIVE_SELECTION, text);
         text.setToolTipText(((Word) text.getData()).formattedHistory());
       }
     });

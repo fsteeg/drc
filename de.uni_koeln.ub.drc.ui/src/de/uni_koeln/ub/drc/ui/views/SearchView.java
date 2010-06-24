@@ -100,7 +100,7 @@ public final class SearchView {
     viewer.addSelectionChangedListener(new ISelectionChangedListener() {
       public void selectionChanged(final SelectionChangedEvent event) {
         IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-        context.modify(IServiceConstants.SELECTION, selection.toList());
+        context.modify(IServiceConstants.ACTIVE_SELECTION, selection.toList());
       }
     });
     initTable();
