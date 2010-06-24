@@ -28,18 +28,19 @@
 	<property name="doc.dir.scala" location="${build.dir}/doc-gen/scaladoc" />
 	<property name="src.dir.scala" location="src/scala" />
 	<property name="test.dir.scala" location="src/specs" />
-	<property name="reports.dir.scala" location="${build.dir}/tests/scala" />
+	<property name="reports.dir.scala" location="${build.dir}/tests/scala/reports" />
+	<property name="summary.dir.scala" location="${build.dir}/tests/scala/summary" />
 
 	<!-- Java version config: -->
 	<property name="ant.java.version" value="1.5" />
 
 	<!-- Scala Ant tasks: -->
-	<taskdef resource="scala/tools/ant/antlib.xml">
-		<classpath>
-			<pathelement location="${lib.dir}/scala-compiler.jar" />
-			<pathelement location="${lib.dir}/scala-library.jar" />
-		</classpath>
-	</taskdef>
+  <taskdef resource="scala/tools/ant/antlib.xml">
+    <classpath>
+      <pathelement location="${lib.dir}/scala-compiler.jar" />
+      <pathelement location="${lib.dir}/scala-library.jar" />
+    </classpath>
+  </taskdef>
 
 	<!-- The classpath: where the classes are to be found -->
 	<path id="project.classpath">
@@ -67,6 +68,7 @@
 		<mkdir dir="${reports.dir.java}" />
 		<mkdir dir="${summary.dir.java}" />
 		<mkdir dir="${reports.dir.scala}" />
+		<mkdir dir="${summary.dir.scala}" />
 	</target>
 
 	<!-- Delete the generated files -->
@@ -106,10 +108,14 @@
 		<javac srcdir="${test.dir.java}" destdir="${build.test.dir.java}">
 			<classpath refid="project.classpath" />
 		</javac>
-
+		<!-- Compile both Java and Scala files in the Scala tests folder, as we use Java Suites for running the tests -->
 		<scalac srcdir="${test.dir.scala}" deprecation="on" destdir="${build.test.dir.scala}" classpathref="project.classpath">
-			<include name="**/*.scala"   />
-		</scalac>
+      <include name="**/*.scala" />
+    </scalac>
+		<javac srcdir="${test.dir.scala}" destdir="${build.test.dir.scala}">
+      <classpath refid="project.classpath" />
+			<include name="**/*.java" />
+    </javac>
 	</target>
 
 	<!-- Build a distribution jar-->
@@ -154,18 +160,20 @@
 			<classpath refid="project.classpath" />
 			<batchtest todir="${reports.dir.java}">
 				<formatter type="xml" />
-				<!--We run only the suites containing 'Exercise' in their name-->
+				<!--For Java, we run only the classes containing 'Test' in their name-->
 				<fileset dir="${build.test.dir.java}" includes="**/*Test*.class" />
 			</batchtest>
+		  <batchtest todir="${reports.dir.scala}">
+        <formatter type="xml" />
+        <!--For Scala, we run only the classes containing 'Suite' in their name-->
+        <fileset dir="${build.test.dir.scala}" includes="**/*Suite*.class" />
+      </batchtest>
 		</junit>
-		<!-- Run the Scala specs by running the application that runs individual specs: -->
-		<java classname="de.uni_koeln.ub.drc.SpecRunner" classpathref="project.classpath">
-		</java>
 	</target>
 
 	<!-- Report the tests -->
 	<target name="test-report" depends="test">
-		<!-- collect the results into a summary report -->
+		<!-- collect the Java results into a summary report -->
 		<junitreport todir="${summary.dir.java}">
 			<fileset dir="${reports.dir.java}">
 				<include name="TEST-*.xml" />
@@ -173,6 +181,14 @@
 			<report format="frames" todir="${summary.dir.java}" />
 		</junitreport>
 		<echo message="Wrote summary test report to: ${summary.dir.java}" />
+		<!-- collect the Scala results into a summary report -->
+    <junitreport todir="${summary.dir.scala}">
+      <fileset dir="${reports.dir.scala}">
+        <include name="TEST-*.xml" />
+      </fileset>
+      <report format="frames" todir="${summary.dir.scala}" />
+    </junitreport>
+    <echo message="Wrote summary test report to: ${summary.dir.scala}" />
 	</target>
 
 	<!-- Generate javadoc and scaladoc documentation-->

@@ -9,10 +9,13 @@
 package de.uni_koeln.ub.drc.data
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.junit.JUnitRunner
+import org.junit.runner.RunWith
 /**
  * @see Word
  * @author Fabian Steeg (fsteeg)
  */
+@RunWith(classOf[JUnitRunner])
 private[drc] class SpecWord extends Spec with ShouldMatchers {
 
   describe("A Word") {
