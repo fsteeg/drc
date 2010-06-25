@@ -276,7 +276,7 @@ public final class PdfContentExtractor {
       }
     }
 
-    for (int i = 0; i < paragraphStartingPoints.size(); i++) {
+    for (int i = 0; i < paragraphStartingPoints.size() && i < fontSizes.size(); i++) {
       Point p = paragraphStartingPoints.get(i);
       Float f = fontSizes.get(i);
       map.put(p, f);

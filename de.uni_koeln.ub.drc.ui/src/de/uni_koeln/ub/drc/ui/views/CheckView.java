@@ -109,7 +109,7 @@ public final class CheckView {
   private void markPosition(final Text text) {
     Word word = (Word) text.getData();
     Box box = word.position();
-    Rectangle rect = new Rectangle(box.x() - 22, box.y() - 15, box.width() + 98, box.height() + 30); // IMG_SIZE
+    Rectangle rect = new Rectangle(box.x() - 22, box.y() - 15, box.width() + 38 /*98*/, box.height() + 30); // IMG_SIZE
     System.out.println("Current word: " + word);
     Image image = reloadImage();
     GC gc = new GC(image);

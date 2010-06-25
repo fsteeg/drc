@@ -5,11 +5,6 @@
 	<projects>
 	</projects>
 	<buildSpec>
-	<buildCommand>
-			<name>org.eclipse.jdt.core.javabuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
 			<triggers>full,incremental,</triggers>

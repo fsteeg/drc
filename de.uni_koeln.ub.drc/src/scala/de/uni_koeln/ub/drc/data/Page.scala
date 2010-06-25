@@ -120,36 +120,21 @@ private object PdfToPage {
     
   def convert(pdfLocation : String) : Page = {
     val words: Buffer[Word] = Buffer()
-    val paragraphs : Buffer[Paragraph] = PositionParser.parse(pdfLocation)
+    val paragraphs : Buffer[Paragraph] = PdfContentExtractor.extractContentFromPdf(pdfLocation).getParagraps
     val pageHeight = 1440 // IMG_SIZE
+    val pageWidth = 900 // IMG_SIZE
     for(p <- paragraphs) {
-      for(line <- p.getLines) {
-        var pos = line.getStartPointScaled(900, pageHeight) // IMG_SIZE
-        for(word <- line.getWords) {
-          val scaled = line.getFontSizeScaled(pageHeight)
-          val wordWidth = width(word, scaled)
-          words add Word(word, Box(pos.getX.toInt, pos.getY.toInt - scaled, wordWidth, scaled))
-          /* Update the starting position for the next word: */
-          pos = new Point(pos.getX + wordWidth + scaled, pos.getY)
+      for(line <- p.getLinesInParagraph) {
+        for(word <- line.getWordsInLine) {
+          var startPos = word.getStartPointScaled(pageWidth, pageHeight)
+          var endPos = word.getEndPointScaled(pageWidth, pageHeight)
+          val scaled = word.getFontSizeScaled(pageHeight)
+          val wordWidth = endPos.getX - startPos.getX//width(word.getText, scaled) 
+          words add Word(word.getText, Box(startPos.getX.toInt, startPos.getY.toInt - scaled, wordWidth.toInt, scaled))
         }
       }
       words add Word(Page.ParagraphMarker, Box(0,0,0,0))
     }
     Page(words.toList, new java.io.File(pdfLocation).getName().replace("pdf", "xml"))
-  }
-    
-  def width(word: String, height: Int) : Int = {
-    /* TODO: calculate letter width based on number of letters in line */
-    /* TODO: get font spacing and style from PDF, adjust width accordingly */
-    var result = 0f
-    val narrow = "li∫tfj"
-    for(c <- word.toCharArray) {
-      /* heuristic: provide width as percentage of height, depending on letter and case: */
-      if(narrow.contains(c.toLower)) 
-        result += height * (if(c.isLower) .1f else .2f)
-      else 
-        result += height * (if(c.isLower) .5f else .8f)
-    }
-    result.round
   }
 }

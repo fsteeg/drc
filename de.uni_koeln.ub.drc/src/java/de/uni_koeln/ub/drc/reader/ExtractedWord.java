@@ -113,7 +113,19 @@ public final class ExtractedWord {
    * @return The scaled starting point of the line
    */
   public Point getStartPointScaled(final int width, final int height) {
-    Point boxPoint = getStartPoint();
+    return scaled(width, height, getStartPoint());
+  }
+  
+  /**
+   * @param width The width of the JPG image
+   * @param height The height of the JPG image
+   * @return The scaled end point of the line
+   */
+  public Point getEndPointScaled(final int width, final int height) {
+    return scaled(width, height, getEndPoint());
+  }
+
+  private Point scaled(final int width, final int height, final Point boxPoint) {
     int x = getX(rectangle, boxPoint.getX(), width);
     int y = getY(rectangle, boxPoint.getY(), height);
     Point scaledPoint = new Point(x, y);
