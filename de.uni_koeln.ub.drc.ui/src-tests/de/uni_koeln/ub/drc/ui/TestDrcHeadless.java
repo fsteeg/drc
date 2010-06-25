@@ -23,20 +23,20 @@ import org.eclipse.e4.core.services.adapter.Adapter;
 import org.eclipse.e4.core.services.contributions.IContributionFactory;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.internal.services.ActiveContextsFunction;
+import org.eclipse.e4.ui.internal.workbench.ActivePartLookupFunction;
+import org.eclipse.e4.ui.internal.workbench.ExceptionHandler;
+import org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory;
+import org.eclipse.e4.ui.internal.workbench.UIEventPublisher;
+import org.eclipse.e4.ui.internal.workbench.WorkbenchLogger;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.MApplicationElement;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.e4.ui.workbench.swt.Activator;
-import org.eclipse.e4.workbench.ui.IExceptionHandler;
-import org.eclipse.e4.workbench.ui.IPresentationEngine;
-import org.eclipse.e4.workbench.ui.internal.ActivePartLookupFunction;
-import org.eclipse.e4.workbench.ui.internal.ExceptionHandler;
-import org.eclipse.e4.workbench.ui.internal.ReflectionContributionFactory;
-import org.eclipse.e4.workbench.ui.internal.UIEventPublisher;
-import org.eclipse.e4.workbench.ui.internal.WorkbenchLogger;
+import org.eclipse.e4.ui.workbench.IExceptionHandler;
+import org.eclipse.e4.ui.workbench.IPresentationEngine;
+import org.eclipse.e4.ui.workbench.swt.WorkbenchSWTActivator;
 import org.eclipse.emf.common.notify.Notifier;
 import org.junit.After;
 import org.junit.Assert;
@@ -58,7 +58,7 @@ public class TestDrcHeadless {
 
   @Before public void setUp() throws Exception {
     Assert.assertTrue("Tests should run as JUnit Plug-in Tests", Platform.isRunning());
-    osgiContext = EclipseContextFactory.getServiceContext(Activator.getDefault().getBundle()
+    osgiContext = EclipseContextFactory.getServiceContext(WorkbenchSWTActivator.getDefault().getBundle()
         .getBundleContext());
     applicationContext = createApplicationContext(osgiContext);
     //applicationContext.set(IContextConstants.DEBUG_STRING, "Application Context"); //$NON-NLS-1$
@@ -112,7 +112,7 @@ public class TestDrcHeadless {
 
   @Test public final void getSelection() throws Exception {
     // Selection is null in headless mode - is this correct?
-    Assert.assertNull(application.getContext().get(IServiceConstants.SELECTION));
+    Assert.assertNull(application.getContext().get(IServiceConstants.ACTIVE_SELECTION));
   }
 
   @Test public final void getActivePart() throws Exception {

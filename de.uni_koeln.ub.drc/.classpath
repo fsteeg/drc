@@ -9,6 +9,6 @@
 	<classpathentry kind="lib" path="lib/iText-5.0.1.jar" sourcepath="lib/iText-src-5.0.1.zip"/>
 	<classpathentry kind="lib" path="lib/junit-4.8.1.jar" sourcepath="lib/junit-4.8.1-src.zip"/>
 	<classpathentry kind="lib" path="lib/truezip-6.jar" sourcepath="lib/truezip-6-src.zip"/>
-	<classpathentry kind="lib" path="lib/scalatest-1.2-for-scala-2.8.0.RC2-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/scalatest-1.2-for-scala-2.8.0.RC6-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

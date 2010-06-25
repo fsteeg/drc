@@ -13,11 +13,13 @@ import java.io._
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
 import Configuration._
-
+import org.scalatest.junit.JUnitRunner
+import org.junit.runner.RunWith
 /**
  * @see Configuration
  * @author Fabian Steeg (fsteeg)
  */
+@RunWith(classOf[JUnitRunner])
 private[drc] class SpecConfiguration extends Spec with ShouldMatchers {
 
   describe("The Configuration") {

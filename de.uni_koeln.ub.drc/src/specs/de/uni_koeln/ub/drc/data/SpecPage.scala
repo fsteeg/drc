@@ -10,11 +10,13 @@ package de.uni_koeln.ub.drc.data
 
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
-
+import org.scalatest.junit.JUnitRunner
+import org.junit.runner.RunWith
 /**
  * @see Page
  * @author Fabian Steeg
  */
+@RunWith(classOf[JUnitRunner])
 class SpecPage extends Spec with ShouldMatchers {
 
   val file: java.io.File = java.io.File.createTempFile("testing", "scala")
@@ -71,8 +73,8 @@ class SpecPage extends Spec with ShouldMatchers {
     }
     
     it("provides initial import of a scanned PDF") {
-          val page : Page = Page.fromPdf("res/rom/PPN345572629_0004-600/PPN345572629_0004-0001.pdf")
-          val file = new java.io.File("res/rom/PPN345572629_0004-600/PPN345572629_0004-0001.xml")
+          val page : Page = Page.fromPdf("res/rom/PPN345572629_0004/PPN345572629_0004-0001.pdf")
+          val file = new java.io.File("res/rom/PPN345572629_0004/PPN345572629_0004-0001.xml")
           val root = page.save(file)
           val uri = file.toURI.toURL.toURI
           expect(true) {root.size > 0}

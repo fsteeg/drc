@@ -15,6 +15,8 @@ import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.core.contexts.IContextConstants;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine;
+import org.eclipse.e4.ui.internal.workbench.swt.ResourceUtility;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.MContext;
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
@@ -23,9 +25,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindowElement;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.IStylingEngine;
-import org.eclipse.e4.ui.workbench.swt.internal.PartRenderingEngine;
-import org.eclipse.e4.ui.workbench.swt.internal.ResourceUtility;
-import org.eclipse.e4.workbench.ui.IResourceUtiltities;
+import org.eclipse.e4.ui.workbench.IResourceUtilities;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.swt.widgets.Display;
 import org.junit.After;
@@ -49,7 +49,7 @@ public final class TestDrcUi extends TestDrcHeadless {
 
   @Before @Override public void setUp() throws Exception {
     Assert.assertTrue("Tests should run as JUnit Plug-in Tests", Platform.isRunning());
-    bundleContext = Activator.getDefault().getBundle().getBundleContext();
+    bundleContext = DrcUiActivator.instance().getBundle().getBundleContext();
     display = Display.getDefault();
     super.setUp();
     while (display.readAndDispatch()) {};
@@ -64,7 +64,7 @@ public final class TestDrcUi extends TestDrcHeadless {
   }
   
   @Test public void bundleContext() {
-    Assert.assertEquals(Activator.PLUGIN_ID, bundleContext.getBundle().getSymbolicName());
+    Assert.assertEquals(DrcUiActivator.PLUGIN_ID, bundleContext.getBundle().getSymbolicName());
   }
 
   @Test public void firstPartGetContext() {
@@ -93,7 +93,7 @@ public final class TestDrcUi extends TestDrcHeadless {
   }
 
   @Test public void getSelectionUi() throws Exception {
-    Assert.assertNotNull(getActiveChildContext(application).get(IServiceConstants.SELECTION));
+    Assert.assertNotNull(getActiveChildContext(application).get(IServiceConstants.ACTIVE_SELECTION));
   }
 
   @Test public void getActiveChildUi() throws Exception {
@@ -150,7 +150,7 @@ public final class TestDrcUi extends TestDrcHeadless {
       public void run() {
         contexts[0] = TestDrcUi.super.createApplicationContext(osgiContext);
         contexts[0]
-            .set(IResourceUtiltities.class.getName(), new ResourceUtility(getPackageAdmin()));
+            .set(IResourceUtilities.class.getName(), new ResourceUtility(/*getPackageAdmin()*/));
         contexts[0].set(IStylingEngine.class.getName(), new IStylingEngine() {
           public void style(final Object widget) {}
 

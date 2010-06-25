@@ -9,11 +9,13 @@ package de.uni_koeln.ub.drc.data
 
 import org.scalatest._
 import org.scalatest.matchers._
-
+import org.scalatest.junit.JUnitRunner
+import org.junit.runner.RunWith
 /**
  * @see Index
  * @author Fabian Steeg (fsteeg)
  */
+@RunWith(classOf[JUnitRunner])
 class SpecIndex extends Spec with ShouldMatchers {
     
     val pages = Page.mock :: Page.mock :: Page(Word("test", Box(0,0,0,0)) :: Nil, "mock") :: Nil
@@ -31,7 +33,7 @@ class SpecIndex extends Spec with ShouldMatchers {
     }
     
     describe("The Index companion object") {
-        val folder = "res/rom/PPN345572629_0004-600"
+        val folder = "res/rom/PPN345572629_0004"
         it("provides initial import of PDF documents") {
             Index.initialImport(folder)
         }
