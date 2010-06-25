@@ -24,7 +24,9 @@ import javax.security.auth.spi.LoginModule;
 
 import org.eclipse.swt.SWT;
 
+import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.ui.views.EditComposite;
 
 /**
  * Simple login module implementation using credentials from a properties file.
@@ -36,7 +38,7 @@ public final class SimpleLoginModule implements LoginModule {
   private CallbackHandler callbackHandler;
   private boolean loggedIn;
   private Subject subject;
-  private String currentUser;
+  private User currentUser;
   private Properties users;
 
   /**
@@ -85,7 +87,8 @@ public final class SimpleLoginModule implements LoginModule {
     String pass = passCallback.getPassword() != null ? new String(passCallback.getPassword()) : "";
     if (validLogin(name, pass)) {
       loggedIn = true;
-      currentUser = name;
+      currentUser = User.withId(name, DrcUiActivator.instance().fileFromBundle("users").getAbsolutePath()); 
+      System.out.println("Logged in: " + currentUser);
     }
     return loggedIn;
   }
@@ -100,7 +103,10 @@ public final class SimpleLoginModule implements LoginModule {
    */
   @Override
   public boolean commit() throws LoginException {
-    subject.getPublicCredentials().add(currentUser);
+    subject.getPublicCredentials()
+        .add(
+            String.format("%s from %s (%s)", currentUser.name(), currentUser.region(),
+                currentUser.id()));
     subject.getPrivateCredentials().add(SWT.getPlatform());
     return loggedIn;
   }

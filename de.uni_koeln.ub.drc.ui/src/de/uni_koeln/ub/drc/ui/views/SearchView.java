@@ -41,6 +41,7 @@ import org.eclipse.swt.widgets.Text;
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.SearchOption;
+import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
  * View containing a search field and a table viewer displaying pages.
@@ -136,7 +137,7 @@ public final class SearchView {
     private Index index;
 
     private SearchViewModelProvider() {
-      index = new Index(Index.loadPagesFromFolder(EditComposite.fileFromBundle("pages")
+      index = new Index(Index.loadPagesFromFolder(DrcUiActivator.instance().fileFromBundle("pages")
           .getAbsolutePath()));
     }
 

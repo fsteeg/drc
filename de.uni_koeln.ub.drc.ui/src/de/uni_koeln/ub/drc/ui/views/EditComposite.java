@@ -7,17 +7,11 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.views;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -34,7 +28,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
-import org.osgi.framework.Bundle;
 
 import scala.collection.JavaConversions;
 import de.uni_koeln.ub.drc.data.Page;
@@ -183,22 +176,5 @@ public final class EditComposite extends Composite {
         text.setToolTipText(((Word) text.getData()).formattedHistory());
       }
     });
-  }
-
-  static File fileFromBundle(final String location) { // TODO move to a utils class
-    Bundle bundle = Platform.getBundle("de.uni_koeln.ub.drc.ui"); //$NON-NLS-1$
-    try {
-      URL resource = bundle.getResource(location);
-      if (resource == null) {
-        System.err.println("Could not resolve: " + location);
-        return null;
-      }
-      return new File(FileLocator.resolve(resource).toURI());
-    } catch (URISyntaxException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    return null;
   }
 }

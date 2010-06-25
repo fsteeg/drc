@@ -7,16 +7,22 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import javax.security.auth.login.LoginException;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.equinox.security.auth.ILoginContext;
 import org.eclipse.equinox.security.auth.LoginContextFactory;
 import org.eclipse.jface.dialogs.ErrorDialog;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -74,6 +80,26 @@ public final class DrcUiActivator extends Plugin {
   public void stop(final BundleContext context) throws Exception {
     instance = null;
     super.stop(context);
+  }
+
+  /**
+   * @param location The name of the file to retrieve, relative to the bundle root
+   * @return The file at the given location
+   */
+  public File fileFromBundle(final String location) {
+    try {
+      URL resource = getBundle().getResource(location);
+      if (resource == null) {
+        System.err.println("Could not resolve: " + location);
+        return null;
+      }
+      return new File(FileLocator.resolve(resource).toURI());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
 }
