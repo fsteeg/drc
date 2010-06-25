@@ -21,11 +21,10 @@ class SpecPage extends Spec with ShouldMatchers {
 
   val file: java.io.File = java.io.File.createTempFile("testing", "scala")
   file.deleteOnExit
+  val page = Page(List(Word("test", Box(1,1,1,1))), "mock")
   
   describe("A Page") {
     
-    val page = Page(List(Word("test", Box(1,1,1,1))), "mock")
-      
     it("should contain words") { 
         expect(1) { page.words.size } 
     }
@@ -49,6 +48,10 @@ class SpecPage extends Spec with ShouldMatchers {
       val words: List[Word] = Page.load(file).words
       expect(Page.mock.words.size) { words.size }
       expect(Page.mock.words.toList) { words.toList }
+    }
+    
+    it("provides roundtrip serialization") {
+      expect(page) { Page.fromXml(page.toXml, page.id) }
     }
     
     it("should serialize and deserialize added modifications") {

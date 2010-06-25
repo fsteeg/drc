@@ -13,13 +13,13 @@ import scala.xml._
  * author of that modification (to maintain a modificaiton history for review and correction).
  * 
  * @param form The new word form for this modification
- * @param author The author of the modification // TODO will be a complex type with location, rights
+ * @param author The ID of the modification author
  * @author Fabian Steeg (fsteeg)
  */
 case class Modification(form:String, author:String) {
-    def toXml = <modification> <form> {form} </form> <author> {author} </author> </modification>
+    def toXml = <modification form={form} author={author} />
 }
 
 object Modification {
-    def fromXml(mod:Node) = Modification( (mod\"form").text.trim, (mod\"author").text.trim )
+    def fromXml(mod:Node) = Modification( (mod\"@form").text.trim, (mod\"@author").text.trim )
 }
