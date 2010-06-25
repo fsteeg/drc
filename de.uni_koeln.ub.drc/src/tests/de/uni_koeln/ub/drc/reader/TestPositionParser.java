@@ -23,7 +23,9 @@ public final class TestPositionParser {
 
   @Test
   public void parse() {
+    
     for (Paragraph p : paragraphs) {
+     
       List<Line> lines = p.getLines();
       for (Line line : lines) {
         Point start = line.getStartPoint();
@@ -58,6 +60,7 @@ public final class TestPositionParser {
   @Test
   public void fontSizeScaling() {
     Line testLine = paragraphs.get(1).getLines().get(0);
+    System.out.println(testLine.getText());
     int fontSize1 = testLine.getFontSizeScaled(1000);
     int fontSize2 = testLine.getFontSizeScaled(900);
     Assert.assertTrue(String.format("Font size %s should be larger than %s", fontSize1, fontSize2),

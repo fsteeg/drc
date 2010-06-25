@@ -37,6 +37,7 @@ public final class PositionParser {
 
     while (s.hasNextLine()) {
       String line = s.nextLine().trim();
+      System.out.println(line);
       if (line.equals("BT")) {
         p = new Paragraph();
         paragraphs.add(p);
@@ -50,9 +51,11 @@ public final class PositionParser {
         String[] tokens = line.split(" ");
         float x = Float.parseFloat(tokens[4]);
         float y = Float.parseFloat(tokens[5]);
-        currentLine = new Line(reader.getPdfBox(), x, y, fontSize, new StringBuilder());
+        currentLine = new Line(reader.getPdfBox(), x, y, fontSize, new StringBuilder(),
+            new ArrayList<Float>());
         p.addLine(currentLine);
       }
+
       if (currentLine != null && line.endsWith("Tj")) {
         line = line.replaceAll("[\\(\\)]| Tj", "");
         currentLine.getText().append(line);

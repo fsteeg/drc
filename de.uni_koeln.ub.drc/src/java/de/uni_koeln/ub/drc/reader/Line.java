@@ -23,6 +23,7 @@ public final class Line {
   private int fontSize;
   private StringBuilder sb;
   private Rectangle rectangle;
+  private List<Float> wordSpaces;
 
   /**
    * @param rectangle The iText {@link Rectangle}
@@ -30,25 +31,22 @@ public final class Line {
    * @param y The Y-coordinate of the beginning of the line within the PDF document
    * @param fontSize The font size of the line
    * @param sb The {@link StringBuilder} which appends the words of the line
+   * @param wordSpaces A List of word spaces of the line
    */
   public Line(final Rectangle rectangle, final float x, final float y, final float fontSize,
-      final StringBuilder sb) {
+      final StringBuilder sb, final List<Float> wordSpaces) {
     this.rectangle = rectangle;
     this.start = new Point(x, y);
     this.fontSize = (int) fontSize;
     this.sb = sb;
+    this.wordSpaces = wordSpaces;
   }
 
   /**
-   * @return The words from the line
+   * @param wordSpace The word-spacing parameter
    */
-  public List<String> getWords() {
-    List<String> words = new ArrayList<String>();
-    String[] str = sb.toString().split(" ");
-    for (String string : str) {
-      words.add(string);
-    }
-    return words;
+  void addWordSpace(final float wordSpace) {
+    wordSpaces.add(wordSpace);
   }
 
   /**
