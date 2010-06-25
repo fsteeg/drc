@@ -20,17 +20,17 @@ public final class Paragraph {
   private List<Line> lines = new ArrayList<Line>();
 
   /**
-   * @return The Lines of a paragraph
+   * @param line The line to be added to the paragraph
    */
-  public List<Line> getLines() {
-    return lines;
+  void addLine(final Line line) {
+    lines.add(line);
   }
 
   /**
-   * @param line The line to be added to the paragraph
+   * @return The Lines of a paragraph
    */
-  public void addLine(final Line line) {
-    lines.add(line);
+  public List<Line> getLinesInParagraph() {
+    return new ArrayList<Line>(lines);
   }
 
 }

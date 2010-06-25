@@ -14,8 +14,8 @@ package de.uni_koeln.ub.drc.reader;
  */
 public final class Point {
 
-  private final float x;
-  private final float y;
+  private float x;
+  private float y;
 
   /**
    * Represents a point in the original scanned document.
@@ -42,15 +42,6 @@ public final class Point {
   }
 
   @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + Float.floatToIntBits(x);
-    result = prime * result + Float.floatToIntBits(y);
-    return result;
-  }
-
-  @Override
   public boolean equals(final Object obj) {
     if (this == obj) {
       return true;
@@ -69,6 +60,20 @@ public final class Point {
       return false;
     }
     return true;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + Float.floatToIntBits(x);
+    result = prime * result + Float.floatToIntBits(y);
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "x=" + getX() + " / y=" + getY();
   }
 
 }
