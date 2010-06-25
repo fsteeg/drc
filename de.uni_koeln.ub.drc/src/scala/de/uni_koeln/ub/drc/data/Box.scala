@@ -20,16 +20,16 @@ import scala.xml._
  */
 case class Box(x:Int, y:Int, width:Int, height:Int) {
   def toXml = 
-      <box> <x> {x} </x> <y> {y} </y> <width> {width} </width> <height> {height} </height> </box>
+      <box x={x.toString} y={y.toString} width={width.toString} height={height.toString}/>
 }
 
 object Box {
   def fromXml(box: Node): Box = {
       Box(
-          (box\"x").text.trim.toInt, 
-          (box\"y").text.trim.toInt, 
-          (box\"width").text.trim.toInt, 
-          (box\"height").text.trim.toInt
+          (box\"@x").text.trim.toInt, 
+          (box\"@y").text.trim.toInt, 
+          (box\"@width").text.trim.toInt, 
+          (box\"@height").text.trim.toInt
       )
   }
 }

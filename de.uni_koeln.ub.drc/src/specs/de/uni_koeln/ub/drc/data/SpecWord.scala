@@ -26,7 +26,7 @@ private[drc] class SpecWord extends Spec with ShouldMatchers {
         expect(Modification("test", "OCR")) { word.history(0) } 
     } 
     it("can be serialized as XML") { 
-        expect(word.original) { (word.toXml \ "original")(0).text.trim } 
+        expect(word.original) { (word.toXml \ "@original")(0).text.trim } 
     }
     it("provides edit suggestions") {
       val suggestions = Word("slaunt", Box(1,1,1,1)).suggestions

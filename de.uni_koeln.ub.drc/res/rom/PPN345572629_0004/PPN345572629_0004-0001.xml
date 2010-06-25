@@ -1,5207 +1,1390 @@
 <page>
-  <word>
-    <original> DANiEL </original>
-    <position>
-      <box>
-        <x> 214 </x>
-        <y> 430 </y>
-        <width> 143 </width>
-        <height> 41 </height>
-      </box>
-    </position>
-    <modification>
-      <form> DANiEL </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> BONiFACi. </original>
-    <position>
-      <box>
-        <x> 398 </x>
-        <y> 430 </y>
-        <width> 213 </width>
-        <height> 41 </height>
-      </box>
-    </position>
-    <modification>
-      <form> BONiFACi. </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> CatechiSmus. </original>
-    <position>
-      <box>
-        <x> 116 </x>
-        <y> 504 </y>
-        <width> 110 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> CatechiSmus. </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Lindauv </original>
-    <position>
-      <box>
-        <x> 244 </x>
-        <y> 504 </y>
-        <width> 50 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Lindauv </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> vid' </original>
-    <position>
-      <box>
-        <x> 312 </x>
-        <y> 504 </y>
-        <width> 34 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> vid' </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> igl </original>
-    <position>
-      <box>
-        <x> 364 </x>
-        <y> 504 </y>
-        <width> 13 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> igl </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Bodenfee, </original>
-    <position>
-      <box>
-        <x> 395 </x>
-        <y> 504 </y>
-        <width> 85 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Bodenfee, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> tras </original>
-    <position>
-      <box>
-        <x> 498 </x>
-        <y> 504 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> tras </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Iohann </original>
-    <position>
-      <box>
-        <x> 545 </x>
-        <y> 504 </y>
-        <width> 49 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Iohann </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Lvdvig </original>
-    <position>
-      <box>
-        <x> 612 </x>
-        <y> 504 </y>
-        <width> 41 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Lvdvig </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Brem. </original>
-    <position>
-      <box>
-        <x> 671 </x>
-        <y> 504 </y>
-        <width> 56 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Brem. </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> 1601. </original>
-    <position>
-      <box>
-        <x> 745 </x>
-        <y> 504 </y>
-        <width> 72 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> 1601. </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> \Abgedruckt </original>
-    <position>
-      <box>
-        <x> 190 </x>
-        <y> 552 </y>
-        <width> 63 </width>
-        <height> 11 </height>
-      </box>
-    </position>
-    <modification>
-      <form> \Abgedruckt </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Romania </original>
-    <position>
-      <box>
-        <x> 264 </x>
-        <y> 552 </y>
-        <width> 37 </width>
-        <height> 11 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Romania </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> IX, </original>
-    <position>
-      <box>
-        <x> 312 </x>
-        <y> 552 </y>
-        <width> 20 </width>
-        <height> 11 </height>
-      </box>
-    </position>
-    <modification>
-      <form> IX, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> 250 </original>
-    <position>
-      <box>
-        <x> 343 </x>
-        <y> 552 </y>
-        <width> 26 </width>
-        <height> 11 </height>
-      </box>
-    </position>
-    <modification>
-      <form> 250 </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ff. </original>
-    <position>
-      <box>
-        <x> 380 </x>
-        <y> 552 </y>
-        <width> 11 </width>
-        <height> 11 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ff. </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 402 </x>
-        <y> 552 </y>
-        <width> 9 </width>
-        <height> 11 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Ulrich, </original>
-    <position>
-      <box>
-        <x> 422 </x>
-        <y> 552 </y>
-        <width> 36 </width>
-        <height> 11 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Ulrich, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Rhatorom. </original>
-    <position>
-      <box>
-        <x> 469 </x>
-        <y> 552 </y>
-        <width> 52 </width>
-        <height> 11 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Rhatorom. </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Texte </original>
-    <position>
-      <box>
-        <x> 532 </x>
-        <y> 552 </y>
-        <width> 20 </width>
-        <height> 11 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Texte </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> I.\ </original>
-    <position>
-      <box>
-        <x> 563 </x>
-        <y> 552 </y>
-        <width> 20 </width>
-        <height> 11 </height>
-      </box>
-    </position>
-    <modification>
-      <form> I.\ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> [f. </original>
-    <position>
-      <box>
-        <x> 80 </x>
-        <y> 596 </y>
-        <width> 31 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> [f. </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ar] </original>
-    <position>
-      <box>
-        <x> 129 </x>
-        <y> 596 </y>
-        <width> 32 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ar] </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ALS </original>
-    <position>
-      <box>
-        <x> 179 </x>
-        <y> 596 </y>
-        <width> 32 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ALS </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> BEiNADATCHEVS, </original>
-    <position>
-      <box>
-        <x> 229 </x>
-        <y> 596 </y>
-        <width> 178 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> BEiNADATCHEVS, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> NiEBELS, </original>
-    <position>
-      <box>
-        <x> 425 </x>
-        <y> 596 </y>
-        <width> 92 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> NiEBELS, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> STATTEVELS, </original>
-    <position>
-      <box>
-        <x> 535 </x>
-        <y> 596 </y>
-        <width> 115 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> STATTEVELS, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> PRVS, </original>
-    <position>
-      <box>
-        <x> 668 </x>
-        <y> 596 </y>
-        <width> 72 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> PRVS, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> SABiGS </original>
-    <position>
-      <box>
-        <x> 81 </x>
-        <y> 624 </y>
-        <width> 74 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> SABiGS </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ET </original>
-    <position>
-      <box>
-        <x> 173 </x>
-        <y> 624 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ET </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> HVNDREFELS </original>
-    <position>
-      <box>
-        <x> 209 </x>
-        <y> 624 </y>
-        <width> 122 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> HVNDREFELS </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> S. </original>
-    <position>
-      <box>
-        <x> 349 </x>
-        <y> 624 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> S. </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Vugaa </original>
-    <position>
-      <box>
-        <x> 396 </x>
-        <y> 624 </y>
-        <width> 50 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Vugaa </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp;^ </original>
-    <position>
-      <box>
-        <x> 464 </x>
-        <y> 624 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp;^ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Signurs </original>
-    <position>
-      <box>
-        <x> 511 </x>
-        <y> 624 </y>
-        <width> 61 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Signurs </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> d&quot;üna </original>
-    <position>
-      <box>
-        <x> 590 </x>
-        <y> 624 </y>
-        <width> 50 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> d&quot;üna </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> intiera </original>
-    <position>
-      <box>
-        <x> 658 </x>
-        <y> 624 </y>
-        <width> 41 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> intiera </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Dret- </original>
-    <position>
-      <box>
-        <x> 717 </x>
-        <y> 624 </y>
-        <width> 49 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Dret- </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> 5 </original>
-    <position>
-      <box>
-        <x> 784 </x>
-        <y> 624 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> 5 </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> chüra </original>
-    <position>
-      <box>
-        <x> 81 </x>
-        <y> 647 </y>
-        <width> 55 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> chüra </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 158 </x>
-        <y> 647 </y>
-        <width> 18 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Commün </original>
-    <position>
-      <box>
-        <x> 198 </x>
-        <y> 647 </y>
-        <width> 73 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Commün </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> da </original>
-    <position>
-      <box>
-        <x> 293 </x>
-        <y> 647 </y>
-        <width> 22 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> da </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> FürStenow, </original>
-    <position>
-      <box>
-        <x> 337 </x>
-        <y> 647 </y>
-        <width> 108 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> FürStenow, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> als </original>
-    <position>
-      <box>
-        <x> 467 </x>
-        <y> 647 </y>
-        <width> 24 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> als </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> meas </original>
-    <position>
-      <box>
-        <x> 513 </x>
-        <y> 647 </y>
-        <width> 44 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> meas </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> orav^unt </original>
-    <position>
-      <box>
-        <x> 579 </x>
-        <y> 647 </y>
-        <width> 86 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> orav^unt </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Hundrevels </original>
-    <position>
-      <box>
-        <x> 687 </x>
-        <y> 647 </y>
-        <width> 108 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Hundrevels </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 817 </x>
-        <y> 647 </y>
-        <width> 18 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> chears </original>
-    <position>
-      <box>
-        <x> 857 </x>
-        <y> 647 </y>
-        <width> 66 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> chears </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Singnurs </original>
-    <position>
-      <box>
-        <x> 81 </x>
-        <y> 675 </y>
-        <width> 86 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Singnurs </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 189 </x>
-        <y> 675 </y>
-        <width> 18 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> buns </original>
-    <position>
-      <box>
-        <x> 229 </x>
-        <y> 675 </y>
-        <width> 44 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> buns </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> amigs, </original>
-    <position>
-      <box>
-        <x> 295 </x>
-        <y> 675 </y>
-        <width> 64 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> amigs, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Salüd </original>
-    <position>
-      <box>
-        <x> 381 </x>
-        <y> 675 </y>
-        <width> 53 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Salüd </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> da </original>
-    <position>
-      <box>
-        <x> 456 </x>
-        <y> 675 </y>
-        <width> 22 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> da </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Deu, </original>
-    <position>
-      <box>
-        <x> 500 </x>
-        <y> 675 </y>
-        <width> 57 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Deu, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> pa^ch </original>
-    <position>
-      <box>
-        <x> 579 </x>
-        <y> 675 </y>
-        <width> 62 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> pa^ch </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 663 </x>
-        <y> 675 </y>
-        <width> 18 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> beinesser </original>
-    <position>
-      <box>
-        <x> 703 </x>
-        <y> 675 </y>
-        <width> 90 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> beinesser </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> tras </original>
-    <position>
-      <box>
-        <x> 815 </x>
-        <y> 675 </y>
-        <width> 35 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> tras </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> no^s </original>
-    <position>
-      <box>
-        <x> 872 </x>
-        <y> 675 </y>
-        <width> 51 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> no^s </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Signer </original>
-    <position>
-      <box>
-        <x> 81 </x>
-        <y> 702 </y>
-        <width> 64 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Signer </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> lesuM </original>
-    <position>
-      <box>
-        <x> 167 </x>
-        <y> 702 </y>
-        <width> 53 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> lesuM </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Christum. </original>
-    <position>
-      <box>
-        <x> 242 </x>
-        <y> 702 </y>
-        <width> 95 </width>
-        <height> 22 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Christum. </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Slaunt </original>
-    <position>
-      <box>
-        <x> 127 </x>
-        <y> 751 </y>
-        <width> 45 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Slaunt </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cha </original>
-    <position>
-      <box>
-        <x> 190 </x>
-        <y> 751 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cha </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> la </original>
-    <position>
-      <box>
-        <x> 235 </x>
-        <y> 751 </y>
-        <width> 11 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> la </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Sanghia </original>
-    <position>
-      <box>
-        <x> 264 </x>
-        <y> 751 </y>
-        <width> 61 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Sanghia </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Scrittüra, </original>
-    <position>
-      <box>
-        <x> 343 </x>
-        <y> 751 </y>
-        <width> 79 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Scrittüra, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Hundrevels </original>
-    <position>
-      <box>
-        <x> 440 </x>
-        <y> 751 </y>
-        <width> 88 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Hundrevels </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Signurs, </original>
-    <position>
-      <box>
-        <x> 546 </x>
-        <y> 751 </y>
-        <width> 76 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Signurs, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> da </original>
-    <position>
-      <box>
-        <x> 640 </x>
-        <y> 751 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> da </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> per </original>
-    <position>
-      <box>
-        <x> 676 </x>
-        <y> 751 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> per </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> tutt </original>
-    <position>
-      <box>
-        <x> 721 </x>
-        <y> 751 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> tutt </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> igl </original>
-    <position>
-      <box>
-        <x> 753 </x>
-        <y> 751 </y>
-        <width> 13 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> igl </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Mund </original>
-    <position>
-      <box>
-        <x> 82 </x>
-        <y> 778 </y>
-        <width> 41 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Mund </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> eintin </original>
-    <position>
-      <box>
-        <x> 141 </x>
-        <y> 778 </y>
-        <width> 32 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> eintin </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> da </original>
-    <position>
-      <box>
-        <x> 191 </x>
-        <y> 778 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> da </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> tuttas </original>
-    <position>
-      <box>
-        <x> 227 </x>
-        <y> 778 </y>
-        <width> 32 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> tuttas </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> forts </original>
-    <position>
-      <box>
-        <x> 277 </x>
-        <y> 778 </y>
-        <width> 31 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> forts </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> linguaghs </original>
-    <position>
-      <box>
-        <x> 326 </x>
-        <y> 778 </y>
-        <width> 67 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> linguaghs </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ees </original>
-    <position>
-      <box>
-        <x> 411 </x>
-        <y> 778 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ees </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> rafad' </original>
-    <position>
-      <box>
-        <x> 456 </x>
-        <y> 778 </y>
-        <width> 52 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> rafad' </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ora </original>
-    <position>
-      <box>
-        <x> 526 </x>
-        <y> 778 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ora </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 571 </x>
-        <y> 778 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> meffa </original>
-    <position>
-      <box>
-        <x> 603 </x>
-        <y> 778 </y>
-        <width> 31 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> meffa </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> per </original>
-    <position>
-      <box>
-        <x> 652 </x>
-        <y> 778 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> per </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Scritt, </original>
-    <position>
-      <box>
-        <x> 697 </x>
-        <y> 778 </y>
-        <width> 52 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Scritt, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> da </original>
-    <position>
-      <box>
-        <x> 767 </x>
-        <y> 778 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> da </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> 10 </original>
-    <position>
-      <box>
-        <x> 803 </x>
-        <y> 778 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> 10 </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> tal </original>
-    <position>
-      <box>
-        <x> 81 </x>
-        <y> 806 </y>
-        <width> 13 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> tal </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Sort </original>
-    <position>
-      <box>
-        <x> 112 </x>
-        <y> 806 </y>
-        <width> 34 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Sort </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 164 </x>
-        <y> 806 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> afchi </original>
-    <position>
-      <box>
-        <x> 196 </x>
-        <y> 806 </y>
-        <width> 31 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> afchi </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> claer, </original>
-    <position>
-      <box>
-        <x> 245 </x>
-        <y> 806 </y>
-        <width> 52 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> claer, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cha </original>
-    <position>
-      <box>
-        <x> 315 </x>
-        <y> 806 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cha </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> bigchia </original>
-    <position>
-      <box>
-        <x> 360 </x>
-        <y> 806 </y>
-        <width> 49 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> bigchia </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> namae </original>
-    <position>
-      <box>
-        <x> 427 </x>
-        <y> 806 </y>
-        <width> 45 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> namae </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ils </original>
-    <position>
-      <box>
-        <x> 490 </x>
-        <y> 806 </y>
-        <width> 13 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ils </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Docturs </original>
-    <position>
-      <box>
-        <x> 521 </x>
-        <y> 806 </y>
-        <width> 61 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Docturs </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 600 </x>
-        <y> 806 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Mussaas </original>
-    <position>
-      <box>
-        <x> 632 </x>
-        <y> 806 </y>
-        <width> 68 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Mussaas </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> da </original>
-    <position>
-      <box>
-        <x> 718 </x>
-        <y> 806 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> da </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> quella, </original>
-    <position>
-      <box>
-        <x> 754 </x>
-        <y> 806 </y>
-        <width> 54 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> quella, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> la </original>
-    <position>
-      <box>
-        <x> 82 </x>
-        <y> 833 </y>
-        <width> 11 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> la </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cognuSchan, </original>
-    <position>
-      <box>
-        <x> 111 </x>
-        <y> 833 </y>
-        <width> 110 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cognuSchan, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> mò </original>
-    <position>
-      <box>
-        <x> 239 </x>
-        <y> 833 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> mò </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> era </original>
-    <position>
-      <box>
-        <x> 275 </x>
-        <y> 833 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> era </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> auter </original>
-    <position>
-      <box>
-        <x> 320 </x>
-        <y> 833 </y>
-        <width> 38 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> auter </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> commün </original>
-    <position>
-      <box>
-        <x> 376 </x>
-        <y> 833 </y>
-        <width> 54 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> commün </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> pievel </original>
-    <position>
-      <box>
-        <x> 448 </x>
-        <y> 833 </y>
-        <width> 40 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> pievel </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 506 </x>
-        <y> 833 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> infa,unts </original>
-    <position>
-      <box>
-        <x> 538 </x>
-        <y> 833 </y>
-        <width> 65 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> infa,unts </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> tras </original>
-    <position>
-      <box>
-        <x> 621 </x>
-        <y> 833 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> tras </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> las </original>
-    <position>
-      <box>
-        <x> 668 </x>
-        <y> 833 </y>
-        <width> 20 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> las </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> fchkolas </original>
-    <position>
-      <box>
-        <x> 706 </x>
-        <y> 833 </y>
-        <width> 58 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> fchkolas </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 782 </x>
-        <y> 833 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> CatechiSems, </original>
-    <position>
-      <box>
-        <x> 83 </x>
-        <y> 861 </y>
-        <width> 110 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> CatechiSems, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> quegl </original>
-    <position>
-      <box>
-        <x> 211 </x>
-        <y> 861 </y>
-        <width> 38 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> quegl </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ees, </original>
-    <position>
-      <box>
-        <x> 267 </x>
-        <y> 861 </y>
-        <width> 41 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ees, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> curtas </original>
-    <position>
-      <box>
-        <x> 326 </x>
-        <y> 861 </y>
-        <width> 47 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> curtas </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> formas </original>
-    <position>
-      <box>
-        <x> 391 </x>
-        <y> 861 </y>
-        <width> 47 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> formas </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 456 </x>
-        <y> 861 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> conpigliameints </original>
-    <position>
-      <box>
-        <x> 488 </x>
-        <y> 861 </y>
-        <width> 99 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> conpigliameints </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> da </original>
-    <position>
-      <box>
-        <x> 605 </x>
-        <y> 861 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> da </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> tutts </original>
-    <position>
-      <box>
-        <x> 641 </x>
-        <y> 861 </y>
-        <width> 23 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> tutts </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> principals </original>
-    <position>
-      <box>
-        <x> 682 </x>
-        <y> 861 </y>
-        <width> 68 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> principals </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> punctgs </original>
-    <position>
-      <box>
-        <x> 83 </x>
-        <y> 888 </y>
-        <width> 56 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> punctgs </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> della </original>
-    <position>
-      <box>
-        <x> 157 </x>
-        <y> 888 </y>
-        <width> 31 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> della </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ChriStianevla </original>
-    <position>
-      <box>
-        <x> 206 </x>
-        <y> 888 </y>
-        <width> 99 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ChriStianevla </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Cretta </original>
-    <position>
-      <box>
-        <x> 323 </x>
-        <y> 888 </y>
-        <width> 45 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Cretta </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 386 </x>
-        <y> 888 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Religiun </original>
-    <position>
-      <box>
-        <x> 418 </x>
-        <y> 888 </y>
-        <width> 56 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Religiun </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> vegnan </original>
-    <position>
-      <box>
-        <x> 492 </x>
-        <y> 888 </y>
-        <width> 54 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> vegnan </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> mussaas </original>
-    <position>
-      <box>
-        <x> 564 </x>
-        <y> 888 </y>
-        <width> 63 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> mussaas </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 645 </x>
-        <y> 888 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> intragui- </original>
-    <position>
-      <box>
-        <x> 677 </x>
-        <y> 888 </y>
-        <width> 65 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> intragui- </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> daas, </original>
-    <position>
-      <box>
-        <x> 84 </x>
-        <y> 916 </y>
-        <width> 50 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> daas, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ch'els </original>
-    <position>
-      <box>
-        <x> 152 </x>
-        <y> 916 </y>
-        <width> 52 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ch'els </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> quella </original>
-    <position>
-      <box>
-        <x> 222 </x>
-        <y> 916 </y>
-        <width> 40 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> quella </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ear </original>
-    <position>
-      <box>
-        <x> 280 </x>
-        <y> 916 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ear </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cognuSchan </original>
-    <position>
-      <box>
-        <x> 325 </x>
-        <y> 916 </y>
-        <width> 95 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cognuSchan </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 438 </x>
-        <y> 916 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> tier </original>
-    <position>
-      <box>
-        <x> 470 </x>
-        <y> 916 </y>
-        <width> 22 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> tier </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> üna </original>
-    <position>
-      <box>
-        <x> 510 </x>
-        <y> 916 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> üna </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> veera </original>
-    <position>
-      <box>
-        <x> 555 </x>
-        <y> 916 </y>
-        <width> 45 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> veera </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cretta </original>
-    <position>
-      <box>
-        <x> 618 </x>
-        <y> 916 </y>
-        <width> 40 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cretta </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> vegnan </original>
-    <position>
-      <box>
-        <x> 676 </x>
-        <y> 916 </y>
-        <width> 54 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> vegnan </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> tratgs </original>
-    <position>
-      <box>
-        <x> 748 </x>
-        <y> 916 </y>
-        <width> 40 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> tratgs </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> 15 </original>
-    <position>
-      <box>
-        <x> 806 </x>
-        <y> 916 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> 15 </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Sij: </original>
-    <position>
-      <box>
-        <x> 84 </x>
-        <y> 944 </y>
-        <width> 32 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Sij: </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Scò </original>
-    <position>
-      <box>
-        <x> 134 </x>
-        <y> 944 </y>
-        <width> 32 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Scò </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> nus </original>
-    <position>
-      <box>
-        <x> 184 </x>
-        <y> 944 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> nus </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> bein </original>
-    <position>
-      <box>
-        <x> 229 </x>
-        <y> 944 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> bein </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> veSein, </original>
-    <position>
-      <box>
-        <x> 276 </x>
-        <y> 944 </y>
-        <width> 67 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> veSein, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cha </original>
-    <position>
-      <box>
-        <x> 361 </x>
-        <y> 944 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cha </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> nua </original>
-    <position>
-      <box>
-        <x> 406 </x>
-        <y> 944 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> nua </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cha </original>
-    <position>
-      <box>
-        <x> 451 </x>
-        <y> 944 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cha </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> nus </original>
-    <position>
-      <box>
-        <x> 496 </x>
-        <y> 944 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> nus </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> vegnign </original>
-    <position>
-      <box>
-        <x> 541 </x>
-        <y> 944 </y>
-        <width> 56 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> vegnign </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> or'da </original>
-    <position>
-      <box>
-        <x> 615 </x>
-        <y> 944 </y>
-        <width> 50 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> or'da </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> noSfa </original>
-    <position>
-      <box>
-        <x> 683 </x>
-        <y> 944 </y>
-        <width> 43 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> noSfa </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> terra, </original>
-    <position>
-      <box>
-        <x> 744 </x>
-        <y> 944 </y>
-        <width> 52 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> terra, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cateins </original>
-    <position>
-      <box>
-        <x> 814 </x>
-        <y> 944 </y>
-        <width> 49 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cateins </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cha </original>
-    <position>
-      <box>
-        <x> 84 </x>
-        <y> 971 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cha </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> bunameng </original>
-    <position>
-      <box>
-        <x> 129 </x>
-        <y> 971 </y>
-        <width> 72 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> bunameng </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> mün[fol. </original>
-    <position>
-      <box>
-        <x> 219 </x>
-        <y> 971 </y>
-        <width> 68 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> mün[fol. </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> av]chiadün </original>
-    <position>
-      <box>
-        <x> 305 </x>
-        <y> 971 </y>
-        <width> 88 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> av]chiadün </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> fa </original>
-    <position>
-      <box>
-        <x> 411 </x>
-        <y> 971 </y>
-        <width> 11 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> fa </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ün </original>
-    <position>
-      <box>
-        <x> 440 </x>
-        <y> 971 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ün </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> qual </original>
-    <position>
-      <box>
-        <x> 476 </x>
-        <y> 971 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> qual </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> chiaufa </original>
-    <position>
-      <box>
-        <x> 523 </x>
-        <y> 971 </y>
-        <width> 49 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> chiaufa </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> or' </original>
-    <position>
-      <box>
-        <x> 590 </x>
-        <y> 971 </y>
-        <width> 32 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> or' </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> d'la </original>
-    <position>
-      <box>
-        <x> 640 </x>
-        <y> 971 </y>
-        <width> 34 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> d'la </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Scrittüra </original>
-    <position>
-      <box>
-        <x> 692 </x>
-        <y> 971 </y>
-        <width> 65 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Scrittüra </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> fanghia: </original>
-    <position>
-      <box>
-        <x> 84 </x>
-        <y> 999 </y>
-        <width> 63 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> fanghia: </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Schi </original>
-    <position>
-      <box>
-        <x> 165 </x>
-        <y> 999 </y>
-        <width> 34 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Schi </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ees </original>
-    <position>
-      <box>
-        <x> 217 </x>
-        <y> 999 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ees </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> igl </original>
-    <position>
-      <box>
-        <x> 262 </x>
-        <y> 999 </y>
-        <width> 13 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> igl </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> pija </original>
-    <position>
-      <box>
-        <x> 293 </x>
-        <y> 999 </y>
-        <width> 22 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> pija </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ear </original>
-    <position>
-      <box>
-        <x> 333 </x>
-        <y> 999 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ear </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> per </original>
-    <position>
-      <box>
-        <x> 378 </x>
-        <y> 999 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> per </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> bafünghs </original>
-    <position>
-      <box>
-        <x> 423 </x>
-        <y> 999 </y>
-        <width> 65 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> bafünghs </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cha </original>
-    <position>
-      <box>
-        <x> 506 </x>
-        <y> 999 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cha </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> nuö </original>
-    <position>
-      <box>
-        <x> 551 </x>
-        <y> 999 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> nuö </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> la </original>
-    <position>
-      <box>
-        <x> 596 </x>
-        <y> 999 </y>
-        <width> 11 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> la </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> noffa </original>
-    <position>
-      <box>
-        <x> 625 </x>
-        <y> 999 </y>
-        <width> 31 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> noffa </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Giuventütna </original>
-    <position>
-      <box>
-        <x> 674 </x>
-        <y> 999 </y>
-        <width> 83 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Giuventütna </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> eintin </original>
-    <position>
-      <box>
-        <x> 85 </x>
-        <y> 1026 </y>
-        <width> 32 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> eintin </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> veera </original>
-    <position>
-      <box>
-        <x> 135 </x>
-        <y> 1026 </y>
-        <width> 45 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> veera </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cretta, </original>
-    <position>
-      <box>
-        <x> 198 </x>
-        <y> 1026 </y>
-        <width> 54 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cretta, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> dretgia </original>
-    <position>
-      <box>
-        <x> 270 </x>
-        <y> 1026 </y>
-        <width> 49 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> dretgia </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cognufchientfcha </original>
-    <position>
-      <box>
-        <x> 337 </x>
-        <y> 1026 </y>
-        <width> 115 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cognufchientfcha </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> da </original>
-    <position>
-      <box>
-        <x> 470 </x>
-        <y> 1026 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> da </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Deu, </original>
-    <position>
-      <box>
-        <x> 506 </x>
-        <y> 1026 </y>
-        <width> 47 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Deu, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> buna </original>
-    <position>
-      <box>
-        <x> 571 </x>
-        <y> 1026 </y>
-        <width> 36 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> buna </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 625 </x>
-        <y> 1026 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> defcheinta </original>
-    <position>
-      <box>
-        <x> 657 </x>
-        <y> 1026 </y>
-        <width> 68 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> defcheinta </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> manauntza </original>
-    <position>
-      <box>
-        <x> 85 </x>
-        <y> 1054 </y>
-        <width> 74 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> manauntza </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> della </original>
-    <position>
-      <box>
-        <x> 177 </x>
-        <y> 1054 </y>
-        <width> 31 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> della </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> vita </original>
-    <position>
-      <box>
-        <x> 226 </x>
-        <y> 1054 </y>
-        <width> 22 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> vita </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> tragian </original>
-    <position>
-      <box>
-        <x> 266 </x>
-        <y> 1054 </y>
-        <width> 49 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> tragian </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> fij. </original>
-    <position>
-      <box>
-        <x> 333 </x>
-        <y> 1054 </y>
-        <width> 20 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> fij. </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Siaunt </original>
-    <position>
-      <box>
-        <x> 371 </x>
-        <y> 1054 </y>
-        <width> 45 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Siaunt </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cha </original>
-    <position>
-      <box>
-        <x> 434 </x>
-        <y> 1054 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cha </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> la </original>
-    <position>
-      <box>
-        <x> 479 </x>
-        <y> 1054 </y>
-        <width> 11 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> la </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> experientia </original>
-    <position>
-      <box>
-        <x> 508 </x>
-        <y> 1054 </y>
-        <width> 77 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> experientia </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> da </original>
-    <position>
-      <box>
-        <x> 603 </x>
-        <y> 1054 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> da </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> münchia </original>
-    <position>
-      <box>
-        <x> 639 </x>
-        <y> 1054 </y>
-        <width> 56 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> münchia </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> gij </original>
-    <position>
-      <box>
-        <x> 713 </x>
-        <y> 1054 </y>
-        <width> 13 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> gij </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> 20 </original>
-    <position>
-      <box>
-        <x> 744 </x>
-        <y> 1054 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> 20 </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ans </original>
-    <position>
-      <box>
-        <x> 86 </x>
-        <y> 1081 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ans </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> muffa, </original>
-    <position>
-      <box>
-        <x> 131 </x>
-        <y> 1081 </y>
-        <width> 45 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> muffa, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cha </original>
-    <position>
-      <box>
-        <x> 194 </x>
-        <y> 1081 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cha </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> pür </original>
-    <position>
-      <box>
-        <x> 239 </x>
-        <y> 1081 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> pür </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> lura </original>
-    <position>
-      <box>
-        <x> 284 </x>
-        <y> 1081 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> lura </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ün </original>
-    <position>
-      <box>
-        <x> 331 </x>
-        <y> 1081 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ün </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> pievel </original>
-    <position>
-      <box>
-        <x> 367 </x>
-        <y> 1081 </y>
-        <width> 40 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> pievel </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 425 </x>
-        <y> 1081 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Regemeint </original>
-    <position>
-      <box>
-        <x> 457 </x>
-        <y> 1081 </y>
-        <width> 72 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Regemeint </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ün </original>
-    <position>
-      <box>
-        <x> 547 </x>
-        <y> 1081 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ün </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ventürevel </original>
-    <position>
-      <box>
-        <x> 583 </x>
-        <y> 1081 </y>
-        <width> 76 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ventürevel </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 677 </x>
-        <y> 1081 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> pafchevel </original>
-    <position>
-      <box>
-        <x> 709 </x>
-        <y> 1081 </y>
-        <width> 67 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> pafchevel </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> beinftadi </original>
-    <position>
-      <box>
-        <x> 86 </x>
-        <y> 1109 </y>
-        <width> 52 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> beinftadi </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 156 </x>
-        <y> 1109 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> bein </original>
-    <position>
-      <box>
-        <x> 188 </x>
-        <y> 1109 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> bein </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> effer </original>
-    <position>
-      <box>
-        <x> 235 </x>
-        <y> 1109 </y>
-        <width> 31 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> effer </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ünandretg </original>
-    <position>
-      <box>
-        <x> 284 </x>
-        <y> 1109 </y>
-        <width> 74 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ünandretg </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> fa </original>
-    <position>
-      <box>
-        <x> 376 </x>
-        <y> 1109 </y>
-        <width> 11 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> fa </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> gudêr, </original>
-    <position>
-      <box>
-        <x> 405 </x>
-        <y> 1109 </y>
-        <width> 59 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> gudêr, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cur </original>
-    <position>
-      <box>
-        <x> 482 </x>
-        <y> 1109 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cur </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cha </original>
-    <position>
-      <box>
-        <x> 527 </x>
-        <y> 1109 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cha </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> eintin </original>
-    <position>
-      <box>
-        <x> 572 </x>
-        <y> 1109 </y>
-        <width> 32 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> eintin </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> las </original>
-    <position>
-      <box>
-        <x> 622 </x>
-        <y> 1109 </y>
-        <width> 20 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> las </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Bafelgias, </original>
-    <position>
-      <box>
-        <x> 660 </x>
-        <y> 1109 </y>
-        <width> 79 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Bafelgias, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> quegl </original>
-    <position>
-      <box>
-        <x> 86 </x>
-        <y> 1136 </y>
-        <width> 38 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> quegl </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ees </original>
-    <position>
-      <box>
-        <x> 142 </x>
-        <y> 1136 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ees </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> eintin </original>
-    <position>
-      <box>
-        <x> 187 </x>
-        <y> 1136 </y>
-        <width> 32 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> eintin </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> veera </original>
-    <position>
-      <box>
-        <x> 237 </x>
-        <y> 1136 </y>
-        <width> 45 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> veera </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cretta </original>
-    <position>
-      <box>
-        <x> 300 </x>
-        <y> 1136 </y>
-        <width> 40 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cretta </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 358 </x>
-        <y> 1136 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> fervetfch </original>
-    <position>
-      <box>
-        <x> 390 </x>
-        <y> 1136 </y>
-        <width> 59 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> fervetfch </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> da </original>
-    <position>
-      <box>
-        <x> 467 </x>
-        <y> 1136 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> da </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Deu </original>
-    <position>
-      <box>
-        <x> 503 </x>
-        <y> 1136 </y>
-        <width> 32 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Deu </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> vean </original>
-    <position>
-      <box>
-        <x> 553 </x>
-        <y> 1136 </y>
-        <width> 36 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> vean </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> mefs </original>
-    <position>
-      <box>
-        <x> 607 </x>
-        <y> 1136 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> mefs </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ün </original>
-    <position>
-      <box>
-        <x> 654 </x>
-        <y> 1136 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ün </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> bun </original>
-    <position>
-      <box>
-        <x> 690 </x>
-        <y> 1136 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> bun </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> funda- </original>
-    <position>
-      <box>
-        <x> 735 </x>
-        <y> 1136 </y>
-        <width> 52 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> funda- </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> meint, </original>
-    <position>
-      <box>
-        <x> 86 </x>
-        <y> 1164 </y>
-        <width> 45 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> meint, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> fe </original>
-    <position>
-      <box>
-        <x> 149 </x>
-        <y> 1164 </y>
-        <width> 11 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> fe </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> intzaigl </original>
-    <position>
-      <box>
-        <x> 178 </x>
-        <y> 1164 </y>
-        <width> 43 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> intzaigl </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> qual </original>
-    <position>
-      <box>
-        <x> 239 </x>
-        <y> 1164 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> qual </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> na </original>
-    <position>
-      <box>
-        <x> 286 </x>
-        <y> 1164 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> na </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> pò </original>
-    <position>
-      <box>
-        <x> 322 </x>
-        <y> 1164 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> pò </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> effer </original>
-    <position>
-      <box>
-        <x> 358 </x>
-        <y> 1164 </y>
-        <width> 31 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> effer </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> nagün </original>
-    <position>
-      <box>
-        <x> 407 </x>
-        <y> 1164 </y>
-        <width> 45 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> nagün </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> bein </original>
-    <position>
-      <box>
-        <x> 470 </x>
-        <y> 1164 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> bein </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> effer, </original>
-    <position>
-      <box>
-        <x> 517 </x>
-        <y> 1164 </y>
-        <width> 45 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> effer, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ne </original>
-    <position>
-      <box>
-        <x> 580 </x>
-        <y> 1164 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ne </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> vid' </original>
-    <position>
-      <box>
-        <x> 616 </x>
-        <y> 1164 </y>
-        <width> 34 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> vid' </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> corp </original>
-    <position>
-      <box>
-        <x> 668 </x>
-        <y> 1164 </y>
-        <width> 36 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> corp </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ne </original>
-    <position>
-      <box>
-        <x> 722 </x>
-        <y> 1164 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ne </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> vid' </original>
-    <position>
-      <box>
-        <x> 758 </x>
-        <y> 1164 </y>
-        <width> 34 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> vid' </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> orma, </original>
-    <position>
-      <box>
-        <x> 87 </x>
-        <y> 1191 </y>
-        <width> 50 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> orma, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> mò </original>
-    <position>
-      <box>
-        <x> 155 </x>
-        <y> 1191 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> mò </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> blear </original>
-    <position>
-      <box>
-        <x> 191 </x>
-        <y> 1191 </y>
-        <width> 38 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> blear </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> plij </original>
-    <position>
-      <box>
-        <x> 247 </x>
-        <y> 1191 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> plij </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> l'ira </original>
-    <position>
-      <box>
-        <x> 279 </x>
-        <y> 1191 </y>
-        <width> 36 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> l'ira </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> da </original>
-    <position>
-      <box>
-        <x> 333 </x>
-        <y> 1191 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> da </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Deu </original>
-    <position>
-      <box>
-        <x> 369 </x>
-        <y> 1191 </y>
-        <width> 32 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Deu </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> fur </original>
-    <position>
-      <box>
-        <x> 419 </x>
-        <y> 1191 </y>
-        <width> 20 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> fur </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> tals </original>
-    <position>
-      <box>
-        <x> 457 </x>
-        <y> 1191 </y>
-        <width> 22 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> tals </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Chriftiauns </original>
-    <position>
-      <box>
-        <x> 497 </x>
-        <y> 1191 </y>
-        <width> 76 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Chriftiauns </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> vean </original>
-    <position>
-      <box>
-        <x> 591 </x>
-        <y> 1191 </y>
-        <width> 36 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> vean </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> à </original>
-    <position>
-      <box>
-        <x> 645 </x>
-        <y> 1191 </y>
-        <width> 9 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> à </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> d'effer. </original>
-    <position>
-      <box>
-        <x> 672 </x>
-        <y> 1191 </y>
-        <width> 68 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> d'effer. </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Schina- </original>
-    <position>
-      <box>
-        <x> 758 </x>
-        <y> 1191 </y>
-        <width> 67 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Schina- </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> 25 </original>
-    <position>
-      <box>
-        <x> 843 </x>
-        <y> 1191 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> 25 </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> vaunt </original>
-    <position>
-      <box>
-        <x> 86 </x>
-        <y> 1219 </y>
-        <width> 38 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> vaunt </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> era </original>
-    <position>
-      <box>
-        <x> 142 </x>
-        <y> 1219 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> era </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> la </original>
-    <position>
-      <box>
-        <x> 187 </x>
-        <y> 1219 </y>
-        <width> 11 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> la </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Giuventütna </original>
-    <position>
-      <box>
-        <x> 216 </x>
-        <y> 1219 </y>
-        <width> 83 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Giuventütna </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ees </original>
-    <position>
-      <box>
-        <x> 317 </x>
-        <y> 1219 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ees </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> üna </original>
-    <position>
-      <box>
-        <x> 362 </x>
-        <y> 1219 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> üna </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ragijfch </original>
-    <position>
-      <box>
-        <x> 407 </x>
-        <y> 1219 </y>
-        <width> 50 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ragijfch </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> della </original>
-    <position>
-      <box>
-        <x> 475 </x>
-        <y> 1219 </y>
-        <width> 31 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> della </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Baselgia </original>
-    <position>
-      <box>
-        <x> 524 </x>
-        <y> 1219 </y>
-        <width> 63 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Baselgia </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> da </original>
-    <position>
-      <box>
-        <x> 605 </x>
-        <y> 1219 </y>
-        <width> 18 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> da </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Deu, </original>
-    <position>
-      <box>
-        <x> 641 </x>
-        <y> 1219 </y>
-        <width> 47 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Deu, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 706 </x>
-        <y> 1219 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Deus </original>
-    <position>
-      <box>
-        <x> 738 </x>
-        <y> 1219 </y>
-        <width> 41 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Deus </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> vutt </original>
-    <position>
-      <box>
-        <x> 87 </x>
-        <y> 1246 </y>
-        <width> 22 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> vutt </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cha </original>
-    <position>
-      <box>
-        <x> 127 </x>
-        <y> 1246 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cha </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> quella </original>
-    <position>
-      <box>
-        <x> 172 </x>
-        <y> 1246 </y>
-        <width> 40 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> quella </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> vignig </original>
-    <position>
-      <box>
-        <x> 230 </x>
-        <y> 1246 </y>
-        <width> 40 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> vignig </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> manada </original>
-    <position>
-      <box>
-        <x> 288 </x>
-        <y> 1246 </y>
-        <width> 54 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> manada </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> à </original>
-    <position>
-      <box>
-        <x> 360 </x>
-        <y> 1246 </y>
-        <width> 9 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> à </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> lgui </original>
-    <position>
-      <box>
-        <x> 387 </x>
-        <y> 1246 </y>
-        <width> 22 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> lgui </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> tiers, </original>
-    <position>
-      <box>
-        <x> 427 </x>
-        <y> 1246 </y>
-        <width> 45 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> tiers, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> vut </original>
-    <position>
-      <box>
-        <x> 490 </x>
-        <y> 1246 </y>
-        <width> 20 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> vut </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ell </original>
-    <position>
-      <box>
-        <x> 528 </x>
-        <y> 1246 </y>
-        <width> 13 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ell </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> duvrar </original>
-    <position>
-      <box>
-        <x> 559 </x>
-        <y> 1246 </y>
-        <width> 54 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> duvrar </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Babb </original>
-    <position>
-      <box>
-        <x> 631 </x>
-        <y> 1246 </y>
-        <width> 41 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Babb </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 690 </x>
-        <y> 1246 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Mamma </original>
-    <position>
-      <box>
-        <x> 722 </x>
-        <y> 1246 </y>
-        <width> 50 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Mamma </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> la </original>
-    <position>
-      <box>
-        <x> 87 </x>
-        <y> 1274 </y>
-        <width> 11 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> la </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> tiers, </original>
-    <position>
-      <box>
-        <x> 116 </x>
-        <y> 1274 </y>
-        <width> 45 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> tiers, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ch'els </original>
-    <position>
-      <box>
-        <x> 179 </x>
-        <y> 1274 </y>
-        <width> 52 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ch'els </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> quella </original>
-    <position>
-      <box>
-        <x> 249 </x>
-        <y> 1274 </y>
-        <width> 40 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> quella </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> à </original>
-    <position>
-      <box>
-        <x> 307 </x>
-        <y> 1274 </y>
-        <width> 9 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> à </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Igui </original>
-    <position>
-      <box>
-        <x> 334 </x>
-        <y> 1274 </y>
-        <width> 23 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Igui </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> megnan </original>
-    <position>
-      <box>
-        <x> 375 </x>
-        <y> 1274 </y>
-        <width> 54 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> megnan </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> tiers </original>
-    <position>
-      <box>
-        <x> 447 </x>
-        <y> 1274 </y>
-        <width> 31 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> tiers </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> cum </original>
-    <position>
-      <box>
-        <x> 496 </x>
-        <y> 1274 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> cum </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> dretchia </original>
-    <position>
-      <box>
-        <x> 541 </x>
-        <y> 1274 </y>
-        <width> 58 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> dretchia </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> forma </original>
-    <position>
-      <box>
-        <x> 617 </x>
-        <y> 1274 </y>
-        <width> 38 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> forma </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> &amp; </original>
-    <position>
-      <box>
-        <x> 673 </x>
-        <y> 1274 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> &amp; </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ünandretg </original>
-    <position>
-      <box>
-        <x> 705 </x>
-        <y> 1274 </y>
-        <width> 74 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ünandretg </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> traer </original>
-    <position>
-      <box>
-        <x> 87 </x>
-        <y> 1301 </y>
-        <width> 38 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> traer </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> fij, </original>
-    <position>
-      <box>
-        <x> 143 </x>
-        <y> 1301 </y>
-        <width> 20 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> fij, </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> igl </original>
-    <position>
-      <box>
-        <x> 181 </x>
-        <y> 1301 </y>
-        <width> 13 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> igl </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> qual </original>
-    <position>
-      <box>
-        <x> 212 </x>
-        <y> 1301 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> qual </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> ees </original>
-    <position>
-      <box>
-        <x> 259 </x>
-        <y> 1301 </y>
-        <width> 27 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> ees </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> à </original>
-    <position>
-      <box>
-        <x> 304 </x>
-        <y> 1301 </y>
-        <width> 9 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> à </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Deu </original>
-    <position>
-      <box>
-        <x> 331 </x>
-        <y> 1301 </y>
-        <width> 32 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Deu </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> igl </original>
-    <position>
-      <box>
-        <x> 381 </x>
-        <y> 1301 </y>
-        <width> 13 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> igl </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> plij </original>
-    <position>
-      <box>
-        <x> 412 </x>
-        <y> 1301 </y>
-        <width> 14 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> plij </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> graund </original>
-    <position>
-      <box>
-        <x> 444 </x>
-        <y> 1301 </y>
-        <width> 54 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> graund </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> bein </original>
-    <position>
-      <box>
-        <x> 516 </x>
-        <y> 1301 </y>
-        <width> 29 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> bein </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> plafchêr. </original>
-    <position>
-      <box>
-        <x> 563 </x>
-        <y> 1301 </y>
-        <width> 72 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> plafchêr. </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Sur </original>
-    <position>
-      <box>
-        <x> 653 </x>
-        <y> 1301 </y>
-        <width> 32 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Sur </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> quegl </original>
-    <position>
-      <box>
-        <x> 703 </x>
-        <y> 1301 </y>
-        <width> 38 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> quegl </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> fcò </original>
-    <position>
-      <box>
-        <x> 759 </x>
-        <y> 1301 </y>
-        <width> 20 </width>
-        <height> 18 </height>
-      </box>
-    </position>
-    <modification>
-      <form> fcò </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Romaniache </original>
-    <position>
-      <box>
-        <x> 102 </x>
-        <y> 1334 </y>
-        <width> 54 </width>
-        <height> 11 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Romaniache </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> Forschungen </original>
-    <position>
-      <box>
-        <x> 167 </x>
-        <y> 1334 </y>
-        <width> 57 </width>
-        <height> 11 </height>
-      </box>
-    </position>
-    <modification>
-      <form> Forschungen </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> IV. </original>
-    <position>
-      <box>
-        <x> 235 </x>
-        <y> 1334 </y>
-        <width> 20 </width>
-        <height> 11 </height>
-      </box>
-    </position>
-    <modification>
-      <form> IV. </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> i </original>
-    <position>
-      <box>
-        <x> 266 </x>
-        <y> 1334 </y>
-        <width> 1 </width>
-        <height> 11 </height>
-      </box>
-    </position>
-    <modification>
-      <form> i </form>
-      <author> OCR </author>
-    </modification>
-  </word>
-  <word>
-    <original> @ </original>
-    <position>
-      <box>
-        <x> 0 </x>
-        <y> 0 </y>
-        <width> 0 </width>
-        <height> 0 </height>
-      </box>
-    </position>
-    <modification>
-      <form> @ </form>
-      <author> OCR </author>
-    </modification>
+  <word original="DANiEL">
+    <box width="143" height="41" y="430" x="214"></box>
+    <modification form="DANiEL" author="OCR"></modification>
+  </word>
+  <word original="BONiFACi.">
+    <box width="213" height="41" y="430" x="398"></box>
+    <modification form="BONiFACi." author="OCR"></modification>
+  </word>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
+  </word>
+  <word original="CatechiSmus.">
+    <box width="110" height="18" y="504" x="116"></box>
+    <modification form="CatechiSmus." author="OCR"></modification>
+  </word>
+  <word original="Lindauv">
+    <box width="50" height="18" y="504" x="244"></box>
+    <modification form="Lindauv" author="OCR"></modification>
+  </word>
+  <word original="vid'">
+    <box width="34" height="18" y="504" x="312"></box>
+    <modification form="vid'" author="OCR"></modification>
+  </word>
+  <word original="igl">
+    <box width="13" height="18" y="504" x="364"></box>
+    <modification form="igl" author="OCR"></modification>
+  </word>
+  <word original="Bodenfee,">
+    <box width="85" height="18" y="504" x="395"></box>
+    <modification form="Bodenfee," author="OCR"></modification>
+  </word>
+  <word original="tras">
+    <box width="29" height="18" y="504" x="498"></box>
+    <modification form="tras" author="OCR"></modification>
+  </word>
+  <word original="Iohann">
+    <box width="49" height="18" y="504" x="545"></box>
+    <modification form="Iohann" author="OCR"></modification>
+  </word>
+  <word original="Lvdvig">
+    <box width="41" height="18" y="504" x="612"></box>
+    <modification form="Lvdvig" author="OCR"></modification>
+  </word>
+  <word original="Brem.">
+    <box width="56" height="18" y="504" x="671"></box>
+    <modification form="Brem." author="OCR"></modification>
+  </word>
+  <word original="1601.">
+    <box width="72" height="18" y="504" x="745"></box>
+    <modification form="1601." author="OCR"></modification>
+  </word>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
+  </word>
+  <word original="\Abgedruckt">
+    <box width="63" height="11" y="552" x="190"></box>
+    <modification form="\Abgedruckt" author="OCR"></modification>
+  </word>
+  <word original="Romania">
+    <box width="37" height="11" y="552" x="264"></box>
+    <modification form="Romania" author="OCR"></modification>
+  </word>
+  <word original="IX,">
+    <box width="20" height="11" y="552" x="312"></box>
+    <modification form="IX," author="OCR"></modification>
+  </word>
+  <word original="250">
+    <box width="26" height="11" y="552" x="343"></box>
+    <modification form="250" author="OCR"></modification>
+  </word>
+  <word original="ff.">
+    <box width="11" height="11" y="552" x="380"></box>
+    <modification form="ff." author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="9" height="11" y="552" x="402"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="Ulrich,">
+    <box width="36" height="11" y="552" x="422"></box>
+    <modification form="Ulrich," author="OCR"></modification>
+  </word>
+  <word original="Rhatorom.">
+    <box width="52" height="11" y="552" x="469"></box>
+    <modification form="Rhatorom." author="OCR"></modification>
+  </word>
+  <word original="Texte">
+    <box width="20" height="11" y="552" x="532"></box>
+    <modification form="Texte" author="OCR"></modification>
+  </word>
+  <word original="I.\">
+    <box width="20" height="11" y="552" x="563"></box>
+    <modification form="I.\" author="OCR"></modification>
+  </word>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
+  </word>
+  <word original="[f.">
+    <box width="31" height="18" y="596" x="80"></box>
+    <modification form="[f." author="OCR"></modification>
+  </word>
+  <word original="ar]">
+    <box width="32" height="18" y="596" x="129"></box>
+    <modification form="ar]" author="OCR"></modification>
+  </word>
+  <word original="ALS">
+    <box width="32" height="18" y="596" x="179"></box>
+    <modification form="ALS" author="OCR"></modification>
+  </word>
+  <word original="BEiNADATCHEVS,">
+    <box width="178" height="18" y="596" x="229"></box>
+    <modification form="BEiNADATCHEVS," author="OCR"></modification>
+  </word>
+  <word original="NiEBELS,">
+    <box width="92" height="18" y="596" x="425"></box>
+    <modification form="NiEBELS," author="OCR"></modification>
+  </word>
+  <word original="STATTEVELS,">
+    <box width="115" height="18" y="596" x="535"></box>
+    <modification form="STATTEVELS," author="OCR"></modification>
+  </word>
+  <word original="PRVS,">
+    <box width="72" height="18" y="596" x="668"></box>
+    <modification form="PRVS," author="OCR"></modification>
+  </word>
+  <word original="SABiGS">
+    <box width="74" height="18" y="624" x="81"></box>
+    <modification form="SABiGS" author="OCR"></modification>
+  </word>
+  <word original="ET">
+    <box width="18" height="18" y="624" x="173"></box>
+    <modification form="ET" author="OCR"></modification>
+  </word>
+  <word original="HVNDREFELS">
+    <box width="122" height="18" y="624" x="209"></box>
+    <modification form="HVNDREFELS" author="OCR"></modification>
+  </word>
+  <word original="S.">
+    <box width="29" height="18" y="624" x="349"></box>
+    <modification form="S." author="OCR"></modification>
+  </word>
+  <word original="Vugaa">
+    <box width="50" height="18" y="624" x="396"></box>
+    <modification form="Vugaa" author="OCR"></modification>
+  </word>
+  <word original="&amp;^">
+    <box width="29" height="18" y="624" x="464"></box>
+    <modification form="&amp;^" author="OCR"></modification>
+  </word>
+  <word original="Signurs">
+    <box width="61" height="18" y="624" x="511"></box>
+    <modification form="Signurs" author="OCR"></modification>
+  </word>
+  <word original="d&quot;üna">
+    <box width="50" height="18" y="624" x="590"></box>
+    <modification form="d&quot;üna" author="OCR"></modification>
+  </word>
+  <word original="intiera">
+    <box width="41" height="18" y="624" x="658"></box>
+    <modification form="intiera" author="OCR"></modification>
+  </word>
+  <word original="Dret-">
+    <box width="49" height="18" y="624" x="717"></box>
+    <modification form="Dret-" author="OCR"></modification>
+  </word>
+  <word original="5">
+    <box width="14" height="18" y="624" x="784"></box>
+    <modification form="5" author="OCR"></modification>
+  </word>
+  <word original="chüra">
+    <box width="55" height="22" y="647" x="81"></box>
+    <modification form="chüra" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="18" height="22" y="647" x="158"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="Commün">
+    <box width="73" height="22" y="647" x="198"></box>
+    <modification form="Commün" author="OCR"></modification>
+  </word>
+  <word original="da">
+    <box width="22" height="22" y="647" x="293"></box>
+    <modification form="da" author="OCR"></modification>
+  </word>
+  <word original="FürStenow,">
+    <box width="108" height="22" y="647" x="337"></box>
+    <modification form="FürStenow," author="OCR"></modification>
+  </word>
+  <word original="als">
+    <box width="24" height="22" y="647" x="467"></box>
+    <modification form="als" author="OCR"></modification>
+  </word>
+  <word original="meas">
+    <box width="44" height="22" y="647" x="513"></box>
+    <modification form="meas" author="OCR"></modification>
+  </word>
+  <word original="orav^unt">
+    <box width="86" height="22" y="647" x="579"></box>
+    <modification form="orav^unt" author="OCR"></modification>
+  </word>
+  <word original="Hundrevels">
+    <box width="108" height="22" y="647" x="687"></box>
+    <modification form="Hundrevels" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="18" height="22" y="647" x="817"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="chears">
+    <box width="66" height="22" y="647" x="857"></box>
+    <modification form="chears" author="OCR"></modification>
+  </word>
+  <word original="Singnurs">
+    <box width="86" height="22" y="675" x="81"></box>
+    <modification form="Singnurs" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="18" height="22" y="675" x="189"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="buns">
+    <box width="44" height="22" y="675" x="229"></box>
+    <modification form="buns" author="OCR"></modification>
+  </word>
+  <word original="amigs,">
+    <box width="64" height="22" y="675" x="295"></box>
+    <modification form="amigs," author="OCR"></modification>
+  </word>
+  <word original="Salüd">
+    <box width="53" height="22" y="675" x="381"></box>
+    <modification form="Salüd" author="OCR"></modification>
+  </word>
+  <word original="da">
+    <box width="22" height="22" y="675" x="456"></box>
+    <modification form="da" author="OCR"></modification>
+  </word>
+  <word original="Deu,">
+    <box width="57" height="22" y="675" x="500"></box>
+    <modification form="Deu," author="OCR"></modification>
+  </word>
+  <word original="pa^ch">
+    <box width="62" height="22" y="675" x="579"></box>
+    <modification form="pa^ch" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="18" height="22" y="675" x="663"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="beinesser">
+    <box width="90" height="22" y="675" x="703"></box>
+    <modification form="beinesser" author="OCR"></modification>
+  </word>
+  <word original="tras">
+    <box width="35" height="22" y="675" x="815"></box>
+    <modification form="tras" author="OCR"></modification>
+  </word>
+  <word original="no^s">
+    <box width="51" height="22" y="675" x="872"></box>
+    <modification form="no^s" author="OCR"></modification>
+  </word>
+  <word original="Signer">
+    <box width="64" height="22" y="702" x="81"></box>
+    <modification form="Signer" author="OCR"></modification>
+  </word>
+  <word original="lesuM">
+    <box width="53" height="22" y="702" x="167"></box>
+    <modification form="lesuM" author="OCR"></modification>
+  </word>
+  <word original="Christum.">
+    <box width="95" height="22" y="702" x="242"></box>
+    <modification form="Christum." author="OCR"></modification>
+  </word>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
+  </word>
+  <word original="Slaunt">
+    <box width="45" height="18" y="751" x="127"></box>
+    <modification form="Slaunt" author="OCR"></modification>
+  </word>
+  <word original="cha">
+    <box width="27" height="18" y="751" x="190"></box>
+    <modification form="cha" author="OCR"></modification>
+  </word>
+  <word original="la">
+    <box width="11" height="18" y="751" x="235"></box>
+    <modification form="la" author="OCR"></modification>
+  </word>
+  <word original="Sanghia">
+    <box width="61" height="18" y="751" x="264"></box>
+    <modification form="Sanghia" author="OCR"></modification>
+  </word>
+  <word original="Scrittüra,">
+    <box width="79" height="18" y="751" x="343"></box>
+    <modification form="Scrittüra," author="OCR"></modification>
+  </word>
+  <word original="Hundrevels">
+    <box width="88" height="18" y="751" x="440"></box>
+    <modification form="Hundrevels" author="OCR"></modification>
+  </word>
+  <word original="Signurs,">
+    <box width="76" height="18" y="751" x="546"></box>
+    <modification form="Signurs," author="OCR"></modification>
+  </word>
+  <word original="da">
+    <box width="18" height="18" y="751" x="640"></box>
+    <modification form="da" author="OCR"></modification>
+  </word>
+  <word original="per">
+    <box width="27" height="18" y="751" x="676"></box>
+    <modification form="per" author="OCR"></modification>
+  </word>
+  <word original="tutt">
+    <box width="14" height="18" y="751" x="721"></box>
+    <modification form="tutt" author="OCR"></modification>
+  </word>
+  <word original="igl">
+    <box width="13" height="18" y="751" x="753"></box>
+    <modification form="igl" author="OCR"></modification>
+  </word>
+  <word original="Mund">
+    <box width="41" height="18" y="778" x="82"></box>
+    <modification form="Mund" author="OCR"></modification>
+  </word>
+  <word original="eintin">
+    <box width="32" height="18" y="778" x="141"></box>
+    <modification form="eintin" author="OCR"></modification>
+  </word>
+  <word original="da">
+    <box width="18" height="18" y="778" x="191"></box>
+    <modification form="da" author="OCR"></modification>
+  </word>
+  <word original="tuttas">
+    <box width="32" height="18" y="778" x="227"></box>
+    <modification form="tuttas" author="OCR"></modification>
+  </word>
+  <word original="forts">
+    <box width="31" height="18" y="778" x="277"></box>
+    <modification form="forts" author="OCR"></modification>
+  </word>
+  <word original="linguaghs">
+    <box width="67" height="18" y="778" x="326"></box>
+    <modification form="linguaghs" author="OCR"></modification>
+  </word>
+  <word original="ees">
+    <box width="27" height="18" y="778" x="411"></box>
+    <modification form="ees" author="OCR"></modification>
+  </word>
+  <word original="rafad'">
+    <box width="52" height="18" y="778" x="456"></box>
+    <modification form="rafad'" author="OCR"></modification>
+  </word>
+  <word original="ora">
+    <box width="27" height="18" y="778" x="526"></box>
+    <modification form="ora" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="778" x="571"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="meffa">
+    <box width="31" height="18" y="778" x="603"></box>
+    <modification form="meffa" author="OCR"></modification>
+  </word>
+  <word original="per">
+    <box width="27" height="18" y="778" x="652"></box>
+    <modification form="per" author="OCR"></modification>
+  </word>
+  <word original="Scritt,">
+    <box width="52" height="18" y="778" x="697"></box>
+    <modification form="Scritt," author="OCR"></modification>
+  </word>
+  <word original="da">
+    <box width="18" height="18" y="778" x="767"></box>
+    <modification form="da" author="OCR"></modification>
+  </word>
+  <word original="10">
+    <box width="29" height="18" y="778" x="803"></box>
+    <modification form="10" author="OCR"></modification>
+  </word>
+  <word original="tal">
+    <box width="13" height="18" y="806" x="81"></box>
+    <modification form="tal" author="OCR"></modification>
+  </word>
+  <word original="Sort">
+    <box width="34" height="18" y="806" x="112"></box>
+    <modification form="Sort" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="806" x="164"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="afchi">
+    <box width="31" height="18" y="806" x="196"></box>
+    <modification form="afchi" author="OCR"></modification>
+  </word>
+  <word original="claer,">
+    <box width="52" height="18" y="806" x="245"></box>
+    <modification form="claer," author="OCR"></modification>
+  </word>
+  <word original="cha">
+    <box width="27" height="18" y="806" x="315"></box>
+    <modification form="cha" author="OCR"></modification>
+  </word>
+  <word original="bigchia">
+    <box width="49" height="18" y="806" x="360"></box>
+    <modification form="bigchia" author="OCR"></modification>
+  </word>
+  <word original="namae">
+    <box width="45" height="18" y="806" x="427"></box>
+    <modification form="namae" author="OCR"></modification>
+  </word>
+  <word original="ils">
+    <box width="13" height="18" y="806" x="490"></box>
+    <modification form="ils" author="OCR"></modification>
+  </word>
+  <word original="Docturs">
+    <box width="61" height="18" y="806" x="521"></box>
+    <modification form="Docturs" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="806" x="600"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="Mussaas">
+    <box width="68" height="18" y="806" x="632"></box>
+    <modification form="Mussaas" author="OCR"></modification>
+  </word>
+  <word original="da">
+    <box width="18" height="18" y="806" x="718"></box>
+    <modification form="da" author="OCR"></modification>
+  </word>
+  <word original="quella,">
+    <box width="54" height="18" y="806" x="754"></box>
+    <modification form="quella," author="OCR"></modification>
+  </word>
+  <word original="la">
+    <box width="11" height="18" y="833" x="82"></box>
+    <modification form="la" author="OCR"></modification>
+  </word>
+  <word original="cognuSchan,">
+    <box width="110" height="18" y="833" x="111"></box>
+    <modification form="cognuSchan," author="OCR"></modification>
+  </word>
+  <word original="mò">
+    <box width="18" height="18" y="833" x="239"></box>
+    <modification form="mò" author="OCR"></modification>
+  </word>
+  <word original="era">
+    <box width="27" height="18" y="833" x="275"></box>
+    <modification form="era" author="OCR"></modification>
+  </word>
+  <word original="auter">
+    <box width="38" height="18" y="833" x="320"></box>
+    <modification form="auter" author="OCR"></modification>
+  </word>
+  <word original="commün">
+    <box width="54" height="18" y="833" x="376"></box>
+    <modification form="commün" author="OCR"></modification>
+  </word>
+  <word original="pievel">
+    <box width="40" height="18" y="833" x="448"></box>
+    <modification form="pievel" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="833" x="506"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="infa,unts">
+    <box width="65" height="18" y="833" x="538"></box>
+    <modification form="infa,unts" author="OCR"></modification>
+  </word>
+  <word original="tras">
+    <box width="29" height="18" y="833" x="621"></box>
+    <modification form="tras" author="OCR"></modification>
+  </word>
+  <word original="las">
+    <box width="20" height="18" y="833" x="668"></box>
+    <modification form="las" author="OCR"></modification>
+  </word>
+  <word original="fchkolas">
+    <box width="58" height="18" y="833" x="706"></box>
+    <modification form="fchkolas" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="833" x="782"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="CatechiSems,">
+    <box width="110" height="18" y="861" x="83"></box>
+    <modification form="CatechiSems," author="OCR"></modification>
+  </word>
+  <word original="quegl">
+    <box width="38" height="18" y="861" x="211"></box>
+    <modification form="quegl" author="OCR"></modification>
+  </word>
+  <word original="ees,">
+    <box width="41" height="18" y="861" x="267"></box>
+    <modification form="ees," author="OCR"></modification>
+  </word>
+  <word original="curtas">
+    <box width="47" height="18" y="861" x="326"></box>
+    <modification form="curtas" author="OCR"></modification>
+  </word>
+  <word original="formas">
+    <box width="47" height="18" y="861" x="391"></box>
+    <modification form="formas" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="861" x="456"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="conpigliameints">
+    <box width="99" height="18" y="861" x="488"></box>
+    <modification form="conpigliameints" author="OCR"></modification>
+  </word>
+  <word original="da">
+    <box width="18" height="18" y="861" x="605"></box>
+    <modification form="da" author="OCR"></modification>
+  </word>
+  <word original="tutts">
+    <box width="23" height="18" y="861" x="641"></box>
+    <modification form="tutts" author="OCR"></modification>
+  </word>
+  <word original="principals">
+    <box width="68" height="18" y="861" x="682"></box>
+    <modification form="principals" author="OCR"></modification>
+  </word>
+  <word original="punctgs">
+    <box width="56" height="18" y="888" x="83"></box>
+    <modification form="punctgs" author="OCR"></modification>
+  </word>
+  <word original="della">
+    <box width="31" height="18" y="888" x="157"></box>
+    <modification form="della" author="OCR"></modification>
+  </word>
+  <word original="ChriStianevla">
+    <box width="99" height="18" y="888" x="206"></box>
+    <modification form="ChriStianevla" author="OCR"></modification>
+  </word>
+  <word original="Cretta">
+    <box width="45" height="18" y="888" x="323"></box>
+    <modification form="Cretta" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="888" x="386"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="Religiun">
+    <box width="56" height="18" y="888" x="418"></box>
+    <modification form="Religiun" author="OCR"></modification>
+  </word>
+  <word original="vegnan">
+    <box width="54" height="18" y="888" x="492"></box>
+    <modification form="vegnan" author="OCR"></modification>
+  </word>
+  <word original="mussaas">
+    <box width="63" height="18" y="888" x="564"></box>
+    <modification form="mussaas" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="888" x="645"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="intragui-">
+    <box width="65" height="18" y="888" x="677"></box>
+    <modification form="intragui-" author="OCR"></modification>
+  </word>
+  <word original="daas,">
+    <box width="50" height="18" y="916" x="84"></box>
+    <modification form="daas," author="OCR"></modification>
+  </word>
+  <word original="ch'els">
+    <box width="52" height="18" y="916" x="152"></box>
+    <modification form="ch'els" author="OCR"></modification>
+  </word>
+  <word original="quella">
+    <box width="40" height="18" y="916" x="222"></box>
+    <modification form="quella" author="OCR"></modification>
+  </word>
+  <word original="ear">
+    <box width="27" height="18" y="916" x="280"></box>
+    <modification form="ear" author="OCR"></modification>
+  </word>
+  <word original="cognuSchan">
+    <box width="95" height="18" y="916" x="325"></box>
+    <modification form="cognuSchan" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="916" x="438"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="tier">
+    <box width="22" height="18" y="916" x="470"></box>
+    <modification form="tier" author="OCR"></modification>
+  </word>
+  <word original="üna">
+    <box width="27" height="18" y="916" x="510"></box>
+    <modification form="üna" author="OCR"></modification>
+  </word>
+  <word original="veera">
+    <box width="45" height="18" y="916" x="555"></box>
+    <modification form="veera" author="OCR"></modification>
+  </word>
+  <word original="cretta">
+    <box width="40" height="18" y="916" x="618"></box>
+    <modification form="cretta" author="OCR"></modification>
+  </word>
+  <word original="vegnan">
+    <box width="54" height="18" y="916" x="676"></box>
+    <modification form="vegnan" author="OCR"></modification>
+  </word>
+  <word original="tratgs">
+    <box width="40" height="18" y="916" x="748"></box>
+    <modification form="tratgs" author="OCR"></modification>
+  </word>
+  <word original="15">
+    <box width="29" height="18" y="916" x="806"></box>
+    <modification form="15" author="OCR"></modification>
+  </word>
+  <word original="Sij:">
+    <box width="32" height="18" y="944" x="84"></box>
+    <modification form="Sij:" author="OCR"></modification>
+  </word>
+  <word original="Scò">
+    <box width="32" height="18" y="944" x="134"></box>
+    <modification form="Scò" author="OCR"></modification>
+  </word>
+  <word original="nus">
+    <box width="27" height="18" y="944" x="184"></box>
+    <modification form="nus" author="OCR"></modification>
+  </word>
+  <word original="bein">
+    <box width="29" height="18" y="944" x="229"></box>
+    <modification form="bein" author="OCR"></modification>
+  </word>
+  <word original="veSein,">
+    <box width="67" height="18" y="944" x="276"></box>
+    <modification form="veSein," author="OCR"></modification>
+  </word>
+  <word original="cha">
+    <box width="27" height="18" y="944" x="361"></box>
+    <modification form="cha" author="OCR"></modification>
+  </word>
+  <word original="nua">
+    <box width="27" height="18" y="944" x="406"></box>
+    <modification form="nua" author="OCR"></modification>
+  </word>
+  <word original="cha">
+    <box width="27" height="18" y="944" x="451"></box>
+    <modification form="cha" author="OCR"></modification>
+  </word>
+  <word original="nus">
+    <box width="27" height="18" y="944" x="496"></box>
+    <modification form="nus" author="OCR"></modification>
+  </word>
+  <word original="vegnign">
+    <box width="56" height="18" y="944" x="541"></box>
+    <modification form="vegnign" author="OCR"></modification>
+  </word>
+  <word original="or'da">
+    <box width="50" height="18" y="944" x="615"></box>
+    <modification form="or'da" author="OCR"></modification>
+  </word>
+  <word original="noSfa">
+    <box width="43" height="18" y="944" x="683"></box>
+    <modification form="noSfa" author="OCR"></modification>
+  </word>
+  <word original="terra,">
+    <box width="52" height="18" y="944" x="744"></box>
+    <modification form="terra," author="OCR"></modification>
+  </word>
+  <word original="cateins">
+    <box width="49" height="18" y="944" x="814"></box>
+    <modification form="cateins" author="OCR"></modification>
+  </word>
+  <word original="cha">
+    <box width="27" height="18" y="971" x="84"></box>
+    <modification form="cha" author="OCR"></modification>
+  </word>
+  <word original="bunameng">
+    <box width="72" height="18" y="971" x="129"></box>
+    <modification form="bunameng" author="OCR"></modification>
+  </word>
+  <word original="mün[fol.">
+    <box width="68" height="18" y="971" x="219"></box>
+    <modification form="mün[fol." author="OCR"></modification>
+  </word>
+  <word original="av]chiadün">
+    <box width="88" height="18" y="971" x="305"></box>
+    <modification form="av]chiadün" author="OCR"></modification>
+  </word>
+  <word original="fa">
+    <box width="11" height="18" y="971" x="411"></box>
+    <modification form="fa" author="OCR"></modification>
+  </word>
+  <word original="ün">
+    <box width="18" height="18" y="971" x="440"></box>
+    <modification form="ün" author="OCR"></modification>
+  </word>
+  <word original="qual">
+    <box width="29" height="18" y="971" x="476"></box>
+    <modification form="qual" author="OCR"></modification>
+  </word>
+  <word original="chiaufa">
+    <box width="49" height="18" y="971" x="523"></box>
+    <modification form="chiaufa" author="OCR"></modification>
+  </word>
+  <word original="or'">
+    <box width="32" height="18" y="971" x="590"></box>
+    <modification form="or'" author="OCR"></modification>
+  </word>
+  <word original="d'la">
+    <box width="34" height="18" y="971" x="640"></box>
+    <modification form="d'la" author="OCR"></modification>
+  </word>
+  <word original="Scrittüra">
+    <box width="65" height="18" y="971" x="692"></box>
+    <modification form="Scrittüra" author="OCR"></modification>
+  </word>
+  <word original="fanghia:">
+    <box width="63" height="18" y="999" x="84"></box>
+    <modification form="fanghia:" author="OCR"></modification>
+  </word>
+  <word original="Schi">
+    <box width="34" height="18" y="999" x="165"></box>
+    <modification form="Schi" author="OCR"></modification>
+  </word>
+  <word original="ees">
+    <box width="27" height="18" y="999" x="217"></box>
+    <modification form="ees" author="OCR"></modification>
+  </word>
+  <word original="igl">
+    <box width="13" height="18" y="999" x="262"></box>
+    <modification form="igl" author="OCR"></modification>
+  </word>
+  <word original="pija">
+    <box width="22" height="18" y="999" x="293"></box>
+    <modification form="pija" author="OCR"></modification>
+  </word>
+  <word original="ear">
+    <box width="27" height="18" y="999" x="333"></box>
+    <modification form="ear" author="OCR"></modification>
+  </word>
+  <word original="per">
+    <box width="27" height="18" y="999" x="378"></box>
+    <modification form="per" author="OCR"></modification>
+  </word>
+  <word original="bafünghs">
+    <box width="65" height="18" y="999" x="423"></box>
+    <modification form="bafünghs" author="OCR"></modification>
+  </word>
+  <word original="cha">
+    <box width="27" height="18" y="999" x="506"></box>
+    <modification form="cha" author="OCR"></modification>
+  </word>
+  <word original="nuö">
+    <box width="27" height="18" y="999" x="551"></box>
+    <modification form="nuö" author="OCR"></modification>
+  </word>
+  <word original="la">
+    <box width="11" height="18" y="999" x="596"></box>
+    <modification form="la" author="OCR"></modification>
+  </word>
+  <word original="noffa">
+    <box width="31" height="18" y="999" x="625"></box>
+    <modification form="noffa" author="OCR"></modification>
+  </word>
+  <word original="Giuventütna">
+    <box width="83" height="18" y="999" x="674"></box>
+    <modification form="Giuventütna" author="OCR"></modification>
+  </word>
+  <word original="eintin">
+    <box width="32" height="18" y="1026" x="85"></box>
+    <modification form="eintin" author="OCR"></modification>
+  </word>
+  <word original="veera">
+    <box width="45" height="18" y="1026" x="135"></box>
+    <modification form="veera" author="OCR"></modification>
+  </word>
+  <word original="cretta,">
+    <box width="54" height="18" y="1026" x="198"></box>
+    <modification form="cretta," author="OCR"></modification>
+  </word>
+  <word original="dretgia">
+    <box width="49" height="18" y="1026" x="270"></box>
+    <modification form="dretgia" author="OCR"></modification>
+  </word>
+  <word original="cognufchientfcha">
+    <box width="115" height="18" y="1026" x="337"></box>
+    <modification form="cognufchientfcha" author="OCR"></modification>
+  </word>
+  <word original="da">
+    <box width="18" height="18" y="1026" x="470"></box>
+    <modification form="da" author="OCR"></modification>
+  </word>
+  <word original="Deu,">
+    <box width="47" height="18" y="1026" x="506"></box>
+    <modification form="Deu," author="OCR"></modification>
+  </word>
+  <word original="buna">
+    <box width="36" height="18" y="1026" x="571"></box>
+    <modification form="buna" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="1026" x="625"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="defcheinta">
+    <box width="68" height="18" y="1026" x="657"></box>
+    <modification form="defcheinta" author="OCR"></modification>
+  </word>
+  <word original="manauntza">
+    <box width="74" height="18" y="1054" x="85"></box>
+    <modification form="manauntza" author="OCR"></modification>
+  </word>
+  <word original="della">
+    <box width="31" height="18" y="1054" x="177"></box>
+    <modification form="della" author="OCR"></modification>
+  </word>
+  <word original="vita">
+    <box width="22" height="18" y="1054" x="226"></box>
+    <modification form="vita" author="OCR"></modification>
+  </word>
+  <word original="tragian">
+    <box width="49" height="18" y="1054" x="266"></box>
+    <modification form="tragian" author="OCR"></modification>
+  </word>
+  <word original="fij.">
+    <box width="20" height="18" y="1054" x="333"></box>
+    <modification form="fij." author="OCR"></modification>
+  </word>
+  <word original="Siaunt">
+    <box width="45" height="18" y="1054" x="371"></box>
+    <modification form="Siaunt" author="OCR"></modification>
+  </word>
+  <word original="cha">
+    <box width="27" height="18" y="1054" x="434"></box>
+    <modification form="cha" author="OCR"></modification>
+  </word>
+  <word original="la">
+    <box width="11" height="18" y="1054" x="479"></box>
+    <modification form="la" author="OCR"></modification>
+  </word>
+  <word original="experientia">
+    <box width="77" height="18" y="1054" x="508"></box>
+    <modification form="experientia" author="OCR"></modification>
+  </word>
+  <word original="da">
+    <box width="18" height="18" y="1054" x="603"></box>
+    <modification form="da" author="OCR"></modification>
+  </word>
+  <word original="münchia">
+    <box width="56" height="18" y="1054" x="639"></box>
+    <modification form="münchia" author="OCR"></modification>
+  </word>
+  <word original="gij">
+    <box width="13" height="18" y="1054" x="713"></box>
+    <modification form="gij" author="OCR"></modification>
+  </word>
+  <word original="20">
+    <box width="29" height="18" y="1054" x="744"></box>
+    <modification form="20" author="OCR"></modification>
+  </word>
+  <word original="ans">
+    <box width="27" height="18" y="1081" x="86"></box>
+    <modification form="ans" author="OCR"></modification>
+  </word>
+  <word original="muffa,">
+    <box width="45" height="18" y="1081" x="131"></box>
+    <modification form="muffa," author="OCR"></modification>
+  </word>
+  <word original="cha">
+    <box width="27" height="18" y="1081" x="194"></box>
+    <modification form="cha" author="OCR"></modification>
+  </word>
+  <word original="pür">
+    <box width="27" height="18" y="1081" x="239"></box>
+    <modification form="pür" author="OCR"></modification>
+  </word>
+  <word original="lura">
+    <box width="29" height="18" y="1081" x="284"></box>
+    <modification form="lura" author="OCR"></modification>
+  </word>
+  <word original="ün">
+    <box width="18" height="18" y="1081" x="331"></box>
+    <modification form="ün" author="OCR"></modification>
+  </word>
+  <word original="pievel">
+    <box width="40" height="18" y="1081" x="367"></box>
+    <modification form="pievel" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="1081" x="425"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="Regemeint">
+    <box width="72" height="18" y="1081" x="457"></box>
+    <modification form="Regemeint" author="OCR"></modification>
+  </word>
+  <word original="ün">
+    <box width="18" height="18" y="1081" x="547"></box>
+    <modification form="ün" author="OCR"></modification>
+  </word>
+  <word original="ventürevel">
+    <box width="76" height="18" y="1081" x="583"></box>
+    <modification form="ventürevel" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="1081" x="677"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="pafchevel">
+    <box width="67" height="18" y="1081" x="709"></box>
+    <modification form="pafchevel" author="OCR"></modification>
+  </word>
+  <word original="beinftadi">
+    <box width="52" height="18" y="1109" x="86"></box>
+    <modification form="beinftadi" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="1109" x="156"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="bein">
+    <box width="29" height="18" y="1109" x="188"></box>
+    <modification form="bein" author="OCR"></modification>
+  </word>
+  <word original="effer">
+    <box width="31" height="18" y="1109" x="235"></box>
+    <modification form="effer" author="OCR"></modification>
+  </word>
+  <word original="ünandretg">
+    <box width="74" height="18" y="1109" x="284"></box>
+    <modification form="ünandretg" author="OCR"></modification>
+  </word>
+  <word original="fa">
+    <box width="11" height="18" y="1109" x="376"></box>
+    <modification form="fa" author="OCR"></modification>
+  </word>
+  <word original="gudêr,">
+    <box width="59" height="18" y="1109" x="405"></box>
+    <modification form="gudêr," author="OCR"></modification>
+  </word>
+  <word original="cur">
+    <box width="27" height="18" y="1109" x="482"></box>
+    <modification form="cur" author="OCR"></modification>
+  </word>
+  <word original="cha">
+    <box width="27" height="18" y="1109" x="527"></box>
+    <modification form="cha" author="OCR"></modification>
+  </word>
+  <word original="eintin">
+    <box width="32" height="18" y="1109" x="572"></box>
+    <modification form="eintin" author="OCR"></modification>
+  </word>
+  <word original="las">
+    <box width="20" height="18" y="1109" x="622"></box>
+    <modification form="las" author="OCR"></modification>
+  </word>
+  <word original="Bafelgias,">
+    <box width="79" height="18" y="1109" x="660"></box>
+    <modification form="Bafelgias," author="OCR"></modification>
+  </word>
+  <word original="quegl">
+    <box width="38" height="18" y="1136" x="86"></box>
+    <modification form="quegl" author="OCR"></modification>
+  </word>
+  <word original="ees">
+    <box width="27" height="18" y="1136" x="142"></box>
+    <modification form="ees" author="OCR"></modification>
+  </word>
+  <word original="eintin">
+    <box width="32" height="18" y="1136" x="187"></box>
+    <modification form="eintin" author="OCR"></modification>
+  </word>
+  <word original="veera">
+    <box width="45" height="18" y="1136" x="237"></box>
+    <modification form="veera" author="OCR"></modification>
+  </word>
+  <word original="cretta">
+    <box width="40" height="18" y="1136" x="300"></box>
+    <modification form="cretta" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="1136" x="358"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="fervetfch">
+    <box width="59" height="18" y="1136" x="390"></box>
+    <modification form="fervetfch" author="OCR"></modification>
+  </word>
+  <word original="da">
+    <box width="18" height="18" y="1136" x="467"></box>
+    <modification form="da" author="OCR"></modification>
+  </word>
+  <word original="Deu">
+    <box width="32" height="18" y="1136" x="503"></box>
+    <modification form="Deu" author="OCR"></modification>
+  </word>
+  <word original="vean">
+    <box width="36" height="18" y="1136" x="553"></box>
+    <modification form="vean" author="OCR"></modification>
+  </word>
+  <word original="mefs">
+    <box width="29" height="18" y="1136" x="607"></box>
+    <modification form="mefs" author="OCR"></modification>
+  </word>
+  <word original="ün">
+    <box width="18" height="18" y="1136" x="654"></box>
+    <modification form="ün" author="OCR"></modification>
+  </word>
+  <word original="bun">
+    <box width="27" height="18" y="1136" x="690"></box>
+    <modification form="bun" author="OCR"></modification>
+  </word>
+  <word original="funda-">
+    <box width="52" height="18" y="1136" x="735"></box>
+    <modification form="funda-" author="OCR"></modification>
+  </word>
+  <word original="meint,">
+    <box width="45" height="18" y="1164" x="86"></box>
+    <modification form="meint," author="OCR"></modification>
+  </word>
+  <word original="fe">
+    <box width="11" height="18" y="1164" x="149"></box>
+    <modification form="fe" author="OCR"></modification>
+  </word>
+  <word original="intzaigl">
+    <box width="43" height="18" y="1164" x="178"></box>
+    <modification form="intzaigl" author="OCR"></modification>
+  </word>
+  <word original="qual">
+    <box width="29" height="18" y="1164" x="239"></box>
+    <modification form="qual" author="OCR"></modification>
+  </word>
+  <word original="na">
+    <box width="18" height="18" y="1164" x="286"></box>
+    <modification form="na" author="OCR"></modification>
+  </word>
+  <word original="pò">
+    <box width="18" height="18" y="1164" x="322"></box>
+    <modification form="pò" author="OCR"></modification>
+  </word>
+  <word original="effer">
+    <box width="31" height="18" y="1164" x="358"></box>
+    <modification form="effer" author="OCR"></modification>
+  </word>
+  <word original="nagün">
+    <box width="45" height="18" y="1164" x="407"></box>
+    <modification form="nagün" author="OCR"></modification>
+  </word>
+  <word original="bein">
+    <box width="29" height="18" y="1164" x="470"></box>
+    <modification form="bein" author="OCR"></modification>
+  </word>
+  <word original="effer,">
+    <box width="45" height="18" y="1164" x="517"></box>
+    <modification form="effer," author="OCR"></modification>
+  </word>
+  <word original="ne">
+    <box width="18" height="18" y="1164" x="580"></box>
+    <modification form="ne" author="OCR"></modification>
+  </word>
+  <word original="vid'">
+    <box width="34" height="18" y="1164" x="616"></box>
+    <modification form="vid'" author="OCR"></modification>
+  </word>
+  <word original="corp">
+    <box width="36" height="18" y="1164" x="668"></box>
+    <modification form="corp" author="OCR"></modification>
+  </word>
+  <word original="ne">
+    <box width="18" height="18" y="1164" x="722"></box>
+    <modification form="ne" author="OCR"></modification>
+  </word>
+  <word original="vid'">
+    <box width="34" height="18" y="1164" x="758"></box>
+    <modification form="vid'" author="OCR"></modification>
+  </word>
+  <word original="orma,">
+    <box width="50" height="18" y="1191" x="87"></box>
+    <modification form="orma," author="OCR"></modification>
+  </word>
+  <word original="mò">
+    <box width="18" height="18" y="1191" x="155"></box>
+    <modification form="mò" author="OCR"></modification>
+  </word>
+  <word original="blear">
+    <box width="38" height="18" y="1191" x="191"></box>
+    <modification form="blear" author="OCR"></modification>
+  </word>
+  <word original="plij">
+    <box width="14" height="18" y="1191" x="247"></box>
+    <modification form="plij" author="OCR"></modification>
+  </word>
+  <word original="l'ira">
+    <box width="36" height="18" y="1191" x="279"></box>
+    <modification form="l'ira" author="OCR"></modification>
+  </word>
+  <word original="da">
+    <box width="18" height="18" y="1191" x="333"></box>
+    <modification form="da" author="OCR"></modification>
+  </word>
+  <word original="Deu">
+    <box width="32" height="18" y="1191" x="369"></box>
+    <modification form="Deu" author="OCR"></modification>
+  </word>
+  <word original="fur">
+    <box width="20" height="18" y="1191" x="419"></box>
+    <modification form="fur" author="OCR"></modification>
+  </word>
+  <word original="tals">
+    <box width="22" height="18" y="1191" x="457"></box>
+    <modification form="tals" author="OCR"></modification>
+  </word>
+  <word original="Chriftiauns">
+    <box width="76" height="18" y="1191" x="497"></box>
+    <modification form="Chriftiauns" author="OCR"></modification>
+  </word>
+  <word original="vean">
+    <box width="36" height="18" y="1191" x="591"></box>
+    <modification form="vean" author="OCR"></modification>
+  </word>
+  <word original="à">
+    <box width="9" height="18" y="1191" x="645"></box>
+    <modification form="à" author="OCR"></modification>
+  </word>
+  <word original="d'effer.">
+    <box width="68" height="18" y="1191" x="672"></box>
+    <modification form="d'effer." author="OCR"></modification>
+  </word>
+  <word original="Schina-">
+    <box width="67" height="18" y="1191" x="758"></box>
+    <modification form="Schina-" author="OCR"></modification>
+  </word>
+  <word original="25">
+    <box width="29" height="18" y="1191" x="843"></box>
+    <modification form="25" author="OCR"></modification>
+  </word>
+  <word original="vaunt">
+    <box width="38" height="18" y="1219" x="86"></box>
+    <modification form="vaunt" author="OCR"></modification>
+  </word>
+  <word original="era">
+    <box width="27" height="18" y="1219" x="142"></box>
+    <modification form="era" author="OCR"></modification>
+  </word>
+  <word original="la">
+    <box width="11" height="18" y="1219" x="187"></box>
+    <modification form="la" author="OCR"></modification>
+  </word>
+  <word original="Giuventütna">
+    <box width="83" height="18" y="1219" x="216"></box>
+    <modification form="Giuventütna" author="OCR"></modification>
+  </word>
+  <word original="ees">
+    <box width="27" height="18" y="1219" x="317"></box>
+    <modification form="ees" author="OCR"></modification>
+  </word>
+  <word original="üna">
+    <box width="27" height="18" y="1219" x="362"></box>
+    <modification form="üna" author="OCR"></modification>
+  </word>
+  <word original="ragijfch">
+    <box width="50" height="18" y="1219" x="407"></box>
+    <modification form="ragijfch" author="OCR"></modification>
+  </word>
+  <word original="della">
+    <box width="31" height="18" y="1219" x="475"></box>
+    <modification form="della" author="OCR"></modification>
+  </word>
+  <word original="Baselgia">
+    <box width="63" height="18" y="1219" x="524"></box>
+    <modification form="Baselgia" author="OCR"></modification>
+  </word>
+  <word original="da">
+    <box width="18" height="18" y="1219" x="605"></box>
+    <modification form="da" author="OCR"></modification>
+  </word>
+  <word original="Deu,">
+    <box width="47" height="18" y="1219" x="641"></box>
+    <modification form="Deu," author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="1219" x="706"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="Deus">
+    <box width="41" height="18" y="1219" x="738"></box>
+    <modification form="Deus" author="OCR"></modification>
+  </word>
+  <word original="vutt">
+    <box width="22" height="18" y="1246" x="87"></box>
+    <modification form="vutt" author="OCR"></modification>
+  </word>
+  <word original="cha">
+    <box width="27" height="18" y="1246" x="127"></box>
+    <modification form="cha" author="OCR"></modification>
+  </word>
+  <word original="quella">
+    <box width="40" height="18" y="1246" x="172"></box>
+    <modification form="quella" author="OCR"></modification>
+  </word>
+  <word original="vignig">
+    <box width="40" height="18" y="1246" x="230"></box>
+    <modification form="vignig" author="OCR"></modification>
+  </word>
+  <word original="manada">
+    <box width="54" height="18" y="1246" x="288"></box>
+    <modification form="manada" author="OCR"></modification>
+  </word>
+  <word original="à">
+    <box width="9" height="18" y="1246" x="360"></box>
+    <modification form="à" author="OCR"></modification>
+  </word>
+  <word original="lgui">
+    <box width="22" height="18" y="1246" x="387"></box>
+    <modification form="lgui" author="OCR"></modification>
+  </word>
+  <word original="tiers,">
+    <box width="45" height="18" y="1246" x="427"></box>
+    <modification form="tiers," author="OCR"></modification>
+  </word>
+  <word original="vut">
+    <box width="20" height="18" y="1246" x="490"></box>
+    <modification form="vut" author="OCR"></modification>
+  </word>
+  <word original="ell">
+    <box width="13" height="18" y="1246" x="528"></box>
+    <modification form="ell" author="OCR"></modification>
+  </word>
+  <word original="duvrar">
+    <box width="54" height="18" y="1246" x="559"></box>
+    <modification form="duvrar" author="OCR"></modification>
+  </word>
+  <word original="Babb">
+    <box width="41" height="18" y="1246" x="631"></box>
+    <modification form="Babb" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="1246" x="690"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="Mamma">
+    <box width="50" height="18" y="1246" x="722"></box>
+    <modification form="Mamma" author="OCR"></modification>
+  </word>
+  <word original="la">
+    <box width="11" height="18" y="1274" x="87"></box>
+    <modification form="la" author="OCR"></modification>
+  </word>
+  <word original="tiers,">
+    <box width="45" height="18" y="1274" x="116"></box>
+    <modification form="tiers," author="OCR"></modification>
+  </word>
+  <word original="ch'els">
+    <box width="52" height="18" y="1274" x="179"></box>
+    <modification form="ch'els" author="OCR"></modification>
+  </word>
+  <word original="quella">
+    <box width="40" height="18" y="1274" x="249"></box>
+    <modification form="quella" author="OCR"></modification>
+  </word>
+  <word original="à">
+    <box width="9" height="18" y="1274" x="307"></box>
+    <modification form="à" author="OCR"></modification>
+  </word>
+  <word original="Igui">
+    <box width="23" height="18" y="1274" x="334"></box>
+    <modification form="Igui" author="OCR"></modification>
+  </word>
+  <word original="megnan">
+    <box width="54" height="18" y="1274" x="375"></box>
+    <modification form="megnan" author="OCR"></modification>
+  </word>
+  <word original="tiers">
+    <box width="31" height="18" y="1274" x="447"></box>
+    <modification form="tiers" author="OCR"></modification>
+  </word>
+  <word original="cum">
+    <box width="27" height="18" y="1274" x="496"></box>
+    <modification form="cum" author="OCR"></modification>
+  </word>
+  <word original="dretchia">
+    <box width="58" height="18" y="1274" x="541"></box>
+    <modification form="dretchia" author="OCR"></modification>
+  </word>
+  <word original="forma">
+    <box width="38" height="18" y="1274" x="617"></box>
+    <modification form="forma" author="OCR"></modification>
+  </word>
+  <word original="&amp;">
+    <box width="14" height="18" y="1274" x="673"></box>
+    <modification form="&amp;" author="OCR"></modification>
+  </word>
+  <word original="ünandretg">
+    <box width="74" height="18" y="1274" x="705"></box>
+    <modification form="ünandretg" author="OCR"></modification>
+  </word>
+  <word original="traer">
+    <box width="38" height="18" y="1301" x="87"></box>
+    <modification form="traer" author="OCR"></modification>
+  </word>
+  <word original="fij,">
+    <box width="20" height="18" y="1301" x="143"></box>
+    <modification form="fij," author="OCR"></modification>
+  </word>
+  <word original="igl">
+    <box width="13" height="18" y="1301" x="181"></box>
+    <modification form="igl" author="OCR"></modification>
+  </word>
+  <word original="qual">
+    <box width="29" height="18" y="1301" x="212"></box>
+    <modification form="qual" author="OCR"></modification>
+  </word>
+  <word original="ees">
+    <box width="27" height="18" y="1301" x="259"></box>
+    <modification form="ees" author="OCR"></modification>
+  </word>
+  <word original="à">
+    <box width="9" height="18" y="1301" x="304"></box>
+    <modification form="à" author="OCR"></modification>
+  </word>
+  <word original="Deu">
+    <box width="32" height="18" y="1301" x="331"></box>
+    <modification form="Deu" author="OCR"></modification>
+  </word>
+  <word original="igl">
+    <box width="13" height="18" y="1301" x="381"></box>
+    <modification form="igl" author="OCR"></modification>
+  </word>
+  <word original="plij">
+    <box width="14" height="18" y="1301" x="412"></box>
+    <modification form="plij" author="OCR"></modification>
+  </word>
+  <word original="graund">
+    <box width="54" height="18" y="1301" x="444"></box>
+    <modification form="graund" author="OCR"></modification>
+  </word>
+  <word original="bein">
+    <box width="29" height="18" y="1301" x="516"></box>
+    <modification form="bein" author="OCR"></modification>
+  </word>
+  <word original="plafchêr.">
+    <box width="72" height="18" y="1301" x="563"></box>
+    <modification form="plafchêr." author="OCR"></modification>
+  </word>
+  <word original="Sur">
+    <box width="32" height="18" y="1301" x="653"></box>
+    <modification form="Sur" author="OCR"></modification>
+  </word>
+  <word original="quegl">
+    <box width="38" height="18" y="1301" x="703"></box>
+    <modification form="quegl" author="OCR"></modification>
+  </word>
+  <word original="fcò">
+    <box width="20" height="18" y="1301" x="759"></box>
+    <modification form="fcò" author="OCR"></modification>
+  </word>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
+  </word>
+  <word original="Romaniache">
+    <box width="54" height="11" y="1334" x="102"></box>
+    <modification form="Romaniache" author="OCR"></modification>
+  </word>
+  <word original="Forschungen">
+    <box width="57" height="11" y="1334" x="167"></box>
+    <modification form="Forschungen" author="OCR"></modification>
+  </word>
+  <word original="IV.">
+    <box width="20" height="11" y="1334" x="235"></box>
+    <modification form="IV." author="OCR"></modification>
+  </word>
+  <word original="i">
+    <box width="1" height="11" y="1334" x="266"></box>
+    <modification form="i" author="OCR"></modification>
+  </word>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
   </word>
 </page>

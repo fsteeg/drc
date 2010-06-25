@@ -45,7 +45,6 @@ case class Page(words:List[Word], id: String) {
     val root = toXml
     val formatted = new StringBuilder
     new PrettyPrinter(120, 2).format(root, formatted)
-    // XML.saveFull("out.xml", root, "UTF-8", true, null) // FIXME hangs
     val writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
     writer.write(formatted.toString)
     writer.close

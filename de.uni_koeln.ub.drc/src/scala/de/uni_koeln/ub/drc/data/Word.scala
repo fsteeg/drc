@@ -75,16 +75,15 @@ case class Word(original:String, position:Box) {
   }
   
   def toXml = 
-    <word> 
-      <original>  { original } </original> 
-      <position>  { position.toXml } </position>
+    <word original={original}> 
+      { position.toXml }
       { history.map(_.toXml) }
     </word>
 }
 
 object Word {
   def fromXml(word:Node) : Word = {
-    val w = Word( (word \ "original").text.trim, Box.fromXml((word \ "position" \ "box")(0)) )
+    val w = Word( (word \ "@original").text.trim, Box.fromXml((word \ "box")(0)) )
     (word\"modification").reverse.foreach( m => {
         val mod =  Modification.fromXml(m)
         if(!w.history.contains(mod))
