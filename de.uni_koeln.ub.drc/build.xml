@@ -8,8 +8,12 @@
 	<property name="deploy.dir.lib" location="${deploy.dir.root}/lib" />
 	<property name="deploy.dir.data" location="${deploy.dir.root}/pages" />
 	<!-- Currently working with volume 4 only: -->
-	<property name="data.volume" value="PPN345572629_0004"/>
+	<property name="data.volume" value="PPN345572629_0004" />
 	<property name="src.dir.data" location="res/rom/${data.volume}" />
+  
+	<!-- Checkstyle setup -->
+	<property name="checkstyle.config" location="doc/checkstyle.xml" />
+	<taskdef resource="checkstyletask.properties" classpath="${lib.dir}/checkstyle-all-5.1.jar" />
 
 	<!-- Java-specific properties: -->
 	<property name="build.prod.dir.java" location="${build.dir}/classes/java/prod" />
@@ -35,12 +39,12 @@
 	<property name="ant.java.version" value="1.5" />
 
 	<!-- Scala Ant tasks: -->
-  <taskdef resource="scala/tools/ant/antlib.xml">
-    <classpath>
-      <pathelement location="${lib.dir}/scala-compiler.jar" />
-      <pathelement location="${lib.dir}/scala-library.jar" />
-    </classpath>
-  </taskdef>
+	<taskdef resource="scala/tools/ant/antlib.xml">
+		<classpath>
+			<pathelement location="${lib.dir}/scala-compiler.jar" />
+			<pathelement location="${lib.dir}/scala-library.jar" />
+		</classpath>
+	</taskdef>
 
 	<!-- The classpath: where the classes are to be found -->
 	<path id="project.classpath">
@@ -54,7 +58,7 @@
 	</path>
 
 	<!-- The main target to do all work -->
-	<target name="all" depends="clean, deploy, doc, test-report, zip, deploy-data" />
+	<target name="all" depends="clean, deploy, checkstyle, doc, test-report, zip, deploy-data" />
 
 	<!-- Prepare the build: create folders -->
 	<target name="prepare">
@@ -87,14 +91,14 @@
 	<target name="compile" depends="prepare">
 		<javac srcdir="${src.dir.java}" destdir="${build.prod.dir.java}">
 			<classpath refid="project.classpath" />
+			<compilerarg value="-Xlint" />
 		</javac>
 		<!-- Copy resources to be in classpath -->
 		<copy todir="${build.prod.dir.java}">
 			<fileset dir="${src.dir.java}" excludes="**/*.java" />
 		</copy>
-
-		<scalac srcdir="${src.dir.scala}" deprecation="on" destdir="${build.prod.dir.scala}" classpathref="project.classpath">
-			<include name="**/*.scala"   />
+		<scalac srcdir="${src.dir.scala}" deprecation="yes" unchecked="yes" addparams="Xlint" destdir="${build.prod.dir.scala}" classpathref="project.classpath">
+			<include name="**/*.scala" />
 		</scalac>
 		<!-- Copy resources to be in classpath -->
 		<copy todir="${build.prod.dir.scala}">
@@ -107,15 +111,17 @@
 	<target name="compile-tests" depends="compile">
 		<javac srcdir="${test.dir.java}" destdir="${build.test.dir.java}">
 			<classpath refid="project.classpath" />
+			<compilerarg value="-Xlint" />
 		</javac>
 		<!-- Compile both Java and Scala files in the Scala tests folder, as we use Java Suites for running the tests -->
-		<scalac srcdir="${test.dir.scala}" deprecation="on" destdir="${build.test.dir.scala}" classpathref="project.classpath">
-      <include name="**/*.scala" />
-    </scalac>
+		<scalac srcdir="${test.dir.scala}" deprecation="yes" unchecked="yes" addparams="Xlint" destdir="${build.test.dir.scala}" classpathref="project.classpath">
+			<include name="**/*.scala" />
+		</scalac>
 		<javac srcdir="${test.dir.scala}" destdir="${build.test.dir.scala}">
-      <classpath refid="project.classpath" />
+			<classpath refid="project.classpath" />
 			<include name="**/*.java" />
-    </javac>
+			<compilerarg value="-Xlint" />
+		</javac>
 	</target>
 
 	<!-- Build a distribution jar-->
@@ -163,11 +169,11 @@
 				<!--For Java, we run only the classes containing 'Test' in their name-->
 				<fileset dir="${build.test.dir.java}" includes="**/*Test*.class" />
 			</batchtest>
-		  <batchtest todir="${reports.dir.scala}">
-        <formatter type="xml" />
-        <!--For Scala, we run only the classes containing 'Suite' in their name-->
-        <fileset dir="${build.test.dir.scala}" includes="**/*Suite*.class" />
-      </batchtest>
+			<batchtest todir="${reports.dir.scala}">
+				<formatter type="xml" />
+				<!--For Scala, we run only the classes containing 'Suite' in their name-->
+				<fileset dir="${build.test.dir.scala}" includes="**/*Suite*.class" />
+			</batchtest>
 		</junit>
 	</target>
 
@@ -182,13 +188,13 @@
 		</junitreport>
 		<echo message="Wrote summary test report to: ${summary.dir.java}" />
 		<!-- collect the Scala results into a summary report -->
-    <junitreport todir="${summary.dir.scala}">
-      <fileset dir="${reports.dir.scala}">
-        <include name="TEST-*.xml" />
-      </fileset>
-      <report format="frames" todir="${summary.dir.scala}" />
-    </junitreport>
-    <echo message="Wrote summary test report to: ${summary.dir.scala}" />
+		<junitreport todir="${summary.dir.scala}">
+			<fileset dir="${reports.dir.scala}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${summary.dir.scala}" />
+		</junitreport>
+		<echo message="Wrote summary test report to: ${summary.dir.scala}" />
 	</target>
 
 	<!-- Generate javadoc and scaladoc documentation-->
@@ -200,6 +206,15 @@
 		<scaladoc srcdir="${src.dir.scala}" destdir="${doc.dir.scala}" deprecation="yes" unchecked="yes" doctitle="DRC Scala API" classpathref="project.classpath">
 			<include name="**/*.scala" />
 		</scaladoc>
+	</target>
+
+	<!-- Run Checkstyle -->
+	<target name="checkstyle">
+		<checkstyle config="${checkstyle.config}">
+			<fileset dir="src" includes="**/*.java" />
+			<formatter type="plain" />
+			<formatter type="xml" toFile="${build.dir}/checkstyle_errors.xml" />
+		</checkstyle>
 	</target>
 
 </project>
