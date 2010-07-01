@@ -11,7 +11,9 @@ import org.apache.commons.httpclient._
 import org.apache.commons.httpclient.methods._
 import scala.xml._
 
-/* Move issues from one GitHub repo to another. Requires Apache Commons httpclient, logging and codec. */
+/* Moves issues from one GitHub repo to another. Will get all open and closed issues from a source 
+ * repo, create corresponding issues in the target repo, adding labels and comments from the source 
+ * issues. Requires Apache Commons httpclient, logging and codec. Set repo properties below. */
 
 object GitHubIssuesMover {
   
@@ -22,7 +24,7 @@ object GitHubIssuesMover {
   val TargetUser = "spinfo"
   val TargetRepo = "drc"
     
-  def main(args : Array[String]) : Unit = {
+  def main(args:Array[String]):Unit = {
     new Move().from(SourceUser, SourceRepo).to(TargetLogin, Token, TargetUser, TargetRepo)
   }
 }
@@ -72,7 +74,7 @@ class Move {
     id
   }
   
-  private def addLabels(id:String, issue:Issue, login:String, token:String, target:String, repo:String)={
+  private def addLabels(id:String, issue:Issue, login:String, token:String, target:String, repo:String) = {
     for(label <- issue.labels) {
       post(IssuesApi + LabelApi.format(target, repo, label, id), 
           "login" -> login, "token" -> token)
@@ -89,6 +91,9 @@ class Move {
   private def getBody(x:Node, originalUser:String, originalRepo:String, originalId:String) = {
     val author = (x \ "user").text
     val originalDate = (x \ "updated-at").text.split("T")(0)
+    /* Since we recreate new issues in the target repo, they have the authenticated user as their
+     * author and the current date - to maintain the original information we add it to the issue and
+     * comment bodies and add a reference to the original user and issue: */
     ((x \ "body").text + 
         "\n\n*Original author: [%s](http://github.com/%s), %s, at %s/%s#%s*".format( 
         author, author, originalDate, originalUser, originalRepo, originalId)).trim
@@ -98,15 +103,15 @@ class Move {
     val response = get(IssuesApi + ListApi.format(user, repo, state.toString.toLowerCase))
     for(issue <- response \ "issue") yield {
       val labels = (issue \\ "label" \ "name").map(_.text)
-      val bodyString = getBody(issue, user, repo, (issue\"number").text)
-      Issue((issue\"title").text,  bodyString, labels, getComments(issue, user, repo), state)
+      val body = getBody(issue, user, repo, (issue\"number").text)
+      Issue((issue\"title").text,  body, labels, getComments(issue, user, repo), state)
     }
   }
   
-  private def getComments(issue: Node, user:String, repo:String):Seq[String] = {
+  private def getComments(issue:Node, user:String, repo:String):Seq[String] = {
     if((issue \ "comments").text != "0") {
-      val commentsResponse = get(IssuesApi + CommentListApi.format(user, repo, (issue \ "number").text))
-      (commentsResponse \ "comment").map( c => getBody(c, user, repo, (issue \ "number").text))
+      val comments = get(IssuesApi + CommentListApi.format(user, repo, (issue \ "number").text))
+      (comments \ "comment").map( c => getBody(c, user, repo, (issue \ "number").text))
     } else Nil
   }
   
