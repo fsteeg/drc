@@ -72,6 +72,7 @@ public final class PageInfo {
     Line line = null;
     for (ExtractedWord ew : words) {
       if (!ew.getText().startsWith(" ")) {
+        // FIXME not reliable e.g. page 1 volume 4
         line = new Line();
         lines.add(line);
       }
