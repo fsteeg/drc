@@ -59,8 +59,9 @@ object SearchOption extends Enumeration {
 object Index {
   
     lazy val lexicon: Set[String] =
-      Set() ++ scala.io.Source.fromInputStream(
-          Index.getClass.getResourceAsStream("words.txt"))("ISO-8859-1").getLines().map(_.trim.toLowerCase)
+      (Set() ++ scala.io.Source.fromInputStream(
+          Index.getClass.getResourceAsStream("words.txt"))("ISO-8859-1").getLines()).map(
+              _.replaceAll("\\s[IVX]+", "").trim.toLowerCase)
     
     /** 
      * Load serialized XML pages from a directory.
