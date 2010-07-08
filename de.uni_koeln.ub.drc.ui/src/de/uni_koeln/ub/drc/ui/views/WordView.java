@@ -25,6 +25,9 @@ import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
@@ -43,10 +46,18 @@ public final class WordView {
   private TableViewer viewer;
   private Text suggestions;
   private Job job;
+  private Button check;
 
   @Inject public WordView(final Composite parent) {
     initTableViewer(parent);
-    suggestions = new Text(parent, SWT.NONE);
+    Composite bottom = new Composite(parent, SWT.NONE);
+    GridLayout layout = new GridLayout(2, false);
+    bottom.setLayout(layout);
+    check = new Button(bottom, SWT.CHECK);
+    check.setToolTipText("Suggest corrections");
+    check.setSelection(true);
+    suggestions = new Text(bottom, SWT.NONE);
+    suggestions.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
     GridLayoutFactory.fillDefaults().generateLayout(parent);
   }
 
@@ -56,7 +67,9 @@ public final class WordView {
       job.cancel();
     }
     if (text == null) {
-      suggestions.setText("No word selected.");
+      suggestions.setText("No word selected");
+    } else if (!check.getSelection()) {
+      suggestions.setText("Edit suggestions disabled");
     } else {
       this.word = (Word) text.getData();
       setTableInput();
