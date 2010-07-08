@@ -147,7 +147,7 @@
 	</target>
 
 	<target name="zip">
-		<zip destfile="${src.dir.data}/${data.volume}.zip" update="true">
+		<zip destfile="${src.dir.data}/${data.volume}.zip" update="false">
 			<!-- Files copied here are currently generated during test run  -->
 			<fileset dir="${src.dir.data}" includes="**/PPN*_*-*.xml,**/PPN*_*-*.jpg" />
 		</zip>

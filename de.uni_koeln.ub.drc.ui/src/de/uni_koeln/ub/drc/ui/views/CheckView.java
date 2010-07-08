@@ -7,9 +7,11 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.views;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
+import java.util.zip.ZipFile;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -102,7 +104,8 @@ public final class CheckView {
   private Image loadImage(final Page page) throws IOException {
     Display display = parent.getDisplay();
     Image newImage = null;
-    newImage = new Image(display, page.zip().get().getInputStream(page.image().get()));
+    newImage = new Image(display,
+        new ZipFile(new File(page.zip().get().getName())).getInputStream(page.image().get()));
     return newImage;
   }
 

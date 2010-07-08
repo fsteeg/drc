@@ -77,9 +77,12 @@ object Index {
             if(entry.getName.endsWith(".xml") && entry.getName.contains("-")) {
               val xmlStream = zip.getInputStream(entry)
               val imageEntry:ZipEntry = zip.getEntry(entry.getName.replace("xml", "jpg"))
-              buffer += Page.load(location + "/" + file + "/" + entry.getName, zip, entry, imageEntry)
+              buffer += Page.load(location + File.separator + file + File.separator + entry.getName, 
+                  zip, entry, imageEntry)
+              xmlStream.close()
             }
           }
+          zip.close()
         }
         buffer.sortBy(_.id).toList
     }
