@@ -108,20 +108,20 @@ public final class EditComposite extends Composite {
     setLineLayout(lineComposite);
     lines.add(lineComposite);
     for (Word word : JavaConversions.asIterable(page.words())) {
-      Text text = new Text(lineComposite, SWT.NONE);
       if (word.original().equals(Page.ParagraphMarker())) {
         lineComposite = new Composite(c, SWT.NONE);
         setLineLayout(lineComposite);
         lines.add(lineComposite);
       } else {
+        Text text = new Text(lineComposite, SWT.NONE);
         text.setText(word.history().top().form());
         if (word.isPossibleError()) {
           text.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_DARK_GRAY));
         }
+        text.setData(word);
+        addListeners(text);
+        list.add(text);
       }
-      text.setData(word);
-      addListeners(text);
-      list.add(text);
     }
     this.layout();
     return list;
