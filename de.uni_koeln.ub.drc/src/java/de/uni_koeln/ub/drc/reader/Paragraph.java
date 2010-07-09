@@ -17,20 +17,20 @@ import java.util.List;
  */
 public final class Paragraph {
 
-  private List<Line> lines = new ArrayList<Line>();
+  private List<ExtractedWord> words = new ArrayList<ExtractedWord>();
 
   /**
    * @param line The line to be added to the paragraph
    */
-  void addLine(final Line line) {
-    lines.add(line);
+  void addWord(final ExtractedWord line) {
+    words.add(line);
   }
 
   /**
    * @return The Lines of a paragraph
    */
-  public List<Line> getLinesInParagraph() {
-    return new ArrayList<Line>(lines);
+  public List<ExtractedWord> getWords() {
+    return new ArrayList<ExtractedWord>(words);
   }
 
 }

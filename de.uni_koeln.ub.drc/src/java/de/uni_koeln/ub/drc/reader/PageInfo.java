@@ -1,23 +1,24 @@
 /**************************************************************************************************
- * Copyright (c) 2010 Mihail Atanassov. All rights reserved. This program and the accompanying
- * materials are made available under the terms of the Eclipse Public License v1.0 which accompanies
- * this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2010 Mihail Atanassov and others. All rights reserved. This program and the
+ * accompanying materials are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  * <p/>
- * Contributors: Mihail Atanassov - initial API and implementation
+ * Contributors: <br/>
+ * Mihail Atanassov - initial API and implementation <br/>
+ * Fabian Steeg - Refactored for PdfBox
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.reader;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.itextpdf.text.Rectangle;
-
 /**
- * @author Mihail Atanssov <saeko.bjagai@gmail.com>
+ * @author Mihail Atanssov <saeko.bjagai@gmail.com>(original version) <br/>
+ *         Fabian Steeg <fsteeg@gmail.com> (Refactored for PdfBox)
  */
 public final class PageInfo {
 
-  private List<Line> lines = new ArrayList<Line>();
   private List<Paragraph> paragraphs = new ArrayList<Paragraph>();
   private List<ExtractedWord> words;
 
@@ -26,27 +27,7 @@ public final class PageInfo {
    */
   public PageInfo(final List<ExtractedWord> words) {
     this.words = words;
-    toLines();
-    toParagrphs();
-  }
-
-  /**
-   * @param index Position of a line in the PDF document
-   * @return The line from index
-   */
-  public Line getLineAt(final int index) {
-    if (index >= 0 && index <= lines.size()) {
-      return lines.get(index);
-    } else {
-      return null;
-    }
-  }
-
-  /**
-   * @return All lines from the PDF document
-   */
-  public List<Line> getLines() {
-    return new ArrayList<Line>(lines);
+    toParagraphs();
   }
 
   /**
@@ -64,29 +45,27 @@ public final class PageInfo {
   /**
    * @return All paragraphs from the PDF document
    */
-  public List<Paragraph> getParagraps() {
+  public List<Paragraph> getParagraphs() {
     return new ArrayList<Paragraph>(paragraphs);
   }
 
-  private void toLines() {
-    Line line = null;
-    for (ExtractedWord ew : words) {
-      if (!ew.getText().startsWith(" ")) {
-        line = new Line();
-        lines.add(line);
+  private void toParagraphs() {
+    Paragraph paragraph = new Paragraph();
+    paragraphs.add(paragraph);
+    for (ExtractedWord word : words) {
+      if (word.isParagraphStart()) {
+        paragraph = new Paragraph();
+        paragraph.addWord(word);
+        paragraphs.add(paragraph);
+      } else {
+        paragraph.addWord(word);
       }
-      line.addExtractedWord(ew);
     }
   }
 
-  private void toParagrphs() {
-    Paragraph paragraph = null;
-    for (Line line : lines) {
-      if (line.getWordsInLine().get(0).isParagraphStart()) {
-        paragraph = new Paragraph();
-        paragraphs.add(paragraph);
-      }
-      paragraph.addLine(line);
-    }
+  @Override
+  public String toString() {
+    return String.format("%s with %s paragraphs, %s words", getClass().getSimpleName(), paragraphs
+        .size(), words.size());
   }
 }

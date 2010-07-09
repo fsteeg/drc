@@ -1,1755 +1,1779 @@
 <page>
-  <word original="Catechifmus 7 ">
-    <box width="419" height="18" y="86" x="383"></box>
-    <modification form="Catechifmus 7 " author="OCR"></modification>
+  <word original="Catechifmus ">
+    <box width="101" height="18" y="86" x="383"></box>
+    <modification form="Catechifmus " author="OCR"></modification>
   </word>
-  <word original="@">
-    <box width="0" height="0" y="0" x="0"></box>
-    <modification form="@" author="OCR"></modification>
+  <word original="7 ">
+    <box width="12" height="23" y="84" x="785"></box>
+    <modification form="7 " author="OCR"></modification>
   </word>
-  <word original="Or">
+  <word original="Or ">
     <box width="23" height="18" y="136" x="117"></box>
-    <modification form="Or" author="OCR"></modification>
+    <modification form="Or " author="OCR"></modification>
   </word>
-  <word original=" digl">
-    <box width="46" height="18" y="136" x="140"></box>
-    <modification form=" digl" author="OCR"></modification>
+  <word original="digl ">
+    <box width="34" height="18" y="136" x="153"></box>
+    <modification form="digl " author="OCR"></modification>
   </word>
-  <word original=" teu">
-    <box width="40" height="18" y="136" x="186"></box>
-    <modification form=" teu" author="OCR"></modification>
+  <word original="teu ">
+    <box width="26" height="18" y="136" x="200"></box>
+    <modification form="teu " author="OCR"></modification>
   </word>
-  <word original=" plaed">
-    <box width="56" height="18" y="136" x="226"></box>
-    <modification form=" plaed" author="OCR"></modification>
+  <word original="plaed ">
+    <box width="43" height="18" y="136" x="239"></box>
+    <modification form="plaed " author="OCR"></modification>
   </word>
-  <word original=" veans">
-    <box width="60" height="18" y="136" x="282"></box>
-    <modification form=" veans" author="OCR"></modification>
+  <word original="veans ">
+    <box width="48" height="18" y="136" x="294"></box>
+    <modification form="veans " author="OCR"></modification>
   </word>
-  <word original=" tij">
-    <box width="31" height="18" y="136" x="342"></box>
-    <modification form=" tij" author="OCR"></modification>
+  <word original="tij ">
+    <box width="18" height="18" y="136" x="355"></box>
+    <modification form="tij " author="OCR"></modification>
   </word>
-  <word original=" cognufcheu">
-    <box width="114" height="18" y="136" x="373"></box>
-    <modification form=" cognufcheu" author="OCR"></modification>
+  <word original="cognufcheu ">
+    <box width="101" height="18" y="136" x="387"></box>
+    <modification form="cognufcheu " author="OCR"></modification>
   </word>
-  <word original=" che">
-    <box width="44" height="18" y="136" x="487"></box>
-    <modification form=" che" author="OCR"></modification>
+  <word original="che ">
+    <box width="28" height="18" y="136" x="503"></box>
+    <modification form="che " author="OCR"></modification>
   </word>
-  <word original=" tij">
-    <box width="31" height="18" y="136" x="531"></box>
-    <modification form=" tij" author="OCR"></modification>
+  <word original="tij ">
+    <box width="19" height="18" y="136" x="544"></box>
+    <modification form="tij " author="OCR"></modification>
   </word>
-  <word original=" has">
-    <box width="42" height="18" y="136" x="562"></box>
-    <modification form=" has" author="OCR"></modification>
+  <word original="has ">
+    <box width="29" height="18" y="136" x="575"></box>
+    <modification form="has " author="OCR"></modification>
   </word>
-  <word original=" eint'">
-    <box width="51" height="18" y="136" x="604"></box>
-    <modification form=" eint'" author="OCR"></modification>
+  <word original="eint' ">
+    <box width="37" height="18" y="136" x="618"></box>
+    <modification form="eint' " author="OCR"></modification>
   </word>
-  <word original=" igl">
-    <box width="32" height="18" y="136" x="655"></box>
-    <modification form=" igl" author="OCR"></modification>
+  <word original="igl ">
+    <box width="22" height="18" y="136" x="666"></box>
+    <modification form="igl " author="OCR"></modification>
   </word>
-  <word original=" còr.">
-    <box width="48" height="18" y="136" x="687"></box>
-    <modification form=" còr." author="OCR"></modification>
+  <word original="còr. ">
+    <box width="33" height="18" y="136" x="702"></box>
+    <modification form="còr. " author="OCR"></modification>
   </word>
-  <word original=" Per-">
-    <box width="61" height="18" y="136" x="735"></box>
-    <modification form=" Per-" author="OCR"></modification>
+  <word original="Per-quegl ">
+    <box width="-638" height="18" y="136" x="758"></box>
+    <modification form="Per-quegl " author="OCR"></modification>
   </word>
-  <word original="quegl">
-    <box width="49" height="18" y="164" x="71"></box>
-    <modification form="quegl" author="OCR"></modification>
+  <word original="hagias ">
+    <box width="57" height="18" y="164" x="134"></box>
+    <modification form="hagias " author="OCR"></modification>
   </word>
-  <word original=" hagias">
-    <box width="71" height="18" y="164" x="120"></box>
-    <modification form=" hagias" author="OCR"></modification>
+  <word original="adatg ">
+    <box width="49" height="18" y="164" x="204"></box>
+    <modification form="adatg " author="OCR"></modification>
   </word>
-  <word original=" adatg">
-    <box width="62" height="18" y="164" x="191"></box>
-    <modification form=" adatg" author="OCR"></modification>
+  <word original="della ">
+    <box width="43" height="18" y="164" x="267"></box>
+    <modification form="della " author="OCR"></modification>
   </word>
-  <word original=" della">
-    <box width="57" height="18" y="164" x="253"></box>
-    <modification form=" della" author="OCR"></modification>
+  <word original="tia ">
+    <box width="23" height="18" y="164" x="322"></box>
+    <modification form="tia " author="OCR"></modification>
   </word>
-  <word original=" tia">
-    <box width="35" height="18" y="164" x="310"></box>
-    <modification form=" tia" author="OCR"></modification>
+  <word original="leungua. ">
+    <box width="76" height="18" y="164" x="359"></box>
+    <modification form="leungua. " author="OCR"></modification>
   </word>
-  <word original=" leungua. ">
-    <box width="102" height="18" y="164" x="345"></box>
-    <modification form=" leungua. " author="OCR"></modification>
+  <word original="Schbitar ">
+    <box width="75" height="18" y="191" x="117"></box>
+    <modification form="Schbitar " author="OCR"></modification>
+  </word>
+  <word original="nagün, ">
+    <box width="63" height="18" y="191" x="205"></box>
+    <modification form="nagün, " author="OCR"></modification>
+  </word>
+  <word original="fcha ">
+    <box width="36" height="18" y="191" x="286"></box>
+    <modification form="fcha " author="OCR"></modification>
+  </word>
+  <word original="veaus ">
+    <box width="49" height="18" y="191" x="335"></box>
+    <modification form="veaus " author="OCR"></modification>
+  </word>
+  <word original="tij ">
+    <box width="18" height="18" y="191" x="401"></box>
+    <modification form="tij " author="OCR"></modification>
+  </word>
+  <word original="ear ">
+    <box width="26" height="18" y="191" x="433"></box>
+    <modification form="ear " author="OCR"></modification>
+  </word>
+  <word original="bigchia ">
+    <box width="65" height="18" y="191" x="478"></box>
+    <modification form="bigchia " author="OCR"></modification>
+  </word>
+  <word original="fchbitaa. ">
+    <box width="77" height="18" y="191" x="561"></box>
+    <modification form="fchbitaa. " author="OCR"></modification>
+  </word>
+  <word original="Schgamnegear ">
+    <box width="130" height="18" y="191" x="667"></box>
+    <modification form="Schgamnegear " author="OCR"></modification>
   </word>
   <word original="@">
     <box width="0" height="0" y="0" x="0"></box>
     <modification form="@" author="OCR"></modification>
   </word>
-  <word original="Schbitar">
-    <box width="76" height="18" y="191" x="116"></box>
-    <modification form="Schbitar" author="OCR"></modification>
+  <word original="nagün, ">
+    <box width="60" height="18" y="219" x="71"></box>
+    <modification form="nagün, " author="OCR"></modification>
   </word>
-  <word original=" nagün,">
-    <box width="76" height="18" y="191" x="192"></box>
-    <modification form=" nagün," author="OCR"></modification>
+  <word original="fcha ">
+    <box width="37" height="18" y="219" x="144"></box>
+    <modification form="fcha " author="OCR"></modification>
   </word>
-  <word original=" fcha">
-    <box width="54" height="18" y="191" x="268"></box>
-    <modification form=" fcha" author="OCR"></modification>
+  <word original="veans ">
+    <box width="49" height="18" y="219" x="190"></box>
+    <modification form="veans " author="OCR"></modification>
   </word>
-  <word original=" veaus">
-    <box width="62" height="18" y="191" x="322"></box>
-    <modification form=" veaus" author="OCR"></modification>
+  <word original="ear ">
+    <box width="27" height="18" y="219" x="252"></box>
+    <modification form="ear " author="OCR"></modification>
   </word>
-  <word original=" tij">
-    <box width="35" height="18" y="191" x="384"></box>
-    <modification form=" tij" author="OCR"></modification>
+  <word original="bigchia ">
+    <box width="64" height="18" y="219" x="289"></box>
+    <modification form="bigchia " author="OCR"></modification>
   </word>
-  <word original=" ear">
-    <box width="40" height="18" y="191" x="419"></box>
-    <modification form=" ear" author="OCR"></modification>
+  <word original="fchgamnegeu. ">
+    <box width="124" height="18" y="219" x="365"></box>
+    <modification form="fchgamnegeu. " author="OCR"></modification>
   </word>
-  <word original=" bigchia">
-    <box width="84" height="18" y="191" x="459"></box>
-    <modification form=" bigchia" author="OCR"></modification>
+  <word original="Gijr ">
+    <box width="36" height="18" y="219" x="512"></box>
+    <modification form="Gijr " author="OCR"></modification>
   </word>
-  <word original=" fchbitaa.">
-    <box width="94" height="18" y="191" x="543"></box>
-    <modification form=" fchbitaa." author="OCR"></modification>
+  <word original="na ">
+    <box width="21" height="18" y="219" x="560"></box>
+    <modification form="na " author="OCR"></modification>
   </word>
-  <word original=" Schgamnegear ">
-    <box width="187" height="18" y="191" x="637"></box>
-    <modification form=" Schgamnegear " author="OCR"></modification>
+  <word original="nui ">
+    <box width="27" height="18" y="219" x="594"></box>
+    <modification form="nui " author="OCR"></modification>
   </word>
-  <word original="nagün,">
-    <box width="60" height="18" y="218" x="71"></box>
-    <modification form="nagün," author="OCR"></modification>
+  <word original="mal, ">
+    <box width="37" height="18" y="219" x="634"></box>
+    <modification form="mal, " author="OCR"></modification>
   </word>
-  <word original=" fcha">
-    <box width="49" height="18" y="218" x="131"></box>
-    <modification form=" fcha" author="OCR"></modification>
+  <word original="fcha ">
+    <box width="36" height="18" y="219" x="685"></box>
+    <modification form="fcha " author="OCR"></modification>
   </word>
-  <word original=" veans">
-    <box width="59" height="18" y="218" x="180"></box>
-    <modification form=" veans" author="OCR"></modification>
+  <word original="chi ">
+    <box width="25" height="18" y="219" x="735"></box>
+    <modification form="chi " author="OCR"></modification>
   </word>
-  <word original=" ear">
-    <box width="39" height="18" y="218" x="239"></box>
-    <modification form=" ear" author="OCR"></modification>
+  <word original="gij ">
+    <box width="22" height="18" y="219" x="775"></box>
+    <modification form="gij " author="OCR"></modification>
   </word>
-  <word original=" bigchia">
-    <box width="75" height="18" y="218" x="278"></box>
-    <modification form=" bigchia" author="OCR"></modification>
-  </word>
-  <word original=" fchgamnegeu.">
-    <box width="136" height="18" y="218" x="353"></box>
-    <modification form=" fchgamnegeu." author="OCR"></modification>
-  </word>
-  <word original=" Gijr">
-    <box width="58" height="18" y="218" x="489"></box>
-    <modification form=" Gijr" author="OCR"></modification>
-  </word>
-  <word original=" na">
-    <box width="33" height="18" y="218" x="547"></box>
-    <modification form=" na" author="OCR"></modification>
-  </word>
-  <word original=" nui">
-    <box width="40" height="18" y="218" x="580"></box>
-    <modification form=" nui" author="OCR"></modification>
-  </word>
-  <word original=" mal,">
-    <box width="51" height="18" y="218" x="620"></box>
-    <modification form=" mal," author="OCR"></modification>
-  </word>
-  <word original=" fcha">
-    <box width="49" height="18" y="218" x="671"></box>
-    <modification form=" fcha" author="OCR"></modification>
-  </word>
-  <word original=" chi">
-    <box width="39" height="18" y="218" x="720"></box>
-    <modification form=" chi" author="OCR"></modification>
-  </word>
-  <word original=" gij ">
-    <box width="52" height="18" y="218" x="759"></box>
-    <modification form=" gij " author="OCR"></modification>
-  </word>
-  <word original="ear">
+  <word original="ear ">
     <box width="27" height="18" y="246" x="71"></box>
-    <modification form="ear" author="OCR"></modification>
+    <modification form="ear " author="OCR"></modification>
   </word>
-  <word original=" nagün">
-    <box width="67" height="18" y="246" x="98"></box>
-    <modification form=" nagün" author="OCR"></modification>
+  <word original="nagün ">
+    <box width="54" height="18" y="246" x="111"></box>
+    <modification form="nagün " author="OCR"></modification>
   </word>
-  <word original=" mal.">
-    <box width="50" height="18" y="246" x="165"></box>
-    <modification form=" mal." author="OCR"></modification>
+  <word original="mal. ">
+    <box width="37" height="18" y="246" x="178"></box>
+    <modification form="mal. " author="OCR"></modification>
   </word>
-  <word original=" 5 ">
-    <box width="1191" height="18" y="246" x="215"></box>
-    <modification form=" 5 " author="OCR"></modification>
-  </word>
-  <word original="@">
-    <box width="0" height="0" y="0" x="0"></box>
-    <modification form="@" author="OCR"></modification>
-  </word>
-  <word original="Nagüna">
-    <box width="69" height="20" y="272" x="117"></box>
-    <modification form="Nagüna" author="OCR"></modification>
-  </word>
-  <word original=" martfcha">
-    <box width="94" height="20" y="272" x="186"></box>
-    <modification form=" martfcha" author="OCR"></modification>
-  </word>
-  <word original=" vauna">
-    <box width="66" height="20" y="272" x="280"></box>
-    <modification form=" vauna" author="OCR"></modification>
-  </word>
-  <word original=" &amp;">
-    <box width="29" height="20" y="272" x="346"></box>
-    <modification form=" &amp;" author="OCR"></modification>
-  </word>
-  <word original=" mal">
-    <box width="42" height="20" y="272" x="375"></box>
-    <modification form=" mal" author="OCR"></modification>
-  </word>
-  <word original=" hundrevla">
-    <box width="106" height="20" y="272" x="417"></box>
-    <modification form=" hundrevla" author="OCR"></modification>
-  </word>
-  <word original=" tfchauntfcha">
-    <box width="127" height="20" y="272" x="523"></box>
-    <modification form=" tfchauntfcha" author="OCR"></modification>
-  </word>
-  <word original=" de">
-    <box width="35" height="20" y="272" x="650"></box>
-    <modification form=" de" author="OCR"></modification>
-  </word>
-  <word original=" lr">
-    <box width="30" height="20" y="272" x="685"></box>
-    <modification form=" lr" author="OCR"></modification>
-  </word>
-  <word original=" or">
-    <box width="32" height="20" y="272" x="715"></box>
-    <modification form=" or" author="OCR"></modification>
-  </word>
-  <word original=" d'la ">
-    <box width="68" height="20" y="272" x="747"></box>
-    <modification form=" d'la " author="OCR"></modification>
-  </word>
-  <word original="tia">
-    <box width="22" height="20" y="299" x="71"></box>
-    <modification form="tia" author="OCR"></modification>
-  </word>
-  <word original=" bucca.">
-    <box width="68" height="20" y="299" x="93"></box>
-    <modification form=" bucca." author="OCR"></modification>
-  </word>
-  <word original=" Scò">
-    <box width="55" height="20" y="299" x="161"></box>
-    <modification form=" Scò" author="OCR"></modification>
-  </word>
-  <word original=" [pag.">
-    <box width="58" height="20" y="299" x="216"></box>
-    <modification form=" [pag." author="OCR"></modification>
-  </word>
-  <word original=" 94]">
-    <box width="40" height="20" y="299" x="274"></box>
-    <modification form=" 94]" author="OCR"></modification>
-  </word>
-  <word original=" S.">
-    <box width="29" height="20" y="299" x="314"></box>
-    <modification form=" S." author="OCR"></modification>
-  </word>
-  <word original=" Paul.">
-    <box width="59" height="20" y="299" x="343"></box>
-    <modification form=" Paul." author="OCR"></modification>
-  </word>
-  <word original=" Muffa">
-    <box width="66" height="20" y="299" x="402"></box>
-    <modification form=" Muffa" author="OCR"></modification>
-  </word>
-  <word original=" Colof.">
-    <box width="66" height="20" y="299" x="468"></box>
-    <modification form=" Colof." author="OCR"></modification>
-  </word>
-  <word original=" 3.">
-    <box width="30" height="20" y="299" x="534"></box>
-    <modification form=" 3." author="OCR"></modification>
-  </word>
-  <word original=" Tutta">
-    <box width="72" height="20" y="299" x="564"></box>
-    <modification form=" Tutta" author="OCR"></modification>
-  </word>
-  <word original=" ira,">
-    <box width="43" height="20" y="299" x="636"></box>
-    <modification form=" ira," author="OCR"></modification>
-  </word>
-  <word original=" naufchadad ">
-    <box width="133" height="20" y="299" x="679"></box>
-    <modification form=" naufchadad " author="OCR"></modification>
-  </word>
-  <word original="feijg">
-    <box width="39" height="20" y="326" x="72"></box>
-    <modification form="feijg" author="OCR"></modification>
-  </word>
-  <word original=" lientfch">
-    <box width="79" height="20" y="326" x="111"></box>
-    <modification form=" lientfch" author="OCR"></modification>
-  </word>
-  <word original=" da">
-    <box width="35" height="20" y="326" x="190"></box>
-    <modification form=" da" author="OCR"></modification>
-  </word>
-  <word original=" te. ">
-    <box width="47" height="20" y="326" x="225"></box>
-    <modification form=" te. " author="OCR"></modification>
+  <word original="5 ">
+    <box width="10" height="18" y="246" x="806"></box>
+    <modification form="5 " author="OCR"></modification>
   </word>
   <word original="@">
     <box width="0" height="0" y="0" x="0"></box>
     <modification form="@" author="OCR"></modification>
   </word>
-  <word original="Tutt">
-    <box width="39" height="18" y="356" x="116"></box>
-    <modification form="Tutt" author="OCR"></modification>
+  <word original="Nagüna ">
+    <box width="69" height="18" y="274" x="117"></box>
+    <modification form="Nagüna " author="OCR"></modification>
   </word>
-  <word original=" quegl">
-    <box width="61" height="18" y="356" x="155"></box>
-    <modification form=" quegl" author="OCR"></modification>
+  <word original="martfcha ">
+    <box width="77" height="18" y="274" x="203"></box>
+    <modification form="martfcha " author="OCR"></modification>
   </word>
-  <word original=" cha">
-    <box width="47" height="18" y="356" x="216"></box>
-    <modification form=" cha" author="OCR"></modification>
+  <word original="vauna ">
+    <box width="53" height="18" y="274" x="293"></box>
+    <modification form="vauna " author="OCR"></modification>
   </word>
-  <word original=" tij">
-    <box width="35" height="18" y="356" x="263"></box>
-    <modification form=" tij" author="OCR"></modification>
+  <word original="&amp; ">
+    <box width="15" height="18" y="274" x="360"></box>
+    <modification form="&amp; " author="OCR"></modification>
   </word>
-  <word original=" fas,">
-    <box width="48" height="18" y="356" x="298"></box>
-    <modification form=" fas," author="OCR"></modification>
+  <word original="mal ">
+    <box width="31" height="18" y="274" x="386"></box>
+    <modification form="mal " author="OCR"></modification>
   </word>
-  <word original=" fae">
-    <box width="38" height="18" y="356" x="346"></box>
-    <modification form=" fae" author="OCR"></modification>
+  <word original="hundrevla ">
+    <box width="90" height="18" y="274" x="433"></box>
+    <modification form="hundrevla " author="OCR"></modification>
   </word>
-  <word original=" cun">
-    <box width="42" height="18" y="356" x="384"></box>
-    <modification form=" cun" author="OCR"></modification>
+  <word original="tfchauntfcha ">
+    <box width="110" height="18" y="274" x="541"></box>
+    <modification form="tfchauntfcha " author="OCR"></modification>
   </word>
-  <word original=" diligentia">
-    <box width="100" height="18" y="356" x="426"></box>
-    <modification form=" diligentia" author="OCR"></modification>
+  <word original="de ">
+    <box width="20" height="18" y="274" x="666"></box>
+    <modification form="de " author="OCR"></modification>
   </word>
-  <word original=" &amp;">
-    <box width="32" height="18" y="356" x="526"></box>
-    <modification form=" &amp;" author="OCR"></modification>
+  <word original="lr ">
+    <box width="14" height="18" y="274" x="702"></box>
+    <modification form="lr " author="OCR"></modification>
   </word>
-  <word original=" à">
-    <box width="26" height="18" y="356" x="558"></box>
-    <modification form=" à" author="OCR"></modification>
+  <word original="or ">
+    <box width="17" height="18" y="274" x="730"></box>
+    <modification form="or " author="OCR"></modification>
   </word>
-  <word original=" fenn,">
-    <box width="62" height="18" y="356" x="584"></box>
-    <modification form=" fenn," author="OCR"></modification>
+  <word original="d'la ">
+    <box width="31" height="18" y="274" x="766"></box>
+    <modification form="d'la " author="OCR"></modification>
   </word>
-  <word original=" fchi">
-    <box width="48" height="18" y="356" x="646"></box>
-    <modification form=" fchi" author="OCR"></modification>
+  <word original="tia ">
+    <box width="22" height="18" y="301" x="71"></box>
+    <modification form="tia " author="OCR"></modification>
   </word>
-  <word original=" veans">
-    <box width="66" height="18" y="356" x="694"></box>
-    <modification form=" veans" author="OCR"></modification>
+  <word original="bucca. ">
+    <box width="55" height="18" y="301" x="106"></box>
+    <modification form="bucca. " author="OCR"></modification>
   </word>
-  <word original=" tij ">
-    <box width="54" height="18" y="356" x="760"></box>
-    <modification form=" tij " author="OCR"></modification>
+  <word original="Scò ">
+    <box width="30" height="18" y="301" x="186"></box>
+    <modification form="Scò " author="OCR"></modification>
   </word>
-  <word original="laudaa">
-    <box width="60" height="18" y="384" x="71"></box>
-    <modification form="laudaa" author="OCR"></modification>
+  <word original="[pag. ">
+    <box width="44" height="18" y="301" x="230"></box>
+    <modification form="[pag. " author="OCR"></modification>
   </word>
-  <word original=" da">
-    <box width="33" height="18" y="384" x="131"></box>
-    <modification form=" da" author="OCR"></modification>
+  <word original="94] ">
+    <box width="29" height="18" y="301" x="286"></box>
+    <modification form="94] " author="OCR"></modification>
   </word>
-  <word original=" Deu.">
-    <box width="55" height="18" y="384" x="164"></box>
-    <modification form=" Deu." author="OCR"></modification>
+  <word original="S. ">
+    <box width="15" height="18" y="301" x="328"></box>
+    <modification form="S. " author="OCR"></modification>
   </word>
-  <word original=" 10 ">
-    <box width="1193" height="18" y="384" x="219"></box>
-    <modification form=" 10 " author="OCR"></modification>
+  <word original="Paul. ">
+    <box width="47" height="18" y="301" x="356"></box>
+    <modification form="Paul. " author="OCR"></modification>
   </word>
-  <word original="Quell">
-    <box width="48" height="18" y="411" x="118"></box>
-    <modification form="Quell" author="OCR"></modification>
+  <word original="Muffa ">
+    <box width="51" height="18" y="301" x="417"></box>
+    <modification form="Muffa " author="OCR"></modification>
   </word>
-  <word original=" ch'ees">
-    <box width="65" height="18" y="411" x="166"></box>
-    <modification form=" ch'ees" author="OCR"></modification>
+  <word original="Colof. ">
+    <box width="52" height="18" y="301" x="482"></box>
+    <modification form="Colof. " author="OCR"></modification>
   </word>
-  <word original=" eintin">
-    <box width="63" height="18" y="411" x="231"></box>
-    <modification form=" eintin" author="OCR"></modification>
+  <word original="3. ">
+    <box width="16" height="18" y="301" x="548"></box>
+    <modification form="3. " author="OCR"></modification>
   </word>
-  <word original=" tfchiel">
-    <box width="67" height="18" y="411" x="294"></box>
-    <modification form=" tfchiel" author="OCR"></modification>
+  <word original="Tutta ">
+    <box width="49" height="18" y="301" x="588"></box>
+    <modification form="Tutta " author="OCR"></modification>
   </word>
-  <word original=" vedza">
-    <box width="65" height="18" y="411" x="361"></box>
-    <modification form=" vedza" author="OCR"></modification>
+  <word original="ira, ">
+    <box width="29" height="18" y="301" x="650"></box>
+    <modification form="ira, " author="OCR"></modification>
   </word>
-  <word original=" tutta">
-    <box width="57" height="18" y="411" x="426"></box>
-    <modification form=" tutta" author="OCR"></modification>
+  <word original="naufchadad ">
+    <box width="103" height="18" y="301" x="695"></box>
+    <modification form="naufchadad " author="OCR"></modification>
   </word>
-  <word original=" la">
-    <box width="31" height="18" y="411" x="483"></box>
-    <modification form=" la" author="OCR"></modification>
+  <word original="feijg ">
+    <box width="39" height="18" y="329" x="72"></box>
+    <modification form="feijg " author="OCR"></modification>
   </word>
-  <word original=" tia">
-    <box width="35" height="18" y="411" x="514"></box>
-    <modification form=" tia" author="OCR"></modification>
+  <word original="lientfch ">
+    <box width="66" height="18" y="329" x="124"></box>
+    <modification form="lientfch " author="OCR"></modification>
   </word>
-  <word original=" lavur:">
-    <box width="67" height="18" y="411" x="549"></box>
-    <modification form=" lavur:" author="OCR"></modification>
+  <word original="da ">
+    <box width="20" height="18" y="329" x="205"></box>
+    <modification form="da " author="OCR"></modification>
   </word>
-  <word original=" Gea">
-    <box width="56" height="18" y="411" x="616"></box>
-    <modification form=" Gea" author="OCR"></modification>
+  <word original="te. ">
+    <box width="21" height="18" y="329" x="239"></box>
+    <modification form="te. " author="OCR"></modification>
   </word>
-  <word original=" ell">
-    <box width="34" height="18" y="411" x="672"></box>
-    <modification form=" ell" author="OCR"></modification>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
   </word>
-  <word original=" vedza">
-    <box width="64" height="18" y="411" x="706"></box>
-    <modification form=" vedza" author="OCR"></modification>
+  <word original="Tutt ">
+    <box width="38" height="18" y="357" x="117"></box>
+    <modification form="Tutt " author="OCR"></modification>
   </word>
-  <word original=" &amp; ">
-    <box width="42" height="18" y="411" x="770"></box>
-    <modification form=" &amp; " author="OCR"></modification>
+  <word original="quegl ">
+    <box width="48" height="18" y="357" x="168"></box>
+    <modification form="quegl " author="OCR"></modification>
   </word>
-  <word original="cognufcha">
+  <word original="cha ">
+    <box width="30" height="18" y="357" x="233"></box>
+    <modification form="cha " author="OCR"></modification>
+  </word>
+  <word original="tij ">
+    <box width="19" height="18" y="357" x="279"></box>
+    <modification form="tij " author="OCR"></modification>
+  </word>
+  <word original="fas, ">
+    <box width="32" height="18" y="357" x="314"></box>
+    <modification form="fas, " author="OCR"></modification>
+  </word>
+  <word original="fae ">
+    <box width="21" height="18" y="357" x="363"></box>
+    <modification form="fae " author="OCR"></modification>
+  </word>
+  <word original="cun ">
+    <box width="30" height="18" y="357" x="396"></box>
+    <modification form="cun " author="OCR"></modification>
+  </word>
+  <word original="diligentia ">
+    <box width="84" height="18" y="357" x="442"></box>
+    <modification form="diligentia " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="15" height="18" y="357" x="543"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="à ">
+    <box width="9" height="18" y="357" x="575"></box>
+    <modification form="à " author="OCR"></modification>
+  </word>
+  <word original="fenn, ">
+    <box width="45" height="18" y="357" x="601"></box>
+    <modification form="fenn, " author="OCR"></modification>
+  </word>
+  <word original="fchi ">
+    <box width="31" height="18" y="357" x="663"></box>
+    <modification form="fchi " author="OCR"></modification>
+  </word>
+  <word original="veans ">
+    <box width="50" height="18" y="357" x="711"></box>
+    <modification form="veans " author="OCR"></modification>
+  </word>
+  <word original="tij ">
+    <box width="18" height="18" y="357" x="779"></box>
+    <modification form="tij " author="OCR"></modification>
+  </word>
+  <word original="laudaa ">
+    <box width="59" height="18" y="384" x="72"></box>
+    <modification form="laudaa " author="OCR"></modification>
+  </word>
+  <word original="da ">
+    <box width="20" height="18" y="384" x="144"></box>
+    <modification form="da " author="OCR"></modification>
+  </word>
+  <word original="Deu. ">
+    <box width="42" height="18" y="384" x="177"></box>
+    <modification form="Deu. " author="OCR"></modification>
+  </word>
+  <word original="10 ">
+    <box width="20" height="18" y="384" x="807"></box>
+    <modification form="10 " author="OCR"></modification>
+  </word>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
+  </word>
+  <word original="Quell ">
+    <box width="48" height="18" y="412" x="118"></box>
+    <modification form="Quell " author="OCR"></modification>
+  </word>
+  <word original="ch'ees ">
+    <box width="51" height="18" y="412" x="180"></box>
+    <modification form="ch'ees " author="OCR"></modification>
+  </word>
+  <word original="eintin ">
+    <box width="50" height="18" y="412" x="244"></box>
+    <modification form="eintin " author="OCR"></modification>
+  </word>
+  <word original="tfchiel ">
+    <box width="55" height="18" y="412" x="307"></box>
+    <modification form="tfchiel " author="OCR"></modification>
+  </word>
+  <word original="vedza ">
+    <box width="51" height="18" y="412" x="375"></box>
+    <modification form="vedza " author="OCR"></modification>
+  </word>
+  <word original="tutta ">
+    <box width="41" height="18" y="412" x="442"></box>
+    <modification form="tutta " author="OCR"></modification>
+  </word>
+  <word original="la ">
+    <box width="15" height="18" y="412" x="499"></box>
+    <modification form="la " author="OCR"></modification>
+  </word>
+  <word original="tia ">
+    <box width="22" height="18" y="412" x="527"></box>
+    <modification form="tia " author="OCR"></modification>
+  </word>
+  <word original="lavur: ">
+    <box width="55" height="18" y="412" x="562"></box>
+    <modification form="lavur: " author="OCR"></modification>
+  </word>
+  <word original="Gea ">
+    <box width="34" height="18" y="412" x="638"></box>
+    <modification form="Gea " author="OCR"></modification>
+  </word>
+  <word original="ell ">
+    <box width="20" height="18" y="412" x="687"></box>
+    <modification form="ell " author="OCR"></modification>
+  </word>
+  <word original="vedza ">
+    <box width="50" height="18" y="412" x="720"></box>
+    <modification form="vedza " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="15" height="18" y="412" x="784"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="cognufcha ">
     <box width="91" height="18" y="439" x="72"></box>
-    <modification form="cognufcha" author="OCR"></modification>
+    <modification form="cognufcha " author="OCR"></modification>
   </word>
-  <word original=" igl">
-    <box width="35" height="18" y="439" x="163"></box>
-    <modification form=" igl" author="OCR"></modification>
+  <word original="igl ">
+    <box width="23" height="18" y="439" x="176"></box>
+    <modification form="igl " author="OCR"></modification>
   </word>
-  <word original=" teu">
-    <box width="40" height="18" y="439" x="198"></box>
-    <modification form=" teu" author="OCR"></modification>
+  <word original="teu ">
+    <box width="27" height="18" y="439" x="212"></box>
+    <modification form="teu " author="OCR"></modification>
   </word>
-  <word original=" cör,">
-    <box width="48" height="18" y="439" x="238"></box>
-    <modification form=" cör," author="OCR"></modification>
+  <word original="cör, ">
+    <box width="35" height="18" y="439" x="252"></box>
+    <modification form="cör, " author="OCR"></modification>
   </word>
-  <word original=" fcha">
-    <box width="51" height="18" y="439" x="286"></box>
-    <modification form=" fcha" author="OCR"></modification>
+  <word original="fcha ">
+    <box width="36" height="18" y="439" x="301"></box>
+    <modification form="fcha " author="OCR"></modification>
   </word>
-  <word original=" tij">
-    <box width="31" height="18" y="439" x="337"></box>
-    <modification form=" tij" author="OCR"></modification>
+  <word original="tij ">
+    <box width="18" height="18" y="439" x="350"></box>
+    <modification form="tij " author="OCR"></modification>
   </word>
-  <word original=" lavuras">
-    <box width="74" height="18" y="439" x="368"></box>
-    <modification form=" lavuras" author="OCR"></modification>
+  <word original="lavuras ">
+    <box width="65" height="18" y="439" x="377"></box>
+    <modification form="lavuras " author="OCR"></modification>
   </word>
-  <word original=" fidêlmeng,">
-    <box width="102" height="18" y="439" x="442"></box>
-    <modification form=" fidêlmeng," author="OCR"></modification>
+  <word original="fidêlmeng, ">
+    <box width="81" height="18" y="439" x="463"></box>
+    <modification form="fidêlmeng, " author="OCR"></modification>
   </word>
-  <word original=" fchi">
-    <box width="52" height="18" y="439" x="544"></box>
-    <modification form=" fchi" author="OCR"></modification>
+  <word original="fchi ">
+    <box width="32" height="18" y="439" x="565"></box>
+    <modification form="fchi " author="OCR"></modification>
   </word>
-  <word original=" plaegl">
-    <box width="63" height="18" y="439" x="596"></box>
-    <modification form=" plaegl" author="OCR"></modification>
+  <word original="plaegl ">
+    <box width="49" height="18" y="439" x="610"></box>
+    <modification form="plaegl " author="OCR"></modification>
   </word>
-  <word original=" à">
-    <box width="22" height="18" y="439" x="659"></box>
-    <modification form=" à" author="OCR"></modification>
+  <word original="à ">
+    <box width="9" height="18" y="439" x="672"></box>
+    <modification form="à " author="OCR"></modification>
   </word>
-  <word original=" Deu,">
-    <box width="51" height="18" y="439" x="681"></box>
-    <modification form=" Deu," author="OCR"></modification>
+  <word original="Deu, ">
+    <box width="42" height="18" y="439" x="690"></box>
+    <modification form="Deu, " author="OCR"></modification>
   </word>
-  <word original=" &amp;">
-    <box width="29" height="18" y="439" x="732"></box>
-    <modification form=" &amp;" author="OCR"></modification>
+  <word original="&amp; ">
+    <box width="16" height="18" y="439" x="746"></box>
+    <modification form="&amp; " author="OCR"></modification>
   </word>
-  <word original=" chi ">
-    <box width="47" height="18" y="439" x="761"></box>
-    <modification form=" chi " author="OCR"></modification>
+  <word original="chi ">
+    <box width="25" height="18" y="439" x="773"></box>
+    <modification form="chi " author="OCR"></modification>
   </word>
-  <word original="va">
-    <box width="20" height="18" y="466" x="71"></box>
-    <modification form="va" author="OCR"></modification>
+  <word original="va ">
+    <box width="20" height="18" y="467" x="71"></box>
+    <modification form="va " author="OCR"></modification>
   </word>
-  <word original=" bein:">
-    <box width="60" height="18" y="466" x="91"></box>
-    <modification form=" bein:" author="OCR"></modification>
+  <word original="bein: ">
+    <box width="46" height="18" y="467" x="105"></box>
+    <modification form="bein: " author="OCR"></modification>
   </word>
-  <word original=" Mò">
-    <box width="44" height="18" y="466" x="151"></box>
-    <modification form=" Mò" author="OCR"></modification>
+  <word original="Mò ">
+    <box width="26" height="18" y="467" x="169"></box>
+    <modification form="Mò " author="OCR"></modification>
   </word>
-  <word original=" fcha">
-    <box width="50" height="18" y="466" x="195"></box>
-    <modification form=" fcha" author="OCR"></modification>
+  <word original="fcha ">
+    <box width="36" height="18" y="467" x="209"></box>
+    <modification form="fcha " author="OCR"></modification>
   </word>
-  <word original=" tij">
-    <box width="33" height="18" y="466" x="245"></box>
-    <modification form=" tij" author="OCR"></modification>
+  <word original="tij ">
+    <box width="18" height="18" y="467" x="260"></box>
+    <modification form="tij " author="OCR"></modification>
   </word>
-  <word original=" handlegias">
-    <box width="109" height="18" y="466" x="278"></box>
-    <modification form=" handlegias" author="OCR"></modification>
+  <word original="handlegias ">
+    <box width="96" height="18" y="467" x="291"></box>
+    <modification form="handlegias " author="OCR"></modification>
   </word>
-  <word original=" cun">
-    <box width="45" height="18" y="466" x="387"></box>
-    <modification form=" cun" author="OCR"></modification>
+  <word original="cun ">
+    <box width="30" height="18" y="467" x="402"></box>
+    <modification form="cun " author="OCR"></modification>
   </word>
-  <word original=" mala">
-    <box width="54" height="18" y="466" x="432"></box>
-    <modification form=" mala" author="OCR"></modification>
+  <word original="mala ">
+    <box width="43" height="18" y="467" x="444"></box>
+    <modification form="mala " author="OCR"></modification>
   </word>
-  <word original=" fee">
-    <box width="38" height="18" y="466" x="486"></box>
-    <modification form=" fee" author="OCR"></modification>
+  <word original="fee ">
+    <box width="24" height="18" y="467" x="501"></box>
+    <modification form="fee " author="OCR"></modification>
   </word>
-  <word original=" eint'">
-    <box width="52" height="18" y="466" x="524"></box>
-    <modification form=" eint'" author="OCR"></modification>
+  <word original="eint' ">
+    <box width="38" height="18" y="467" x="538"></box>
+    <modification form="eint' " author="OCR"></modification>
   </word>
-  <word original=" igl">
-    <box width="34" height="18" y="466" x="576"></box>
-    <modification form=" igl" author="OCR"></modification>
+  <word original="igl ">
+    <box width="22" height="18" y="467" x="588"></box>
+    <modification form="igl " author="OCR"></modification>
   </word>
-  <word original=" cör,">
-    <box width="48" height="18" y="466" x="610"></box>
-    <modification form=" cör," author="OCR"></modification>
+  <word original="cör, ">
+    <box width="35" height="18" y="467" x="624"></box>
+    <modification form="cör, " author="OCR"></modification>
   </word>
-  <word original=" te">
-    <box width="28" height="18" y="466" x="658"></box>
-    <modification form=" te" author="OCR"></modification>
+  <word original="te ">
+    <box width="15" height="18" y="467" x="671"></box>
+    <modification form="te " author="OCR"></modification>
   </word>
-  <word original=" vean">
-    <box width="52" height="18" y="466" x="686"></box>
-    <modification form=" vean" author="OCR"></modification>
+  <word original="vean ">
+    <box width="41" height="18" y="467" x="698"></box>
+    <modification form="vean " author="OCR"></modification>
   </word>
-  <word original=" Deus ">
-    <box width="75" height="18" y="466" x="738"></box>
-    <modification form=" Deus " author="OCR"></modification>
+  <word original="Deus ">
+    <box width="43" height="18" y="467" x="755"></box>
+    <modification form="Deus " author="OCR"></modification>
   </word>
-  <word original="bigchia">
-    <box width="64" height="18" y="493" x="72"></box>
-    <modification form="bigchia" author="OCR"></modification>
+  <word original="bigchia ">
+    <box width="64" height="18" y="494" x="72"></box>
+    <modification form="bigchia " author="OCR"></modification>
   </word>
-  <word original=" à">
-    <box width="23" height="18" y="493" x="136"></box>
-    <modification form=" à" author="OCR"></modification>
+  <word original="à ">
+    <box width="9" height="18" y="494" x="150"></box>
+    <modification form="à " author="OCR"></modification>
   </word>
-  <word original=" lafchar">
-    <box width="73" height="18" y="493" x="159"></box>
-    <modification form=" lafchar" author="OCR"></modification>
+  <word original="lafchar ">
+    <box width="61" height="18" y="494" x="172"></box>
+    <modification form="lafchar " author="OCR"></modification>
   </word>
-  <word original=" ir">
-    <box width="29" height="18" y="493" x="232"></box>
-    <modification form=" ir" author="OCR"></modification>
+  <word original="ir ">
+    <box width="15" height="18" y="494" x="246"></box>
+    <modification form="ir " author="OCR"></modification>
   </word>
-  <word original=" vij">
-    <box width="34" height="18" y="493" x="261"></box>
-    <modification form=" vij" author="OCR"></modification>
+  <word original="vij ">
+    <box width="22" height="18" y="494" x="274"></box>
+    <modification form="vij " author="OCR"></modification>
   </word>
-  <word original=" feinza">
-    <box width="67" height="18" y="493" x="295"></box>
-    <modification form=" feinza" author="OCR"></modification>
+  <word original="feinza ">
+    <box width="52" height="18" y="494" x="310"></box>
+    <modification form="feinza " author="OCR"></modification>
   </word>
-  <word original=" caftigameint,">
-    <box width="132" height="18" y="493" x="362"></box>
-    <modification form=" caftigameint," author="OCR"></modification>
+  <word original="caftigameint, ">
+    <box width="117" height="18" y="494" x="377"></box>
+    <modification form="caftigameint, " author="OCR"></modification>
   </word>
-  <word original=" è">
-    <box width="27" height="18" y="493" x="494"></box>
-    <modification form=" è" author="OCR"></modification>
+  <word original="è ">
+    <box width="8" height="18" y="494" x="513"></box>
+    <modification form="è " author="OCR"></modification>
   </word>
-  <word original=" daveintig">
-    <box width="96" height="18" y="493" x="521"></box>
-    <modification form=" daveintig" author="OCR"></modification>
+  <word original="daveintig ">
+    <box width="82" height="18" y="494" x="535"></box>
+    <modification form="daveintig " author="OCR"></modification>
   </word>
-  <word original=" fur">
-    <box width="39" height="18" y="493" x="617"></box>
-    <modification form=" fur" author="OCR"></modification>
+  <word original="fur ">
+    <box width="25" height="18" y="494" x="631"></box>
+    <modification form="fur " author="OCR"></modification>
   </word>
-  <word original=" curt">
-    <box width="50" height="18" y="493" x="656"></box>
-    <modification form=" curt" author="OCR"></modification>
+  <word original="curt ">
+    <box width="33" height="18" y="494" x="673"></box>
+    <modification form="curt " author="OCR"></modification>
   </word>
-  <word original=" guar">
-    <box width="52" height="18" y="493" x="706"></box>
-    <modification form=" guar" author="OCR"></modification>
+  <word original="guar ">
+    <box width="40" height="18" y="494" x="719"></box>
+    <modification form="guar " author="OCR"></modification>
   </word>
-  <word original=" fur ">
-    <box width="55" height="18" y="493" x="758"></box>
-    <modification form=" fur " author="OCR"></modification>
+  <word original="fur ">
+    <box width="25" height="18" y="494" x="774"></box>
+    <modification form="fur " author="OCR"></modification>
   </word>
-  <word original="lung.">
+  <word original="lung. ">
     <box width="44" height="18" y="521" x="72"></box>
-    <modification form="lung." author="OCR"></modification>
+    <modification form="lung. " author="OCR"></modification>
   </word>
-  <word original=" 15 ">
-    <box width="1401" height="18" y="521" x="116"></box>
-    <modification form=" 15 " author="OCR"></modification>
+  <word original="15 ">
+    <box width="20" height="18" y="521" x="808"></box>
+    <modification form="15 " author="OCR"></modification>
   </word>
-  <word original="Bigchia">
-    <box width="69" height="18" y="549" x="115"></box>
-    <modification form="Bigchia" author="OCR"></modification>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
   </word>
-  <word original=" imprender">
-    <box width="105" height="18" y="549" x="184"></box>
-    <modification form=" imprender" author="OCR"></modification>
+  <word original="Bigchia ">
+    <box width="69" height="18" y="550" x="115"></box>
+    <modification form="Bigchia " author="OCR"></modification>
   </word>
-  <word original=" cò">
-    <box width="32" height="18" y="549" x="289"></box>
-    <modification form=" cò" author="OCR"></modification>
+  <word original="imprender ">
+    <box width="91" height="18" y="550" x="198"></box>
+    <modification form="imprender " author="OCR"></modification>
   </word>
-  <word original=" tij">
-    <box width="31" height="18" y="549" x="321"></box>
-    <modification form=" tij" author="OCR"></modification>
+  <word original="cò ">
+    <box width="18" height="18" y="550" x="303"></box>
+    <modification form="cò " author="OCR"></modification>
   </word>
-  <word original=" dees">
-    <box width="48" height="18" y="549" x="352"></box>
-    <modification form=" dees" author="OCR"></modification>
+  <word original="tij ">
+    <box width="18" height="18" y="550" x="334"></box>
+    <modification form="tij " author="OCR"></modification>
   </word>
-  <word original=" ingannar">
-    <box width="90" height="18" y="549" x="400"></box>
-    <modification form=" ingannar" author="OCR"></modification>
+  <word original="dees ">
+    <box width="37" height="18" y="550" x="363"></box>
+    <modification form="dees " author="OCR"></modification>
   </word>
-  <word original=" la">
-    <box width="28" height="18" y="549" x="490"></box>
-    <modification form=" la" author="OCR"></modification>
+  <word original="ingannar ">
+    <box width="79" height="18" y="550" x="411"></box>
+    <modification form="ingannar " author="OCR"></modification>
   </word>
-  <word original=" lgeud,">
-    <box width="69" height="18" y="549" x="518"></box>
-    <modification form=" lgeud," author="OCR"></modification>
+  <word original="la ">
+    <box width="15" height="18" y="550" x="503"></box>
+    <modification form="la " author="OCR"></modification>
   </word>
-  <word original=" perche">
-    <box width="72" height="18" y="549" x="587"></box>
-    <modification form=" perche" author="OCR"></modification>
+  <word original="lgeud, ">
+    <box width="56" height="18" y="550" x="531"></box>
+    <modification form="lgeud, " author="OCR"></modification>
   </word>
-  <word original=" cha">
-    <box width="40" height="18" y="549" x="659"></box>
-    <modification form=" cha" author="OCR"></modification>
+  <word original="perche ">
+    <box width="58" height="18" y="550" x="601"></box>
+    <modification form="perche " author="OCR"></modification>
   </word>
-  <word original=" quegl">
-    <box width="58" height="18" y="549" x="699"></box>
-    <modification form=" quegl" author="OCR"></modification>
+  <word original="cha ">
+    <box width="29" height="18" y="550" x="670"></box>
+    <modification form="cha " author="OCR"></modification>
   </word>
-  <word original=" ees ">
-    <box width="56" height="18" y="549" x="757"></box>
-    <modification form=" ees " author="OCR"></modification>
+  <word original="quegl ">
+    <box width="48" height="18" y="550" x="709"></box>
+    <modification form="quegl " author="OCR"></modification>
   </word>
-  <word original="üna">
+  <word original="ees ">
+    <box width="26" height="18" y="550" x="773"></box>
+    <modification form="ees " author="OCR"></modification>
+  </word>
+  <word original="üna ">
     <box width="31" height="18" y="577" x="71"></box>
-    <modification form="üna" author="OCR"></modification>
-  </word>
-  <word original=" fchgrifchur">
-    <box width="113" height="18" y="577" x="102"></box>
-    <modification form=" fchgrifchur" author="OCR"></modification>
-  </word>
-  <word original=" avaunt">
-    <box width="75" height="18" y="577" x="215"></box>
-    <modification form=" avaunt" author="OCR"></modification>
-  </word>
-  <word original=" Deu,">
-    <box width="53" height="18" y="577" x="290"></box>
-    <modification form=" Deu," author="OCR"></modification>
-  </word>
-  <word original=" &amp;">
-    <box width="29" height="18" y="577" x="343"></box>
-    <modification form=" &amp;" author="OCR"></modification>
-  </word>
-  <word original=" ftaas">
-    <box width="52" height="18" y="577" x="372"></box>
-    <modification form=" ftaas" author="OCR"></modification>
-  </word>
-  <word original=" à">
-    <box width="23" height="18" y="577" x="424"></box>
-    <modification form=" à" author="OCR"></modification>
-  </word>
-  <word original=" Deu">
-    <box width="48" height="18" y="577" x="447"></box>
-    <modification form=" Deu" author="OCR"></modification>
-  </word>
-  <word original=" per">
-    <box width="42" height="18" y="577" x="495"></box>
-    <modification form=" per" author="OCR"></modification>
-  </word>
-  <word original=" quegl">
-    <box width="61" height="18" y="577" x="537"></box>
-    <modification form=" quegl" author="OCR"></modification>
-  </word>
-  <word original=" dar">
-    <box width="43" height="18" y="577" x="598"></box>
-    <modification form=" dar" author="OCR"></modification>
-  </word>
-  <word original=" ün">
-    <box width="33" height="18" y="577" x="641"></box>
-    <modification form=" ün" author="OCR"></modification>
-  </word>
-  <word original=" greaf">
-    <box width="59" height="18" y="577" x="674"></box>
-    <modification form=" greaf" author="OCR"></modification>
-  </word>
-  <word original=" quint. ">
-    <box width="80" height="18" y="577" x="733"></box>
-    <modification form=" quint. " author="OCR"></modification>
-  </word>
-  <word original="Sees">
-    <box width="38" height="18" y="604" x="118"></box>
-    <modification form="Sees" author="OCR"></modification>
-  </word>
-  <word original=" d'verdad">
-    <box width="89" height="18" y="604" x="156"></box>
-    <modification form=" d'verdad" author="OCR"></modification>
-  </word>
-  <word original=" eintin">
-    <box width="65" height="18" y="604" x="245"></box>
-    <modification form=" eintin" author="OCR"></modification>
-  </word>
-  <word original=" tuttas">
-    <box width="63" height="18" y="604" x="310"></box>
-    <modification form=" tuttas" author="OCR"></modification>
-  </word>
-  <word original=" chiaufas,">
-    <box width="94" height="18" y="604" x="373"></box>
-    <modification form=" chiaufas," author="OCR"></modification>
-  </word>
-  <word original=" perche">
-    <box width="73" height="18" y="604" x="467"></box>
-    <modification form=" perche" author="OCR"></modification>
-  </word>
-  <word original=" che">
-    <box width="42" height="18" y="604" x="540"></box>
-    <modification form=" che" author="OCR"></modification>
-  </word>
-  <word original=" ftatt">
-    <box width="48" height="18" y="604" x="582"></box>
-    <modification form=" ftatt" author="OCR"></modification>
-  </word>
-  <word original=" nagutta">
-    <box width="81" height="18" y="604" x="630"></box>
-    <modification form=" nagutta" author="OCR"></modification>
-  </word>
-  <word original=" plij">
-    <box width="43" height="18" y="604" x="711"></box>
-    <modification form=" plij" author="OCR"></modification>
-  </word>
-  <word original=" mal à">
-    <box width="-673" height="18" y="604" x="754"></box>
-    <modification form=" mal à" author="OCR"></modification>
-  </word>
-  <word original=" nui">
-    <box width="40" height="18" y="632" x="81"></box>
-    <modification form=" nui" author="OCR"></modification>
-  </word>
-  <word original=" Giuvnal">
-    <box width="81" height="18" y="632" x="121"></box>
-    <modification form=" Giuvnal" author="OCR"></modification>
-  </word>
-  <word original=" cha">
-    <box width="44" height="18" y="632" x="202"></box>
-    <modification form=" cha" author="OCR"></modification>
-  </word>
-  <word original=" mentchir:">
-    <box width="101" height="18" y="632" x="246"></box>
-    <modification form=" mentchir:" author="OCR"></modification>
-  </word>
-  <word original=" Ord'mentchir">
-    <box width="132" height="18" y="632" x="347"></box>
-    <modification form=" Ord'mentchir" author="OCR"></modification>
-  </word>
-  <word original=" perfchenda">
-    <box width="112" height="18" y="632" x="479"></box>
-    <modification form=" perfchenda" author="OCR"></modification>
-  </word>
-  <word original=" ingular">
-    <box width="78" height="18" y="632" x="591"></box>
-    <modification form=" ingular" author="OCR"></modification>
-  </word>
-  <word original=" &amp;">
-    <box width="24" height="18" y="632" x="669"></box>
-    <modification form=" &amp;" author="OCR"></modification>
-  </word>
-  <word original=" ord'ingular ">
-    <box width="115" height="18" y="632" x="693"></box>
-    <modification form=" ord'ingular " author="OCR"></modification>
-  </word>
-  <word original="la">
-    <box width="16" height="18" y="659" x="71"></box>
-    <modification form="la" author="OCR"></modification>
-  </word>
-  <word original=" fuga">
-    <box width="51" height="18" y="659" x="87"></box>
-    <modification form=" fuga" author="OCR"></modification>
-  </word>
-  <word original=" eintin">
-    <box width="64" height="18" y="659" x="138"></box>
-    <modification form=" eintin" author="OCR"></modification>
-  </word>
-  <word original=" culiets.">
-    <box width="76" height="18" y="659" x="202"></box>
-    <modification form=" culiets." author="OCR"></modification>
-  </word>
-  <word original=" 20 ">
-    <box width="1078" height="18" y="659" x="278"></box>
-    <modification form=" 20 " author="OCR"></modification>
-  </word>
-  <word original="Tij">
-    <box width="27" height="18" y="687" x="116"></box>
-    <modification form="Tij" author="OCR"></modification>
-  </word>
-  <word original=" dees">
-    <box width="51" height="18" y="687" x="143"></box>
-    <modification form=" dees" author="OCR"></modification>
-  </word>
-  <word original=" bigch'fr">
-    <box width="82" height="18" y="687" x="194"></box>
-    <modification form=" bigch'fr" author="OCR"></modification>
-  </word>
-  <word original=" ord'cheafa">
-    <box width="109" height="18" y="687" x="276"></box>
-    <modification form=" ord'cheafa" author="OCR"></modification>
-  </word>
-  <word original=" feinza">
-    <box width="66" height="18" y="687" x="385"></box>
-    <modification form=" feinza" author="OCR"></modification>
-  </word>
-  <word original=" licentia">
-    <box width="82" height="18" y="687" x="451"></box>
-    <modification form=" licentia" author="OCR"></modification>
-  </word>
-  <word original=" &amp;">
-    <box width="29" height="18" y="687" x="533"></box>
-    <modification form=" &amp;" author="OCR"></modification>
-  </word>
-  <word original=" voeglia">
-    <box width="72" height="18" y="687" x="562"></box>
-    <modification form=" voeglia" author="OCR"></modification>
-  </word>
-  <word original=" da">
-    <box width="37" height="18" y="687" x="634"></box>
-    <modification form=" da" author="OCR"></modification>
-  </word>
-  <word original=" teu">
-    <box width="41" height="18" y="687" x="671"></box>
-    <modification form=" teu" author="OCR"></modification>
-  </word>
-  <word original=" Babb">
-    <box width="59" height="18" y="687" x="712"></box>
-    <modification form=" Babb" author="OCR"></modification>
-  </word>
-  <word original=" &amp; ">
-    <box width="43" height="18" y="687" x="771"></box>
-    <modification form=" &amp; " author="OCR"></modification>
+    <modification form="üna " author="OCR"></modification>
+  </word>
+  <word original="fchgrifchur ">
+    <box width="99" height="18" y="577" x="116"></box>
+    <modification form="fchgrifchur " author="OCR"></modification>
+  </word>
+  <word original="avaunt ">
+    <box width="60" height="18" y="577" x="230"></box>
+    <modification form="avaunt " author="OCR"></modification>
+  </word>
+  <word original="Deu, ">
+    <box width="41" height="18" y="577" x="302"></box>
+    <modification form="Deu, " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="15" height="18" y="577" x="357"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="ftaas ">
+    <box width="41" height="18" y="577" x="383"></box>
+    <modification form="ftaas " author="OCR"></modification>
+  </word>
+  <word original="à ">
+    <box width="9" height="18" y="577" x="438"></box>
+    <modification form="à " author="OCR"></modification>
+  </word>
+  <word original="Deu ">
+    <box width="35" height="18" y="577" x="460"></box>
+    <modification form="Deu " author="OCR"></modification>
+  </word>
+  <word original="per ">
+    <box width="27" height="18" y="577" x="510"></box>
+    <modification form="per " author="OCR"></modification>
+  </word>
+  <word original="quegl ">
+    <box width="48" height="18" y="577" x="550"></box>
+    <modification form="quegl " author="OCR"></modification>
+  </word>
+  <word original="dar ">
+    <box width="28" height="18" y="577" x="613"></box>
+    <modification form="dar " author="OCR"></modification>
+  </word>
+  <word original="ün ">
+    <box width="21" height="18" y="577" x="654"></box>
+    <modification form="ün " author="OCR"></modification>
+  </word>
+  <word original="greaf ">
+    <box width="45" height="18" y="577" x="688"></box>
+    <modification form="greaf " author="OCR"></modification>
+  </word>
+  <word original="quint. ">
+    <box width="51" height="18" y="577" x="748"></box>
+    <modification form="quint. " author="OCR"></modification>
+  </word>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
+  </word>
+  <word original="Sees ">
+    <box width="38" height="18" y="605" x="118"></box>
+    <modification form="Sees " author="OCR"></modification>
+  </word>
+  <word original="d'verdad ">
+    <box width="76" height="18" y="605" x="170"></box>
+    <modification form="d'verdad " author="OCR"></modification>
+  </word>
+  <word original="eintin ">
+    <box width="49" height="18" y="605" x="261"></box>
+    <modification form="eintin " author="OCR"></modification>
+  </word>
+  <word original="tuttas ">
+    <box width="49" height="18" y="605" x="324"></box>
+    <modification form="tuttas " author="OCR"></modification>
+  </word>
+  <word original="chiaufas, ">
+    <box width="81" height="18" y="605" x="387"></box>
+    <modification form="chiaufas, " author="OCR"></modification>
+  </word>
+  <word original="perche ">
+    <box width="58" height="18" y="605" x="482"></box>
+    <modification form="perche " author="OCR"></modification>
+  </word>
+  <word original="che ">
+    <box width="28" height="18" y="605" x="554"></box>
+    <modification form="che " author="OCR"></modification>
+  </word>
+  <word original="ftatt ">
+    <box width="36" height="18" y="605" x="595"></box>
+    <modification form="ftatt " author="OCR"></modification>
+  </word>
+  <word original="nagutta ">
+    <box width="67" height="18" y="605" x="644"></box>
+    <modification form="nagutta " author="OCR"></modification>
+  </word>
+  <word original="plij ">
+    <box width="28" height="18" y="605" x="726"></box>
+    <modification form="plij " author="OCR"></modification>
+  </word>
+  <word original="mal ">
+    <box width="31" height="18" y="605" x="768"></box>
+    <modification form="mal " author="OCR"></modification>
+  </word>
+  <word original="à ">
+    <box width="9" height="18" y="633" x="72"></box>
+    <modification form="à " author="OCR"></modification>
+  </word>
+  <word original="nui ">
+    <box width="27" height="18" y="633" x="94"></box>
+    <modification form="nui " author="OCR"></modification>
+  </word>
+  <word original="Giuvnal ">
+    <box width="70" height="18" y="633" x="132"></box>
+    <modification form="Giuvnal " author="OCR"></modification>
+  </word>
+  <word original="cha ">
+    <box width="29" height="18" y="633" x="217"></box>
+    <modification form="cha " author="OCR"></modification>
+  </word>
+  <word original="mentchir: ">
+    <box width="88" height="18" y="633" x="259"></box>
+    <modification form="mentchir: " author="OCR"></modification>
+  </word>
+  <word original="Ord'mentchir ">
+    <box width="118" height="18" y="633" x="361"></box>
+    <modification form="Ord'mentchir " author="OCR"></modification>
+  </word>
+  <word original="perfchenda ">
+    <box width="99" height="18" y="633" x="493"></box>
+    <modification form="perfchenda " author="OCR"></modification>
+  </word>
+  <word original="ingular ">
+    <box width="65" height="18" y="633" x="605"></box>
+    <modification form="ingular " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="15" height="18" y="633" x="678"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="ord'ingular ">
+    <box width="99" height="18" y="633" x="702"></box>
+    <modification form="ord'ingular " author="OCR"></modification>
+  </word>
+  <word original="la ">
+    <box width="15" height="18" y="660" x="72"></box>
+    <modification form="la " author="OCR"></modification>
+  </word>
+  <word original="fuga ">
+    <box width="38" height="18" y="660" x="100"></box>
+    <modification form="fuga " author="OCR"></modification>
+  </word>
+  <word original="eintin ">
+    <box width="50" height="18" y="660" x="152"></box>
+    <modification form="eintin " author="OCR"></modification>
+  </word>
+  <word original="culiets. ">
+    <box width="62" height="18" y="660" x="216"></box>
+    <modification form="culiets. " author="OCR"></modification>
+  </word>
+  <word original="20 ">
+    <box width="21" height="18" y="660" x="808"></box>
+    <modification form="20 " author="OCR"></modification>
+  </word>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
+  </word>
+  <word original="Tij ">
+    <box width="27" height="18" y="688" x="116"></box>
+    <modification form="Tij " author="OCR"></modification>
+  </word>
+  <word original="dees ">
+    <box width="36" height="18" y="688" x="158"></box>
+    <modification form="dees " author="OCR"></modification>
+  </word>
+  <word original="bigch'fr ">
+    <box width="69" height="18" y="688" x="208"></box>
+    <modification form="bigch'fr " author="OCR"></modification>
+  </word>
+  <word original="ord'cheafa ">
+    <box width="91" height="18" y="688" x="294"></box>
+    <modification form="ord'cheafa " author="OCR"></modification>
+  </word>
+  <word original="feinza ">
+    <box width="52" height="18" y="688" x="399"></box>
+    <modification form="feinza " author="OCR"></modification>
+  </word>
+  <word original="licentia ">
+    <box width="65" height="18" y="688" x="468"></box>
+    <modification form="licentia " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="15" height="18" y="688" x="547"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="voeglia ">
+    <box width="62" height="18" y="688" x="572"></box>
+    <modification form="voeglia " author="OCR"></modification>
+  </word>
+  <word original="da ">
+    <box width="20" height="18" y="688" x="651"></box>
+    <modification form="da " author="OCR"></modification>
+  </word>
+  <word original="teu ">
+    <box width="26" height="18" y="688" x="687"></box>
+    <modification form="teu " author="OCR"></modification>
+  </word>
+  <word original="Babb ">
+    <box width="46" height="18" y="688" x="726"></box>
+    <modification form="Babb " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="15" height="18" y="688" x="786"></box>
+    <modification form="&amp; " author="OCR"></modification>
   </word>
-  <word original="Mamma,">
-    <box width="75" height="18" y="715" x="72"></box>
-    <modification form="Mamma," author="OCR"></modification>
+  <word original="Mamma, ">
+    <box width="75" height="18" y="716" x="72"></box>
+    <modification form="Mamma, " author="OCR"></modification>
   </word>
-  <word original=" guarda">
-    <box width="75" height="18" y="715" x="147"></box>
-    <modification form=" guarda" author="OCR"></modification>
+  <word original="guarda ">
+    <box width="61" height="18" y="716" x="161"></box>
+    <modification form="guarda " author="OCR"></modification>
   </word>
-  <word original=" quels">
-    <box width="58" height="18" y="715" x="222"></box>
-    <modification form=" quels" author="OCR"></modification>
+  <word original="quels ">
+    <box width="44" height="18" y="716" x="236"></box>
+    <modification form="quels " author="OCR"></modification>
   </word>
-  <word original=" ch'han">
-    <box width="71" height="18" y="715" x="280"></box>
-    <modification form=" ch'han" author="OCR"></modification>
+  <word original="ch'han ">
+    <box width="56" height="18" y="716" x="295"></box>
+    <modification form="ch'han " author="OCR"></modification>
   </word>
-  <word original=" da">
-    <box width="34" height="18" y="715" x="351"></box>
-    <modification form=" da" author="OCR"></modification>
+  <word original="da ">
+    <box width="20" height="18" y="716" x="365"></box>
+    <modification form="da " author="OCR"></modification>
   </word>
-  <word original=" commendar">
-    <box width="115" height="18" y="715" x="385"></box>
-    <modification form=" commendar" author="OCR"></modification>
+  <word original="commendar ">
+    <box width="102" height="18" y="716" x="398"></box>
+    <modification form="commendar " author="OCR"></modification>
   </word>
-  <word original=" fur">
-    <box width="39" height="18" y="715" x="500"></box>
-    <modification form=" fur" author="OCR"></modification>
+  <word original="fur ">
+    <box width="25" height="18" y="716" x="514"></box>
+    <modification form="fur " author="OCR"></modification>
   </word>
-  <word original=" te.">
-    <box width="34" height="18" y="715" x="539"></box>
-    <modification form=" te." author="OCR"></modification>
+  <word original="te. ">
+    <box width="21" height="18" y="716" x="552"></box>
+    <modification form="te. " author="OCR"></modification>
   </word>
-  <word original=" Cur">
-    <box width="58" height="18" y="715" x="573"></box>
-    <modification form=" Cur" author="OCR"></modification>
+  <word original="Cur ">
+    <box width="32" height="18" y="716" x="599"></box>
+    <modification form="Cur " author="OCR"></modification>
   </word>
-  <word original=" tij">
-    <box width="27" height="18" y="715" x="631"></box>
-    <modification form=" tij" author="OCR"></modification>
+  <word original="tij ">
+    <box width="19" height="18" y="716" x="640"></box>
+    <modification form="tij " author="OCR"></modification>
   </word>
-  <word original=" veans">
-    <box width="61" height="18" y="715" x="658"></box>
-    <modification form=" veans" author="OCR"></modification>
+  <word original="veans ">
+    <box width="49" height="18" y="716" x="671"></box>
+    <modification form="veans " author="OCR"></modification>
   </word>
-  <word original=" tarmefs ">
-    <box width="96" height="18" y="715" x="719"></box>
-    <modification form=" tarmefs " author="OCR"></modification>
+  <word original="tarmefs ">
+    <box width="66" height="18" y="716" x="735"></box>
+    <modification form="tarmefs " author="OCR"></modification>
   </word>
-  <word original="ora,">
-    <box width="33" height="18" y="742" x="72"></box>
-    <modification form="ora," author="OCR"></modification>
+  <word original="ora, ">
+    <box width="34" height="18" y="743" x="72"></box>
+    <modification form="ora, " author="OCR"></modification>
   </word>
-  <word original=" fchi">
-    <box width="45" height="18" y="742" x="105"></box>
-    <modification form=" fchi" author="OCR"></modification>
+  <word original="fchi ">
+    <box width="32" height="18" y="743" x="118"></box>
+    <modification form="fchi " author="OCR"></modification>
   </word>
-  <word original=" turna">
-    <box width="60" height="18" y="742" x="150"></box>
-    <modification form=" turna" author="OCR"></modification>
+  <word original="turna ">
+    <box width="46" height="18" y="743" x="164"></box>
+    <modification form="turna " author="OCR"></modification>
   </word>
-  <word original=" bein">
-    <box width="50" height="18" y="742" x="210"></box>
-    <modification form=" bein" author="OCR"></modification>
+  <word original="bein ">
+    <box width="37" height="18" y="743" x="223"></box>
+    <modification form="bein " author="OCR"></modification>
   </word>
-  <word original=" preft.">
-    <box width="59" height="18" y="742" x="260"></box>
-    <modification form=" preft." author="OCR"></modification>
+  <word original="preft. ">
+    <box width="46" height="18" y="743" x="273"></box>
+    <modification form="preft. " author="OCR"></modification>
   </word>
-  <word original=" [pag.">
-    <box width="62" height="18" y="742" x="319"></box>
-    <modification form=" [pag." author="OCR"></modification>
+  <word original="[pag. ">
+    <box width="45" height="18" y="743" x="336"></box>
+    <modification form="[pag. " author="OCR"></modification>
   </word>
-  <word original=" 95].">
-    <box width="44" height="18" y="742" x="381"></box>
-    <modification form=" 95]." author="OCR"></modification>
+  <word original="95]. ">
+    <box width="36" height="18" y="743" x="389"></box>
+    <modification form="95]. " author="OCR"></modification>
   </word>
-  <word original=" Bigchia">
-    <box width="82" height="18" y="742" x="425"></box>
-    <modification form=" Bigchia" author="OCR"></modification>
+  <word original="Bigchia ">
+    <box width="67" height="18" y="743" x="440"></box>
+    <modification form="Bigchia " author="OCR"></modification>
   </word>
-  <word original=" kybigear">
-    <box width="93" height="18" y="742" x="507"></box>
-    <modification form=" kybigear" author="OCR"></modification>
+  <word original="kybigear ">
+    <box width="80" height="18" y="743" x="520"></box>
+    <modification form="kybigear " author="OCR"></modification>
   </word>
-  <word original=" culs">
-    <box width="49" height="18" y="742" x="600"></box>
-    <modification form=" culs" author="OCR"></modification>
+  <word original="culs ">
+    <box width="33" height="18" y="743" x="616"></box>
+    <modification form="culs " author="OCR"></modification>
   </word>
-  <word original=" teas">
-    <box width="47" height="18" y="742" x="649"></box>
-    <modification form=" teas" author="OCR"></modification>
+  <word original="teas ">
+    <box width="33" height="18" y="743" x="663"></box>
+    <modification form="teas " author="OCR"></modification>
   </word>
-  <word original=" conpagns, ">
-    <box width="118" height="18" y="742" x="696"></box>
-    <modification form=" conpagns, " author="OCR"></modification>
+  <word original="conpagns, ">
+    <box width="88" height="18" y="743" x="712"></box>
+    <modification form="conpagns, " author="OCR"></modification>
   </word>
-  <word original="far">
+  <word original="far ">
     <box width="24" height="18" y="770" x="72"></box>
-    <modification form="far" author="OCR"></modification>
-  </word>
-  <word original=" na">
-    <box width="32" height="18" y="770" x="96"></box>
-    <modification form=" na" author="OCR"></modification>
-  </word>
-  <word original=" nui">
-    <box width="41" height="18" y="770" x="128"></box>
-    <modification form=" nui" author="OCR"></modification>
-  </word>
-  <word original=" da">
-    <box width="33" height="18" y="770" x="169"></box>
-    <modification form=" da" author="OCR"></modification>
-  </word>
-  <word original=" laed">
-    <box width="50" height="18" y="770" x="202"></box>
-    <modification form=" laed" author="OCR"></modification>
-  </word>
-  <word original=" ne">
-    <box width="34" height="18" y="770" x="252"></box>
-    <modification form=" ne" author="OCR"></modification>
-  </word>
-  <word original=" digl">
-    <box width="51" height="18" y="770" x="286"></box>
-    <modification form=" digl" author="OCR"></modification>
-  </word>
-  <word original=" mal.">
-    <box width="51" height="18" y="770" x="337"></box>
-    <modification form=" mal." author="OCR"></modification>
-  </word>
-  <word original=" Schmentchir">
-    <box width="135" height="18" y="770" x="388"></box>
-    <modification form=" Schmentchir" author="OCR"></modification>
-  </word>
-  <word original=" nagün">
-    <box width="71" height="18" y="770" x="523"></box>
-    <modification form=" nagün" author="OCR"></modification>
-  </word>
-  <word original=" faulfameg.">
-    <box width="109" height="18" y="770" x="594"></box>
-    <modification form=" faulfameg." author="OCR"></modification>
-  </word>
-  <word original=" Bigchia ">
-    <box width="125" height="18" y="770" x="703"></box>
-    <modification form=" Bigchia " author="OCR"></modification>
-  </word>
-  <word original="portar">
-    <box width="54" height="18" y="797" x="72"></box>
-    <modification form="portar" author="OCR"></modification>
-  </word>
-  <word original=" guar">
-    <box width="53" height="18" y="797" x="126"></box>
-    <modification form=" guar" author="OCR"></modification>
-  </word>
-  <word original=" tfchantfchar">
-    <box width="120" height="18" y="797" x="179"></box>
-    <modification form=" tfchantfchar" author="OCR"></modification>
-  </word>
-  <word original=" ord'cheafa.">
-    <box width="113" height="18" y="797" x="299"></box>
-    <modification form=" ord'cheafa." author="OCR"></modification>
-  </word>
-  <word original=" 25 ">
-    <box width="812" height="18" y="797" x="412"></box>
-    <modification form=" 25 " author="OCR"></modification>
-  </word>
-  <word original="Bigchia">
-    <box width="68" height="18" y="825" x="117"></box>
-    <modification form="Bigchia" author="OCR"></modification>
-  </word>
-  <word original=" guardar">
-    <box width="84" height="18" y="825" x="185"></box>
-    <modification form=" guardar" author="OCR"></modification>
-  </word>
-  <word original=" fün">
-    <box width="41" height="18" y="825" x="269"></box>
-    <modification form=" fün" author="OCR"></modification>
-  </word>
-  <word original=" autra">
-    <box width="60" height="18" y="825" x="310"></box>
-    <modification form=" autra" author="OCR"></modification>
-  </word>
-  <word original=" lgeud,">
-    <box width="67" height="18" y="825" x="370"></box>
-    <modification form=" lgeud," author="OCR"></modification>
-  </word>
-  <word original=" cho">
-    <box width="43" height="18" y="825" x="437"></box>
-    <modification form=" cho" author="OCR"></modification>
-  </word>
-  <word original=" quella">
-    <box width="68" height="18" y="825" x="480"></box>
-    <modification form=" quella" author="OCR"></modification>
-  </word>
-  <word original=" fa,">
-    <box width="32" height="18" y="825" x="548"></box>
-    <modification form=" fa," author="OCR"></modification>
-  </word>
-  <word original=" guar">
-    <box width="53" height="18" y="825" x="580"></box>
-    <modification form=" guar" author="OCR"></modification>
-  </word>
-  <word original=" cò">
-    <box width="31" height="18" y="825" x="633"></box>
-    <modification form=" cò" author="OCR"></modification>
-  </word>
-  <word original=" la">
-    <box width="24" height="18" y="825" x="664"></box>
-    <modification form=" la" author="OCR"></modification>
-  </word>
-  <word original=" viva.">
-    <box width="52" height="18" y="825" x="688"></box>
-    <modification form=" viva." author="OCR"></modification>
-  </word>
-  <word original=" Scha ">
-    <box width="78" height="18" y="825" x="740"></box>
-    <modification form=" Scha " author="OCR"></modification>
-  </word>
-  <word original="tij">
-    <box width="18" height="18" y="853" x="72"></box>
-    <modification form="tij" author="OCR"></modification>
-  </word>
-  <word original=" vedzas">
-    <box width="72" height="18" y="853" x="90"></box>
-    <modification form=" vedzas" author="OCR"></modification>
-  </word>
-  <word original=" quegl">
-    <box width="62" height="18" y="853" x="162"></box>
-    <modification form=" quegl" author="OCR"></modification>
-  </word>
-  <word original=" cha">
-    <box width="44" height="18" y="853" x="224"></box>
-    <modification form=" cha" author="OCR"></modification>
-  </word>
-  <word original=" à">
-    <box width="22" height="18" y="853" x="268"></box>
-    <modification form=" à" author="OCR"></modification>
-  </word>
-  <word original=" nui">
-    <box width="39" height="18" y="853" x="290"></box>
-    <modification form=" nui" author="OCR"></modification>
-  </word>
-  <word original=" auter">
-    <box width="59" height="18" y="853" x="329"></box>
-    <modification form=" auter" author="OCR"></modification>
-  </word>
-  <word original=" ftatt">
-    <box width="49" height="18" y="853" x="388"></box>
-    <modification form=" ftatt" author="OCR"></modification>
-  </word>
-  <word original=" mal,">
-    <box width="53" height="18" y="853" x="437"></box>
-    <modification form=" mal," author="OCR"></modification>
-  </word>
-  <word original=" fui">
-    <box width="37" height="18" y="853" x="490"></box>
-    <modification form=" fui" author="OCR"></modification>
-  </word>
-  <word original=" tij">
-    <box width="32" height="18" y="853" x="527"></box>
-    <modification form=" tij" author="OCR"></modification>
-  </word>
-  <word original=" lgietz.">
-    <box width="67" height="18" y="853" x="559"></box>
-    <modification form=" lgietz." author="OCR"></modification>
-  </word>
-  <word original=" Scha">
-    <box width="69" height="18" y="853" x="626"></box>
-    <modification form=" Scha" author="OCR"></modification>
-  </word>
-  <word original=" tij">
-    <box width="31" height="18" y="853" x="695"></box>
-    <modification form=" tij" author="OCR"></modification>
-  </word>
-  <word original=" vedzas ">
-    <box width="88" height="18" y="853" x="726"></box>
-    <modification form=" vedzas " author="OCR"></modification>
-  </word>
-  <word original="quegl">
-    <box width="48" height="18" y="880" x="73"></box>
-    <modification form="quegl" author="OCR"></modification>
-  </word>
-  <word original=" cha">
-    <box width="43" height="18" y="880" x="121"></box>
-    <modification form=" cha" author="OCR"></modification>
-  </word>
-  <word original=" à">
-    <box width="22" height="18" y="880" x="164"></box>
-    <modification form=" à" author="OCR"></modification>
-  </word>
-  <word original=" nui">
-    <box width="40" height="18" y="880" x="186"></box>
-    <modification form=" nui" author="OCR"></modification>
-  </word>
-  <word original=" auter">
-    <box width="58" height="18" y="880" x="226"></box>
-    <modification form=" auter" author="OCR"></modification>
-  </word>
-  <word original=" ftatt">
-    <box width="49" height="18" y="880" x="284"></box>
-    <modification form=" ftatt" author="OCR"></modification>
-  </word>
-  <word original=" bein">
-    <box width="51" height="18" y="880" x="333"></box>
-    <modification form=" bein" author="OCR"></modification>
-  </word>
-  <word original=" &amp;">
-    <box width="28" height="18" y="880" x="384"></box>
-    <modification form=" &amp;" author="OCR"></modification>
-  </word>
-  <word original=" vean">
-    <box width="51" height="18" y="880" x="412"></box>
-    <modification form=" vean" author="OCR"></modification>
-  </word>
-  <word original=" laudaa,">
-    <box width="85" height="18" y="880" x="463"></box>
-    <modification form=" laudaa," author="OCR"></modification>
-  </word>
-  <word original=" bigchia">
-    <box width="83" height="18" y="880" x="548"></box>
-    <modification form=" bigchia" author="OCR"></modification>
-  </word>
-  <word original=" te">
-    <box width="32" height="18" y="880" x="631"></box>
-    <modification form=" te" author="OCR"></modification>
-  </word>
-  <word original=" turpagear">
-    <box width="103" height="18" y="880" x="663"></box>
-    <modification form=" turpagear" author="OCR"></modification>
-  </word>
-  <word original=" da ">
-    <box width="50" height="18" y="880" x="766"></box>
-    <modification form=" da " author="OCR"></modification>
-  </word>
-  <word original="far">
-    <box width="24" height="18" y="908" x="74"></box>
-    <modification form="far" author="OCR"></modification>
-  </word>
-  <word original=" fcò">
-    <box width="38" height="18" y="908" x="98"></box>
-    <modification form=" fcò" author="OCR"></modification>
-  </word>
-  <word original=" ell. ">
-    <box width="55" height="18" y="908" x="136"></box>
-    <modification form=" ell. " author="OCR"></modification>
-  </word>
-  <word original="Quell">
-    <box width="49" height="18" y="936" x="119"></box>
-    <modification form="Quell" author="OCR"></modification>
-  </word>
-  <word original=" cha">
-    <box width="43" height="18" y="936" x="168"></box>
-    <modification form=" cha" author="OCR"></modification>
-  </word>
-  <word original=" te">
-    <box width="28" height="18" y="936" x="211"></box>
-    <modification form=" te" author="OCR"></modification>
-  </word>
-  <word original=" caftiga">
-    <box width="76" height="18" y="936" x="239"></box>
-    <modification form=" caftiga" author="OCR"></modification>
-  </word>
-  <word original=" cun">
-    <box width="48" height="18" y="936" x="315"></box>
-    <modification form=" cun" author="OCR"></modification>
-  </word>
-  <word original=" plaeds">
-    <box width="68" height="18" y="936" x="363"></box>
-    <modification form=" plaeds" author="OCR"></modification>
-  </word>
-  <word original=" ingratzgia,">
-    <box width="117" height="18" y="936" x="431"></box>
-    <modification form=" ingratzgia," author="OCR"></modification>
-  </word>
-  <word original=" &amp;">
-    <box width="34" height="18" y="936" x="548"></box>
-    <modification form=" &amp;" author="OCR"></modification>
-  </word>
-  <word original=" igl">
-    <box width="36" height="18" y="936" x="582"></box>
-    <modification form=" igl" author="OCR"></modification>
-  </word>
-  <word original=" falva">
-    <box width="59" height="18" y="936" x="618"></box>
-    <modification form=" falva" author="OCR"></modification>
-  </word>
-  <word original=" per">
-    <box width="45" height="18" y="936" x="677"></box>
-    <modification form=" per" author="OCR"></modification>
-  </word>
-  <word original=" ün">
-    <box width="36" height="18" y="936" x="722"></box>
-    <modification form=" ün" author="OCR"></modification>
-  </word>
-  <word original=" cha">
-    <box width="42" height="18" y="936" x="758"></box>
-    <modification form=" cha" author="OCR"></modification>
-  </word>
-  <word original=" 30 ">
-    <box width="39" height="18" y="936" x="800"></box>
-    <modification form=" 30 " author="OCR"></modification>
-  </word>
-  <word original="chi">
-    <box width="25" height="18" y="963" x="74"></box>
-    <modification form="chi" author="OCR"></modification>
-  </word>
-  <word original=" vutt">
-    <box width="47" height="18" y="963" x="99"></box>
-    <modification form=" vutt" author="OCR"></modification>
-  </word>
-  <word original=" bein. ">
-    <box width="70" height="18" y="963" x="146"></box>
-    <modification form=" bein. " author="OCR"></modification>
-  </word>
-  <word original="Nua">
-    <box width="36" height="18" y="991" x="119"></box>
-    <modification form="Nua" author="OCR"></modification>
-  </word>
-  <word original=" dus">
-    <box width="44" height="18" y="991" x="155"></box>
-    <modification form=" dus" author="OCR"></modification>
-  </word>
-  <word original=" da">
-    <box width="33" height="18" y="991" x="199"></box>
-    <modification form=" da" author="OCR"></modification>
-  </word>
-  <word original=" fcüs">
-    <box width="48" height="18" y="991" x="232"></box>
-    <modification form=" fcüs" author="OCR"></modification>
-  </word>
-  <word original=" plaedan">
-    <box width="78" height="18" y="991" x="280"></box>
-    <modification form=" plaedan" author="OCR"></modification>
-  </word>
-  <word original=" infemmel,">
-    <box width="101" height="18" y="991" x="358"></box>
-    <modification form=" infemmel," author="OCR"></modification>
-  </word>
-  <word original=" bigh">
-    <box width="54" height="18" y="991" x="459"></box>
-    <modification form=" bigh" author="OCR"></modification>
-  </word>
-  <word original=" Ir">
-    <box width="28" height="18" y="991" x="513"></box>
-    <modification form=" Ir" author="OCR"></modification>
-  </word>
-  <word original=" vitiers,">
-    <box width="73" height="18" y="991" x="541"></box>
-    <modification form=" vitiers," author="OCR"></modification>
-  </word>
-  <word original=" mò">
-    <box width="38" height="18" y="991" x="614"></box>
-    <modification form=" mò" author="OCR"></modification>
-  </word>
-  <word original=" davent. ">
-    <box width="92" height="18" y="991" x="652"></box>
-    <modification form=" davent. " author="OCR"></modification>
-  </word>
-  <word original="Sueinter">
-    <box width="75" height="18" y="1019" x="120"></box>
-    <modification form="Sueinter" author="OCR"></modification>
-  </word>
-  <word original=" quegl">
-    <box width="62" height="18" y="1019" x="195"></box>
-    <modification form=" quegl" author="OCR"></modification>
-  </word>
-  <word original=" tutt">
-    <box width="45" height="18" y="1019" x="257"></box>
-    <modification form=" tutt" author="OCR"></modification>
-  </word>
-  <word original=" chear">
-    <box width="63" height="18" y="1019" x="302"></box>
-    <modification form=" chear" author="OCR"></modification>
-  </word>
-  <word original=" figl">
-    <box width="41" height="18" y="1019" x="365"></box>
-    <modification form=" figl" author="OCR"></modification>
-  </word>
-  <word original=" dritza">
-    <box width="68" height="18" y="1019" x="406"></box>
-    <modification form=" dritza" author="OCR"></modification>
-  </word>
-  <word original=" &amp;">
-    <box width="28" height="18" y="1019" x="474"></box>
-    <modification form=" &amp;" author="OCR"></modification>
-  </word>
-  <word original=" meina">
-    <box width="63" height="18" y="1019" x="502"></box>
-    <modification form=" meina" author="OCR"></modification>
-  </word>
-  <word original=" la">
-    <box width="29" height="18" y="1019" x="565"></box>
-    <modification form=" la" author="OCR"></modification>
-  </word>
-  <word original=" tia">
-    <box width="38" height="18" y="1019" x="594"></box>
-    <modification form=" tia" author="OCR"></modification>
-  </word>
-  <word original=" vita. ">
-    <box width="72" height="18" y="1019" x="632"></box>
-    <modification form=" vita. " author="OCR"></modification>
-  </word>
-  <word original="Sügl">
-    <box width="39" height="18" y="1047" x="120"></box>
-    <modification form="Sügl" author="OCR"></modification>
-  </word>
-  <word original=" plij">
-    <box width="43" height="18" y="1047" x="159"></box>
-    <modification form=" plij" author="OCR"></modification>
-  </word>
-  <word original=" davös">
-    <box width="64" height="18" y="1047" x="202"></box>
-    <modification form=" davös" author="OCR"></modification>
-  </word>
-  <word original=" te">
-    <box width="28" height="18" y="1047" x="266"></box>
-    <modification form=" te" author="OCR"></modification>
-  </word>
-  <word original=" perchüra">
-    <box width="92" height="18" y="1047" x="294"></box>
-    <modification form=" perchüra" author="OCR"></modification>
-  </word>
-  <word original=" dagl">
-    <box width="51" height="18" y="1047" x="386"></box>
-    <modification form=" dagl" author="OCR"></modification>
-  </word>
-  <word original=" gieg,">
-    <box width="57" height="18" y="1047" x="437"></box>
-    <modification form=" gieg," author="OCR"></modification>
-  </word>
-  <word original=" &amp;">
-    <box width="29" height="18" y="1047" x="494"></box>
-    <modification form=" &amp;" author="OCR"></modification>
-  </word>
-  <word original=" tutt">
-    <box width="41" height="18" y="1047" x="523"></box>
-    <modification form=" tutt" author="OCR"></modification>
-  </word>
-  <word original=" igl">
-    <box width="35" height="18" y="1047" x="564"></box>
-    <modification form=" igl" author="OCR"></modification>
-  </word>
-  <word original=" teu">
-    <box width="39" height="18" y="1047" x="599"></box>
-    <modification form=" teu" author="OCR"></modification>
-  </word>
-  <word original=" fatg">
-    <box width="49" height="18" y="1047" x="638"></box>
-    <modification form=" fatg" author="OCR"></modification>
-  </word>
-  <word original=" &amp;">
-    <box width="30" height="18" y="1047" x="687"></box>
-    <modification form=" &amp;" author="OCR"></modification>
-  </word>
-  <word original=" vita">
-    <box width="46" height="18" y="1047" x="717"></box>
-    <modification form=" vita" author="OCR"></modification>
-  </word>
-  <word original=" re-">
-    <box width="38" height="18" y="1047" x="763"></box>
-    <modification form=" re-" author="OCR"></modification>
-  </word>
-  <word original="commenda">
-    <box width="95" height="18" y="1074" x="74"></box>
-    <modification form="commenda" author="OCR"></modification>
-  </word>
-  <word original=" à">
-    <box width="22" height="18" y="1074" x="169"></box>
-    <modification form=" à" author="OCR"></modification>
-  </word>
-  <word original=" Deu,">
-    <box width="56" height="18" y="1074" x="191"></box>
-    <modification form=" Deu," author="OCR"></modification>
-  </word>
-  <word original=" fueinter">
-    <box width="82" height="18" y="1074" x="247"></box>
-    <modification form=" fueinter" author="OCR"></modification>
-  </word>
-  <word original=" igl">
-    <box width="36" height="18" y="1074" x="329"></box>
-    <modification form=" igl" author="OCR"></modification>
-  </word>
-  <word original=" feu">
-    <box width="40" height="18" y="1074" x="365"></box>
-    <modification form=" feu" author="OCR"></modification>
-  </word>
-  <word original=" plaed">
-    <box width="57" height="18" y="1074" x="405"></box>
-    <modification form=" plaed" author="OCR"></modification>
-  </word>
-  <word original=" te">
-    <box width="28" height="18" y="1074" x="462"></box>
-    <modification form=" te" author="OCR"></modification>
-  </word>
-  <word original=" falva,">
-    <box width="61" height="18" y="1074" x="490"></box>
-    <modification form=" falva," author="OCR"></modification>
-  </word>
-  <word original=" fchi">
-    <box width="47" height="18" y="1074" x="551"></box>
-    <modification form=" fchi" author="OCR"></modification>
-  </word>
-  <word original=" veans">
-    <box width="62" height="18" y="1074" x="598"></box>
-    <modification form=" veans" author="OCR"></modification>
-  </word>
-  <word original=" à">
-    <box width="23" height="18" y="1074" x="660"></box>
-    <modification form=" à" author="OCR"></modification>
-  </word>
-  <word original=" plafcheer">
-    <box width="95" height="18" y="1074" x="683"></box>
-    <modification form=" plafcheer" author="OCR"></modification>
-  </word>
-  <word original=" à">
-    <box width="23" height="18" y="1074" x="778"></box>
-    <modification form=" à" author="OCR"></modification>
-  </word>
-  <word original=" 35 ">
-    <box width="38" height="18" y="1074" x="801"></box>
-    <modification form=" 35 " author="OCR"></modification>
-  </word>
-  <word original="Deu,">
-    <box width="44" height="18" y="1101" x="75"></box>
-    <modification form="Deu," author="OCR"></modification>
-  </word>
-  <word original=" &amp;">
-    <box width="30" height="18" y="1101" x="119"></box>
-    <modification form=" &amp;" author="OCR"></modification>
-  </word>
-  <word original=" effer">
-    <box width="50" height="18" y="1101" x="149"></box>
-    <modification form=" effer" author="OCR"></modification>
-  </word>
-  <word original=" feu">
-    <box width="41" height="18" y="1101" x="199"></box>
-    <modification form=" feu" author="OCR"></modification>
-  </word>
-  <word original=" erbtavel,">
-    <box width="97" height="18" y="1101" x="240"></box>
-    <modification form=" erbtavel," author="OCR"></modification>
-  </word>
-  <word original=" igl">
-    <box width="40" height="18" y="1101" x="337"></box>
-    <modification form=" igl" author="OCR"></modification>
-  </word>
-  <word original=" qual">
-    <box width="52" height="18" y="1101" x="377"></box>
-    <modification form=" qual" author="OCR"></modification>
-  </word>
-  <word original=" vut">
-    <box width="40" height="18" y="1101" x="429"></box>
-    <modification form=" vut" author="OCR"></modification>
-  </word>
-  <word original=" effer">
-    <box width="53" height="18" y="1101" x="469"></box>
-    <modification form=" effer" author="OCR"></modification>
-  </word>
-  <word original=" ludaa">
-    <box width="66" height="18" y="1101" x="522"></box>
-    <modification form=" ludaa" author="OCR"></modification>
-  </word>
-  <word original=" &amp;">
-    <box width="28" height="18" y="1101" x="588"></box>
-    <modification form=" &amp;" author="OCR"></modification>
-  </word>
-  <word original=" glorificaa">
-    <box width="94" height="18" y="1101" x="616"></box>
-    <modification form=" glorificaa" author="OCR"></modification>
-  </word>
-  <word original=" ear">
-    <box width="42" height="18" y="1101" x="710"></box>
-    <modification form=" ear" author="OCR"></modification>
-  </word>
-  <word original=" dals ">
-    <box width="64" height="18" y="1101" x="752"></box>
-    <modification form=" dals " author="OCR"></modification>
-  </word>
-  <word original="pitfchans">
-    <box width="80" height="18" y="1129" x="75"></box>
-    <modification form="pitfchans" author="OCR"></modification>
-  </word>
-  <word original=" infaunts,">
-    <box width="97" height="18" y="1129" x="155"></box>
-    <modification form=" infaunts," author="OCR"></modification>
-  </word>
-  <word original=" Amen. ">
-    <box width="88" height="18" y="1129" x="252"></box>
-    <modification form=" Amen. " author="OCR"></modification>
-  </word>
-  <word original="[pag.">
-    <box width="44" height="18" y="1172" x="76"></box>
-    <modification form="[pag." author="OCR"></modification>
-  </word>
-  <word original=" 96].">
-    <box width="54" height="18" y="1172" x="120"></box>
-    <modification form=" 96]." author="OCR"></modification>
-  </word>
-  <word original=" igl">
-    <box width="207" height="18" y="1172" x="174"></box>
-    <modification form=" igl" author="OCR"></modification>
-  </word>
-  <word original=" XXXIV.">
-    <box width="73" height="18" y="1172" x="381"></box>
-    <modification form=" XXXIV." author="OCR"></modification>
-  </word>
-  <word original=" Pfalm. ">
-    <box width="76" height="18" y="1172" x="454"></box>
-    <modification form=" Pfalm. " author="OCR"></modification>
-  </word>
-  <word original="VEgni">
-    <box width="58" height="18" y="1213" x="121"></box>
-    <modification form="VEgni" author="OCR"></modification>
-  </word>
-  <word original=" na">
-    <box width="29" height="18" y="1213" x="179"></box>
-    <modification form=" na" author="OCR"></modification>
-  </word>
-  <word original=" tiers">
-    <box width="48" height="18" y="1213" x="208"></box>
-    <modification form=" tiers" author="OCR"></modification>
-  </word>
-  <word original=" me">
-    <box width="32" height="18" y="1213" x="256"></box>
-    <modification form=" me" author="OCR"></modification>
-  </word>
-  <word original=" vus">
-    <box width="37" height="18" y="1213" x="288"></box>
-    <modification form=" vus" author="OCR"></modification>
-  </word>
-  <word original=" infaunts,">
-    <box width="86" height="18" y="1213" x="325"></box>
-    <modification form=" infaunts," author="OCR"></modification>
-  </word>
-  <word original=" &amp;">
-    <box width="27" height="18" y="1213" x="411"></box>
-    <modification form=" &amp;" author="OCR"></modification>
-  </word>
-  <word original=" tettlad">
-    <box width="65" height="18" y="1213" x="438"></box>
-    <modification form=" tettlad" author="OCR"></modification>
-  </word>
-  <word original=" me,">
-    <box width="40" height="18" y="1213" x="503"></box>
-    <modification form=" me," author="OCR"></modification>
-  </word>
-  <word original=" io">
-    <box width="30" height="18" y="1213" x="543"></box>
-    <modification form=" io" author="OCR"></modification>
-  </word>
-  <word original=" vus">
-    <box width="38" height="18" y="1213" x="573"></box>
-    <modification form=" vus" author="OCR"></modification>
-  </word>
-  <word original=" vij">
-    <box width="30" height="18" y="1213" x="611"></box>
-    <modification form=" vij" author="OCR"></modification>
-  </word>
-  <word original=" mussar">
-    <box width="71" height="18" y="1213" x="641"></box>
-    <modification form=" mussar" author="OCR"></modification>
-  </word>
-  <word original=" la">
-    <box width="23" height="18" y="1213" x="712"></box>
-    <modification form=" la" author="OCR"></modification>
-  </word>
-  <word original=" temma ">
-    <box width="78" height="18" y="1213" x="735"></box>
-    <modification form=" temma " author="OCR"></modification>
-  </word>
-  <word original="digl">
-    <box width="33" height="18" y="1241" x="76"></box>
-    <modification form="digl" author="OCR"></modification>
-  </word>
-  <word original=" Signer. ">
-    <box width="93" height="18" y="1241" x="109"></box>
-    <modification form=" Signer. " author="OCR"></modification>
-  </word>
-  <word original="Quell">
-    <box width="48" height="18" y="1269" x="121"></box>
-    <modification form="Quell" author="OCR"></modification>
-  </word>
-  <word original=" cha">
-    <box width="44" height="18" y="1269" x="169"></box>
-    <modification form=" cha" author="OCR"></modification>
-  </word>
-  <word original=" garegia">
-    <box width="79" height="18" y="1269" x="213"></box>
-    <modification form=" garegia" author="OCR"></modification>
-  </word>
-  <word original=" bun">
-    <box width="47" height="18" y="1269" x="292"></box>
-    <modification form=" bun" author="OCR"></modification>
-  </word>
-  <word original=" teimp">
-    <box width="62" height="18" y="1269" x="339"></box>
-    <modification form=" teimp" author="OCR"></modification>
-  </word>
-  <word original=" &amp;">
-    <box width="29" height="18" y="1269" x="401"></box>
-    <modification form=" &amp;" author="OCR"></modification>
-  </word>
-  <word original=" havefs">
-    <box width="66" height="18" y="1269" x="430"></box>
-    <modification form=" havefs" author="OCR"></modification>
-  </word>
-  <word original=" gugient">
-    <box width="84" height="18" y="1269" x="496"></box>
-    <modification form=" gugient" author="OCR"></modification>
-  </word>
-  <word original=" buns">
-    <box width="58" height="18" y="1269" x="580"></box>
-    <modification form=" buns" author="OCR"></modification>
-  </word>
-  <word original=" gijs,">
-    <box width="53" height="18" y="1269" x="638"></box>
-    <modification form=" gijs," author="OCR"></modification>
-  </word>
-  <word original=" quell">
-    <box width="63" height="18" y="1269" x="691"></box>
-    <modification form=" quell" author="OCR"></modification>
-  </word>
-  <word original=" per-40 ">
-    <box width="93" height="18" y="1269" x="754"></box>
-    <modification form=" per-40 " author="OCR"></modification>
-  </word>
-  <word original="chürig">
-    <box width="56" height="18" y="1296" x="76"></box>
-    <modification form="chürig" author="OCR"></modification>
-  </word>
-  <word original=" la">
-    <box width="28" height="18" y="1296" x="132"></box>
-    <modification form=" la" author="OCR"></modification>
-  </word>
-  <word original=" fia">
-    <box width="32" height="18" y="1296" x="160"></box>
-    <modification form=" fia" author="OCR"></modification>
-  </word>
-  <word original=" leungua">
-    <box width="82" height="18" y="1296" x="192"></box>
-    <modification form=" leungua" author="OCR"></modification>
-  </word>
-  <word original=" avaunt">
-    <box width="71" height="18" y="1296" x="274"></box>
-    <modification form=" avaunt" author="OCR"></modification>
-  </word>
-  <word original=" igl">
-    <box width="35" height="18" y="1296" x="345"></box>
-    <modification form=" igl" author="OCR"></modification>
-  </word>
-  <word original=" mal,">
-    <box width="48" height="18" y="1296" x="380"></box>
-    <modification form=" mal," author="OCR"></modification>
-  </word>
-  <word original=" &amp;">
-    <box width="28" height="18" y="1296" x="428"></box>
-    <modification form=" &amp;" author="OCR"></modification>
-  </word>
-  <word original=" la">
-    <box width="24" height="18" y="1296" x="456"></box>
-    <modification form=" la" author="OCR"></modification>
-  </word>
-  <word original=" fia">
-    <box width="35" height="18" y="1296" x="480"></box>
-    <modification form=" fia" author="OCR"></modification>
-  </word>
-  <word original=" bucca">
-    <box width="61" height="18" y="1296" x="515"></box>
-    <modification form=" bucca" author="OCR"></modification>
-  </word>
-  <word original=" ch'ella">
-    <box width="67" height="18" y="1296" x="576"></box>
-    <modification form=" ch'ella" author="OCR"></modification>
-  </word>
-  <word original=" bigchia">
-    <box width="75" height="18" y="1296" x="643"></box>
-    <modification form=" bigchia" author="OCR"></modification>
-  </word>
-  <word original=" tfchaun-">
-    <box width="86" height="18" y="1296" x="718"></box>
-    <modification form=" tfchaun-" author="OCR"></modification>
-  </word>
-  <word original="-">
-    <box width="6" height="18" y="1296" x="798"></box>
-    <modification form="-" author="OCR"></modification>
+    <modification form="far " author="OCR"></modification>
+  </word>
+  <word original="na ">
+    <box width="20" height="18" y="770" x="108"></box>
+    <modification form="na " author="OCR"></modification>
+  </word>
+  <word original="nui ">
+    <box width="27" height="18" y="770" x="142"></box>
+    <modification form="nui " author="OCR"></modification>
+  </word>
+  <word original="da ">
+    <box width="20" height="18" y="770" x="183"></box>
+    <modification form="da " author="OCR"></modification>
+  </word>
+  <word original="laed ">
+    <box width="33" height="18" y="770" x="219"></box>
+    <modification form="laed " author="OCR"></modification>
+  </word>
+  <word original="ne ">
+    <box width="20" height="18" y="770" x="267"></box>
+    <modification form="ne " author="OCR"></modification>
+  </word>
+  <word original="digl ">
+    <box width="34" height="18" y="770" x="303"></box>
+    <modification form="digl " author="OCR"></modification>
+  </word>
+  <word original="mal. ">
+    <box width="38" height="18" y="770" x="350"></box>
+    <modification form="mal. " author="OCR"></modification>
+  </word>
+  <word original="Schmentchir ">
+    <box width="111" height="18" y="770" x="413"></box>
+    <modification form="Schmentchir " author="OCR"></modification>
+  </word>
+  <word original="nagün ">
+    <box width="53" height="18" y="770" x="541"></box>
+    <modification form="nagün " author="OCR"></modification>
+  </word>
+  <word original="faulfameg. ">
+    <box width="94" height="18" y="770" x="610"></box>
+    <modification form="faulfameg. " author="OCR"></modification>
+  </word>
+  <word original="Bigchia ">
+    <box width="68" height="18" y="770" x="733"></box>
+    <modification form="Bigchia " author="OCR"></modification>
+  </word>
+  <word original="portar ">
+    <box width="54" height="18" y="798" x="72"></box>
+    <modification form="portar " author="OCR"></modification>
+  </word>
+  <word original="guar ">
+    <box width="40" height="18" y="798" x="139"></box>
+    <modification form="guar " author="OCR"></modification>
+  </word>
+  <word original="tfchantfchar ">
+    <box width="107" height="18" y="798" x="192"></box>
+    <modification form="tfchantfchar " author="OCR"></modification>
+  </word>
+  <word original="ord'cheafa. ">
+    <box width="97" height="18" y="798" x="315"></box>
+    <modification form="ord'cheafa. " author="OCR"></modification>
+  </word>
+  <word original="25 ">
+    <box width="20" height="18" y="798" x="809"></box>
+    <modification form="25 " author="OCR"></modification>
+  </word>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
+  </word>
+  <word original="Bigchia ">
+    <box width="68" height="18" y="826" x="117"></box>
+    <modification form="Bigchia " author="OCR"></modification>
+  </word>
+  <word original="guardar ">
+    <box width="70" height="18" y="826" x="199"></box>
+    <modification form="guardar " author="OCR"></modification>
+  </word>
+  <word original="fün ">
+    <box width="28" height="18" y="826" x="283"></box>
+    <modification form="fün " author="OCR"></modification>
+  </word>
+  <word original="autra ">
+    <box width="46" height="18" y="826" x="324"></box>
+    <modification form="autra " author="OCR"></modification>
+  </word>
+  <word original="lgeud, ">
+    <box width="55" height="18" y="826" x="382"></box>
+    <modification form="lgeud, " author="OCR"></modification>
+  </word>
+  <word original="cho ">
+    <box width="29" height="18" y="826" x="451"></box>
+    <modification form="cho " author="OCR"></modification>
+  </word>
+  <word original="quella ">
+    <box width="54" height="18" y="826" x="494"></box>
+    <modification form="quella " author="OCR"></modification>
+  </word>
+  <word original="fa, ">
+    <box width="22" height="18" y="826" x="559"></box>
+    <modification form="fa, " author="OCR"></modification>
+  </word>
+  <word original="guar ">
+    <box width="40" height="18" y="826" x="593"></box>
+    <modification form="guar " author="OCR"></modification>
+  </word>
+  <word original="cò ">
+    <box width="18" height="18" y="826" x="646"></box>
+    <modification form="cò " author="OCR"></modification>
+  </word>
+  <word original="la ">
+    <box width="16" height="18" y="826" x="673"></box>
+    <modification form="la " author="OCR"></modification>
+  </word>
+  <word original="viva. ">
+    <box width="43" height="18" y="826" x="698"></box>
+    <modification form="viva. " author="OCR"></modification>
+  </word>
+  <word original="Scha ">
+    <box width="41" height="18" y="826" x="760"></box>
+    <modification form="Scha " author="OCR"></modification>
+  </word>
+  <word original="tij ">
+    <box width="18" height="18" y="854" x="72"></box>
+    <modification form="tij " author="OCR"></modification>
+  </word>
+  <word original="vedzas ">
+    <box width="58" height="18" y="854" x="104"></box>
+    <modification form="vedzas " author="OCR"></modification>
+  </word>
+  <word original="quegl ">
+    <box width="48" height="18" y="854" x="176"></box>
+    <modification form="quegl " author="OCR"></modification>
+  </word>
+  <word original="cha ">
+    <box width="29" height="18" y="854" x="239"></box>
+    <modification form="cha " author="OCR"></modification>
+  </word>
+  <word original="à ">
+    <box width="9" height="18" y="854" x="281"></box>
+    <modification form="à " author="OCR"></modification>
+  </word>
+  <word original="nui ">
+    <box width="27" height="18" y="854" x="303"></box>
+    <modification form="nui " author="OCR"></modification>
+  </word>
+  <word original="auter ">
+    <box width="44" height="18" y="854" x="344"></box>
+    <modification form="auter " author="OCR"></modification>
+  </word>
+  <word original="ftatt ">
+    <box width="36" height="18" y="854" x="402"></box>
+    <modification form="ftatt " author="OCR"></modification>
+  </word>
+  <word original="mal, ">
+    <box width="40" height="18" y="854" x="451"></box>
+    <modification form="mal, " author="OCR"></modification>
+  </word>
+  <word original="fui ">
+    <box width="22" height="18" y="854" x="505"></box>
+    <modification form="fui " author="OCR"></modification>
+  </word>
+  <word original="tij ">
+    <box width="19" height="18" y="854" x="540"></box>
+    <modification form="tij " author="OCR"></modification>
+  </word>
+  <word original="lgietz. ">
+    <box width="54" height="18" y="854" x="572"></box>
+    <modification form="lgietz. " author="OCR"></modification>
+  </word>
+  <word original="Scha ">
+    <box width="42" height="18" y="854" x="654"></box>
+    <modification form="Scha " author="OCR"></modification>
+  </word>
+  <word original="tij ">
+    <box width="18" height="18" y="854" x="709"></box>
+    <modification form="tij " author="OCR"></modification>
+  </word>
+  <word original="vedzas ">
+    <box width="59" height="18" y="854" x="742"></box>
+    <modification form="vedzas " author="OCR"></modification>
+  </word>
+  <word original="quegl ">
+    <box width="48" height="18" y="881" x="73"></box>
+    <modification form="quegl " author="OCR"></modification>
+  </word>
+  <word original="cha ">
+    <box width="29" height="18" y="881" x="135"></box>
+    <modification form="cha " author="OCR"></modification>
+  </word>
+  <word original="à ">
+    <box width="9" height="18" y="881" x="177"></box>
+    <modification form="à " author="OCR"></modification>
+  </word>
+  <word original="nui ">
+    <box width="27" height="18" y="881" x="199"></box>
+    <modification form="nui " author="OCR"></modification>
+  </word>
+  <word original="auter ">
+    <box width="45" height="18" y="881" x="239"></box>
+    <modification form="auter " author="OCR"></modification>
+  </word>
+  <word original="ftatt ">
+    <box width="36" height="18" y="881" x="297"></box>
+    <modification form="ftatt " author="OCR"></modification>
+  </word>
+  <word original="bein ">
+    <box width="37" height="18" y="881" x="347"></box>
+    <modification form="bein " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="16" height="18" y="881" x="397"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="vean ">
+    <box width="40" height="18" y="881" x="423"></box>
+    <modification form="vean " author="OCR"></modification>
+  </word>
+  <word original="laudaa, ">
+    <box width="68" height="18" y="881" x="480"></box>
+    <modification form="laudaa, " author="OCR"></modification>
+  </word>
+  <word original="bigchia ">
+    <box width="65" height="18" y="881" x="567"></box>
+    <modification form="bigchia " author="OCR"></modification>
+  </word>
+  <word original="te ">
+    <box width="15" height="18" y="881" x="648"></box>
+    <modification form="te " author="OCR"></modification>
+  </word>
+  <word original="turpagear ">
+    <box width="87" height="18" y="881" x="679"></box>
+    <modification form="turpagear " author="OCR"></modification>
+  </word>
+  <word original="da ">
+    <box width="21" height="18" y="881" x="781"></box>
+    <modification form="da " author="OCR"></modification>
+  </word>
+  <word original="far ">
+    <box width="24" height="18" y="909" x="74"></box>
+    <modification form="far " author="OCR"></modification>
+  </word>
+  <word original="fcò ">
+    <box width="25" height="18" y="909" x="111"></box>
+    <modification form="fcò " author="OCR"></modification>
+  </word>
+  <word original="ell. ">
+    <box width="26" height="18" y="909" x="151"></box>
+    <modification form="ell. " author="OCR"></modification>
+  </word>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
+  </word>
+  <word original="Quell ">
+    <box width="49" height="18" y="937" x="119"></box>
+    <modification form="Quell " author="OCR"></modification>
+  </word>
+  <word original="cha ">
+    <box width="29" height="18" y="937" x="182"></box>
+    <modification form="cha " author="OCR"></modification>
+  </word>
+  <word original="te ">
+    <box width="16" height="18" y="937" x="224"></box>
+    <modification form="te " author="OCR"></modification>
+  </word>
+  <word original="caftiga ">
+    <box width="59" height="18" y="937" x="256"></box>
+    <modification form="caftiga " author="OCR"></modification>
+  </word>
+  <word original="cun ">
+    <box width="31" height="18" y="937" x="332"></box>
+    <modification form="cun " author="OCR"></modification>
+  </word>
+  <word original="plaeds ">
+    <box width="52" height="18" y="937" x="379"></box>
+    <modification form="plaeds " author="OCR"></modification>
+  </word>
+  <word original="ingratzgia, ">
+    <box width="100" height="18" y="937" x="448"></box>
+    <modification form="ingratzgia, " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="15" height="18" y="937" x="567"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="igl ">
+    <box width="22" height="18" y="937" x="596"></box>
+    <modification form="igl " author="OCR"></modification>
+  </word>
+  <word original="falva ">
+    <box width="43" height="18" y="937" x="634"></box>
+    <modification form="falva " author="OCR"></modification>
+  </word>
+  <word original="per ">
+    <box width="28" height="18" y="937" x="694"></box>
+    <modification form="per " author="OCR"></modification>
+  </word>
+  <word original="ün ">
+    <box width="21" height="18" y="937" x="737"></box>
+    <modification form="ün " author="OCR"></modification>
+  </word>
+  <word original="cha ">
+    <box width="29" height="18" y="937" x="771"></box>
+    <modification form="cha " author="OCR"></modification>
+  </word>
+  <word original="30 ">
+    <box width="20" height="18" y="937" x="811"></box>
+    <modification form="30 " author="OCR"></modification>
+  </word>
+  <word original="chi ">
+    <box width="25" height="18" y="965" x="74"></box>
+    <modification form="chi " author="OCR"></modification>
+  </word>
+  <word original="vutt ">
+    <box width="34" height="18" y="965" x="112"></box>
+    <modification form="vutt " author="OCR"></modification>
+  </word>
+  <word original="bein. ">
+    <box width="43" height="18" y="965" x="160"></box>
+    <modification form="bein. " author="OCR"></modification>
+  </word>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
+  </word>
+  <word original="Nua ">
+    <box width="36" height="18" y="992" x="119"></box>
+    <modification form="Nua " author="OCR"></modification>
+  </word>
+  <word original="dus ">
+    <box width="29" height="18" y="992" x="170"></box>
+    <modification form="dus " author="OCR"></modification>
+  </word>
+  <word original="da ">
+    <box width="20" height="18" y="992" x="212"></box>
+    <modification form="da " author="OCR"></modification>
+  </word>
+  <word original="fcüs ">
+    <box width="33" height="18" y="992" x="247"></box>
+    <modification form="fcüs " author="OCR"></modification>
+  </word>
+  <word original="plaedan ">
+    <box width="64" height="18" y="992" x="294"></box>
+    <modification form="plaedan " author="OCR"></modification>
+  </word>
+  <word original="infemmel, ">
+    <box width="89" height="18" y="992" x="371"></box>
+    <modification form="infemmel, " author="OCR"></modification>
+  </word>
+  <word original="bigh ">
+    <box width="39" height="18" y="992" x="474"></box>
+    <modification form="bigh " author="OCR"></modification>
+  </word>
+  <word original="Ir ">
+    <box width="16" height="18" y="992" x="526"></box>
+    <modification form="Ir " author="OCR"></modification>
+  </word>
+  <word original="vitiers, ">
+    <box width="60" height="18" y="992" x="554"></box>
+    <modification form="vitiers, " author="OCR"></modification>
+  </word>
+  <word original="mò ">
+    <box width="25" height="18" y="992" x="627"></box>
+    <modification form="mò " author="OCR"></modification>
+  </word>
+  <word original="davent. ">
+    <box width="64" height="18" y="992" x="667"></box>
+    <modification form="davent. " author="OCR"></modification>
+  </word>
+  <word original="Sueinter ">
+    <box width="75" height="18" y="1021" x="120"></box>
+    <modification form="Sueinter " author="OCR"></modification>
+  </word>
+  <word original="quegl ">
+    <box width="48" height="18" y="1021" x="209"></box>
+    <modification form="quegl " author="OCR"></modification>
+  </word>
+  <word original="tutt ">
+    <box width="30" height="18" y="1021" x="272"></box>
+    <modification form="tutt " author="OCR"></modification>
+  </word>
+  <word original="chear ">
+    <box width="47" height="18" y="1021" x="318"></box>
+    <modification form="chear " author="OCR"></modification>
+  </word>
+  <word original="figl ">
+    <box width="26" height="18" y="1021" x="381"></box>
+    <modification form="figl " author="OCR"></modification>
+  </word>
+  <word original="dritza ">
+    <box width="51" height="18" y="1021" x="423"></box>
+    <modification form="dritza " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="15" height="18" y="1021" x="488"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="meina ">
+    <box width="52" height="18" y="1021" x="513"></box>
+    <modification form="meina " author="OCR"></modification>
+  </word>
+  <word original="la ">
+    <box width="15" height="18" y="1021" x="579"></box>
+    <modification form="la " author="OCR"></modification>
+  </word>
+  <word original="tia ">
+    <box width="22" height="18" y="1021" x="610"></box>
+    <modification form="tia " author="OCR"></modification>
+  </word>
+  <word original="vita. ">
+    <box width="38" height="18" y="1021" x="650"></box>
+    <modification form="vita. " author="OCR"></modification>
+  </word>
+  <word original="Sügl ">
+    <box width="39" height="18" y="1048" x="120"></box>
+    <modification form="Sügl " author="OCR"></modification>
+  </word>
+  <word original="plij ">
+    <box width="29" height="18" y="1048" x="173"></box>
+    <modification form="plij " author="OCR"></modification>
+  </word>
+  <word original="davös ">
+    <box width="50" height="18" y="1048" x="216"></box>
+    <modification form="davös " author="OCR"></modification>
+  </word>
+  <word original="te ">
+    <box width="15" height="18" y="1048" x="279"></box>
+    <modification form="te " author="OCR"></modification>
+  </word>
+  <word original="perchüra ">
+    <box width="79" height="18" y="1048" x="307"></box>
+    <modification form="perchüra " author="OCR"></modification>
+  </word>
+  <word original="dagl ">
+    <box width="38" height="18" y="1048" x="400"></box>
+    <modification form="dagl " author="OCR"></modification>
+  </word>
+  <word original="gieg, ">
+    <box width="42" height="18" y="1048" x="452"></box>
+    <modification form="gieg, " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="15" height="18" y="1048" x="508"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="tutt ">
+    <box width="31" height="18" y="1048" x="533"></box>
+    <modification form="tutt " author="OCR"></modification>
+  </word>
+  <word original="igl ">
+    <box width="22" height="18" y="1048" x="577"></box>
+    <modification form="igl " author="OCR"></modification>
+  </word>
+  <word original="teu ">
+    <box width="27" height="18" y="1048" x="612"></box>
+    <modification form="teu " author="OCR"></modification>
+  </word>
+  <word original="fatg ">
+    <box width="34" height="18" y="1048" x="654"></box>
+    <modification form="fatg " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="15" height="18" y="1048" x="702"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="vita ">
+    <box width="33" height="18" y="1048" x="731"></box>
+    <modification form="vita " author="OCR"></modification>
+  </word>
+  <word original="re-commenda ">
+    <box width="-608" height="18" y="1048" x="777"></box>
+    <modification form="re-commenda " author="OCR"></modification>
+  </word>
+  <word original="à ">
+    <box width="9" height="18" y="1075" x="182"></box>
+    <modification form="à " author="OCR"></modification>
+  </word>
+  <word original="Deu, ">
+    <box width="43" height="18" y="1075" x="204"></box>
+    <modification form="Deu, " author="OCR"></modification>
+  </word>
+  <word original="fueinter ">
+    <box width="67" height="18" y="1075" x="262"></box>
+    <modification form="fueinter " author="OCR"></modification>
+  </word>
+  <word original="igl ">
+    <box width="21" height="18" y="1075" x="344"></box>
+    <modification form="igl " author="OCR"></modification>
+  </word>
+  <word original="feu ">
+    <box width="26" height="18" y="1075" x="380"></box>
+    <modification form="feu " author="OCR"></modification>
+  </word>
+  <word original="plaed ">
+    <box width="43" height="18" y="1075" x="419"></box>
+    <modification form="plaed " author="OCR"></modification>
+  </word>
+  <word original="te ">
+    <box width="15" height="18" y="1075" x="475"></box>
+    <modification form="te " author="OCR"></modification>
+  </word>
+  <word original="falva, ">
+    <box width="48" height="18" y="1075" x="504"></box>
+    <modification form="falva, " author="OCR"></modification>
+  </word>
+  <word original="fchi ">
+    <box width="32" height="18" y="1075" x="566"></box>
+    <modification form="fchi " author="OCR"></modification>
+  </word>
+  <word original="veans ">
+    <box width="49" height="18" y="1075" x="611"></box>
+    <modification form="veans " author="OCR"></modification>
+  </word>
+  <word original="à ">
+    <box width="9" height="18" y="1075" x="674"></box>
+    <modification form="à " author="OCR"></modification>
+  </word>
+  <word original="plafcheer ">
+    <box width="83" height="18" y="1075" x="695"></box>
+    <modification form="plafcheer " author="OCR"></modification>
+  </word>
+  <word original="à ">
+    <box width="9" height="18" y="1075" x="793"></box>
+    <modification form="à " author="OCR"></modification>
+  </word>
+  <word original="35 ">
+    <box width="19" height="18" y="1075" x="812"></box>
+    <modification form="35 " author="OCR"></modification>
+  </word>
+  <word original="Deu, ">
+    <box width="44" height="18" y="1103" x="75"></box>
+    <modification form="Deu, " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="15" height="18" y="1103" x="134"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="effer ">
+    <box width="39" height="18" y="1103" x="160"></box>
+    <modification form="effer " author="OCR"></modification>
+  </word>
+  <word original="feu ">
+    <box width="26" height="18" y="1103" x="214"></box>
+    <modification form="feu " author="OCR"></modification>
+  </word>
+  <word original="erbtavel, ">
+    <box width="82" height="18" y="1103" x="256"></box>
+    <modification form="erbtavel, " author="OCR"></modification>
+  </word>
+  <word original="igl ">
+    <box width="21" height="18" y="1103" x="356"></box>
+    <modification form="igl " author="OCR"></modification>
+  </word>
+  <word original="qual ">
+    <box width="38" height="18" y="1103" x="391"></box>
+    <modification form="qual " author="OCR"></modification>
+  </word>
+  <word original="vut ">
+    <box width="27" height="18" y="1103" x="442"></box>
+    <modification form="vut " author="OCR"></modification>
+  </word>
+  <word original="effer ">
+    <box width="39" height="18" y="1103" x="483"></box>
+    <modification form="effer " author="OCR"></modification>
+  </word>
+  <word original="ludaa ">
+    <box width="50" height="18" y="1103" x="539"></box>
+    <modification form="ludaa " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="15" height="18" y="1103" x="602"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="glorificaa ">
+    <box width="83" height="18" y="1103" x="628"></box>
+    <modification form="glorificaa " author="OCR"></modification>
+  </word>
+  <word original="ear ">
+    <box width="27" height="18" y="1103" x="726"></box>
+    <modification form="ear " author="OCR"></modification>
+  </word>
+  <word original="dals ">
+    <box width="35" height="18" y="1103" x="768"></box>
+    <modification form="dals " author="OCR"></modification>
+  </word>
+  <word original="pitfchans ">
+    <box width="80" height="18" y="1130" x="75"></box>
+    <modification form="pitfchans " author="OCR"></modification>
+  </word>
+  <word original="infaunts, ">
+    <box width="83" height="18" y="1130" x="170"></box>
+    <modification form="infaunts, " author="OCR"></modification>
+  </word>
+  <word original="Amen. ">
+    <box width="57" height="18" y="1130" x="269"></box>
+    <modification form="Amen. " author="OCR"></modification>
+  </word>
+  <word original="[pag. ">
+    <box width="44" height="20" y="1171" x="76"></box>
+    <modification form="[pag. " author="OCR"></modification>
+  </word>
+  <word original="96]. ">
+    <box width="41" height="20" y="1171" x="133"></box>
+    <modification form="96]. " author="OCR"></modification>
+  </word>
+  <word original="igl ">
+    <box width="24" height="20" y="1171" x="358"></box>
+    <modification form="igl " author="OCR"></modification>
+  </word>
+  <word original="XXXIV. ">
+    <box width="62" height="20" y="1171" x="393"></box>
+    <modification form="XXXIV. " author="OCR"></modification>
+  </word>
+  <word original="Pfalm. ">
+    <box width="55" height="20" y="1171" x="465"></box>
+    <modification form="Pfalm. " author="OCR"></modification>
+  </word>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
+  </word>
+  <word original="VEgni ">
+    <box width="58" height="18" y="1214" x="121"></box>
+    <modification form="VEgni " author="OCR"></modification>
+  </word>
+  <word original="na ">
+    <box width="20" height="18" y="1214" x="188"></box>
+    <modification form="na " author="OCR"></modification>
+  </word>
+  <word original="tiers ">
+    <box width="38" height="18" y="1214" x="218"></box>
+    <modification form="tiers " author="OCR"></modification>
+  </word>
+  <word original="me ">
+    <box width="24" height="18" y="1214" x="264"></box>
+    <modification form="me " author="OCR"></modification>
+  </word>
+  <word original="vus ">
+    <box width="29" height="18" y="1214" x="296"></box>
+    <modification form="vus " author="OCR"></modification>
+  </word>
+  <word original="infaunts, ">
+    <box width="77" height="18" y="1214" x="335"></box>
+    <modification form="infaunts, " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="15" height="18" y="1214" x="423"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="tettlad ">
+    <box width="57" height="18" y="1214" x="446"></box>
+    <modification form="tettlad " author="OCR"></modification>
+  </word>
+  <word original="me, ">
+    <box width="30" height="18" y="1214" x="513"></box>
+    <modification form="me, " author="OCR"></modification>
+  </word>
+  <word original="io ">
+    <box width="16" height="18" y="1214" x="557"></box>
+    <modification form="io " author="OCR"></modification>
+  </word>
+  <word original="vus ">
+    <box width="29" height="18" y="1214" x="583"></box>
+    <modification form="vus " author="OCR"></modification>
+  </word>
+  <word original="vij ">
+    <box width="23" height="18" y="1214" x="619"></box>
+    <modification form="vij " author="OCR"></modification>
+  </word>
+  <word original="mussar ">
+    <box width="59" height="18" y="1214" x="653"></box>
+    <modification form="mussar " author="OCR"></modification>
+  </word>
+  <word original="la ">
+    <box width="16" height="18" y="1214" x="720"></box>
+    <modification form="la " author="OCR"></modification>
+  </word>
+  <word original="temma ">
+    <box width="58" height="18" y="1214" x="746"></box>
+    <modification form="temma " author="OCR"></modification>
+  </word>
+  <word original="digl ">
+    <box width="33" height="18" y="1242" x="76"></box>
+    <modification form="digl " author="OCR"></modification>
+  </word>
+  <word original="Signer. ">
+    <box width="63" height="18" y="1242" x="125"></box>
+    <modification form="Signer. " author="OCR"></modification>
+  </word>
+  <word original="@">
+    <box width="0" height="0" y="0" x="0"></box>
+    <modification form="@" author="OCR"></modification>
+  </word>
+  <word original="Quell ">
+    <box width="48" height="18" y="1270" x="121"></box>
+    <modification form="Quell " author="OCR"></modification>
+  </word>
+  <word original="cha ">
+    <box width="29" height="18" y="1270" x="184"></box>
+    <modification form="cha " author="OCR"></modification>
+  </word>
+  <word original="garegia ">
+    <box width="66" height="18" y="1270" x="226"></box>
+    <modification form="garegia " author="OCR"></modification>
+  </word>
+  <word original="bun ">
+    <box width="33" height="18" y="1270" x="306"></box>
+    <modification form="bun " author="OCR"></modification>
+  </word>
+  <word original="teimp ">
+    <box width="49" height="18" y="1270" x="353"></box>
+    <modification form="teimp " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="15" height="18" y="1270" x="415"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="havefs ">
+    <box width="56" height="18" y="1270" x="440"></box>
+    <modification form="havefs " author="OCR"></modification>
+  </word>
+  <word original="gugient ">
+    <box width="66" height="18" y="1270" x="514"></box>
+    <modification form="gugient " author="OCR"></modification>
+  </word>
+  <word original="buns ">
+    <box width="41" height="18" y="1270" x="598"></box>
+    <modification form="buns " author="OCR"></modification>
+  </word>
+  <word original="gijs, ">
+    <box width="40" height="18" y="1270" x="652"></box>
+    <modification form="gijs, " author="OCR"></modification>
+  </word>
+  <word original="quell ">
+    <box width="43" height="18" y="1270" x="711"></box>
+    <modification form="quell " author="OCR"></modification>
+  </word>
+  <word original="per-40 ">
+    <box width="62" height="18" y="1270" x="771"></box>
+    <modification form="per-40 " author="OCR"></modification>
+  </word>
+  <word original="chürig ">
+    <box width="56" height="18" y="1298" x="76"></box>
+    <modification form="chürig " author="OCR"></modification>
+  </word>
+  <word original="la ">
+    <box width="16" height="18" y="1298" x="145"></box>
+    <modification form="la " author="OCR"></modification>
+  </word>
+  <word original="fia ">
+    <box width="21" height="18" y="1298" x="171"></box>
+    <modification form="fia " author="OCR"></modification>
+  </word>
+  <word original="leungua ">
+    <box width="72" height="18" y="1298" x="202"></box>
+    <modification form="leungua " author="OCR"></modification>
+  </word>
+  <word original="avaunt ">
+    <box width="60" height="18" y="1298" x="285"></box>
+    <modification form="avaunt " author="OCR"></modification>
+  </word>
+  <word original="igl ">
+    <box width="22" height="18" y="1298" x="358"></box>
+    <modification form="igl " author="OCR"></modification>
+  </word>
+  <word original="mal, ">
+    <box width="38" height="18" y="1298" x="391"></box>
+    <modification form="mal, " author="OCR"></modification>
+  </word>
+  <word original="&amp; ">
+    <box width="16" height="18" y="1298" x="441"></box>
+    <modification form="&amp; " author="OCR"></modification>
+  </word>
+  <word original="la ">
+    <box width="16" height="18" y="1298" x="465"></box>
+    <modification form="la " author="OCR"></modification>
+  </word>
+  <word original="fia ">
+    <box width="21" height="18" y="1298" x="494"></box>
+    <modification form="fia " author="OCR"></modification>
+  </word>
+  <word original="bucca ">
+    <box width="51" height="18" y="1298" x="525"></box>
+    <modification form="bucca " author="OCR"></modification>
+  </word>
+  <word original="ch'ella ">
+    <box width="56" height="18" y="1298" x="587"></box>
+    <modification form="ch'ella " author="OCR"></modification>
+  </word>
+  <word original="bigchia ">
+    <box width="64" height="18" y="1298" x="654"></box>
+    <modification form="bigchia " author="OCR"></modification>
   </word>
   <word original="@">
     <box width="0" height="0" y="0" x="0"></box>

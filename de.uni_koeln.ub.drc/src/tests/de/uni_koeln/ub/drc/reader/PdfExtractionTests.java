@@ -1,48 +1,39 @@
-/**************************************************************************************************
- * Copyright (c) 2010 Mihail Atanassov. All rights reserved. This program and the accompanying
- * materials are made available under the terms of the Eclipse Public License v1.0 which accompanies
- * this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
- * <p/>
- * Contributors: Mihail Atanassov - initial API and implementation
- *************************************************************************************************/
-
 package de.uni_koeln.ub.drc.reader;
 
+import java.io.IOException;
 import java.util.List;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * @author Mihail Atanassov <saeko.bjagai@gmail.com>
- */
 public class PdfExtractionTests {
 
   private String pdfName = "res/rom/PPN345572629_0004/PPN345572629_0004-0001.pdf";
   private PageInfo pi = PdfContentExtractor.extractContentFromPdf(pdfName);
 
   @Test
-  public void encoding() {
-    List<Line> lines = pi.getLines();
-    for (Line line : lines) {
-      List<ExtractedWord> words = line.getWordsInLine();
+  public void words() throws IOException {
+    System.out.println("PageInfo: " + pi);
+    List<Paragraph> paragraps = pi.getParagraphs();
+    for (Paragraph paragraph : paragraps) {
+      List<ExtractedWord> words = paragraph.getWords();
       for (ExtractedWord word : words) {
-        String token = word.getText();
-        Assert.assertFalse("Encoding should be correct", token.contains("�"));
+        Assert.assertFalse("There should be no empty words in: " + words, word.getText().trim()
+            .length() == 0);
+        Assert.assertFalse("Encoding should be correct", word.getText().contains("�"));
       }
     }
   }
 
   @Test
   public void findTextChunks() {
-    List<Line> lines = pi.getLines();
-    String toFind = " pievel";
+    List<Paragraph> ps = pi.getParagraphs();
+    String toFind = "pievel";
     int counts = 0;
-    for (Line line : lines) {
-      List<ExtractedWord> words = line.getWordsInLine();
-      for (ExtractedWord extractedWord : words) {
-        if (extractedWord.getText().equals(toFind)) {
+    for (Paragraph para : ps) {
+      // List<ExtractedWord> words = para.getWordsInLine();
+      for (ExtractedWord extractedWord : para.getWords()) {
+        if (extractedWord.getText().contains(toFind)) {
           counts++;
         }
       }
@@ -53,10 +44,9 @@ public class PdfExtractionTests {
 
   @Test
   public void fontSizeScaling() {
-    List<ExtractedWord> words = pi.getParagraps().get(1).getLinesInParagraph().get(0)
-        .getWordsInLine();
+    List<ExtractedWord> words = pi.getParagraphs().get(1).getWords();
     for (ExtractedWord extractedWord : words) {
-      int fontSize1 = extractedWord.getFontSizeScaled(1000);
+      int fontSize1 = extractedWord.getFontSizeScaled(1440);
       int fontSize2 = extractedWord.getFontSizeScaled(900);
       Assert.assertTrue(String
           .format("Font size %s should be larger than %s", fontSize1, fontSize2),
@@ -69,35 +59,19 @@ public class PdfExtractionTests {
   }
 
   @Test
-  public void lineCount() {
-    List<Line> lines = pi.getLines();
-    Assert.assertTrue("There should be 30 lines detected in the PDF document", lines.size() == 30);
-  }
-
-  @Test
-  public void lines() {
-    List<Line> lines = pi.getLines();
-    List<ExtractedWord> wordsInLine = lines.get(18).getWordsInLine();
-    int wordCount = wordsInLine.size();
-    Assert.assertTrue("line.size() should be 10, but is " + wordCount, wordCount == 10);
-    Assert.assertEquals(" cretta,", wordsInLine.get(2).getText());
-  }
-
-  @Test
   public void paragraphs() {
-    List<Paragraph> paragraphs = pi.getParagraps();
-    Assert.assertTrue(paragraphs.get(0).getLinesInParagraph().get(0).getWordsInLine().get(0)
-        .getText().startsWith("DANiEL"));
-    Assert.assertTrue(paragraphs.size() == 6);
+    List<Paragraph> paragraphs = pi.getParagraphs();
+    Assert.assertTrue(paragraphs.get(0).getWords().get(0).getText().startsWith("DANiEL"));
+    Assert.assertTrue(paragraphs.size() == 4);
   }
 
   @Test
   public void point() {
-    List<ExtractedWord> words = pi.getLineAt(1).getWordsInLine();
+    List<ExtractedWord> words = pi.getParagraphs().get(1).getWords();
     Point scaledStart = words.get(0).getStartPointScaled(900, 1440);
-    Point p = new Point(116, 522);
+    Point p = new Point(190, 564);
     Assert.assertEquals(p, scaledStart);
-    Assert.assertTrue(words.get(0).getText().toString().startsWith("CatechiSmus"));
+    Assert.assertTrue(words.get(0).getText().toString().startsWith("(Abgedruckt"));
   }
 
 }

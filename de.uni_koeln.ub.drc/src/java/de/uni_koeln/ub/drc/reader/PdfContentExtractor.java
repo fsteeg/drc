@@ -1,308 +1,108 @@
 /**************************************************************************************************
- * Copyright (c) 2010 Mihail Atanassov. All rights reserved. This program and the accompanying
- * materials are made available under the terms of the Eclipse Public License v1.0 which accompanies
- * this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2010 Mihail Atanassov and others. All rights reserved. This program and the
+ * accompanying materials are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  * <p/>
- * Contributors: Mihail Atanassov - initial API and implementation
+ * Contributors: <br/>
+ * Mihail Atanassov - initial API and implementation <br/>
+ * Fabian Steeg - Refactored for PdfBox
  *************************************************************************************************/
-
 package de.uni_koeln.ub.drc.reader;
 
+import java.awt.print.PageFormat;
+import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
+import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.Vector;
 
-import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.pdf.PdfDictionary;
-import com.itextpdf.text.pdf.PdfName;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.parser.ContentByteUtils;
-import com.itextpdf.text.pdf.parser.LocationTextExtractionStrategy;
-import com.itextpdf.text.pdf.parser.PdfContentStreamProcessor;
-import com.itextpdf.text.pdf.parser.Vector;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.util.TextPosition;
+
+import de.uni_koeln.ub.drc.reader.temp.PDFTextStripper2;
+import de.uni_koeln.ub.drc.reader.temp.PositionWrapper;
 
 /**
  * The utility class {@code PdfContentExtractor} is optimized for parsing PDF documents generated
- * from an OCR result of ABBYY FineReader 9.0 Professional Edition.
- * @author Mihail Atanssov <saeko.bjagai@gmail.com>
+ * from an OCR result of ABBYY FineReader 9.0 Professional Edition. Subclasses a PdfBox
+ * PDFTextStripper to get the text, paragraph and and position information.
+ * @author Mihail Atanssov <saeko.bjagai@gmail.com> (original version) <br/>
+ *         Fabian Steeg <fsteeg@gmail.com> (Refactored for PdfBox)
  */
+public class PdfContentExtractor extends PDFTextStripper2 {
 
-public final class PdfContentExtractor {
+  private List<TextPosition> paragraphs = new ArrayList<TextPosition>();
 
-  /**
-   * Constant for the field locationalResult in {@link LocationTextExtractionStrategy}.
-   */
-  private static final int LOCATIONRESULT = 1;
-  /**
-   * Constant for the field {@code String} text of {@code private static class TextChunk} in
-   * {@link LocationTextExtractionStrategy}.
-   */
-  private static final int TEXT = 0;
-  /**
-   * Constant for the field {@link Vector} startLocation of {@code private static class TextChunk}
-   * in {@link LocationTextExtractionStrategy}.
-   */
-  private static final int STARTLOCATION = 1;
-  /**
-   * Constant for the field {@link Vector} endLocation of {@code private static class TextChunk} in
-   * {@link LocationTextExtractionStrategy}.
-   */
-  private static final int ENDLOCATION = 2;
-  /**
-   * Constant for the field {@link float} charSpaceWidth of {@code private static class TextChunk}
-   * in {@link LocationTextExtractionStrategy}.
-   */
-  private static final int CHARSPACEWIDTH = 8;
-
-  private PdfContentExtractor() {
-  // static utility class
+  public PdfContentExtractor() throws IOException {
+    super();
   }
 
-  /**
-   * Parses the PDF document and returns a {@link List} of {@link ExtractedWord}.
-   * @param pdfName Name of the PDF document to be parsed
-   * @return Instance of {@link PageInfo}
-   */
-  public static PageInfo extractContentFromPdf(final String pdfName) {
+  @Override
+  protected void isParagraphSeparation(final PositionWrapper position,
+      final PositionWrapper lastPosition, final PositionWrapper lastLineStartPosition) {
+    /* TODO we can get lines from here if we need to, we will be called here for every line */
+    super.isParagraphSeparation(position, lastPosition, lastLineStartPosition);
+    if (position.isParagraphStart()) {
+      paragraphs.add(position.getTextPosition());
+    }
+  }
 
-    List<ExtractedWord> extractedWords = new ArrayList<ExtractedWord>();
-    PdfReader reader = null;
-    Map<Point, Float> map = null;
-    Float fontSize = 0F;
-
+  public static PageInfo extractContentFromPdf(String pdfName) {
     try {
-
-      reader = new PdfReader(pdfName);
-
-      int numsOfPages = reader.getNumberOfPages();
-
-      for (int page = 1; page <= numsOfPages; page++) {
-
-        byte[] content = reader.getPageContent(page);
-        String rawContent = new String(content);
-        map = getParagraphsAndFontSizes(rawContent);
-
-        LocationTextExtractionStrategy strategy = new LocationTextExtractionStrategy();
-
-        PdfDictionary pageDic = reader.getPageN(page);
-        PdfDictionary resourcesDic = pageDic.getAsDict(PdfName.RESOURCES);
-
-        PdfContentStreamProcessor processor = new PdfContentStreamProcessor(strategy);
-        processor.processContent(ContentByteUtils.getContentBytesForPage(reader, page),
-            resourcesDic);
-
-        // Begin Reflection
-        try {
-
-          /*
-           * Reflecting the com.itextpdf.text.pdf.parser.LocationTextExtractionStrategy Class
-           */
-          Class<?> cls = LocationTextExtractionStrategy.class;
-          // Class.forName("com.itextpdf.text.pdf.parser.LocationTextExtractionStrategy");
-
-          Field[] fields = cls.getDeclaredFields();
-
-          /*
-           * To access the fields they have to be set accessible == true
-           */
-          for (int i = 0; i < fields.length; i++) {
-            fields[i].setAccessible(true);
-          }
-
-          /*
-           * With the get() method of the class Field and by passing a instance of the
-           * LocationTextExtractionStrategy we retrieve an instance of type Object
-           */
-          Object o = fields[LOCATIONRESULT].get(strategy);
-          /*
-           * Just perform a simple cast to convert to the right type.
-           */
-          List<?> locationalResult = (List<?>) o;
-
-          for (Object object : locationalResult) {
-
-            Field[] innerFields = object.getClass().getDeclaredFields();
-
-            for (Field field : innerFields) {
-              field.setAccessible(true);
-            }
-            /*
-             * Now it is important to retrieve the fields in the same order like there are listed in
-             * the private inner class
-             * com.itextpdf.text.pdf.parser.LocationTextExtractionStrategy.TextChunk
-             */
-            String text = (String) innerFields[TEXT].get(object);
-            Vector startLocation = (Vector) innerFields[STARTLOCATION].get(object);
-            Vector endLocation = (Vector) innerFields[ENDLOCATION].get(object);
-            Float charSpaceWidth = (Float) innerFields[CHARSPACEWIDTH].get(object);
-
-            /*
-             * Create an instance of ExtractedWord class.
-             */
-
-            boolean isParagraphStart = false;
-
-            for (Point p1 : map.keySet()) {
-              Point p2 = new Point(startLocation.get(Vector.I1), startLocation.get(Vector.I2));
-              if (p1.equals(p2)) {
-                isParagraphStart = true;
-                fontSize = map.get(p1);
-              }
-            }
-
-            ExtractedWord tmp = new ExtractedWord(text, startLocation, endLocation, charSpaceWidth,
-                isParagraphStart, fontSize, reader.getCropBox(page));
-
-            /*
-             * At least we add the instance of ExtractedWord to the list extractedWords
-             */
-            extractedWords.add(tmp);
-          }
-        } catch (SecurityException e) {
-          e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-          e.printStackTrace();
-        } catch (IllegalAccessException e) {
-          e.printStackTrace();
-        }
-
-        // End Reflection
-      }
+      PDDocument document = PDDocument.load(new File(pdfName));
+      PdfContentExtractor x = initExtractor(document);
+      PageInfo result = x.toPageInfo();
+      document.close();
+      return result;
     } catch (IOException e) {
       e.printStackTrace();
     }
-    List<ExtractedWord> result = concatenate(extractedWords);
-    return new PageInfo(result);
+    return null;
   }
 
-  /**
-   * @param extractedWords List of {@link ExtractedWord}
-   * @return List of merged {@link ExtractedWord}
-   */
-  private static List<ExtractedWord> concatenate(final List<ExtractedWord> extractedWords) {
-    List<ExtractedWord> toReturn = new ArrayList<ExtractedWord>();
-
-    for (int i = 0; i < extractedWords.size() - 1;) {
-
-      ExtractedWord current = extractedWords.get(i);
-      ExtractedWord currentNext = extractedWords.get(i + 1);
-
-      /* First token of a line or token in line */
-      if (firstOfLineOrInLine(current, currentNext)) {
-        ExtractedWord ew = mergeFirstOrInLineExtractedWords(current, currentNext);
-        toReturn.add(ew);
-        i += 2;
-        /* Token end of line or token not spliced */
-      } else if (endOfLineOrNotSpliced(current, currentNext)) {
-        toReturn.add(current);
-        i++;
-        /* Token spliced 3 times */
-      } else if (toReturn.size() > 0) {
-        ExtractedWord removed = toReturn.remove(toReturn.size() - 1);
-        String text = removed.getText() + current.getText();
-        Vector startLocation = removed.getStartLocation();
-        Vector endLocation = current.getEndLocation();
-        Float charSpaceWidth = current.getCharSpaceWidth();
-        boolean isParagraphStart = current.isParagraphStart();
-        Float fontSize = removed.getFontSize();
-        Rectangle rectangle = removed.getRectangle();
-        ExtractedWord ew = new ExtractedWord(text, startLocation, endLocation, charSpaceWidth,
-            isParagraphStart, fontSize, rectangle);
-        toReturn.add(ew);
-        i++;
-        /* Default case */
-      } else {
-        toReturn.add(current);
-        i++;
-      }
-
-    }
-    toReturn.add(extractedWords.get(extractedWords.size() - 1));
-    return toReturn;
+  private static PdfContentExtractor initExtractor(final PDDocument document) throws IOException {
+    StringWriter writer = new StringWriter();
+    PdfContentExtractor x = new PdfContentExtractor();
+    x.setDropThreshold(3.75f);
+    // x.setIndentThreshold(1f); // for tweaking paragraph detection
+    x.writeText(document, writer);
+    return x;
   }
 
-  private static boolean endOfLineOrNotSpliced(final ExtractedWord current,
-      final ExtractedWord currentNext) {
-
-    boolean a = current.getText().startsWith(" ") && currentNext.getText().startsWith(" ");
-
-    boolean b = current.getText().startsWith(" ") && current.getText().endsWith(" ");
-
-    return a || b;
-  }
-
-  private static boolean firstOfLineOrInLine(final ExtractedWord current,
-      final ExtractedWord currentNext) {
-
-    boolean a = !current.getText().startsWith(" ") && !currentNext.getText().startsWith(" ")
-        && current.getEndPoint().equals(currentNext.getStartPoint());
-
-    boolean b = current.getText().startsWith(" ") && !currentNext.getText().startsWith(" ")
-        && current.getEndPoint().equals(currentNext.getStartPoint());
-
-    return a || b;
-  }
-
-  private static Map<Point, Float> getParagraphsAndFontSizes(final String rawContent) {
-    Scanner s = new Scanner(rawContent);
-
-    List<Float> fontSizes = new ArrayList<Float>();
-    List<Point> paragraphStartingPoints = new ArrayList<Point>();
-
-    Map<Point, Float> map = new HashMap<Point, Float>();
-    boolean newBT = false;
-
-    while (s.hasNext()) {
-      String line = s.nextLine().trim();
-      if (line.equals("BT")) {
-        newBT = true;
-      }
-
-      if (line.endsWith("Tf") && newBT) {
-        fontSizes.add(Float.parseFloat(line.split(" ")[1]));
-      }
-
-      if (line.endsWith("Tm") && newBT) {
-        String[] tokens = line.split(" ");
-        float x = Float.parseFloat(tokens[4]);
-        float y = Float.parseFloat(tokens[5]);
-        Point p = new Point(x, y);
-        paragraphStartingPoints.add(p);
-        newBT = false;
+  private PageInfo toPageInfo() {
+    Vector<List<TextPosition>> positions = charactersByArticle;
+    List<ExtractedWord> words = new ArrayList<ExtractedWord>();
+    TextPosition currentWordStart = positions.get(0).get(0);
+    StringBuilder currentWordText = new StringBuilder();
+    for (List<TextPosition> list : positions) {
+      for (TextPosition pos : list) {
+        if (currentWordStart == null) {
+          currentWordStart = pos; // remember start for new words
+        }
+        currentWordText.append(pos.getCharacter());
+        if (pos.getCharacter().equals(" ")) {
+          ExtractedWord w = word(currentWordStart, currentWordText, pos);
+          currentWordText = new StringBuilder();
+          currentWordStart = null; // forget current word start
+          words.add(w);
+        }
       }
     }
-
-    for (int i = 0; i < paragraphStartingPoints.size() && i < fontSizes.size(); i++) {
-      Point p = paragraphStartingPoints.get(i);
-      Float f = fontSizes.get(i);
-      map.put(p, f);
-    }
-
-    return map;
+    return new PageInfo(words);
   }
 
-  /**
-   * @param current The current {@link ExtractedWord}
-   * @param currentNext The current.next {@link ExtractedWord}
-   * @return A new {@link ExtractedWord} merged from current and currentNext
-   */
-  private static ExtractedWord mergeFirstOrInLineExtractedWords(final ExtractedWord current,
-      final ExtractedWord currentNext) {
-
-    String text = current.getText() + currentNext.getText();
-    Vector startLocation = current.getStartLocation();
-    Vector endLocation = currentNext.getEndLocation();
-    Float charSpaceWidth = current.getCharSpaceWidth();
-    boolean isParagraphStart = current.isParagraphStart();
-    Float fontSize = current.getFontSize();
-    Rectangle rectangle = current.getRectangle();
-
-    ExtractedWord ew = new ExtractedWord(text, startLocation, endLocation, charSpaceWidth,
-        isParagraphStart, fontSize, rectangle);
-    return ew;
+  private ExtractedWord word(final TextPosition currentWordStart, final StringBuilder currentWord,
+      final TextPosition endPosition) {
+    String wordText = currentWord.toString();
+    PageFormat format = document.getPageFormat(0);
+    float width = (float) format.getWidth();
+    float height = (float) format.getHeight();
+    Point start = new Point(currentWordStart.getX(), height - currentWordStart.getY());
+    Point end = new Point(endPosition.getX(), height - endPosition.getY());
+    ExtractedWord w = new ExtractedWord(wordText, start, end,
+        paragraphs.contains(currentWordStart), endPosition.getFontSize(), width, height);
+    return w;
   }
 }

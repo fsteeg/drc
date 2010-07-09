@@ -111,7 +111,7 @@ object Page {
  *  @author Fabian Steeg (fsteeg) 
  */
 private object PdfToPage {
-    
+   
   import java.net.URL
   import de.uni_koeln.ub.drc.reader._
   import scala.collection.JavaConversions._
@@ -120,18 +120,16 @@ private object PdfToPage {
     
   def convert(pdfLocation : String) : Page = {
     val words: Buffer[Word] = Buffer()
-    val paragraphs : Buffer[Paragraph] = PdfContentExtractor.extractContentFromPdf(pdfLocation).getParagraps
+    val paragraphs : Buffer[Paragraph] = PdfContentExtractor.extractContentFromPdf(pdfLocation).getParagraphs
     val pageHeight = 1440 // IMG_SIZE
     val pageWidth = 900 // IMG_SIZE
     for(p <- paragraphs) {
-      for(line <- p.getLinesInParagraph) {
-        for(word <- line.getWordsInLine) {
-          var startPos = word.getStartPointScaled(pageWidth, pageHeight)
-          var endPos = word.getEndPointScaled(pageWidth, pageHeight)
-          val scaled = word.getFontSizeScaled(pageHeight)
-          val wordWidth = endPos.getX - startPos.getX//width(word.getText, scaled) 
-          words add Word(word.getText, Box(startPos.getX.toInt, startPos.getY.toInt - scaled, wordWidth.toInt, scaled))
-        }
+      for(word <- p.getWords) {
+        var startPos = word.getStartPointScaled(pageWidth, pageHeight)
+        var endPos = word.getEndPointScaled(pageWidth, pageHeight)
+        val scaled = word.getFontSizeScaled(pageHeight)
+        val wordWidth = endPos.getX - startPos.getX//width(word.getText, scaled) 
+        words add Word(word.getText, Box(startPos.getX.toInt, startPos.getY.toInt - scaled, wordWidth.toInt, scaled))
       }
       words add Word(Page.ParagraphMarker, Box(0,0,0,0))
     }
