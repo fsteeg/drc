@@ -1,10 +1,10 @@
 /**************************************************************************************************
- * Copyright (c) 2010 Mihail Atanassov. All rights reserved. This program and the accompanying
- * materials are made available under the terms of the Eclipse Public License v1.0 which accompanies
- * this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
- * <p/>
- * Contributors: Mihail Atanassov - initial API and implementation
- *************************************************************************************************/
+* Copyright (c) 2010 Mihail Atanassov. All rights reserved. This program and the accompanying
+* materials are made available under the terms of the Eclipse Public License v1.0 which accompanies
+* this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+* <p/>
+* Contributors: Mihail Atanassov - initial API and implementation
+*************************************************************************************************/
 
 package de.uni_koeln.ub.drc.reader;
 
@@ -15,8 +15,8 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 /**
- * @author Mihail Atanassov <saeko.bjagai@gmail.com>
- */
+* @author Mihail Atanassov <saeko.bjagai@gmail.com>
+*/
 public class PdfExtractionTests {
 
   private String pdfName = "res/rom/PPN345572629_0004/PPN345572629_0004-0001.pdf";
@@ -71,23 +71,23 @@ public class PdfExtractionTests {
   @Test
   public void lineCount() {
     List<Line> lines = pi.getLines();
-    Assert.assertEquals(28, lines.size()); //FIXME actually 30
+    Assert.assertTrue("There should be 30 lines detected in the PDF document", lines.size() == 30);
   }
 
   @Test
-  public void words() {
+  public void lines() {
     List<Line> lines = pi.getLines();
     List<ExtractedWord> wordsInLine = lines.get(18).getWordsInLine();
     int wordCount = wordsInLine.size();
-    Assert.assertEquals(13, wordCount); //FIXME actually 10
-    Assert.assertEquals(" cha", wordsInLine.get(2).getText());
+    Assert.assertTrue("line.size() should be 10, but is " + wordCount, wordCount == 10);
+    Assert.assertEquals(" cretta,", wordsInLine.get(2).getText());
   }
 
   @Test
   public void paragraphs() {
     List<Paragraph> paragraphs = pi.getParagraps();
     Assert.assertTrue(paragraphs.get(0).getLinesInParagraph().get(0).getWordsInLine().get(0)
-        .getText().startsWith("DANIEL"));
+        .getText().startsWith("DANiEL"));
     Assert.assertTrue(paragraphs.size() == 6);
   }
 
@@ -95,9 +95,9 @@ public class PdfExtractionTests {
   public void point() {
     List<ExtractedWord> words = pi.getLineAt(1).getWordsInLine();
     Point scaledStart = words.get(0).getStartPointScaled(900, 1440);
-    Point p = new Point(119, 523);
+    Point p = new Point(116, 522);
     Assert.assertEquals(p, scaledStart);
-    Assert.assertTrue(words.get(0).getText().toString().startsWith("Gatechifmus"));
+    Assert.assertTrue(words.get(0).getText().toString().startsWith("CatechiSmus"));
   }
 
 }
