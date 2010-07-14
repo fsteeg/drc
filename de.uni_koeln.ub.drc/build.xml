@@ -211,7 +211,7 @@
 	<!-- Run Checkstyle -->
 	<target name="checkstyle">
 		<checkstyle config="${checkstyle.config}">
-			<fileset dir="src" includes="**/*.java" />
+			<fileset dir="src" includes="**/*.java" excludes="**/temp/*.java"/>
 			<formatter type="plain" />
 			<formatter type="xml" toFile="${build.dir}/checkstyle_errors.xml" />
 		</checkstyle>
