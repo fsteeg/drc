@@ -97,14 +97,13 @@ public final class EditView {
     final IProgressMonitor monitor = m == null ? new NullProgressMonitor() : m;
     final Page page = editComposite.getPage();
     monitor.beginTask("Saving page...", page.words().size());
-    final Iterator<Word> modified = JavaConversions.asIterable(page.words()).iterator();
     final List<Text> words = editComposite.getWords();
 
     editComposite.getDisplay().asyncExec(new Runnable() {
       @Override public void run() {
         for (int i = 0; i < words.size(); i++) {
           String newText = words.get(i).getText();
-          Word word = modified.next();
+          Word word = (Word) words.get(i).getData();
           Stack<Modification> history = word.history();
           String oldText = history.top().form();
           if (!newText.equals(oldText) && !word.original().trim().equals(Page.ParagraphMarker())) {
