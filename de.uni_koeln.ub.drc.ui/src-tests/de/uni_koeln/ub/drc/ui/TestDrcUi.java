@@ -35,6 +35,7 @@ import org.junit.Test;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.packageadmin.PackageAdmin;
 import org.osgi.util.tracker.ServiceTracker;
+import org.w3c.dom.css.CSSStyleDeclaration;
 
 /**
  * UI tests.
@@ -157,6 +158,10 @@ public final class TestDrcUi extends TestDrcHeadless {
           public void setId(final Object widget, final String id) {}
 
           public void setClassname(final Object widget, final String classname) {}
+
+        @Override public CSSStyleDeclaration getStyle(Object widget) {
+            return null;
+        }
         });
       }
     });

@@ -944,7 +944,7 @@ public class PDFTextStripper2 extends PDFTextStripper {
     
      }
 
-     private static class WrappedTextPosition extends TextPosition{
+     protected static class WrappedTextPosition extends TextPosition{
          protected TextPosition src = null;
         
          public WrappedTextPosition(TextPosition src){

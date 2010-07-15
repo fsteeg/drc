@@ -155,7 +155,6 @@ public final class WordView {
 
   private void addVotingButtons() {
     TableItem[] items = viewer.getTable().getItems();
-    System.out.println("Got: " + items.length);
     for (int i = 0; i < items.length; i++) {
       final TableItem item = items[i];
       final int index = i;
@@ -223,7 +222,6 @@ public final class WordView {
 
     @Override
     public void inputChanged(final Viewer viewer, final Object oldInput, final Object newInput) {
-      System.out.println("Changed to: " + newInput);
       if (newInput != null) {
         Modification[] newMods = (Modification[]) newInput;
         for (int i = 0; i < newMods.length; i++) {

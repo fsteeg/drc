@@ -28,6 +28,7 @@ import org.eclipse.e4.ui.internal.workbench.ExceptionHandler;
 import org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory;
 import org.eclipse.e4.ui.internal.workbench.UIEventPublisher;
 import org.eclipse.e4.ui.internal.workbench.WorkbenchLogger;
+import org.eclipse.e4.ui.internal.workbench.swt.WorkbenchSWTActivator;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.MApplicationElement;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
@@ -36,7 +37,6 @@ import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.IExceptionHandler;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
-import org.eclipse.e4.ui.workbench.swt.WorkbenchSWTActivator;
 import org.eclipse.emf.common.notify.Notifier;
 import org.junit.After;
 import org.junit.Assert;
@@ -142,7 +142,7 @@ public class TestDrcHeadless {
     appContext.set(IContributionFactory.class.getName(), new ReflectionContributionFactory(
         (IExtensionRegistry) appContext.get(IExtensionRegistry.class.getName())));
     appContext.set(IExceptionHandler.class.getName(), new ExceptionHandler());
-    appContext.set(Logger.class.getName(), new WorkbenchLogger());
+    appContext.set(Logger.class.getName(), new WorkbenchLogger(DrcUiActivator.PLUGIN_ID));
     appContext.set(Adapter.class.getName(),
         ContextInjectionFactory.make(EclipseAdapter.class, appContext));
     appContext.set(ContextManager.class.getName(), new ContextManager());
