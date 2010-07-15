@@ -28,6 +28,18 @@ private[drc] class SpecWord extends Spec with ShouldMatchers {
     it("can be serialized as XML") { 
         expect(word.original) { (word.toXml \ "@original")(0).text.trim } 
     }
+    it("can be deserialized from XML") {
+        expect(1) {
+            Word.fromXml(<word original="test">
+                            <box width="1" height="1" y="1" x="1"></box>
+                            <modification form="test" score="1" author="OCR">
+                              <voters>
+                                <voter name="me"></voter>
+                              </voters>
+                            </modification>
+                          </word>).history.top.score
+        }
+    }
     it("provides edit suggestions") {
       val suggestions = Word("slaunt", Box(1,1,1,1)).suggestions
       println("Suggestions: " + suggestions.mkString(", "))

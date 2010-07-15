@@ -11,3 +11,4 @@ com.*
 .DS_Store
 .svn
 accounts.properties
+de.uni_koeln.ub.drc/res/rom/PPN*/PPN*_*-*.xml

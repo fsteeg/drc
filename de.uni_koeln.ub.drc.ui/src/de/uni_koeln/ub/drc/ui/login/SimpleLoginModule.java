@@ -87,7 +87,7 @@ public final class SimpleLoginModule implements LoginModule {
     String pass = passCallback.getPassword() != null ? new String(passCallback.getPassword()) : "";
     if (validLogin(name, pass)) {
       loggedIn = true;
-      currentUser = User.withId(name, DrcUiActivator.instance().fileFromBundle("users").getAbsolutePath()); 
+      currentUser = User.withId(name, DrcUiActivator.instance().usersFolder()); 
       System.out.println("Logged in: " + currentUser);
     }
     return loggedIn;
@@ -107,7 +107,7 @@ public final class SimpleLoginModule implements LoginModule {
         .add(
             String.format("%s from %s (%s)", currentUser.name(), currentUser.region(),
                 currentUser.id()));
-    subject.getPrivateCredentials().add(SWT.getPlatform());
+    subject.getPrivateCredentials().add(currentUser);
     return loggedIn;
   }
 

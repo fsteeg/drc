@@ -16,14 +16,14 @@ import javax.security.auth.login.LoginException;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.equinox.security.auth.ILoginContext;
 import org.eclipse.equinox.security.auth.LoginContextFactory;
 import org.eclipse.jface.dialogs.ErrorDialog;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+
+import de.uni_koeln.ub.drc.data.User;
 
 /**
  * Bundle activator.
@@ -34,6 +34,7 @@ public final class DrcUiActivator extends Plugin {
   public static final String PLUGIN_ID = "de.uni_koeln.ub.drc.ui";
 
   private static final String JAAS_CONFIG_FILE = "jaas_config";
+
   private static DrcUiActivator instance;
   private ILoginContext loginContext;
 
@@ -42,6 +43,20 @@ public final class DrcUiActivator extends Plugin {
     super.start(context);
     instance = this;
     login(context);
+  }
+
+  public String usersFolder() {
+    return fileFromBundle("users").getAbsolutePath();
+  }
+
+  public User currentUser() {
+    User user = null;
+    try {
+      user = (User) getLoginContext().getSubject().getPrivateCredentials().iterator().next();
+    } catch (LoginException e) {
+      e.printStackTrace();
+    }
+    return user;
   }
 
   private void login(final BundleContext context) throws Exception {

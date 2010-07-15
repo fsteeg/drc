@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import de.uni_koeln.ub.drc.data.SpecIndex;
+import de.uni_koeln.ub.drc.data.SpecModification;
 import de.uni_koeln.ub.drc.data.SpecPage;
 import de.uni_koeln.ub.drc.data.SpecUser;
 import de.uni_koeln.ub.drc.data.SpecWord;
@@ -22,5 +23,6 @@ import de.uni_koeln.ub.drc.util.SpecConfiguration;
  * @author Fabian Steeg (fsteeg)
  */
 @RunWith( Suite.class )
-@Suite.SuiteClasses( { SpecConfiguration.class, SpecWord.class, SpecPage.class, SpecIndex.class, SpecUser.class } )
+@Suite.SuiteClasses( { SpecConfiguration.class, SpecWord.class, SpecPage.class, SpecIndex.class,
+        SpecUser.class, SpecModification.class } )
 public final class SpecSuite {}

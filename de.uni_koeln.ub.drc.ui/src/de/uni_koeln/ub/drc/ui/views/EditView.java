@@ -9,7 +9,6 @@ package de.uni_koeln.ub.drc.ui.views;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -35,10 +34,10 @@ import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
-import scala.collection.JavaConversions;
 import scala.collection.mutable.Stack;
 import de.uni_koeln.ub.drc.data.Modification;
 import de.uni_koeln.ub.drc.data.Page;
+import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
@@ -49,18 +48,23 @@ import de.uni_koeln.ub.drc.ui.DrcUiActivator;
  */
 public final class EditView {
 
-  @Inject private EHandlerService handlerService;
-  @Inject private ECommandService commandService;
-  @Inject private IEclipseContext context;
+  @Inject
+  private EHandlerService handlerService;
+  @Inject
+  private ECommandService commandService;
+  @Inject
+  private IEclipseContext context;
 
   private final MDirtyable dirtyable;
   private final EditComposite editComposite;
 
-  @PostConstruct public void setContext() {
+  @PostConstruct
+  public void setContext() {
     editComposite.context = context; // FIXME this can't be right
   }
 
-  @Inject public EditView(final Composite parent, final MDirtyable dirtyable) {
+  @Inject
+  public EditView(final Composite parent, final MDirtyable dirtyable) {
     ScrolledComposite sc = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
     editComposite = new EditComposite(dirtyable, sc, SWT.NONE);
     sc.setContent(editComposite);
@@ -70,7 +74,8 @@ public final class EditView {
     this.dirtyable = dirtyable;
   }
 
-  @Inject public void setSelection(
+  @Inject
+  public void setSelection(
       @Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final List<Page> pages) {
     if (pages != null && pages.size() > 0) {
       Page page = pages.get(0);
@@ -92,27 +97,26 @@ public final class EditView {
     dirtyable.setDirty(false);
   }
 
-  @Persist public void doSave(@Optional final IProgressMonitor m) throws IOException,
-      InterruptedException {
+  @Persist
+  public void doSave(@Optional final IProgressMonitor m) throws IOException, InterruptedException {
     final IProgressMonitor monitor = m == null ? new NullProgressMonitor() : m;
     final Page page = editComposite.getPage();
     monitor.beginTask("Saving page...", page.words().size());
     final List<Text> words = editComposite.getWords();
 
     editComposite.getDisplay().asyncExec(new Runnable() {
-      @Override public void run() {
+      @Override
+      public void run() {
         for (int i = 0; i < words.size(); i++) {
           String newText = words.get(i).getText();
           Word word = (Word) words.get(i).getData();
           Stack<Modification> history = word.history();
           String oldText = history.top().form();
           if (!newText.equals(oldText) && !word.original().trim().equals(Page.ParagraphMarker())) {
-            try {
-              history.push(new Modification(newText, DrcUiActivator.instance().getLoginContext()
-                  .getSubject().getPublicCredentials().iterator().next().toString()));
-            } catch (LoginException e) {
-              e.printStackTrace();
-            } /* System.getProperty("user.name") */
+            User user = DrcUiActivator.instance().currentUser();
+            history.push(new Modification(newText, user.id()));
+            user.hasEdited();
+            user.save(DrcUiActivator.instance().usersFolder());
           }
           monitor.worked(1);
         }

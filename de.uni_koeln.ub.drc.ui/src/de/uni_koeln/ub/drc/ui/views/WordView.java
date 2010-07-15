@@ -7,6 +7,8 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.views;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -18,17 +20,12 @@ import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.jface.viewers.IStructuredContentProvider;
-import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -37,9 +34,13 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
-import scala.collection.JavaConversions;
 import de.uni_koeln.ub.drc.data.Modification;
+import de.uni_koeln.ub.drc.data.Page;
+import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.data.Word;
+import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.ui.views.WordViewModel.WordViewContentProvider;
+import de.uni_koeln.ub.drc.ui.views.WordViewModel.WordViewLabelProvider;
 
 /**
  * View containing details for the currently selected word.
@@ -52,6 +53,7 @@ public final class WordView {
   private Text suggestions;
   private Job job;
   private Button check;
+  private Page page;
 
   @Inject
   public WordView(final Composite parent) {
@@ -83,6 +85,16 @@ public final class WordView {
       findEditSuggestions();
       job.setPriority(Job.DECORATE);
       job.schedule();
+    }
+  }
+
+  @Inject
+  public void setSelection(
+      @Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final List<Page> pages) {
+    if (pages != null && pages.size() > 0) {
+      Page page = pages.get(0);
+      System.out.println("Setting page: " + page);
+      this.page = page;
     }
   }
 
@@ -125,7 +137,7 @@ public final class WordView {
   }
 
   private void initTable() {
-    final int[] columns = new int[] { 185, 250, 50, 30, 50 };
+    final int[] columns = new int[] { 185, 300, 50, 30, 50 };
     createColumn("Form", columns[0], viewer);
     createColumn("Author", columns[1], viewer);
     createColumn("Votes", columns[2], viewer);
@@ -147,7 +159,7 @@ public final class WordView {
 
   private void setTableInput() {
     if (word != null) {
-      viewer.setInput(WordViewModelProvider.CONTENT.getDetails(word));
+      viewer.setInput(WordViewModel.CONTENT.getDetails(word));
     }
     addVotingButtons();
     // FIXME buttons remain visible when changing to word with less modifications in history
@@ -158,37 +170,72 @@ public final class WordView {
     for (int i = 0; i < items.length; i++) {
       final TableItem item = items[i];
       final int index = i;
-      addUpvoteButton(item, index);
-      addDownvoteButton(item, index);
+      addButton(item, index, Vote.UP, 3);
+      addButton(item, index, Vote.DOWN, 4);
     }
   }
 
-  private void addDownvoteButton(final TableItem item, final int index) {
-    Button bad = createButton(item, "down", 4);
-    bad.addSelectionListener(new SelectionListener() {
+  private static enum Vote {
+    UP {
       @Override
-      public void widgetSelected(final SelectionEvent e) {
-        MessageDialog.openInformation(item.getParent().getShell(), "Downvote", "Would downvote: "
-            + viewer.getData(index + ""));
+      void update(Modification mod, User author, User voter) {
+        mod.upvote(voter.id());
+        voter.hasUpvoted(); // TODO pass to single vote(Vote) method
+        author.wasUpvoted();
       }
-
+    },
+    DOWN {
       @Override
-      public void widgetDefaultSelected(final SelectionEvent e) {}
-    });
+      void update(Modification mod, User author, User voter) {
+        mod.downvote(voter.id());
+        voter.hasDownvoted();
+        author.wasDownvoted();
+      }
+    };
+    abstract void update(Modification modification, User author, User voter);
   }
 
-  private void addUpvoteButton(final TableItem item, final int index) {
-    Button good = createButton(item, "up", 3);
+  private void addButton(final TableItem item, final int index, final Vote vote, int col) {
+    Button good = createButton(item, vote.toString(), col);
     good.addSelectionListener(new SelectionListener() {
       @Override
       public void widgetSelected(final SelectionEvent e) {
-        MessageDialog.openInformation(item.getParent().getShell(), "Upvote", "Would upvote: "
-            + viewer.getData(index + ""));
+        Modification modification = (Modification) viewer.getData(index + "");
+        if (currentUserMayVote(modification)) {
+          vote(modification, DrcUiActivator.instance().currentUser(), vote);
+          MessageDialog.openInformation(item.getParent().getShell(), "Vote " + vote, "Voted "
+              + modification + ": " + vote);
+        }
       }
 
       @Override
       public void widgetDefaultSelected(final SelectionEvent e) {}
     });
+
+  }
+
+  private void vote(Modification modification, User voter, Vote vote) {
+    String usersFolder = DrcUiActivator.instance().usersFolder();
+    User author = User.withId(modification.author(), usersFolder);
+    vote.update(modification, author, voter);
+    page.save();
+    voter.save(usersFolder); // TODO save internally? requires internal association to location
+    author.save(usersFolder);
+  }
+
+  private boolean currentUserMayVote(Modification modification) {
+    User user = DrcUiActivator.instance().currentUser();
+    if (modification.author().equals(user.id())) {
+      MessageDialog.openWarning(viewer.getControl().getShell(), "Cannot vote for own edits",
+          "You cannot upvote or downvote your own corrections");
+      return false;
+    }
+    if (modification.voters().contains(user.id())) {
+      MessageDialog.openWarning(viewer.getControl().getShell(), "Can vote only once",
+          "You can only vote once for a correction");
+      return false;
+    }
+    return true;
   }
 
   private Button createButton(final TableItem item, final String label, int columnIndex) {
@@ -200,58 +247,5 @@ public final class WordView {
     editor.horizontalAlignment = SWT.LEFT;
     editor.setEditor(button, item, columnIndex);
     return button;
-  }
-
-  private static final class WordViewModelProvider {
-    public static final WordViewModelProvider CONTENT = new WordViewModelProvider();
-
-    public Modification[] getDetails(final Word word) {
-      return JavaConversions.asCollection(word.history()).toArray(new Modification[] {});
-    }
-  }
-
-  private static final class WordViewContentProvider implements IStructuredContentProvider {
-    @Override
-    public Object[] getElements(final Object inputElement) {
-      Object[] elements = (Object[]) inputElement;
-      return elements;
-    }
-
-    @Override
-    public void dispose() {}
-
-    @Override
-    public void inputChanged(final Viewer viewer, final Object oldInput, final Object newInput) {
-      if (newInput != null) {
-        Modification[] newMods = (Modification[]) newInput;
-        for (int i = 0; i < newMods.length; i++) {
-          viewer.setData(i + "", newMods[i]);
-        }
-      }
-    }
-  }
-
-  private static final class WordViewLabelProvider extends LabelProvider implements
-      ITableLabelProvider {
-
-    @Override
-    public String getColumnText(final Object element, final int columnIndex) {
-      Modification modification = (Modification) element;
-      switch (columnIndex) {
-      case 0:
-        return modification.form();
-      case 1:
-        return modification.author();
-      case 2:
-        return "0"; // TODO modification.score
-      default:
-        return null; // TODO do we need modification.time()?
-      }
-    }
-
-    @Override
-    public Image getColumnImage(final Object element, final int columnIndex) {
-      return null;
-    }
   }
 }

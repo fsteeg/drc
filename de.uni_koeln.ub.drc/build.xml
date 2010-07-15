@@ -7,6 +7,8 @@
 	<property name="deploy.dir.root" location="../de.uni_koeln.ub.drc.ui/" />
 	<property name="deploy.dir.lib" location="${deploy.dir.root}/lib" />
 	<property name="deploy.dir.data" location="${deploy.dir.root}/pages" />
+	<property name="deploy.dir.data.users" location="${deploy.dir.root}/users" />
+	<property name="src.dir.data.users" location="users" />
 	<!-- Currently working with volume 4 only: -->
 	<property name="data.volume" value="PPN345572629_0004" />
 	<property name="src.dir.data" location="res/rom/${data.volume}" />
@@ -158,6 +160,9 @@
 			<!-- Files copied here are currently generated during test run -->
 			<fileset dir="${src.dir.data}" includes="*.zip" />
 		</copy>
+		<copy todir="${deploy.dir.data.users}">
+            <fileset dir="${src.dir.data.users}" includes="*.xml" />
+        </copy>
 	</target>
 
 	<!-- Run the tests -->

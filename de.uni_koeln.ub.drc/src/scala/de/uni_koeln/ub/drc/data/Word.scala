@@ -84,8 +84,9 @@ case class Word(original:String, position:Box) {
 object Word {
   def fromXml(word:Node) : Word = {
     val w = Word( (word \ "@original").text.trim, Box.fromXml((word \ "box")(0)) )
+    w.history.clear()
     (word\"modification").reverse.foreach( m => {
-        val mod =  Modification.fromXml(m)
+        val mod = Modification.fromXml(m)
         if(!w.history.contains(mod))
         w.history.push(mod)
     }    

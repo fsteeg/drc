@@ -33,9 +33,37 @@ class SpecPage extends Spec with ShouldMatchers {
         expect(1) { (page.toXml \ "word").size }
     }
     
+    it("can be deserialized from XML") {
+        expect(1) {
+            Page.fromXml(<page>
+                          <word original="test">
+                            <box width="1" height="1" y="1" x="1"></box>
+                            <modification form="test" score="1" author="OCR">
+                              <voters>
+                                <voter name="me"></voter>
+                              </voters>
+                            </modification>
+                          </word>
+                        </page>, file.getAbsolutePath).words(0).history.top.score
+
+        }
+    }
+    
     it("can save a page of words to disk") {
       Page.mock.save(file)
       expect(true) {file.exists}
+    }
+    
+    it("will save all embedded objects") {
+      val temp = java.io.File.createTempFile("testing", "scala")
+      println(temp)
+      expect(1) {
+          page.words(0).history.top.upvote("me"); page.save(temp)
+          Page.load(temp).words(0).history.top.score
+      }
+      expect(1) {
+          Page.load(temp).words(0).history.size
+      }
     }
     
   }

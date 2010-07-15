@@ -28,8 +28,21 @@ class SpecUser extends Spec with ShouldMatchers {
     it("has an associated region") {
       expect("Cologne, Germany") { user.region }
     }
+    it("has a reputation that is adjusted according to upvoting, downvoting, being upvoted and being downvoted") {
+      expect(0) { user.reputation }
+      expect(true) { val prev = user.reputation; user.hasUpvoted; user.reputation > prev }
+      expect(true) { val prev = user.reputation; user.wasUpvoted; user.reputation > prev }
+      expect(true) { val prev = user.reputation; user.hasDownvoted; user.reputation < prev }
+      expect(true) { val prev = user.reputation; user.wasDownvoted; user.reputation < prev }
+    }
     it("can be persisted via XML"){
       expect(<user name="Fabian Steeg" id="fsteeg" region="Cologne, Germany"/>) { user.toXml }
+      expect(user) { User.fromXml(user.toXml) }
+    }
+    it("can be changed and persisted") {
+      expect(true) { 
+        user.hasUpvoted; user.save("users"); User.withId(user.id, "users").reputation > 0
+      }
     }
   }
   describe("The User companion") {
@@ -41,12 +54,14 @@ class SpecUser extends Spec with ShouldMatchers {
       val claesn = User("claesn", "Claes Neuefeind", "Cologne, Germany")
       val matana = User("matana", "Mihail Atanassov", "Cologne, Germany")
       val rols = User("rols", "Jürgen Rolshoven", "Cologne, Germany")
+      val ocr = User("OCR", "OCR", "Russia")
       val location = "users"
       User.save(location, fsteeg, claesn, matana, rols)
       expect(fsteeg) { User.withId("fsteeg", location) }
       expect(claesn) { User.withId("claesn", location) }
       expect(matana) { User.withId("matana", location) }
       expect(rols) { User.withId("rols", location) }
+      expect(ocr) { User.withId("OCR", location) }
     }
   }
 }
