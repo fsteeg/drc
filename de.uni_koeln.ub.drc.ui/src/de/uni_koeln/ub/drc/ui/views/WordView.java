@@ -54,6 +54,7 @@ public final class WordView {
   private Job job;
   private Button check;
   private Page page;
+  private Text text;
 
   @Inject
   public WordView(final Composite parent) {
@@ -71,6 +72,7 @@ public final class WordView {
 
   @Inject
   public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text text) {
+    this.text = text;
     if (job != null) {
       /* If a word is selected while we had a Job running for the previous word, cancel that: */
       job.cancel();
@@ -81,11 +83,11 @@ public final class WordView {
       suggestions.setText("Edit suggestions disabled");
     } else {
       this.word = (Word) text.getData();
-      setTableInput();
       findEditSuggestions();
       job.setPriority(Job.DECORATE);
       job.schedule();
     }
+    setTableInput();
   }
 
   @Inject
@@ -137,12 +139,13 @@ public final class WordView {
   }
 
   private void initTable() {
-    final int[] columns = new int[] { 185, 300, 50, 30, 50 };
+    final int[] columns = new int[] { 185, 300, 50, 30, 50, 80 };
     createColumn("Form", columns[0], viewer);
     createColumn("Author", columns[1], viewer);
     createColumn("Votes", columns[2], viewer);
-    createColumn("", columns[3], viewer);
-    createColumn("", columns[4], viewer);
+    createColumn("Up", columns[3], viewer);
+    createColumn("Down", columns[4], viewer);
+    createColumn("Revert", columns[5], viewer);
     Table table = viewer.getTable();
     table.setHeaderVisible(true);
     table.setLinesVisible(true);
@@ -158,21 +161,63 @@ public final class WordView {
   }
 
   private void setTableInput() {
+    clearButtons();
     if (word != null) {
       viewer.setInput(WordViewModel.CONTENT.getDetails(word));
     }
-    addVotingButtons();
-    // FIXME buttons remain visible when changing to word with less modifications in history
+    addButtons();
   }
 
-  private void addVotingButtons() {
+  private void clearButtons() {
+    TableItem[] items = viewer.getTable().getItems();
+    for (int i = 0; i < items.length; i++) {
+      if (!items[i].isDisposed()) {
+        Object data = items[i].getData();
+        if (data != null && data instanceof Button[]) {
+          Button[] buttons = (Button[]) data;
+          for (Button button : buttons) {
+            if (button != null) {
+              button.dispose();
+            }
+          }
+        }
+      }
+    }
+  }
+
+  private void addButtons() {
     TableItem[] items = viewer.getTable().getItems();
     for (int i = 0; i < items.length; i++) {
       final TableItem item = items[i];
       final int index = i;
-      addButton(item, index, Vote.UP, 3);
-      addButton(item, index, Vote.DOWN, 4);
+      if (item.getText(0).trim().length() > 0) {
+        Button up = addVoteButton(item, index, Vote.UP, 3);
+        Button down = addVoteButton(item, index, Vote.DOWN, 4);
+        Button rev = addRevertButton(item, index, 5);
+        item.setData(new Button[] { up, down, rev });
+      }
     }
+  }
+
+  private Button addRevertButton(final TableItem item, final int index, int col) {
+    final Modification modification = (Modification) viewer.getData(index + "");
+    if (!word.history().top().equals(modification)) { // no revert for most recent modification
+      Button button = createButton(item, "revert", col);
+      button.addSelectionListener(new SelectionListener() {
+        @Override
+        public void widgetSelected(final SelectionEvent e) {
+          word.history().push(modification);
+          MessageDialog.openInformation(item.getParent().getShell(), "Reverted", "Reverted to: "
+              + modification);
+          text.setText(modification.form());
+        }
+
+        @Override
+        public void widgetDefaultSelected(final SelectionEvent e) {}
+      });
+      return button;
+    }
+    return null;
   }
 
   private static enum Vote {
@@ -195,9 +240,9 @@ public final class WordView {
     abstract void update(Modification modification, User author, User voter);
   }
 
-  private void addButton(final TableItem item, final int index, final Vote vote, int col) {
-    Button good = createButton(item, vote.toString(), col);
-    good.addSelectionListener(new SelectionListener() {
+  private Button addVoteButton(final TableItem item, final int index, final Vote vote, int col) {
+    Button button = createButton(item, vote.toString().toLowerCase(), col);
+    button.addSelectionListener(new SelectionListener() {
       @Override
       public void widgetSelected(final SelectionEvent e) {
         Modification modification = (Modification) viewer.getData(index + "");
@@ -211,7 +256,7 @@ public final class WordView {
       @Override
       public void widgetDefaultSelected(final SelectionEvent e) {}
     });
-
+    return button;
   }
 
   private void vote(Modification modification, User voter, Vote vote) {

@@ -37,6 +37,7 @@ case class Page(words:List[Word], id: String) {
     // XML.saveFull("out.xml", root, "UTF-8", true, null) // FIXME hangs
     val writer = new OutputStreamWriter(new de.schlichtherle.io.FileOutputStream(file), "UTF-8");
     writer.write(formatted.toString)
+    // println("Wrote: " + formatted.toString)
     writer.close
     root
   }

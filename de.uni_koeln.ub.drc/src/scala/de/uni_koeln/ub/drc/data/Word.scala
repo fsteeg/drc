@@ -89,7 +89,6 @@ object Word {
     w.history.clear()
     (word\"modification").reverse.foreach( m => {
         val mod = Modification.fromXml(m)
-        if(!w.history.contains(mod))
         w.history.push(mod)
     }    
     )
