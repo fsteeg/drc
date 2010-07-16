@@ -74,6 +74,8 @@ case class Word(original:String, position:Box) {
     true
   }
   
+  def isLocked = history.size >= 6 || history.exists(_.score >= 3)
+  
   def toXml = 
     <word original={original}> 
       { position.toXml }

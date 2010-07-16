@@ -47,7 +47,8 @@ public final class EditComposite extends Composite {
   private List<Composite> lines = new ArrayList<Composite>();
   IEclipseContext context;
 
-  @Inject public EditComposite(final MDirtyable dirtyable, final Composite parent, final int style) {
+  @Inject
+  public EditComposite(final MDirtyable dirtyable, final Composite parent, final int style) {
     super(parent, style);
     this.parent = parent;
     this.dirtyable = dirtyable;
@@ -79,7 +80,8 @@ public final class EditComposite extends Composite {
 
   private void addWrapOnResizeListener(final Composite parent) {
     parent.addControlListener(new ControlListener() {
-      @Override public void controlResized(final ControlEvent e) {
+      @Override
+      public void controlResized(final ControlEvent e) {
         for (Composite line : lines) {
           if (!line.isDisposed()) {
             setLineLayout(line);
@@ -88,7 +90,8 @@ public final class EditComposite extends Composite {
         layout();
       }
 
-      @Override public void controlMoved(final ControlEvent e) {}
+      @Override
+      public void controlMoved(final ControlEvent e) {}
     });
   }
 
@@ -120,6 +123,7 @@ public final class EditComposite extends Composite {
         }
         text.setData(word);
         addListeners(text);
+        text.setEditable(!word.isLocked());
         list.add(text);
       }
     }
