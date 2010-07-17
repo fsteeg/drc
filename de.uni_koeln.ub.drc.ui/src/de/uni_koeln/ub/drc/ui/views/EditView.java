@@ -85,9 +85,13 @@ public final class EditView {
             new String[] { IDialogConstants.YES_LABEL, IDialogConstants.NO_LABEL }, 0);
         dialog.create();
         if (dialog.open() == Window.OK) {
-          ParameterizedCommand saveCommand = commandService.createCommand("page.save",
-              Collections.EMPTY_MAP);
-          handlerService.executeHandler(saveCommand);
+          try {
+            doSave(null);
+          } catch (IOException e) {
+            e.printStackTrace();
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
         }
       }
       editComposite.update(page);
@@ -104,7 +108,7 @@ public final class EditView {
     monitor.beginTask("Saving page...", page.words().size());
     final List<Text> words = editComposite.getWords();
 
-    editComposite.getDisplay().asyncExec(new Runnable() {
+    editComposite.getDisplay().syncExec(new Runnable() {
       @Override
       public void run() {
         for (int i = 0; i < words.size(); i++) {
