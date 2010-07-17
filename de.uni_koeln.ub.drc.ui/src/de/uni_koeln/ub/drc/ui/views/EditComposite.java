@@ -166,7 +166,8 @@ public final class EditComposite extends Composite {
       private void checkWordValidity(final Text text) {
         String current = text.getText();
         Word word = (Word) text.getData();
-        if (current.length() != word.original().length() || current.contains(" ")) {
+        if (current.length() != word.original().length()
+            || (current.contains(" ") && !word.original().contains(" "))) {
           text.setForeground(text.getDisplay().getSystemColor(SWT.COLOR_RED));
           MessageDialog.openWarning(text.getShell(), "Questionable Edit Operation",
               "Your recent edit operation changed a word in a dubious way (e.g. by adding a blank into "

@@ -72,7 +72,10 @@ public final class WordView {
 
   @Inject
   public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text text) {
-    this.text = text;
+    if (text != null) {
+      this.text = text;
+      this.word = (Word) text.getData();
+    }
     if (job != null) {
       /* If a word is selected while we had a Job running for the previous word, cancel that: */
       job.cancel();
@@ -82,7 +85,6 @@ public final class WordView {
     } else if (!check.getSelection()) {
       suggestions.setText("Edit suggestions disabled");
     } else {
-      this.word = (Word) text.getData();
       findEditSuggestions();
       job.setPriority(Job.DECORATE);
       job.schedule();

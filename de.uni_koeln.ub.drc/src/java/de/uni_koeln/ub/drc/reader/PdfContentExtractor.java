@@ -82,11 +82,13 @@ public class PdfContentExtractor extends PDFTextStripper2 {
           currentWordStart = pos; // remember start for new words
         }
         currentWordText.append(pos.getCharacter());
-        if (pos.getCharacter().equals(" ")) {
+        if (pos.getCharacter().equals(" ") || pos.getCharacter().equals("-")) {
           ExtractedWord w = word(currentWordStart, currentWordText, pos);
+          if (currentWordText.toString().trim().length() > 0) {
+            words.add(w);
+          }
           currentWordText = new StringBuilder();
           currentWordStart = null; // forget current word start
-          words.add(w);
         }
       }
     }

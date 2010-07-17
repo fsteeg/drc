@@ -15,7 +15,6 @@
       <children xsi:type="basic:PartStack" xmi:id="_SeXUGO8EErtz9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7w" containerData="1000" selectedElement="WordView">
         <children xsi:type="basic:Part" xmi:id="WordView" elementId="WordView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.WordView" label="Word" iconURI="" tooltip="Word View"/>
       </children>
-      <children xsi:type="basic:PartStack" xmi:id="_SeXUGO8EErtz9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7w" containerData="0"/> <!-- Kind of workaround for problem with last part stack  -->
     </children>
     <variables>selection</variables>
     <variables>input</variables>

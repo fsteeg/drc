@@ -79,13 +79,8 @@ public final class CheckView {
   }
 
   @Inject public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text word) {
-    if (imageLoaded) {
-      if (word != null) {
-        markPosition(word);
-      } else {
-        clearMarker();
-        return;
-      }
+    if (imageLoaded && word != null) {
+      markPosition(word);
     }
   }
 
@@ -112,19 +107,21 @@ public final class CheckView {
   private void markPosition(final Text text) {
     Word word = (Word) text.getData();
     Box box = word.position();
-    Rectangle rect = new Rectangle(box.x() - 22, box.y() - 15, box.width() + 38 /*98*/, box.height() + 30); // IMG_SIZE
+    Rectangle rect = new Rectangle(box.x() - 10, box.y() - 4, box.width() + 20, box.height() + 12); // IMG_SIZE
     System.out.println("Current word: " + word);
     Image image = reloadImage();
     GC gc = new GC(image);
     drawBoxArea(rect, gc);
     drawBoxBorder(rect, gc);
     imageLabel.setImage(image);
+    gc.dispose();
+    image.dispose();
     scrolledComposite.setOrigin(new Point(rect.x - 10, rect.y - 10)); // IMG_SIZE
   }
 
   private void drawBoxBorder(final Rectangle rect, final GC gc) {
     gc.setAlpha(200);
-    gc.setLineWidth(5);
+    gc.setLineWidth(1);
     gc.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_DARK_GREEN));
     gc.drawRectangle(rect);
   }
