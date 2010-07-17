@@ -1,5 +1,17 @@
 Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy). CI is available on our "Hudson":http://hydra4.spinfo.uni-koeln.de:8080/job/DRC/ server.
 
+h1. Beta 1 - Milestone 3 (2010 July 17)
+
+h2. Overview
+
+Beta 1 milestone 3 (tag: b1-m3) mainly adds multi-user support with user reputation and a voting system for corrections. It also introduces the ability to revert to a previous correction, a larger and improved presentation of the original document, more accurate word highlighting, as well as bugfixes and performance improvements.
+
+!http://i31.tinypic.com/4j0vx3.png!
+
+h2. Dependencies and Setup
+
+Beta 1 milestone 3 requires Eclipse "4.0 RC1":http://download.eclipse.org/e4/downloads/drops/S-1.0RC1-201007011000/index.html; other requirements (e.g. Scala 2.8 final, PdfBox) are included in the @lib@ folder in the @de.uni_koeln.ub.drc@ bundle. See below for general instructions on building and running.
+
 h1. Beta 1 - Milestone 2 (2010 May 28)
 
 h2. Overview
@@ -29,6 +41,7 @@ h1. General Documentation
 h2. Building and Running
 
 * Core components (Scala) are built and deployed with Ant to be used in the UI (Eclipse 4); see the @build.xml@ file in the @de.uni_koeln.ub.drc@ bundle
+* After cloning, rename the @accounts.properties.template@ file in @de.uni_koeln.ub.drc.ui@ to @accounts.properties@
 * Tests for the core components can be run with Ant, UI tests by running the @AllTestsSuite@ in the @de.uni_koeln.ub.drc.ui@ bundle (Run As > Plug-in Test)
 * The UI can be started by running the @drc.ui.product@ in the @de.uni_koeln.ub.drc.ui@ bundle (Run As > Eclipse Application)
 
