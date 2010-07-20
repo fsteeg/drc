@@ -23,6 +23,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
@@ -43,7 +44,7 @@ public final class CheckView {
   private Label imageLabel;
   private boolean imageLoaded = false;
   private ScrolledComposite scrolledComposite;
-  private Image image;
+  private ImageData image;
 
   @Inject public CheckView(final Composite parent) {
     this.parent = parent;
@@ -85,14 +86,15 @@ public final class CheckView {
   }
 
   private void updateImage(final Page page) throws IOException {
-    image = loadImage(page);
-    imageLabel.setImage(image);
+    Image loadedImage = loadImage(page);
+    image = loadedImage.getImageData();
+    imageLabel.setImage(loadedImage);
     imageLoaded = true;
   }
 
   private Image reloadImage() {
     Display display = parent.getDisplay();
-    Image newImage = new Image(display, image.getImageData());
+    Image newImage = new Image(display, image);
     return newImage;
   }
 
