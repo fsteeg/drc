@@ -107,6 +107,7 @@ public final class CheckView {
   }
 
   private void markPosition(final Text text) {
+    imageLabel.getImage().dispose();
     Word word = (Word) text.getData();
     Box box = word.position();
     Rectangle rect = new Rectangle(box.x() - 10, box.y() - 4, box.width() + 20, box.height() + 12); // IMG_SIZE
@@ -117,7 +118,6 @@ public final class CheckView {
     drawBoxBorder(rect, gc);
     imageLabel.setImage(image);
     gc.dispose();
-    image.dispose();
     scrolledComposite.setOrigin(new Point(rect.x - 10, rect.y - 10)); // IMG_SIZE
   }
 

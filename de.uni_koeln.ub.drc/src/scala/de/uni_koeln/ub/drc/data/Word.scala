@@ -37,7 +37,7 @@ case class Word(original:String, position:Box) {
   
   lazy val suggestions: List[String] = (List() ++ Index.lexicon).sortBy(distance(_)) take 10
   
-  def isPossibleError : Boolean = !Index.lexicon.contains(original) && history.size == 1
+  def isPossibleError : Boolean = !Index.lexicon.contains(original.toLowerCase) && history.size == 1
     
   private def distance(s1: String, s2: String): Int = {
     val table = Array.ofDim[Int](s1.length + 1, s2.length + 1)
