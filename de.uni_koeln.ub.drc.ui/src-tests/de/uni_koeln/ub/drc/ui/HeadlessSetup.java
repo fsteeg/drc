@@ -181,10 +181,11 @@ final class HeadlessSetup {
         + HeadlessEngine.class.getName();
     @Inject private IEventBroker eventBroker;
     @Inject private IContributionFactory contributionFactory;
+    @Inject private IEclipseContext context;
     private EventHandler childHandler;
     private EventHandler activeChildHandler;
 
-    @Override public Object createGui(final MUIElement element, final Object parent) {
+    @Override public Object createGui(final MUIElement element, final Object parent, IEclipseContext context) {
       if (element instanceof MContext) {
         MContext mcontext = (MContext) element;
         if (mcontext.getContext() != null) {
@@ -201,7 +202,7 @@ final class HeadlessSetup {
     }
 
     @Override public Object createGui(final MUIElement element) {
-      return createGui(element, null);
+      return createGui(element, null, context);
     }
 
     @Override public void removeGui(final MUIElement element) {
@@ -235,7 +236,7 @@ final class HeadlessSetup {
             Object element = event.getProperty(UIEvents.EventTags.NEW_VALUE);
             if (element instanceof MUIElement) {
               Object parent = event.getProperty(UIEvents.EventTags.ELEMENT);
-              createGui((MUIElement) element, parent);
+              createGui((MUIElement) element, parent, context);
               if (parent instanceof MPartStack) {
                 MPartStack stack = (MPartStack) parent;
                 List<MStackElement> children = stack.getChildren();
@@ -256,7 +257,7 @@ final class HeadlessSetup {
           Object element = event.getProperty(UIEvents.EventTags.NEW_VALUE);
           if (element instanceof MUIElement) {
             Object parent = event.getProperty(UIEvents.EventTags.ELEMENT);
-            createGui((MUIElement) element, parent);
+            createGui((MUIElement) element, parent, context);
           }
         }
       };
@@ -268,7 +269,7 @@ final class HeadlessSetup {
     private void createGuiFromChildren(final MUIElement element) {
       for (Object child : ((MElementContainer<?>) element).getChildren()) {
         if (child instanceof MUIElement) {
-          createGui((MUIElement) child, element);
+          createGui((MUIElement) child, element, context);
           if (child instanceof MContext) {
             IEclipseContext childContext = ((MContext) child).getContext();
             IEclipseContext parentContext = getParentContext((MUIElement) child);
@@ -284,7 +285,7 @@ final class HeadlessSetup {
       MPartStack container = (MPartStack) element;
       MStackElement active = container.getSelectedElement();
       if (active != null) {
-        createGui(active, container);
+        createGui(active, container, context);
         IEclipseContext childContext = ((MContext) active).getContext();
         IEclipseContext parentContext = getParentContext(active);
         parentContext.set(IContextConstants.ACTIVE_CHILD, childContext);

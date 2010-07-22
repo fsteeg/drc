@@ -162,6 +162,9 @@ public final class TestDrcUi extends TestDrcHeadless {
         @Override public CSSStyleDeclaration getStyle(Object widget) {
             return null;
         }
+
+        @Override
+        public void setClassnameAndId(Object widget, String classname, String id) {}
         });
       }
     });
