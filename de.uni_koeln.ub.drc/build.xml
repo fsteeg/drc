@@ -12,7 +12,7 @@
 	<!-- Currently working with volume 4 only: -->
 	<property name="data.volume" value="PPN345572629_0004" />
 	<property name="src.dir.data" location="res/rom/${data.volume}" />
-  
+
 	<!-- Checkstyle setup -->
 	<property name="checkstyle.config" location="doc/checkstyle.xml" />
 	<taskdef resource="checkstyletask.properties" classpath="${lib.dir}/checkstyle-all-5.1.jar" />
@@ -148,6 +148,10 @@
 		</copy>
 	</target>
 
+	<target name="import" depends="compile">
+		<java classpathref="project.classpath" classname="de.uni_koeln.ub.drc.data.Import"/>
+	</target>
+
 	<target name="zip">
 		<zip destfile="${src.dir.data}/${data.volume}.zip" update="false">
 			<!-- Files copied here are currently generated during test run  -->
@@ -161,8 +165,8 @@
 			<fileset dir="${src.dir.data}" includes="*.zip" />
 		</copy>
 		<copy todir="${deploy.dir.data.users}">
-            <fileset dir="${src.dir.data.users}" includes="*.xml" />
-        </copy>
+			<fileset dir="${src.dir.data.users}" includes="*.xml" />
+		</copy>
 	</target>
 
 	<!-- Run the tests -->

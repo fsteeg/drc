@@ -56,6 +56,10 @@ object SearchOption extends Enumeration {
     def toStrings = Array[String]() ++ SearchOption.values map (_.toString)
 }
 
+object Import extends Application {
+    Index.initialImport("res/rom/PPN345572629_0004")
+}
+
 object Index {
   
     lazy val lexicon: Set[String] =
@@ -95,10 +99,11 @@ object Index {
     def initialImport(location: String): Unit = {
         val files = new File(location).list
         for(file <- files.toList if file.endsWith("pdf") ) {
-            val xml = new File(location, file.replace("pdf", "xml"))
+            val xml = new File(location, file.replace("pdf", "xml").replace(" ", ""))
             // TODO use separate test data (overwriting here)
             val page = Page.fromPdf(new File(location, file).getAbsolutePath)
             page.save(xml)
+            println("Imported " + file)
         }
     }
     
