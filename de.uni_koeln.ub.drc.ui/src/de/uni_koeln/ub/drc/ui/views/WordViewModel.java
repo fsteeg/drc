@@ -7,6 +7,8 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.views;
 
+import java.util.Date;
+
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -66,6 +68,8 @@ final class WordViewModel {
         return String.format("%s from %s (%s, %s)", user.name(), user.region(), user.id(),
             user.reputation());
       case 2:
+        return new Date(modification.date()).toString();
+      case 3:
         return modification.score() + "";
       default:
         return null; // TODO do we need modification.time()?

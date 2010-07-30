@@ -8,6 +8,7 @@
 package de.uni_koeln.ub.drc.ui.views;
 
 import java.io.File;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -38,9 +39,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
+import scala.collection.JavaConversions;
+import scala.collection.immutable.List;
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.SearchOption;
+import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
@@ -111,9 +115,10 @@ public final class SearchView {
   }
 
   private void initTable() {
-    final int[] columns = new int[] { 185, 800 };
+    final int[] columns = new int[] { 185, 620, 180 };
     createColumn("File", columns[0]);
     createColumn("Text", columns[1]);
+    createColumn("Modified", columns[2]);
     Table table = viewer.getTable();
     table.setHeaderVisible(true);
     table.setLinesVisible(true);
@@ -168,9 +173,19 @@ public final class SearchView {
         return page.id().substring(page.id().lastIndexOf(File.separatorChar) + 1);
       case 1:
         return page.toText("|");
+      case 2:
+        return lastModificationDate(page.words());
       default:
         return page.toString();
       }
+    }
+
+    private String lastModificationDate(List<Word> words) {
+      long latest = 0;
+      for (Word word : JavaConversions.asList(words)) {
+        latest = Math.max(latest, word.history().top().date());
+      }
+      return new Date(latest).toString();
     }
 
     @Override public Image getColumnImage(final Object element, final int columnIndex) {

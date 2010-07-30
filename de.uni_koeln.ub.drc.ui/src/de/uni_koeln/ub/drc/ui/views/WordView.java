@@ -141,13 +141,14 @@ public final class WordView {
   }
 
   private void initTable() {
-    final int[] columns = new int[] { 185, 300, 50, 30, 50, 80 };
+    final int[] columns = new int[] { 185, 300, 200, 50, 30, 50, 80 };
     createColumn("Form", columns[0], viewer);
     createColumn("Author", columns[1], viewer);
-    createColumn("Votes", columns[2], viewer);
-    createColumn("Up", columns[3], viewer);
-    createColumn("Down", columns[4], viewer);
-    createColumn("Revert", columns[5], viewer);
+    createColumn("Date", columns[2], viewer);
+    createColumn("Votes", columns[3], viewer);
+    createColumn("Up", columns[4], viewer);
+    createColumn("Down", columns[5], viewer);
+    createColumn("Revert", columns[6], viewer);
     Table table = viewer.getTable();
     table.setHeaderVisible(true);
     table.setLinesVisible(true);
@@ -193,9 +194,9 @@ public final class WordView {
       final TableItem item = items[i];
       final int index = i;
       if (item.getText(0).trim().length() > 0) {
-        Button up = addVoteButton(item, index, Vote.UP, 3);
-        Button down = addVoteButton(item, index, Vote.DOWN, 4);
-        Button rev = addRevertButton(item, index, 5);
+        Button up = addVoteButton(item, index, Vote.UP, 4);
+        Button down = addVoteButton(item, index, Vote.DOWN, 5);
+        Button rev = addRevertButton(item, index, 6);
         item.setData(new Button[] { up, down, rev });
       }
     }
