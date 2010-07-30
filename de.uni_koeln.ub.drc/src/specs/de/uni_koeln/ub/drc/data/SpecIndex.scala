@@ -33,17 +33,6 @@ class SpecIndex extends Spec with ShouldMatchers {
     }
     
     describe("The Index companion object") {
-        val folder = "res/rom/PPN345572629_0004"
-        it("provides initial import of PDF documents") {
-            Index.initialImport(folder)
-        }
-        it("provides a way to import a directory containing serialized pages") {
-            Index.initialImport(folder)
-            val pages = Index.loadPagesFromFolder(folder)
-            val index = Index(pages)
-            expect(10) { index.pages.length }
-            expect(10) { index.search("").length }
-        }
         it("provides a factory method") {
             expect(Index(pages)) { new Index(pages) }
         }

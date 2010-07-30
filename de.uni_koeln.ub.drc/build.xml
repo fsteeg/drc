@@ -60,7 +60,7 @@
 	</path>
 
 	<!-- The main target to do all work -->
-	<target name="all" depends="clean, deploy, checkstyle, doc, test-report, zip, deploy-data" />
+	<target name="all" depends="clean, deploy, checkstyle, doc, test-report" />
 
 	<!-- Prepare the build: create folders -->
 	<target name="prepare">
