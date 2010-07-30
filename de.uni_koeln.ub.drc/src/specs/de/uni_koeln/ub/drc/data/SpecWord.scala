@@ -32,7 +32,7 @@ private[drc] class SpecWord extends Spec with ShouldMatchers {
         expect(1) {
             Word.fromXml(<word original="test">
                             <box width="1" height="1" y="1" x="1"></box>
-                            <modification form="test" score="1" author="OCR">
+                            <modification form="test" score="1" author="OCR" date="123456789">
                               <voters>
                                 <voter name="me"></voter>
                               </voters>

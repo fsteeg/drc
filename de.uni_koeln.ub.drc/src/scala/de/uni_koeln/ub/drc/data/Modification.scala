@@ -19,6 +19,7 @@ import scala.collection.mutable.ListBuffer
  * @author Fabian Steeg (fsteeg)
  */
 case class Modification(form:String, author:String) {
+    var date = System.currentTimeMillis
     var score = 0
     var voters = scala.collection.mutable.Set[String]()
     def upvote(voter:String) { guard(voter); score = score + 1; voters += voter }
@@ -27,7 +28,7 @@ case class Modification(form:String, author:String) {
         if(voters.contains(voter)) throw new IllegalArgumentException(voter + " has already voted")
     }
     def toXml = 
-        <modification form={form} author={author} score={score.toString}> 
+        <modification form={form} author={author} score={score.toString} date={date.toString}> 
             <voters> { voters.map((id:String) => <voter name={id}/>) } </voters>
         </modification>
     
@@ -40,6 +41,7 @@ object Modification {
         m.score = if(trimmed.size == 0) 0 else trimmed.toInt
         m.voters = scala.collection.mutable.Set[String]() ++ 
             (mod \\ "voter").map((n:Node) => (n\"@name").text.trim)
+        m.date = (mod\"@date").text.toLong
         m
     }
 }

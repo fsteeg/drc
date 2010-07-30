@@ -19,7 +19,11 @@ import org.junit.runner.RunWith
 private[drc] class SpecModification extends Spec with ShouldMatchers {
 
   describe("A Modification") {
+    val before = System.currentTimeMillis
     val mod = Modification("test", "fsteeg")
+    val after = System.currentTimeMillis
+    it("contains a date") { expect(true) { mod.date >= before && mod.date <= after } }
+    it("preserves the original date") { expect(mod.date) { Modification.fromXml(mod.toXml).date } }
     it("contains the edited form") { expect("test") { mod.form } }
     it("contains an author ID") { expect("fsteeg") { mod.author } }
     it("has a score that is adjusted according to votes") {
@@ -42,7 +46,7 @@ private[drc] class SpecModification extends Spec with ShouldMatchers {
     it("can be deserialized from XML") {
         expect(1) {
             Modification.fromXml(
-                    <modification form="test" score="1" author="OCR">
+                    <modification form="test" score="1" author="OCR" date="123456789">
                       <voters>
                         <voter name="me"></voter>
                       </voters>
@@ -50,6 +54,7 @@ private[drc] class SpecModification extends Spec with ShouldMatchers {
             ).score 
         }
     }
+    it("supports XML roundtripping") { expect(mod) { Modification.fromXml(mod.toXml) } }
   }
   
 }
