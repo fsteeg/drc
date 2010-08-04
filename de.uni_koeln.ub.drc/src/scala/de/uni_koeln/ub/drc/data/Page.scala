@@ -104,6 +104,22 @@ object Page {
         yield Word(w, map(w.toLowerCase)), "mock"
     )
     
+  /** 
+   * @param lists The lists of pages to merge (each independently edited, e.g. by different users)
+   * @return A single list of pages containing the merged content 
+   */
+  def merge(lists:List[Page]*):Seq[Page] = {
+    for(p1 <- lists.head; list2 <- lists.tail; p2 <- list2; if p1.id == p2.id)
+      mergePages(p1, p2)
+    lists.head
+  }
+  
+  private def mergePages(p1:Page, p2:Page):Page = {
+    for(w1 <- p1.words; w2 <- p2.words; m <- w2.history.reverse; if(!w1.history.contains(m)))
+      w1.history.push(m)
+    p1
+  }
+  
 }
 
 /** 

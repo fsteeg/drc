@@ -103,6 +103,47 @@ class SpecPage extends Spec with ShouldMatchers {
         expect(2) { loadedFromFile.history.size }
     }
     
+    it("can merge multiple lists of pages into a single list of pages") {
+      
+      // we assume three pages with identical IDs, edited by three users:
+      val o = Modification("test", "OCR")
+      val m1 = Modification("c1", "u1"); val p1 = edit(threePages, m1)
+      val m2 = Modification("c2", "u2"); val p2 = edit(threePages, m2)
+      val m3 = Modification("c3", "u3"); val p3 = edit(threePages, m3)
+      
+      // assert that each user's modification is present in his three lists:
+      for((m,p) <- List((m1,p1), (m2,p2), (m3,p3))) {
+        expect(3) { p.size }
+        expect(List(m,m,m,m,m,m)) { for(page<-p;word<-page.words) yield word.history.toList(0) }
+        expect(List(o,o,o,o,o,o)) { for(page<-p;word<-page.words) yield word.history.toList(1) }
+      }
+      
+      // merge the three lists of each user into three lists containing all modifications:
+      val merged = Page.merge(p1, p2, p3)
+      
+      // the history of each word of the three merged lists should now contain all modifications:
+      expect(3) { merged.size }
+      for(page <- merged) {
+        expect(List(m3,m3)) { for(word<-page.words) yield word.history.toList(0) }
+        expect(List(m2,m2)) { for(word<-page.words) yield word.history.toList(1) }
+        expect(List(m1,m1)) { for(word<-page.words) yield word.history.toList(2) }
+        expect(List(o,o)) { for(word<-page.words) yield word.history.toList(3) }
+      }
+      
+    }
+    
+    def threePages = List(
+        Page(List(Word("test", Box(1,1,1,1)), Word("test", Box(1,1,1,1))), "p1"),
+        Page(List(Word("test", Box(1,1,1,1)), Word("test", Box(1,1,1,1))), "p2"),
+        Page(List(Word("test", Box(1,1,1,1)), Word("test", Box(1,1,1,1))), "p3")
+    )
+    
+    def edit(pages:List[Page], mod:Modification) = {
+      for (page <- pages; word <- page.words) word.history.push(mod); pages
+    }
+      
+    }
+  
     it("provides initial import of a scanned PDF") {
           val page : Page = Page.fromPdf("res/rom/PPN345572629_0004/PPN345572629_0004-0001.pdf")
           val file = new java.io.File("res/rom/PPN345572629_0004/PPN345572629_0004-0001.xml")
@@ -111,7 +152,5 @@ class SpecPage extends Spec with ShouldMatchers {
           expect(true) {root.size > 0}
           expect(true) {file.exists}
       }
-    
-  }
   
 }

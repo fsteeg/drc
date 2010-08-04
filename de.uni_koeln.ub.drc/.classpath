@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="src/tests"/>
 	<classpathentry kind="src" path="src/specs"/>
 	<classpathentry kind="src" path="src/scala"/>
-	<classpathentry kind="con" path="ch.epfl.lamp.sdt.launching.SCALA_CONTAINER"/>
+	<classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/junit-4.8.1.jar" sourcepath="lib/junit-4.8.1-src.zip"/>
 	<classpathentry kind="lib" path="lib/truezip-6.jar" sourcepath="lib/truezip-6-src.zip"/>
