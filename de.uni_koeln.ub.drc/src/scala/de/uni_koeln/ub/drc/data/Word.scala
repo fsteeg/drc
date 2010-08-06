@@ -10,7 +10,9 @@ package de.uni_koeln.ub.drc.data
 import scala.collection.mutable.Stack
 import scala.xml._
 import java.io.{InputStreamReader, FileInputStream, BufferedReader}
-
+import scala.reflect._
+import scala.annotation.target._
+import sjson.json._
 import scala.collection.mutable
 
 /**
@@ -25,9 +27,17 @@ import scala.collection.mutable
  * @param position The position of the word in the scanned document
  * @author Fabian Steeg (fsteeg)
  */
-case class Word(original:String, position:Box) {
+@BeanInfo case class Word(
+    original:String, 
+    @JSONTypeHint(classOf[Box])
+    position:Box) {
+  
+  private def this() = this(null, null) // for scouch
+  override def toString = 
+    "word with original=%s, position=%s, history=%s, suggestions=%s".format(original, position, history, suggestions)
     
   /** A word's history is a stack of modifications, the top of which is the current form. */
+  @JSONTypeHint(classOf[Modification])
   val history: Stack[Modification] = new Stack[Modification]()
   
   if( history.size == 0 ) 

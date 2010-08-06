@@ -8,7 +8,9 @@
 
 package de.uni_koeln.ub.drc.data
 import scala.xml._
-
+import scala.reflect._
+import scala.annotation.target._
+import sjson.json._
 /**
  * A box represents the position of a word in the original scanned document.
  * 
@@ -18,7 +20,9 @@ import scala.xml._
  * @param height The height of the box
  * @author Fabian Steeg (fsteeg)
  */
-case class Box(x:Int, y:Int, width:Int, height:Int) {
+@BeanInfo case class Box(x:Int, y:Int, width:Int, height:Int) {
+  private def this() = this(0, 0, 0, 0) // for scouch
+  override def toString = "box with x=%s, y=%s, width=%s, height=%s".format(x, y, width, height)
   def toXml = 
       <box x={x.toString} y={y.toString} width={width.toString} height={height.toString}/>
 }

@@ -9,6 +9,9 @@
 package de.uni_koeln.ub.drc.data
 import scala.xml._
 import scala.collection.mutable.ListBuffer
+import scala.reflect._
+import scala.annotation.target._
+import sjson.json._
 /**
  * Represent a modification made to a word, consisting of the form the word is modified to and the
  * author of that modification (to maintain a modificaiton history for review and correction), as
@@ -18,7 +21,12 @@ import scala.collection.mutable.ListBuffer
  * @param author The ID of the modification author
  * @author Fabian Steeg (fsteeg)
  */
-case class Modification(form:String, author:String) {
+@BeanInfo case class Modification(form:String, author:String) {
+  
+    private def this() = this(null, null) // for scouch
+    override def toString = 
+      "modification with form=%s, author=%s, date=%s, score=%s, voters=%s".format(form, author, date, score, voters)
+  
     var date = System.currentTimeMillis
     var score = 0
     var voters = scala.collection.mutable.Set[String]()

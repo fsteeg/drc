@@ -16,6 +16,7 @@ import de.uni_koeln.ub.drc.data.SpecModification;
 import de.uni_koeln.ub.drc.data.SpecPage;
 import de.uni_koeln.ub.drc.data.SpecUser;
 import de.uni_koeln.ub.drc.data.SpecWord;
+import de.uni_koeln.ub.drc.data.SpecStorage;
 import de.uni_koeln.ub.drc.util.SpecConfiguration;
 
 /**
@@ -24,5 +25,5 @@ import de.uni_koeln.ub.drc.util.SpecConfiguration;
  */
 @RunWith( Suite.class )
 @Suite.SuiteClasses( { SpecConfiguration.class, SpecWord.class, SpecPage.class, SpecIndex.class,
-        SpecUser.class, SpecModification.class } )
+        SpecUser.class, SpecModification.class, SpecStorage.class } )
 public final class SpecSuite {}

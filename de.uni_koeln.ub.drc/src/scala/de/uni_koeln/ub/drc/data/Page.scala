@@ -11,6 +11,9 @@ import scala.xml._
 import java.io._
 import java.util.zip._
 import de.uni_koeln.ub.drc.reader.Point
+import scala.reflect._
+import scala.annotation.target._
+import sjson.json._
 
 /**
  * Representation of a scanned page.
@@ -18,7 +21,12 @@ import de.uni_koeln.ub.drc.reader.Point
  * @param id An ID for this page (TODO: update to e.g. URI)
  * @author Fabian Steeg
  */
-case class Page(words:List[Word], id: String) {
+@BeanInfo case class Page(
+    @JSONTypeHint(classOf[Word])
+    words:List[Word], id: String) {
+  
+  private def this() = this(null, null) // for scouch
+  override def toString = "page with words=%s, id=%s, image=%s, zip=%s".format(words, id, image, zip)
   
   var image: Option[ZipEntry] = None
   var zip: Option[ZipFile] = None
