@@ -16,13 +16,12 @@ import de.uni_koeln.ub.drc.data.SpecModification;
 import de.uni_koeln.ub.drc.data.SpecPage;
 import de.uni_koeln.ub.drc.data.SpecUser;
 import de.uni_koeln.ub.drc.data.SpecWord;
-import de.uni_koeln.ub.drc.util.SpecConfiguration;
 
 /**
  * Main test suite.
  * @author Fabian Steeg (fsteeg)
  */
 @RunWith( Suite.class )
-@Suite.SuiteClasses( { SpecConfiguration.class, SpecWord.class, SpecPage.class, SpecIndex.class,
+@Suite.SuiteClasses( { SpecWord.class, SpecPage.class, SpecIndex.class,
         SpecUser.class, SpecModification.class } )
 public final class SpecSuite {}
