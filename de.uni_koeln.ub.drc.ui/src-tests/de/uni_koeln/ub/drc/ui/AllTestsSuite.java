@@ -23,13 +23,16 @@ import org.junit.runners.Suite;
  * basically the UI tests work when the running Eclipse instance is in the background when running
  * TODO: check tests in next milestone
  */
-@RunWith( Suite.class ) @Suite.SuiteClasses( { TestDrcHeadless.class } ) public final class AllTestsSuite {
+@RunWith( Suite.class )
+@Suite.SuiteClasses( { TestDrcHeadless.class, TestPageConverter.class } )
+public final class AllTestsSuite {
 
   static final String APPLICATION_XMI = "de.uni_koeln.ub.drc.ui/Application.e4xmi";
   static final String[] PART_NAMES = { "SearchView", "EditView", "CheckView", "WordView" };
 
   /** Check if we are running as JUnit Plug-in test. */
-  @Before public void setup() {
+  @Before
+  public void setup() {
     if (!Platform.isRunning()) {
       Assert.fail("Please run as JUnit Plug-in test");
     }

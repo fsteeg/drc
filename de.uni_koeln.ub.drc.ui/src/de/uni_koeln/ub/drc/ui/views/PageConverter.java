@@ -18,11 +18,11 @@ import java.util.Map;
  */
 public class PageConverter {
 
-  private final static PageConverter INSTANCE = new PageConverter();
   private final static String[] NUMERALS = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII",
       "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV",
       "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX" };
   private Map<String, Map<String, String>> outer;
+  private final static PageConverter INSTANCE = new PageConverter();
 
   private PageConverter() {
 
