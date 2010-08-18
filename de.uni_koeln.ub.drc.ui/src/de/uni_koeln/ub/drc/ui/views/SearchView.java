@@ -57,9 +57,11 @@ public final class SearchView {
   private static CCombo searchOptions;
   private TableViewer viewer;
 
-  @Inject private IEclipseContext context;
+  @Inject
+  private IEclipseContext context;
 
-  @Inject public SearchView(final Composite parent) {
+  @Inject
+  public SearchView(final Composite parent) {
     Composite searchComposite = new Composite(parent, SWT.NONE);
     searchComposite.setLayout(new GridLayout(2, false));
     initSearchField(searchComposite);
@@ -68,7 +70,8 @@ public final class SearchView {
     GridLayoutFactory.fillDefaults().generateLayout(parent);
   }
 
-  @PostConstruct public void select() {
+  @PostConstruct
+  public void select() {
     if (viewer.getElementAt(0) == null) {
       throw new IllegalArgumentException("No entries in initial search view");
     }
@@ -79,7 +82,8 @@ public final class SearchView {
     searchField = new Text(parent, SWT.BORDER);
     searchField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
     searchField.addModifyListener(new ModifyListener() {
-      @Override public void modifyText(final ModifyEvent e) {
+      @Override
+      public void modifyText(final ModifyEvent e) {
         setInput();
       }
     });
@@ -90,11 +94,13 @@ public final class SearchView {
     searchOptions.setItems(SearchOption.toStrings());
     searchOptions.select(SearchOption.all().id());
     searchOptions.addSelectionListener(new SelectionListener() {
-      @Override public void widgetSelected(final SelectionEvent e) {
+      @Override
+      public void widgetSelected(final SelectionEvent e) {
         setInput();
       }
 
-      @Override public void widgetDefaultSelected(final SelectionEvent e) {
+      @Override
+      public void widgetDefaultSelected(final SelectionEvent e) {
         setInput();
       }
     });
@@ -115,10 +121,11 @@ public final class SearchView {
   }
 
   private void initTable() {
-    final int[] columns = new int[] { 185, 620, 180 };
+    final int[] columns = new int[] { 185, 50, 570, 180 };
     createColumn("File", columns[0]);
-    createColumn("Text", columns[1]);
-    createColumn("Modified", columns[2]);
+    createColumn("Octopus", columns[1]);
+    createColumn("Text", columns[2]);
+    createColumn("Modified", columns[3]);
     Table table = viewer.getTable();
     table.setHeaderVisible(true);
     table.setLinesVisible(true);
@@ -153,31 +160,40 @@ public final class SearchView {
   }
 
   private static final class SearchViewContentProvider implements IStructuredContentProvider {
-    @Override public Object[] getElements(final Object inputElement) {
+    @Override
+    public Object[] getElements(final Object inputElement) {
       Object[] elements = (Object[]) inputElement;
       return elements;
     }
 
-    @Override public void dispose() {}
+    @Override
+    public void dispose() {}
 
-    @Override public void inputChanged(final Viewer viewer, final Object oldInput,
-        final Object newInput) {}
+    @Override
+    public void inputChanged(final Viewer viewer, final Object oldInput, final Object newInput) {}
   }
 
   private static final class SearchViewLabelProvider extends LabelProvider implements
       ITableLabelProvider {
-    @Override public String getColumnText(final Object element, final int columnIndex) {
+    @Override
+    public String getColumnText(final Object element, final int columnIndex) {
       Page page = (Page) element;
       switch (columnIndex) {
       case 0:
-        return page.id().substring(page.id().lastIndexOf(File.separatorChar) + 1);
+        return fileName(page);
       case 1:
-        return page.toText("|");
+        return PageConverter.convert(fileName(page));
       case 2:
+        return page.toText("|");
+      case 3:
         return lastModificationDate(page.words());
       default:
         return page.toString();
       }
+    }
+
+    private String fileName(Page page) {
+      return page.id().substring(page.id().lastIndexOf(File.separatorChar) + 1);
     }
 
     private String lastModificationDate(List<Word> words) {
@@ -188,7 +204,8 @@ public final class SearchView {
       return new Date(latest).toString();
     }
 
-    @Override public Image getColumnImage(final Object element, final int columnIndex) {
+    @Override
+    public Image getColumnImage(final Object element, final int columnIndex) {
       return null;
     }
   }
