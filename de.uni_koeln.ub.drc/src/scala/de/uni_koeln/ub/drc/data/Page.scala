@@ -18,16 +18,16 @@ import de.uni_koeln.ub.drc.reader.Point
  * @param id An ID for this page (TODO: update to e.g. URI)
  * @author Fabian Steeg
  */
-case class Page(words:List[Word], id: String) {
-  
+case class Page(words: List[Word], id: String) {
+
   var image: Option[ZipEntry] = None
   var zip: Option[ZipFile] = None
-  
-  def toXml = <page> { words.toList.map(_.toXml) } </page>
-  
-  def toText(delim: String) = 
-    ("" /: words) (_ + " " + _.history.top.form.replace(Page.ParagraphMarker, delim)) 
-  
+
+  def toXml = <page>{ words.toList.map(_.toXml) }</page>
+
+  def toText(delim: String) =
+    ("" /: words)(_ + " " + _.history.top.form.replace(Page.ParagraphMarker, delim))
+
   def save(): Node = {
     println("Attempting to save to: " + id)
     val file = new de.schlichtherle.io.File(id)
@@ -41,8 +41,8 @@ case class Page(words:List[Word], id: String) {
     writer.close
     root
   }
-  
-  def save(file:File): Node = {
+
+  def save(file: File): Node = {
     val root = toXml
     val formatted = new StringBuilder
     new PrettyPrinter(120, 2).format(root, formatted)
@@ -51,75 +51,89 @@ case class Page(words:List[Word], id: String) {
     writer.close
     root
   }
-  
+
 }
 
 object Page {
-  
+  import com.novocode.squery.session._
+  import Tables._
+  import com.novocode.squery.combinator.basic.BasicDriver.Implicit._
+  import com.novocode.squery.session.Database.threadLocalSession
+  def fromDb(t: (String, java.sql.Blob), db: Database): Page = {
+    val pageId = t._1
+    db withSession {
+      val words = for (
+        word <- Words;
+        if word.pageId === pageId
+      ) yield word
+      println(words.list())
+      val wordList = scala.collection.mutable.ListBuffer[Word]()
+      for(w <- words) wordList += Word(w._3, Box(w._4, w._5, w._6, w._7))
+      Page(wordList.toList, t._1)
+    }
+  }
+
   val ParagraphMarker = "@"
 
-  def fromXml(page:Node, id: String): Page = Page( 
-    for(word <- (page \ "word").toList) yield Word.fromXml(word), id
-  )
-  
-  def fromPdf(pdf:String): Page = { PdfToPage.convert(pdf) }
-  
-  def load(file:java.io.File): Page = {
-      val page:Node = XML.loadFile(file)
-      Page.fromXml(page, file.getName)
+  def fromXml(page: Node, id: String): Page = Page(for (word <- (page \ "word").toList) yield Word.fromXml(word), id
+    )
+
+  def fromPdf(pdf: String): Page = { PdfToPage.convert(pdf) }
+
+  def load(file: java.io.File): Page = {
+    val page: Node = XML.loadFile(file)
+    Page.fromXml(page, file.getName)
   }
-  
-  def load(stream:java.io.InputStream, id: String): Page = {
-      val page:Node = XML.load(stream)
-      Page.fromXml(page, id)
+
+  def load(stream: java.io.InputStream, id: String): Page = {
+    val page: Node = XML.load(stream)
+    Page.fromXml(page, id)
   }
-  
+
   def load(id: String, zip: ZipFile, xml: ZipEntry, image: ZipEntry): Page = {
-      val page:Node = XML.load(zip.getInputStream(xml))
-      val result = Page.fromXml(page, id)
-      result.image = Some(image)
-      result.zip = Some(zip)
-      result
+    val page: Node = XML.load(zip.getInputStream(xml))
+    val result = Page.fromXml(page, id)
+    result.image = Some(image)
+    result.zip = Some(zip)
+    result
   }
 
   /**
    * This models what we get from the OCR: the original word forms as recognized by the OCR,
    * together with their coordinates in the scan result (originally a PDF with absolute values).
-   */  
+   */
   private val map = Map(
-      "daniel" -> Box(130, 283, 150, 30),
-      "bonifaci" -> Box(280, 285, 180, 30),
-      "catechismus" -> Box(70, 330, 80, 20),
-      "als" -> Box(110, 390, 30, 20),
-      "slaunt" -> Box(78, 498, 45, 15)
-  )
-  
+    "daniel" -> Box(130, 283, 150, 30),
+    "bonifaci" -> Box(280, 285, 180, 30),
+    "catechismus" -> Box(70, 330, 80, 20),
+    "als" -> Box(110, 390, 30, 20),
+    "slaunt" -> Box(78, 498, 45, 15)
+    )
+
   /**
    * This models the other part we get from the OCR: the full text, which we need to tokenize and
    * convert into Word objects to be displayed and edited in the UI.
    */
-  val mock: Page = 
-    Page(
-      for( w <- "Daniel Bonifaci Catechismus Als Slaunt".split(" ").toList ) 
-        yield Word(w, map(w.toLowerCase)), "mock"
-    )
-    
+  val mock: Page =
+    Page(for (w <- "Daniel Bonifaci Catechismus Als Slaunt".split(" ").toList) yield Word(w, map(w.toLowerCase)), "mock"
+      )
+
   /** 
    * @param lists The lists of pages to merge (each independently edited, e.g. by different users)
    * @return A single list of pages containing the merged content 
    */
-  def merge(lists:List[Page]*):Seq[Page] = {
-    for(p1 <- lists.head; list2 <- lists.tail; p2 <- list2; if p1.id == p2.id)
+  def merge(lists: List[Page]*): Seq[Page] = {
+    for (p1 <- lists.head; list2 <- lists.tail; p2 <- list2; if p1.id == p2.id)
       mergePages(p1, p2)
     lists.head
   }
-  
-  private def mergePages(p1:Page, p2:Page):Page = {
-    for(w1 <- p1.words; w2 <- p2.words; m <- w2.history.reverse; if(!w1.history.contains(m)))
+
+  private def mergePages(p1: Page, p2: Page): Page = {
+    for (w1 <- p1.words; w2 <- p2.words; m <- w2.history.reverse; if (!w1.history.contains(m)))
       w1.history.push(m)
     p1
   }
-  
+
 }
 
 /** 
@@ -128,27 +142,27 @@ object Page {
  *  @author Fabian Steeg (fsteeg) 
  */
 private object PdfToPage {
-   
+
   import java.net.URL
   import de.uni_koeln.ub.drc.reader._
   import scala.collection.JavaConversions._
   import scala.collection.mutable.Buffer
   import java.io.File
-    
-  def convert(pdfLocation : String) : Page = {
+
+  def convert(pdfLocation: String): Page = {
     val words: Buffer[Word] = Buffer()
-    val paragraphs : Buffer[Paragraph] = PdfContentExtractor.extractContentFromPdf(pdfLocation).getParagraphs
+    val paragraphs: Buffer[Paragraph] = PdfContentExtractor.extractContentFromPdf(pdfLocation).getParagraphs
     val pageHeight = 1440 // IMG_SIZE
     val pageWidth = 900 // IMG_SIZE
-    for(p <- paragraphs) {
-      for(word <- p.getWords) {
+    for (p <- paragraphs) {
+      for (word <- p.getWords) {
         var startPos = word.getStartPointScaled(pageWidth, pageHeight)
         var endPos = word.getEndPointScaled(pageWidth, pageHeight)
         val scaled = word.getFontSizeScaled(pageHeight)
-        val wordWidth = endPos.getX - startPos.getX//width(word.getText, scaled) 
+        val wordWidth = endPos.getX - startPos.getX //width(word.getText, scaled) 
         words add Word(word.getText, Box(startPos.getX.toInt, startPos.getY.toInt - scaled, wordWidth.toInt, scaled))
       }
-      words add Word(Page.ParagraphMarker, Box(0,0,0,0))
+      words add Word(Page.ParagraphMarker, Box(0, 0, 0, 0))
     }
     Page(words.toList, new java.io.File(pdfLocation).getName().replace("pdf", "xml"))
   }

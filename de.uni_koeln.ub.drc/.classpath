@@ -15,5 +15,7 @@
 	<classpathentry kind="lib" path="lib/jempbox-1.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/pdfbox-1.2.0.jar" sourcepath="lib/pdfbox-1.2.0-src.zip"/>
 	<classpathentry kind="lib" path="lib/scalatest-1.2-for-scala-2.8.0.final-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/scala-query_2.8.0-1.0.0-SNAPSHOT.jar" sourcepath="lib/scala-query_2.8.0-1.0.0-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="lib/h2-1.2.140.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

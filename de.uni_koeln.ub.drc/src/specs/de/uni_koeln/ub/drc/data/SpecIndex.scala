@@ -36,6 +36,14 @@ class SpecIndex extends Spec with ShouldMatchers {
         it("provides a factory method") {
             expect(Index(pages)) { new Index(pages) }
         }
+        it("provides access to DB persistence of pages") {
+          //Index.initDb
+          expect(pages) { 
+            //Index.store(pages); 
+            Index.retrieve 
+          }
+        }
     }
+    
     
 }
