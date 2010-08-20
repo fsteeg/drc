@@ -100,10 +100,15 @@ object Index {
         val files = new File(location).list
         for(file <- files.toList if file.endsWith("pdf") ) {
             val xml = new File(location, file.replace("pdf", "xml").replace(" ", ""))
+            val img = new File(xml.getParent, xml.getName.replace(".xml", ".jpg"))
             // TODO use separate test data (overwriting here)
             val page = Page.fromPdf(new File(location, file).getAbsolutePath)
             page.save(xml)
-            println("Imported " + file)
+            import Db._
+            Db.put(xml, DataType.XML)
+            Db.put(img, DataType.IMG)
+            println("Imported xml: " + xml)
+            println("Imported img: " + img)
         }
     }
     
