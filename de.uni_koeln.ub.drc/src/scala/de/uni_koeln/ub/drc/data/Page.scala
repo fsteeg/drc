@@ -7,6 +7,8 @@
  *************************************************************************************************/
 
 package de.uni_koeln.ub.drc.data
+
+import Db._
 import scala.xml._
 import java.io._
 import java.util.zip._
@@ -22,6 +24,7 @@ case class Page(words:List[Word], id: String) {
   
   var image: Option[ZipEntry] = None
   var zip: Option[ZipFile] = None
+  var imageBytes: Option[Array[Byte]] = None // TODO unify, e.g. InputStream for ZIP and DB
   
   def toXml = <page> { words.toList.map(_.toXml) } </page>
   
@@ -32,13 +35,31 @@ case class Page(words:List[Word], id: String) {
     println("Attempting to save to: " + id)
     val file = new de.schlichtherle.io.File(id)
     val root = toXml
-    val formatted = new StringBuilder
-    new PrettyPrinter(120, 2).format(root, formatted)
+    val formatted = format(root)
     // XML.saveFull("out.xml", root, "UTF-8", true, null) // FIXME hangs
     val writer = new OutputStreamWriter(new de.schlichtherle.io.FileOutputStream(file), "UTF-8");
     writer.write(formatted.toString)
     // println("Wrote: " + formatted.toString)
     writer.close
+    root
+  }
+  
+  def format(root:Node) = {
+    val formatted = new StringBuilder
+    new PrettyPrinter(120, 2).format(root, formatted)
+    formatted
+  }
+  
+  def saveToDb(): Node = {
+    val file = id.split("/").last
+    val collection = file.split("-")(0)
+    val entry = file
+    val dbXml:String = Db.get(collection, entry)(0).asInstanceOf[String]
+    val dbEntry = Page.load(dbXml, entry)
+    val mergedPage = Page.mergePages(dbEntry, this)
+    val root = mergedPage.toXml
+    val formatted = format(root)
+    Db.put(formatted, collection, entry, DataType.XML)
     root
   }
   
@@ -71,6 +92,11 @@ object Page {
   
   def load(stream:java.io.InputStream, id: String): Page = {
       val page:Node = XML.load(stream)
+      Page.fromXml(page, id)
+  }
+  
+  def load(xml:String, id: String): Page = {
+      val page:Node = XML.loadString(xml)
       Page.fromXml(page, id)
   }
   
@@ -115,8 +141,11 @@ object Page {
   }
   
   private def mergePages(p1:Page, p2:Page):Page = {
-    for(w1 <- p1.words; w2 <- p2.words; m <- w2.history.reverse; if(!w1.history.contains(m)))
+    for(
+        w1 <- p1.words; w2 <- p2.words; m <- w2.history.reverse; // TODO ID for words?
+        if(w1.original==w2.original && w1.position == w2.position && (!w1.history.contains(m)))){
       w1.history.push(m)
+    }
     p1
   }
   

@@ -41,6 +41,7 @@ import org.eclipse.swt.widgets.Text;
 
 import scala.collection.JavaConversions;
 import scala.collection.immutable.List;
+import de.uni_koeln.ub.drc.data.Db;
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.SearchOption;
@@ -149,8 +150,8 @@ public final class SearchView {
     private Index index;
 
     private SearchViewModelProvider() {
-      index = new Index(Index.loadPagesFromFolder(DrcUiActivator.instance().fileFromBundle("pages")
-          .getAbsolutePath()));
+      List<Page> pages = Index.loadPagesFromDb("PPN345572629_0004"); // Index.loadPagesFromFolder(DrcUiActivator.instance().fileFromBundle("pages").getAbsolutePath());
+      index = new Index(pages);
     }
 
     public Page[] getPages(final String term) {

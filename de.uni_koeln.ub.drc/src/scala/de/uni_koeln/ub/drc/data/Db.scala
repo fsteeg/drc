@@ -51,9 +51,9 @@ object Db {
     val collection = DatabaseManager.getCollection(Uri + Root + Drc + name)
     collection.setProperty(OutputKeys.INDENT, "no")
     if(ids.size==0) List() ++ collection.listResources // all ids
-    else (for(id <- ids) yield collection.getResource(name + "-" + id).getContent).toList
+    else (for(id <- ids) yield collection.getResource(id).getContent).toList
   }
-
+  
   def createCollection(name: String): Collection = {
     DatabaseManager.getCollection(Uri + Root)
       .getService(classOf[CollectionManagementService].getSimpleName, "1.0")

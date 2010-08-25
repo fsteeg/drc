@@ -136,6 +136,6 @@ public final class EditView {
 
   private void saveToXml(final Page page) {
     System.out.println("Saving page: " + page);
-    page.save();
+    page.saveToDb();
   }
 }

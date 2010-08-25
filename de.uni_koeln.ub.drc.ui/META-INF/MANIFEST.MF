@@ -35,6 +35,13 @@ Bundle-ClassPath: lib/scala-dbc-src.jar,
  lib/drc-java.jar,
  lib/drc-scala.jar,
  lib/truezip-6.jar,
+ lib/ws-commons-util-1.0.2.jar,
+ lib/xercesImpl.jar,
+ lib/xmldb.jar,
+ lib/xmlrpc-client-3.1.2.jar,
+ lib/xmlrpc-common-3.1.2.jar,
+ lib/exist.jar,
+ lib/log4j-1.2.15.jar,
  .
 Bundle-Activator: de.uni_koeln.ub.drc.ui.DrcUiActivator
 Bundle-ActivationPolicy: lazy

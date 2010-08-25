@@ -7,11 +7,11 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.views;
 
-import java.io.File;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.util.List;
-import java.util.zip.ZipFile;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -32,6 +32,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import de.uni_koeln.ub.drc.data.Box;
+import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.Word;
 
@@ -101,8 +102,8 @@ public final class CheckView {
   private Image loadImage(final Page page) throws IOException {
     Display display = parent.getDisplay();
     Image newImage = null;
-    newImage = new Image(display,
-        new ZipFile(new File(page.zip().get().getName())).getInputStream(page.image().get()));
+    InputStream in = new ByteArrayInputStream(Index.loadImageFor(page)); // TODO image as lazy def in page, fetched on demand?
+    newImage = new Image(display, in); //new ZipFile(new File(page.zip().get().getName())).getInputStream(page.image().get()));
     return newImage;
   }
 

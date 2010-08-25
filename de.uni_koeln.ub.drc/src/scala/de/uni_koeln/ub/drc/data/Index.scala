@@ -92,6 +92,20 @@ object Index {
         buffer.sortBy(_.id).toList
     }
     
+    def loadPagesFromDb(collection:String): List[Page] = {
+      val ids = Db.get(collection)
+      for(id <- ids; if id.toString.endsWith(".xml"))
+        yield {
+        val pageXml:String = Db.get(collection, id.asInstanceOf[String])(0).asInstanceOf[String]
+        Page.load(pageXml, id.asInstanceOf[String])
+      }
+    }
+    
+    def loadImageFor(page:Page): Array[Byte] = {
+      val file = page.id.split("/").last // TODO centralize, use extractor?
+      Db.get(file.split("-")(0), file.replace(".xml", ".jpg"))(0).asInstanceOf[Array[Byte]]
+    }
+    
     /** 
      * Import page PDF files to XML.
      * @param location The directory containing PDF files to be imported into the page XML format 
