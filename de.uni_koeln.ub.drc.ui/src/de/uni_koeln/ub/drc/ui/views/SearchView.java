@@ -150,7 +150,7 @@ public final class SearchView {
     private Index index;
 
     private SearchViewModelProvider() {
-      List<Page> pages = Index.loadPagesFromDb("PPN345572629_0004"); // Index.loadPagesFromFolder(DrcUiActivator.instance().fileFromBundle("pages").getAbsolutePath());
+      List<Page> pages = Index.loadPagesFromDb("PPN345572629_0004");
       index = new Index(pages);
     }
 

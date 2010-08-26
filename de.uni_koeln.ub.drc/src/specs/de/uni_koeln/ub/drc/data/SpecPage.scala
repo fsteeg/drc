@@ -49,20 +49,19 @@ class SpecPage extends Spec with ShouldMatchers {
         }
     }
     
-    it("can save a page of words to disk") {
-      Page.mock.save(file)
+    it("can save a page of words to the DB") {
+      Page.mock.saveToDb()
       expect(true) {file.exists}
     }
     
     it("will save all embedded objects") {
-      val temp = java.io.File.createTempFile("testing", "scala")
-      println(temp)
       expect(1) {
-          page.words(0).history.top.upvote("me"); page.save(temp)
-          Page.load(temp).words(0).history.top.score
+          page.words(0).history.top.upvote("me")
+          page.saveToDb()
+          Page.load(page.toXml.toString, page.id).words(0).history.top.score
       }
       expect(1) {
-          Page.load(temp).words(0).history.size
+          Page.load(page.toXml.toString, page.id).words(0).history.size
       }
     }
     
@@ -73,7 +72,7 @@ class SpecPage extends Spec with ShouldMatchers {
     it("should provide usable test data") { expect(5) { Page.mock.words.size } }
   
     it("can load a page of words from disk") {
-      val words: List[Word] = Page.load(file).words
+      val words: List[Word] = Page.load(Page.mock.toXml.toString, page.id).words
       expect(Page.mock.words.size) { words.size }
       expect(Page.mock.words.toList) { words.toList }
     }
@@ -89,18 +88,16 @@ class SpecPage extends Spec with ShouldMatchers {
       word.history push newMod
       expect(true) { word.history.contains(newMod) }
       expect(2) { word.history.size }
-      page.save(file)
-      val loadedWord = Page.load(file).words(0)
+      page.saveToDb()
+      val loadedWord = Page.load(page.toXml.toString, page.id).words(0)
       val loadedMod = loadedWord.history.top
       expect(2) { loadedWord.history.size }
       expect(newMod) { loadedMod }
     }
     
-    it("should be desializable both from a file and an input stream") {
-        val loadedFromFile = Page.load(file).words(0)
-        expect(2) { loadedFromFile.history.size }
-        val loadedFromStream = Page.load(file.toURI.toURL.openStream, file.getName()).words(0)
-        expect(2) { loadedFromFile.history.size }
+    it("should be desializable from an XML string") {
+        val loadedFromXml = Page.load(page.toXml.toString, page.id).words(0)
+        expect(page.words(0).history.size) { loadedFromXml.history.size }
     }
     
     it("can merge multiple lists of pages into a single list of pages") {
@@ -147,7 +144,7 @@ class SpecPage extends Spec with ShouldMatchers {
     it("provides initial import of a scanned PDF") {
           val page : Page = Page.fromPdf("res/rom/PPN345572629_0004/PPN345572629_0004-0001.pdf")
           val file = new java.io.File("res/rom/PPN345572629_0004/PPN345572629_0004-0001.xml")
-          val root = page.save(file)
+          val root = page.saveToDb()
           val uri = file.toURI.toURL.toURI
           expect(true) {root.size > 0}
           expect(true) {file.exists}

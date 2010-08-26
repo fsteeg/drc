@@ -67,31 +67,6 @@ object Index {
           Index.getClass.getResourceAsStream("words.txt"))("ISO-8859-1").getLines()).map(
               _.replaceAll("\\s[IVX]+", "").trim.toLowerCase)
     
-    /** 
-     * Load serialized XML pages from a directory.
-     * @param location The directory containing the page XML files to load 
-     */
-    def loadPagesFromFolder(location: String): List[Page] = {
-        val files = new File(location).list
-        val buffer = new ListBuffer[Page]
-        for(file <- files.toList if file.endsWith("zip")) {
-          val zip = new ZipFile(new File(location, file), ZipFile.OPEN_READ)
-          val entries = zip.entries
-          while(entries.hasMoreElements) {
-            val entry = entries.nextElement
-            if(entry.getName.endsWith(".xml") && entry.getName.contains("-")) {
-              val xmlStream = zip.getInputStream(entry)
-              val imageEntry:ZipEntry = zip.getEntry(entry.getName.replace("xml", "jpg"))
-              buffer += Page.load(location + File.separator + file + File.separator + entry.getName, 
-                  zip, entry, imageEntry)
-              xmlStream.close()
-            }
-          }
-          zip.close()
-        }
-        buffer.sortBy(_.id).toList
-    }
-    
     def loadPagesFromDb(collection:String): List[Page] = {
       val ids = Db.get(collection)
       for(id <- ids; if id.toString.endsWith(".xml"))
@@ -117,7 +92,6 @@ object Index {
             val img = new File(xml.getParent, xml.getName.replace(".xml", ".jpg"))
             // TODO use separate test data (overwriting here)
             val page = Page.fromPdf(new File(location, file).getAbsolutePath)
-            page.save(xml)
             import Db._
             Db.put(xml, DataType.XML)
             Db.put(img, DataType.IMG)

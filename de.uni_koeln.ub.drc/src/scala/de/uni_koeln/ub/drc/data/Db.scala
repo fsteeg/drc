@@ -21,8 +21,10 @@ import java.io.File
  * @author Fabian Steeg (fsteeg)
  */
 object Db {
-
-  private val Uri = "xmldb:exist://localhost:8080/exist/xmlrpc"
+  /* Requires an eXist DB running locally (http://exist.sourceforge.net/).
+   * Configure in 'tools/jetty/etc/jetty.xml' to run on port '8888'.
+   * Start with 'bin/startup.sh', fill with ant import (in the root of this project). */
+  private val Uri = "xmldb:exist://localhost:8888/exist/xmlrpc"
   private val Root = "/db/"
   private val Drc = "drc/"
   DatabaseManager.registerDatabase(new DatabaseImpl())
@@ -49,6 +51,7 @@ object Db {
 
   def get(name: String, ids:String*): List[Object] = {
     val collection = DatabaseManager.getCollection(Uri + Root + Drc + name)
+    if(collection==null) return null
     collection.setProperty(OutputKeys.INDENT, "no")
     if(ids.size==0) List() ++ collection.listResources // all ids
     else (for(id <- ids) yield collection.getResource(id).getContent).toList

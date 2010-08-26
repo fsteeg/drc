@@ -22,27 +22,12 @@ import de.uni_koeln.ub.drc.reader.Point
  */
 case class Page(words:List[Word], id: String) {
   
-  var image: Option[ZipEntry] = None
-  var zip: Option[ZipFile] = None
-  var imageBytes: Option[Array[Byte]] = None // TODO unify, e.g. InputStream for ZIP and DB
+  var imageBytes: Option[Array[Byte]] = None
   
   def toXml = <page> { words.toList.map(_.toXml) } </page>
   
   def toText(delim: String) = 
     ("" /: words) (_ + " " + _.history.top.form.replace(Page.ParagraphMarker, delim)) 
-  
-  def save(): Node = {
-    println("Attempting to save to: " + id)
-    val file = new de.schlichtherle.io.File(id)
-    val root = toXml
-    val formatted = format(root)
-    // XML.saveFull("out.xml", root, "UTF-8", true, null) // FIXME hangs
-    val writer = new OutputStreamWriter(new de.schlichtherle.io.FileOutputStream(file), "UTF-8");
-    writer.write(formatted.toString)
-    // println("Wrote: " + formatted.toString)
-    writer.close
-    root
-  }
   
   def format(root:Node) = {
     val formatted = new StringBuilder
@@ -54,24 +39,20 @@ case class Page(words:List[Word], id: String) {
     val file = id.split("/").last
     val collection = file.split("-")(0)
     val entry = file
-    val dbXml:String = Db.get(collection, entry)(0).asInstanceOf[String]
-    val dbEntry = Page.load(dbXml, entry)
-    val mergedPage = Page.mergePages(dbEntry, this)
+    val dbRes = Db.get(collection, entry)
+    val mergedPage = mergedDbVersion(dbRes, entry)
     val root = mergedPage.toXml
     val formatted = format(root)
     Db.put(formatted, collection, entry, DataType.XML)
     root
   }
   
-  def save(file:File): Node = {
-    val root = toXml
-    val formatted = new StringBuilder
-    new PrettyPrinter(120, 2).format(root, formatted)
-    val writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
-    writer.write(formatted.toString)
-    writer.close
-    root
-  }
+  def mergedDbVersion(dbRes:List[Object], entry:String) =
+    if(dbRes==null) this else  {
+      val dbXml:String = dbRes(0).asInstanceOf[String]
+      val dbEntry = Page.load(dbXml, entry)
+      Page.mergePages(dbEntry, this)
+    }
   
 }
 
@@ -85,27 +66,9 @@ object Page {
   
   def fromPdf(pdf:String): Page = { PdfToPage.convert(pdf) }
   
-  def load(file:java.io.File): Page = {
-      val page:Node = XML.loadFile(file)
-      Page.fromXml(page, file.getName)
-  }
-  
-  def load(stream:java.io.InputStream, id: String): Page = {
-      val page:Node = XML.load(stream)
-      Page.fromXml(page, id)
-  }
-  
   def load(xml:String, id: String): Page = {
       val page:Node = XML.loadString(xml)
       Page.fromXml(page, id)
-  }
-  
-  def load(id: String, zip: ZipFile, xml: ZipEntry, image: ZipEntry): Page = {
-      val page:Node = XML.load(zip.getInputStream(xml))
-      val result = Page.fromXml(page, id)
-      result.image = Some(image)
-      result.zip = Some(zip)
-      result
   }
 
   /**
@@ -127,7 +90,7 @@ object Page {
   val mock: Page = 
     Page(
       for( w <- "Daniel Bonifaci Catechismus Als Slaunt".split(" ").toList ) 
-        yield Word(w, map(w.toLowerCase)), "mock"
+        yield Word(w, map(w.toLowerCase)), "testing-mock"
     )
     
   /** 
