@@ -87,7 +87,12 @@ public final class SimpleLoginModule implements LoginModule {
     String pass = passCallback.getPassword() != null ? new String(passCallback.getPassword()) : "";
     if (validLogin(name, pass)) {
       loggedIn = true;
-      currentUser = User.withId(name, DrcUiActivator.instance().usersFolder()); 
+      try {
+        String folder = DrcUiActivator.instance().usersFolder();
+        currentUser = User.withId(name, folder);
+      } catch (Throwable x) {
+        x.printStackTrace();
+      }
       System.out.println("Logged in: " + currentUser);
     }
     return loggedIn;
