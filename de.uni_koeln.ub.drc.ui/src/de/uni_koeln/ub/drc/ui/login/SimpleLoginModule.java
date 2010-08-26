@@ -9,9 +9,7 @@
 package de.uni_koeln.ub.drc.ui.login;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.security.auth.Subject;
 import javax.security.auth.callback.Callback;
@@ -22,11 +20,7 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
 
-import org.eclipse.swt.SWT;
-
 import de.uni_koeln.ub.drc.data.User;
-import de.uni_koeln.ub.drc.ui.DrcUiActivator;
-import de.uni_koeln.ub.drc.ui.views.EditComposite;
 
 /**
  * Simple login module implementation using credentials from a properties file.
@@ -34,12 +28,10 @@ import de.uni_koeln.ub.drc.ui.views.EditComposite;
  */
 public final class SimpleLoginModule implements LoginModule {
 
-  private static final String ACCOUNTS = "accounts.properties";
   private CallbackHandler callbackHandler;
   private boolean loggedIn;
   private Subject subject;
   private User currentUser;
-  private Properties users;
 
   /**
    * {@inheritDoc}
@@ -53,13 +45,6 @@ public final class SimpleLoginModule implements LoginModule {
       final Map sharedState, final Map options) {
     this.subject = subject;
     this.callbackHandler = callbackHandler;
-    URL accountPropertiesUrl = DrcUiActivator.instance().getBundle().getEntry(ACCOUNTS);
-    users = new Properties();
-    try {
-      users.load(accountPropertiesUrl.openStream());
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
 
   /**
@@ -85,21 +70,22 @@ public final class SimpleLoginModule implements LoginModule {
   private boolean authenticate(final NameCallback userCallback, final PasswordCallback passCallback) {
     String name = userCallback.getName();
     String pass = passCallback.getPassword() != null ? new String(passCallback.getPassword()) : "";
-    if (validLogin(name, pass)) {
+    User candidate = null;
+    try {
+      candidate = User.withId(name);
+    } catch (Throwable x) {
+      x.printStackTrace();
+    }
+    if (validLogin(candidate, pass)) {
+      currentUser = candidate;
       loggedIn = true;
-      try {
-        String folder = DrcUiActivator.instance().usersFolder();
-        currentUser = User.withId(name, folder);
-      } catch (Throwable x) {
-        x.printStackTrace();
-      }
       System.out.println("Logged in: " + currentUser);
     }
     return loggedIn;
   }
 
-  private boolean validLogin(final String name, final String pass) {
-    return users.getProperty(name).trim().equals(pass);
+  private boolean validLogin(User candidate, final String pass) {
+    return candidate.pass().equals(pass);
   }
 
   /**

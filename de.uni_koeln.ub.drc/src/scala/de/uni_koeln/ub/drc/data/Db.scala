@@ -7,6 +7,8 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.data
 
+import scala.xml.Elem
+import scala.xml.XML
 import javax.xml.transform.OutputKeys
 import org.exist.xmldb.EXistResource
 import org.xmldb.api.modules.BinaryResource
@@ -48,13 +50,27 @@ object Db {
     resource.setContent(content)
     collection.storeResource(resource)
   }
-
-  def get(name: String, ids:String*): List[Object] = {
+  
+  def collection(name:String):Option[Collection] = {
     val collection = DatabaseManager.getCollection(Uri + Root + Drc + name)
-    if(collection==null) return null
-    collection.setProperty(OutputKeys.INDENT, "no")
-    if(ids.size==0) List() ++ collection.listResources // all ids
-    else (for(id <- ids) yield collection.getResource(id).getContent).toList
+    if(collection==null) None else Some(collection)
+  }
+
+  def xml(name: String, ids:String*): Option[List[Elem]] = collection(name) match {
+    case None => None
+    case Some(coll) => Some((for(id <- ids) 
+      yield XML.loadString(coll.getResource(id).getContent.asInstanceOf[String])).toList)
+  }
+  
+  def img(name: String, ids:String*): Option[List[Array[Byte]]] = collection(name) match {
+     case None => None
+     case Some(coll) => Some((for(id <- ids) 
+       yield coll.getResource(id).getContent.asInstanceOf[Array[Byte]]).toList)
+  }
+  
+  def ids(name: String): Option[List[String]] = collection(name) match {
+    case None => None
+    case Some(coll) => Some(List() ++ coll.listResources) // all ids
   }
   
   def createCollection(name: String): Collection = {

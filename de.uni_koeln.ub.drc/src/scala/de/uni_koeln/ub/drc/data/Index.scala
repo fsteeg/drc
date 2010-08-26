@@ -58,6 +58,7 @@ object SearchOption extends Enumeration {
 
 object Import extends Application {
     Index.initialImport("res/rom/PPN345572629_0004")
+    User.initialImport("users");
 }
 
 object Index {
@@ -68,17 +69,17 @@ object Index {
               _.replaceAll("\\s[IVX]+", "").trim.toLowerCase)
     
     def loadPagesFromDb(collection:String): List[Page] = {
-      val ids = Db.get(collection)
-      for(id <- ids; if id.toString.endsWith(".xml"))
-        yield {
-        val pageXml:String = Db.get(collection, id.asInstanceOf[String])(0).asInstanceOf[String]
-        Page.load(pageXml, id.asInstanceOf[String])
+      val ids = Db.ids(collection)
+      ids match {
+        case Some(list) => for(id <- list; if id.endsWith(".xml"))
+          yield Page.fromXml(Db.xml(collection, id).get(0), id)
+        case None => throw new IllegalArgumentException("Invalid collection: " + collection)
       }
     }
     
     def loadImageFor(page:Page): Array[Byte] = {
       val file = page.id.split("/").last // TODO centralize, use extractor?
-      Db.get(file.split("-")(0), file.replace(".xml", ".jpg"))(0).asInstanceOf[Array[Byte]]
+      Db.img(file.split("-")(0), file.replace(".xml", ".jpg")).get(0)
     }
     
     /** 

@@ -58,10 +58,10 @@ class SpecPage extends Spec with ShouldMatchers {
       expect(1) {
           page.words(0).history.top.upvote("me")
           page.saveToDb()
-          Page.load(page.toXml.toString, page.id).words(0).history.top.score
+          Page.fromXml(page.toXml, page.id).words(0).history.top.score
       }
       expect(1) {
-          Page.load(page.toXml.toString, page.id).words(0).history.size
+          Page.fromXml(page.toXml, page.id).words(0).history.size
       }
     }
     
@@ -71,8 +71,8 @@ class SpecPage extends Spec with ShouldMatchers {
   
     it("should provide usable test data") { expect(5) { Page.mock.words.size } }
   
-    it("can load a page of words from disk") {
-      val words: List[Word] = Page.load(Page.mock.toXml.toString, page.id).words
+    it("can load a page of words from XML") {
+      val words: List[Word] = Page.fromXml(Page.mock.toXml, page.id).words
       expect(Page.mock.words.size) { words.size }
       expect(Page.mock.words.toList) { words.toList }
     }
@@ -89,14 +89,14 @@ class SpecPage extends Spec with ShouldMatchers {
       expect(true) { word.history.contains(newMod) }
       expect(2) { word.history.size }
       page.saveToDb()
-      val loadedWord = Page.load(page.toXml.toString, page.id).words(0)
+      val loadedWord = Page.fromXml(page.toXml, page.id).words(0)
       val loadedMod = loadedWord.history.top
       expect(2) { loadedWord.history.size }
       expect(newMod) { loadedMod }
     }
     
     it("should be desializable from an XML string") {
-        val loadedFromXml = Page.load(page.toXml.toString, page.id).words(0)
+        val loadedFromXml = Page.fromXml(page.toXml, page.id).words(0)
         expect(page.words(0).history.size) { loadedFromXml.history.size }
     }
     

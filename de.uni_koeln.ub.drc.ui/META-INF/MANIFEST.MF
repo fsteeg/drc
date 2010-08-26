@@ -27,7 +27,8 @@ Require-Bundle: javax.inject;bundle-version="1.0.0",
  org.eclipse.e4.ui.workbench.swt;bundle-version="0.9.1",
  de.uni_koeln.ub.drc;bundle-version="0.1.0"
 Bundle-Vendor: University of Cologne
-Bundle-ClassPath: lib/scala-dbc-src.jar,
+Bundle-ClassPath: lib/drc-scala.jar,
+ lib/scala-dbc-src.jar,
  lib/scala-dbc.jar,
  lib/scala-library-src.jar,
  lib/scala-library.jar,
@@ -40,7 +41,6 @@ Bundle-ClassPath: lib/scala-dbc-src.jar,
  lib/xmlrpc-common-3.1.2.jar,
  lib/exist.jar,
  lib/log4j-1.2.15.jar,
- lib/drc-scala.jar,
  .
 Bundle-Activator: de.uni_koeln.ub.drc.ui.DrcUiActivator
 Bundle-ActivationPolicy: lazy

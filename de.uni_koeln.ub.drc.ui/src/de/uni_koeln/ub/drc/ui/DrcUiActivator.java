@@ -45,10 +45,6 @@ public final class DrcUiActivator extends Plugin {
     login(context);
   }
 
-  public String usersFolder() {
-    return fileFromBundle("users").getAbsolutePath();
-  }
-
   public User currentUser() {
     User user = null;
     try {

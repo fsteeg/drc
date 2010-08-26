@@ -120,7 +120,7 @@ public final class EditView {
             User user = DrcUiActivator.instance().currentUser();
             history.push(new Modification(newText, user.id()));
             user.hasEdited();
-            user.save(DrcUiActivator.instance().usersFolder());
+            user.save();
           }
           monitor.worked(1);
         }

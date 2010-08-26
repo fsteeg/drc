@@ -17,7 +17,7 @@ import org.junit.runner.RunWith
  */
 @RunWith(classOf[JUnitRunner])
 class SpecUser extends Spec with ShouldMatchers {
-  val user = User("fsteeg", "Fabian Steeg", "Cologne, Germany")
+  val user = User("fsteeg", "Fabian Steeg", "Cologne, Germany", "")
   describe("A User") {
     it("has a unique user name") {
       expect("fsteeg") { user.id }
@@ -36,32 +36,32 @@ class SpecUser extends Spec with ShouldMatchers {
       expect(true) { val prev = user.reputation; user.wasDownvoted; user.reputation < prev }
     }
     it("can be persisted via XML"){
-      expect(<user name="Fabian Steeg" id="fsteeg" region="Cologne, Germany"/>) { user.toXml }
       expect(user) { User.fromXml(user.toXml) }
     }
     it("can be changed and persisted") {
       expect(true) { 
-        user.hasUpvoted; user.save("users"); User.withId(user.id, "users").reputation > 0
+        user.hasUpvoted; user.save(); User.withId(user.id).reputation > 0
       }
     }
   }
   describe("The User companion") {
+    it("allows import of users into the DB") {
+      User.initialImport("users")
+    }
     it("allows loading of a user from XML"){
       expect(user) { User.fromXml(user.toXml) }
     }
     it("allows access to individual saved user instances via user name"){
-      val fsteeg = User("fsteeg", "Fabian Steeg", "Cologne, Germany")
-      val claesn = User("claesn", "Claes Neuefeind", "Cologne, Germany")
-      val matana = User("matana", "Mihail Atanassov", "Cologne, Germany")
-      val rols = User("rols", "Jürgen Rolshoven", "Cologne, Germany")
-      val ocr = User("OCR", "OCR", "Russia")
-      val location = "users"
-      User.save(location, fsteeg, claesn, matana, rols)
-      expect(fsteeg) { User.withId("fsteeg", location) }
-      expect(claesn) { User.withId("claesn", location) }
-      expect(matana) { User.withId("matana", location) }
-      expect(rols) { User.withId("rols", location) }
-      expect(ocr) { User.withId("OCR", location) }
+      val fsteeg = User("fsteeg", "Fabian Steeg", "Cologne, Germany", "")
+      val claesn = User("claesn", "Claes Neuefeind", "Cologne, Germany", "")
+      val matana = User("matana", "Mihail Atanassov", "Cologne, Germany", "")
+      val rols = User("rols", "Jürgen Rolshoven", "Cologne, Germany", "")
+      val ocr = User("OCR", "OCR", "Russia", "")
+      expect(fsteeg) { User.withId("fsteeg") }
+      expect(claesn) { User.withId("claesn") }
+      expect(matana) { User.withId("matana") }
+      expect(rols) { User.withId("rols") }
+      expect(ocr) { User.withId("OCR") }
     }
   }
 }

@@ -263,12 +263,11 @@ public final class WordView {
   }
 
   private void vote(Modification modification, User voter, Vote vote) {
-    String usersFolder = DrcUiActivator.instance().usersFolder();
-    User author = User.withId(modification.author(), usersFolder);
+    User author = User.withId(modification.author());
     vote.update(modification, author, voter);
     page.saveToDb();
-    voter.save(usersFolder); // TODO save internally? requires internal association to location
-    author.save(usersFolder);
+    voter.save();
+    author.save();
   }
 
   private boolean currentUserMayVote(Modification modification) {

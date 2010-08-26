@@ -60,7 +60,7 @@ final class WordViewModel {
     @Override
     public String getColumnText(final Object element, final int columnIndex) {
       Modification modification = (Modification) element;
-      User user = User.withId(modification.author(), DrcUiActivator.instance().usersFolder());
+      User user = User.withId(modification.author());
       switch (columnIndex) {
       case 0:
         return modification.form();

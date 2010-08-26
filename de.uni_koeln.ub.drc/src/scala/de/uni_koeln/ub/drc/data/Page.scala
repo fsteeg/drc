@@ -39,7 +39,7 @@ case class Page(words:List[Word], id: String) {
     val file = id.split("/").last
     val collection = file.split("-")(0)
     val entry = file
-    val dbRes = Db.get(collection, entry)
+    val dbRes = Db.xml(collection, entry)
     val mergedPage = mergedDbVersion(dbRes, entry)
     val root = mergedPage.toXml
     val formatted = format(root)
@@ -47,12 +47,13 @@ case class Page(words:List[Word], id: String) {
     root
   }
   
-  def mergedDbVersion(dbRes:List[Object], entry:String) =
-    if(dbRes==null) this else  {
-      val dbXml:String = dbRes(0).asInstanceOf[String]
-      val dbEntry = Page.load(dbXml, entry)
+  def mergedDbVersion(dbRes:Option[List[Node]], entry:String) = dbRes match {
+    case None => this // no merging needed
+    case Some(res) => {
+      val dbEntry = Page.fromXml(res(0), entry)
       Page.mergePages(dbEntry, this)
     }
+  }
   
 }
 
@@ -66,11 +67,6 @@ object Page {
   
   def fromPdf(pdf:String): Page = { PdfToPage.convert(pdf) }
   
-  def load(xml:String, id: String): Page = {
-      val page:Node = XML.loadString(xml)
-      Page.fromXml(page, id)
-  }
-
   /**
    * This models what we get from the OCR: the original word forms as recognized by the OCR,
    * together with their coordinates in the scan result (originally a PDF with absolute values).
