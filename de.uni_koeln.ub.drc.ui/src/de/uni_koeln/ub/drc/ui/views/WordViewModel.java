@@ -65,8 +65,8 @@ final class WordViewModel {
       case 0:
         return modification.form();
       case 1:
-        return String.format("%s from %s (%s, %s)", user.name(), user.region(), user.id(),
-            user.reputation());
+        return user.name().equals("OCR") ? "--" : String.format("%s from %s (%s, %s)", user.name(),
+            user.region(), user.id(), user.reputation());
       case 2:
         return new Date(modification.date()).toString();
       case 3:
