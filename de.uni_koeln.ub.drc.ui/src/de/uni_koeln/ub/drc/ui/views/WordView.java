@@ -209,7 +209,11 @@ public final class WordView {
       button.addSelectionListener(new SelectionListener() {
         @Override
         public void widgetSelected(final SelectionEvent e) {
-          word.history().push(modification);
+          /* If we revert to a previous modification the currently most recent modification
+           * is voted down, and the modification that we are reverting to is voted up: */
+          User currentUser = DrcUiActivator.instance().currentUser();
+          vote(word.history().top(), currentUser, Vote.DOWN);
+          vote(modification, currentUser, Vote.UP);
           MessageDialog.openInformation(item.getParent().getShell(), "Reverted", "Reverted to: "
               + modification);
           text.setText(modification.form());

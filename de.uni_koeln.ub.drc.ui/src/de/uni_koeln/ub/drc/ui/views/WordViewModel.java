@@ -72,7 +72,7 @@ final class WordViewModel {
       case 3:
         return modification.score() + "";
       default:
-        return null; // TODO do we need modification.time()?
+        return null;
       }
     }
 
