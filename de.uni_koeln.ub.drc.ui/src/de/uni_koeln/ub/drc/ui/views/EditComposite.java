@@ -144,11 +144,14 @@ public final class EditComposite extends Composite {
     addModifyListener(text);
   }
 
+  private Text prev;
+  private int active = SWT.COLOR_DARK_GREEN;
+  
   private void addModifyListener(final Text text) {
     text.addModifyListener(new ModifyListener() {
       public void modifyText(final ModifyEvent e) {
         /* Reset any warning color during editing (we check when focus is lost, see below): */
-        text.setForeground(text.getDisplay().getSystemColor(SWT.COLOR_BLACK));
+        text.setForeground(text.getDisplay().getSystemColor(active));
         if (commitChanges) {
           dirtyable.setDirty(true);
         }
@@ -159,6 +162,7 @@ public final class EditComposite extends Composite {
   private void addFocusListener(final Text text) {
     text.addFocusListener(new FocusListener() {
       public void focusLost(final FocusEvent e) {
+        prev = text; // remember so we can clear only when new focus gained, not when lost
         context.modify(IServiceConstants.ACTIVE_SELECTION, null);
         checkWordValidity(text);
       }
@@ -177,8 +181,13 @@ public final class EditComposite extends Composite {
       }
 
       public void focusGained(final FocusEvent e) {
+        text.clearSelection(); // use only our persistent marking below
         context.modify(IServiceConstants.ACTIVE_SELECTION, text);
         text.setToolTipText(((Word) text.getData()).formattedHistory());
+        if (prev != null && !prev.isDisposed()) {
+          prev.setForeground(text.getDisplay().getSystemColor(SWT.COLOR_BLACK));
+        }
+        text.setForeground(text.getDisplay().getSystemColor(active));
       }
     });
   }
