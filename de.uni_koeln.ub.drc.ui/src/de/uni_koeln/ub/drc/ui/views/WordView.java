@@ -50,23 +50,12 @@ public final class WordView {
 
   private Word word;
   private TableViewer viewer;
-  private Text suggestions;
-  private Job job;
-  private Button check;
   private Page page;
   private Text text;
 
   @Inject
   public WordView(final Composite parent) {
     initTableViewer(parent);
-    Composite bottom = new Composite(parent, SWT.NONE);
-    GridLayout layout = new GridLayout(2, false);
-    bottom.setLayout(layout);
-    check = new Button(bottom, SWT.CHECK);
-    check.setToolTipText("Suggest corrections");
-    check.setSelection(true);
-    suggestions = new Text(bottom, SWT.NONE);
-    suggestions.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
     GridLayoutFactory.fillDefaults().generateLayout(parent);
   }
 
@@ -75,19 +64,6 @@ public final class WordView {
     if (text != null) {
       this.text = text;
       this.word = (Word) text.getData();
-    }
-    if (job != null) {
-      /* If a word is selected while we had a Job running for the previous word, cancel that: */
-      job.cancel();
-    }
-    if (text == null) {
-      suggestions.setText("No word selected");
-    } else if (!check.getSelection()) {
-      suggestions.setText("Edit suggestions disabled");
-    } else {
-      findEditSuggestions();
-      job.setPriority(Job.DECORATE);
-      job.schedule();
     }
     setTableInput();
   }
@@ -100,36 +76,6 @@ public final class WordView {
       System.out.println("Setting page: " + page);
       this.page = page;
     }
-  }
-
-  private void findEditSuggestions() {
-    suggestions.setText("Finding edit suggestions...");
-    job = new Job("Edit suggestions search job") {
-      protected IStatus run(final IProgressMonitor monitor) {
-        final boolean complete = word.prepSuggestions();
-        suggestions.getDisplay().asyncExec(new Runnable() {
-          @Override
-          public void run() {
-            if (!complete) {
-              suggestions.setText("Finding edit suggestions...");
-            } else {
-              final String s = "Suggestions for " + word.original() + ": "
-                  + word.suggestions().mkString(", ");
-              if (!suggestions.isDisposed()) {
-                suggestions.setText(s);
-              }
-            }
-          }
-        });
-        return Status.OK_STATUS;
-      }
-
-      @Override
-      protected void canceling() {
-        word.cancelled_$eq(true);
-        suggestions.setText("Finding edit suggestions...");
-      };
-    };
   }
 
   private void initTableViewer(final Composite parent) {
