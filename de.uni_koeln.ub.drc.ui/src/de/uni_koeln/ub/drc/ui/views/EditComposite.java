@@ -146,6 +146,7 @@ public final class EditComposite extends Composite {
 
   private Text prev;
   private int active = SWT.COLOR_DARK_GREEN;
+  private int dubious = SWT.COLOR_RED;
   
   private void addModifyListener(final Text text) {
     text.addModifyListener(new ModifyListener() {
@@ -172,11 +173,11 @@ public final class EditComposite extends Composite {
         Word word = (Word) text.getData();
         if (current.length() != word.original().length()
             || (current.contains(" ") && !word.original().contains(" "))) {
-          text.setForeground(text.getDisplay().getSystemColor(SWT.COLOR_RED));
-          MessageDialog.openWarning(text.getShell(), "Questionable Edit Operation",
+          if(!MessageDialog.openQuestion(text.getShell(), "Questionable Edit Operation",
               "Your recent edit operation changed a word in a dubious way (e.g. by adding a blank into "
-                  + "what should be a single word or by changing the length of a word) - it has "
-                  + "been marked red");
+                  + "what should be a single word or by changing the length of a word) - are you sure?")){
+            text.setForeground(text.getDisplay().getSystemColor(dubious));
+          }
         }
       }
 
@@ -184,7 +185,8 @@ public final class EditComposite extends Composite {
         text.clearSelection(); // use only our persistent marking below
         context.modify(IServiceConstants.ACTIVE_SELECTION, text);
         text.setToolTipText(((Word) text.getData()).formattedHistory());
-        if (prev != null && !prev.isDisposed()) {
+        if (prev != null && !prev.isDisposed()
+            && !prev.getForeground().equals(text.getDisplay().getSystemColor(dubious))) {
           prev.setForeground(text.getDisplay().getSystemColor(SWT.COLOR_BLACK));
         }
         text.setForeground(text.getDisplay().getSystemColor(active));
