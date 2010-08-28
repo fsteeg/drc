@@ -1,5 +1,17 @@
 Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy). CI is available on our "Hudson":http://hydra4.spinfo.uni-koeln.de:8080/job/DRC/ server.
 
+h1. Beta 1 - Milestone 4 (2010 August 28)
+
+h2. Overview
+
+Beta 1 milestone 4 (tag: b1-m4) replaces the initial prototypical persistence in zip files with an XML DB (eXist-db). This milestone includes all pages for the first volume, based on improved initial OCR. It supports merging of pages edited by different users and adds several UI improvements, like modification dates, page mapping and synchronized highlighting in the image and the edit area.
+
+!http://i35.tinypic.com/a4972h.png!
+
+h2. Dependencies and Setup
+
+Beta 1 milestone 4 requires Eclipse "4.0":http://download.eclipse.org/e4/downloads/drops/R-0.10-201007271415/index.html and "eXist-db":http://exist.sourceforge.net/ (install, change port from 8080 to 8888 in @tools/jetty/etc/jetty.xml@, run @bin/startup.sh@, "import":http://exist-db.org/backup.html#N103B1 our "DB backup":http://hydra4.spinfo.uni-koeln.de/existdb.zip); other requirements (e.g. Scala 2.8 final, PdfBox) are included in the @lib@ folder in the @de.uni_koeln.ub.drc@ bundle. See below for general instructions on building and running.
+
 h1. Beta 1 - Milestone 3 (2010 July 17)
 
 h2. Overview
