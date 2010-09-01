@@ -8,7 +8,7 @@
 
 package de.uni_koeln.ub.drc.data
 
-import Db._
+import XmlDb._
 import scala.xml._
 import java.io._
 import java.util.zip._
@@ -36,14 +36,15 @@ case class Page(words:List[Word], id: String) {
   }
   
   def saveToDb(): Node = {
+    val db = Index.Db
     val file = id.split("/").last
     val collection = file.split("-")(0)
     val entry = file
-    val dbRes = Db.xml(collection, entry)
+    val dbRes = db.getXml(collection, entry)
     val mergedPage = mergedDbVersion(dbRes, entry)
     val root = mergedPage.toXml
     val formatted = format(root)
-    Db.put(formatted, collection, entry, DataType.XML)
+    db.putXml(root, collection, entry)
     root
   }
   

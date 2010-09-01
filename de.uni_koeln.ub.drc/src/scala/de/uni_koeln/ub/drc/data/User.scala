@@ -28,12 +28,12 @@ case class User(id:String, name:String, region:String, pass:String) {
           upvoted={upvoted.toString} 
           downvotes={downvotes.toString} 
           downvoted={downvoted.toString}/>
-  def save() = Db.put(toXml, "users", id+".xml", Db.DataType.XML)
+  def save() = Index.Db.putXml(toXml, "users", id+".xml")
 }
 
 object User {
   def withId(id:String): User = {
-    val xml = Db.xml("users", id+".xml").get(0)
+    val xml = Index.Db.getXml("users", id+".xml").get(0)
     User.fromXml(xml)
   }
   def fromXml(xml:Node): User = {
@@ -46,6 +46,6 @@ object User {
       u
   }
   def initialImport(folder:String):Unit = {
-    for(user<-new File(folder).listFiles) Db.put(user, Db.DataType.XML)
+    for(user<-new File(folder).listFiles) Index.Db.put(user, XmlDb.Format.XML)
   }
 }

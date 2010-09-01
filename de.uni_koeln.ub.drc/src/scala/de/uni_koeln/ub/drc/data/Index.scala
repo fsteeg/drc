@@ -16,7 +16,6 @@ import scala.collection.mutable.ListBuffer
  *
  */
 class Index(val pages: List[Page]) {
-  
     /**
      * Search for pages containing a given term.
      * @param term The term to search for
@@ -62,24 +61,24 @@ object Import extends Application {
 }
 
 object Index {
-  
+    val Db = XmlDb("xmldb:exist://localhost:8888/exist/xmlrpc", "/db/", "drc/")
     lazy val lexicon: Set[String] =
       (Set() ++ scala.io.Source.fromInputStream(
           Index.getClass.getResourceAsStream("words.txt"))("ISO-8859-1").getLines()).map(
               _.replaceAll("\\s[IVX]+", "").trim.toLowerCase)
     
     def loadPagesFromDb(collection:String): List[Page] = {
-      val ids = Db.ids(collection)
+      val ids = Db.getIds(collection)
       ids match {
         case Some(list) => for(id <- list; if id.endsWith(".xml"))
-          yield Page.fromXml(Db.xml(collection, id).get(0), id)
+          yield Page.fromXml(Db.getXml(collection, id).get(0), id)
         case None => throw new IllegalArgumentException("Invalid collection: " + collection)
       }
     }
     
     def loadImageFor(page:Page): Array[Byte] = {
       val file = page.id.split("/").last // TODO centralize, use extractor?
-      Db.img(file.split("-")(0), file.replace(".xml", ".jpg")).get(0)
+      Db.getBin(file.split("-")(0), file.replace(".xml", ".jpg")).get(0)
     }
     
     /** 
@@ -93,9 +92,9 @@ object Index {
             val img = new File(xml.getParent, xml.getName.replace(".xml", ".jpg"))
             // TODO use separate test data (overwriting here)
             val page = Page.fromPdf(new File(location, file).getAbsolutePath)
-            import Db._
-            Db.put(xml, DataType.XML)
-            Db.put(img, DataType.IMG)
+            import XmlDb._
+            Db.put(xml, Format.XML)
+            Db.put(img, Format.BIN)
             println("Imported xml: " + xml)
             println("Imported img: " + img)
         }
