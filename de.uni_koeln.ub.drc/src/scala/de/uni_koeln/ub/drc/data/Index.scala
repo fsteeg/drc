@@ -6,6 +6,8 @@
  * Contributors: Fabian Steeg - initial API and implementation
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.data
+
+import scala.xml.XML
 import java.io.File
 import java.util.zip._
 import scala.collection.mutable.ListBuffer
@@ -92,6 +94,7 @@ object Index {
             val img = new File(xml.getParent, xml.getName.replace(".xml", ".jpg"))
             // TODO use separate test data (overwriting here)
             val page = Page.fromPdf(new File(location, file).getAbsolutePath)
+            XML.save(xml.getAbsolutePath, page.toXml, "UTF-8", false)
             import XmlDb._
             Db.put(xml, Format.XML)
             Db.put(img, Format.BIN)
