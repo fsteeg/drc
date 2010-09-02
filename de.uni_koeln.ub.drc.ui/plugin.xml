@@ -59,5 +59,13 @@
             configName="SIMPLE">
       </callbackHandlerMapping>
    </extension>
+   <extension
+         id="de_uni_koeln_ub_drc_rcp_product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.ant.core.antRunner"
+            name="DRC UI">
+      </product>
+   </extension>
    
 </plugin>
