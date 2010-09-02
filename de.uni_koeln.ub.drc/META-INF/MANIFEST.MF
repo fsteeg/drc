@@ -268,4 +268,3 @@ Export-Package: de.uni_koeln.ub.drc,
  org.xmldb.api,
  org.xmldb.api.base,
  org.xmldb.api.modules
-Require-Bundle: org.scala-ide.scala.library
