@@ -8,7 +8,7 @@
 
 package de.uni_koeln.ub.drc.data
 
-import XmlDb._
+import com.quui.sinist.XmlDb
 import scala.xml._
 import java.io._
 import java.util.zip._

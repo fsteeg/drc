@@ -40,6 +40,7 @@ Bundle-ClassPath: lib/drc-scala.jar,
  lib/xmlrpc-common-3.1.2.jar,
  lib/exist.jar,
  lib/log4j-1.2.15.jar,
- .
+ .,
+ lib/sinist_2.8.0-0.1.0.jar
 Bundle-Activator: de.uni_koeln.ub.drc.ui.DrcUiActivator
 Bundle-ActivationPolicy: lazy

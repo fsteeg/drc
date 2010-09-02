@@ -12,51 +12,18 @@ import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
-import XmlDb._
+import com.quui.sinist.XmlDb
 import java.io.File
 /**
- * @see XmlDb
+ * Test DRC database access and content.
  * @author Fabian Steeg
  */
 @RunWith(classOf[JUnitRunner])
-class SpecXmlDb extends Spec with ShouldMatchers {
+class SpecDrcDb extends Spec with ShouldMatchers {
   
   describe("The Db") {
     
     val db = Index.Db
-    
-    val coll = "test-coll"
-    it("can be used to store and retrieve XML in a type-safe way") {
-      val doc = "test-xml-id"
-      val xml: Elem = <some><xml>stuff</xml></some>
-      val pretty = new PrettyPrinter(200, 2)
-      expect(pretty format xml) {
-        db.putXml(xml, coll, doc)
-        val res: Elem = db.getXml(coll, doc).get(0)
-        pretty format res
-      }
-    }
-    
-    it("can be used to store and retrieve binary data in a type-safe way") {
-      val doc = "test-bin-id"
-      val bin: Array[Byte] = "data".getBytes
-      expect(new String(bin)) {
-        db.putBin(bin, coll, doc)
-        val res: Array[Byte] = db.getBin(coll, doc).get(0)
-        new String(res)
-      }
-    }
-    
-    it("allows access to all stored pages of a collection") {
-      expect(2) { db.getIds(coll).get.size } // we added on XML, one BIN
-    }
-    
-    it("returns all entries for a specific type if no ids are given") {
-      expect(1) { db.getXml(coll).get.size } // we added one XML
-      expect(1) { db.getBin(coll).get.size } // we added one BIN
-    }
-    
-    // DRC-specific, move to SpecIndex
     
     it("allows access to all stored pages IDs") {
       expect(218 * 2) { db.getIds("PPN345572629_0004").get.size }

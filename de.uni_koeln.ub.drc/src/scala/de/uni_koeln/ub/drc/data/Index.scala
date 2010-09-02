@@ -11,6 +11,8 @@ import scala.xml.XML
 import java.io.File
 import java.util.zip._
 import scala.collection.mutable.ListBuffer
+import com.quui.sinist.XmlDb
+import com.quui.sinist.XmlDb.Format
 /**
  * Simple experimental index for initial page selection.
  * @param pages The pages to index
@@ -95,7 +97,6 @@ object Index {
             // TODO use separate test data (overwriting here)
             val page = Page.fromPdf(new File(location, file).getAbsolutePath)
             XML.save(xml.getAbsolutePath, page.toXml, "UTF-8", false)
-            import XmlDb._
             Db.put(xml, Format.XML)
             Db.put(img, Format.BIN)
             println("Imported xml: " + xml)

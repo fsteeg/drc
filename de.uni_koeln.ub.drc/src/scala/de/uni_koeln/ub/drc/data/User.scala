@@ -9,6 +9,7 @@ package de.uni_koeln.ub.drc.data
 
 import scala.xml._
 import java.io._
+import com.quui.sinist.XmlDb
 /**
  * Initial user representation: id, full name, region, reputation and XML persistence.
  * @author Fabian Steeg (fsteeg)
