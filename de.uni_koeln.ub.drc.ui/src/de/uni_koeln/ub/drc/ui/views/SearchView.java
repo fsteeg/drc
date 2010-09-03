@@ -41,12 +41,10 @@ import org.eclipse.swt.widgets.Text;
 
 import scala.collection.JavaConversions;
 import scala.collection.immutable.List;
-import de.uni_koeln.ub.drc.data.Db;
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.SearchOption;
 import de.uni_koeln.ub.drc.data.Word;
-import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
  * View containing a search field and a table viewer displaying pages.
