@@ -6,14 +6,14 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="org.eclipse.e4.ui.workbench.swt.E4Application"
-            name="DRC UI">
+            name="DRC RCP">
+         <property
+               name="appName"
+               value="DRC RCP">
+         </property>
          <property
                name="applicationXMI"
                value="de.uni_koeln.ub.drc.ui/Application.e4xmi">
-         </property>
-         <property
-               name="appName"
-               value="DRC UI">
          </property>
          <property
                name="preferenceCustomization"
@@ -59,13 +59,4 @@
             configName="SIMPLE">
       </callbackHandlerMapping>
    </extension>
-   <extension
-         id="de_uni_koeln_ub_drc_rcp_product"
-         point="org.eclipse.core.runtime.products">
-      <product
-            application="org.eclipse.ant.core.antRunner"
-            name="DRC UI">
-      </product>
-   </extension>
-   
 </plugin>
