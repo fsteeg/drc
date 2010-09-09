@@ -5,7 +5,7 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry excluding="de/uni_koeln/ub/drc/ui/Word.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="src-tests"/>
-	<classpathentry exported="true" kind="lib" path="lib/drc-scala.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/drc-scala.jar" sourcepath="/de.uni_koeln.ub.drc"/>
 	<classpathentry kind="lib" path="lib/scala-library.jar" sourcepath="lib/scala-library-src.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/ws-commons-util-1.0.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/xercesImpl.jar"/>

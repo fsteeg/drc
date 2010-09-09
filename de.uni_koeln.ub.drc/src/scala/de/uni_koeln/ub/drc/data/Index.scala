@@ -64,8 +64,11 @@ object Import extends Application {
     User.initialImport("users");
 }
 
+object LocalDb extends XmlDb("xmldb:exist://localhost:8080/exist/xmlrpc", "/db/", "drc/")
+object ServerDb extends XmlDb("xmldb:exist://hydra4.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/")
+
 object Index {
-    val Db = XmlDb("xmldb:exist://localhost:8888/exist/xmlrpc", "/db/", "drc/")
+    val Db = ServerDb
     lazy val lexicon: Set[String] =
       (Set() ++ scala.io.Source.fromInputStream(
           Index.getClass.getResourceAsStream("words.txt"))("ISO-8859-1").getLines()).map(
