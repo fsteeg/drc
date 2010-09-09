@@ -11,4 +11,5 @@
   <artifactId>de.uni_koeln.ub.drc.rcp</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <packaging>eclipse-application</packaging>
+  <!-- TODO: package as eclipse-repository, build with mvn clean install on 0.10.0 for p2 & fixes  -->
 </project>
