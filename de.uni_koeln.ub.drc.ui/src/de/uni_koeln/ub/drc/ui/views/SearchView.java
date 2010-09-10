@@ -8,14 +8,22 @@
 package de.uni_koeln.ub.drc.ui.views;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -39,8 +47,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
-import scala.collection.JavaConversions;
-import scala.collection.immutable.List;
+import static scala.collection.JavaConversions.*;
+import scala.collection.mutable.Buffer;
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.SearchOption;
@@ -139,17 +147,47 @@ public final class SearchView {
   }
 
   private void setInput() {
-    viewer.setInput(SearchViewModelProvider.CONTENT.getPages(searchField.getText().trim()
-        .toLowerCase()));
+    ProgressMonitorDialog dialog = new ProgressMonitorDialog(viewer.getTable().getShell());
+    dialog.open();
+    try {
+      dialog.run(true, true, new IRunnableWithProgress() {
+        public void run(final IProgressMonitor m) throws InvocationTargetException,
+            InterruptedException {
+          SearchViewModelProvider.content = new SearchViewModelProvider(m);
+        }
+      });
+    } catch (InvocationTargetException e) {
+      e.printStackTrace();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    Page[] pages = SearchViewModelProvider.content.getPages(searchField.getText().trim()
+        .toLowerCase());
+    viewer.setInput(pages);
   }
 
   private static final class SearchViewModelProvider {
-    public static final SearchViewModelProvider CONTENT = new SearchViewModelProvider();
+    private static SearchViewModelProvider content = null;
     private Index index;
 
-    private SearchViewModelProvider() {
-      List<Page> pages = Index.loadPagesFromDb("PPN345572629_0004");
-      index = new Index(pages);
+    private SearchViewModelProvider(IProgressMonitor m) {
+      String c = "PPN345572629_0004";
+      List<String> ids = asList(Index.Db().getIds(c).get());
+      m.beginTask("Loading data from the DB...", ids.size() / 2); // we only load the XML files
+      List<Page> pages = new ArrayList<Page>();
+      for (String id : ids) {
+        if (id.endsWith(".xml")) {
+          m.subTask(id);
+          pages
+              .add(Page.fromXml(Index.Db().getXml(c, asBuffer(Arrays.asList(id))).get().head(), id));
+          m.worked(1);
+        }
+        if (m.isCanceled()) {
+          break;
+        }
+      }
+      index = new Index(asBuffer(pages).toList());
+      m.done();
     }
 
     public Page[] getPages(final String term) {
@@ -185,7 +223,7 @@ public final class SearchView {
       case 2:
         return page.toText("|");
       case 3:
-        return lastModificationDate(page.words());
+        return lastModificationDate(asList(page.words()));
       default:
         return page.toString();
       }
@@ -197,7 +235,7 @@ public final class SearchView {
 
     private String lastModificationDate(List<Word> words) {
       long latest = 0;
-      for (Word word : JavaConversions.asList(words)) {
+      for (Word word : words) {
         latest = Math.max(latest, word.history().top().date());
       }
       return new Date(latest).toString();
