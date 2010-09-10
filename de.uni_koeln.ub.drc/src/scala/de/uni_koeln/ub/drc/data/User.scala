@@ -14,39 +14,35 @@ import com.quui.sinist.XmlDb
  * Initial user representation: id, full name, region, reputation and XML persistence.
  * @author Fabian Steeg (fsteeg)
  */
-case class User(id:String, name:String, region:String, pass:String) {
+case class User(id: String, name: String, region: String, pass: String) {
   private var edits, upvotes, upvoted, downvotes, downvoted = 0
-  def reputation = (edits * 1 + upvotes * 1 + upvoted * 10 ) - (downvotes * 1 + downvoted * 2)
-  def hasEdited { edits = edits + 1}
-  def hasUpvoted { upvotes += 1}
-  def wasUpvoted { upvoted += 1}
-  def hasDownvoted { downvotes += 1}
-  def wasDownvoted { downvoted += 1}
-  def toXml = <user 
-          id={id} name={name} region={region} pass={pass} 
-          edits={edits.toString} 
-          upvotes={upvotes.toString} 
-          upvoted={upvoted.toString} 
-          downvotes={downvotes.toString} 
-          downvoted={downvoted.toString}/>
-  def save() = Index.Db.putXml(toXml, "users", id+".xml")
+  def reputation = (edits * 1 + upvotes * 1 + upvoted * 10) - (downvotes * 1 + downvoted * 2)
+  def hasEdited { edits = edits + 1 }
+  def hasUpvoted { upvotes += 1 }
+  def wasUpvoted { upvoted += 1 }
+  def hasDownvoted { downvotes += 1 }
+  def wasDownvoted { downvoted += 1 }
+  def toXml = <user id={ id } name={ name } region={ region } pass={ pass } edits={ edits.toString } upvotes={ upvotes.toString } upvoted={ upvoted.toString } downvotes={ downvotes.toString } downvoted={ downvoted.toString }/>
+  def save() = Index.Db.putXml(toXml, "users", id + ".xml")
 }
 
 object User {
-  def withId(id:String): User = {
-    val xml = Index.Db.getXml("users", id+".xml").get(0)
-    User.fromXml(xml)
+  def withId(id: String): User =
+    Index.Db.getXml("users", id + ".xml") match {
+      case Some(List(xml: Elem, _*)) => User.fromXml(xml)
+      case None => throw new IllegalStateException("Could not find user '%s' in DB '%s'".format(id, Index.Db))
+    }
+
+  def fromXml(xml: Node): User = {
+    val u = User((xml \ "@id").text, (xml \ "@name").text, (xml \ "@region").text, (xml \ "@pass").text)
+    u.edits = (xml \ "@edits").text.trim.toInt
+    u.upvotes = (xml \ "@upvotes").text.trim.toInt
+    u.upvoted = (xml \ "@upvoted").text.trim.toInt
+    u.downvotes = (xml \ "@downvotes").text.trim.toInt
+    u.downvoted = (xml \ "@downvoted").text.trim.toInt
+    u
   }
-  def fromXml(xml:Node): User = {
-      val u = User((xml\"@id").text, (xml\"@name").text, (xml\"@region").text, (xml\"@pass").text)
-      u.edits = (xml\"@edits").text.trim.toInt
-      u.upvotes = (xml\"@upvotes").text.trim.toInt
-      u.upvoted = (xml\"@upvoted").text.trim.toInt
-      u.downvotes = (xml\"@downvotes").text.trim.toInt
-      u.downvoted = (xml\"@downvoted").text.trim.toInt
-      u
-  }
-  def initialImport(folder:String):Unit = {
-    for(user<-new File(folder).listFiles) Index.Db.put(user, XmlDb.Format.XML)
+  def initialImport(folder: String): Unit = {
+    for (user <- new File(folder).listFiles) Index.Db.put(user, XmlDb.Format.XML)
   }
 }
