@@ -171,8 +171,9 @@ public final class EditComposite extends Composite {
       private void checkWordValidity(final Text text) {
         String current = text.getText();
         Word word = (Word) text.getData();
-        if (current.length() != word.original().length()
-            || (current.contains(" ") && !word.original().contains(" "))) {
+        String reference = word.history().top().form();
+        if (current.length() != reference.length()
+            || (current.contains(" ") && !reference.contains(" "))) {
           if(!MessageDialog.openQuestion(text.getShell(), "Questionable Edit Operation",
               "Your recent edit operation changed a word in a dubious way (e.g. by adding a blank into "
                   + "what should be a single word or by changing the length of a word) - are you sure?")){
