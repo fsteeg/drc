@@ -78,7 +78,7 @@ public final class CheckView {
     bottom.setLayout(layout);
     check = new Button(bottom, SWT.CHECK);
     check.setToolTipText("Suggest corrections");
-    check.setSelection(true);
+    check.setSelection(false);
     suggestions = new Text(bottom, SWT.WRAP);
     suggestions.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
   }

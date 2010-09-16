@@ -30,8 +30,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
 import scala.collection.JavaConversions;
+import de.uni_koeln.ub.drc.data.Modification;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.Word;
+import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
  * Composite holding the edit area. Used by the {@link EditView}.
@@ -178,6 +180,8 @@ public final class EditComposite extends Composite {
               "Your recent edit operation changed a word in a dubious way (e.g. by adding a blank into "
                   + "what should be a single word or by changing the length of a word) - are you sure?")){
             text.setForeground(text.getDisplay().getSystemColor(dubious));
+          } else {
+            word.history().push(new Modification(current, DrcUiActivator.instance().currentUser().id()));
           }
         }
       }
