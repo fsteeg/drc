@@ -7,10 +7,14 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.views;
 
+import static scala.collection.JavaConversions.asBuffer;
+import static scala.collection.JavaConversions.asList;
+
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +22,6 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
@@ -47,8 +50,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
-import static scala.collection.JavaConversions.*;
-import scala.collection.mutable.Buffer;
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.SearchOption;
@@ -163,6 +164,11 @@ public final class SearchView {
     }
     Page[] pages = SearchViewModelProvider.content.getPages(searchField.getText().trim()
         .toLowerCase());
+    Arrays.sort(pages, new Comparator<Page>() {
+      public int compare(Page p1, Page p2) {
+        return p1.id().compareTo(p2.id());
+      }
+    });
     viewer.setInput(pages);
   }
 
