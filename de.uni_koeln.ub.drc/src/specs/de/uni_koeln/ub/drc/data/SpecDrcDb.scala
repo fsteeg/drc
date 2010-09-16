@@ -20,32 +20,22 @@ import java.io.File
  */
 @RunWith(classOf[JUnitRunner])
 class SpecDrcDb extends Spec with ShouldMatchers {
-  
+
   describe("The Db") {
-    
+
     val db = Index.Db
-    
-    it("allows access to all stored pages IDs") {
-      expect(218 * 2) { db.getIds("PPN345572629_0004").get.size }
-    }
-    
-    it("returns all entries if no ids are given") {
-      expect(218) { db.getXml("PPN345572629_0004").get.size }
-      expect(218) { db.getBin("PPN345572629_0004").get.size }
-    }
-    
+    val collection = "PPN345572629_0004"
+    val entry = "PPN345572629_0004-0001.xml"
+
     it("allows access to specific pages, both XML and IMG") {
-      val coll = "PPN345572629_0004"
-      expect(2) { db.getXml(coll, "PPN345572629_0004-0001.xml", "PPN345572629_0004-0002.xml").get.size }
-      expect(classOf[Elem]) { db.getXml(coll, "PPN345572629_0004-0001.xml").get(0).getClass }
-      expect(classOf[Array[Byte]]) { db.getBin(coll, "PPN345572629_0004-0001.jpg").get(0).getClass }
+      expect(2) { db.getXml(collection, "PPN345572629_0004-0001.xml", "PPN345572629_0004-0002.xml").get.size }
+      expect(classOf[Elem]) { db.getXml(collection, "PPN345572629_0004-0001.xml").get(0).getClass }
+      expect(classOf[Array[Byte]]) { db.getBin(collection, "PPN345572629_0004-0001.jpg").get(0).getClass }
     }
-    
+
     it("allows to retrieve XML for manipulation and store it back") {
       val now = System.currentTimeMillis
       expect(true) {
-        val collection = "PPN345572629_0004"
-        val entry = "PPN345572629_0004-0001.xml"
         val rep = "DANiEL"
         val xml = db.getXml(collection, entry).get(0)
         val newXml = xml.toString.replace(rep, rep + now)
@@ -55,16 +45,38 @@ class SpecDrcDb extends Spec with ShouldMatchers {
         updated.toString.contains(now + "")
       }
     }
-    
+
+    it("allows to manipulate entries as page objects and store them back") {
+      val now = System.currentTimeMillis
+      val xml = db.getXml(collection, entry).get(0)
+      val page = Page.fromXml(xml, entry)
+      val mod = page.words(0).history.top
+      val oldScore = page.words(0).history.top.score
+      mod.downvote("tests"+System.currentTimeMillis)
+      expect(true) { mod.score < oldScore }
+      page.saveToDb
+      expect(true) { 
+        val p = Page.fromXml(db.getXml(collection, entry).get(0), entry); 
+        p.words(0).history.top.score < oldScore }
+    }
+
     it("stores XML that can be used to instantiate page objects") {
       expect(true) {
-        val collection = "PPN345572629_0004"
         val pages = Index.loadPagesFromDb(collection)
         pages.forall((p: Page) => (p.getClass == classOf[Page]
           && p.imageBytes == None)
           && Index.loadImageFor(pages(0)).isInstanceOf[Array[Byte]])
       }
     }
-    
+
+    it("allows access to all stored pages IDs") {
+      expect(218 * 2) { db.getIds(collection).get.size }
+    }
+
+    it("returns all entries if no ids are given") {
+      expect(218) { db.getXml(collection).get.size }
+      expect(218) { db.getBin(collection).get.size }
+    }
+
   }
 }

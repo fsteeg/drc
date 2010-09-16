@@ -19,8 +19,6 @@ import org.junit.runner.RunWith
 @RunWith(classOf[JUnitRunner])
 class SpecPage extends Spec with ShouldMatchers {
 
-  val file: java.io.File = java.io.File.createTempFile("testing", "scala")
-  file.deleteOnExit
   val page = Page(List(Word("test", Box(1,1,1,1))), "mock")
   
   describe("A Page") {
@@ -44,14 +42,9 @@ class SpecPage extends Spec with ShouldMatchers {
                               </voters>
                             </modification>
                           </word>
-                        </page>, file.getAbsolutePath).words(0).history.top.score
+                        </page>, System.currentTimeMillis+"").words(0).history.top.score
 
         }
-    }
-    
-    it("can save a page of words to the DB") {
-      Page.mock.saveToDb()
-      expect(true) {file.exists}
     }
     
     it("will save all embedded objects") {

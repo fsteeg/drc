@@ -52,7 +52,7 @@ case class Page(words:List[Word], id: String) {
     case None => this // no merging needed
     case Some(res) => {
       val dbEntry = Page.fromXml(res(0), entry)
-      Page.mergePages(dbEntry, this)
+      Page.mergePages(this, dbEntry)
     }
   }
   
@@ -103,7 +103,7 @@ object Page {
   private def mergePages(p1:Page, p2:Page):Page = {
     for(
         w1 <- p1.words; w2 <- p2.words; m <- w2.history.reverse; // TODO ID for words?
-        if(w1.original==w2.original && w1.position == w2.position && (!w1.history.contains(m)))){
+        if(w1.original == w2.original && w1.position == w2.position && (!w1.history.contains(m)))){
       w1.history.push(m)
     }
     p1
