@@ -152,11 +152,14 @@ public final class WordView {
     final Modification modification = (Modification) viewer.getData(index + "");
     if (!word.history().top().equals(modification)) { // no revert for most recent modification
       Button button = createButton(item, "revert", col);
+      button.setEnabled(!word.isLocked());
       button.addSelectionListener(new SelectionListener() {
         @Override
         public void widgetSelected(final SelectionEvent e) {
-          /* If we revert to a previous modification the currently most recent modification
-           * is voted down, and the modification that we are reverting to is voted up: */
+          /*
+           * If we revert to a previous modification the currently most recent modification is voted
+           * down, and the modification that we are reverting to is voted up:
+           */
           User currentUser = DrcUiActivator.instance().currentUser();
           vote(word.history().top(), currentUser, Vote.DOWN);
           vote(modification, currentUser, Vote.UP);
@@ -203,6 +206,7 @@ public final class WordView {
           vote(modification, DrcUiActivator.instance().currentUser(), vote);
           MessageDialog.openInformation(item.getParent().getShell(), "Vote " + vote, "Voted "
               + modification + ": " + vote);
+          text.setEditable(!((Word) text.getData()).isLocked());
         }
       }
 

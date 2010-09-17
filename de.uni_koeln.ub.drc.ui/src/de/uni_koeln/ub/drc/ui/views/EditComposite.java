@@ -183,14 +183,19 @@ public final class EditComposite extends Composite {
         if (current.length() != reference.length()
             || (current.contains(" ") && !reference.contains(" "))) {
           text.setForeground(text.getDisplay().getSystemColor(DUBIOUS));
-          status.setText("Your recent edit changed the word length - this is likely an error, "
+          setMessage("Your recent edit changed the word length - this might be an error, "
               + "the word has been marked red (save to confirm)");
-          status.setForeground(status.getDisplay().getSystemColor(DUBIOUS));
+        } else {
+          status.setText("");
         }
       }
 
       public void focusGained(final FocusEvent e) {
         text.clearSelection(); // use only our persistent marking below
+        if(((Word)text.getData()).isLocked()){
+          setMessage(String.format("Entry '%s' is locked (vote down to unlock)", text.getText()));
+        }
+        text.setEditable(!((Word) text.getData()).isLocked());
         context.modify(IServiceConstants.ACTIVE_SELECTION, text);
         text.setToolTipText(((Word) text.getData()).formattedHistory());
         if (prev != null && !prev.isDisposed()
@@ -198,6 +203,11 @@ public final class EditComposite extends Composite {
           prev.setForeground(text.getDisplay().getSystemColor(DEFAULT));
         }
         text.setForeground(text.getDisplay().getSystemColor(ACTIVE));
+      }
+
+      private void setMessage(String t) {
+        status.setText(t);
+        status.setForeground(status.getDisplay().getSystemColor(DUBIOUS));
       }
     });
   }
