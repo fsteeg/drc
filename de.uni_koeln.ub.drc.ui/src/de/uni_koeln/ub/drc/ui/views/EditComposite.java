@@ -27,6 +27,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import scala.collection.JavaConversions;
@@ -48,12 +49,14 @@ public final class EditComposite extends Composite {
   private List<Text> words;
   private List<Composite> lines = new ArrayList<Composite>();
   IEclipseContext context;
+  private Label status;
 
   @Inject
-  public EditComposite(final MDirtyable dirtyable, final Composite parent, final int style) {
-    super(parent, style);
-    this.parent = parent;
-    this.dirtyable = dirtyable;
+  public EditComposite(final EditView editView, final int style) {
+    super(editView.sc, style);
+    this.parent = editView.sc;
+    this.dirtyable = editView.dirtyable;
+    this.status = editView.label;
     parent.getShell().setBackgroundMode(SWT.INHERIT_DEFAULT);
     GridLayout layout = new GridLayout(1, false);
     this.setLayout(layout);
@@ -147,17 +150,20 @@ public final class EditComposite extends Composite {
   }
 
   private Text prev;
-  private int active = SWT.COLOR_DARK_GREEN;
-  private int dubious = SWT.COLOR_RED;
-  
+  final static int ACTIVE = SWT.COLOR_DARK_GREEN;
+  final static int DUBIOUS = SWT.COLOR_RED;
+  final static int DEFAULT = SWT.COLOR_BLACK;
+
   private void addModifyListener(final Text text) {
     text.addModifyListener(new ModifyListener() {
       public void modifyText(final ModifyEvent e) {
         /* Reset any warning color during editing (we check when focus is lost, see below): */
-        text.setForeground(text.getDisplay().getSystemColor(active));
+        text.setForeground(text.getDisplay().getSystemColor(ACTIVE));
         if (commitChanges) {
           dirtyable.setDirty(true);
         }
+        text.pack();
+        text.getParent().layout();
       }
     });
   }
@@ -176,13 +182,10 @@ public final class EditComposite extends Composite {
         String reference = word.history().top().form();
         if (current.length() != reference.length()
             || (current.contains(" ") && !reference.contains(" "))) {
-          if(!MessageDialog.openQuestion(text.getShell(), "Questionable Edit Operation",
-              "Your recent edit operation changed a word in a dubious way (e.g. by adding a blank into "
-                  + "what should be a single word or by changing the length of a word) - are you sure?")){
-            text.setForeground(text.getDisplay().getSystemColor(dubious));
-          } else {
-            word.history().push(new Modification(current, DrcUiActivator.instance().currentUser().id()));
-          }
+          text.setForeground(text.getDisplay().getSystemColor(DUBIOUS));
+          status.setText("Your recent edit changed the word length - this is likely an error, "
+              + "the word has been marked red (save to confirm)");
+          status.setForeground(status.getDisplay().getSystemColor(DUBIOUS));
         }
       }
 
@@ -191,10 +194,10 @@ public final class EditComposite extends Composite {
         context.modify(IServiceConstants.ACTIVE_SELECTION, text);
         text.setToolTipText(((Word) text.getData()).formattedHistory());
         if (prev != null && !prev.isDisposed()
-            && !prev.getForeground().equals(text.getDisplay().getSystemColor(dubious))) {
-          prev.setForeground(text.getDisplay().getSystemColor(SWT.COLOR_BLACK));
+            && !prev.getForeground().equals(text.getDisplay().getSystemColor(DUBIOUS))) {
+          prev.setForeground(text.getDisplay().getSystemColor(DEFAULT));
         }
-        text.setForeground(text.getDisplay().getSystemColor(active));
+        text.setForeground(text.getDisplay().getSystemColor(ACTIVE));
       }
     });
   }

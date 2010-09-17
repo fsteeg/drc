@@ -148,7 +148,7 @@ public final class SearchView {
   }
 
   private void setInput() {
-    ProgressMonitorDialog dialog = new ProgressMonitorDialog(viewer.getTable().getShell());
+    ProgressMonitorDialog dialog = new ProgressMonitorDialog(searchField.getShell());
     dialog.open();
     try {
       dialog.run(true, true, new IRunnableWithProgress() {

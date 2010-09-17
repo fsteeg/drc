@@ -8,15 +8,12 @@
 package de.uni_koeln.ub.drc.ui.views;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.security.auth.login.LoginException;
 
-import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.e4.core.commands.ECommandService;
@@ -28,10 +25,13 @@ import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import scala.collection.mutable.Stack;
@@ -53,10 +53,12 @@ public final class EditView {
   @Inject
   private ECommandService commandService;
   @Inject
-  private IEclipseContext context;
+  IEclipseContext context;
 
-  private final MDirtyable dirtyable;
-  private final EditComposite editComposite;
+  final MDirtyable dirtyable;
+  final EditComposite editComposite;
+  Label label;
+  ScrolledComposite sc;
 
   @PostConstruct
   public void setContext() {
@@ -65,13 +67,17 @@ public final class EditView {
 
   @Inject
   public EditView(final Composite parent, final MDirtyable dirtyable) {
-    ScrolledComposite sc = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
-    editComposite = new EditComposite(dirtyable, sc, SWT.NONE);
+    sc = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
+    this.dirtyable = dirtyable;
+    label = new Label(parent, SWT.CENTER);
+    label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+    editComposite = new EditComposite(this, SWT.NONE);
     sc.setContent(editComposite);
     sc.setExpandVertical(true);
     sc.setExpandHorizontal(true);
-    sc.setMinSize(editComposite.computeSize(SWT.MAX, SWT.MAX));
-    this.dirtyable = dirtyable;
+    sc.setMinSize(editComposite.computeSize(SWT.DEFAULT, SWT.MAX));
+    editComposite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+    GridLayoutFactory.fillDefaults().generateLayout(parent);
   }
 
   @Inject
@@ -112,19 +118,32 @@ public final class EditView {
       @Override
       public void run() {
         for (int i = 0; i < words.size(); i++) {
-          String newText = words.get(i).getText();
-          Word word = (Word) words.get(i).getData();
-          Stack<Modification> history = word.history();
-          String oldText = history.top().form();
-          if (!newText.equals(oldText) && !word.original().trim().equals(Page.ParagraphMarker())) {
-            User user = DrcUiActivator.instance().currentUser();
-            history.push(new Modification(newText, user.id()));
-            user.hasEdited();
-            user.save();
-          }
+          Text text = words.get(i);
+          resetWarningColor(text);
+          addToHistory(text);
           monitor.worked(1);
         }
         saveToXml(page);
+      }
+
+      private void addToHistory(Text text) {
+        String newText = text.getText();
+        Word word = (Word) text.getData();
+        Stack<Modification> history = word.history();
+        String oldText = history.top().form();
+        if (!newText.equals(oldText) && !word.original().trim().equals(Page.ParagraphMarker())) {
+          User user = DrcUiActivator.instance().currentUser();
+          history.push(new Modification(newText, user.id()));
+          user.hasEdited();
+          user.save();
+        }
+      }
+
+      private void resetWarningColor(Text text) {
+        if (text.getForeground().equals(text.getDisplay().getSystemColor(EditComposite.DUBIOUS))) {
+          text.setForeground(text.getDisplay().getSystemColor(EditComposite.DEFAULT));
+          label.setText("");
+        }
       }
     });
     dirtyable.setDirty(false);
