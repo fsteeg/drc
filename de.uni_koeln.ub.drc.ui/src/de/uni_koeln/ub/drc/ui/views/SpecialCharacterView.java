@@ -62,7 +62,7 @@ public final class SpecialCharacterView {
 
   private void initSCButtons(final Composite specialCharacterComposite) {
     for (int i = 0; i < SC.length; i++) {
-      final Button button = new Button(specialCharacterComposite, SWT.PUSH);
+      final Button button = new Button(specialCharacterComposite, SWT.PUSH | SWT.FLAT);
       RowData rowData = new RowData(30, 30);
       button.setLayoutData(rowData);
       button.setText("" + SC[i]);

@@ -46,4 +46,6 @@
   <bindingContexts>org.eclipse.ui.contexts.dialogAndWindow</bindingContexts>
   <commands xmi:id="page.export" elementId="page.export" commandName="Export" description=""/>
   <commands xmi:id="page.save" elementId="page.save" commandName="Save" description=""/>
+  <addons elementId="DnD Addon" contributionURI="platform:/plugin/org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.dndaddon.DnDAddon"/>
+  <addons elementId="Cleanup Addon" contributionURI="platform:/plugin/org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.cleanupaddon.CleanupAddon"/>
 </application:Application>
