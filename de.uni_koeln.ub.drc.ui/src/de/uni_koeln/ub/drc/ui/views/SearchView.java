@@ -76,7 +76,7 @@ public final class SearchView {
   private List<Page> allPages;
   private int index;
   private Label currentPageLabel;
-  
+
   private Comparator<Page> comp = new Comparator<Page>() {
     public int compare(Page p1, Page p2) {
       return p1.id().compareTo(p2.id());
@@ -126,6 +126,7 @@ public final class SearchView {
     next.setImage(DrcUiActivator.instance().loadImage("icons/next.gif"));
     next.addSelectionListener(new NavigationListener(Navigate.NEXT));
     currentPageLabel = new Label(bottomComposite, SWT.NONE);
+    currentPageLabel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
   }
 
   private void updateSelection() {
@@ -138,7 +139,8 @@ public final class SearchView {
   }
 
   private void setCurrentPageLabel(Page page) {
-    currentPageLabel.setText("Current page: " + page.id());
+    currentPageLabel.setText(String.format("Current page: volume %s, page %s", page.volume(),
+        page.number()));
   }
 
   @PostConstruct
@@ -184,7 +186,7 @@ public final class SearchView {
     viewer.addSelectionChangedListener(new ISelectionChangedListener() {
       public void selectionChanged(final SelectionChangedEvent event) {
         IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-        if(selection.getFirstElement() instanceof Page) {
+        if (selection.getFirstElement() instanceof Page) {
           setCurrentPageLabel((Page) selection.getFirstElement());
         }
         context.modify(IServiceConstants.ACTIVE_SELECTION, selection.toList());
@@ -208,11 +210,13 @@ public final class SearchView {
   }
 
   private void initTable() {
-    final int[] columns = new int[] { 185, 50, 570, 180 };
-    createColumn("File", columns[0]);
-    createColumn("Octopus", columns[1]);
-    createColumn("Text", columns[2]);
-    createColumn("Modified", columns[3]);
+    final int[] columns = new int[] { 25, 50, 50, 570, 200, 50 };
+    createColumn("", columns[0]);
+    createColumn("Volume", columns[1]);
+    createColumn("Page", columns[2]);
+    createColumn("Text", columns[3]);
+    createColumn("Modified", columns[4]);
+    createColumn("Octopus", columns[5]);
     Table table = viewer.getTable();
     table.setHeaderVisible(true);
     table.setLinesVisible(true);
@@ -304,13 +308,17 @@ public final class SearchView {
       Page page = (Page) element;
       switch (columnIndex) {
       case 0:
-        return fileName(page);
+        return "";
       case 1:
-        return PageConverter.convert(fileName(page));
+        return page.volume() + "";
       case 2:
-        return page.toText("|");
+        return page.number() + "";
       case 3:
+        return page.toText("|").substring(0, 90) + "...";
+      case 4:
         return lastModificationDate(asList(page.words()));
+      case 5:
+        return PageConverter.convert(fileName(page));
       default:
         return page.toString();
       }
@@ -330,6 +338,11 @@ public final class SearchView {
 
     @Override
     public Image getColumnImage(final Object element, final int columnIndex) {
+      if (columnIndex == 0) {
+        // return new Image(searchOptions.getDisplay(), new ByteArrayInputStream(
+        // Index.loadImageFor((Page) element))); // TODO add thumbnails to DB, use here
+        return DrcUiActivator.instance().loadImage("icons/page.gif");
+      }
       return null;
     }
   }

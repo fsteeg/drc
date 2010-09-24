@@ -22,6 +22,10 @@ import de.uni_koeln.ub.drc.reader.Point
  */
 case class Page(words:List[Word], id: String) {
   
+  private val toks = id.split("""[-_.]""")
+  def volume = if(toks.size == 4) toks(1).toInt else throw new IllegalStateException(id)
+  def number = if(toks.size == 4) toks(2).toInt else throw new IllegalStateException(id)
+  
   var imageBytes: Option[Array[Byte]] = None
   
   def toXml = <page> { words.toList.map(_.toXml) } </page>
