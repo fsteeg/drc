@@ -92,7 +92,7 @@ public final class SearchView {
     searchField.addModifyListener(new ModifyListener() {
       @Override
       public void modifyText(final ModifyEvent e) {
-        setInput();
+        setInput(SearchViewModelProvider.content);
       }
     });
   }
@@ -104,12 +104,12 @@ public final class SearchView {
     searchOptions.addSelectionListener(new SelectionListener() {
       @Override
       public void widgetSelected(final SelectionEvent e) {
-        setInput();
+        setInput(SearchViewModelProvider.content);
       }
 
       @Override
       public void widgetDefaultSelected(final SelectionEvent e) {
-        setInput();
+        setInput(SearchViewModelProvider.content);
       }
     });
   }
@@ -125,7 +125,7 @@ public final class SearchView {
     initTable();
     viewer.setContentProvider(new SearchViewContentProvider());
     viewer.setLabelProvider(new SearchViewLabelProvider());
-    setInput();
+    setInput(SearchViewModelProvider.content);
   }
 
   private void initTable() {
@@ -147,7 +147,21 @@ public final class SearchView {
     column1.getColumn().setMoveable(true);
   }
 
-  private void setInput() {
+  private void setInput(final SearchViewModelProvider content) {
+    if (content == null) {
+      loadData();
+    }
+    Page[] pages = SearchViewModelProvider.content.getPages(searchField.getText().trim()
+        .toLowerCase());
+    Arrays.sort(pages, new Comparator<Page>() {
+      public int compare(Page p1, Page p2) {
+        return p1.id().compareTo(p2.id());
+      }
+    });
+    viewer.setInput(pages);
+  }
+
+  private void loadData() {
     ProgressMonitorDialog dialog = new ProgressMonitorDialog(searchField.getShell());
     dialog.open();
     try {
@@ -162,14 +176,6 @@ public final class SearchView {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-    Page[] pages = SearchViewModelProvider.content.getPages(searchField.getText().trim()
-        .toLowerCase());
-    Arrays.sort(pages, new Comparator<Page>() {
-      public int compare(Page p1, Page p2) {
-        return p1.id().compareTo(p2.id());
-      }
-    });
-    viewer.setInput(pages);
   }
 
   private static final class SearchViewModelProvider {
