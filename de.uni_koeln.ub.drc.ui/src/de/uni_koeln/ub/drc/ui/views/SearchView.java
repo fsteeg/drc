@@ -14,15 +14,18 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -46,7 +49,9 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
@@ -67,6 +72,15 @@ public final class SearchView {
 
   @Inject
   private IEclipseContext context;
+  private List<Page> allPages;
+  private int index;
+  private Label currentPageLabel;
+  
+  private Comparator<Page> comp = new Comparator<Page>() {
+    public int compare(Page p1, Page p2) {
+      return p1.id().compareTo(p2.id());
+    }
+  };
 
   @Inject
   public SearchView(final Composite parent) {
@@ -75,7 +89,55 @@ public final class SearchView {
     initSearchField(searchComposite);
     initOptionsCombo(searchComposite);
     initTableViewer(parent);
+    addNavigationButtons(parent);
     GridLayoutFactory.fillDefaults().generateLayout(parent);
+  }
+
+  private enum Navigate {
+    NEXT, PREV
+  }
+
+  private class NavigationListener implements SelectionListener {
+    private Navigate nav;
+
+    public NavigationListener(Navigate nav) {
+      this.nav = nav;
+    }
+
+    @Override
+    public void widgetSelected(SelectionEvent e) {
+      viewer.setSelection(new StructuredSelection());
+      index = nav == Navigate.PREV ? index - 1 : index + 1;
+      updateSelection();
+    }
+
+    @Override
+    public void widgetDefaultSelected(SelectionEvent e) {}
+  }
+
+  private void addNavigationButtons(Composite parent) {
+    Composite bottomComposite = new Composite(parent, SWT.NONE);
+    bottomComposite.setLayout(new GridLayout(3, false));
+    Button prev = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
+    prev.setText("\u2190");
+    prev.addSelectionListener(new NavigationListener(Navigate.PREV));
+    Button next = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
+    next.setText("\u2192");
+    next.addSelectionListener(new NavigationListener(Navigate.NEXT));
+    currentPageLabel = new Label(bottomComposite, SWT.NONE);
+  }
+
+  private void updateSelection() {
+    if (index < allPages.size() && index >= 0) {
+      Page page = allPages.get(index);
+      setCurrentPageLabel(page);
+      StructuredSelection selection = new StructuredSelection(new Page[] { page });
+      context.modify(IServiceConstants.ACTIVE_SELECTION, selection.toList());
+    }
+  }
+
+  private void setCurrentPageLabel(Page page) {
+    currentPageLabel.setText(page.id());
   }
 
   @PostConstruct
@@ -84,6 +146,8 @@ public final class SearchView {
       throw new IllegalArgumentException("No entries in initial search view");
     }
     viewer.setSelection(new StructuredSelection(viewer.getElementAt(0)));
+    allPages = new ArrayList<Page>(asList(SearchViewModelProvider.content.index.pages()));
+    Collections.sort(allPages, comp);
   }
 
   private void initSearchField(final Composite parent) {
@@ -115,10 +179,13 @@ public final class SearchView {
   }
 
   private void initTableViewer(final Composite parent) {
-    viewer = new TableViewer(parent, SWT.MULTI | SWT.V_SCROLL | SWT.FULL_SELECTION);
+    viewer = new TableViewer(parent, SWT.MULTI | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
     viewer.addSelectionChangedListener(new ISelectionChangedListener() {
       public void selectionChanged(final SelectionChangedEvent event) {
         IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+        if(selection.getFirstElement() instanceof Page) {
+          setCurrentPageLabel((Page) selection.getFirstElement());
+        }
         context.modify(IServiceConstants.ACTIVE_SELECTION, selection.toList());
       }
     });
@@ -126,6 +193,17 @@ public final class SearchView {
     viewer.setContentProvider(new SearchViewContentProvider());
     viewer.setLabelProvider(new SearchViewLabelProvider());
     setInput(SearchViewModelProvider.content);
+  }
+
+  @Inject
+  public void setSelection(
+      @Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final List<Page> pages) {
+    if (pages != null && pages.size() > 0) {
+      Page page = pages.get(0);
+      if (allPages != null) {
+        index = allPages.indexOf(page);
+      }
+    }
   }
 
   private void initTable() {
@@ -153,11 +231,7 @@ public final class SearchView {
     }
     Page[] pages = SearchViewModelProvider.content.getPages(searchField.getText().trim()
         .toLowerCase());
-    Arrays.sort(pages, new Comparator<Page>() {
-      public int compare(Page p1, Page p2) {
-        return p1.id().compareTo(p2.id());
-      }
-    });
+    Arrays.sort(pages, comp);
     viewer.setInput(pages);
   }
 
@@ -180,7 +254,7 @@ public final class SearchView {
 
   private static final class SearchViewModelProvider {
     private static SearchViewModelProvider content = null;
-    private Index index;
+    Index index;
 
     private SearchViewModelProvider(IProgressMonitor m) {
       String c = "PPN345572629_0004";

@@ -8,13 +8,14 @@
 <repository location="http://download.eclipse.org/releases/helios"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.platform.ide" version="4.0.0.I20100727-1520"/>
-<unit id="org.eclipse.rcp.id" version="4.0.0.I20100727-1520"/>
-<repository location="http://download.eclipse.org/e4/sdk/drops/R-4.0-201007271520/repository"/>
-</location>
-<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
 <unit id="org.eclipse.e4.runtime.feature.feature.group" version="0.9.1.v20091009-1415-7Q68ZF9JgLWLMBckAQBmu"/>
 <repository location="http://download.eclipse.org/e4/downloads/drops/R-0.10-201007271415/repository/"/>
+</location>
+<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
+<unit id="org.eclipse.platform.ide" version="4.0.0.I20100727-1520"/>
+<unit id="org.eclipse.rcp.id" version="4.0.0.I20100727-1520"/>
+<unit id="org.eclipse.rcp.source.feature.group" version="4.0.0.v20100726-9OCJFKtFuxrHUSfXBA5VlPRhgRel"/>
+<repository location="http://download.eclipse.org/e4/sdk/drops/R-4.0-201007271520/repository"/>
 </location>
 </locations>
 </target>

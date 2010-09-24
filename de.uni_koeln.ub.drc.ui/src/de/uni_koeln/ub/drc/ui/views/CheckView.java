@@ -62,7 +62,7 @@ public final class CheckView {
   @Inject public CheckView(final Composite parent) {
     this.parent = parent;
     scrolledComposite = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
-    imageLabel = new Label(scrolledComposite, SWT.BORDER);
+    imageLabel = new Label(scrolledComposite, SWT.BORDER | SWT.CENTER);
     scrolledComposite.setContent(imageLabel);
     scrolledComposite.setExpandVertical(true);
     scrolledComposite.setExpandHorizontal(true);
