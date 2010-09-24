@@ -120,8 +120,8 @@ public final class CheckView {
 
   @Inject
   public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text word) {
-    this.word = word;
     if (imageLoaded && word != null) {
+      this.word = word;
       markPosition(word);
       if (job != null) {
         /* If a word is selected while we had a Job running for the previous word, cancel that: */

@@ -138,7 +138,7 @@ public final class SearchView {
   }
 
   private void setCurrentPageLabel(Page page) {
-    currentPageLabel.setText(page.id());
+    currentPageLabel.setText("Current page: " + page.id());
   }
 
   @PostConstruct
