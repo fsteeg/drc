@@ -26,6 +26,8 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
@@ -57,9 +59,10 @@ public final class CheckView {
   private Text suggestions;
   private Job job;
   private Button check;
-  
+  private Text word;
 
-  @Inject public CheckView(final Composite parent) {
+  @Inject
+  public CheckView(final Composite parent) {
     this.parent = parent;
     scrolledComposite = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
     imageLabel = new Label(scrolledComposite, SWT.BORDER | SWT.CENTER);
@@ -79,11 +82,21 @@ public final class CheckView {
     check = new Button(bottom, SWT.CHECK);
     check.setToolTipText("Suggest corrections");
     check.setSelection(false);
+    check.addSelectionListener(new SelectionListener() {
+      @Override
+      public void widgetSelected(SelectionEvent e) {
+        setSelection(word);
+      }
+
+      @Override
+      public void widgetDefaultSelected(SelectionEvent e) {}
+    });
     suggestions = new Text(bottom, SWT.WRAP);
     suggestions.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
   }
 
-  @Inject public void setSelection(
+  @Inject
+  public void setSelection(
       @Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final List<Page> pages) {
     if (pages != null && pages.size() > 0) {
       Page page = pages.get(0);
@@ -98,14 +111,16 @@ public final class CheckView {
       return;
     }
   }
-  
+
   private void handle(Exception e) {
     MessageDialog.openError(parent.getShell(), "Could not load scan",
         "Could not load the image file for the current page");
     e.printStackTrace();
   }
 
-  @Inject public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text word) {
+  @Inject
+  public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text word) {
+    this.word = word;
     if (imageLoaded && word != null) {
       markPosition(word);
       if (job != null) {
@@ -117,13 +132,13 @@ public final class CheckView {
       } else if (!check.getSelection()) {
         suggestions.setText("Edit suggestions disabled");
       } else {
-        findEditSuggestions((Word)word.getData());
+        findEditSuggestions((Word) word.getData());
         job.setPriority(Job.DECORATE);
         job.schedule();
       }
     }
   }
-  
+
   private void findEditSuggestions(final Word word) {
     suggestions.setText("Finding edit suggestions...");
     job = new Job("Edit suggestions search job") {
@@ -170,8 +185,10 @@ public final class CheckView {
   private Image loadImage(final Page page) throws IOException {
     Display display = parent.getDisplay();
     Image newImage = null;
-    InputStream in = new ByteArrayInputStream(Index.loadImageFor(page)); // TODO image as lazy def in page, fetched on demand?
-    newImage = new Image(display, in); //new ZipFile(new File(page.zip().get().getName())).getInputStream(page.image().get()));
+    InputStream in = new ByteArrayInputStream(Index.loadImageFor(page)); // TODO image as lazy def
+                                                                         // in page, fetched on
+                                                                         // demand?
+    newImage = new Image(display, in);
     return newImage;
   }
 

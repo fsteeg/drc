@@ -59,6 +59,7 @@ import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.SearchOption;
 import de.uni_koeln.ub.drc.data.Word;
+import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
  * View containing a search field and a table viewer displaying pages.
@@ -119,10 +120,10 @@ public final class SearchView {
     Composite bottomComposite = new Composite(parent, SWT.NONE);
     bottomComposite.setLayout(new GridLayout(3, false));
     Button prev = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
-    prev.setText("\u2190");
+    prev.setImage(DrcUiActivator.instance().loadImage("icons/prev.gif"));
     prev.addSelectionListener(new NavigationListener(Navigate.PREV));
     Button next = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
-    next.setText("\u2192");
+    next.setImage(DrcUiActivator.instance().loadImage("icons/next.gif"));
     next.addSelectionListener(new NavigationListener(Navigate.NEXT));
     currentPageLabel = new Label(bottomComposite, SWT.NONE);
   }

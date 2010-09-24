@@ -11,16 +11,21 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Collections;
 
 import javax.security.auth.login.LoginException;
 
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.equinox.security.auth.ILoginContext;
 import org.eclipse.equinox.security.auth.LoginContextFactory;
 import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.BundleContext;
 
 import de.uni_koeln.ub.drc.data.User;
@@ -111,6 +116,13 @@ public final class DrcUiActivator extends Plugin {
       e.printStackTrace();
     }
     return null;
+  }
+
+  public Image loadImage(String location) {
+    IPath path = new Path(location);
+    URL url = FileLocator.find(this.getBundle(), path, Collections.EMPTY_MAP);
+    ImageDescriptor desc = ImageDescriptor.createFromURL(url);
+    return desc.createImage();
   }
 
 }
