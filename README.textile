@@ -1,5 +1,17 @@
 Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy), see our "development server":http://hydra4.spinfo.uni-koeln.de for downloads and data.
 
+h1. Beta 1 - Milestone 5 (2010 September 30)
+
+h2. Overview
+
+Beta 1 milestone 5 (tag: b1-m5) adds a new view to enter special characters, next/previous page browsing, page tagging and comments. The view arrangement is now fully customizable. Milestone 5 also introduces various minor UI improvements and bugfixes, like search result and page details or improved error handling and progress notification. The code is now built by Hudson using Tycho (see link above for downloads of nightly builds).
+
+!http://i54.tinypic.com/ouxxm9.png!
+
+h2. Dependencies and Setup
+
+Beta 1 milestone 5 requires Eclipse "4.0":http://download.eclipse.org/e4/downloads/drops/R-0.10-201007271415/index.html and "eXist-db":http://exist.sourceforge.net/ (running on our server or locally on port 8080, see below for setup); other requirements are included. The Tycho build requires Maven 3 and can be executed in the repo root using @mvn clean package@. See below for general instructions on building and running.
+
 h1. Beta 1 - Milestone 4 (2010 August 28)
 
 h2. Overview
