@@ -119,7 +119,7 @@ public final class SearchView {
 
   private void addPageInfoBar(Composite parent) {
     Composite bottomComposite = new Composite(parent, SWT.NONE);
-    bottomComposite.setLayout(new GridLayout(4, false));
+    bottomComposite.setLayout(new GridLayout(5, false));
     Button prev = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
     prev.setImage(DrcUiActivator.instance().loadImage("icons/prev.gif"));
     prev.addSelectionListener(new NavigationListener(Navigate.PREV));
@@ -132,28 +132,36 @@ public final class SearchView {
   }
 
   private void insertAddCommentButton(Composite bottomComposite) {
+    final Text text = new Text(bottomComposite, SWT.BORDER);
     Button addComment = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
     addComment.setToolTipText("Add a new tag to the current page");
     addComment.setImage(DrcUiActivator.instance().loadImage("icons/add.gif"));
-    addComment.addSelectionListener(new SelectionListener() {
+    SelectionListener listener = new SelectionListener() {
 
       @Override
-      public void widgetSelected(SelectionEvent e) {
-        InputDialog dialog = new InputDialog(viewer.getControl().getShell(), "New tag",
-            "Please enter the new tag:", null, null);
-        dialog.open();
-        String input = dialog.getValue();
+      public void widgetSelected(SelectionEvent e) { // on button click
+        addComment(text);
+      }
+
+      @Override
+      public void widgetDefaultSelected(SelectionEvent e) { // on enter in text
+        addComment(text);
+      }
+      
+      private void addComment(final Text text) {
+        String input = text.getText();
         if (input != null && input.trim().length() != 0) {
           Page page = allPages.get(index);
           page.tags().$plus$eq(input);
           page.saveToDb();
           setCurrentPageLabel(page);
+          text.setText("");
         }
       }
 
-      @Override
-      public void widgetDefaultSelected(SelectionEvent e) {}
-    });
+    };
+    addComment.addSelectionListener(listener);
+    text.addSelectionListener(listener);
   }
 
   private void updateSelection() {

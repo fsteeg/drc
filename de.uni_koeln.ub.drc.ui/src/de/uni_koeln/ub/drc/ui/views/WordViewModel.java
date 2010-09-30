@@ -19,12 +19,10 @@ import scala.collection.JavaConversions;
 import de.uni_koeln.ub.drc.data.Modification;
 import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.data.Word;
-import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
  * Model, content and label providers for the {@link WordView}.
  * @author Fabian Steeg (fsteeg)
- *
  */
 final class WordViewModel {
   public static final WordViewModel CONTENT = new WordViewModel();
@@ -32,7 +30,7 @@ final class WordViewModel {
   public Modification[] getDetails(final Word word) {
     return JavaConversions.asCollection(word.history()).toArray(new Modification[] {});
   }
-  
+
   static final class WordViewContentProvider implements IStructuredContentProvider {
     @Override
     public Object[] getElements(final Object inputElement) {
@@ -54,8 +52,7 @@ final class WordViewModel {
     }
   }
 
-  static final class WordViewLabelProvider extends LabelProvider implements
-      ITableLabelProvider {
+  static final class WordViewLabelProvider extends LabelProvider implements ITableLabelProvider {
 
     @Override
     public String getColumnText(final Object element, final int columnIndex) {
@@ -65,8 +62,7 @@ final class WordViewModel {
       case 0:
         return modification.form();
       case 1:
-        return user.name().equals("OCR") ? "--" : String.format("%s from %s (%s, %s)", user.name(),
-            user.region(), user.id(), user.reputation());
+        return user.name().equals("OCR") ? "--" : userDetails(user);
       case 2:
         return new Date(modification.date()).toString();
       case 3:
@@ -74,6 +70,11 @@ final class WordViewModel {
       default:
         return null;
       }
+    }
+
+    static String userDetails(User user) {
+      return String.format("%s from %s (%s, %s)", user.name(), user.region(), user.id(),
+          user.reputation());
     }
 
     @Override
