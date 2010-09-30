@@ -63,6 +63,7 @@ public final class EditView {
   @PostConstruct
   public void setContext() {
     editComposite.context = context; // FIXME this can't be right
+    editComposite.getWords().get(0).setFocus();
   }
 
   @Inject
@@ -106,7 +107,7 @@ public final class EditView {
     }
     dirtyable.setDirty(false);
   }
-
+  
   @Persist
   public void doSave(@Optional final IProgressMonitor m) throws IOException, InterruptedException {
     final IProgressMonitor monitor = m == null ? new NullProgressMonitor() : m;

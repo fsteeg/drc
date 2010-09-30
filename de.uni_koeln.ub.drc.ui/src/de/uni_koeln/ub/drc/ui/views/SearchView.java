@@ -69,6 +69,7 @@ import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 public final class SearchView {
 
   private Text searchField;
+  private Label resultCount;
   private static CCombo searchOptions;
   private TableViewer viewer;
 
@@ -87,7 +88,7 @@ public final class SearchView {
   @Inject
   public SearchView(final Composite parent) {
     Composite searchComposite = new Composite(parent, SWT.NONE);
-    searchComposite.setLayout(new GridLayout(2, false));
+    searchComposite.setLayout(new GridLayout(3, false));
     initSearchField(searchComposite);
     initOptionsCombo(searchComposite);
     initTableViewer(parent);
@@ -175,7 +176,7 @@ public final class SearchView {
 
   private void setCurrentPageLabel(Page page) {
     currentPageLabel.setText(String.format("Current page: volume %s, page %s, %s", page.volume(),
-        page.number(), page.tags().size() == 0 ? "not tagged" : "tagged as "
+        page.number(), page.tags().size() == 0 ? "not tagged" : "tagged as: "
             + page.tags().mkString(", ")));
   }
 
@@ -190,6 +191,7 @@ public final class SearchView {
   }
 
   private void initSearchField(final Composite parent) {
+    resultCount = new Label(parent, SWT.NONE);
     searchField = new Text(parent, SWT.BORDER);
     searchField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
     searchField.addModifyListener(new ModifyListener() {
@@ -198,6 +200,11 @@ public final class SearchView {
         setInput(SearchViewModelProvider.content);
       }
     });
+  }
+
+  private void updateResultCount() {
+    int count = viewer.getTable().getItemCount();
+    resultCount.setText(String.format("%s %s for:", count, count == 1 ? "hit" : "hits"));
   }
 
   private void initOptionsCombo(final Composite searchComposite) {
@@ -274,6 +281,7 @@ public final class SearchView {
         .toLowerCase());
     Arrays.sort(pages, comp);
     viewer.setInput(pages);
+    updateResultCount();
   }
 
   private void loadData() {
