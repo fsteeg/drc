@@ -8,6 +8,7 @@
 
 package de.uni_koeln.ub.drc.data
 
+import scala.collection.mutable.ListBuffer
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.junit.JUnitRunner
@@ -32,6 +33,23 @@ class SpecPage extends Spec with ShouldMatchers {
       expect(1) { Page(List(), "PPN345572629_0004-0001.xml").number }
       expect(9999) { Page(List(), "PPN345572629_0004-9999.xml").number }
       intercept[IllegalStateException] { Page(List(), "PPN345572629.xml").number }
+    }
+    
+    it("can be tagged") {
+      page.tags += "sample"
+      page.tags += "testing"
+      val exp = ListBuffer("sample", "testing")
+      expect(exp) { page.tags }
+      expect(exp) { Page.fromXml(page.toXml, "mock").tags }
+    }
+    
+    it("can be commented") {
+      val date = System.currentTimeMillis
+      page.comments += Comment("fsteeg", "text1", date)
+      page.comments += Comment("claesn", "text2", date)
+      val exp = ListBuffer(Comment("fsteeg", "text1", date), Comment("claesn", "text2", date))
+      expect(exp) { page.comments }
+      expect(exp) { Page.fromXml(page.toXml, "mock").comments }
     }
 
     it("can be serialized to XML") {

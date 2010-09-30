@@ -27,6 +27,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -90,7 +91,7 @@ public final class SearchView {
     initSearchField(searchComposite);
     initOptionsCombo(searchComposite);
     initTableViewer(parent);
-    addNavigationButtons(parent);
+    addPageInfoBar(parent);
     GridLayoutFactory.fillDefaults().generateLayout(parent);
   }
 
@@ -116,9 +117,9 @@ public final class SearchView {
     public void widgetDefaultSelected(SelectionEvent e) {}
   }
 
-  private void addNavigationButtons(Composite parent) {
+  private void addPageInfoBar(Composite parent) {
     Composite bottomComposite = new Composite(parent, SWT.NONE);
-    bottomComposite.setLayout(new GridLayout(3, false));
+    bottomComposite.setLayout(new GridLayout(4, false));
     Button prev = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
     prev.setImage(DrcUiActivator.instance().loadImage("icons/prev.gif"));
     prev.addSelectionListener(new NavigationListener(Navigate.PREV));
@@ -126,7 +127,33 @@ public final class SearchView {
     next.setImage(DrcUiActivator.instance().loadImage("icons/next.gif"));
     next.addSelectionListener(new NavigationListener(Navigate.NEXT));
     currentPageLabel = new Label(bottomComposite, SWT.NONE);
+    insertAddCommentButton(bottomComposite);
     currentPageLabel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+  }
+
+  private void insertAddCommentButton(Composite bottomComposite) {
+    Button addComment = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
+    addComment.setToolTipText("Add a new tag to the current page");
+    addComment.setImage(DrcUiActivator.instance().loadImage("icons/add.gif"));
+    addComment.addSelectionListener(new SelectionListener() {
+
+      @Override
+      public void widgetSelected(SelectionEvent e) {
+        InputDialog dialog = new InputDialog(viewer.getControl().getShell(), "New tag",
+            "Please enter the new tag:", null, null);
+        dialog.open();
+        String input = dialog.getValue();
+        if (input != null && input.trim().length() != 0) {
+          Page page = allPages.get(index);
+          page.tags().$plus$eq(input);
+          page.saveToDb();
+          setCurrentPageLabel(page);
+        }
+      }
+
+      @Override
+      public void widgetDefaultSelected(SelectionEvent e) {}
+    });
   }
 
   private void updateSelection() {
@@ -139,8 +166,9 @@ public final class SearchView {
   }
 
   private void setCurrentPageLabel(Page page) {
-    currentPageLabel.setText(String.format("Current page: volume %s, page %s", page.volume(),
-        page.number()));
+    currentPageLabel.setText(String.format("Current page: volume %s, page %s, %s", page.volume(),
+        page.number(), page.tags().size() == 0 ? "not tagged" : "tagged as "
+            + page.tags().mkString(", ")));
   }
 
   @PostConstruct
