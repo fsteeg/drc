@@ -51,7 +51,16 @@ class SpecPage extends Spec with ShouldMatchers {
       expect(exp) { page.comments }
       expect(exp) { Page.fromXml(page.toXml, "mock").comments }
     }
-
+    
+    it("can return info on its editing status") {
+      val page = Page(List(Word("test", Box(1, 1, 1, 1))), "mock")
+      expect(0) { page.edits }
+      page.words(0).history.push(Modification("test", "user"))
+      expect(1) { page.edits }
+      page.words(0).history.push(Modification("test", "user"))
+      expect(2) { page.edits }
+    }
+    
     it("can be serialized to XML") {
       expect(1) { (page.toXml \ "word").size }
     }
@@ -75,7 +84,6 @@ class SpecPage extends Spec with ShouldMatchers {
     it("will save all embedded objects") {
       expect(1) {
         page.words(0).history.top.upvote("me")
-        page.saveToDb()
         Page.fromXml(page.toXml, page.id).words(0).history.top.score
       }
       expect(1) {

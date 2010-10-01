@@ -26,7 +26,8 @@ case class Page(words: List[Word], id: String) {
   private val toks = id.split("""[-_.]""")
   def volume = if (toks.size == 4) toks(1).toInt else throw new IllegalStateException(id)
   def number = if (toks.size == 4) toks(2).toInt else throw new IllegalStateException(id)
-
+  def edits = (0 /: words)(_ + _.history.size) - words.size
+  
   val tags: ListBuffer[String] = new ListBuffer()
   val comments: ListBuffer[Comment] = new ListBuffer()
 

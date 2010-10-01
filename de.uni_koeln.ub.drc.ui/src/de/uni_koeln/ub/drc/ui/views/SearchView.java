@@ -27,7 +27,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -383,9 +382,11 @@ public final class SearchView {
     @Override
     public Image getColumnImage(final Object element, final int columnIndex) {
       if (columnIndex == 0) {
+        Page page = (Page) element;
         // return new Image(searchOptions.getDisplay(), new ByteArrayInputStream(
         // Index.loadImageFor((Page) element))); // TODO add thumbnails to DB, use here
-        return DrcUiActivator.instance().loadImage("icons/page.gif");
+        return DrcUiActivator.instance().loadImage(
+            page.edits() == 0 ? "icons/page.gif" : "icons/edited.gif");
       }
       return null;
     }
