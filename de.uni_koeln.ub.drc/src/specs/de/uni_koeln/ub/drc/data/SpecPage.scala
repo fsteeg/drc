@@ -36,9 +36,9 @@ class SpecPage extends Spec with ShouldMatchers {
     }
     
     it("can be tagged") {
-      page.tags += "sample"
-      page.tags += "testing"
-      val exp = ListBuffer("sample", "testing")
+      page.tags += Tag("sample", "user")
+      page.tags += Tag("testing", "user")
+      val exp = ListBuffer(Tag("sample", "user"), Tag("testing", "user"))
       expect(exp) { page.tags }
       expect(exp) { Page.fromXml(page.toXml, "mock").tags }
     }

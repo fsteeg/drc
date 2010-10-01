@@ -28,7 +28,7 @@ case class Page(words: List[Word], id: String) {
   def number = if (toks.size == 4) toks(2).toInt else throw new IllegalStateException(id)
   def edits = (0 /: words)(_ + _.history.size) - words.size
   
-  val tags: ListBuffer[String] = new ListBuffer()
+  val tags: ListBuffer[Tag] = new ListBuffer()
   val comments: ListBuffer[Comment] = new ListBuffer()
 
   var imageBytes: Option[Array[Byte]] = None
@@ -36,7 +36,7 @@ case class Page(words: List[Word], id: String) {
   def toXml =
     <page>
       { words.map(_.toXml) }
-      { tags.map((tag: String) => <tag name={ tag }/>) }
+      { tags.map(_.toXml) }
       { comments.map(_.toXml) }
     </page>
 
@@ -78,7 +78,7 @@ object Page {
 
   def fromXml(page: Node, id: String): Page = {
     val p = Page(for (word <- (page \ "word").toList) yield Word.fromXml(word), id)
-    for (tag <- (page \ "tag")) p.tags += (tag \ "@name").text
+    for (tag <- (page \ "tag")) p.tags += Tag.fromXml(tag)
     for (comment <- (page \ "comment")) p.comments += Comment.fromXml(comment)
     p
   }
@@ -133,6 +133,15 @@ private[data] case class Comment(user: String, text: String, date: Long) {
 
 private[data] object Comment {
   def fromXml(xml: Node) = Comment((xml \ "@user").text, xml.text, (xml \ "@date").text.toLong)
+}
+
+private[data] case class Tag(text: String, user: String) {
+  def toXml = <tag user={ user } text={ text }/>
+  override def toString = text
+}
+
+private[data] object Tag {
+  def fromXml(xml: Node) = Tag((xml \ "@text").text, (xml \ "@user").text)
 }
 
 /** 

@@ -58,6 +58,7 @@ import org.eclipse.swt.widgets.Text;
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.SearchOption;
+import de.uni_koeln.ub.drc.data.Tag;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
@@ -152,7 +153,7 @@ public final class SearchView {
         String input = text.getText();
         if (input != null && input.trim().length() != 0) {
           Page page = allPages.get(index);
-          page.tags().$plus$eq(input);
+          page.tags().$plus$eq(new Tag(input, DrcUiActivator.instance().currentUser().id()));
           page.saveToDb();
           setCurrentPageLabel(page);
           text.setText("");
