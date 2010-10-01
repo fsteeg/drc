@@ -194,34 +194,31 @@ public final class SearchView {
     resultCount = new Label(parent, SWT.NONE);
     searchField = new Text(parent, SWT.BORDER);
     searchField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-    searchField.addModifyListener(new ModifyListener() {
-      @Override
-      public void modifyText(final ModifyEvent e) {
-        setInput(SearchViewModelProvider.content);
-      }
-    });
-  }
-
-  private void updateResultCount() {
-    int count = viewer.getTable().getItemCount();
-    resultCount.setText(String.format("%s %s for:", count, count == 1 ? "hit" : "hits"));
+    searchField.addSelectionListener(searchListener);
   }
 
   private void initOptionsCombo(final Composite searchComposite) {
     searchOptions = new CCombo(searchComposite, SWT.NONE);
     searchOptions.setItems(SearchOption.toStrings());
     searchOptions.select(SearchOption.all().id());
-    searchOptions.addSelectionListener(new SelectionListener() {
-      @Override
-      public void widgetSelected(final SelectionEvent e) {
-        setInput(SearchViewModelProvider.content);
-      }
+    searchOptions.addSelectionListener(searchListener);
+  }
+  
+  private SelectionListener searchListener = new SelectionListener() {
+    @Override
+    public void widgetSelected(final SelectionEvent e) {
+      setInput();
+    }
 
-      @Override
-      public void widgetDefaultSelected(final SelectionEvent e) {
-        setInput(SearchViewModelProvider.content);
-      }
-    });
+    @Override
+    public void widgetDefaultSelected(final SelectionEvent e) {
+      setInput();
+    }
+  };
+  
+  private void updateResultCount() {
+    int count = viewer.getTable().getItemCount();
+    resultCount.setText(String.format("%s %s for:", count, count == 1 ? "hit" : "hits"));
   }
 
   private void initTableViewer(final Composite parent) {
@@ -238,7 +235,7 @@ public final class SearchView {
     initTable();
     viewer.setContentProvider(new SearchViewContentProvider());
     viewer.setLabelProvider(new SearchViewLabelProvider());
-    setInput(SearchViewModelProvider.content);
+    setInput();
   }
 
   @Inject
@@ -273,8 +270,8 @@ public final class SearchView {
     column1.getColumn().setMoveable(true);
   }
 
-  private void setInput(final SearchViewModelProvider content) {
-    if (content == null) {
+  private void setInput() {
+    if (SearchViewModelProvider.content == null) {
       loadData();
     }
     Page[] pages = SearchViewModelProvider.content.getPages(searchField.getText().trim()
