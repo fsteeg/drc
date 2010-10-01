@@ -34,8 +34,9 @@ class Index(val pages: List[Page]) {
      * @return A list of pages where any word contains the term according to the specified option
      */
     def search(term: String, option: SearchOption.Value): Array[Page] =
-      for { page <- pages.toArray if page.words.exists( 
-          option match {
+      for { page <- pages.toArray 
+        if(option == SearchOption.tags && page.tags.map(_.text.toLowerCase).contains(term.toLowerCase)) ||
+        option != SearchOption.tags && page.words.exists(option match {
             case SearchOption.all => _.history.exists(_.form.toLowerCase contains term.toLowerCase)
             case SearchOption.latest => _.history.top.form.toLowerCase contains term.toLowerCase
             case SearchOption.original => _.history.toList.last.form.toLowerCase contains term.toLowerCase
@@ -54,8 +55,9 @@ class Index(val pages: List[Page]) {
 object SearchOption extends Enumeration {
     type SearchOption = Value
     val latest = Value("Latest")
-    val all = Value("All")
+    val all = Value("History")
     val original = Value("Original")
+    val tags = Value("Tags")
     def toStrings = Array[String]() ++ SearchOption.values map (_.toString)
 }
 
