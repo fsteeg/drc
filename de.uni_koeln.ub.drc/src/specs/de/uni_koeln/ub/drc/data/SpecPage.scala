@@ -21,6 +21,7 @@ import org.junit.runner.RunWith
 class SpecPage extends Spec with ShouldMatchers {
 
   val page = Page(List(Word("test", Box(1, 1, 1, 1))), "mock")
+  val db = Index.LocalDb
 
   describe("A Page") {
 
@@ -114,7 +115,7 @@ class SpecPage extends Spec with ShouldMatchers {
       word.history push newMod
       expect(true) { word.history.contains(newMod) }
       expect(2) { word.history.size }
-      page.saveToDb()
+      page.saveToDb(db)
       val loadedWord = Page.fromXml(page.toXml, page.id).words(0)
       val loadedMod = loadedWord.history.top
       expect(2) { loadedWord.history.size }
@@ -169,7 +170,7 @@ class SpecPage extends Spec with ShouldMatchers {
   it("provides initial import of a scanned PDF") {
     val page: Page = Page.fromPdf("res/rom/PPN345572629_0004/PPN345572629_0004-0001.pdf")
     val file = new java.io.File("res/rom/PPN345572629_0004/PPN345572629_0004-0001.xml")
-    val root = page.saveToDb()
+    val root = page.saveToDb(db)
     val uri = file.toURI.toURL.toURI
     expect(true) { root.size > 0 }
     expect(true) { file.exists }

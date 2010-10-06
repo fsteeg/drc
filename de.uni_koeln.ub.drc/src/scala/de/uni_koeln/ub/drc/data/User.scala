@@ -23,14 +23,14 @@ case class User(id: String, name: String, region: String, pass: String) {
   def hasDownvoted { downvotes += 1 }
   def wasDownvoted { downvoted += 1 }
   def toXml = <user id={ id } name={ name } region={ region } pass={ pass } edits={ edits.toString } upvotes={ upvotes.toString } upvoted={ upvoted.toString } downvotes={ downvotes.toString } downvoted={ downvoted.toString }/>
-  def save() = Index.Db.putXml(toXml, "users", id + ".xml")
+  def save(db:XmlDb) = db.putXml(toXml, "users", id + ".xml")
 }
 
 object User {
-  def withId(id: String): User =
-    Index.Db.getXml("users", id + ".xml") match {
+  def withId(db:XmlDb, id: String): User =
+    db.getXml("users", id + ".xml") match {
       case Some(List(xml: Elem, _*)) => User.fromXml(xml)
-      case None => throw new IllegalStateException("Could not find user '%s' in DB '%s'".format(id, Index.Db))
+      case None => throw new IllegalStateException("Could not find user '%s' in DB '%s'".format(id, db))
     }
 
   def fromXml(xml: Node): User = {
@@ -42,7 +42,7 @@ object User {
     u.downvoted = (xml \ "@downvoted").text.trim.toInt
     u
   }
-  def initialImport(folder: String): Unit = {
-    for (user <- new File(folder).listFiles) Index.Db.put(user, XmlDb.Format.XML)
+  def initialImport(db: XmlDb, folder: String): Unit = {
+    for (user <- new File(folder).listFiles) db.put(user, XmlDb.Format.XML)
   }
 }

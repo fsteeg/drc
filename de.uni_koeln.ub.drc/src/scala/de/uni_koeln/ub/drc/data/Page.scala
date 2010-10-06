@@ -49,8 +49,7 @@ case class Page(words: List[Word], id: String) {
     formatted
   }
 
-  def saveToDb(): Node = {
-    val db = Index.Db
+  def saveToDb(db: XmlDb): Node = {
     val file = id.split("/").last
     val collection = file.split("-")(0)
     val entry = file

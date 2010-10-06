@@ -101,7 +101,7 @@ public final class CommentsView {
               new Comment(DrcUiActivator.instance().currentUser().id(), text, System
                   .currentTimeMillis()));
           setInput();
-          page.saveToDb();
+          page.saveToDb(DrcUiActivator.instance().db());
           commentField.setText("");
         }
       }
@@ -168,7 +168,8 @@ public final class CommentsView {
       case 1:
         return comment.text();
       case 2:
-        return WordViewLabelProvider.userDetails(User.withId(comment.user()));
+        return WordViewLabelProvider.userDetails(User.withId(DrcUiActivator.instance().db(),
+            comment.user()));
       case 3:
         return new Date(comment.date()).toString();
       default:

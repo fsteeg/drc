@@ -45,6 +45,7 @@ import de.uni_koeln.ub.drc.data.Box;
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.Word;
+import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
  * View containing the scanned page used to check the original word while editing.
@@ -185,9 +186,9 @@ public final class CheckView {
   private Image loadImage(final Page page) throws IOException {
     Display display = parent.getDisplay();
     Image newImage = null;
-    InputStream in = new ByteArrayInputStream(Index.loadImageFor(page)); // TODO image as lazy def
-                                                                         // in page, fetched on
-                                                                         // demand?
+    // TODO image as lazy def in page, fetched on demand?
+    InputStream in = new ByteArrayInputStream(Index.loadImageFor(DrcUiActivator.instance().db(),
+        page));
     newImage = new Image(display, in);
     return newImage;
   }

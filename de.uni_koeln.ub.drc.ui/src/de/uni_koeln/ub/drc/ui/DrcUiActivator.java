@@ -28,6 +28,9 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.BundleContext;
 
+import com.quui.sinist.XmlDb;
+
+import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.User;
 
 /**
@@ -39,6 +42,8 @@ public final class DrcUiActivator extends Plugin {
   public static final String PLUGIN_ID = "de.uni_koeln.ub.drc.ui";
 
   private static final String JAAS_CONFIG_FILE = "jaas_config";
+
+  private XmlDb db = null;
 
   private static DrcUiActivator instance;
   private ILoginContext loginContext;
@@ -123,6 +128,15 @@ public final class DrcUiActivator extends Plugin {
     URL url = FileLocator.find(this.getBundle(), path, Collections.EMPTY_MAP);
     ImageDescriptor desc = ImageDescriptor.createFromURL(url);
     return desc.createImage();
+  }
+
+  public XmlDb db() {
+    if(db == null) {
+      db = Index.LocalDb().isAvailable() ? Index.LocalDb() : new XmlDb(
+          "xmldb:exist://hydra4.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/");
+      System.out.println("Using DB: " + db);
+    }
+    return db;
   }
 
 }

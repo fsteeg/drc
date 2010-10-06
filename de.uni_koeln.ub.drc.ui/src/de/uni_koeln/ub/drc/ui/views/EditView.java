@@ -136,7 +136,7 @@ public final class EditView {
           User user = DrcUiActivator.instance().currentUser();
           history.push(new Modification(newText, user.id()));
           user.hasEdited();
-          user.save();
+          user.save(DrcUiActivator.instance().db());
         }
       }
 
@@ -156,6 +156,6 @@ public final class EditView {
 
   private void saveToXml(final Page page) {
     System.out.println("Saving page: " + page);
-    page.saveToDb();
+    page.saveToDb(DrcUiActivator.instance().db());
   }
 }

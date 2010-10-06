@@ -154,7 +154,7 @@ public final class SearchView {
         if (input != null && input.trim().length() != 0) {
           Page page = allPages.get(index);
           page.tags().$plus$eq(new Tag(input, DrcUiActivator.instance().currentUser().id()));
-          page.saveToDb();
+          page.saveToDb(DrcUiActivator.instance().db());
           setCurrentPageLabel(page);
           text.setText("");
         }
@@ -304,14 +304,15 @@ public final class SearchView {
 
     private SearchViewModelProvider(IProgressMonitor m) {
       String c = "PPN345572629_0004";
-      List<String> ids = asList(Index.Db().getIds(c).get());
+      List<String> ids = asList(DrcUiActivator.instance().db().getIds(c).get());
       m.beginTask("Loading data from the DB...", ids.size() / 2); // we only load the XML files
       List<Page> pages = new ArrayList<Page>();
       for (String id : ids) {
         if (id.endsWith(".xml")) {
           m.subTask(id);
-          pages
-              .add(Page.fromXml(Index.Db().getXml(c, asBuffer(Arrays.asList(id))).get().head(), id));
+          pages.add(Page.fromXml(
+              DrcUiActivator.instance().db().getXml(c, asBuffer(Arrays.asList(id))).get().head(),
+              id));
           m.worked(1);
         }
         if (m.isCanceled()) {

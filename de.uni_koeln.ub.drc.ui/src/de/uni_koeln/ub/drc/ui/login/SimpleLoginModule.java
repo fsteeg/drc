@@ -21,6 +21,7 @@ import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
 
 import de.uni_koeln.ub.drc.data.User;
+import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
  * Simple login module implementation using credentials from a properties file.
@@ -72,7 +73,7 @@ public final class SimpleLoginModule implements LoginModule {
     String pass = passCallback.getPassword() != null ? new String(passCallback.getPassword()) : "";
     User candidate = null;
     try {
-      candidate = User.withId(name);
+      candidate = User.withId(DrcUiActivator.instance().db(), name);
     } catch (Throwable x) {
       x.printStackTrace();
     }

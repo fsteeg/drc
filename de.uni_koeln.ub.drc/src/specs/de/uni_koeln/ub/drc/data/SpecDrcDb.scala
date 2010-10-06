@@ -23,7 +23,7 @@ class SpecDrcDb extends Spec with ShouldMatchers {
 
   describe("The Db") {
 
-    val db = Index.Db
+    val db = Index.LocalDb
     val collection = "PPN345572629_0004"
     val entry = "PPN345572629_0004-0001.xml"
 
@@ -54,7 +54,7 @@ class SpecDrcDb extends Spec with ShouldMatchers {
       val oldScore = page.words(0).history.top.score
       mod.downvote("tests"+System.currentTimeMillis)
       expect(true) { mod.score < oldScore }
-      page.saveToDb
+      page.saveToDb(db)
       expect(true) { 
         val p = Page.fromXml(db.getXml(collection, entry).get(0), entry); 
         p.words(0).history.top.score < oldScore }
@@ -62,10 +62,10 @@ class SpecDrcDb extends Spec with ShouldMatchers {
 
     it("stores XML that can be used to instantiate page objects") {
       expect(true) {
-        val pages = Index.loadPagesFromDb(collection)
+        val pages = Index.loadPagesFromDb(db, collection)
         pages.forall((p: Page) => (p.getClass == classOf[Page]
           && p.imageBytes == None)
-          && Index.loadImageFor(pages(0)).isInstanceOf[Array[Byte]])
+          && Index.loadImageFor(db, pages(0)).isInstanceOf[Array[Byte]])
       }
     }
 

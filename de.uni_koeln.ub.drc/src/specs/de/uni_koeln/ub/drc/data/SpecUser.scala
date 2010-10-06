@@ -18,6 +18,7 @@ import org.junit.runner.RunWith
 @RunWith(classOf[JUnitRunner])
 class SpecUser extends Spec with ShouldMatchers {
   val user = User("fsteeg", "Fabian Steeg", "Cologne, Germany", "")
+  val db = Index.LocalDb
   describe("A User") {
     it("has a unique user name") {
       expect("fsteeg") { user.id }
@@ -40,13 +41,13 @@ class SpecUser extends Spec with ShouldMatchers {
     }
     it("can be changed and persisted") {
       expect(true) { 
-        user.hasUpvoted; user.save(); User.withId(user.id).reputation > 0
+        user.hasUpvoted; user.save(db); User.withId(db, user.id).reputation > 0
       }
     }
   }
   describe("The User companion") {
     it("allows import of users into the DB") {
-      User.initialImport("users")
+      User.initialImport(db, "users")
     }
     it("allows loading of a user from XML"){
       expect(user) { User.fromXml(user.toXml) }
@@ -57,11 +58,11 @@ class SpecUser extends Spec with ShouldMatchers {
       val matana = User("matana", "Mihail Atanassov", "Cologne, Germany", "")
       val rols = User("rols", "Jürgen Rolshoven", "Cologne, Germany", "")
       val ocr = User("OCR", "OCR", "Russia", "")
-      expect(fsteeg) { User.withId("fsteeg") }
-      expect(claesn) { User.withId("claesn") }
-      expect(matana) { User.withId("matana") }
-      expect(rols) { User.withId("rols") }
-      expect(ocr) { User.withId("OCR") }
+      expect(fsteeg) { User.withId(db, "fsteeg") }
+      expect(claesn) { User.withId(db, "claesn") }
+      expect(matana) { User.withId(db, "matana") }
+      expect(rols) { User.withId(db, "rols") }
+      expect(ocr) { User.withId(db, "OCR") }
     }
   }
 }

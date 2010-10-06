@@ -19,6 +19,7 @@ import scala.collection.JavaConversions;
 import de.uni_koeln.ub.drc.data.Modification;
 import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.data.Word;
+import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
  * Model, content and label providers for the {@link WordView}.
@@ -57,7 +58,7 @@ final class WordViewModel {
     @Override
     public String getColumnText(final Object element, final int columnIndex) {
       Modification modification = (Modification) element;
-      User user = User.withId(modification.author());
+      User user = User.withId(DrcUiActivator.instance().db(), modification.author());
       switch (columnIndex) {
       case 0:
         return modification.form();
