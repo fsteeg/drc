@@ -157,8 +157,8 @@ public final class EditComposite extends Composite {
   private Text prev;
   final static int ACTIVE = SWT.COLOR_DARK_GREEN;
   final static int DUBIOUS = SWT.COLOR_RED;
-  final static int DEFAULT = SWT.COLOR_DARK_GRAY;
-  final static int UNCHECKED = SWT.COLOR_BLACK;
+  final static int DEFAULT = SWT.COLOR_BLACK;
+  final static int UNCHECKED = SWT.COLOR_BLACK; // no coloring for now
 
   private void addModifyListener(final Text text) {
     text.addModifyListener(new ModifyListener() {
