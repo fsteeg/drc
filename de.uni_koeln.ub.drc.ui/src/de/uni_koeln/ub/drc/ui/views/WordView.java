@@ -212,11 +212,13 @@ public final class WordView {
   }
 
   private void vote(Modification modification, User voter, Vote vote) {
-    User author = User.withId(modification.author());
-    vote.update(modification, author, voter);
-    page.saveToDb();
-    voter.save();
-    author.save();
+    if (!modification.voters().contains(voter.id())) {
+      User author = User.withId(modification.author());
+      vote.update(modification, author, voter);
+      page.saveToDb();
+      voter.save();
+      author.save();
+    }
   }
 
   private boolean currentUserMayVote(Modification modification) {
