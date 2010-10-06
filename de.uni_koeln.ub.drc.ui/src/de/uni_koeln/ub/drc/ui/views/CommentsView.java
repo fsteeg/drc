@@ -38,6 +38,7 @@ import org.eclipse.swt.widgets.Text;
 import de.uni_koeln.ub.drc.data.Comment;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.User;
+import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 import de.uni_koeln.ub.drc.ui.views.WordViewModel.WordViewLabelProvider;
 
@@ -62,6 +63,14 @@ public final class CommentsView {
       @Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final List<Page> pages) {
     if (pages != null && pages.size() > 0) {
       page = pages.get(0);
+      setInput();
+    }
+  }
+
+  @Inject
+  public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text text) {
+    if (text != null) {
+      this.page = (Page) ((Object[]) text.getData())[1];
       setInput();
     }
   }

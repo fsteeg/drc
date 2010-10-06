@@ -12,8 +12,8 @@
       <children xsi:type="basic:PartStack" xmi:id="_SeXUertEd6FC9cDb6iV7h" elementId="_SeXUAu8EEd6FC9cDb6iV7g" containerData="1000" selectedElement="CheckView">
         <children xsi:type="basic:Part" xmi:id="CheckView" elementId="CheckView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.CheckView" label="Check" iconURI="" tooltip="Check View"/>
       </children>
-      <children xsi:type="basic:PartStack" xmi:id="_SeXUGO8EErtz9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7w" containerData="750" selectedElement="CommentsView">
-      <children xsi:type="basic:Part" xmi:id="_zJIoYLzZEd-9rpiV8zkceg" elementId="SpecialCharacterView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.SpecialCharacterView" label="Special Characters" tooltip="Special Characters"/>
+      <children xsi:type="basic:PartStack" xmi:id="_SeXUGO8EErtz9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7w" containerData="750" selectedElement="SpecialCharacterView">
+      <children xsi:type="basic:Part" xmi:id="SpecialCharacterView" elementId="SpecialCharacterView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.SpecialCharacterView" label="Special Characters" tooltip="Special Characters"/>
         <children xsi:type="basic:Part" xmi:id="WordView" elementId="WordView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.WordView" label="Word History" iconURI="" tooltip="Word History View"/>
         <children xsi:type="basic:Part" xmi:id="CommentsView" elementId="CommentsView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.CommentsView" label="Page Comments" iconURI="" tooltip="Comments View"/>
       </children>

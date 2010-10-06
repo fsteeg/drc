@@ -132,7 +132,7 @@ public final class CheckView {
       } else if (!check.getSelection()) {
         suggestions.setText("Edit suggestions disabled");
       } else {
-        findEditSuggestions((Word) word.getData());
+        findEditSuggestions((Word) ((Object[]) word.getData())[0]);
         job.setPriority(Job.DECORATE);
         job.schedule();
       }
@@ -194,7 +194,7 @@ public final class CheckView {
 
   private void markPosition(final Text text) {
     imageLabel.getImage().dispose();
-    Word word = (Word) text.getData();
+    Word word = (Word) ((Object[]) text.getData())[0];
     Box box = word.position();
     Rectangle rect = new Rectangle(box.x() - 10, box.y() - 4, box.width() + 20, box.height() + 12); // IMG_SIZE
     System.out.println("Current word: " + word);

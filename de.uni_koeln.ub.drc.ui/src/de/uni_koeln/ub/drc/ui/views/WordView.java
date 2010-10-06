@@ -12,10 +12,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -26,8 +22,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
@@ -63,7 +57,8 @@ public final class WordView {
   public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text text) {
     if (text != null) {
       this.text = text;
-      this.word = (Word) text.getData();
+      this.word = (Word) ((Object[]) text.getData())[0];
+      this.page = (Page) ((Object[]) text.getData())[1];
     }
     setTableInput();
   }
@@ -206,7 +201,7 @@ public final class WordView {
           vote(modification, DrcUiActivator.instance().currentUser(), vote);
           MessageDialog.openInformation(item.getParent().getShell(), "Vote " + vote, "Voted "
               + modification + ": " + vote);
-          text.setEditable(!((Word) text.getData()).isLocked());
+          text.setEditable(!word.isLocked());
         }
       }
 
