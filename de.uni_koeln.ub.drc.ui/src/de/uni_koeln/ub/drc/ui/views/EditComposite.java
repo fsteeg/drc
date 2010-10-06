@@ -13,9 +13,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.ui.css.swt.CSSSWTConstants;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
@@ -27,14 +27,13 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import scala.collection.JavaConversions;
-import de.uni_koeln.ub.drc.data.Modification;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.Word;
-import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
  * Composite holding the edit area. Used by the {@link EditView}.
@@ -62,6 +61,7 @@ public final class EditComposite extends Composite {
     this.setLayout(layout);
     commitChanges = true;
     addWrapOnResizeListener(parent);
+    setCssName(this);
   }
 
   /**
@@ -122,10 +122,10 @@ public final class EditComposite extends Composite {
         lines.add(lineComposite);
       } else {
         Text text = new Text(lineComposite, SWT.NONE);
+        setCssName(text);
         text.setText(word.history().top().form());
-        if (word.isPossibleError()) {
-          text.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_DARK_GRAY));
-        }
+        text.setForeground(parent.getDisplay().getSystemColor(
+            word.isPossibleError() ? UNCHECKED : DEFAULT));
         text.setData(word);
         addListeners(text);
         text.setEditable(!word.isLocked());
@@ -136,7 +136,12 @@ public final class EditComposite extends Composite {
     return list;
   }
 
+  private void setCssName(Control control) {
+    control.setData(CSSSWTConstants.CSS_CLASS_NAME_KEY, "editComposite");
+  }
+
   private void setLineLayout(final Composite lineComposite) {
+    setCssName(lineComposite);
     RowLayout layout = new RowLayout();
     GridData data = new GridData();
     data.widthHint = lineComposite.computeSize(parent.getSize().x, parent.getSize().y).x - 20;
@@ -152,7 +157,8 @@ public final class EditComposite extends Composite {
   private Text prev;
   final static int ACTIVE = SWT.COLOR_DARK_GREEN;
   final static int DUBIOUS = SWT.COLOR_RED;
-  final static int DEFAULT = SWT.COLOR_BLACK;
+  final static int DEFAULT = SWT.COLOR_DARK_GRAY;
+  final static int UNCHECKED = SWT.COLOR_BLACK;
 
   private void addModifyListener(final Text text) {
     text.addModifyListener(new ModifyListener() {
@@ -192,7 +198,7 @@ public final class EditComposite extends Composite {
 
       public void focusGained(final FocusEvent e) {
         text.clearSelection(); // use only our persistent marking below
-        if(((Word)text.getData()).isLocked()){
+        if (((Word) text.getData()).isLocked()) {
           setMessage(String.format("Entry '%s' is locked (vote down to unlock)", text.getText()));
         }
         text.setEditable(!((Word) text.getData()).isLocked());
