@@ -148,7 +148,7 @@ public final class SearchView {
       public void widgetDefaultSelected(SelectionEvent e) { // on enter in text
         addComment(text);
       }
-      
+
       private void addComment(final Text text) {
         String input = text.getText();
         if (input != null && input.trim().length() != 0) {
@@ -203,7 +203,7 @@ public final class SearchView {
     searchOptions.select(SearchOption.all().id());
     searchOptions.addSelectionListener(searchListener);
   }
-  
+
   private SelectionListener searchListener = new SelectionListener() {
     @Override
     public void widgetSelected(final SelectionEvent e) {
@@ -215,7 +215,7 @@ public final class SearchView {
       setInput();
     }
   };
-  
+
   private void updateResultCount() {
     int count = viewer.getTable().getItemCount();
     resultCount.setText(String.format("%s %s for:", count, count == 1 ? "hit" : "hits"));
@@ -250,13 +250,13 @@ public final class SearchView {
   }
 
   private void initTable() {
-    final int[] columns = new int[] { 25, 50, 50, 570, 200, 50 };
+    final int[] columns = new int[] { 25, 50, 60, 400, 200, 250 };
     createColumn("", columns[0]);
     createColumn("Volume", columns[1]);
     createColumn("Page", columns[2]);
     createColumn("Text", columns[3]);
     createColumn("Modified", columns[4]);
-    createColumn("Octopus", columns[5]);
+    createColumn("Tags", columns[5]);
     Table table = viewer.getTable();
     table.setHeaderVisible(true);
     table.setLinesVisible(true);
@@ -352,14 +352,16 @@ public final class SearchView {
         return "";
       case 1:
         return page.volume() + "";
-      case 2:
-        return page.number() + "";
+      case 2: {
+        String mapped = PageConverter.convert(fileName(page));
+        return page.number() + ((page.number() + "").equals(mapped) ? "" : " (" + mapped + ")");
+      }
       case 3:
-        return page.toText("|").substring(0, 90) + "...";
+        return page.toText("|").substring(0, 60) + "...";
       case 4:
         return lastModificationDate(asList(page.words()));
       case 5:
-        return PageConverter.convert(fileName(page));
+        return page.tags().mkString(", ");
       default:
         return page.toString();
       }
