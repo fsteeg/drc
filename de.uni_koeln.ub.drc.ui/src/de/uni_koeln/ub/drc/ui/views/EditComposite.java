@@ -33,7 +33,9 @@ import org.eclipse.swt.widgets.Text;
 
 import scala.collection.JavaConversions;
 import de.uni_koeln.ub.drc.data.Page;
+import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.data.Word;
+import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
  * Composite holding the edit area. Used by the {@link EditView}.
@@ -163,6 +165,9 @@ public final class EditComposite extends Composite {
   private void addModifyListener(final Text text) {
     text.addModifyListener(new ModifyListener() {
       public void modifyText(final ModifyEvent e) {
+        User user = DrcUiActivator.instance().currentUser();
+        user.latestPage_$eq(page.id());
+        user.latestWord_$eq(words.indexOf(text));
         /* Reset any warning color during editing (we check when focus is lost, see below): */
         text.setForeground(text.getDisplay().getSystemColor(ACTIVE));
         if (commitChanges) {

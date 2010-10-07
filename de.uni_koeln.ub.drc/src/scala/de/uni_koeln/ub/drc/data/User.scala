@@ -16,13 +16,18 @@ import com.quui.sinist.XmlDb
  */
 case class User(id: String, name: String, region: String, pass: String) {
   private var edits, upvotes, upvoted, downvotes, downvoted = 0
+  var latestPage: String = ""
+  var latestWord: Int = 0
   def reputation = (edits * 1 + upvotes * 1 + upvoted * 10) - (downvotes * 1 + downvoted * 2)
   def hasEdited { edits = edits + 1 }
   def hasUpvoted { upvotes += 1 }
   def wasUpvoted { upvoted += 1 }
   def hasDownvoted { downvotes += 1 }
   def wasDownvoted { downvoted += 1 }
-  def toXml = <user id={ id } name={ name } region={ region } pass={ pass } edits={ edits.toString } upvotes={ upvotes.toString } upvoted={ upvoted.toString } downvotes={ downvotes.toString } downvoted={ downvoted.toString }/>
+  def toXml = 
+    <user id={ id } name={ name } region={ region } pass={ pass } edits={ edits.toString } 
+    upvotes={ upvotes.toString } upvoted={ upvoted.toString } downvotes={ downvotes.toString } 
+    downvoted={ downvoted.toString } latestPage={ latestPage } latestWord={ latestWord.toString }/>
   def save(db:XmlDb) = db.putXml(toXml, "users", id + ".xml")
 }
 
@@ -40,6 +45,9 @@ object User {
     u.upvoted = (xml \ "@upvoted").text.trim.toInt
     u.downvotes = (xml \ "@downvotes").text.trim.toInt
     u.downvoted = (xml \ "@downvoted").text.trim.toInt
+    u.latestPage = (xml \ "@latestPage").text.trim
+    val lw = (xml \ "@latestWord").text.trim
+    if(lw!="") u.latestWord = lw.toInt
     u
   }
   def initialImport(db: XmlDb, folder: String): Unit = {

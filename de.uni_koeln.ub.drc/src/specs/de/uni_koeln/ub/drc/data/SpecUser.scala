@@ -36,6 +36,12 @@ class SpecUser extends Spec with ShouldMatchers {
       expect(true) { val prev = user.reputation; user.hasDownvoted; user.reputation < prev }
       expect(true) { val prev = user.reputation; user.wasDownvoted; user.reputation < prev }
     }
+    it("can store the latest position worked on") {
+      user.latestPage = "someid"
+      expect("someid") { User.fromXml(user.toXml).latestPage }
+      user.latestWord = 5
+      expect(5) { User.fromXml(user.toXml).latestWord }
+    }
     it("can be persisted via XML"){
       expect(user) { User.fromXml(user.toXml) }
     }

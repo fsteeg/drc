@@ -53,6 +53,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import de.uni_koeln.ub.drc.data.Index;
@@ -186,6 +187,14 @@ public final class SearchView {
       throw new IllegalArgumentException("No entries in initial search view");
     }
     viewer.setSelection(new StructuredSelection(viewer.getElementAt(0)));
+    TableItem[] items = viewer.getTable().getItems();
+    for (int i = 0; i < items.length; i++) {
+      Page page = (Page) items[i].getData();
+      if(page.id().equals(DrcUiActivator.instance().currentUser().latestPage())) {
+        viewer.setSelection(new StructuredSelection(viewer.getElementAt(i)));
+        break;
+      }
+    }
     allPages = new ArrayList<Page>(asList(SearchViewModelProvider.content.index.pages()));
     Collections.sort(allPages, comp);
   }

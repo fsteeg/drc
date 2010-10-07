@@ -63,15 +63,17 @@ public final class EditView {
   @PostConstruct
   public void setContext() {
     editComposite.context = context; // FIXME this can't be right
-    editComposite.getWords().get(0).setFocus();
+    Text text = editComposite.getWords().get(DrcUiActivator.instance().currentUser().latestWord());
+    text.setFocus();
+    sc.showControl(text);
   }
 
   @Inject
   public EditView(final Composite parent, final MDirtyable dirtyable) {
-    sc = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
     this.dirtyable = dirtyable;
     label = new Label(parent, SWT.CENTER);
     label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+    sc = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
     editComposite = new EditComposite(this, SWT.NONE);
     sc.setContent(editComposite);
     sc.setExpandVertical(true);
