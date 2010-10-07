@@ -50,7 +50,7 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements Callback
 
   private static final String TITLE = "Login to DRC";
   private static final String LOGIN = "Login";
-  private static final Point SIZE = new Point(250, 200);
+  private static final Point SIZE = new Point(250, 150);
   private boolean inputProcessed = false;
   private List<Callback> callbacks;
 
@@ -160,6 +160,7 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements Callback
     dialogArea.setLayoutData(new GridData(GridData.FILL_BOTH));
     Composite composite = new Composite(dialogArea, SWT.NONE);
     composite.setLayout(new GridLayout(2, false));
+    composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
     createCallbackHandlers(composite);
     return composite;
   }
@@ -173,14 +174,15 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements Callback
       }
     }
   }
-
+  
   private void createPasswordHandler(final Composite composite, final PasswordCallback callback) {
     Label label = new Label(composite, SWT.NONE);
     label.setText(callback.getPrompt());
-    final Text passwordText = new Text(composite, SWT.SINGLE | SWT.LEAD | SWT.PASSWORD | SWT.BORDER);
-    passwordText.addModifyListener(new ModifyListener() {
+    final Text text = new Text(composite, SWT.SINGLE | SWT.LEAD | SWT.PASSWORD | SWT.BORDER);
+    text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+    text.addModifyListener(new ModifyListener() {
       public void modifyText(final ModifyEvent event) {
-        callback.setPassword(passwordText.getText().toCharArray());
+        callback.setPassword(text.getText().toCharArray());
       }
     });
   }
@@ -189,6 +191,7 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements Callback
     Label label = new Label(composite, SWT.NONE);
     label.setText(callback.getPrompt());
     final Text text = new Text(composite, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+    text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
     text.addModifyListener(new ModifyListener() {
       public void modifyText(final ModifyEvent event) {
         callback.setName(text.getText());

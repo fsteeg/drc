@@ -24,7 +24,7 @@ import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
- * Simple login module implementation using credentials from a properties file.
+ * Simple login module implementation.
  * @author Fabian Steeg (fsteeg)
  */
 public final class SimpleLoginModule implements LoginModule {

@@ -133,7 +133,7 @@ public final class DrcUiActivator extends Plugin {
   public XmlDb db() {
     if(db == null) {
       db = Index.LocalDb().isAvailable() ? Index.LocalDb() : new XmlDb(
-          "xmldb:exist://hydra4.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/");
+          "xmldb:exist://postgres.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/");
       System.out.println("Using DB: " + db);
     }
     return db;
