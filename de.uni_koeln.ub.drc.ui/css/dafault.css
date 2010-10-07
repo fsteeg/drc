@@ -33,6 +33,10 @@ Text {
   background-color: #FDFCDC;
 }
 
+.specialCharacter {
+  font: Verdana 14px bold;
+}
+
 CTabFolder {
   tab-renderer: url('platform:/plugin/org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.CTabRendering');
 }

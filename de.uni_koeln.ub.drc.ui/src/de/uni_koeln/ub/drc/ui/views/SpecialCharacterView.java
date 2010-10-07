@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.css.swt.CSSSWTConstants;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -65,6 +66,7 @@ public final class SpecialCharacterView {
       final Button button = new Button(specialCharacterComposite, SWT.PUSH | SWT.FLAT);
       RowData rowData = new RowData(30, 30);
       button.setLayoutData(rowData);
+      button.setData(CSSSWTConstants.CSS_CLASS_NAME_KEY, "specialCharacter");
       button.setText("" + SC[i]);
       button.addSelectionListener(new SelectionListener() {
 
