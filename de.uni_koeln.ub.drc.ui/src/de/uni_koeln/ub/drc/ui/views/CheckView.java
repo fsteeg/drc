@@ -57,7 +57,7 @@ public final class CheckView {
   private boolean imageLoaded = false;
   private ScrolledComposite scrolledComposite;
   private ImageData image;
-  private Text suggestions;
+  private Label suggestions;
   private Job job;
   private Button check;
   private Text word;
@@ -92,7 +92,7 @@ public final class CheckView {
       @Override
       public void widgetDefaultSelected(SelectionEvent e) {}
     });
-    suggestions = new Text(bottom, SWT.WRAP);
+    suggestions = new Label(bottom, SWT.WRAP);
     suggestions.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
   }
 
