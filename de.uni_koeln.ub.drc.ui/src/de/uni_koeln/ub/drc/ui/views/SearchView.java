@@ -41,15 +41,13 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CCombo;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
@@ -71,7 +69,7 @@ public final class SearchView {
 
   private Text searchField;
   private Label resultCount;
-  private static CCombo searchOptions;
+  private static Combo searchOptions;
   private TableViewer viewer;
 
   @Inject
@@ -89,7 +87,7 @@ public final class SearchView {
   @Inject
   public SearchView(final Composite parent) {
     Composite searchComposite = new Composite(parent, SWT.NONE);
-    searchComposite.setLayout(new GridLayout(3, false));
+    searchComposite.setLayout(new GridLayout(4, false));
     initSearchField(searchComposite);
     initOptionsCombo(searchComposite);
     initTableViewer(parent);
@@ -121,7 +119,7 @@ public final class SearchView {
 
   private void addPageInfoBar(Composite parent) {
     Composite bottomComposite = new Composite(parent, SWT.NONE);
-    bottomComposite.setLayout(new GridLayout(5, false));
+    bottomComposite.setLayout(new GridLayout(6, false));
     Button prev = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
     prev.setImage(DrcUiActivator.instance().loadImage("icons/prev.gif"));
     prev.addSelectionListener(new NavigationListener(Navigate.PREV));
@@ -134,6 +132,8 @@ public final class SearchView {
   }
 
   private void insertAddCommentButton(Composite bottomComposite) {
+    Label label = new Label(bottomComposite, SWT.NONE);
+    label.setText("Add tag:");
     final Text text = new Text(bottomComposite, SWT.BORDER);
     Button addComment = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
     addComment.setToolTipText("Add a new tag to the current page");
@@ -207,9 +207,12 @@ public final class SearchView {
   }
 
   private void initOptionsCombo(final Composite searchComposite) {
-    searchOptions = new CCombo(searchComposite, SWT.NONE);
-    searchOptions.setItems(SearchOption.toStrings());
-    searchOptions.select(SearchOption.all().id());
+    Label label = new Label(searchComposite, SWT.NONE);
+    label.setText("in:");
+    searchOptions = new Combo(searchComposite, SWT.READ_ONLY);
+    searchOptions.setItems(new String[] { SearchOption.all().toString(),
+        SearchOption.tags().toString() });
+    searchOptions.select(0);
     searchOptions.addSelectionListener(searchListener);
   }
 

@@ -12,6 +12,10 @@ Label {
 	background-color: white;
 }
 
+Combo {
+  font: Verdana;
+}
+
 Composite {
 	background-color: white;
 }

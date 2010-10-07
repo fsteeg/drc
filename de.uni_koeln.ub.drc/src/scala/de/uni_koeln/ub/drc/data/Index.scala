@@ -55,7 +55,7 @@ class Index(val pages: List[Page]) {
 object SearchOption extends Enumeration {
     type SearchOption = Value
     val latest = Value("Latest")
-    val all = Value("History")
+    val all = Value("Text")
     val original = Value("Original")
     val tags = Value("Tags")
     def toStrings = Array[String]() ++ SearchOption.values map (_.toString)
