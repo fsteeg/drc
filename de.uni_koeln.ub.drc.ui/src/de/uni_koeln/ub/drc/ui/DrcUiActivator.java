@@ -134,6 +134,9 @@ public final class DrcUiActivator extends Plugin {
     if(db == null) {
       db = Index.LocalDb().isAvailable() ? Index.LocalDb() : new XmlDb(
           "xmldb:exist://postgres.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/");
+      if(!db.isAvailable()) {
+        throw new IllegalStateException("Could not connect to DB: " + db);
+      }
       System.out.println("Using DB: " + db);
     }
     return db;

@@ -71,9 +71,9 @@ public final class EditView {
   @Inject
   public EditView(final Composite parent, final MDirtyable dirtyable) {
     this.dirtyable = dirtyable;
-    label = new Label(parent, SWT.CENTER);
-    label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
     sc = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
+    label = new Label(parent, SWT.CENTER | SWT.WRAP);
+    label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
     editComposite = new EditComposite(this, SWT.NONE);
     sc.setContent(editComposite);
     sc.setExpandVertical(true);
