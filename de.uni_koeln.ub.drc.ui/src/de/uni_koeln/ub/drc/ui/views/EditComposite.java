@@ -168,8 +168,15 @@ public final class EditComposite extends Composite {
         if (commitChanges) {
           dirtyable.setDirty(true);
         }
-        text.pack();
+        text.pack(true);
         text.getParent().layout();
+        /*
+         * Workaround: on Windows, when adding text at the end of the widget, text at the beginning
+         * is pushed out of the widget and not visible - so we jump to beginning and then back:
+         */
+        int pos = text.getCaretPosition();
+        text.setSelection(0);
+        text.setSelection(pos);
       }
     });
   }
