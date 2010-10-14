@@ -364,11 +364,9 @@ public final class SearchView {
       case 0:
         return "";
       case 1:
-        return page.volume() + "";
-      case 2: {
-        String mapped = PageConverter.convert(fileName(page));
-        return page.number() + ((page.number() + "").equals(mapped) ? "" : " (" + mapped + ")");
-      }
+        return page.volume() - 3 + ""; // TODO proper mapping for volume
+      case 2:
+        return PageConverter.convert(fileName(page));
       case 3:
         return page.toText("|").substring(0, 60) + "...";
       case 4:
