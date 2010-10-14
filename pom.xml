@@ -21,7 +21,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <properties>
-    <tycho.version>0.10.0-SNAPSHOT</tycho.version>
+    <tycho.version>0.10.0</tycho.version>
   </properties>
   <modules>
     <module>de.uni_koeln.ub.drc.feature</module>
