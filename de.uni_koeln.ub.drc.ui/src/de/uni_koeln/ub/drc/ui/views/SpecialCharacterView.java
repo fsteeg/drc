@@ -14,7 +14,6 @@ import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.css.swt.CSSSWTConstants;
 import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -78,14 +77,9 @@ public final class SpecialCharacterView {
 
         private void insert(final String character) {
           if (text != null) {
-            if (!text.isFocusControl()) {
-              MessageDialog.openInformation(text.getShell(), "Special Characters",
-                  "Please select a word in the text to insert the character");
-            } else {
-              int pos = text.getCaretPosition();
-              text.insert(character);
-              text.setSelection(pos + 1);
-            }
+            int pos = text.getCaretPosition();
+            text.insert(character);
+            text.setSelection(pos + 1);
           }
         }
 

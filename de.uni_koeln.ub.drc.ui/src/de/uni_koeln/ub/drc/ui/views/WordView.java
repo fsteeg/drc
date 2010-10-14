@@ -22,6 +22,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
@@ -84,13 +85,13 @@ public final class WordView {
   }
 
   private void initTable() {
-    final int[] columns = new int[] { 185, 300, 200, 50, 30, 50, 80 };
+    final int[] columns = new int[] { 185, 300, 200, 50, 70, 70, 70 };
     createColumn("Form", columns[0], viewer);
     createColumn("Author", columns[1], viewer);
     createColumn("Date", columns[2], viewer);
     createColumn("Votes", columns[3], viewer);
-    createColumn("Up", columns[4], viewer);
-    createColumn("Down", columns[5], viewer);
+    createColumn("Upvote", columns[4], viewer);
+    createColumn("Downvote", columns[5], viewer);
     createColumn("Revert", columns[6], viewer);
     Table table = viewer.getTable();
     table.setHeaderVisible(true);
@@ -148,7 +149,7 @@ public final class WordView {
   private Button addRevertButton(final TableItem item, final int index, int col) {
     final Modification modification = (Modification) viewer.getData(index + "");
     if (!word.history().top().equals(modification)) { // no revert for most recent modification
-      Button button = createButton(item, "revert", col);
+      Button button = createButton(item, DrcUiActivator.instance().loadImage("icons/revert.gif"), col);
       button.setEnabled(!word.isLocked());
       button.addSelectionListener(new SelectionListener() {
         @Override
@@ -194,7 +195,9 @@ public final class WordView {
   }
 
   private Button addVoteButton(final TableItem item, final int index, final Vote vote, int col) {
-    Button button = createButton(item, vote.toString().toLowerCase(), col);
+    Button button = createButton(item,
+        vote == Vote.UP ? DrcUiActivator.instance().loadImage("icons/up.gif") : DrcUiActivator
+            .instance().loadImage("icons/down.gif"), col);
     button.addSelectionListener(new SelectionListener() {
       @Override
       public void widgetSelected(final SelectionEvent e) {
@@ -221,6 +224,7 @@ public final class WordView {
       page.saveToDb(db);
       voter.save(db);
       author.save(db);
+      setTableInput();
     }
   }
 
@@ -239,12 +243,13 @@ public final class WordView {
     return true;
   }
 
-  private Button createButton(final TableItem item, final String label, int columnIndex) {
+  private Button createButton(final TableItem item, final Image label, int columnIndex) {
     TableEditor editor = new TableEditor(viewer.getTable());
     Button button = new Button(viewer.getTable(), SWT.PUSH | SWT.FLAT);
-    button.setText(label); // TODO icon, too?
+    button.setImage(label);
     button.pack();
-    editor.minimumWidth = button.getSize().x;
+    editor.minimumWidth = 15;
+    editor.minimumHeight = 15;
     editor.horizontalAlignment = SWT.LEFT;
     editor.setEditor(button, item, columnIndex);
     return button;
