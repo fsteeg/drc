@@ -1,1 +1,4 @@
-<user region="Cologne, Germany" edits="0" upvotes="0" upvoted="0" downvotes="0" downvoted="0" name="Mihail Atanassov" id="matana" pass=""></user>
+<user region="Cologne, Germany" edits="0" upvotes="0" upvoted="0"
+	downvotes="0" downvoted="0" name="Mihail Atanassov" id="matana" pass="drc">
+  <db location="xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc" root="/db/" prefix="drc/"/>
+</user>

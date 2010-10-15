@@ -168,7 +168,7 @@ public final class CommentsView {
       case 1:
         return comment.text();
       case 2:
-        return WordViewLabelProvider.userDetails(User.withId(DrcUiActivator.instance().db(),
+        return WordViewLabelProvider.userDetails(User.withId(DrcUiActivator.instance().userDb(),
             comment.user()));
       case 3:
         return new Date(comment.date()).toString();

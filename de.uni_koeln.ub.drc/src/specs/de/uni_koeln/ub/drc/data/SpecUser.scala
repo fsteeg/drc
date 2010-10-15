@@ -7,6 +7,7 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.data
 
+import com.quui.sinist.XmlDb
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.junit.JUnitRunner
@@ -29,6 +30,15 @@ class SpecUser extends Spec with ShouldMatchers {
     it("has an associated region") {
       expect("Cologne, Germany") { user.region }
     }
+    it("can be associated with a specific DB location") {
+      val default = XmlDb("xmldb:exist://localhost:8080/exist/xmlrpc", "/db/", "drc/")
+      expect(default) { user.db }
+      expect(default) { User.fromXml(user.toXml).db }
+      val customDb = XmlDb("xmldb:exist://hydra2.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/")
+      val customUser = User("fsteeg", "Fabian Steeg", "Cologne, Germany", "", customDb)
+      expect(customDb) { customUser.db }
+      expect(customDb) { User.fromXml(customUser.toXml).db }
+    }
     it("has a reputation that is adjusted according to upvoting, downvoting, being upvoted and being downvoted") {
       expect(0) { user.reputation }
       expect(true) { val prev = user.reputation; user.hasUpvoted; user.reputation > prev }
@@ -42,11 +52,11 @@ class SpecUser extends Spec with ShouldMatchers {
       user.latestWord = 5
       expect(5) { User.fromXml(user.toXml).latestWord }
     }
-    it("can be persisted via XML"){
+    it("can be persisted via XML") {
       expect(user) { User.fromXml(user.toXml) }
     }
     it("can be changed and persisted") {
-      expect(true) { 
+      expect(true) {
         user.hasUpvoted; user.save(db); User.withId(db, user.id).reputation > 0
       }
     }
@@ -55,15 +65,15 @@ class SpecUser extends Spec with ShouldMatchers {
     it("allows import of users into the DB") {
       User.initialImport(db, "users")
     }
-    it("allows loading of a user from XML"){
+    it("allows loading of a user from XML") {
       expect(user) { User.fromXml(user.toXml) }
     }
-    it("allows access to individual saved user instances via user name"){
-      val fsteeg = User("fsteeg", "Fabian Steeg", "Cologne, Germany", "")
-      val claesn = User("claesn", "Claes Neuefeind", "Cologne, Germany", "")
-      val matana = User("matana", "Mihail Atanassov", "Cologne, Germany", "")
-      val rols = User("rols", "Jürgen Rolshoven", "Cologne, Germany", "")
-      val ocr = User("OCR", "OCR", "Russia", "")
+    it("allows access to individual saved user instances via user name") {
+      val fsteeg = User("fsteeg", "Fabian Steeg", "Cologne, Germany", "drc", Import.product)
+      val claesn = User("claesn", "Claes Neuefeind", "Cologne, Germany", "drc", Import.product)
+      val matana = User("matana", "Mihail Atanassov", "Cologne, Germany", "drc", Import.product)
+      val rols = User("rols", "Jürgen Rolshoven", "Cologne, Germany", "drc", Import.product)
+      val ocr = User("OCR", "OCR", "Russia", "drc", Import.product)
       expect(fsteeg) { User.withId(db, "fsteeg") }
       expect(claesn) { User.withId(db, "claesn") }
       expect(matana) { User.withId(db, "matana") }

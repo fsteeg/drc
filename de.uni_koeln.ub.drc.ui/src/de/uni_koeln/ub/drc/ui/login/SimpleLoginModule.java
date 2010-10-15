@@ -73,7 +73,7 @@ public final class SimpleLoginModule implements LoginModule {
     String pass = passCallback.getPassword() != null ? new String(passCallback.getPassword()) : "";
     User candidate = null;
     try {
-      candidate = User.withId(DrcUiActivator.instance().db(), name);
+      candidate = User.withId(DrcUiActivator.instance().userDb(), name);
     } catch (Throwable x) {
       x.printStackTrace();
     }

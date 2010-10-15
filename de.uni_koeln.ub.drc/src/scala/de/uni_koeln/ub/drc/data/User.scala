@@ -14,7 +14,7 @@ import com.quui.sinist.XmlDb
  * Initial user representation: id, full name, region, reputation and XML persistence.
  * @author Fabian Steeg (fsteeg)
  */
-case class User(id: String, name: String, region: String, pass: String) {
+case class User(id: String, name: String, region: String, pass: String, db:XmlDb = User.defaultDb) {
   private var edits, upvotes, upvoted, downvotes, downvoted = 0
   var latestPage: String = ""
   var latestWord: Int = 0
@@ -27,11 +27,13 @@ case class User(id: String, name: String, region: String, pass: String) {
   def toXml = 
     <user id={ id } name={ name } region={ region } pass={ pass } edits={ edits.toString } 
     upvotes={ upvotes.toString } upvoted={ upvoted.toString } downvotes={ downvotes.toString } 
-    downvoted={ downvoted.toString } latestPage={ latestPage } latestWord={ latestWord.toString }/>
+    downvoted={ downvoted.toString } latestPage={ latestPage } latestWord={ latestWord.toString }>
+    <db location={db.location} root={db.root} prefix={db.prefix}/> </user>
   def save(db:XmlDb) = db.putXml(toXml, "users", id + ".xml")
 }
 
 object User {
+  private val defaultDb = XmlDb("xmldb:exist://localhost:8080/exist/xmlrpc", "/db/", "drc/")
   def withId(db:XmlDb, id: String): User =
     db.getXml("users", id + ".xml") match {
       case Some(List(xml: Elem, _*)) => User.fromXml(xml)
@@ -39,7 +41,9 @@ object User {
     }
 
   def fromXml(xml: Node): User = {
-    val u = User((xml \ "@id").text, (xml \ "@name").text, (xml \ "@region").text, (xml \ "@pass").text)
+    val db = (xml\"db")
+    val u = User((xml \ "@id").text, (xml \ "@name").text, (xml \ "@region").text, (xml \ "@pass").text,
+      if(db.isEmpty) defaultDb else XmlDb((db\"@location").text, (db\"@root").text, (db\"@prefix").text))
     u.edits = (xml \ "@edits").text.trim.toInt
     u.upvotes = (xml \ "@upvotes").text.trim.toInt
     u.upvoted = (xml \ "@upvoted").text.trim.toInt

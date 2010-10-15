@@ -131,15 +131,19 @@ public final class DrcUiActivator extends Plugin {
   }
 
   public XmlDb db() {
-    if(db == null) {
-      db = Index.LocalDb().isAvailable() ? Index.LocalDb() : new XmlDb(
-          "xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/");
-      if(!db.isAvailable()) {
+    if (db == null) {
+      db = Index.LocalDb().isAvailable() ? Index.LocalDb() : currentUser().db();
+      if (!db.isAvailable()) {
         throw new IllegalStateException("Could not connect to DB: " + db);
       }
       System.out.println("Using DB: " + db);
     }
     return db;
+  }
+
+  public XmlDb userDb() {
+    return Index.LocalDb().isAvailable() ? Index.LocalDb() : new XmlDb(
+        "xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/");
   }
 
 }

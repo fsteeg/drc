@@ -219,11 +219,12 @@ public final class WordView {
   private void vote(Modification modification, User voter, Vote vote) {
     if (!modification.voters().contains(voter.id())) {
       XmlDb db = DrcUiActivator.instance().db();
-      User author = User.withId(db, modification.author());
+      XmlDb userDb = DrcUiActivator.instance().userDb();
+      User author = User.withId(userDb, modification.author());
       vote.update(modification, author, voter);
       page.saveToDb(db);
-      voter.save(db);
-      author.save(db);
+      voter.save(userDb);
+      author.save(userDb);
       setTableInput();
     }
   }
