@@ -1,4 +1,10 @@
-Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy), see our "development server":http://hydra4.spinfo.uni-koeln.de for downloads and data.
+Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy).
+
+h1. Beta 1 (2010 October 15)
+
+Our first beta (tag: b1) is "available for download":http://github.com/spinfo/drc/downloads (login: @anonymous@, empty pass).
+
+!http://i53.tinypic.com/10rpog3.png!
 
 h1. Beta 1 - Milestone 5 (2010 September 30)
 
