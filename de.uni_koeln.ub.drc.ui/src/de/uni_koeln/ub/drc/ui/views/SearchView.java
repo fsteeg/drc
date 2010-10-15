@@ -176,7 +176,7 @@ public final class SearchView {
   }
 
   private void setCurrentPageLabel(Page page) {
-    currentPageLabel.setText(String.format("Current page: volume %s, page %s, %s", page.volume(),
+    currentPageLabel.setText(String.format("Current page: volume %s, page %s, %s", mappedVolume(page),
         page.number(), page.tags().size() == 0 ? "not tagged" : "tagged as: "
             + page.tags().mkString(", ")));
   }
@@ -364,7 +364,7 @@ public final class SearchView {
       case 0:
         return "";
       case 1:
-        return page.volume() - 3 + ""; // TODO proper mapping for volume
+        return mappedVolume(page) + "";
       case 2:
         return PageConverter.convert(fileName(page));
       case 3:
@@ -377,7 +377,7 @@ public final class SearchView {
         return page.toString();
       }
     }
-
+    
     private String fileName(Page page) {
       return page.id().substring(page.id().lastIndexOf(File.separatorChar) + 1);
     }
@@ -401,5 +401,9 @@ public final class SearchView {
       }
       return null;
     }
+  }
+  
+  private static int mappedVolume(Page page) {
+    return page.volume() - 3; // TODO proper mapping for volume
   }
 }
