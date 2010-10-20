@@ -171,6 +171,8 @@ public final class CheckView {
   }
 
   private void updateImage(final Page page) throws IOException {
+    if (imageLabel != null && imageLabel.getImage() != null && !imageLabel.getImage().isDisposed())
+      imageLabel.getImage().dispose();
     Image loadedImage = loadImage(page);
     image = loadedImage.getImageData();
     imageLabel.setImage(loadedImage);
@@ -198,7 +200,6 @@ public final class CheckView {
     Word word = (Word) ((Object[]) text.getData())[0];
     Box box = word.position();
     Rectangle rect = new Rectangle(box.x() - 10, box.y() - 4, box.width() + 20, box.height() + 12); // IMG_SIZE
-    System.out.println("Current word: " + word);
     Image image = reloadImage();
     GC gc = new GC(image);
     drawBoxArea(rect, gc);

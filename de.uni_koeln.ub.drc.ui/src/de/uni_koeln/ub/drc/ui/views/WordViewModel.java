@@ -8,6 +8,8 @@
 package de.uni_koeln.ub.drc.ui.views;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -54,16 +56,17 @@ final class WordViewModel {
   }
 
   static final class WordViewLabelProvider extends LabelProvider implements ITableLabelProvider {
-
+    
+    private static Map<String, User> users = new HashMap<String, User>();
+    
     @Override
     public String getColumnText(final Object element, final int columnIndex) {
       Modification modification = (Modification) element;
-      User user = User.withId(DrcUiActivator.instance().userDb(), modification.author());
       switch (columnIndex) {
       case 0:
         return modification.form();
       case 1:
-        return user.name().equals("OCR") ? "--" : userDetails(user);
+        return userDetails(modification.author());
       case 2:
         return new Date(modification.date()).toString();
       case 3:
@@ -73,7 +76,10 @@ final class WordViewModel {
       }
     }
 
-    static String userDetails(User user) {
+    static String userDetails(String id) {
+      if(id.equals("OCR")) return "--";
+      if(!users.containsKey(id)) users.put(id, User.withId(DrcUiActivator.instance().userDb(), id));
+      User user = users.get(id);
       return String.format("%s from %s (%s, %s)", user.name(), user.region(), user.id(),
           user.reputation());
     }
