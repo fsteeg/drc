@@ -63,6 +63,10 @@ public final class EditView {
   @PostConstruct
   public void setContext() {
     editComposite.context = context; // FIXME this can't be right
+    focusLatestWord();
+  }
+
+  private void focusLatestWord() {
     Text text = editComposite.getWords().get(DrcUiActivator.instance().currentUser().latestWord());
     text.setFocus();
     sc.showControl(text);

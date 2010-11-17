@@ -54,6 +54,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
+import scala.collection.JavaConversions;
+
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.SearchOption;
@@ -172,7 +174,24 @@ public final class SearchView {
       setCurrentPageLabel(page);
       StructuredSelection selection = new StructuredSelection(new Page[] { page });
       context.modify(IServiceConstants.ACTIVE_SELECTION, selection.toList());
+      reload(viewer.getTable().getParent(),page);
     }
+  }
+  
+  private void reload(final Composite parent, final Page page) {
+    System.out.println("Reloading page: " + page);
+    parent.getDisplay().asyncExec(new Runnable() {
+      @Override
+      public void run() {
+        Page reloaded = Page.fromXml(
+            DrcUiActivator
+                .instance()
+                .db()
+                .getXml(SearchViewModelProvider.COLLECTION,
+                    JavaConversions.asBuffer(Arrays.asList(page.id()))).get().head(), page.id());
+        context.modify(IServiceConstants.ACTIVE_SELECTION, new StructuredSelection(reloaded).toList());
+      }
+    });
   }
 
   private void setCurrentPageLabel(Page page) {
@@ -186,7 +205,6 @@ public final class SearchView {
     if (viewer.getElementAt(0) == null) {
       throw new IllegalArgumentException("No entries in initial search view");
     }
-    viewer.setSelection(new StructuredSelection(viewer.getElementAt(0)));
     TableItem[] items = viewer.getTable().getItems();
     for (int i = 0; i < items.length; i++) {
       Page page = (Page) items[i].getData();
@@ -194,6 +212,9 @@ public final class SearchView {
         viewer.setSelection(new StructuredSelection(viewer.getElementAt(i)));
         break;
       }
+    }
+    if(viewer.getSelection().isEmpty()){
+      viewer.setSelection(new StructuredSelection(viewer.getElementAt(0)));
     }
     allPages = new ArrayList<Page>(asList(SearchViewModelProvider.content.index.pages()));
     Collections.sort(allPages, comp);
@@ -227,21 +248,30 @@ public final class SearchView {
       setInput();
     }
   };
-
+  
   private void updateResultCount() {
     int count = viewer.getTable().getItemCount();
     resultCount.setText(String.format("%s %s for:", count, count == 1 ? "hit" : "hits"));
   }
 
+  private boolean initial = true;
+  
   private void initTableViewer(final Composite parent) {
     viewer = new TableViewer(parent, SWT.MULTI | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
     viewer.addSelectionChangedListener(new ISelectionChangedListener() {
       public void selectionChanged(final SelectionChangedEvent event) {
-        IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+        final IStructuredSelection selection = (IStructuredSelection) event.getSelection();
         if (selection.getFirstElement() instanceof Page) {
-          setCurrentPageLabel((Page) selection.getFirstElement());
+          String oldPageLabel = currentPageLabel.getText();
+          final Page page = (Page) selection.getFirstElement();
+          setCurrentPageLabel(page);
+          context.modify(IServiceConstants.ACTIVE_SELECTION, selection.toList());
+          if (!initial) { // don't reload initial page
+            reload(parent, page);
+          } else {
+            initial = false;
+          }
         }
-        context.modify(IServiceConstants.ACTIVE_SELECTION, selection.toList());
       }
     });
     initTable();
@@ -312,18 +342,18 @@ public final class SearchView {
 
   private static final class SearchViewModelProvider {
     private static SearchViewModelProvider content = null;
+    private final static String COLLECTION = "PPN345572629_0004";
     Index index;
 
     private SearchViewModelProvider(IProgressMonitor m) {
-      String c = "PPN345572629_0004";
-      List<String> ids = asList(DrcUiActivator.instance().db().getIds(c).get());
+      List<String> ids = asList(DrcUiActivator.instance().db().getIds(COLLECTION).get());
       m.beginTask("Loading data from the DB...", ids.size() / 2); // we only load the XML files
       List<Page> pages = new ArrayList<Page>();
       for (String id : ids) {
         if (id.endsWith(".xml")) {
           m.subTask(id);
           pages.add(Page.fromXml(
-              DrcUiActivator.instance().db().getXml(c, asBuffer(Arrays.asList(id))).get().head(),
+              DrcUiActivator.instance().db().getXml(COLLECTION, asBuffer(Arrays.asList(id))).get().head(),
               id));
           m.worked(1);
         }
