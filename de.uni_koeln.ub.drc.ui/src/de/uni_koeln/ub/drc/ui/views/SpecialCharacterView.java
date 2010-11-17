@@ -15,8 +15,11 @@ import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.css.swt.CSSSWTConstants;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
@@ -43,15 +46,20 @@ public final class SpecialCharacterView {
   @Inject
   private IEclipseContext context;
   private Text text;
-
+  
   @Inject
   public SpecialCharacterView(final Composite parent) {
-    Composite specialCharacterComposite = new Composite(parent, SWT.NONE);
+    ScrolledComposite scrolledComposite = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
+    Composite specialCharacterComposite = new Composite(scrolledComposite, SWT.NONE);
+    scrolledComposite.setContent(specialCharacterComposite);
+    scrolledComposite.setExpandVertical(true);
+    scrolledComposite.setExpandHorizontal(true);
     RowLayout rowLayout = new RowLayout(SWT.HORIZONTAL);
     rowLayout.spacing = 5;
     rowLayout.pack = true;
     specialCharacterComposite.setLayout(rowLayout);
     initSCButtons(specialCharacterComposite);
+    scrolledComposite.setMinSize(specialCharacterComposite.computeSize(SWT.MIN, SWT.DEFAULT));
   }
 
   @Inject
