@@ -16,10 +16,10 @@ import org.eclipse.e4.ui.css.swt.CSSSWTConstants;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
@@ -33,6 +33,8 @@ import org.eclipse.swt.widgets.Text;
 
 public final class SpecialCharacterView {
 
+  private Text text;
+
   private static final char[] SC = new char[] { /* A */'\u00C0', '\u00E0', '\u00C1', '\u00E1',
       '\u00C2', '\u00E2', '\u00C3', '\u00E3', '\u00C4', '\u00E4', '\u00C6', '\u00E6', '\u1EA0',
       '\u1EA1', /* E */'\u00C8', '\u00E8', '\u00C9', '\u00E9', '\u00CA', '\u00EA', '\u00CB',
@@ -43,10 +45,6 @@ public final class SpecialCharacterView {
       '\u00FA', '\u00DB', '\u00FB', '\u00DC', '\u00FC', '\u0168', '\u0169', '\u016A', '\u016B', /* N */
       '\u00D1', '\u00F1', /* long S */'\u017F' };
 
-  @Inject
-  private IEclipseContext context;
-  private Text text;
-  
   @Inject
   public SpecialCharacterView(final Composite parent) {
     ScrolledComposite scrolledComposite = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
@@ -69,6 +67,27 @@ public final class SpecialCharacterView {
     }
   }
 
+  protected static class TextFocusListener implements FocusListener {
+    
+    private IEclipseContext context;
+    private Text text;
+  
+    public TextFocusListener(final IEclipseContext context, final Text text) {
+      this.context = context;
+      this.text = text;
+    }
+  
+    @Override
+    public void focusGained(FocusEvent e) {
+      context.modify(IServiceConstants.ACTIVE_SELECTION, null);
+    }
+  
+    @Override
+    public void focusLost(FocusEvent e) {
+      context.modify(IServiceConstants.ACTIVE_SELECTION, text);
+    }
+  }
+
   private void initSCButtons(final Composite specialCharacterComposite) {
     for (int i = 0; i < SC.length; i++) {
       final Button button = new Button(specialCharacterComposite, SWT.PUSH | SWT.FLAT);
@@ -88,6 +107,7 @@ public final class SpecialCharacterView {
             int pos = text.getCaretPosition();
             text.insert(character);
             text.setSelection(pos + 1);
+            text.setFocus();
           }
         }
 

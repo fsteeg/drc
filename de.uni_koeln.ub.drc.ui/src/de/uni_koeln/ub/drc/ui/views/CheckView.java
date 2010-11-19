@@ -121,7 +121,7 @@ public final class CheckView {
 
   @Inject
   public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text word) {
-    if (imageLoaded && word != null) {
+    if (imageLoaded && word != null && word.getData() != null) {
       this.word = word;
       markPosition(word);
       if (job != null) {
