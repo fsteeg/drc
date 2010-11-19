@@ -79,12 +79,12 @@ public final class SpecialCharacterView {
   
     @Override
     public void focusGained(FocusEvent e) {
-      context.modify(IServiceConstants.ACTIVE_SELECTION, null);
+      context.modify(IServiceConstants.ACTIVE_SELECTION, text);
     }
   
     @Override
     public void focusLost(FocusEvent e) {
-      context.modify(IServiceConstants.ACTIVE_SELECTION, text);
+      context.modify(IServiceConstants.ACTIVE_SELECTION, null);
     }
   }
 
