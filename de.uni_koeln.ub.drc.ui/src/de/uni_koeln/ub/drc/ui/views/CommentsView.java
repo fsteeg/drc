@@ -12,9 +12,11 @@ import static scala.collection.JavaConversions.asList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -48,8 +50,11 @@ import de.uni_koeln.ub.drc.ui.views.WordViewModel.WordViewLabelProvider;
  */
 public final class CommentsView {
 
+  @Inject
+  private IEclipseContext context;
   private TableViewer viewer;
   private Page page;
+  private Text commentField;
 
   @Inject
   public CommentsView(final Composite parent) {
@@ -69,16 +74,22 @@ public final class CommentsView {
 
   @Inject
   public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text text) {
-    if (text != null) {
+    if (text != null && text.getData() != null) {
       this.page = (Page) ((Object[]) text.getData())[1];
       setInput();
     }
   }
 
+  @PostConstruct
+  private void addFocusListener() {
+    commentField
+        .addFocusListener(new SpecialCharacterView.TextFocusListener(context, commentField));
+  }
+
   private void initAddCommentBar(Composite parent) {
     Composite comp = new Composite(parent, SWT.NONE);
     comp.setLayout(new GridLayout(2, false));
-    final Text commentField = new Text(comp, SWT.BORDER);
+    commentField = new Text(comp, SWT.BORDER);
     commentField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
     Button add = new Button(comp, SWT.PUSH | SWT.FLAT);
     add.setImage(DrcUiActivator.instance().loadImage("icons/add.gif"));

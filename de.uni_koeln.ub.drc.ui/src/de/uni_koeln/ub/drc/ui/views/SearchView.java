@@ -41,6 +41,8 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
@@ -62,6 +64,7 @@ import de.uni_koeln.ub.drc.data.SearchOption;
 import de.uni_koeln.ub.drc.data.Tag;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.ui.views.SpecialCharacterView.TextFocusListener;
 
 /**
  * View containing a search field and a table viewer displaying pages.
@@ -70,6 +73,7 @@ import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 public final class SearchView {
 
   private Text searchField;
+  private Text tagField;
   private Label resultCount;
   private static Combo searchOptions;
   private TableViewer viewer;
@@ -95,6 +99,12 @@ public final class SearchView {
     initTableViewer(parent);
     addPageInfoBar(parent);
     GridLayoutFactory.fillDefaults().generateLayout(parent);
+  }
+
+  @PostConstruct
+  private void addFocusListener() {
+    searchField.addFocusListener(new SpecialCharacterView.TextFocusListener(context, searchField));
+    tagField.addFocusListener(new SpecialCharacterView.TextFocusListener(context, tagField));
   }
 
   private enum Navigate {
@@ -136,7 +146,7 @@ public final class SearchView {
   private void insertAddCommentButton(Composite bottomComposite) {
     Label label = new Label(bottomComposite, SWT.NONE);
     label.setText("Add tag:");
-    final Text text = new Text(bottomComposite, SWT.BORDER);
+    tagField = new Text(bottomComposite, SWT.BORDER);
     Button addComment = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
     addComment.setToolTipText("Add a new tag to the current page");
     addComment.setImage(DrcUiActivator.instance().loadImage("icons/add.gif"));
@@ -144,12 +154,12 @@ public final class SearchView {
 
       @Override
       public void widgetSelected(SelectionEvent e) { // on button click
-        addComment(text);
+        addComment(tagField);
       }
 
       @Override
       public void widgetDefaultSelected(SelectionEvent e) { // on enter in text
-        addComment(text);
+        addComment(tagField);
       }
 
       private void addComment(final Text text) {
@@ -165,7 +175,7 @@ public final class SearchView {
 
     };
     addComment.addSelectionListener(listener);
-    text.addSelectionListener(listener);
+    tagField.addSelectionListener(listener);
   }
 
   private void updateSelection() {
@@ -174,10 +184,10 @@ public final class SearchView {
       setCurrentPageLabel(page);
       StructuredSelection selection = new StructuredSelection(new Page[] { page });
       context.modify(IServiceConstants.ACTIVE_SELECTION, selection.toList());
-      reload(viewer.getTable().getParent(),page);
+      reload(viewer.getTable().getParent(), page);
     }
   }
-  
+
   private void reload(final Composite parent, final Page page) {
     System.out.println("Reloading page: " + page);
     parent.getDisplay().asyncExec(new Runnable() {
@@ -189,14 +199,15 @@ public final class SearchView {
                 .db()
                 .getXml(SearchViewModelProvider.COLLECTION,
                     JavaConversions.asBuffer(Arrays.asList(page.id()))).get().head(), page.id());
-        context.modify(IServiceConstants.ACTIVE_SELECTION, new StructuredSelection(reloaded).toList());
+        context.modify(IServiceConstants.ACTIVE_SELECTION,
+            new StructuredSelection(reloaded).toList());
       }
     });
   }
 
   private void setCurrentPageLabel(Page page) {
-    currentPageLabel.setText(String.format("Current page: volume %s, page %s, %s", mappedVolume(page),
-        page.number(), page.tags().size() == 0 ? "not tagged" : "tagged as: "
+    currentPageLabel.setText(String.format("Current page: volume %s, page %s, %s",
+        mappedVolume(page), page.number(), page.tags().size() == 0 ? "not tagged" : "tagged as: "
             + page.tags().mkString(", ")));
   }
 
@@ -208,12 +219,12 @@ public final class SearchView {
     TableItem[] items = viewer.getTable().getItems();
     for (int i = 0; i < items.length; i++) {
       Page page = (Page) items[i].getData();
-      if(page.id().equals(DrcUiActivator.instance().currentUser().latestPage())) {
+      if (page.id().equals(DrcUiActivator.instance().currentUser().latestPage())) {
         viewer.setSelection(new StructuredSelection(viewer.getElementAt(i)));
         break;
       }
     }
-    if(viewer.getSelection().isEmpty()){
+    if (viewer.getSelection().isEmpty()) {
       viewer.setSelection(new StructuredSelection(viewer.getElementAt(0)));
     }
     allPages = new ArrayList<Page>(asList(SearchViewModelProvider.content.index.pages()));
@@ -248,14 +259,14 @@ public final class SearchView {
       setInput();
     }
   };
-  
+
   private void updateResultCount() {
     int count = viewer.getTable().getItemCount();
     resultCount.setText(String.format("%s %s for:", count, count == 1 ? "hit" : "hits"));
   }
 
   private boolean initial = true;
-  
+
   private void initTableViewer(final Composite parent) {
     viewer = new TableViewer(parent, SWT.MULTI | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
     viewer.addSelectionChangedListener(new ISelectionChangedListener() {
@@ -353,8 +364,8 @@ public final class SearchView {
         if (id.endsWith(".xml")) {
           m.subTask(id);
           pages.add(Page.fromXml(
-              DrcUiActivator.instance().db().getXml(COLLECTION, asBuffer(Arrays.asList(id))).get().head(),
-              id));
+              DrcUiActivator.instance().db().getXml(COLLECTION, asBuffer(Arrays.asList(id))).get()
+                  .head(), id));
           m.worked(1);
         }
         if (m.isCanceled()) {
@@ -407,7 +418,7 @@ public final class SearchView {
         return page.toString();
       }
     }
-    
+
     private String fileName(Page page) {
       return page.id().substring(page.id().lastIndexOf(File.separatorChar) + 1);
     }
@@ -432,7 +443,7 @@ public final class SearchView {
       return null;
     }
   }
-  
+
   private static int mappedVolume(Page page) {
     return page.volume() - 3; // TODO proper mapping for volume
   }

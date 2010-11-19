@@ -58,7 +58,7 @@ public final class WordView {
 
   @Inject
   public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text text) {
-    if (text != null) {
+    if (text != null && text.getData() != null) {
       this.text = text;
       this.word = (Word) ((Object[]) text.getData())[0];
       this.page = (Page) ((Object[]) text.getData())[1];
