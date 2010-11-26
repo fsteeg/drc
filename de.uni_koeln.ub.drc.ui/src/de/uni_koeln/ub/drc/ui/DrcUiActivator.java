@@ -9,9 +9,11 @@ package de.uni_koeln.ub.drc.ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
+import java.util.Set;
 
 import javax.security.auth.login.LoginException;
 
@@ -21,6 +23,18 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.equinox.p2.core.IProvisioningAgent;
+import org.eclipse.equinox.p2.core.ProvisionException;
+import org.eclipse.equinox.p2.metadata.IInstallableUnit;
+import org.eclipse.equinox.p2.operations.InstallOperation;
+import org.eclipse.equinox.p2.operations.ProvisioningJob;
+import org.eclipse.equinox.p2.operations.ProvisioningSession;
+import org.eclipse.equinox.p2.query.QueryUtil;
+import org.eclipse.equinox.p2.repository.artifact.IArtifactRepositoryManager;
+import org.eclipse.equinox.p2.repository.metadata.IMetadataRepository;
+import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.equinox.security.auth.ILoginContext;
 import org.eclipse.equinox.security.auth.LoginContextFactory;
 import org.eclipse.jface.dialogs.ErrorDialog;
@@ -39,9 +53,9 @@ import de.uni_koeln.ub.drc.data.User;
  */
 public final class DrcUiActivator extends Plugin {
 
-  public static final String PLUGIN_ID = "de.uni_koeln.ub.drc.ui";
+  public static final String PLUGIN_ID = "de.uni_koeln.ub.drc.ui"; //$NON-NLS-1$
 
-  private static final String JAAS_CONFIG_FILE = "jaas_config";
+  private static final String JAAS_CONFIG_FILE = "jaas_config"; //$NON-NLS-1$
 
   private XmlDb db = null;
 
@@ -52,7 +66,48 @@ public final class DrcUiActivator extends Plugin {
   public void start(final BundleContext context) throws Exception {
     super.start(context);
     instance = this;
+    update(context);
     login(context);
+  }
+
+  private void update(BundleContext context) throws URISyntaxException {
+    URI repo = new URI("http://hydra2.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
+    // URI repo = new URI("file:///Users/fsteeg/Documents/workspaces/drc/de.uni_koeln.ub.drc.rcp/target/repository"); //$NON-NLS-1$
+    String productId = "de.uni_koeln.ub.drc.rcp"; //$NON-NLS-1$
+    InstallOperation op = createInstallOperation(context, repo, productId);
+    if (op != null) {
+      IStatus status = op.resolveModal(null);
+      getLog().log(
+          new Status(IStatus.INFO, PLUGIN_ID, String.format(
+              "Resolved operation status: %s, details: %s", status, op.getResolutionDetails()))); //$NON-NLS-1$
+      ProvisioningJob job = op.getProvisioningJob(null);
+      if (job != null) {
+        job.addJobChangeListener(new JobChangeAdapter() {
+          public void done(IJobChangeEvent event) {
+            getLog().log(new Status(IStatus.INFO, PLUGIN_ID, "Update Done: " + event.getResult())); //$NON-NLS-1$
+          }
+        });
+        job.schedule();
+      }
+    }
+  }
+
+  private InstallOperation createInstallOperation(BundleContext context, URI repo, String productId) {
+    try {
+      final IProvisioningAgent agent = (IProvisioningAgent) context.getService(context
+          .getServiceReference(IProvisioningAgent.SERVICE_NAME));
+      IMetadataRepository metadataRepo = ((IMetadataRepositoryManager) agent
+          .getService(IMetadataRepositoryManager.SERVICE_NAME)).loadRepository(repo, null);
+      ((IArtifactRepositoryManager) agent.getService(IArtifactRepositoryManager.SERVICE_NAME))
+          .loadRepository(repo, null);
+      Set<IInstallableUnit> toInstall = metadataRepo
+          .query(QueryUtil.createIUQuery(productId), null).toUnmodifiableSet();
+      getLog().log(new Status(IStatus.INFO, PLUGIN_ID, "Attempting to install: " + toInstall)); //$NON-NLS-1$
+      return new InstallOperation(new ProvisioningSession(agent), toInstall);
+    } catch (ProvisionException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   public User currentUser() {
@@ -111,7 +166,7 @@ public final class DrcUiActivator extends Plugin {
     try {
       URL resource = getBundle().getResource(location);
       if (resource == null) {
-        System.err.println("Could not resolve: " + location);
+        getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, "Could not resolve: " + location));
         return null;
       }
       return new File(FileLocator.resolve(resource).toURI());
@@ -136,7 +191,7 @@ public final class DrcUiActivator extends Plugin {
       if (!db.isAvailable()) {
         throw new IllegalStateException("Could not connect to DB: " + db);
       }
-      System.out.println("Using DB: " + db);
+      getLog().log(new Status(IStatus.INFO, PLUGIN_ID, "Using DB: " + db));
     }
     return db;
   }

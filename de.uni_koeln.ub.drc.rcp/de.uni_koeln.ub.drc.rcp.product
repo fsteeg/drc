@@ -4,9 +4,12 @@
 <product name="DRC RCP" uid="de.uni_koeln.ub.drc.rcp" id="de.uni_koeln.ub.drc.ui.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.2.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
+      <macosx></macosx>
    </configIni>
 
    <launcherArgs>
+      <programArgs>-consolelog</programArgs>
+      <programArgsMac>-startup ../../../plugins/org.eclipse.equinox.launcher_1.1.0.v20100507.jar</programArgsMac>
       <vmArgs>-Xmx256m</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
@@ -18,13 +21,12 @@
       startupProgressRect="5,275,445,15"
       startupMessageRect="7,252,445,20"
       startupForegroundColor="000000" />
-
-   <!-- <launcher name="DRC">
+   <launcher>
       <solaris/>
       <win useIco="false">
          <bmp/>
       </win>
-   </launcher> --> <!-- Not working with Tycho eclipse-repository packaging -->
+   </launcher>
 
    <vm>
    </vm>
@@ -33,11 +35,12 @@
    </plugins>
 
    <features>
-      <feature id="de.uni_koeln.ub.drc.feature" version="0.2.0.qualifier"/>
       <feature id="org.eclipse.pde.junit.runtime.addon" version="1.0.0.v20100610"/>
       <feature id="org.eclipse.rcp" version="4.0.0.v20100726-9OCJFKtFuxrHUSfXBA5VlPRhgRel"/>
       <feature id="org.eclipse.platform" version="4.0.0.v20100727-9LEiGN9FmrOcU0RSmR2t8q6tBnWBq9KXihSfm"/>
       <feature id="org.eclipse.e4.runtime.feature" version="0.9.1.v20091009-1415-7Q68ZF9JgLWLMBckAQBmu"/>
+      <feature id="de.uni_koeln.ub.drc.feature"/>
+      <feature id="org.eclipse.equinox.p2.user.ui" version="2.0.0.v20100503-897HFZ-FdHjO2NQo0sD_Nt"/>
    </features>
 
    <configurations>
