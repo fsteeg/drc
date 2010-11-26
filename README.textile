@@ -1,5 +1,15 @@
 Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy).
 
+h1. Beta 2 - Milestone 1 (2010 November 26)
+
+h2. Overview
+
+Beta 2 milestone 1 (tag: b2-m1) contains bugfixes and visual tweaks, as well as various minor improvements like optimized DB access and memory usage, improved synchronization between users and special characters support in all text fields. The Tycho build now uses the 'eclipse-repository' packaging and the application updates itself on startup using the p2 API.
+
+h2. Dependencies and Setup
+
+Beta 2 milestone 1 requires Eclipse "4.0":http://download.eclipse.org/e4/downloads/drops/R-0.10-201007271415/index.html and "eXist-db":http://exist.sourceforge.net/ (running on our server or locally on port 7777, see below for setup); other requirements are included. The Tycho build requires Maven 3 and can be executed in the repo root using @mvn clean install@.
+
 h1. Beta 1 (2010 October 15)
 
 Our first beta (tag: b1) is "available for download":http://github.com/spinfo/drc/downloads (login: @anonymous@, empty pass).
