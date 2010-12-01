@@ -34,13 +34,14 @@ class Index(val pages: List[Page]) {
      * @return A list of pages where any word contains the term according to the specified option
      */
     def search(term: String, option: SearchOption.Value): Array[Page] =
-      for { page <- pages.toArray 
-        if(option == SearchOption.tags && page.tags.map(_.text.toLowerCase).contains(term.toLowerCase)) ||
-        option != SearchOption.tags && page.words.exists(option match {
-            case SearchOption.all => _.history.exists(_.form.toLowerCase contains term.toLowerCase)
-            case SearchOption.latest => _.history.top.form.toLowerCase contains term.toLowerCase
-            case SearchOption.original => _.history.toList.last.form.toLowerCase contains term.toLowerCase
-          })
+      for { page <- pages.toArray; t = term.toLowerCase
+        if (term.trim.length==0 || (option match {
+            case SearchOption.all => page.words.exists(_.history.exists(_.form.toLowerCase contains t))
+            case SearchOption.latest => page.words.exists(_.history.top.form.toLowerCase contains t)
+            case SearchOption.original => page.words.exists(_.history.toList.last.form.toLowerCase contains t)
+            case SearchOption.tags => page.tags.exists(_.text.toLowerCase contains t)
+            case SearchOption.comments => page.comments.exists(_.text.toLowerCase contains t)
+          }))
       } yield page
     
     override def toString = "Index with " + pages.length + " pages"
@@ -58,6 +59,7 @@ object SearchOption extends Enumeration {
     val all = Value("Text")
     val original = Value("Original")
     val tags = Value("Tags")
+    val comments = Value("Comments")
     def toStrings = Array[String]() ++ SearchOption.values map (_.toString)
 }
 

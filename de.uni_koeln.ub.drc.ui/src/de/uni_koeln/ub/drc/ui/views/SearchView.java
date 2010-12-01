@@ -243,7 +243,7 @@ public final class SearchView {
     label.setText("in:");
     searchOptions = new Combo(searchComposite, SWT.READ_ONLY);
     searchOptions.setItems(new String[] { SearchOption.all().toString(),
-        SearchOption.tags().toString() });
+        SearchOption.tags().toString(), SearchOption.comments().toString() });
     searchOptions.select(0);
     searchOptions.addSelectionListener(searchListener);
   }

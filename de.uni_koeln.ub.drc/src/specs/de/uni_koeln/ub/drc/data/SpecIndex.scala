@@ -17,25 +17,32 @@ import org.junit.runner.RunWith
  */
 @RunWith(classOf[JUnitRunner])
 class SpecIndex extends Spec with ShouldMatchers {
-    
-    val pages = Page.mock :: Page.mock :: Page(Word("test", Box(0,0,0,0)) :: Nil, "mock") :: Nil
-    
-    describe("The Index") {
-        val index = Index(pages)
-        it("allows full text search for a list of pages") {
-            expect(2) {index.search("catechismus").length}
-            expect(1) {index.search("Test").length}
-            expect(0) {index.search("catechismus".reverse).length}
-        }
-        it("is case insensitive") {
-            expect( index.search("test").toList ) { index.search("Test").toList }
-        }
+
+  val page = Page(Word("test", Box(0, 0, 0, 0)) :: Nil, "mock")
+  page.comments += Comment("me", "comment text", 0)
+  page.tags += Tag("testtag", "me")
+  val pages = Page.mock :: Page.mock :: page :: Nil
+
+  describe("The Index") {
+    val index = Index(pages)
+    it("allows full text search for a list of pages") {
+      expect(2) { index.search("catechismus").length }
+      expect(1) { index.search("Test").length }
+      expect(0) { index.search("catechismus".reverse).length }
     }
-    
-    describe("The Index companion object") {
-        it("provides a factory method") {
-            expect(Index(pages)) { new Index(pages) }
-        }
+    it("is case insensitive") {
+      expect(index.search("test").toList) { index.search("Test").toList }
     }
-    
+    it("supports searching in different fields") {
+      expect(1) { index.search("testtag", SearchOption.tags).length }
+      expect(1) { index.search("comment", SearchOption.comments).length }
+    }
+  }
+
+  describe("The Index companion object") {
+    it("provides a factory method") {
+      expect(Index(pages)) { new Index(pages) }
+    }
+  }
+
 }
