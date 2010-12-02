@@ -120,22 +120,23 @@ public final class CheckView {
   }
 
   @Inject
-  public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text word) {
-    if (imageLoaded && word != null && word.getData() != null) {
-      this.word = word;
-      markPosition(word);
+  public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text text) {
+    Word word = null;
+    if (imageLoaded && text != null && (word = (Word) text.getData(Word.class.toString())) != null) {
+      this.word = text;
+      markPosition(text);
       if (job != null) {
         /* If a word is selected while we had a Job running for the previous word, cancel that: */
         job.cancel();
       }
-      if (word == null) {
+      if (text == null) {
         suggestions.setText("No word selected");
       } else if (!check.getSelection()) {
         suggestions.setText("Edit suggestions disabled");
-      } else if (((Word) ((Object[]) word.getData())[0]).isLocked()) {
+      } else if (word.isLocked()) {
         suggestions.setText("No edit suggestions - word is locked");
       } else {
-        findEditSuggestions((Word) ((Object[]) word.getData())[0]);
+        findEditSuggestions(word);
         job.setPriority(Job.DECORATE);
         job.schedule();
       }
@@ -199,7 +200,7 @@ public final class CheckView {
 
   private void markPosition(final Text text) {
     imageLabel.getImage().dispose();
-    Word word = (Word) ((Object[]) text.getData())[0];
+    Word word = (Word) text.getData(Word.class.toString());
     Box box = word.position();
     Rectangle rect = new Rectangle(box.x() - 10, box.y() - 4, box.width() + 20, box.height() + 12); // IMG_SIZE
     Image image = reloadImage();

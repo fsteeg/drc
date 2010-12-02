@@ -74,8 +74,9 @@ public final class CommentsView {
 
   @Inject
   public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text text) {
-    if (text != null && text.getData() != null) {
-      this.page = (Page) ((Object[]) text.getData())[1];
+    Page page = null;
+    if (text != null && (page = (Page) text.getData(Page.class.toString())) != null) {
+      this.page = page;
       setInput();
     }
   }

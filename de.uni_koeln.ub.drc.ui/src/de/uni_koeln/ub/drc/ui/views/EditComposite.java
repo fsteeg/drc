@@ -128,7 +128,8 @@ public final class EditComposite extends Composite {
         text.setText(word.history().top().form());
         text.setForeground(parent.getDisplay().getSystemColor(
             word.isPossibleError() ? UNCHECKED : DEFAULT));
-        text.setData(new Object[] { word, page });
+        text.setData(Word.class.toString(), word);
+        text.setData(Page.class.toString(), page);
         addListeners(text);
         text.setEditable(!word.isLocked());
         list.add(text);
@@ -196,7 +197,7 @@ public final class EditComposite extends Composite {
 
       private void checkWordValidity(final Text text) {
         String current = text.getText();
-        Word word = (Word) ((Object[]) text.getData())[0];
+        Word word = (Word) text.getData(Word.class.toString());
         String reference = word.history().top().form();
         if (current.length() != reference.length()
             || (current.contains(" ") && !reference.contains(" "))) {
@@ -210,7 +211,7 @@ public final class EditComposite extends Composite {
 
       public void focusGained(final FocusEvent e) {
         text.clearSelection(); // use only our persistent marking below
-        Word word = (Word) ((Object[]) text.getData())[0];
+        Word word = (Word) text.getData(Word.class.toString());
         if (word.isLocked()) {
           setMessage(String.format("Entry '%s' is locked (vote down to unlock)", text.getText()));
         }

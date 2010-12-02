@@ -135,7 +135,7 @@ public final class EditView {
 
       private void addToHistory(Text text) {
         String newText = text.getText();
-        Word word = (Word) ((Object[])text.getData())[0];
+        Word word = (Word) text.getData(Word.class.toString());
         Stack<Modification> history = word.history();
         String oldText = history.top().form();
         if (!newText.equals(oldText) && !word.original().trim().equals(Page.ParagraphMarker())) {
