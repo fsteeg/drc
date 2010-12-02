@@ -132,6 +132,8 @@ public final class CheckView {
         suggestions.setText("No word selected");
       } else if (!check.getSelection()) {
         suggestions.setText("Edit suggestions disabled");
+      } else if (((Word) ((Object[]) word.getData())[0]).isLocked()) {
+        suggestions.setText("No edit suggestions - word is locked");
       } else {
         findEditSuggestions((Word) ((Object[]) word.getData())[0]);
         job.setPriority(Job.DECORATE);
