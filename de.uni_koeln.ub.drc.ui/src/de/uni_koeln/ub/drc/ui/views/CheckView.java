@@ -154,10 +154,11 @@ public final class CheckView {
             if (!complete) {
               suggestions.setText("Finding edit suggestions...");
             } else {
-              final String s = String.format("Suggestions for %s (originally '%s'): %s", word
-                  .history().top().form(), word.original(), word.suggestions().mkString(", "));
+              String text = (word.suggestions().size() == 0) ? "No reasonable edit suggestions found"
+                  : String.format("Suggestions for %s (originally '%s'): %s", word.history().top()
+                      .form(), word.original(), word.suggestions().mkString(", "));
               if (!suggestions.isDisposed()) {
-                suggestions.setText(s);
+                suggestions.setText(text);
               }
             }
           }

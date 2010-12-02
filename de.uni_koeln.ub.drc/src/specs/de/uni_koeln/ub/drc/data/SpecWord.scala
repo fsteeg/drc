@@ -52,6 +52,10 @@ private[drc] class SpecWord extends Spec with ShouldMatchers {
       expect(false) { suggestions2.exists(_.startsWith("s")) } // should use 'test', not 'slaunt'
       expect(31916) {Index.lexicon.size}
     }
+    it("provides no suggestions if they are too far off") {
+      val word = Word("satanarchäolügenialkohöllischewunschpunsch", Box(1,1,1,1))
+      expect(0) { word.suggestions.size }
+    }
   }
   
 }
