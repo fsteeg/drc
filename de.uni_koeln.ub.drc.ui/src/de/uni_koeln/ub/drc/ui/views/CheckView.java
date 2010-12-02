@@ -151,8 +151,8 @@ public final class CheckView {
             if (!complete) {
               suggestions.setText("Finding edit suggestions...");
             } else {
-              final String s = "Suggestions for " + word.original() + ": "
-                  + word.suggestions().mkString(", ");
+              final String s = String.format("Suggestions for %s (originally '%s'): %s", word
+                  .history().top().form(), word.original(), word.suggestions().mkString(", "));
               if (!suggestions.isDisposed()) {
                 suggestions.setText(s);
               }

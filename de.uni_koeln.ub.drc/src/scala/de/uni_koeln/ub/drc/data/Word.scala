@@ -35,7 +35,7 @@ case class Word(original:String, position:Box) {
   
   def formattedHistory = history mkString "\n"
   
-  lazy val suggestions: List[String] = (List() ++ Index.lexicon).sortBy(distance(_)) take 10
+  lazy val suggestions: List[String] = (List() ++ Index.lexicon).sortBy(distance(_)) take 5
   
   def isPossibleError : Boolean = !Index.lexicon.contains(original.toLowerCase) && history.size == 1
     
@@ -58,7 +58,7 @@ case class Word(original:String, position:Box) {
   private val distances = new mutable.HashMap[String, Int]() with mutable.SynchronizedMap[String, Int]
   def distance(other: String): Int = {
     if (!distances.contains(other)) {
-      distances += other -> distance(original.toLowerCase, other)
+      distances += other -> distance(history.top.form.toLowerCase, other)
     }
     distances(other)
   }

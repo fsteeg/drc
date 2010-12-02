@@ -41,9 +41,15 @@ private[drc] class SpecWord extends Spec with ShouldMatchers {
         }
     }
     it("provides edit suggestions") {
-      val suggestions = Word("slaunt", Box(1,1,1,1)).suggestions
-      println("Suggestions: " + suggestions.mkString(", "))
-      expect(10) { suggestions.size }
+      val word1 = Word("slaunt", Box(1,1,1,1))
+      val word2 = Word("slaunt", Box(1,1,1,1))
+      word2.history push Modification("test", "me")
+      val suggestions1 = word1.suggestions
+      val suggestions2 = word2.suggestions
+      println("Suggestions1: " + suggestions1.mkString(", "))
+      println("Suggestions2: " + suggestions2.mkString(", "))
+      expect(5) { suggestions1.size }
+      expect(false) { suggestions2.exists(_.startsWith("s")) } // should use 'test', not 'slaunt'
       expect(31916) {Index.lexicon.size}
     }
   }
