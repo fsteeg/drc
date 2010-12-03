@@ -137,9 +137,13 @@ public final class EditView {
         String newText = text.getText();
         Word word = (Word) text.getData(Word.class.toString());
         Stack<Modification> history = word.history();
-        String oldText = history.top().form();
-        if (!newText.equals(oldText) && !word.original().trim().equals(Page.ParagraphMarker())) {
+        Modification oldMod = history.top();
+        if (!newText.equals(oldMod.form()) && !word.original().trim().equals(Page.ParagraphMarker())) {
           User user = DrcUiActivator.instance().currentUser();
+          if (!oldMod.author().equals(user.id())) {
+            oldMod.downvote(user.id());
+            User.withId(DrcUiActivator.instance().userDb(), oldMod.author()).wasDownvoted();
+          }
           history.push(new Modification(newText, user.id()));
           user.hasEdited();
           user.save(DrcUiActivator.instance().db());
