@@ -15,6 +15,6 @@ package de.uni_koeln.ub.drc.util
 private[util] object Configuration {
   val Res = "res"
   val Romafo = Res + "/rom/" 
-  val Cdm = Res + "/cdm/"
+  val Cdm = Res + "/"
   val Write = true
 }

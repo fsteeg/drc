@@ -17,6 +17,7 @@ import de.uni_koeln.ub.drc.data.SpecPage;
 import de.uni_koeln.ub.drc.data.SpecUser;
 import de.uni_koeln.ub.drc.data.SpecWord;
 import de.uni_koeln.ub.drc.data.SpecDrcDb;
+import de.uni_koeln.ub.drc.util.SpecMetsTransformer;
 
 /**
  * Main test suite.
@@ -24,5 +25,5 @@ import de.uni_koeln.ub.drc.data.SpecDrcDb;
  */
 @RunWith( Suite.class )
 @Suite.SuiteClasses( { SpecWord.class, SpecPage.class, SpecIndex.class,
-        SpecUser.class, SpecModification.class, SpecDrcDb.class } )
+        SpecUser.class, SpecModification.class, SpecDrcDb.class, SpecMetsTransformer.class } )
 public final class SpecSuite {}

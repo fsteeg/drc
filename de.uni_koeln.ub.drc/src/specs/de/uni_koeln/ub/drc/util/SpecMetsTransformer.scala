@@ -8,24 +8,48 @@
  
 package de.uni_koeln.ub.drc.util
 
+import org.junit.runner.RunWith
 import scala.xml._
 import java.io._
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.junit.JUnitRunner
 import Configuration._
 
 /**
  * @see MetsTransformer
  * @author Fabian Steeg (fsteeg)
  */
-private[drc] class MetsTransformerSpec extends Spec with ShouldMatchers {
+@RunWith(classOf[JUnitRunner])
+class SpecMetsTransformer extends Spec with ShouldMatchers {
 
   describe("The MetsImporter") {
     
     /* A single file: */
-    val file = new File(Romafo + "PPN345572629_0017/PPN345572629_0017.xml")
+    val file = new File(Romafo + "PPN345572629_0004/PPN345572629_0004.xml")
+    val transformer = new MetsTransformer(XML.load(new FileReader(file)))
     it("should import METS metadata to ContentDM for single file " + file) {
-      new MetsTransformer(XML.load(new FileReader(file))).transform().length should be > 500
+      transformer.transform().length should be > 500
+    }
+    
+    it("should return chapters for specific pages, using order numbers from the metadata") {
+      val mode = Count.Label
+      expect("Chapter 1: Daniel Bonifaci") { transformer.chapter(1, mode) }
+      expect("Chapter 1: Daniel Bonifaci") { transformer.chapter(8, mode) }
+      expect("Chapter 2: Gion Antoni Calvenzano") { transformer.chapter(9, mode) }
+      expect("Chapter 2: Gion Antoni Calvenzano") { transformer.chapter(29, mode) }
+      expect("Appendix: Nachwort") { transformer.chapter(209, mode) }
+      expect("Appendix: Nachwort") { transformer.chapter(218, mode) }
+    }
+    
+    it("should return chapters for specific pages, using physical file numbers") {
+      val mode = Count.File
+      expect("Chapter 1: Daniel Bonifaci") { transformer.chapter(7, mode) }
+      expect("Chapter 1: Daniel Bonifaci") { transformer.chapter(14, mode) }
+      expect("Chapter 2: Gion Antoni Calvenzano") { transformer.chapter(15, mode) }
+      expect("Chapter 2: Gion Antoni Calvenzano") { transformer.chapter(35, mode) }
+      expect("Appendix: Nachwort") { transformer.chapter(215, mode) }
+      expect("Appendix: Nachwort") { transformer.chapter(224, mode) }
     }
     
     /* All files: */

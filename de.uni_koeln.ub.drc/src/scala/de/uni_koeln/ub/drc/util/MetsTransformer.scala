@@ -24,6 +24,11 @@ import Configuration._
  * @see MetsTransformerSpec
  * @author Fabian Steeg (fsteeg)
  **/
+private[util] object Count extends Enumeration {
+  type Count = Value
+  val Label = Value
+  val File = Value
+}
 private[util] class MetsTransformer(xml:Elem) {
   
   private val mods = xml\"dmdSec"\"mdWrap"\"xmlData"\"mods"
@@ -36,9 +41,19 @@ private[util] class MetsTransformer(xml:Elem) {
   /* Maps used when generating the output in the transform method: */
   private val log: (String, Map[String, (String, String)]) = buildLogMap()
   private val fullTitle = log._1
+  private var fileMap: Map[String, String] = buildFileMap
   private var logMap: Map[String,(String, String)] = log._2
   private var physMap: Map[String, String] = buildPhysMap
   private var linkMap: Map[String, String] = buildLinkMap
+  
+  private[util] def chapter(page:Int, mode:Count.Value = Count.File): String = {
+    def labelMap = physMap.map(_.swap)
+    val chapter = mode match {
+      case Count.Label => logMap(linkMap(labelMap(page.toString)))
+      case Count.File => logMap(linkMap(fileMap(page.toString)))
+    }
+    chapter._1 + ": " + chapter._2
+  }
   
   private[util] def transform(): String = {
     val builder = new StringBuilder()
@@ -136,10 +151,23 @@ private[util] class MetsTransformer(xml:Elem) {
     xml\"structMap"\"div"\"div" foreach { (div) =>
       val id = (div\"@ID").text.trim
       var page = (div\"@ORDERLABEL").text.trim
-        if(page.length == 0) page = (div\"@ORDER").text.trim
-        if(id.length() > 0 && page.length() > 0) physMap += id -> page
+      if(page.length == 0) page = (div\"@ORDER").text.trim
+      if(id.length() > 0 && page.length() > 0) physMap += id -> page
     }
     physMap
+  }
+  
+  private def buildFileMap() = {
+    /* Map file IDs to physical IDs: */
+    var fileMap:Map[String,String] = Map()
+    xml\"structMap"\"div"\"div" foreach { (div) =>
+      val id = (div\"@ID").text.trim
+      var page = (div\"@ORDER").text.trim
+      if(id.length() > 0 && page.length() > 0) {
+        fileMap += page -> id
+      }
+    }
+    fileMap
   }
   
   private def buildLinkMap = {
