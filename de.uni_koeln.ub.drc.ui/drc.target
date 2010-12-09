@@ -4,18 +4,19 @@
 <target name="DRC Target">
 <locations>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.pde.junit.runtime.addon.feature.group" version="1.0.0.v20100610"/>
-<repository location="http://download.eclipse.org/releases/helios"/>
+<unit id="org.eclipse.platform.feature.group" version="4.1.0.v20101006-9HEsGbmFkzHZsz0VOwNsOQ3LPoXUwUPaMXHioG"/>
+<unit id="org.eclipse.rcp.feature.group" version="4.1.0.v20101006-9PCfFqhFuxtaG602a0z-UCqWGhnF"/>
+<unit id="org.eclipse.rcp.source.feature.group" version="4.1.0.v20101006-9PCfFqhFuxtaG602a0z-UCqWGhnF"/>
+<repository location="http://download.eclipse.org/e4/sdk/drops/S-4.1M3-201010291118/repository"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.e4.runtime.feature.feature.group" version="0.9.1.v20091009-1415-7Q68ZF9JgLWLMBckAQBmu"/>
-<repository location="http://download.eclipse.org/e4/downloads/drops/R-0.10-201007271415/repository/"/>
+<unit id="org.eclipse.pde.junit.runtime.addon.feature.group" version="1.0.0.v20100819-37M1"/>
+<repository location="http://download.eclipse.org/releases/indigo"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.platform.ide" version="4.0.0.I20100727-1520"/>
-<unit id="org.eclipse.rcp.id" version="4.0.0.I20100727-1520"/>
-<unit id="org.eclipse.rcp.source.feature.group" version="4.0.0.v20100726-9OCJFKtFuxrHUSfXBA5VlPRhgRel"/>
-<repository location="http://download.eclipse.org/e4/sdk/drops/R-4.0-201007271520/repository"/>
+<unit id="org.eclipse.e4.runtime.feature.feature.group" version="0.9.1.v20100917-1000-7Q6A7F9JgLWLMgNNAXpeu"/>
+<unit id="org.eclipse.e4.tests.base.feature.feature.group" version="0.9.1.v20100825-1400-7D7GA78s734C4658"/>
+<repository location="http://download.eclipse.org/e4/downloads/drops/S-0.11M3-201010291030/repository"/>
 </location>
 </locations>
 </target>

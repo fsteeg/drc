@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
-import org.eclipse.e4.core.contexts.IContextConstants;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.contexts.RunAndTrack;
 import org.eclipse.e4.core.di.IDisposable;
@@ -63,7 +62,7 @@ final class HeadlessSetup {
     public boolean changed(IEclipseContext eventsContext) {
       Object o = eventsContext.get(IServiceConstants.ACTIVE_PART);
       if (o instanceof MPart) {
-        eventsContext.set(IServiceConstants.ACTIVE_PART_ID,
+        eventsContext.set(IServiceConstants.ACTIVE_PART,
             ((MPart) o).getElementId());
       }
       return true;
@@ -72,7 +71,7 @@ final class HeadlessSetup {
     @Override
     public String toString() {
       return "HeadlessStartupTest$RunAndTrack[" //$NON-NLS-1$
-          + IServiceConstants.ACTIVE_PART_ID + ']';
+          + IServiceConstants.ACTIVE_PART + ']';
     }
   };
 
@@ -273,9 +272,7 @@ final class HeadlessSetup {
           if (child instanceof MContext) {
             IEclipseContext childContext = ((MContext) child).getContext();
             IEclipseContext parentContext = getParentContext((MUIElement) child);
-            if (parentContext.getLocal(IContextConstants.ACTIVE_CHILD) == null) {
-              parentContext.set(IContextConstants.ACTIVE_CHILD, childContext);
-            }
+            childContext.activate();
           }
         }
       }
@@ -288,7 +285,7 @@ final class HeadlessSetup {
         createGui(active, container, context);
         IEclipseContext childContext = ((MContext) active).getContext();
         IEclipseContext parentContext = getParentContext(active);
-        parentContext.set(IContextConstants.ACTIVE_CHILD, childContext);
+        childContext.activate();
       } else {
         List<MStackElement> children = container.getChildren();
         if (!children.isEmpty()) {
@@ -313,9 +310,7 @@ final class HeadlessSetup {
           contribution.setObject(clientObject);
         }
       }
-      if (parentContext.getLocal(IContextConstants.ACTIVE_CHILD) == null) {
-        parentContext.set(IContextConstants.ACTIVE_CHILD, createdContext);
-      }
+      createdContext.activate();
     }
 
     private static IEclipseContext getParentContext(final MUIElement element) {

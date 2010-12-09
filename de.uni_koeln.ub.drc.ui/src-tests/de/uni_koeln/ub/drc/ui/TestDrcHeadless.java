@@ -115,18 +115,6 @@ public class TestDrcHeadless {
     Assert.assertNull(application.getContext().get(IServiceConstants.ACTIVE_SELECTION));
   }
 
-  @Test public final void getActivePart() throws Exception {
-    Assert.assertNull(application.getContext().get(IServiceConstants.ACTIVE_PART));
-  }
-
-  @Test public final void getPersistedState() throws Exception {
-    Assert.assertNull(application.getContext().get(IServiceConstants.PERSISTED_STATE));
-  }
-
-  @Test public final void getActivePartId() throws Exception {
-    Assert.assertNull(application.getContext().get(IServiceConstants.ACTIVE_PART_ID));
-  }
-
   protected String getUri() {
     return AllTestsSuite.APPLICATION_XMI;
   }
@@ -163,10 +151,9 @@ public class TestDrcHeadless {
 
   private void switchTo(IEclipseContext context, MPart part) {
     context.set(IServiceConstants.ACTIVE_PART, part);
-    Assert.assertEquals(part.getElementId(), context.get(IServiceConstants.ACTIVE_PART_ID));
+    Assert.assertEquals(part.getElementId(), context.get(IServiceConstants.ACTIVE_PART));
     // the OSGi context should not have been affected:
     Assert.assertNull(osgiContext.get(IServiceConstants.ACTIVE_PART));
-    Assert.assertNull(osgiContext.get(IServiceConstants.ACTIVE_PART_ID));
   }
 
   protected MPart[] getFourParts() {

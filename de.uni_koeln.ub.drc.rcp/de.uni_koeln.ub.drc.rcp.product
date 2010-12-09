@@ -4,7 +4,6 @@
 <product name="DRC RCP" uid="de.uni_koeln.ub.drc.rcp" id="de.uni_koeln.ub.drc.ui.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.2.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
-      <macosx></macosx>
    </configIni>
 
    <launcherArgs>
@@ -35,12 +34,12 @@
    </plugins>
 
    <features>
-      <feature id="org.eclipse.pde.junit.runtime.addon" version="1.0.0.v20100610"/>
-      <feature id="org.eclipse.rcp" version="4.0.0.v20100726-9OCJFKtFuxrHUSfXBA5VlPRhgRel"/>
-      <feature id="org.eclipse.platform" version="4.0.0.v20100727-9LEiGN9FmrOcU0RSmR2t8q6tBnWBq9KXihSfm"/>
-      <feature id="org.eclipse.e4.runtime.feature" version="0.9.1.v20091009-1415-7Q68ZF9JgLWLMBckAQBmu"/>
       <feature id="de.uni_koeln.ub.drc.feature"/>
-      <feature id="org.eclipse.equinox.p2.user.ui" version="2.0.0.v20100503-897HFZ-FdHjO2NQo0sD_Nt"/>
+      <feature id="org.eclipse.pde.junit.runtime.addon" version="1.0.0.v20100819-37M1"/>
+      <feature id="org.eclipse.equinox.p2.user.ui" version="2.0.0.v20100503-897OFx-FdHjO2NkE10Uc8KQ"/>
+      <feature id="org.eclipse.e4.runtime.feature" version="0.9.1.v20100917-1000-7Q6A7F9JgLWLMgNNAXpeu"/>
+      <feature id="org.eclipse.e4.rcp" version="1.0.0.v20101025-1420-7IA37CFT0z0-O4FgmEGvy3u"/>
+      <feature id="org.eclipse.platform" version="4.1.0.v20101006-9HEsGbmFkzHZsz0VOwNsOQ3LPoXUwUPaMXHioG"/>
    </features>
 
    <configurations>

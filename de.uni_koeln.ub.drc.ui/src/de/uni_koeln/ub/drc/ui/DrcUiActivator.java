@@ -76,7 +76,13 @@ public final class DrcUiActivator extends Plugin {
     String productId = "de.uni_koeln.ub.drc.rcp"; //$NON-NLS-1$
     InstallOperation op = createInstallOperation(context, repo, productId);
     if (op != null) {
-      IStatus status = op.resolveModal(null);
+      IStatus status = null;
+      try {
+        status = op.resolveModal(null);
+      } catch (IllegalArgumentException x) {
+        getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, x.getMessage()));
+        return;
+      }
       getLog().log(
           new Status(IStatus.INFO, PLUGIN_ID, String.format(
               "Resolved operation status: %s, details: %s", status, op.getResolutionDetails()))); //$NON-NLS-1$

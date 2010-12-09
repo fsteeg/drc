@@ -13,7 +13,6 @@ import java.util.Set;
 
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.e4.core.contexts.IContextConstants;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine;
 import org.eclipse.e4.ui.internal.workbench.swt.ResourceUtility;
@@ -86,7 +85,7 @@ public final class TestDrcUi extends TestDrcHeadless {
 
   @Test public void getActiveChild() throws Exception {
     Assert.assertNotNull("Active child of application context should not be null", application
-        .getContext().get(IContextConstants.ACTIVE_CHILD));
+        .getContext().getActiveChild());
   }
 
   @Test public void getActiveContextsUi() throws Exception {
@@ -98,15 +97,11 @@ public final class TestDrcUi extends TestDrcHeadless {
   }
 
   @Test public void getActiveChildUi() throws Exception {
-    Assert.assertNotNull(getActiveChildContext(application).get(IContextConstants.ACTIVE_CHILD));
+    Assert.assertNotNull(application.getContext().getActiveChild());
   }
 
   @Test public void getActiveShellUi() throws Exception {
     Assert.assertNull(getActiveChildContext(application).get(IServiceConstants.ACTIVE_SHELL));
-  }
-
-  @Test public void getPersistedStateUi() throws Exception {
-    Assert.assertNull(getActiveChildContext(application).get(IServiceConstants.PERSISTED_STATE));
   }
 
   @Test @Override public void switchActivePart1InContext() throws Exception {
@@ -142,7 +137,7 @@ public final class TestDrcUi extends TestDrcHeadless {
   private void switchTo(final IEclipseContext context, final MPart part) {
     context.set(IServiceConstants.ACTIVE_PART, part);
     while (display.readAndDispatch()) {};
-    Assert.assertEquals(part.getElementId(), context.get(IServiceConstants.ACTIVE_PART_ID));
+    Assert.assertEquals(part.getElementId(), context.getActiveChild().get(IServiceConstants.ACTIVE_PART));
   }
 
   @Override protected IEclipseContext createApplicationContext(final IEclipseContext osgiContext) {

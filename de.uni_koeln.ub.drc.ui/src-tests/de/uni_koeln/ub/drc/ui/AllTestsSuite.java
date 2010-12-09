@@ -18,13 +18,8 @@ import org.junit.runners.Suite;
  * Main test suite.
  * @author Fabian Steeg (fsteeg)
  */
-/*
- * TestDrcUi.class <-- currently disabled, causes Exceptions, also in the e4 contacts demo tests,
- * basically the UI tests work when the running Eclipse instance is in the background when running
- * TODO: check tests in next milestone
- */
 @RunWith( Suite.class )
-@Suite.SuiteClasses( { TestDrcHeadless.class, TestPageConverter.class } )
+@Suite.SuiteClasses( { TestDrcHeadless.class, TestPageConverter.class, TestDrcUi.class  } )
 public final class AllTestsSuite {
 
   static final String APPLICATION_XMI = "de.uni_koeln.ub.drc.ui/Application.e4xmi";
