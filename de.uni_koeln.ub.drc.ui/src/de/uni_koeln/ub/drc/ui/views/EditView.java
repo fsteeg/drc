@@ -67,9 +67,12 @@ public final class EditView {
   }
 
   private void focusLatestWord() {
-    Text text = editComposite.getWords().get(DrcUiActivator.instance().currentUser().latestWord());
-    text.setFocus();
-    sc.showControl(text);
+    if (editComposite != null && editComposite.getWords() != null) {
+      Text text = editComposite.getWords()
+          .get(DrcUiActivator.instance().currentUser().latestWord());
+      text.setFocus();
+      sc.showControl(text);
+    }
   }
 
   @Inject

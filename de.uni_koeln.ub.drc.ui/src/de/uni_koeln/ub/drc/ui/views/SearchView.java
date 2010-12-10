@@ -34,15 +34,14 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.FocusEvent;
-import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
@@ -52,19 +51,17 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeItem;
 
 import scala.collection.JavaConversions;
-
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.SearchOption;
 import de.uni_koeln.ub.drc.data.Tag;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
-import de.uni_koeln.ub.drc.ui.views.SpecialCharacterView.TextFocusListener;
 
 /**
  * View containing a search field and a table viewer displaying pages.
@@ -76,7 +73,7 @@ public final class SearchView {
   private Text tagField;
   private Label resultCount;
   private static Combo searchOptions;
-  private TableViewer viewer;
+  private TreeViewer viewer;
 
   @Inject
   private IEclipseContext context;
@@ -184,7 +181,7 @@ public final class SearchView {
       setCurrentPageLabel(page);
       StructuredSelection selection = new StructuredSelection(new Page[] { page });
       context.modify(IServiceConstants.ACTIVE_SELECTION, selection.toList());
-      reload(viewer.getTable().getParent(), page);
+      reload(viewer.getTree().getParent(), page);
     }
   }
 
@@ -213,19 +210,20 @@ public final class SearchView {
 
   @PostConstruct
   public void select() {
-    if (viewer.getElementAt(0) == null) {
+    viewer.expandAll();
+    if (viewer.getTree().getItems().length == 0) {
       throw new IllegalArgumentException("No entries in initial search view");
     }
-    TableItem[] items = viewer.getTable().getItems();
+    TreeItem[] items = viewer.getTree().getItems();
     for (int i = 0; i < items.length; i++) {
       Page page = (Page) items[i].getData();
       if (page.id().equals(DrcUiActivator.instance().currentUser().latestPage())) {
-        viewer.setSelection(new StructuredSelection(viewer.getElementAt(i)));
+        viewer.setSelection(new StructuredSelection(viewer.getTree().getItem(i).getData()));
         break;
       }
     }
     if (viewer.getSelection().isEmpty()) {
-      viewer.setSelection(new StructuredSelection(viewer.getElementAt(0)));
+      viewer.setSelection(new StructuredSelection(viewer.getTree().getItem(0).getData()));
     }
     allPages = new ArrayList<Page>(asList(SearchViewModelProvider.content.index.pages()));
     Collections.sort(allPages, comp);
@@ -261,14 +259,14 @@ public final class SearchView {
   };
 
   private void updateResultCount() {
-    int count = viewer.getTable().getItemCount();
+    int count = viewer.getTree().getItemCount();
     resultCount.setText(String.format("%s %s for:", count, count == 1 ? "hit" : "hits"));
   }
 
   private boolean initial = true;
 
   private void initTableViewer(final Composite parent) {
-    viewer = new TableViewer(parent, SWT.MULTI | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
+    viewer = new TreeViewer(parent, SWT.MULTI | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
     viewer.addSelectionChangedListener(new ISelectionChangedListener() {
       public void selectionChanged(final SelectionChangedEvent event) {
         final IStructuredSelection selection = (IStructuredSelection) event.getSelection();
@@ -303,20 +301,20 @@ public final class SearchView {
   }
 
   private void initTable() {
-    final int[] columns = new int[] { 25, 50, 60, 400, 200, 250 };
+    final int[] columns = new int[] { 40, 50, 60, 400, 200, 250 };
     createColumn("", columns[0]);
     createColumn("Volume", columns[1]);
     createColumn("Page", columns[2]);
     createColumn("Text", columns[3]);
     createColumn("Modified", columns[4]);
     createColumn("Tags", columns[5]);
-    Table table = viewer.getTable();
-    table.setHeaderVisible(true);
-    table.setLinesVisible(true);
+    Tree tree = viewer.getTree();
+    tree.setHeaderVisible(true);
+    tree.setLinesVisible(true);
   }
 
   private void createColumn(final String name, final int width) {
-    TableViewerColumn column1 = new TableViewerColumn(viewer, SWT.NONE);
+    TreeViewerColumn column1 = new TreeViewerColumn(viewer, SWT.NONE);
     column1.getColumn().setText(name);
     column1.getColumn().setWidth(width);
     column1.getColumn().setResizable(true);
@@ -382,7 +380,8 @@ public final class SearchView {
     }
   }
 
-  private static final class SearchViewContentProvider implements IStructuredContentProvider {
+  private static final class SearchViewContentProvider implements
+  IStructuredContentProvider, ITreeContentProvider {
     @Override
     public Object[] getElements(final Object inputElement) {
       Object[] elements = (Object[]) inputElement;
@@ -394,9 +393,24 @@ public final class SearchView {
 
     @Override
     public void inputChanged(final Viewer viewer, final Object oldInput, final Object newInput) {}
+
+    @Override
+    public Object[] getChildren(Object parentElement) {
+      return null;
+    }
+
+    @Override
+    public Object getParent(Object element) {
+      return null;
+    }
+
+    @Override
+    public boolean hasChildren(Object element) {
+      return false;
+    }
   }
 
-  private static final class SearchViewLabelProvider extends LabelProvider implements
+  private static final class SearchViewLabelProvider extends LabelProvider implements 
       ITableLabelProvider {
     @Override
     public String getColumnText(final Object element, final int columnIndex) {
