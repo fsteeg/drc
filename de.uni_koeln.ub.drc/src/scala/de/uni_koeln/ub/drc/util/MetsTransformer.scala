@@ -29,8 +29,9 @@ private[util] object Count extends Enumeration {
   val Label = Value
   val File = Value
 }
-private[util] class MetsTransformer(xml:Elem) {
+private[util] class MetsTransformer(file:File) {
   
+  private val xml = XML.load(new FileReader(file))
   private val mods = xml\"dmdSec"\"mdWrap"\"xmlData"\"mods"
   private val loc = (mods\"location"\"url").text.trim
   private val num = (mods\"part"\"detail"\"number").text.trim
@@ -49,8 +50,8 @@ private[util] class MetsTransformer(xml:Elem) {
   private[util] def chapter(page:Int, mode:Count.Value = Count.File): String = {
     def labelMap = physMap.map(_.swap)
     val chapter = mode match {
-      case Count.Label => logMap(linkMap(labelMap(page.toString)))
-      case Count.File => logMap(linkMap(fileMap(page.toString)))
+      case Count.Label => logMap.getOrElse(linkMap(labelMap(page.toString)), ("Unknown",  "Not found"))
+      case Count.File => logMap.getOrElse(linkMap(fileMap(page.toString)), ("Unknown",  "Not found"))
     }
     chapter._1 + ": " + chapter._2
   }

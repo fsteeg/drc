@@ -17,7 +17,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -53,7 +55,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
-import org.eclipse.swt.widgets.TreeItem;
 
 import scala.collection.JavaConversions;
 import de.uni_koeln.ub.drc.data.Index;
@@ -62,6 +63,8 @@ import de.uni_koeln.ub.drc.data.SearchOption;
 import de.uni_koeln.ub.drc.data.Tag;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.util.Count;
+import de.uni_koeln.ub.drc.util.MetsTransformer;
 
 /**
  * View containing a search field and a table viewer displaying pages.
@@ -214,19 +217,17 @@ public final class SearchView {
     if (viewer.getTree().getItems().length == 0) {
       throw new IllegalArgumentException("No entries in initial search view");
     }
-    TreeItem[] items = viewer.getTree().getItems();
-    for (int i = 0; i < items.length; i++) {
-      Page page = (Page) items[i].getData();
+    allPages = new ArrayList<Page>(asList(SearchViewModelProvider.content.index.pages()));
+    Collections.sort(allPages, comp);
+    for (Page page : allPages) {
       if (page.id().equals(DrcUiActivator.instance().currentUser().latestPage())) {
-        viewer.setSelection(new StructuredSelection(viewer.getTree().getItem(i).getData()));
+        viewer.setSelection(new StructuredSelection(page));
         break;
       }
     }
     if (viewer.getSelection().isEmpty()) {
-      viewer.setSelection(new StructuredSelection(viewer.getTree().getItem(0).getData()));
+      viewer.setSelection(new StructuredSelection(allPages.get(0)));
     }
-    allPages = new ArrayList<Page>(asList(SearchViewModelProvider.content.index.pages()));
-    Collections.sort(allPages, comp);
   }
 
   private void initSearchField(final Composite parent) {
@@ -321,6 +322,8 @@ public final class SearchView {
     column1.getColumn().setMoveable(true);
   }
 
+  private Map<String, List<Page>> chapters = new HashMap<String, List<Page>>();
+
   private void setInput() {
     if (SearchViewModelProvider.content == null) {
       loadData();
@@ -328,7 +331,19 @@ public final class SearchView {
     Page[] pages = SearchViewModelProvider.content.getPages(searchField.getText().trim()
         .toLowerCase());
     Arrays.sort(pages, comp);
-    viewer.setInput(pages);
+    MetsTransformer mets = new MetsTransformer(DrcUiActivator.instance().fileFromBundle(
+        "PPN345572629_0004.xml"));
+    for (Page page : pages) {
+      int fileNumber = page.number();
+      String chapter = mets.chapter(fileNumber, Count.Label());
+      List<Page> pagesInChapter = chapters.get(chapter);
+      if (pagesInChapter == null) {
+        pagesInChapter = new ArrayList<Page>();
+        chapters.put(chapter, pagesInChapter);
+      }
+      pagesInChapter.add(page);
+    }
+    viewer.setInput(chapters);
     updateResultCount();
   }
 
@@ -380,10 +395,15 @@ public final class SearchView {
     }
   }
 
-  private static final class SearchViewContentProvider implements
-  IStructuredContentProvider, ITreeContentProvider {
+  private final class SearchViewContentProvider implements IStructuredContentProvider,
+      ITreeContentProvider {
     @Override
     public Object[] getElements(final Object inputElement) {
+      if (inputElement instanceof Map) {
+        Object[] array = ((Map) inputElement).keySet().toArray(new String[] {});
+        Arrays.sort(array);
+        return array;
+      }
       Object[] elements = (Object[]) inputElement;
       return elements;
     }
@@ -396,7 +416,7 @@ public final class SearchView {
 
     @Override
     public Object[] getChildren(Object parentElement) {
-      return null;
+      return chapters.get(parentElement.toString()).toArray(new Page[] {});
     }
 
     @Override
@@ -406,30 +426,37 @@ public final class SearchView {
 
     @Override
     public boolean hasChildren(Object element) {
-      return false;
+      return element instanceof String;
     }
   }
 
-  private static final class SearchViewLabelProvider extends LabelProvider implements 
-      ITableLabelProvider {
+  private boolean isPage(Object element) {
+    return element instanceof Page;
+  }
+
+  private Page asPage(Object element) {
+    return (Page) element;
+  }
+
+  private final class SearchViewLabelProvider extends LabelProvider implements ITableLabelProvider {
     @Override
     public String getColumnText(final Object element, final int columnIndex) {
-      Page page = (Page) element;
       switch (columnIndex) {
       case 0:
         return "";
       case 1:
-        return mappedVolume(page) + "";
+        return isPage(element) ? mappedVolume(asPage(element)) + "" : "";
       case 2:
-        return PageConverter.convert(fileName(page));
+        return isPage(element) ? PageConverter.convert(fileName(asPage(element))) : "";
       case 3:
-        return page.toText("|").substring(0, 60) + "...";
+        return isPage(element) ? asPage(element).toText("|").substring(0, 60) + "..." : element
+            .toString();
       case 4:
-        return lastModificationDate(asList(page.words()));
+        return isPage(element) ? lastModificationDate(asList(asPage(element).words())) : "";
       case 5:
-        return page.tags().mkString(", ");
+        return isPage(element) ? asPage(element).tags().mkString(", ") : "";
       default:
-        return page.toString();
+        return element.toString();
       }
     }
 
@@ -447,7 +474,7 @@ public final class SearchView {
 
     @Override
     public Image getColumnImage(final Object element, final int columnIndex) {
-      if (columnIndex == 0) {
+      if (columnIndex == 0 && element instanceof Page) {
         Page page = (Page) element;
         // return new Image(searchOptions.getDisplay(), new ByteArrayInputStream(
         // Index.loadImageFor((Page) element))); // TODO add thumbnails to DB, use here

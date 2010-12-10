@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class PdfExtractionTests {
 
-  private String pdfName = "res/rom/PPN345572629_0004/PPN345572629_0004-0001.pdf";
+  private String pdfName = "res/rom/PPN345572629_0004/PPN345572629_0004 - 0007.pdf";
   private PageInfo pi = PdfContentExtractor.extractContentFromPdf(pdfName);
 
   @Test
@@ -69,7 +69,7 @@ public class PdfExtractionTests {
   public void point() {
     List<ExtractedWord> words = pi.getParagraphs().get(1).getWords();
     Point scaledStart = words.get(0).getStartPointScaled(900, 1440);
-    Point p = new Point(190, 564);
+    Point p = new Point(192, 564);
     Assert.assertEquals(p, scaledStart);
     Assert.assertTrue(words.get(0).getText().toString().startsWith("(Abgedruckt"));
   }

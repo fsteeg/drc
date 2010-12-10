@@ -25,12 +25,12 @@ class SpecDrcDb extends Spec with ShouldMatchers {
 
     val db = Index.LocalDb
     val collection = "PPN345572629_0004"
-    val entry = "PPN345572629_0004-0001.xml"
+    val entry = "PPN345572629_0004-0007.xml"
 
     it("allows access to specific pages, both XML and IMG") {
-      expect(2) { db.getXml(collection, "PPN345572629_0004-0001.xml", "PPN345572629_0004-0002.xml").get.size }
-      expect(classOf[Elem]) { db.getXml(collection, "PPN345572629_0004-0001.xml").get(0).getClass }
-      expect(classOf[Array[Byte]]) { db.getBin(collection, "PPN345572629_0004-0001.jpg").get(0).getClass }
+      expect(2) { db.getXml(collection, "PPN345572629_0004-0007.xml", "PPN345572629_0004-0008.xml").get.size }
+      expect(classOf[Elem]) { db.getXml(collection, "PPN345572629_0004-0007.xml").get(0).getClass }
+      expect(classOf[Array[Byte]]) { db.getBin(collection, "PPN345572629_0004-0007.jpg").get(0).getClass }
     }
 
     it("allows to retrieve XML for manipulation and store it back") {
@@ -70,12 +70,12 @@ class SpecDrcDb extends Spec with ShouldMatchers {
     }
 
     it("allows access to all stored pages IDs") {
-      expect(218 * 2) { db.getIds(collection).get.size }
+      expect(217 * 2) { db.getIds(collection).get.size }
     }
 
     it("returns all entries if no ids are given") {
-      expect(218) { db.getXml(collection).get.size }
-      expect(218) { db.getBin(collection).get.size }
+      expect(217) { db.getXml(collection).get.size }
+      expect(217) { db.getBin(collection).get.size }
     }
 
   }
