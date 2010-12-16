@@ -22,34 +22,54 @@ import Configuration._
  */
 @RunWith(classOf[JUnitRunner])
 class SpecMetsTransformer extends Spec with ShouldMatchers {
+  
+  describe("The Chapter case class") {
+    it("provides ordering first by volume, then by number") {
+      expect(List(
+          Chapter(4,1,""),
+          Chapter(4,2,""),
+          Chapter(4,3,""),
+          Chapter(5,1,""),
+          Chapter(5,2,""),
+          Chapter(5,3,"")
+      )) {List(
+          Chapter(5,3,""),
+          Chapter(5,2,""),
+          Chapter(5,1,""),
+          Chapter(4,3,""),
+          Chapter(4,2,""),
+          Chapter(4,1,"")
+      ).sorted}
+    }
+  }
 
   describe("The MetsImporter") {
     
     /* A single file: */
     val file = new File(Romafo + "PPN345572629_0004/PPN345572629_0004.xml")
-    val transformer = new MetsTransformer(file)
+    val mets = new MetsTransformer(file)
     it("should import METS metadata to ContentDM for single file " + file) {
-      transformer.transform().length should be > 500
+      mets.transform().length should be > 500
     }
     
     it("should return chapters for specific pages, using order numbers from the metadata") {
       val mode = Count.Label
-      expect("Chapter 1: Daniel Bonifaci") { transformer.chapter(1, mode) }
-      expect("Chapter 1: Daniel Bonifaci") { transformer.chapter(8, mode) }
-      expect("Chapter 2: Gion Antoni Calvenzano") { transformer.chapter(9, mode) }
-      expect("Chapter 2: Gion Antoni Calvenzano") { transformer.chapter(29, mode) }
-      expect("Appendix: Nachwort") { transformer.chapter(209, mode) }
-      expect("Appendix: Nachwort") { transformer.chapter(218, mode) }
+      expect((1, "Daniel Bonifaci")) { val c = mets.chapter(1, mode); (c.number, c.title) }
+      expect((1, "Daniel Bonifaci")) { val c = mets.chapter(8, mode); (c.number, c.title) }
+      expect((2, "Gion Antoni Calvenzano")) { val c = mets.chapter(9, mode); (c.number, c.title) }
+      expect((2, "Gion Antoni Calvenzano")) { val c = mets.chapter(29, mode); (c.number, c.title) }
+      expect((Integer.MAX_VALUE, "Nachwort")) { val c = mets.chapter(209, mode); (c.number, c.title) }
+      expect((Integer.MAX_VALUE, "Nachwort")) { val c = mets.chapter(218, mode); (c.number, c.title) }
     }
     
     it("should return chapters for specific pages, using physical file numbers") {
       val mode = Count.File
-      expect("Chapter 1: Daniel Bonifaci") { transformer.chapter(7, mode) }
-      expect("Chapter 1: Daniel Bonifaci") { transformer.chapter(14, mode) }
-      expect("Chapter 2: Gion Antoni Calvenzano") { transformer.chapter(15, mode) }
-      expect("Chapter 2: Gion Antoni Calvenzano") { transformer.chapter(35, mode) }
-      expect("Appendix: Nachwort") { transformer.chapter(215, mode) }
-      expect("Appendix: Nachwort") { transformer.chapter(224, mode) }
+      expect((1, "Daniel Bonifaci")) { val c = mets.chapter(7, mode); (c.number, c.title) }
+      expect((1, "Daniel Bonifaci")) { val c = mets.chapter(14, mode); (c.number, c.title) }
+      expect((2, "Gion Antoni Calvenzano")) { val c = mets.chapter(15, mode); (c.number, c.title) }
+      expect((2, "Gion Antoni Calvenzano")) { val c = mets.chapter(35, mode); (c.number, c.title) }
+      expect((Integer.MAX_VALUE, "Nachwort")) { val c = mets.chapter(215, mode); (c.number, c.title) }
+      expect((Integer.MAX_VALUE, "Nachwort")) { val c = mets.chapter(224, mode); (c.number, c.title) }
     }
     
     /* All files: */

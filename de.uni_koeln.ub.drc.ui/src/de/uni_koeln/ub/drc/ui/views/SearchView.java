@@ -63,6 +63,7 @@ import de.uni_koeln.ub.drc.data.SearchOption;
 import de.uni_koeln.ub.drc.data.Tag;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.util.Chapter;
 import de.uni_koeln.ub.drc.util.Count;
 import de.uni_koeln.ub.drc.util.MetsTransformer;
 
@@ -321,7 +322,7 @@ public final class SearchView {
     column1.getColumn().setMoveable(true);
   }
 
-  private Map<String, List<Page>> chapters = new TreeMap<String, List<Page>>();
+  private Map<Chapter, List<Page>> chapters = new TreeMap<Chapter, List<Page>>();
 
   private void setInput() {
     if (SearchViewModelProvider.content == null) {
@@ -332,10 +333,10 @@ public final class SearchView {
     Arrays.sort(pages, comp);
     MetsTransformer mets = new MetsTransformer(DrcUiActivator.instance().fileFromBundle(
         "PPN345572629_0004.xml"));
-    chapters = new TreeMap<String, List<Page>>();
+    chapters = new TreeMap<Chapter, List<Page>>();
     for (Page page : pages) {
       int fileNumber = page.number();
-      String chapter = mets.chapter(fileNumber, Count.Label());
+      Chapter chapter = mets.chapter(fileNumber, Count.Label());
       List<Page> pagesInChapter = chapters.get(chapter);
       if (pagesInChapter == null) {
         pagesInChapter = new ArrayList<Page>();
@@ -401,7 +402,7 @@ public final class SearchView {
     @Override
     public Object[] getElements(final Object inputElement) {
       if (inputElement instanceof Map) {
-        Object[] array = ((Map) inputElement).keySet().toArray(new String[] {});
+        Object[] array = ((Map) inputElement).keySet().toArray(new Chapter[] {});
         Arrays.sort(array);
         return array;
       }
@@ -417,7 +418,7 @@ public final class SearchView {
 
     @Override
     public Object[] getChildren(Object parentElement) {
-      return chapters.get(parentElement.toString()).toArray(new Page[] {});
+      return chapters.get(parentElement).toArray(new Page[] {});
     }
 
     @Override
@@ -427,7 +428,7 @@ public final class SearchView {
 
     @Override
     public boolean hasChildren(Object element) {
-      return element instanceof String;
+      return element instanceof Chapter;
     }
   }
 

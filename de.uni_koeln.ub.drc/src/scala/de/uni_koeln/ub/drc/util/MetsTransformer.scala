@@ -29,6 +29,13 @@ private[util] object Count extends Enumeration {
   val Label = Value
   val File = Value
 }
+
+case class Chapter(volume:Int, number:Int, title:String) extends Ordered[Chapter] {
+  def compare(that:Chapter) = 
+    if(this.volume==that.volume) this.number compare that.number else this.volume compare that.volume
+  override def toString = "Chapter %s: %s".format(number, title)
+}
+
 private[util] class MetsTransformer(file:File) {
   
   private val xml = XML.load(new FileReader(file))
@@ -47,13 +54,14 @@ private[util] class MetsTransformer(file:File) {
   private var physMap: Map[String, String] = buildPhysMap
   private var linkMap: Map[String, String] = buildLinkMap
   
-  private[util] def chapter(page:Int, mode:Count.Value = Count.File): String = {
+  private[util] def chapter(page:Int, mode:Count.Value = Count.File): Chapter = {
     def labelMap = physMap.map(_.swap)
     val chapter = mode match {
       case Count.Label => logMap.getOrElse(linkMap(labelMap(page.toString)), ("Unknown",  "Not found"))
       case Count.File => logMap.getOrElse(linkMap(fileMap(page.toString)), ("Unknown",  "Not found"))
     }
-    chapter._1 + ": " + chapter._2
+    val number = if(chapter._1.contains("Chapter")) chapter._1.split(" ")(1).toInt else Integer.MAX_VALUE
+    Chapter(4, number, chapter._2) // TODO get volume from initial metadata location, or init with volume number
   }
   
   private[util] def transform(): String = {
