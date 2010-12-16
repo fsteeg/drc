@@ -323,6 +323,7 @@ public final class SearchView {
   }
 
   private Map<Chapter, List<Page>> chapters = new TreeMap<Chapter, List<Page>>();
+  private MetsTransformer mets = new MetsTransformer("PPN345572629_0004.xml", DrcUiActivator.instance().db());
 
   private void setInput() {
     if (SearchViewModelProvider.content == null) {
@@ -331,8 +332,6 @@ public final class SearchView {
     Page[] pages = SearchViewModelProvider.content.getPages(searchField.getText().trim()
         .toLowerCase());
     Arrays.sort(pages, comp);
-    MetsTransformer mets = new MetsTransformer(DrcUiActivator.instance().fileFromBundle(
-        "PPN345572629_0004.xml"));
     chapters = new TreeMap<Chapter, List<Page>>();
     for (Page page : pages) {
       int fileNumber = page.number();

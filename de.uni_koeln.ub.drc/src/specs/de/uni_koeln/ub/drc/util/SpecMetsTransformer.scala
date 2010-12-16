@@ -47,7 +47,7 @@ class SpecMetsTransformer extends Spec with ShouldMatchers {
     
     /* A single file: */
     val file = new File(Romafo + "PPN345572629_0004/PPN345572629_0004.xml")
-    val mets = new MetsTransformer(file)
+    val mets = new MetsTransformer(XML.loadFile(file))
     it("should import METS metadata to ContentDM for single file " + file) {
       mets.transform().length should be > 500
     }
@@ -77,7 +77,7 @@ class SpecMetsTransformer extends Spec with ShouldMatchers {
       val xmlFile = new File(Romafo+dir, dir+".xml")
       if(xmlFile.exists) {
         it("should import METS metadata to ContentDM for " + xmlFile) {
-          val result = new MetsTransformer(xmlFile).transform()
+          val result = new MetsTransformer(XML.loadFile(xmlFile)).transform()
           result.length should be > 500
           if(Write) {
             val out = Cdm+xmlFile.getName.replace(".xml", ".txt")

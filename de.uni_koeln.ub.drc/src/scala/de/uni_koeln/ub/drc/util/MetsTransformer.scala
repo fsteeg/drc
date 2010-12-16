@@ -36,9 +36,10 @@ case class Chapter(volume:Int, number:Int, title:String) extends Ordered[Chapter
   override def toString = "Chapter %s: %s".format(number, title)
 }
 
-private[util] class MetsTransformer(file:File) {
+private[util] class MetsTransformer(xml:Elem) {
   
-  private val xml = XML.load(new FileReader(file))
+  def this(name:String, db: com.quui.sinist.XmlDb) = this(db.getXml("meta", name).get(0))
+  
   private val mods = xml\"dmdSec"\"mdWrap"\"xmlData"\"mods"
   private val loc = (mods\"location"\"url").text.trim
   private val num = (mods\"part"\"detail"\"number").text.trim
