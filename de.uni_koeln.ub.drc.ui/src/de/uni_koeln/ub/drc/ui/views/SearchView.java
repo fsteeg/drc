@@ -17,9 +17,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -259,8 +259,7 @@ public final class SearchView {
     }
   };
 
-  private void updateResultCount() {
-    int count = viewer.getTree().getItemCount();
+  private void updateResultCount(int count) {
     resultCount.setText(String.format("%s %s for:", count, count == 1 ? "hit" : "hits"));
   }
 
@@ -302,7 +301,7 @@ public final class SearchView {
   }
 
   private void initTable() {
-    final int[] columns = new int[] { 40, 50, 60, 400, 200, 250 };
+    final int[] columns = new int[] { 60, 50, 60, 400, 200, 250 };
     createColumn("", columns[0]);
     createColumn("Volume", columns[1]);
     createColumn("Page", columns[2]);
@@ -322,7 +321,7 @@ public final class SearchView {
     column1.getColumn().setMoveable(true);
   }
 
-  private Map<String, List<Page>> chapters = new HashMap<String, List<Page>>();
+  private Map<String, List<Page>> chapters = new TreeMap<String, List<Page>>();
 
   private void setInput() {
     if (SearchViewModelProvider.content == null) {
@@ -333,6 +332,7 @@ public final class SearchView {
     Arrays.sort(pages, comp);
     MetsTransformer mets = new MetsTransformer(DrcUiActivator.instance().fileFromBundle(
         "PPN345572629_0004.xml"));
+    chapters = new TreeMap<String, List<Page>>();
     for (Page page : pages) {
       int fileNumber = page.number();
       String chapter = mets.chapter(fileNumber, Count.Label());
@@ -344,7 +344,8 @@ public final class SearchView {
       pagesInChapter.add(page);
     }
     viewer.setInput(chapters);
-    updateResultCount();
+    viewer.expandAll();
+    updateResultCount(pages.length);
   }
 
   private void loadData() {
