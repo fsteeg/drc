@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class PdfExtractionTests {
 
-  private String pdfName = "res/rom/PPN345572629_0004/PPN345572629_0004 - 0007.pdf";
+  private String pdfName = "res/tests/PPN345572629_0004 - 0007.pdf";
   private PageInfo pi = PdfContentExtractor.extractContentFromPdf(pdfName);
 
   @Test

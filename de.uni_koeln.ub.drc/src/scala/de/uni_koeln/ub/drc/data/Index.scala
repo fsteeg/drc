@@ -65,11 +65,25 @@ object SearchOption extends Enumeration {
 
 object Import extends Application {
     val testing = Index.LocalDb
-    val staging = XmlDb("xmldb:exist://hydra2.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/")
+    val staging = XmlDb("xmldb:exist://hydra2.spinfo.uni-koeln.de:7777/exist/xmlrpc", "/db/", "drc/")
     val product = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/")
     val anon = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc-anonymous/")
     //Index.initialImport(testing, "res/rom/PPN345572629_0004")
+    //Meta.initialImport(testing, "res/rom/PPN345572629")
     //User.initialImport(testing, "users");
+}
+
+object Meta {
+  
+  def initialImport(db: XmlDb, location: String): Unit = {
+      val files = new File(location).list
+      for(file <- files.toList if file.endsWith("xml") ) {
+          val xml = new File(location, file)
+          db.put(xml, Format.XML)
+          println("Imported meta xml: " + xml)
+      }
+  }
+  
 }
 
 object Index {

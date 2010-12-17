@@ -46,7 +46,7 @@ class SpecMetsTransformer extends Spec with ShouldMatchers {
   describe("The MetsImporter") {
     
     /* A single file: */
-    val file = new File(Romafo + "PPN345572629_0004/PPN345572629_0004.xml")
+    val file = new File("res/tests/PPN345572629_0004.xml")
     val mets = new MetsTransformer(XML.loadFile(file))
     it("should import METS metadata to ContentDM for single file " + file) {
       mets.transform().length should be > 500
@@ -70,6 +70,13 @@ class SpecMetsTransformer extends Spec with ShouldMatchers {
       expect((2, "Gion Antoni Calvenzano")) { val c = mets.chapter(35, mode); (c.number, c.title) }
       expect((Integer.MAX_VALUE, "Nachwort")) { val c = mets.chapter(215, mode); (c.number, c.title) }
       expect((Integer.MAX_VALUE, "Nachwort")) { val c = mets.chapter(224, mode); (c.number, c.title) }
+    }
+    
+    it("provides a fallback result for unknown pages") {
+      val mode = Count.File
+      expect((Integer.MAX_VALUE, "Unknown")) { val c = mets.chapter(Integer.MAX_VALUE, mode); (c.number, c.title) }
+      expect((Integer.MAX_VALUE, "Unknown")) { val c = mets.chapter(Integer.MIN_VALUE, mode); (c.number, c.title) }
+      expect("Chapter X: Unknown") { mets.chapter(Integer.MIN_VALUE, mode).toString }
     }
     
     /* All files: */

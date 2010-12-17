@@ -33,12 +33,12 @@ private[util] object Count extends Enumeration {
 case class Chapter(volume:Int, number:Int, title:String) extends Ordered[Chapter] {
   def compare(that:Chapter) = 
     if(this.volume==that.volume) this.number compare that.number else this.volume compare that.volume
-  override def toString = "Chapter %s: %s".format(number, title)
+  override def toString = "Chapter %s: %s".format(if (number == Integer.MAX_VALUE) "X" else number, title)
 }
 
 private[util] class MetsTransformer(xml:Elem) {
   
-  def this(name:String, db: com.quui.sinist.XmlDb) = this(db.getXml("meta", name).get(0))
+  def this(name:String, db: com.quui.sinist.XmlDb) = this(db.getXml("PPN345572629", name).get(0))
   
   private val mods = xml\"dmdSec"\"mdWrap"\"xmlData"\"mods"
   private val loc = (mods\"location"\"url").text.trim
@@ -56,10 +56,14 @@ private[util] class MetsTransformer(xml:Elem) {
   private var linkMap: Map[String, String] = buildLinkMap
   
   private[util] def chapter(page:Int, mode:Count.Value = Count.File): Chapter = {
-    def labelMap = physMap.map(_.swap)
-    val chapter = mode match {
-      case Count.Label => logMap.getOrElse(linkMap(labelMap(page.toString)), ("Unknown",  "Not found"))
-      case Count.File => logMap.getOrElse(linkMap(fileMap(page.toString)), ("Unknown",  "Not found"))
+    lazy val labelMap = physMap.map(_.swap)
+    val chapter = try { 
+      logMap(linkMap( mode match {
+        case Count.Label => labelMap(page.toString)
+        case Count.File => fileMap(page.toString)
+    }))
+    } catch {
+      case nse:NoSuchElementException => ("Unknown", "Unknown")
     }
     val number = if(chapter._1.contains("Chapter")) chapter._1.split(" ")(1).toInt else Integer.MAX_VALUE
     Chapter(4, number, chapter._2) // TODO get volume from initial metadata location, or init with volume number

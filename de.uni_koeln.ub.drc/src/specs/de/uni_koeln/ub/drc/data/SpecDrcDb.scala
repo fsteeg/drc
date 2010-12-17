@@ -70,12 +70,12 @@ class SpecDrcDb extends Spec with ShouldMatchers {
     }
 
     it("allows access to all stored pages IDs") {
-      expect(217 * 2) { db.getIds(collection).get.size }
+      expect(218 * 2) { db.getIds(collection).get.size }
     }
 
     it("returns all entries if no ids are given") {
-      expect(217) { db.getXml(collection).get.size }
-      expect(217) { db.getBin(collection).get.size }
+      expect(218) { db.getXml(collection).get.size }
+      expect(218) { db.getBin(collection).get.size }
     }
 
   }

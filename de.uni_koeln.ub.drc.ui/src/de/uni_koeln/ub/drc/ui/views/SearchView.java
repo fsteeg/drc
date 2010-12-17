@@ -323,7 +323,8 @@ public final class SearchView {
   }
 
   private Map<Chapter, List<Page>> chapters = new TreeMap<Chapter, List<Page>>();
-  private MetsTransformer mets = new MetsTransformer("PPN345572629_0004.xml", DrcUiActivator.instance().db());
+  private MetsTransformer mets = new MetsTransformer(SearchViewModelProvider.COLLECTION + ".xml",
+      DrcUiActivator.instance().db());
 
   private void setInput() {
     if (SearchViewModelProvider.content == null) {
