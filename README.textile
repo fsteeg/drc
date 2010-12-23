@@ -1,5 +1,15 @@
 Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy).
 
+h1. Beta 2 - Milestone 2 (2010 December 23)
+
+h2. Overview
+
+Beta 2 milestone 2 (tag: b2-m2) contains chapter navigation (based on METS metadata) and adds all 12 volumes of the Romansch Chrestomathy we currently have available. This version also adds the ability to search in comments, improves presentation of edit suggestions, contains minor fixes and is now based on Eclipse 4.1 (M3).
+
+h2. Dependencies and Setup
+
+Beta 2 milestone 2 requires Eclipse 4.1 (load the @drc.target@ definition in @de.uni_koeln.ub.drc.ui@) and "eXist-db":http://exist.sourceforge.net/ running locally on port 7777, see below for setup; other requirements are included. The full data can be "downloaded":http://hydra2.spinfo.uni-koeln.de/downloads/data/rom.zip and imported into the local DB by running @ant import@ in @de.uni_koeln.ub.drc@ (place the @rom/@ folder in @res/@). The Tycho build requires Maven 3 and can be executed in the repo root using @mvn clean install@.
+
 h1. Beta 2 - Milestone 1 (2010 November 26)
 
 h2. Overview
