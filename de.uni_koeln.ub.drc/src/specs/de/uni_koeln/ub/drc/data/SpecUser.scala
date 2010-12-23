@@ -69,11 +69,11 @@ class SpecUser extends Spec with ShouldMatchers {
       expect(user) { User.fromXml(user.toXml) }
     }
     it("allows access to individual saved user instances via user name") {
-      val fsteeg = User("fsteeg", "Fabian Steeg", "Cologne, Germany", "drc", Import.product)
-      val claesn = User("claesn", "Claes Neuefeind", "Cologne, Germany", "drc", Import.product)
-      val matana = User("matana", "Mihail Atanassov", "Cologne, Germany", "drc", Import.product)
-      val rols = User("rols", "Jürgen Rolshoven", "Cologne, Germany", "drc", Import.product)
-      val ocr = User("OCR", "OCR", "Russia", "drc", Import.product)
+      val fsteeg = User("fsteeg", "Fabian Steeg", "Cologne, Germany", "drc", db)
+      val claesn = User("claesn", "Claes Neuefeind", "Cologne, Germany", "drc", db)
+      val matana = User("matana", "Mihail Atanassov", "Cologne, Germany", "drc", db)
+      val rols = User("rols", "Jürgen Rolshoven", "Cologne, Germany", "drc", db)
+      val ocr = User("OCR", "OCR", "Russia", "drc", db)
       expect(fsteeg) { User.withId(db, "fsteeg") }
       expect(claesn) { User.withId(db, "claesn") }
       expect(matana) { User.withId(db, "matana") }

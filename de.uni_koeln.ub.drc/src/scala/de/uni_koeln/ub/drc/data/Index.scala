@@ -64,13 +64,18 @@ object SearchOption extends Enumeration {
 }
 
 object Import extends Application {
-    val testing = Index.LocalDb
-    val staging = XmlDb("xmldb:exist://hydra2.spinfo.uni-koeln.de:7777/exist/xmlrpc", "/db/", "drc/")
-    val product = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/")
-    val anon = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc-anonymous/")
-    //Index.initialImport(testing, "res/rom/PPN345572629_0004")
-    //Meta.initialImport(testing, "res/rom/PPN345572629")
-    //User.initialImport(testing, "users");
+    private val testing = Index.LocalDb
+    //val staging = XmlDb("xmldb:exist://hydra2.spinfo.uni-koeln.de:7777/exist/xmlrpc", "/db/", "drc/")
+    //val product = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/")
+    //val anon = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc-anonymous/")
+    
+    for(volume <- List(
+        "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027", "0035", "0036", "0037")) {
+      Index.initialImport(testing, "res/rom/PPN345572629_" + volume)
+    }
+    
+    Meta.initialImport(testing, "res/rom/PPN345572629")
+    User.initialImport(testing, "users");
 }
 
 object Meta {

@@ -33,6 +33,7 @@ import de.uni_koeln.ub.drc.reader.temp.PositionWrapper;
  */
 public class PdfContentExtractor extends PDFTextStripper2 {
 
+  private static String location;
   private List<TextPosition> paragraphs = new ArrayList<TextPosition>();
 
   public PdfContentExtractor() throws IOException {
@@ -51,6 +52,7 @@ public class PdfContentExtractor extends PDFTextStripper2 {
 
   public static PageInfo extractContentFromPdf(String pdfName) {
     try {
+      location = pdfName;
       PDDocument document = PDDocument.load(new File(pdfName));
       PdfContentExtractor x = initExtractor(document);
       PageInfo result = x.toPageInfo();
@@ -67,13 +69,22 @@ public class PdfContentExtractor extends PDFTextStripper2 {
     PdfContentExtractor x = new PdfContentExtractor();
     x.setDropThreshold(3.75f);
     // x.setIndentThreshold(1f); // for tweaking paragraph detection
-    x.writeText(document, writer);
+    try {
+      x.writeText(document, writer);
+    } catch (NullPointerException e) {
+      System.err.println("Could not process: " + location);
+      e.printStackTrace();
+    }
     return x;
   }
 
   private PageInfo toPageInfo() {
     Vector<List<TextPosition>> positions = charactersByArticle;
     List<ExtractedWord> words = new ArrayList<ExtractedWord>();
+    if(positions.size() == 0 || positions.get(0).size() == 0) {
+      System.err.println("No content found for: " + location);
+      return new PageInfo(words);
+    }
     TextPosition currentWordStart = positions.get(0).get(0);
     StringBuilder currentWordText = new StringBuilder();
     for (List<TextPosition> list : positions) {

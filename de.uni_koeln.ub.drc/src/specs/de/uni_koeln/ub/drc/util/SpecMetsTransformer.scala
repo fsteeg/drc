@@ -79,6 +79,15 @@ class SpecMetsTransformer extends Spec with ShouldMatchers {
       expect("Chapter X: Unknown") { mets.chapter(Integer.MIN_VALUE, mode).toString }
     }
     
+    it("provides conversion from file numbers to page labels") {
+      expect("1") { mets.label(7) }
+      expect("8") { mets.label(14) }
+      expect("9") { mets.label(15) }
+      expect("29") { mets.label(35) }
+      expect("209") { mets.label(215) }
+      expect("218") { mets.label(224) }
+    }
+    
     /* All files: */
     for(dir <- new File(Romafo).list if !dir.startsWith(".") && !dir.startsWith("romafo")) {
       val xmlFile = new File(Romafo+dir, dir+".xml")

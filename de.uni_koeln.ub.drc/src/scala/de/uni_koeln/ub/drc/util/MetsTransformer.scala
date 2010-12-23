@@ -50,10 +50,12 @@ private[util] class MetsTransformer(xml:Elem) {
   /* Maps used when generating the output in the transform method: */
   private val log: (String, Map[String, (String, String)]) = buildLogMap()
   private val fullTitle = log._1
-  private var fileMap: Map[String, String] = buildFileMap
-  private var logMap: Map[String,(String, String)] = log._2
-  private var physMap: Map[String, String] = buildPhysMap
-  private var linkMap: Map[String, String] = buildLinkMap
+  private var fileMap: Map[String, String] = buildFileMap // file -> physID, e.g. 205 -> phys206
+  private var logMap: Map[String,(String, String)] = log._2 // logID -> chapter, e.g. log16 -> (Chapter 8, Canzun)
+  private var physMap: Map[String, String] = buildPhysMap // physID -> label, e.g. phys562 -> 549
+  private var linkMap: Map[String, String] = buildLinkMap // physID -> logID, e.g. phys562 -> log67
+  
+  private[util] def label(file:Int) : String = physMap(fileMap(file.toString)) // result is String, can be "XVI"
   
   private[util] def chapter(page:Int, mode:Count.Value = Count.File): Chapter = {
     lazy val labelMap = physMap.map(_.swap)
