@@ -73,10 +73,12 @@ import de.uni_koeln.ub.drc.util.MetsTransformer;
  */
 public final class SearchView {
 
+  private static final String[] VOLUMES = new String[] { "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024",
+          "0027", "0035", "0036", "0037" };
   private Text searchField;
   private Text tagField;
   private Label resultCount;
-  private static Combo searchOptions;
+  private Combo searchOptions;
   private TreeViewer viewer;
 
   @Inject
@@ -90,16 +92,29 @@ public final class SearchView {
       return p1.id().compareTo(p2.id());
     }
   };
+  private Combo volumes;
 
   @Inject
   public SearchView(final Composite parent) {
     Composite searchComposite = new Composite(parent, SWT.NONE);
-    searchComposite.setLayout(new GridLayout(4, false));
+    searchComposite.setLayout(new GridLayout(7, false));
+    initVolumeSelector(searchComposite);
     initSearchField(searchComposite);
     initOptionsCombo(searchComposite);
     initTableViewer(parent);
     addPageInfoBar(parent);
     GridLayoutFactory.fillDefaults().generateLayout(parent);
+  }
+
+  private void initVolumeSelector(Composite searchComposite) {
+    Label label1 = new Label(searchComposite, SWT.NONE);
+    label1.setText("Volume");
+    volumes = new Combo(searchComposite, SWT.READ_ONLY);
+    volumes.setItems(VOLUMES);
+    volumes.select(0);
+    volumes.addSelectionListener(searchListener);
+    Label label2 = new Label(searchComposite, SWT.NONE);
+    label2.setText("has");
   }
 
   @PostConstruct
@@ -198,7 +213,7 @@ public final class SearchView {
             DrcUiActivator
                 .instance()
                 .db()
-                .getXml(SearchViewModelProvider.COLLECTION,
+                .getXml(selected(volumes),
                     JavaConversions.asBuffer(Arrays.asList(page.id()))).get().head(), page.id());
         context.modify(IServiceConstants.ACTIVE_SELECTION,
             new StructuredSelection(reloaded).toList());
@@ -208,7 +223,7 @@ public final class SearchView {
 
   private void setCurrentPageLabel(Page page) {
     currentPageLabel.setText(String.format("Current page: volume %s, page %s, %s",
-        mappedVolume(page), page.number(), page.tags().size() == 0 ? "not tagged" : "tagged as: "
+        page.volume(), page.number(), page.tags().size() == 0 ? "not tagged" : "tagged as: "
             + page.tags().mkString(", ")));
   }
 
@@ -218,7 +233,7 @@ public final class SearchView {
     if (viewer.getTree().getItems().length == 0) {
       throw new IllegalArgumentException("No entries in initial search view");
     }
-    allPages = new ArrayList<Page>(asList(SearchViewModelProvider.content.index.pages()));
+    allPages = new ArrayList<Page>(asList(content.index.pages()));
     Collections.sort(allPages, comp);
     for (Page page : allPages) {
       if (page.id().equals(DrcUiActivator.instance().currentUser().latestPage())) {
@@ -323,17 +338,19 @@ public final class SearchView {
   }
 
   private Map<Chapter, List<Page>> chapters = new TreeMap<Chapter, List<Page>>();
-  private MetsTransformer mets = new MetsTransformer(SearchViewModelProvider.COLLECTION + ".xml",
-      DrcUiActivator.instance().db());
+  private MetsTransformer mets;
+  private String last = VOLUMES[0];
 
   private void setInput() {
-    if (SearchViewModelProvider.content == null) {
+    String current = selected(volumes);
+    if (content == null || !current.equals(last)) {
       loadData();
     }
-    Page[] pages = SearchViewModelProvider.content.getPages(searchField.getText().trim()
-        .toLowerCase());
+    last = current;
+    Page[] pages = content.getPages(searchField.getText().trim().toLowerCase());
     Arrays.sort(pages, comp);
     chapters = new TreeMap<Chapter, List<Page>>();
+    mets = new MetsTransformer(current + ".xml", DrcUiActivator.instance().db());
     for (Page page : pages) {
       int fileNumber = page.number();
       Chapter chapter = mets.chapter(fileNumber, Count.Label());
@@ -356,7 +373,7 @@ public final class SearchView {
       dialog.run(true, true, new IRunnableWithProgress() {
         public void run(final IProgressMonitor m) throws InvocationTargetException,
             InterruptedException {
-          SearchViewModelProvider.content = new SearchViewModelProvider(m);
+          content = new SearchViewModelProvider(m);
         }
       });
     } catch (InvocationTargetException e) {
@@ -365,21 +382,28 @@ public final class SearchView {
       e.printStackTrace();
     }
   }
+  
+  private SearchViewModelProvider content = null;
 
-  private static final class SearchViewModelProvider {
-    private static SearchViewModelProvider content = null;
-    private final static String COLLECTION = "PPN345572629_0004";
+  private final class SearchViewModelProvider {
+    
     Index index;
-
-    private SearchViewModelProvider(IProgressMonitor m) {
-      List<String> ids = asList(DrcUiActivator.instance().db().getIds(COLLECTION).get());
+    String selected;
+    private SearchViewModelProvider(final IProgressMonitor m) {
+      viewer.getTree().getDisplay().syncExec(new Runnable() {
+        @Override
+        public void run() {
+          selected = selected(volumes);
+        }
+      });
+      List<String> ids = asList(DrcUiActivator.instance().db().getIds(selected).get());
       m.beginTask("Loading data from the DB...", ids.size() / 2); // we only load the XML files
       List<Page> pages = new ArrayList<Page>();
       for (String id : ids) {
         if (id.endsWith(".xml")) {
           m.subTask(id);
           pages.add(Page.fromXml(
-              DrcUiActivator.instance().db().getXml(COLLECTION, asBuffer(Arrays.asList(id))).get()
+              DrcUiActivator.instance().db().getXml(selected, asBuffer(Arrays.asList(id))).get()
                   .head(), id));
           m.worked(1);
         }
@@ -436,6 +460,10 @@ public final class SearchView {
     return element instanceof Page;
   }
 
+  private String selected(Combo volumes) {
+    return "PPN345572629_" + (volumes == null ? VOLUMES[0] : volumes.getItem(volumes.getSelectionIndex()));
+  }
+
   private Page asPage(Object element) {
     return (Page) element;
   }
@@ -447,12 +475,16 @@ public final class SearchView {
       case 0:
         return "";
       case 1:
-        return isPage(element) ? mappedVolume(asPage(element)) + "" : "";
+        return isPage(element) ? asPage(element).volume() + "" : "";
       case 2:
-        return isPage(element) ? PageConverter.convert(fileName(asPage(element))) : "";
-      case 3:
-        return isPage(element) ? asPage(element).toText("|").substring(0, 60) + "..." : element
-            .toString();
+        return isPage(element) ? mets.label(asPage(element).number()) + "" : "";
+      case 3: {
+        if (isPage(element)) {
+          String text = asPage(element).toText("|");
+          return text.substring(0, Math.min(60, text.length())) + "...";
+        } else
+          return element.toString();
+      }
       case 4:
         return isPage(element) ? lastModificationDate(asList(asPage(element).words())) : "";
       case 5:
@@ -487,7 +519,4 @@ public final class SearchView {
     }
   }
 
-  private static int mappedVolume(Page page) {
-    return page.volume() - 3; // TODO proper mapping for volume
-  }
 }

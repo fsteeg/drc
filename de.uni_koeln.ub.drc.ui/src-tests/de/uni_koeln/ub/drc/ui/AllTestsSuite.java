@@ -19,7 +19,7 @@ import org.junit.runners.Suite;
  * @author Fabian Steeg (fsteeg)
  */
 @RunWith( Suite.class )
-@Suite.SuiteClasses( { TestDrcHeadless.class, TestPageConverter.class, TestDrcUi.class  } )
+@Suite.SuiteClasses( { TestDrcHeadless.class, TestDrcUi.class  } )
 public final class AllTestsSuite {
 
   static final String APPLICATION_XMI = "de.uni_koeln.ub.drc.ui/Application.e4xmi";
