@@ -11,6 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -48,186 +49,243 @@ import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
- * View containing the scanned page used to check the original word while editing.
+ * View containing the scanned page used to check the original word while
+ * editing.
+ * 
  * @author Fabian Steeg (fsteeg)
  */
 public final class CheckView {
-  private Composite parent;
-  private Label imageLabel;
-  private boolean imageLoaded = false;
-  private ScrolledComposite scrolledComposite;
-  private ImageData image;
-  private Label suggestions;
-  private Job job;
-  private Button check;
-  private Text word;
+	private Composite parent;
+	private Label imageLabel;
+	private boolean imageLoaded = false;
+	private ScrolledComposite scrolledComposite;
+	private ImageData image;
+	private Label suggestions;
+	private Job job;
+	private Button check;
+	private Text word;
+	private List<Button> suggestionButtons = new ArrayList<Button>();
+	private Composite bottom;
 
-  @Inject
-  public CheckView(final Composite parent) {
-    this.parent = parent;
-    scrolledComposite = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.H_SCROLL | SWT.BORDER);
-    imageLabel = new Label(scrolledComposite, SWT.BORDER | SWT.CENTER);
-    scrolledComposite.setContent(imageLabel);
-    scrolledComposite.setExpandVertical(true);
-    scrolledComposite.setExpandHorizontal(true);
-    // scrolledComposite.setMinSize(imageLabel.computeSize(SWT.MAX, SWT.MAX));
-    scrolledComposite.setMinSize(new Point(900, 1440)); // IMG_SIZE
-    addSuggestions();
-    GridLayoutFactory.fillDefaults().generateLayout(parent);
-  }
+	@Inject
+	public CheckView(final Composite parent) {
+		this.parent = parent;
+		scrolledComposite = new ScrolledComposite(parent, SWT.V_SCROLL
+				| SWT.H_SCROLL | SWT.BORDER);
+		imageLabel = new Label(scrolledComposite, SWT.BORDER | SWT.CENTER);
+		scrolledComposite.setContent(imageLabel);
+		scrolledComposite.setExpandVertical(true);
+		scrolledComposite.setExpandHorizontal(true);
+		// scrolledComposite.setMinSize(imageLabel.computeSize(SWT.MAX,
+		// SWT.MAX));
+		scrolledComposite.setMinSize(new Point(900, 1440)); // IMG_SIZE
+		addSuggestions();
+		GridLayoutFactory.fillDefaults().generateLayout(parent);
+	}
 
-  private void addSuggestions() {
-    Composite bottom = new Composite(parent, SWT.NONE);
-    GridLayout layout = new GridLayout(2, false);
-    bottom.setLayout(layout);
-    check = new Button(bottom, SWT.CHECK);
-    check.setToolTipText("Suggest corrections");
-    check.setSelection(false);
-    check.addSelectionListener(new SelectionListener() {
-      @Override
-      public void widgetSelected(SelectionEvent e) {
-        setSelection(word);
-      }
+	private void addSuggestions() {
+		bottom = new Composite(parent, SWT.NONE);
+		GridLayout layout = new GridLayout(7, false);
+		bottom.setLayout(layout);
+		check = new Button(bottom, SWT.CHECK);
+		check.setToolTipText("Suggest corrections");
+		check.setSelection(false);
+		check.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				setSelection(word);
+			}
 
-      @Override
-      public void widgetDefaultSelected(SelectionEvent e) {}
-    });
-    suggestions = new Label(bottom, SWT.WRAP);
-    suggestions.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-  }
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
+		suggestions = new Label(bottom, SWT.WRAP);
+		suggestions.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+	}
 
-  @Inject
-  public void setSelection(
-      @Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final List<Page> pages) {
-    if (pages != null && pages.size() > 0) {
-      Page page = pages.get(0);
-      try {
-        updateImage(page);
-      } catch (MalformedURLException e) {
-        handle(e);
-      } catch (IOException e) {
-        handle(e);
-      }
-    } else {
-      return;
-    }
-  }
+	@Inject
+	public void setSelection(
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final List<Page> pages) {
+		if (pages != null && pages.size() > 0) {
+			Page page = pages.get(0);
+			try {
+				updateImage(page);
+			} catch (MalformedURLException e) {
+				handle(e);
+			} catch (IOException e) {
+				handle(e);
+			}
+		} else {
+			return;
+		}
+	}
 
-  private void handle(Exception e) {
-    MessageDialog.openError(parent.getShell(), "Could not load scan",
-        "Could not load the image file for the current page");
-    e.printStackTrace();
-  }
+	private void handle(Exception e) {
+		MessageDialog.openError(parent.getShell(), "Could not load scan",
+				"Could not load the image file for the current page");
+		e.printStackTrace();
+	}
 
-  @Inject
-  public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text text) {
-    Word word = null;
-    if (imageLoaded && text != null && (word = (Word) text.getData(Word.class.toString())) != null) {
-      this.word = text;
-      markPosition(text);
-      if (job != null) {
-        /* If a word is selected while we had a Job running for the previous word, cancel that: */
-        job.cancel();
-      }
-      if (text == null) {
-        suggestions.setText("No word selected");
-      } else if (!check.getSelection()) {
-        suggestions.setText("Edit suggestions disabled");
-      } else if (word.isLocked()) {
-        suggestions.setText("No edit suggestions - word is locked");
-      } else {
-        findEditSuggestions(word);
-        job.setPriority(Job.DECORATE);
-        job.schedule();
-      }
-    }
-  }
+	@Inject
+	public void setSelection(
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final Text text) {
+		Word word = null;
+		if (imageLoaded && text != null
+				&& (word = (Word) text.getData(Word.class.toString())) != null) {
+			this.word = text;
+			markPosition(text);
+			if (job != null) {
+				/*
+				 * If a word is selected while we had a Job running for the
+				 * previous word, cancel that:
+				 */
+				job.cancel();
+			}
+			if (text == null) {
+				suggestions.setText("No word selected");
+			} else if (!check.getSelection()) {
+				suggestions.setText("Edit suggestions disabled");
+				disposeButtons();
+			} else if (word.isLocked()) {
+				suggestions.setText("No edit suggestions - word is locked");
+			} else {
+				findEditSuggestions(word, text);
+				job.setPriority(Job.DECORATE);
+				job.schedule();
+			}
+		}
+	}
 
-  private void findEditSuggestions(final Word word) {
-    suggestions.setText("Finding edit suggestions...");
-    job = new Job("Edit suggestions search job") {
-      protected IStatus run(final IProgressMonitor monitor) {
-        final boolean complete = word.prepSuggestions();
-        suggestions.getDisplay().asyncExec(new Runnable() {
-          @Override
-          public void run() {
-            if (!complete) {
-              suggestions.setText("Finding edit suggestions...");
-            } else {
-              String text = (word.suggestions().size() == 0) ? "No reasonable edit suggestions found"
-                  : String.format("Suggestions for %s (originally '%s'): %s", word.history().top()
-                      .form(), word.original(), word.suggestions().mkString(", "));
-              if (!suggestions.isDisposed()) {
-                suggestions.setText(text);
-              }
-            }
-          }
-        });
-        return Status.OK_STATUS;
-      }
+	private void disposeButtons() {
+		if(!suggestionButtons.isEmpty()) {
+			for (Button b : suggestionButtons) {
+				b.dispose();
+			}
+		}
+		suggestionButtons = new ArrayList<Button>();
+	}
 
-      @Override
-      protected void canceling() {
-        word.cancelled_$eq(true);
-        suggestions.setText("Finding edit suggestions...");
-      };
-    };
-  }
+	private void findEditSuggestions(final Word word, final Text text) {
+		disposeButtons();
+		suggestions.setText("Finding edit suggestions...");
+		job = new Job("Edit suggestions search job") {
+			protected IStatus run(final IProgressMonitor monitor) {
+				final boolean complete = word.prepSuggestions();
+				suggestions.getDisplay().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						if (!complete) {
+							suggestions.setText("Finding edit suggestions...");
+						} else {
+							String info = (word.suggestions().size() == 0) ? "No reasonable edit suggestions found"
+									: String.format(
+											"Suggestions for %s (originally '%s'):",
+											word.history().top().form(),
+											word.original());
 
-  private void updateImage(final Page page) throws IOException {
-    if (imageLabel != null && imageLabel.getImage() != null && !imageLabel.getImage().isDisposed())
-      imageLabel.getImage().dispose();
-    Image loadedImage = loadImage(page);
-    image = loadedImage.getImageData();
-    imageLabel.setImage(loadedImage);
-    imageLoaded = true;
-  }
+							bottom.getDisplay().asyncExec(new Runnable() {
+								@Override
+								public void run() {
+									String words = word.suggestions().mkString(" ");
+									for (String string : words.split(" ")) {
+										final Button b = new Button(bottom, SWT.WRAP);
+										b.setLayoutData(new GridData(SWT.NONE));
+										b.setText(string);
+										b.addSelectionListener(new SelectionListener() {
+											@Override
+											public void widgetSelected(SelectionEvent e) {
+												if (text != null) {
+											            text.setText(b.getText());
+											            text.setSelection(text.getCaretPosition());
+										          }
+											}
+											
+											@Override
+											public void widgetDefaultSelected(SelectionEvent e) {
+											}
+										});
+										suggestionButtons.add(b);
+									}
+									bottom.pack();
+									bottom.redraw();
+								}
+							});
 
-  private Image reloadImage() {
-    Display display = parent.getDisplay();
-    Image newImage = new Image(display, image);
-    return newImage;
-  }
+							if (!suggestions.isDisposed()) {
+								suggestions.setText(info);
+							}
+						}
+					}
+				});
+				return Status.OK_STATUS;
+			}
 
-  private Image loadImage(final Page page) throws IOException {
-    Display display = parent.getDisplay();
-    Image newImage = null;
-    // TODO image as lazy def in page, fetched on demand?
-    InputStream in = new ByteArrayInputStream(Index.loadImageFor(DrcUiActivator.instance().db(),
-        page));
-    newImage = new Image(display, in);
-    return newImage;
-  }
+			@Override
+			protected void canceling() {
+				word.cancelled_$eq(true);
+				suggestions.setText("Finding edit suggestions...");
+			};
+		};
+	}
 
-  private void markPosition(final Text text) {
-    imageLabel.getImage().dispose();
-    Word word = (Word) text.getData(Word.class.toString());
-    Box box = word.position();
-    Rectangle rect = new Rectangle(box.x() - 10, box.y() - 4, box.width() + 20, box.height() + 12); // IMG_SIZE
-    Image image = reloadImage();
-    GC gc = new GC(image);
-    drawBoxArea(rect, gc);
-    drawBoxBorder(rect, gc);
-    imageLabel.setImage(image);
-    gc.dispose();
-    scrolledComposite.setOrigin(new Point(rect.x - 10, rect.y - 10)); // IMG_SIZE
-  }
+	private void updateImage(final Page page) throws IOException {
+		if (imageLabel != null && imageLabel.getImage() != null
+				&& !imageLabel.getImage().isDisposed())
+		imageLabel.getImage().dispose();
+		Image loadedImage = loadImage(page);
+		image = loadedImage.getImageData();
+		imageLabel.setImage(loadedImage);
+		imageLoaded = true;
+	}
 
-  private void drawBoxBorder(final Rectangle rect, final GC gc) {
-    gc.setAlpha(200);
-    gc.setLineWidth(1);
-    gc.setForeground(parent.getDisplay().getSystemColor(SWT.COLOR_DARK_GREEN));
-    gc.drawRectangle(rect);
-  }
+	private Image reloadImage() {
+		Display display = parent.getDisplay();
+		Image newImage = new Image(display, image);
+		return newImage;
+	}
 
-  private void drawBoxArea(final Rectangle rect, final GC gc) {
-    gc.setAlpha(50);
-    gc.setBackground(parent.getDisplay().getSystemColor(SWT.COLOR_GREEN));
-    gc.fillRectangle(rect);
-  }
+	private Image loadImage(final Page page) throws IOException {
+		Display display = parent.getDisplay();
+		Image newImage = null;
+		// TODO image as lazy def in page, fetched on demand?
+		InputStream in = new ByteArrayInputStream(Index.loadImageFor(
+				DrcUiActivator.instance().db(), page));
+		newImage = new Image(display, in);
+		return newImage;
+	}
 
-  private void clearMarker() {
-    imageLabel.setImage(reloadImage());
-  }
+	private void markPosition(final Text text) {
+		imageLabel.getImage().dispose();
+		Word word = (Word) text.getData(Word.class.toString());
+		Box box = word.position();
+		Rectangle rect = new Rectangle(box.x() - 10, box.y() - 4,
+				box.width() + 20, box.height() + 12); // IMG_SIZE
+		Image image = reloadImage();
+		GC gc = new GC(image);
+		drawBoxArea(rect, gc);
+		drawBoxBorder(rect, gc);
+		imageLabel.setImage(image);
+		gc.dispose();
+		scrolledComposite.setOrigin(new Point(rect.x - 10, rect.y - 10)); // IMG_SIZE
+	}
+
+	private void drawBoxBorder(final Rectangle rect, final GC gc) {
+		gc.setAlpha(200);
+		gc.setLineWidth(1);
+		gc.setForeground(parent.getDisplay().getSystemColor(
+				SWT.COLOR_DARK_GREEN));
+		gc.drawRectangle(rect);
+	}
+
+	private void drawBoxArea(final Rectangle rect, final GC gc) {
+		gc.setAlpha(50);
+		gc.setBackground(parent.getDisplay().getSystemColor(SWT.COLOR_GREEN));
+		gc.fillRectangle(rect);
+	}
+
+	private void clearMarker() {
+		imageLabel.setImage(reloadImage());
+	}
 
 }
