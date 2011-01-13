@@ -16,3 +16,8 @@ de.uni_koeln.ub.drc.ui/lib/*
 de.uni_koeln.ub.drc.ui/pages/*
 target
 de.uni_koeln.ub.drc/res/*.txt
+drcp/.classpath
+drcp/.project
+drcp/tmp
+drcp/logs
+*.class

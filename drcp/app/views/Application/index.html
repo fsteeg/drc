@@ -1,0 +1,21 @@
+#{extends 'main.html' /} #{set title:'DRC' /}
+
+<h1>The Digital Romansch Chrestomathy Portal</h1>
+
+#{if active.size() > 0}
+<h3>Active Users</h3>
+<ol>
+  #{list items:active, as:'user'}
+	<li class="active-user">${user.name} from ${user.region} (${user.reputation()})</li>
+	#{/list}
+</ol>
+#{/if}
+
+#{if inactive.size() > 0}
+<h3>Inactive Users</h3>
+<ul>
+  #{list items:inactive, as:'user'}
+  <li class="inactive-user">${user.name} from ${user.region}</li>
+  #{/list}
+</ul>
+#{/if}
