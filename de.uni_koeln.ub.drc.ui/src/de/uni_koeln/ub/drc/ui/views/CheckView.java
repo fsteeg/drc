@@ -83,27 +83,6 @@ public final class CheckView {
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
 	}
 
-	private void addSuggestions() {
-		bottom = new Composite(parent, SWT.NONE);
-		GridLayout layout = new GridLayout(7, false);
-		bottom.setLayout(layout);
-		check = new Button(bottom, SWT.CHECK);
-		check.setToolTipText("Suggest corrections");
-		check.setSelection(false);
-		check.addSelectionListener(new SelectionListener() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				setSelection(word);
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-			}
-		});
-		suggestions = new Label(bottom, SWT.WRAP);
-		suggestions.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-	}
-
 	@Inject
 	public void setSelection(
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final List<Page> pages) {
@@ -119,12 +98,6 @@ public final class CheckView {
 		} else {
 			return;
 		}
-	}
-
-	private void handle(Exception e) {
-		MessageDialog.openError(parent.getShell(), "Could not load scan",
-				"Could not load the image file for the current page");
-		e.printStackTrace();
 	}
 
 	@Inject
@@ -157,13 +130,84 @@ public final class CheckView {
 		}
 	}
 
+	private void addSuggestions() {
+		bottom = new Composite(parent, SWT.NONE);
+		GridLayout layout = new GridLayout(7, false);
+		bottom.setLayout(layout);
+		check = new Button(bottom, SWT.CHECK);
+		check.setToolTipText("Suggest corrections");
+		check.setSelection(false);
+		check.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				setSelection(word);
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
+		suggestions = new Label(bottom, SWT.WRAP);
+		suggestions.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+	}
+
+	private void clearMarker() {
+		imageLabel.setImage(reloadImage());
+	}
+
+	private void displaySuggestionButtons(final Word word, final Text text) {
+		bottom.getDisplay().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				String words = word.suggestions().mkString(" ");
+				for (String string : words.split(" ")) {
+					final Button b = new Button(bottom, SWT.WRAP);
+					b.setLayoutData(new GridData(SWT.NONE));
+					b.setText(string);
+					b.addSelectionListener(new SelectionListener() {
+
+						@Override
+						public void widgetSelected(SelectionEvent e) {
+							if (text != null) {
+								text.setText(b.getText());
+								text.setSelection(text.getCaretPosition());
+								text.setFocus();
+							}
+						}
+
+						@Override
+						public void widgetDefaultSelected(SelectionEvent e) {
+						}
+					});
+					suggestionButtons.add(b);
+				}
+				bottom.pack();
+				bottom.redraw();
+			}
+		});
+	}
+
 	private void disposeButtons() {
-		if(!suggestionButtons.isEmpty()) {
+		if (!suggestionButtons.isEmpty()) {
 			for (Button b : suggestionButtons) {
 				b.dispose();
 			}
 		}
 		suggestionButtons = new ArrayList<Button>();
+	}
+
+	private void drawBoxArea(final Rectangle rect, final GC gc) {
+		gc.setAlpha(50);
+		gc.setBackground(parent.getDisplay().getSystemColor(SWT.COLOR_GREEN));
+		gc.fillRectangle(rect);
+	}
+
+	private void drawBoxBorder(final Rectangle rect, final GC gc) {
+		gc.setAlpha(200);
+		gc.setLineWidth(1);
+		gc.setForeground(parent.getDisplay().getSystemColor(
+				SWT.COLOR_DARK_GREEN));
+		gc.drawRectangle(rect);
 	}
 
 	private void findEditSuggestions(final Word word, final Text text) {
@@ -183,38 +227,12 @@ public final class CheckView {
 											"Suggestions for %s (originally '%s'):",
 											word.history().top().form(),
 											word.original());
+							
+							if (!bottom.isDisposed())
+								displaySuggestionButtons(word, text);
 
-							bottom.getDisplay().asyncExec(new Runnable() {
-								@Override
-								public void run() {
-									String words = word.suggestions().mkString(" ");
-									for (String string : words.split(" ")) {
-										final Button b = new Button(bottom, SWT.WRAP);
-										b.setLayoutData(new GridData(SWT.NONE));
-										b.setText(string);
-										b.addSelectionListener(new SelectionListener() {
-											@Override
-											public void widgetSelected(SelectionEvent e) {
-												if (text != null) {
-											            text.setText(b.getText());
-											            text.setSelection(text.getCaretPosition());
-										          }
-											}
-											
-											@Override
-											public void widgetDefaultSelected(SelectionEvent e) {
-											}
-										});
-										suggestionButtons.add(b);
-									}
-									bottom.pack();
-									bottom.redraw();
-								}
-							});
-
-							if (!suggestions.isDisposed()) {
+							if (!suggestions.isDisposed())
 								suggestions.setText(info);
-							}
 						}
 					}
 				});
@@ -229,20 +247,10 @@ public final class CheckView {
 		};
 	}
 
-	private void updateImage(final Page page) throws IOException {
-		if (imageLabel != null && imageLabel.getImage() != null
-				&& !imageLabel.getImage().isDisposed())
-		imageLabel.getImage().dispose();
-		Image loadedImage = loadImage(page);
-		image = loadedImage.getImageData();
-		imageLabel.setImage(loadedImage);
-		imageLoaded = true;
-	}
-
-	private Image reloadImage() {
-		Display display = parent.getDisplay();
-		Image newImage = new Image(display, image);
-		return newImage;
+	private void handle(Exception e) {
+		MessageDialog.openError(parent.getShell(), "Could not load scan",
+				"Could not load the image file for the current page");
+		e.printStackTrace();
 	}
 
 	private Image loadImage(final Page page) throws IOException {
@@ -270,22 +278,20 @@ public final class CheckView {
 		scrolledComposite.setOrigin(new Point(rect.x - 10, rect.y - 10)); // IMG_SIZE
 	}
 
-	private void drawBoxBorder(final Rectangle rect, final GC gc) {
-		gc.setAlpha(200);
-		gc.setLineWidth(1);
-		gc.setForeground(parent.getDisplay().getSystemColor(
-				SWT.COLOR_DARK_GREEN));
-		gc.drawRectangle(rect);
+	private Image reloadImage() {
+		Display display = parent.getDisplay();
+		Image newImage = new Image(display, image);
+		return newImage;
 	}
 
-	private void drawBoxArea(final Rectangle rect, final GC gc) {
-		gc.setAlpha(50);
-		gc.setBackground(parent.getDisplay().getSystemColor(SWT.COLOR_GREEN));
-		gc.fillRectangle(rect);
-	}
-
-	private void clearMarker() {
-		imageLabel.setImage(reloadImage());
+	private void updateImage(final Page page) throws IOException {
+		if (imageLabel != null && imageLabel.getImage() != null
+				&& !imageLabel.getImage().isDisposed())
+			imageLabel.getImage().dispose();
+		Image loadedImage = loadImage(page);
+		image = loadedImage.getImageData();
+		imageLabel.setImage(loadedImage);
+		imageLoaded = true;
 	}
 
 }
