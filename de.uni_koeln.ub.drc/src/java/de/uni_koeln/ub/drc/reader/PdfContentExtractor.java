@@ -110,8 +110,8 @@ public class PdfContentExtractor extends PDFTextStripper2 {
       final TextPosition endPosition) {
     String wordText = currentWord.toString();
     PageFormat format = document.getPageFormat(0);
-    float width = (float) format.getWidth();
-    float height = (float) format.getHeight();
+    double width =  format.getWidth();
+    double height =  format.getHeight();
     Point start = new Point(currentWordStart.getX(), height - currentWordStart.getY());
     Point end = new Point(endPosition.getX(), height - endPosition.getY());
     ExtractedWord w = new ExtractedWord(wordText, start, end,

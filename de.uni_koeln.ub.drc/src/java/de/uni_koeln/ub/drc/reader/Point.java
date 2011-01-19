@@ -14,15 +14,15 @@ package de.uni_koeln.ub.drc.reader;
  */
 public final class Point {
 
-  private float x;
-  private float y;
+  private double x;
+  private double y;
 
   /**
    * Represents a point in the original scanned document.
    * @param x The x coordinate of this point
    * @param y The y coordinate of this point
    */
-  public Point(final float x, final float y) {
+  public Point(final double x, final double y) {
     this.x = x;
     this.y = y;
   }
@@ -30,14 +30,14 @@ public final class Point {
   /**
    * @return The x coordinate
    */
-  public float getX() {
+  public double getX() {
     return x;
   }
 
   /**
    * @return The y coordinate
    */
-  public float getY() {
+  public double getY() {
     return y;
   }
 
@@ -53,10 +53,10 @@ public final class Point {
       return false;
     }
     Point other = (Point) obj;
-    if (Float.floatToIntBits(x) != Float.floatToIntBits(other.x)) {
+    if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)) {
       return false;
     }
-    if (Float.floatToIntBits(y) != Float.floatToIntBits(other.y)) {
+    if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y)) {
       return false;
     }
     return true;
@@ -64,11 +64,11 @@ public final class Point {
 
   @Override
   public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + Float.floatToIntBits(x);
-    result = prime * result + Float.floatToIntBits(y);
-    return result;
+    final long prime = 31;
+    long result = 1;
+    result = prime * result + Double.doubleToLongBits(x);
+    result = prime * result + Double.doubleToLongBits(y);
+    return (int)result;
   }
 
   @Override
