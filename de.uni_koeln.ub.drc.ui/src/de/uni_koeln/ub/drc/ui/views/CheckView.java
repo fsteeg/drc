@@ -161,7 +161,7 @@ public final class CheckView {
 			public void run() {
 				String words = word.suggestions().mkString(" ");
 				for (String string : words.split(" ")) {
-					final Button b = new Button(bottom, SWT.WRAP);
+					final Button b = new Button(bottom, SWT.FLAT);
 					b.setLayoutData(new GridData(SWT.NONE));
 					b.setText(string);
 					b.addSelectionListener(new SelectionListener() {
