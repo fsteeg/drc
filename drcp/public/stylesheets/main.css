@@ -1,0 +1,14 @@
+table {
+	border-collapse: collapse;
+}
+
+table,th,td {
+	border: 1px solid lightgray;
+	text-align: left;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+img {
+	border: 1px solid lightgray;
+}

@@ -2,20 +2,34 @@
 
 <h1>The Digital Romansch Chrestomathy Portal</h1>
 
+${ids.size()} total pages, showing first two:
+
+#{if pages.size() > 0}
+<p>
+  #{list items:pages, as:'page'}
+  <img src="${page}" width=150px/> 
+  #{/list}
+</p>
+#{/if}
+
 #{if active.size() > 0}
 <h3>Active Users</h3>
-<ol>
+<table>
+  <tr> <th>Rank</th> <th>Name</th> <th>Region</th> <th>Score</th> </tr>
   #{list items:active, as:'user'}
-	<li class="active-user">${user.name} from ${user.region} (${user.reputation()})</li>
+	<tr class="active-user"> 
+	  <td>${active.indexOf(user)+1}</td> <td>${user.name}</td> <td>${user.region}</td> <td>${user.reputation()}</td>
+	</tr>
 	#{/list}
-</ol>
+</table>
 #{/if}
 
 #{if inactive.size() > 0}
 <h3>Inactive Users</h3>
-<ul>
+<table>
+  <tr> <th>Name</th> <th>Region</th> </tr>
   #{list items:inactive, as:'user'}
-  <li class="inactive-user">${user.name} from ${user.region}</li>
+  <tr class="inactive-user"> <td>${user.name}</td> <td>${user.region}</td> </tr>
   #{/list}
-</ul>
+</table>
 #{/if}

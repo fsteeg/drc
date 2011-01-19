@@ -20,4 +20,5 @@ drcp/.classpath
 drcp/.project
 drcp/tmp
 drcp/logs
+drcp/server.pid
 *.class
