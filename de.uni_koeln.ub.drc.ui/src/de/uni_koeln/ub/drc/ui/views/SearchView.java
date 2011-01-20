@@ -55,6 +55,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeItem;
 
 import scala.collection.JavaConversions;
 import de.uni_koeln.ub.drc.data.Index;
@@ -73,8 +74,8 @@ import de.uni_koeln.ub.drc.util.MetsTransformer;
  */
 public final class SearchView {
 
-  private static final String[] VOLUMES = new String[] { "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024",
-          "0027", "0035", "0036", "0037" };
+  private static final String[] VOLUMES = new String[] { "0004", "0008", "0009", "0011", "0012",
+      "0017", "0018", "0024", "0027", "0035", "0036", "0037" };
   private Text searchField;
   private Text tagField;
   private Label resultCount;
@@ -83,13 +84,17 @@ public final class SearchView {
 
   @Inject
   private IEclipseContext context;
-  private List<Page> allPages;
+  private List<String> allPages;
   private int index;
   private Label currentPageLabel;
 
-  private Comparator<Page> comp = new Comparator<Page>() {
-    public int compare(Page p1, Page p2) {
-      return p1.id().compareTo(p2.id());
+  private Comparator<Object> comp = new Comparator<Object>() {
+    public int compare(Object p1, Object p2) {
+      if (p1 instanceof Page && p2 instanceof Page) {
+        return ((Page) p1).id().compareTo(((Page) p2).id());
+      } else {
+        return p1.toString().compareTo(p2.toString());
+      }
     }
   };
   private Combo volumes;
@@ -181,7 +186,7 @@ public final class SearchView {
       private void addComment(final Text text) {
         String input = text.getText();
         if (input != null && input.trim().length() != 0) {
-          Page page = allPages.get(index);
+          Page page = page(allPages.get(index));
           page.tags().$plus$eq(new Tag(input, DrcUiActivator.instance().currentUser().id()));
           page.saveToDb(DrcUiActivator.instance().db());
           setCurrentPageLabel(page);
@@ -194,9 +199,23 @@ public final class SearchView {
     tagField.addSelectionListener(listener);
   }
 
+  String selected;
+
+  private Page page(String string) {
+    volumes.getDisplay().syncExec(new Runnable() {
+      @Override
+      public void run() {
+        selected = selected(volumes);
+      }
+    });
+    return Page.fromXml(
+        DrcUiActivator.instance().db().getXml(selected, asBuffer(Arrays.asList(string))).get()
+            .head(), string);
+  }
+
   private void updateSelection() {
     if (index < allPages.size() && index >= 0) {
-      Page page = allPages.get(index);
+      Page page = page(allPages.get(index));
       setCurrentPageLabel(page);
       StructuredSelection selection = new StructuredSelection(new Page[] { page });
       context.modify(IServiceConstants.ACTIVE_SELECTION, selection.toList());
@@ -209,12 +228,7 @@ public final class SearchView {
     parent.getDisplay().asyncExec(new Runnable() {
       @Override
       public void run() {
-        Page reloaded = Page.fromXml(
-            DrcUiActivator
-                .instance()
-                .db()
-                .getXml(selected(volumes),
-                    JavaConversions.asBuffer(Arrays.asList(page.id()))).get().head(), page.id());
+        Page reloaded = page(page.id());
         context.modify(IServiceConstants.ACTIVE_SELECTION,
             new StructuredSelection(reloaded).toList());
       }
@@ -222,28 +236,41 @@ public final class SearchView {
   }
 
   private void setCurrentPageLabel(Page page) {
-    currentPageLabel.setText(String.format("Current page: volume %s, page %s, %s",
-        page.volume(), page.number(), page.tags().size() == 0 ? "not tagged" : "tagged as: "
+    currentPageLabel.setText(String.format("Current page: volume %s, page %s, %s", page.volume(),
+        mets.label(page.number()), page.tags().size() == 0 ? "not tagged" : "tagged as: "
             + page.tags().mkString(", ")));
   }
 
   @PostConstruct
   public void select() {
-    viewer.expandAll();
     if (viewer.getTree().getItems().length == 0) {
       throw new IllegalArgumentException("No entries in initial search view");
     }
-    allPages = new ArrayList<Page>(asList(content.index.pages()));
-    Collections.sort(allPages, comp);
-    for (Page page : allPages) {
-      if (page.id().equals(DrcUiActivator.instance().currentUser().latestPage())) {
-        viewer.setSelection(new StructuredSelection(page));
+    allPages = new ArrayList<String>(asList(content.index.pages()));
+    Collections.sort(allPages);
+    for (String pageId : allPages) {
+      if (pageId.equals(DrcUiActivator.instance().currentUser().latestPage())) {
+        select(pageId);
         break;
       }
     }
     if (viewer.getSelection().isEmpty()) {
       viewer.setSelection(new StructuredSelection(allPages.get(0)));
     }
+  }
+
+  private void select(String pageId) {
+    Page page = page(pageId);
+    Chapter chapter = mets.chapter(page.number(), Count.File());
+    viewer.refresh(chapter);
+    TreeItem[] items = viewer.getTree().getItems();
+    for (TreeItem treeItem : items) {
+      if (treeItem.getText(3).contains(chapter.title())) {
+        treeItem.setExpanded(true);
+      }
+    }
+    viewer.reveal(page);
+    viewer.setSelection(new StructuredSelection(page), true);
   }
 
   private void initSearchField(final Composite parent) {
@@ -311,7 +338,7 @@ public final class SearchView {
     if (pages != null && pages.size() > 0) {
       Page page = pages.get(0);
       if (allPages != null) {
-        index = allPages.indexOf(page);
+        index = allPages.indexOf(page.id());
       }
     }
   }
@@ -337,7 +364,7 @@ public final class SearchView {
     column1.getColumn().setMoveable(true);
   }
 
-  private Map<Chapter, List<Page>> chapters = new TreeMap<Chapter, List<Page>>();
+  private Map<Chapter, List<Object>> chapters = new TreeMap<Chapter, List<Object>>();
   private MetsTransformer mets;
   private String last = VOLUMES[0];
 
@@ -347,23 +374,24 @@ public final class SearchView {
       loadData();
     }
     last = current;
-    Page[] pages = content.getPages(searchField.getText().trim().toLowerCase());
+    Object[] pages = content.getPages(searchField.getText().trim().toLowerCase());
     Arrays.sort(pages, comp);
-    chapters = new TreeMap<Chapter, List<Page>>();
+    chapters = new TreeMap<Chapter, List<Object>>();
     mets = new MetsTransformer(current + ".xml", DrcUiActivator.instance().db());
-    for (Page page : pages) {
-      int fileNumber = page.number();
+    for (Object page : pages) {
+      int fileNumber = page instanceof Page ? ((Page) page).number()
+          : new Page(null, (String) page).number();
       Chapter chapter = mets.chapter(fileNumber, Count.Label());
-      List<Page> pagesInChapter = chapters.get(chapter);
+      List<Object> pagesInChapter = chapters.get(chapter);
       if (pagesInChapter == null) {
-        pagesInChapter = new ArrayList<Page>();
+        pagesInChapter = new ArrayList<Object>();
         chapters.put(chapter, pagesInChapter);
       }
       pagesInChapter.add(page);
     }
     viewer.setInput(chapters);
-    viewer.expandAll();
     updateResultCount(pages.length);
+    select();
   }
 
   private void loadData() {
@@ -382,13 +410,14 @@ public final class SearchView {
       e.printStackTrace();
     }
   }
-  
+
   private SearchViewModelProvider content = null;
 
   private final class SearchViewModelProvider {
-    
+
     Index index;
     String selected;
+
     private SearchViewModelProvider(final IProgressMonitor m) {
       viewer.getTree().getDisplay().syncExec(new Runnable() {
         @Override
@@ -398,26 +427,59 @@ public final class SearchView {
       });
       List<String> ids = asList(DrcUiActivator.instance().db().getIds(selected).get());
       m.beginTask("Loading data from the DB...", ids.size() / 2); // we only load the XML files
-      List<Page> pages = new ArrayList<Page>();
+      List<String> pages = new ArrayList<String>();
       for (String id : ids) {
         if (id.endsWith(".xml")) {
           m.subTask(id);
-          pages.add(Page.fromXml(
-              DrcUiActivator.instance().db().getXml(selected, asBuffer(Arrays.asList(id))).get()
-                  .head(), id));
+          pages.add(id);
           m.worked(1);
         }
         if (m.isCanceled()) {
           break;
         }
       }
-      index = new Index(asBuffer(pages).toList());
+      index = new Index(asBuffer(pages).toList(), DrcUiActivator.instance().db(), selected);
       m.done();
     }
 
-    public Page[] getPages(final String term) {
-      String selectedSearchOption = searchOptions.getItem(searchOptions.getSelectionIndex());
-      return index.search(term, SearchOption.withName(selectedSearchOption));
+    Object[] search;
+
+    public Object[] getPages(final String term) {
+      final String selectedSearchOption = searchOptions.getItem(searchOptions.getSelectionIndex());
+      ProgressMonitorDialog dialog = new ProgressMonitorDialog(searchField.getShell());
+      dialog.open();
+      try {
+        dialog.run(true, true, new IRunnableWithProgress() {
+          public void run(final IProgressMonitor m) throws InvocationTargetException,
+              InterruptedException {
+            if (term.trim().equals("")) {
+              search = JavaConversions.asList(index.pages()).toArray(new String[] {});
+            } else {
+              List<Page> result = new ArrayList<Page>();
+              m.beginTask("Searching in " + index.pages().size() + " pages...", index.pages()
+                  .size());
+              for (String id : asList(index.pages())) {
+                Page p = page(id);
+                if (index.matches(p, term.toLowerCase(),
+                    SearchOption.withName(selectedSearchOption))) {
+                  result.add(p);
+                }
+                m.worked(1);
+                if (m.isCanceled()) {
+                  break;
+                }
+              }
+              search = result.toArray();
+            }
+
+          }
+        });
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      return search;
     }
   }
 
@@ -442,7 +504,12 @@ public final class SearchView {
 
     @Override
     public Object[] getChildren(Object parentElement) {
-      return chapters.get(parentElement).toArray(new Page[] {});
+      List<Object> ids = chapters.get(parentElement);
+      List<Page> pages = new ArrayList<Page>();
+      for (Object object : ids) {
+        pages.add(object instanceof String ? page((String) object) : (Page) object);
+      }
+      return pages.toArray(new Page[] {});
     }
 
     @Override
@@ -461,7 +528,8 @@ public final class SearchView {
   }
 
   private String selected(Combo volumes) {
-    return "PPN345572629_" + (volumes == null ? VOLUMES[0] : volumes.getItem(volumes.getSelectionIndex()));
+    return "PPN345572629_"
+        + (volumes == null ? VOLUMES[0] : volumes.getItem(volumes.getSelectionIndex()));
   }
 
   private Page asPage(Object element) {
