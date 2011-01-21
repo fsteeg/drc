@@ -1,11 +1,11 @@
 #{extends 'main.html' /} #{set title:'DRC' /}
 
-<h1>The Digital Romansch Chrestomathy Portal</h1>
-
-${ids.size()} total pages, showing first two: #{if pages.size() > 0}
-<p>#{list items:pages, as:'page'} <img src="${page}" width=150px />
+${ids.size()} total pages. #{if pages.size() > 0}
+<p>#{list items:pages, as:'page'} <a href="${page}"><img src="${page}" width=50px /></a>
 #{/list}</p>
-#{/if} #{if active.size() > 0}
+#{/if} 
+
+#{if active.size() > 0}
 <h3>Active Users</h3>
 <table>
 	<tr>

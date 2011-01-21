@@ -1,7 +1,7 @@
 package controllers
 
 import com.quui.sinist.XmlDb
-import de.uni_koeln.ub.drc.data.User
+import de.uni_koeln.ub.drc.data._
 import play._
 import play.mvc._
 
@@ -16,15 +16,19 @@ object Application extends Controller {
     val (active, inactive) = users.sortBy(_.reputation).reverse.partition(_.reputation > 0)
 
     val ids = db.getIds(collection).get.filter(_.endsWith(".xml"))
-    val pages = ids.take(2).map("http://" + server + "/exist/rest/db/drc/" + collection + "/" +
-      _.replace(".xml", ".jpg"))
+    val pages = ids.take(5).map(imageLink(_))
 
     Template(active, inactive, ids, pages)
   }
+  
+  private def imageLink(id:String) = "http://" + server + "/exist/rest/db/drc/" + collection + "/" +
+      id.replace(".xml", ".jpg")
 
-  def user(id: String) {
+  def user(id: String) = {
     val user = User.fromXml(db.getXml("users", id+".xml").get(0))
-    Template(user)
+    val link = imageLink(user.latestPage)
+    val page = new Page(null, user.latestPage)
+    Template(user, link, page)
   }
 
 }

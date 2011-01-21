@@ -11,6 +11,21 @@
         #{get 'moreScripts' /}
     </head>
     <body>
-        #{doLayout /}
+        <div id="header">
+        <div id="title">
+                <h1>The Digital Romansch Chrestomathy Portal</h1>
+            </div>
+            <div id="logo">
+               <img src="/public/images/drc.png" width="150px"/>
+            </div>
+            <hr/>
+        </div>
+        <div id="main">
+            #{doLayout /} 
+        </div>
+        <p id="footer">
+            <hr/>
+            <i>The Digital Romansch Chrestomathy Portal: a collaborative digitization effort.</i>
+        </p>
     </body>
 </html>
