@@ -2,34 +2,47 @@
 
 <h1>The Digital Romansch Chrestomathy Portal</h1>
 
-${ids.size()} total pages, showing first two:
-
-#{if pages.size() > 0}
-<p>
-  #{list items:pages, as:'page'}
-  <img src="${page}" width=150px/> 
-  #{/list}
-</p>
-#{/if}
-
-#{if active.size() > 0}
+${ids.size()} total pages, showing first two: #{if pages.size() > 0}
+<p>#{list items:pages, as:'page'} <img src="${page}" width=150px />
+#{/list}</p>
+#{/if} #{if active.size() > 0}
 <h3>Active Users</h3>
 <table>
-  <tr> <th>Rank</th> <th>Name</th> <th>Region</th> <th>Score</th> </tr>
-  #{list items:active, as:'user'}
-	<tr class="active-user"> 
-	  <td>${active.indexOf(user)+1}</td> <td>${user.name}</td> <td>${user.region}</td> <td>${user.reputation()}</td>
+	<tr>
+		<th>Rank</th>
+		<th>Name</th>
+		<th>Region</th>
+		<th>Score</th>
+	</tr>
+	#{list items:active, as:'user'}
+	<tr class="active-user">
+		<td>${active.indexOf(user)+1}</td>
+		<td>${user.name}</td>
+		<td>${user.region}</td>
+		<td>${user.reputation()}</td>
+	</tr>
+	#{/list}
+</table>
+#{/if} #{if inactive.size() > 0}
+<h3>Inactive Users</h3>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Region</th>
+	</tr>
+	#{list items:inactive, as:'user'}
+	<tr class="inactive-user">
+		<td>${user.name}</td>
+		<td>${user.region}</td>
 	</tr>
 	#{/list}
 </table>
 #{/if}
 
-#{if inactive.size() > 0}
-<h3>Inactive Users</h3>
-<table>
-  <tr> <th>Name</th> <th>Region</th> </tr>
-  #{list items:inactive, as:'user'}
-  <tr class="inactive-user"> <td>${user.name}</td> <td>${user.region}</td> </tr>
-  #{/list}
-</table>
-#{/if}
+<p>Get involved: download the latest beta release of the editor for
+<a
+	href="http://github.com/downloads/spinfo/drc/drc-beta-win-2010-10-20.zip">Windows</a>
+or <a
+	href="http://github.com/downloads/spinfo/drc/drc-beta-mac-2010-10-20.zip">Mac</a>,
+or fork us on <a href="http://github.com/spinfo/drc">GitHub</a>.</p>
+
