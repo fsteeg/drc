@@ -12,3 +12,19 @@ table,th,td {
 img {
 	border: 1px solid lightgray;
 }
+
+html,body {
+	background: #FFFFFF !important;
+	font-family: Helvetica, Arial, Sans !important;
+}
+
+body {
+	width: 900px;
+	padding: 0 30px;
+	margin: auto;
+}
+
+h1,h2,h3,a {
+	color: #869AB1;
+	margin-bottom: 15px;
+}

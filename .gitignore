@@ -22,3 +22,4 @@ drcp/tmp
 drcp/logs
 drcp/server.pid
 *.class
+drcp/eclipse/classes

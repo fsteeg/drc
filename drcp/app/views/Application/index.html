@@ -17,7 +17,7 @@ ${ids.size()} total pages, showing first two: #{if pages.size() > 0}
 	#{list items:active, as:'user'}
 	<tr class="active-user">
 		<td>${active.indexOf(user)+1}</td>
-		<td>${user.name}</td>
+		<td><a href="@{Application.user(user.id)}">${user.name}</a></td>
 		<td>${user.region}</td>
 		<td>${user.reputation()}</td>
 	</tr>

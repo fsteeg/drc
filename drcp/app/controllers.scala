@@ -22,4 +22,9 @@ object Application extends Controller {
     Template(active, inactive, ids, pages)
   }
 
+  def user(id: String) {
+    val user = User.fromXml(db.getXml("users", id+".xml").get(0))
+    Template(user)
+  }
+
 }
