@@ -381,7 +381,7 @@ public final class SearchView {
     for (Object page : pages) {
       int fileNumber = page instanceof Page ? ((Page) page).number()
           : new Page(null, (String) page).number();
-      Chapter chapter = mets.chapter(fileNumber, Count.Label());
+      Chapter chapter = mets.chapter(fileNumber, Count.File());
       List<Object> pagesInChapter = chapters.get(chapter);
       if (pagesInChapter == null) {
         pagesInChapter = new ArrayList<Object>();
