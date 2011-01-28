@@ -23,11 +23,14 @@ import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Widget;
 
 import com.quui.sinist.XmlDb;
 
@@ -60,8 +63,7 @@ public final class WordView {
   public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text text) {
     Word word = null;
     Page page = null;
-    if (text != null 
-        && (word = (Word) text.getData(Word.class.toString())) != null
+    if (text != null && (word = (Word) text.getData(Word.class.toString())) != null
         && (page = (Page) text.getData(Page.class.toString())) != null) {
       this.text = text;
       this.word = word;
@@ -112,40 +114,25 @@ public final class WordView {
   }
 
   private void setTableInput() {
-    clearButtons();
     if (word != null) {
+      TableHelper.clearWidgets(viewer.getTable());
       viewer.setInput(WordViewModel.CONTENT.getDetails(word));
-    }
-    addButtons();
-  }
-
-  private void clearButtons() {
-    TableItem[] items = viewer.getTable().getItems();
-    for (int i = 0; i < items.length; i++) {
-      if (!items[i].isDisposed()) {
-        Object data = items[i].getData();
-        if (data != null && data instanceof Button[]) {
-          Button[] buttons = (Button[]) data;
-          for (Button button : buttons) {
-            if (button != null) {
-              button.dispose();
-            }
-          }
-        }
-      }
+      addWidgets();
     }
   }
 
-  private void addButtons() {
+  private void addWidgets() {
     TableItem[] items = viewer.getTable().getItems();
     for (int i = 0; i < items.length; i++) {
       final TableItem item = items[i];
       final int index = i;
       if (item.getText(0).trim().length() > 0) {
+        final String author = ((Modification) item.getData()).author();
+        Link link = TableHelper.insertLink(viewer.getTable(), item, author, 1);
         Button up = addVoteButton(item, index, Vote.UP, 4);
         Button down = addVoteButton(item, index, Vote.DOWN, 5);
         Button rev = addRevertButton(item, index, 6);
-        item.setData(new Button[] { up, down, rev });
+        item.setData(new Widget[] { up, down, rev, link });
       }
     }
   }
@@ -153,7 +140,8 @@ public final class WordView {
   private Button addRevertButton(final TableItem item, final int index, int col) {
     final Modification modification = (Modification) viewer.getData(index + "");
     if (!word.history().top().equals(modification)) { // no revert for most recent modification
-      Button button = createButton(item, DrcUiActivator.instance().loadImage("icons/revert.gif"), col);
+      Button button = createButton(item, DrcUiActivator.instance().loadImage("icons/revert.gif"),
+          col);
       button.setEnabled(!word.isLocked());
       button.addSelectionListener(new SelectionListener() {
         @Override

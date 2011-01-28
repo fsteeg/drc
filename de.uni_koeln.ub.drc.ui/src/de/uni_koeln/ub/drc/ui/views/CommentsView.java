@@ -34,13 +34,14 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Widget;
 
 import de.uni_koeln.ub.drc.data.Comment;
 import de.uni_koeln.ub.drc.data.Page;
-import de.uni_koeln.ub.drc.data.User;
-import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 import de.uni_koeln.ub.drc.ui.views.WordViewModel.WordViewLabelProvider;
 
@@ -151,8 +152,22 @@ public final class CommentsView {
 
   private void setInput() {
     if (page != null) {
+      TableHelper.clearWidgets(viewer.getTable());
       viewer.setInput(asList(page.comments()).toArray(new Comment[] {}));
+      addLinks();
     }
+  }
+
+  private void addLinks() {
+    Table table = viewer.getTable();
+    TableItem[] items = table.getItems();
+    for (int i = 0; i < items.length; i++) {
+      final TableItem item = items[i];
+      final String author = ((Comment) item.getData()).user();
+      Link link = TableHelper.insertLink(viewer.getTable(), item, author, 2);
+      item.setData(new Widget[] { link });
+    }
+
   }
 
   private static final class CommentsContentProvider implements IStructuredContentProvider {

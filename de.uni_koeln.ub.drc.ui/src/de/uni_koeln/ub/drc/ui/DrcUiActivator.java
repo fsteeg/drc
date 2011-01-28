@@ -57,6 +57,10 @@ public final class DrcUiActivator extends Plugin {
 
   private static final String JAAS_CONFIG_FILE = "jaas_config"; //$NON-NLS-1$
 
+  public static final String PROFILE_ROOT = "http://hydra2.spinfo.uni-koeln.de:9000/application/user?id=";
+
+  public static final String OCR_ID = "OCR";
+
   private XmlDb db = null;
 
   private static DrcUiActivator instance;
