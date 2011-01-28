@@ -1,5 +1,51 @@
+html,body {
+  background: #FFFFFF !important;
+  font-family: Helvetica, Arial, Sans !important;
+  font-size: 11pt;
+}
+
+body {
+  width: 950px;
+  padding: 0 30px;
+  margin: auto;
+}
+
+#header {
+  /* background: yellow; */
+}
+
+#main {
+  position: relative;
+  padding-bottom: 120px; /* Height of the footer */
+  /* background: gray; */
+}
+
+#left {
+  position: absolute;
+  left: 0;
+  width: 50%;
+  /* background: green; */
+}
+
+#right {
+  position: absolute;
+  right: 0;
+  width: 50%;
+  text-align: right; /* depends on element width */
+  /* background: red; */
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 950px;
+  height: 120px; /* Height of the footer */
+  /* background: lightblue; */
+}
+
 table {
 	border-collapse: collapse;
+	width:95%;
 }
 
 table.form,th.form,td.form {
@@ -18,17 +64,6 @@ table,th,td {
 
 img {
 	border: 1px solid lightgray;
-}
-
-html,body {
-	background: #FFFFFF !important;
-	font-family: Helvetica, Arial, Sans !important;
-}
-
-body {
-	width: 900px;
-	padding: 0 30px;
-	margin: auto;
 }
 
 h1,h2,h3 {
