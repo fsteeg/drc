@@ -1,5 +1,15 @@
 Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy).
 
+h1. Beta 2 - Milestone 3 (2011 January 28)
+
+h2. Overview
+
+Beta 2 milestone 3 (tag: b2-m3) improves data handling and chapter navigation in the editor. It also adds some minor UI improvements. The main new feature is the introduction of a Web portal based on the "Play":http://www.playframework.org/ framework. The initial portal provides some information about the project, basic user statistics, and a sign up page (see folder @drcp/@).
+
+h2. Dependencies and Setup
+
+Dependencies and setup for the editor have not changed (see below). To run the portal application, install the "Play framework":http://www.playframework.org/documentation/1.1.1/guide1#aInstallingthePlayframeworka and its "Scala module":http://www.playframework.org/modules/scala and run @play start@ in the @drcp/@ folder. The application should then be running at @localhost:9000@.
+
 h1. Beta 2 - Milestone 2 (2010 December 23)
 
 h2. Overview
