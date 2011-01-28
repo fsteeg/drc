@@ -262,15 +262,14 @@ public final class SearchView {
   private void select(String pageId) {
     Page page = page(pageId);
     Chapter chapter = mets.chapter(page.number(), Count.File());
-    viewer.refresh(chapter);
     TreeItem[] items = viewer.getTree().getItems();
     for (TreeItem treeItem : items) {
       if (treeItem.getText(3).contains(chapter.title())) {
         treeItem.setExpanded(true);
       }
     }
-    viewer.reveal(page);
-    viewer.setSelection(new StructuredSelection(page), true);
+    viewer.refresh(chapter);
+    viewer.setSelection(new StructuredSelection(page));
   }
 
   private void initSearchField(final Composite parent) {
@@ -391,7 +390,6 @@ public final class SearchView {
     }
     viewer.setInput(chapters);
     updateResultCount(pages.length);
-    select();
   }
 
   private void loadData() {

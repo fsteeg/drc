@@ -150,6 +150,7 @@ public final class EditView {
           history.push(new Modification(newText, user.id()));
           user.hasEdited();
           user.save(DrcUiActivator.instance().userDb());
+          text.setFocus();
         }
       }
 
