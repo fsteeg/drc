@@ -15,29 +15,26 @@ body {
 }
 
 #main {
-  position: relative;
   padding-bottom: 120px; /* Height of the footer */
   /* background: gray; */
 }
 
 #left {
-  position: absolute;
-  left: 0;
+  float: left;
   width: 50%;
   /* background: green; */
 }
 
 #right {
-  position: absolute;
-  right: 0;
+  float: left;
   width: 50%;
   text-align: right; /* depends on element width */
   /* background: red; */
 }
 
 #footer {
-  position: absolute;
-  bottom: 0;
+  padding-top: 20px;
+  clear: both;
   width: 950px;
   height: 120px; /* Height of the footer */
   /* background: lightblue; */
