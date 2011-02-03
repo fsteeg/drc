@@ -2,7 +2,8 @@
 
 <h1>${user.name}</h1>
 
-<p>Score: ${user.reputation()}</p>
+<p>Score: ${user.reputation()} (${user.edits} edits, ${user.upvotes} upvotes, ${user.downvotes} 
+downvotes, ${user.upvoted} upvoted, ${user.downvoted} downvoted)</p>
 <p>Region: ${user.region}</p>
 #{if link.endsWith(".jpg")}
 <p>Last edited: volume ${page.volume()}, page ${page.number()}</p>
