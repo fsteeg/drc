@@ -57,8 +57,6 @@ final class WordViewModel {
 
   static final class WordViewLabelProvider extends LabelProvider implements ITableLabelProvider {
     
-    private static Map<String, User> users = new HashMap<String, User>();
-    
     @Override
     public String getColumnText(final Object element, final int columnIndex) {
       Modification modification = (Modification) element;
@@ -78,8 +76,7 @@ final class WordViewModel {
 
     static String userDetails(String id) {
       if(id.equals("OCR")) return "--";
-      if(!users.containsKey(id)) users.put(id, User.withId(DrcUiActivator.instance().userDb(), id));
-      User user = users.get(id);
+      User user = User.withId(DrcUiActivator.instance().userDb(), id);
       return String.format("%s from %s (%s, %s)", user.name(), user.region(), user.id(),
           user.reputation());
     }
