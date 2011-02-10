@@ -57,9 +57,9 @@ public final class DrcUiActivator extends Plugin {
 
   private static final String JAAS_CONFIG_FILE = "jaas_config"; //$NON-NLS-1$
 
-  public static final String PROFILE_ROOT = "http://hydra2.spinfo.uni-koeln.de:9000/application/user?id=";
+  public static final String PROFILE_ROOT = "http://hydra2.spinfo.uni-koeln.de:9000/application/user?id="; //$NON-NLS-1$
 
-  public static final String OCR_ID = "OCR";
+  public static final String OCR_ID = "OCR"; //$NON-NLS-1$
 
   private XmlDb db = null;
 
@@ -70,7 +70,7 @@ public final class DrcUiActivator extends Plugin {
   public void start(final BundleContext context) throws Exception {
     super.start(context);
     instance = this;
-    update(context);
+    //update(context);
     login(context);
   }
 
@@ -131,14 +131,14 @@ public final class DrcUiActivator extends Plugin {
   }
 
   private void login(final BundleContext context) throws Exception {
-    String configName = "SIMPLE";
+    String configName = "SIMPLE"; //$NON-NLS-1$
     URL configUrl = context.getBundle().getEntry(JAAS_CONFIG_FILE);
     loginContext = LoginContextFactory.createContext(configName, configUrl);
     try {
       loginContext.login();
     } catch (LoginException e) {
-      IStatus status = new Status(IStatus.ERROR, "de.uni_koeln.ub.drc.ui", "Login failed", e);
-      int result = ErrorDialog.openError(null, "Error", "Login failed", status);
+      IStatus status = new Status(IStatus.ERROR, "de.uni_koeln.ub.drc.ui", "Login failed", e); //$NON-NLS-1$ //$NON-NLS-2$
+      int result = ErrorDialog.openError(null, Messages.Error, Messages.LoginFailed, status);
       if (result == ErrorDialog.CANCEL) {
         stop(context);
         System.exit(0);
@@ -176,7 +176,7 @@ public final class DrcUiActivator extends Plugin {
     try {
       URL resource = getBundle().getResource(location);
       if (resource == null) {
-        getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, "Could not resolve: " + location));
+        getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, "Could not resolve: " + location)); //$NON-NLS-1$
         return null;
       }
       return new File(FileLocator.resolve(resource).toURI());
@@ -199,16 +199,16 @@ public final class DrcUiActivator extends Plugin {
     if (db == null) {
       db = Index.LocalDb().isAvailable() ? Index.LocalDb() : currentUser().db();
       if (!db.isAvailable()) {
-        throw new IllegalStateException("Could not connect to DB: " + db);
+        throw new IllegalStateException("Could not connect to DB: " + db); //$NON-NLS-1$
       }
-      getLog().log(new Status(IStatus.INFO, PLUGIN_ID, "Using DB: " + db));
+      getLog().log(new Status(IStatus.INFO, PLUGIN_ID, "Using DB: " + db)); //$NON-NLS-1$
     }
     return db;
   }
 
   public XmlDb userDb() {
     return Index.LocalDb().isAvailable() ? Index.LocalDb() : new XmlDb(
-        "xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/");
+        "xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
   }
 
 }

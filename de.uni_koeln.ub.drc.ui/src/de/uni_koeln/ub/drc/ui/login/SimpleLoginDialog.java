@@ -41,6 +41,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.ui.Messages;
 
 /**
  * Handles the callbacks from the LoginModule with a login dialog.
@@ -48,8 +49,8 @@ import de.uni_koeln.ub.drc.ui.DrcUiActivator;
  */
 public class SimpleLoginDialog extends /* TitleArea */Dialog implements CallbackHandler {
 
-  private static final String TITLE = "Login to DRC";
-  private static final String LOGIN = "Login";
+  private static final String TITLE = Messages.LoginToDrc;
+  private static final String LOGIN = Messages.Login;
   private static final Point SIZE = new Point(250, 150);
   private boolean inputProcessed = false;
   private List<Callback> callbacks;

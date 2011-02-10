@@ -22,6 +22,7 @@ import javax.security.auth.spi.LoginModule;
 
 import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.ui.Messages;
 
 /**
  * Simple login module implementation.
@@ -54,8 +55,8 @@ public final class SimpleLoginModule implements LoginModule {
    */
   @Override
   public boolean login() throws LoginException {
-    NameCallback userCallback = new NameCallback("User:");
-    PasswordCallback passCallback = new PasswordCallback("Password:", false);
+    NameCallback userCallback = new NameCallback(Messages.User);
+    PasswordCallback passCallback = new PasswordCallback(Messages.Password, false);
     try {
       callbackHandler.handle(new Callback[] {
       /* new TextOutputCallback(TextOutputCallback.INFORMATION, "Please login"), */userCallback,
@@ -70,7 +71,7 @@ public final class SimpleLoginModule implements LoginModule {
 
   private boolean authenticate(final NameCallback userCallback, final PasswordCallback passCallback) {
     String name = userCallback.getName();
-    String pass = passCallback.getPassword() != null ? new String(passCallback.getPassword()) : "";
+    String pass = passCallback.getPassword() != null ? new String(passCallback.getPassword()) : ""; //$NON-NLS-1$
     User candidate = null;
     try {
       candidate = User.withId(DrcUiActivator.instance().userDb(), name);
@@ -80,7 +81,7 @@ public final class SimpleLoginModule implements LoginModule {
     if (validLogin(candidate, pass)) {
       currentUser = candidate;
       loggedIn = true;
-      System.out.println("Logged in: " + currentUser);
+      System.out.println("Logged in: " + currentUser); //$NON-NLS-1$
     }
     return loggedIn;
   }
@@ -97,7 +98,7 @@ public final class SimpleLoginModule implements LoginModule {
   public boolean commit() throws LoginException {
     subject.getPublicCredentials()
         .add(
-            String.format("%s from %s (%s)", currentUser.name(), currentUser.region(),
+            String.format("%s " + "" + " %s (%s)", currentUser.name(), currentUser.region(), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-2$
                 currentUser.id()));
     subject.getPrivateCredentials().add(currentUser);
     return loggedIn;

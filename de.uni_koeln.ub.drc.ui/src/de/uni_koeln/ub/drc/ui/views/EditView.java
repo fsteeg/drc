@@ -40,6 +40,7 @@ import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.ui.Messages;
 
 /**
  * A view that the area to edit the text. Marks the section in the image file that corresponds to
@@ -96,8 +97,8 @@ public final class EditView {
     if (pages != null && pages.size() > 0) {
       Page page = pages.get(0);
       if (dirtyable.isDirty()) {
-        MessageDialog dialog = new MessageDialog(editComposite.getShell(), "Save page", null,
-            "The current page has been modified. Save changes?", MessageDialog.CONFIRM,
+        MessageDialog dialog = new MessageDialog(editComposite.getShell(), Messages.SavePage, null,
+            Messages.CurrentPageModified, MessageDialog.CONFIRM,
             new String[] { IDialogConstants.YES_LABEL, IDialogConstants.NO_LABEL }, 0);
         dialog.create();
         if (dialog.open() == Window.OK) {
@@ -121,7 +122,7 @@ public final class EditView {
   public void doSave(@Optional final IProgressMonitor m) throws IOException, InterruptedException {
     final IProgressMonitor monitor = m == null ? new NullProgressMonitor() : m;
     final Page page = editComposite.getPage();
-    monitor.beginTask("Saving page...", page.words().size());
+    monitor.beginTask(Messages.SavingPage, page.words().size());
     final List<Text> words = editComposite.getWords();
 
     editComposite.getDisplay().syncExec(new Runnable() {
@@ -157,7 +158,7 @@ public final class EditView {
       private void resetWarningColor(Text text) {
         if (text.getForeground().equals(text.getDisplay().getSystemColor(EditComposite.DUBIOUS))) {
           text.setForeground(text.getDisplay().getSystemColor(EditComposite.DEFAULT));
-          label.setText("");
+          label.setText(""); //$NON-NLS-1$
         }
       }
     });
@@ -169,7 +170,7 @@ public final class EditView {
   }
 
   private void saveToXml(final Page page) {
-    System.out.println("Saving page: " + page);
+    System.out.println("Saving page: " + page); //$NON-NLS-1$
     page.saveToDb(DrcUiActivator.instance().db());
   }
 }

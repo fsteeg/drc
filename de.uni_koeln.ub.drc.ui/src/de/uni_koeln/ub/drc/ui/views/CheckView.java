@@ -47,6 +47,7 @@ import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.ui.Messages;
 
 /**
  * View containing the scanned page used to check the original word while
@@ -116,12 +117,12 @@ public final class CheckView {
 				job.cancel();
 			}
 			if (text == null) {
-				suggestions.setText("No word selected");
+				suggestions.setText(Messages.NoWordSelected);
 			} else if (!check.getSelection()) {
-				suggestions.setText("Edit suggestions disabled");
+				suggestions.setText(Messages.EditSuggestionsDisabled);
 				disposeButtons();
 			} else if (word.isLocked()) {
-				suggestions.setText("No edit suggestions - word is locked");
+				suggestions.setText(Messages.NoEditSuggestionsWordIsLocked);
 			} else {
 				findEditSuggestions(word, text);
 				job.setPriority(Job.DECORATE);
@@ -135,7 +136,7 @@ public final class CheckView {
 		GridLayout layout = new GridLayout(7, false);
 		bottom.setLayout(layout);
 		check = new Button(bottom, SWT.CHECK);
-		check.setToolTipText("Suggest corrections");
+		check.setToolTipText(Messages.SuggestCorrections);
 		check.setSelection(false);
 		check.addSelectionListener(new SelectionListener() {
 			@Override
@@ -159,8 +160,8 @@ public final class CheckView {
 		bottom.getDisplay().asyncExec(new Runnable() {
 			@Override
 			public void run() {
-				String words = word.suggestions().mkString(" ");
-				for (String string : words.split(" ")) {
+				String words = word.suggestions().mkString(" "); //$NON-NLS-1$
+				for (String string : words.split(" ")) { //$NON-NLS-1$
 					final Button b = new Button(bottom, SWT.FLAT);
 					b.setLayoutData(new GridData(SWT.NONE));
 					b.setText(string);
@@ -212,19 +213,19 @@ public final class CheckView {
 
 	private void findEditSuggestions(final Word word, final Text text) {
 		disposeButtons();
-		suggestions.setText("Finding edit suggestions...");
-		job = new Job("Edit suggestions search job") {
+		suggestions.setText(Messages.FindingEditSuggestions);
+		job = new Job(Messages.EditSuggestionsSearchJob) {
 			protected IStatus run(final IProgressMonitor monitor) {
 				final boolean complete = word.prepSuggestions();
 				suggestions.getDisplay().asyncExec(new Runnable() {
 					@Override
 					public void run() {
 						if (!complete) {
-							suggestions.setText("Finding edit suggestions...");
+							suggestions.setText(Messages.FindingEditSuggestions);
 						} else {
-							String info = (word.suggestions().size() == 0) ? "No reasonable edit suggestions found"
+							String info = (word.suggestions().size() == 0) ? Messages.NoReasonableEditSuggestionsFound
 									: String.format(
-											"Suggestions for %s (originally '%s'):",
+									    Messages.SuggestionsFor + " %s (" + Messages.Originally + " '%s'):",
 											word.history().top().form(),
 											word.original());
 							
@@ -242,14 +243,14 @@ public final class CheckView {
 			@Override
 			protected void canceling() {
 				word.cancelled_$eq(true);
-				suggestions.setText("Finding edit suggestions...");
+				suggestions.setText(Messages.FindingEditSuggestions);
 			};
 		};
 	}
 
 	private void handle(Exception e) {
-		MessageDialog.openError(parent.getShell(), "Could not load scan",
-				"Could not load the image file for the current page");
+		MessageDialog.openError(parent.getShell(), Messages.CouldNotLoadScan,
+				Messages.CouldNotLoadImageForCurrentPage);
 		e.printStackTrace();
 	}
 

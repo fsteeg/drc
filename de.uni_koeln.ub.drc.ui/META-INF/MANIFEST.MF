@@ -55,3 +55,4 @@ Bundle-ClassPath: lib/scala-dbc-src.jar,
  .
 Bundle-Activator: de.uni_koeln.ub.drc.ui.DrcUiActivator
 Bundle-ActivationPolicy: lazy
+Bundle-Localization: plugin
