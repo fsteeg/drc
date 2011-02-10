@@ -20,7 +20,6 @@ import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.contexts.RunAndTrack;
-import org.eclipse.e4.core.di.IDisposable;
 import org.eclipse.e4.core.services.contributions.IContributionFactory;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.internal.workbench.E4Workbench;
@@ -216,9 +215,7 @@ final class HeadlessSetup {
         MContext mcontext = (MContext) element;
         IEclipseContext context = mcontext.getContext();
         mcontext.setContext(null);
-        if (context instanceof IDisposable) {
-          ((IDisposable) context).dispose();
-        }
+        context.dispose();
       }
     }
 
