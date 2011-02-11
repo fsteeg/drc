@@ -70,9 +70,13 @@ object Import extends Application {
     //val anon = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc-anonymous/")
     
     for(volume <- List(
-        "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027", "0035", "0036", "0037")) {
+        "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027", "0033", "0035", "0036", "0037", "0038")) {
       Index.initialImport(testing, "res/rom/PPN345572629_" + volume)
     }
+    
+//    for(volume <- List("0004")) {
+//      Index.initialImport(testing, "res/rom/PPN345572629_" + volume)
+//    }
     
     Meta.initialImport(testing, "res/rom/PPN345572629")
     User.initialImport(testing, "users");
@@ -111,7 +115,7 @@ object Index {
     
     def loadImageFor(db: XmlDb, page:Page): Array[Byte] = {
       val file = page.id.split("/").last // TODO centralize, use extractor?
-      db.getBin(file.split("-")(0), file.replace(".xml", ".jpg")).get(0)
+      db.getBin(file.split("-")(0), file.replace(".xml", ".png")).get(0)
     }
     
     /** 
@@ -122,7 +126,7 @@ object Index {
         val files = new File(location).list
         for(file <- files.toList if file.endsWith("pdf") ) {
             val xml = new File(location, file.replace("pdf", "xml").replace(" ", ""))
-            val img = new File(xml.getParent, xml.getName.replace(".xml", ".jpg"))
+            val img = new File(xml.getParent, xml.getName.replace(".xml", ".png"))
             // TODO use separate test data (overwriting here)
             val page = Page.fromPdf(new File(location, file).getAbsolutePath)
             XML.save(xml.getAbsolutePath, page.toXml, "UTF-8", false)
