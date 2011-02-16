@@ -14,7 +14,6 @@ import javax.inject.Named;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.e4.core.di.IDisposable;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Persist;
@@ -58,9 +57,7 @@ public final class SaveHandler {
       }
     });
 
-    if (pmContext instanceof IDisposable) {
-      ((IDisposable) pmContext).dispose();
-    }
+    pmContext.dispose();
   }
   
   static void applyDialogStyles(final IStylingEngine engine, final Control control) {

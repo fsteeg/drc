@@ -34,14 +34,16 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Widget;
 
 import de.uni_koeln.ub.drc.data.Comment;
 import de.uni_koeln.ub.drc.data.Page;
-import de.uni_koeln.ub.drc.data.User;
-import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.ui.Messages;
 import de.uni_koeln.ub.drc.ui.views.WordViewModel.WordViewLabelProvider;
 
 /**
@@ -93,8 +95,8 @@ public final class CommentsView {
     commentField = new Text(comp, SWT.BORDER);
     commentField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
     Button add = new Button(comp, SWT.PUSH | SWT.FLAT);
-    add.setImage(DrcUiActivator.instance().loadImage("icons/add.gif"));
-    add.setToolTipText("Add a new comment to the current page");
+    add.setImage(DrcUiActivator.instance().loadImage("icons/add.gif")); //$NON-NLS-1$
+    add.setToolTipText(Messages.AddNewComment);
     SelectionListener listener = new SelectionListener() {
       @Override
       public void widgetSelected(SelectionEvent e) { // on button click
@@ -114,7 +116,7 @@ public final class CommentsView {
                   .currentTimeMillis()));
           setInput();
           page.saveToDb(DrcUiActivator.instance().db());
-          commentField.setText("");
+          commentField.setText(""); //$NON-NLS-1$
         }
       }
     };
@@ -132,10 +134,10 @@ public final class CommentsView {
 
   private void initTable() {
     final int[] columns = new int[] { 25, 500, 300, 150 };
-    createColumn("", columns[0]);
-    createColumn("Comment", columns[1]);
-    createColumn("Author", columns[2]);
-    createColumn("Date", columns[3]);
+    createColumn("", columns[0]); //$NON-NLS-1$
+    createColumn(Messages.Comment, columns[1]);
+    createColumn(Messages.Author, columns[2]);
+    createColumn(Messages.Date, columns[3]);
     Table table = viewer.getTable();
     table.setHeaderVisible(true);
     table.setLinesVisible(true);
@@ -151,8 +153,22 @@ public final class CommentsView {
 
   private void setInput() {
     if (page != null) {
+      TableHelper.clearWidgets(viewer.getTable());
       viewer.setInput(asList(page.comments()).toArray(new Comment[] {}));
+      addLinks();
     }
+  }
+
+  private void addLinks() {
+    Table table = viewer.getTable();
+    TableItem[] items = table.getItems();
+    for (int i = 0; i < items.length; i++) {
+      final TableItem item = items[i];
+      final String author = ((Comment) item.getData()).user();
+      Link link = TableHelper.insertLink(viewer.getTable(), item, author, 2);
+      item.setData(new Widget[] { link });
+    }
+
   }
 
   private static final class CommentsContentProvider implements IStructuredContentProvider {
@@ -176,7 +192,7 @@ public final class CommentsView {
       Comment comment = (Comment) element;
       switch (columnIndex) {
       case 0:
-        return "";
+        return ""; //$NON-NLS-1$
       case 1:
         return comment.text();
       case 2:
@@ -191,7 +207,7 @@ public final class CommentsView {
     @Override
     public Image getColumnImage(final Object element, final int columnIndex) {
       if (columnIndex == 0) {
-        return DrcUiActivator.instance().loadImage("icons/write.gif");
+        return DrcUiActivator.instance().loadImage("icons/write.gif"); //$NON-NLS-1$
       }
       return null;
     }

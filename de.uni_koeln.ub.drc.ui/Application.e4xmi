@@ -3,34 +3,34 @@
   <children xsi:type="basic:TrimmedWindow" xmi:id="_SeXUGO8EsdfC9cDb6iV7g" elementId="_SeXUAe8EEd6FC9cDb6iV7g" selectedElement="_SeXUCujkld6FC9cDb6iV7g" y="22" width="1024" height="1200">
     <children xsi:type="basic:PartSashContainer" xmi:id="_SeXUCujkld6FC9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g" selectedElement="_SeXUGO8EErtz9cDb6iV7g">
       <children xsi:type="basic:PartStack" xmi:id="_SeXUDe8klkFC9cDb6iV7f" elementId="_SeXUAu8EEd6FC9cDb6iV7g" containerData="1000" selectedElement="SearchView">
-        <children xsi:type="basic:Part" xmi:id="SearchView" elementId="SearchView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.SearchView" label="Navigate" iconURI="" tooltip="Navigate View"/>
-        <!-- <children xsi:type="basic:Part" xmi:id="UserView" elementId="UserView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.UserView" label="User" iconURI="" tooltip="User View"/> -->
+        <children xsi:type="basic:Part" xmi:id="SearchView" elementId="SearchView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.SearchView" label="%Navigate" iconURI="" tooltip="%Navigate"/>
+        <!-- <children xsi:type="basic:Part" xmi:id="UserView" elementId="UserView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.UserView" label="%User" iconURI="" tooltip="%User"/> -->
       </children>
       <children xsi:type="basic:PartStack" xmi:id="_SeXUDewerb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g" containerData="2000" selectedElement="EditView">
-        <children xsi:type="basic:Part" xmi:id="EditView" elementId="EditView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.EditView" label="Edit" iconURI="" tooltip="Edit View"/>
+        <children xsi:type="basic:Part" xmi:id="EditView" elementId="EditView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.EditView" label="%Edit" iconURI="" tooltip="%Edit"/>
       </children>
       <children xsi:type="basic:PartStack" xmi:id="_SeXUertEd6FC9cDb6iV7h" elementId="_SeXUAu8EEd6FC9cDb6iV7g" containerData="1000" selectedElement="CheckView">
-        <children xsi:type="basic:Part" xmi:id="CheckView" elementId="CheckView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.CheckView" label="Check" iconURI="" tooltip="Check View"/>
+        <children xsi:type="basic:Part" xmi:id="CheckView" elementId="CheckView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.CheckView" label="%Check" iconURI="" tooltip="%Check"/>
       </children>
       <children xsi:type="basic:PartStack" xmi:id="_SeXUGO8EErtz9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7w" containerData="750" selectedElement="SpecialCharacterView">
-      <children xsi:type="basic:Part" xmi:id="SpecialCharacterView" elementId="SpecialCharacterView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.SpecialCharacterView" label="Special Characters" tooltip="Special Characters"/>
-        <children xsi:type="basic:Part" xmi:id="WordView" elementId="WordView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.WordView" label="Word History" iconURI="" tooltip="Word History View"/>
-        <children xsi:type="basic:Part" xmi:id="CommentsView" elementId="CommentsView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.CommentsView" label="Page Comments" iconURI="" tooltip="Comments View"/>
+      <children xsi:type="basic:Part" xmi:id="SpecialCharacterView" elementId="SpecialCharacterView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.SpecialCharacterView" label="%SpecialCharacters" tooltip="%SpecialCharacters"/>
+        <children xsi:type="basic:Part" xmi:id="WordView" elementId="WordView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.WordView" label="%WordHistory" iconURI="" tooltip="%WordHistory"/>
+        <children xsi:type="basic:Part" xmi:id="CommentsView" elementId="CommentsView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.CommentsView" label="%PageComments" iconURI="" tooltip="%PageComments"/>
       </children>
     </children>
     <variables>selection</variables>
     <variables>input</variables>
     <mainMenu xmi:id="menu:org.eclipse.ui.main.menu" elementId="menu:org.eclipse.ui.main.menu">
-      <children xsi:type="menu:Menu" xmi:id="_SeXUGO8EtzuFC9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g" label="File">
-        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUGO8EEzuiC9cDb6iV7g" elementId="exit.menu.item" label="Exit" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.handlers.ExitHandler"/>
-        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUGO8EEd6Fuiob6iV7g" elementId="save.menu.item" label="Save" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.handlers.SaveHandler"/>
-        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUGO8EEd6FC9iop6iV7g" elementId="export.meu.item" label="Export" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.handlers.ExportHandler"/>
+      <children xsi:type="menu:Menu" xmi:id="_SeXUGO8EtzuFC9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g" label="%File">
+        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUGO8EEzuiC9cDb6iV7g" elementId="exit.menu.item" label="%Exit" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.handlers.ExitHandler"/>
+        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUGO8EEd6Fuiob6iV7g" elementId="save.menu.item" label="%Save" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.handlers.SaveHandler"/>
+        <children xsi:type="menu:DirectMenuItem" xmi:id="_SeXUGO8EEd6FC9iop6iV7g" elementId="export.meu.item" label="%Export" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.handlers.ExportHandler"/>
       </children>
     </mainMenu>
     <trimBars xmi:id="_SeXUGO8dfgFC9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g">
       <children xsi:type="menu:ToolBar" xmi:id="_SeXUGO8fghFC9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_SeXghjEd6FC9cDb6iV7g" elementId="save.tool.item" containerData="" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/save.gif" tooltip="Save current page" command="page.save"/>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_SeXUGOhjk6FC9cDb6iV7g" elementId="export.tool.item" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/export.gif" tooltip="Export selected pages" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.handlers.ExportHandler"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_SeXghjEd6FC9cDb6iV7g" elementId="save.tool.item" containerData="" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/save.gif" tooltip="%SaveCurrentPage" command="page.save"/>
+        <children xsi:type="menu:DirectToolItem" xmi:id="_SeXUGOhjk6FC9cDb6iV7g" elementId="export.tool.item" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/export.gif" tooltip="%ExportSelectedPages" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.handlers.ExportHandler"/>
       </children>
     </trimBars>
   </children>
@@ -49,4 +49,10 @@
   <commands xmi:id="page.save" elementId="page.save" commandName="Save" description=""/>
   <addons xmi:id="_WL9X0cfkEd-g5Okyeg4Vbw" elementId="DnD Addon" contributionURI="platform:/plugin/org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.dndaddon.DnDAddon"/>
   <addons xmi:id="_WL9X0sfkEd-g5Okyeg4Vbw" elementId="Cleanup Addon" contributionURI="platform:/plugin/org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.cleanupaddon.CleanupAddon"/>
+  <addons xmi:id="_XGB3wPZlEd-XstlTZ6nTXg" elementId="org.eclipse.e4.core.commands.service" contributionURI="platform:/plugin/org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_XGB3wPZlEd-XstlTZ6nTXh" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="platform:/plugin/org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_XGB3wPZlEd-XstlTZ6nTXi" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="platform:/plugin/org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_LK0NgPZmEd-XstlTZ6nTXj" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="platform:/plugin/org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_LK0NgPZmEd-XstlTZ6nTXk" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="platform:/plugin/org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_LK0NgPZmEd-XstlTZ6nTXl" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="platform:/plugin/org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
 </application:Application>

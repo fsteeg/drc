@@ -4,19 +4,19 @@
 <target name="DRC Target">
 <locations>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.platform.feature.group" version="4.1.0.v20101006-9HEsGbmFkzHZsz0VOwNsOQ3LPoXUwUPaMXHioG"/>
-<unit id="org.eclipse.rcp.feature.group" version="4.1.0.v20101006-9PCfFqhFuxtaG602a0z-UCqWGhnF"/>
-<unit id="org.eclipse.rcp.source.feature.group" version="4.1.0.v20101006-9PCfFqhFuxtaG602a0z-UCqWGhnF"/>
-<repository location="http://download.eclipse.org/e4/sdk/drops/S-4.1M3-201010291118/repository"/>
+<unit id="org.eclipse.e4.runtime.feature.feature.group" version="0.9.1.v20100917-1000-7Q6A7F9JgLWMN_OFCerfs"/>
+<repository location="http://download.eclipse.org/e4/downloads/drops/S-0.11M5-201101282000/repository/"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.pde.junit.runtime.addon.feature.group" version="1.0.0.v20100819-37M1"/>
+<unit id="org.eclipse.equinox.sdk.feature.group" version="3.7.0.v20110123-7L7W8Z8W1Q-o0s4vt1ZSqhuUgmCP"/>
 <repository location="http://download.eclipse.org/releases/indigo"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.e4.runtime.feature.feature.group" version="0.9.1.v20100917-1000-7Q6A7F9JgLWLMgNNAXpeu"/>
-<unit id="org.eclipse.e4.tests.base.feature.feature.group" version="0.9.1.v20100825-1400-7D7GA78s734C4658"/>
-<repository location="http://download.eclipse.org/e4/downloads/drops/S-0.11M3-201010291030/repository"/>
+<unit id="org.eclipse.platform.feature.group" version="4.1.0.v20101006-9HExGi1FmYIKHn5AX0yCVXk0gQTApClNiutO5KpL1ufz0"/>
+<unit id="org.eclipse.platform.source.feature.group" version="4.1.0.v20101006-9HExGi1FmYIKHn5AX0yCVXk0gQTApClNiutO5KpL1ufz0"/>
+<unit id="org.eclipse.rcp.feature.group" version="4.1.0.v20101119-1030-97C8FhKFnSIo6djHc1Rd9HEIz01_"/>
+<unit id="org.eclipse.rcp.source.feature.group" version="4.1.0.v20101119-1030-97C8FhKFnSIo6djHc1Rd9HEIz01_"/>
+<repository location="http://download.eclipse.org/e4/sdk/drops/S-4.1M5-201101282000/repository/"/>
 </location>
 </locations>
 </target>

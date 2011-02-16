@@ -22,9 +22,13 @@ class SpecIndex extends Spec with ShouldMatchers {
   page.comments += Comment("me", "comment text", 0)
   page.tags += Tag("testtag", "me")
   val pages = Page.mock :: Page.mock :: page :: Nil
+  val db = Index.LocalDb
+  val coll = "testing"
+  for(p<-pages) db.putXml(p.toXml, coll, p.id)
+  val ids = pages map (_.id)
 
   describe("The Index") {
-    val index = Index(pages)
+    val index = Index(ids, db, coll)
     it("allows full text search for a list of pages") {
       expect(2) { index.search("catechismus").length }
       expect(1) { index.search("Test").length }
@@ -41,7 +45,7 @@ class SpecIndex extends Spec with ShouldMatchers {
 
   describe("The Index companion object") {
     it("provides a factory method") {
-      expect(Index(pages)) { new Index(pages) }
+      expect(Index(ids, db, coll)) { new Index(ids, db, coll) }
     }
   }
 

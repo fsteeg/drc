@@ -27,6 +27,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import de.uni_koeln.ub.drc.data.Page;
+import de.uni_koeln.ub.drc.ui.Messages;
 
 /**
  * Handles page export, hooked into the menu via Application.xmi.
@@ -56,18 +57,18 @@ public final class ExportHandler {
   @Execute public void execute(final IWorkbench workbench) {
     Shell shell = Display.getCurrent().getActiveShell();
     if (pages == null) {
-      MessageDialog.openError(shell, "No pages selected", "Please select pages to export");
+      MessageDialog.openError(shell, Messages.NoPagesSelected, Messages.SelectPagesToExport);
       return;
     }
     FileDialog dialog = new FileDialog(shell, SWT.SAVE);
-    dialog.setFilterNames(new String[] { "Text files" });
-    dialog.setFilterExtensions(new String[] { "*.txt" });
+    dialog.setFilterNames(new String[] { Messages.TextFiles });
+    dialog.setFilterExtensions(new String[] { "*.txt" }); //$NON-NLS-1$
     String location = dialog.open();
     if (location != null) {
       save(pages, location);
-      String pagesString = pages.size() == 1 ? "page" : "pages";
-      MessageDialog.openInformation(shell, "Export",
-          String.format("%s " + pagesString + " exported to %s", pages.size(), location));
+      String pagesString = pages.size() == 1 ? Messages.Page : Messages.Pages;
+      MessageDialog.openInformation(shell, Messages.Export,
+          String.format("%s " + pagesString + " " + Messages.ExportedTo + " %s", pages.size(), location)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-4$
     }
   }
 
@@ -75,7 +76,7 @@ public final class ExportHandler {
     String fullText = concat(pages);
     PrintWriter writer = null;
     try {
-      writer = new PrintWriter(location, "UTF-8");
+      writer = new PrintWriter(location, "UTF-8"); //$NON-NLS-1$
       writer.write(fullText);
     } catch (IOException e) {
       e.printStackTrace();
@@ -87,8 +88,8 @@ public final class ExportHandler {
   private String concat(final List<Page> pages) {
     StringBuilder builder = new StringBuilder();
     for (Page page : pages) {
-      builder.append(page.id()).append("\n\n").append(page.toText("\n\n"))
-          .append("\n\n");
+      builder.append(page.id()).append("\n\n").append(page.toText("\n\n")) //$NON-NLS-1$ //$NON-NLS-2$
+          .append("\n\n"); //$NON-NLS-1$
     }
     return builder.toString();
   }

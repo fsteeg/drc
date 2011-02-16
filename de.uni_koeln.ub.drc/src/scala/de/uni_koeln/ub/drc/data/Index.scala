@@ -19,7 +19,10 @@ import com.quui.sinist.XmlDb.Format
  * @author Fabian Steeg (fsteeg)
  *
  */
-class Index(val pages: List[Page]) {
+class Index(val pages: List[String], val db: XmlDb, val selected: String) {
+  
+  lazy val pageObjects = pages.toArray.map((id:String) => Page.fromXml(db.getXml(selected, id).get(0), id)) 
+  
     /**
      * Search for pages containing a given term.
      * @param term The term to search for
@@ -34,16 +37,20 @@ class Index(val pages: List[Page]) {
      * @return A list of pages where any word contains the term according to the specified option
      */
     def search(term: String, option: SearchOption.Value): Array[Page] =
-      for { page <- pages.toArray; t = term.toLowerCase
-        if (term.trim.length==0 || (option match {
-            case SearchOption.all => page.words.exists(_.history.exists(_.form.toLowerCase contains t))
-            case SearchOption.latest => page.words.exists(_.history.top.form.toLowerCase contains t)
-            case SearchOption.original => page.words.exists(_.history.toList.last.form.toLowerCase contains t)
-            case SearchOption.tags => page.tags.exists(_.text.toLowerCase contains t)
-            case SearchOption.comments => page.comments.exists(_.text.toLowerCase contains t)
-          }))
+      for { page <- pageObjects; t = term.toLowerCase
+        if (matches(page, t, option))
       } yield page
     
+    def matches(page:Page, t:String, option:SearchOption.Value) : Boolean = {
+        t.trim.length==0 || (option match {
+        case SearchOption.all => page.words.exists(_.history.exists(_.form.toLowerCase contains t))
+        case SearchOption.latest => page.words.exists(_.history.top.form.toLowerCase contains t)
+        case SearchOption.original => page.words.exists(_.history.toList.last.form.toLowerCase contains t)
+        case SearchOption.tags => page.tags.exists(_.text.toLowerCase contains t)
+        case SearchOption.comments => page.comments.exists(_.text.toLowerCase contains t)
+      })
+    }
+      
     override def toString = "Index with " + pages.length + " pages"
     override def hashCode = pages.hashCode
     override def equals(other: Any) = other match {
@@ -137,5 +144,5 @@ object Index {
         }
     }
     
-    def apply(pages: List[Page]) = new Index(pages)
+    def apply(pages: List[String], db: XmlDb, collection: String) = new Index(pages, db, collection)
 }

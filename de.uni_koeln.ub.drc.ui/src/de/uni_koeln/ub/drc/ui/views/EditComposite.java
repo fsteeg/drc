@@ -36,6 +36,7 @@ import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.ui.Messages;
 
 /**
  * Composite holding the edit area. Used by the {@link EditView}.
@@ -140,7 +141,7 @@ public final class EditComposite extends Composite {
   }
 
   private void setCssName(Control control) {
-    control.setData(CSSSWTConstants.CSS_CLASS_NAME_KEY, "editComposite");
+    control.setData(CSSSWTConstants.CSS_CLASS_NAME_KEY, "editComposite"); //$NON-NLS-1$
   }
 
   private void setLineLayout(final Composite lineComposite) {
@@ -200,12 +201,11 @@ public final class EditComposite extends Composite {
         Word word = (Word) text.getData(Word.class.toString());
         String reference = word.history().top().form();
         if (current.length() != reference.length()
-            || (current.contains(" ") && !reference.contains(" "))) {
+            || (current.contains(" ") && !reference.contains(" "))) { //$NON-NLS-1$ //$NON-NLS-2$
           text.setForeground(text.getDisplay().getSystemColor(DUBIOUS));
-          setMessage("Your recent edit changed the word length - this might be an error, "
-              + "the word has been marked red (save to confirm)");
+          setMessage(Messages.YourRecentEdit);
         } else {
-          status.setText("");
+          status.setText(""); //$NON-NLS-1$
         }
       }
 
@@ -213,7 +213,7 @@ public final class EditComposite extends Composite {
         text.clearSelection(); // use only our persistent marking below
         Word word = (Word) text.getData(Word.class.toString());
         if (word.isLocked()) {
-          setMessage(String.format("Entry '%s' is locked (vote down to unlock)", text.getText()));
+          setMessage(String.format(Messages.Entry + " '%s' " + Messages.IsLocked, text.getText())); //$NON-NLS-2$
         }
         text.setEditable(!word.isLocked());
         context.modify(IServiceConstants.ACTIVE_SELECTION, text);

@@ -55,6 +55,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeItem;
 
 import scala.collection.JavaConversions;
 import de.uni_koeln.ub.drc.data.Index;
@@ -63,6 +64,7 @@ import de.uni_koeln.ub.drc.data.SearchOption;
 import de.uni_koeln.ub.drc.data.Tag;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.ui.Messages;
 import de.uni_koeln.ub.drc.util.Chapter;
 import de.uni_koeln.ub.drc.util.Count;
 import de.uni_koeln.ub.drc.util.MetsTransformer;
@@ -73,8 +75,10 @@ import de.uni_koeln.ub.drc.util.MetsTransformer;
  */
 public final class SearchView {
 
+
   private static final String[] VOLUMES = new String[] { "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024",
-          "0027", "0033", "0035", "0036", "0037", "0038" };
+          "0027"/*, "0033", "0035", "0036", "0037", "0038"*/};
+
   private Text searchField;
   private Text tagField;
   private Label resultCount;
@@ -83,13 +87,17 @@ public final class SearchView {
 
   @Inject
   private IEclipseContext context;
-  private List<Page> allPages;
+  private List<String> allPages;
   private int index;
   private Label currentPageLabel;
 
-  private Comparator<Page> comp = new Comparator<Page>() {
-    public int compare(Page p1, Page p2) {
-      return p1.id().compareTo(p2.id());
+  private Comparator<Object> comp = new Comparator<Object>() {
+    public int compare(Object p1, Object p2) {
+      if (p1 instanceof Page && p2 instanceof Page) {
+        return ((Page) p1).id().compareTo(((Page) p2).id());
+      } else {
+        return p1.toString().compareTo(p2.toString());
+      }
     }
   };
   private Combo volumes;
@@ -108,13 +116,13 @@ public final class SearchView {
 
   private void initVolumeSelector(Composite searchComposite) {
     Label label1 = new Label(searchComposite, SWT.NONE);
-    label1.setText("Volume");
+    label1.setText(Messages.Volume);
     volumes = new Combo(searchComposite, SWT.READ_ONLY);
     volumes.setItems(VOLUMES);
     volumes.select(0);
     volumes.addSelectionListener(searchListener);
     Label label2 = new Label(searchComposite, SWT.NONE);
-    label2.setText("has");
+    label2.setText(Messages.Has);
   }
 
   @PostConstruct
@@ -149,10 +157,10 @@ public final class SearchView {
     Composite bottomComposite = new Composite(parent, SWT.NONE);
     bottomComposite.setLayout(new GridLayout(6, false));
     Button prev = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
-    prev.setImage(DrcUiActivator.instance().loadImage("icons/prev.gif"));
+    prev.setImage(DrcUiActivator.instance().loadImage("icons/prev.gif")); //$NON-NLS-1$
     prev.addSelectionListener(new NavigationListener(Navigate.PREV));
     Button next = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
-    next.setImage(DrcUiActivator.instance().loadImage("icons/next.gif"));
+    next.setImage(DrcUiActivator.instance().loadImage("icons/next.gif")); //$NON-NLS-1$
     next.addSelectionListener(new NavigationListener(Navigate.NEXT));
     currentPageLabel = new Label(bottomComposite, SWT.NONE);
     insertAddCommentButton(bottomComposite);
@@ -161,11 +169,11 @@ public final class SearchView {
 
   private void insertAddCommentButton(Composite bottomComposite) {
     Label label = new Label(bottomComposite, SWT.NONE);
-    label.setText("Add tag:");
+    label.setText(Messages.AddTag);
     tagField = new Text(bottomComposite, SWT.BORDER);
     Button addComment = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
-    addComment.setToolTipText("Add a new tag to the current page");
-    addComment.setImage(DrcUiActivator.instance().loadImage("icons/add.gif"));
+    addComment.setToolTipText(Messages.AddNewTagToCurrentPage);
+    addComment.setImage(DrcUiActivator.instance().loadImage("icons/add.gif")); //$NON-NLS-1$
     SelectionListener listener = new SelectionListener() {
 
       @Override
@@ -181,11 +189,11 @@ public final class SearchView {
       private void addComment(final Text text) {
         String input = text.getText();
         if (input != null && input.trim().length() != 0) {
-          Page page = allPages.get(index);
+          Page page = page(allPages.get(index));
           page.tags().$plus$eq(new Tag(input, DrcUiActivator.instance().currentUser().id()));
           page.saveToDb(DrcUiActivator.instance().db());
           setCurrentPageLabel(page);
-          text.setText("");
+          text.setText(""); //$NON-NLS-1$
         }
       }
 
@@ -194,9 +202,23 @@ public final class SearchView {
     tagField.addSelectionListener(listener);
   }
 
+  String selected;
+
+  private Page page(String string) {
+    volumes.getDisplay().syncExec(new Runnable() {
+      @Override
+      public void run() {
+        selected = selected(volumes);
+      }
+    });
+    return Page.fromXml(
+        DrcUiActivator.instance().db().getXml(selected, asBuffer(Arrays.asList(string))).get()
+            .head(), string);
+  }
+
   private void updateSelection() {
     if (index < allPages.size() && index >= 0) {
-      Page page = allPages.get(index);
+      Page page = page(allPages.get(index));
       setCurrentPageLabel(page);
       StructuredSelection selection = new StructuredSelection(new Page[] { page });
       context.modify(IServiceConstants.ACTIVE_SELECTION, selection.toList());
@@ -205,16 +227,11 @@ public final class SearchView {
   }
 
   private void reload(final Composite parent, final Page page) {
-    System.out.println("Reloading page: " + page);
+    System.out.println(Messages.ReloadingPage + page);
     parent.getDisplay().asyncExec(new Runnable() {
       @Override
       public void run() {
-        Page reloaded = Page.fromXml(
-            DrcUiActivator
-                .instance()
-                .db()
-                .getXml(selected(volumes),
-                    JavaConversions.asBuffer(Arrays.asList(page.id()))).get().head(), page.id());
+        Page reloaded = page(page.id());
         context.modify(IServiceConstants.ACTIVE_SELECTION,
             new StructuredSelection(reloaded).toList());
       }
@@ -222,28 +239,40 @@ public final class SearchView {
   }
 
   private void setCurrentPageLabel(Page page) {
-    currentPageLabel.setText(String.format("Current page: volume %s, page %s, %s",
-        page.volume(), page.number(), page.tags().size() == 0 ? "not tagged" : "tagged as: "
-            + page.tags().mkString(", ")));
+    currentPageLabel.setText(String.format(Messages.CurrentPageVolume + " %s, " + Messages.Page + " %s, %s", page.volume(), //$NON-NLS-2$ //$NON-NLS-4$
+        mets.label(page.number()), page.tags().size() == 0 ? Messages.NotTagged : Messages.TaggedAs
+            + page.tags().mkString(", "))); //$NON-NLS-1$
   }
 
   @PostConstruct
   public void select() {
-    viewer.expandAll();
     if (viewer.getTree().getItems().length == 0) {
-      throw new IllegalArgumentException("No entries in initial search view");
+      throw new IllegalArgumentException(Messages.NoEntries);
     }
-    allPages = new ArrayList<Page>(asList(content.index.pages()));
-    Collections.sort(allPages, comp);
-    for (Page page : allPages) {
-      if (page.id().equals(DrcUiActivator.instance().currentUser().latestPage())) {
-        viewer.setSelection(new StructuredSelection(page));
+    allPages = new ArrayList<String>(asList(content.index.pages()));
+    Collections.sort(allPages);
+    for (String pageId : allPages) {
+      if (pageId.equals(DrcUiActivator.instance().currentUser().latestPage())) {
+        select(pageId);
         break;
       }
     }
     if (viewer.getSelection().isEmpty()) {
       viewer.setSelection(new StructuredSelection(allPages.get(0)));
     }
+  }
+
+  private void select(String pageId) {
+    Page page = page(pageId);
+    Chapter chapter = mets.chapter(page.number(), Count.File());
+    TreeItem[] items = viewer.getTree().getItems();
+    for (TreeItem treeItem : items) {
+      if (treeItem.getText(3).contains(chapter.title())) {
+        treeItem.setExpanded(true);
+      }
+    }
+    viewer.refresh(chapter);
+    viewer.setSelection(new StructuredSelection(page));
   }
 
   private void initSearchField(final Composite parent) {
@@ -255,7 +284,7 @@ public final class SearchView {
 
   private void initOptionsCombo(final Composite searchComposite) {
     Label label = new Label(searchComposite, SWT.NONE);
-    label.setText("in:");
+    label.setText(Messages.In);
     searchOptions = new Combo(searchComposite, SWT.READ_ONLY);
     searchOptions.setItems(new String[] { SearchOption.all().toString(),
         SearchOption.tags().toString(), SearchOption.comments().toString() });
@@ -276,7 +305,7 @@ public final class SearchView {
   };
 
   private void updateResultCount(int count) {
-    resultCount.setText(String.format("%s %s for:", count, count == 1 ? "hit" : "hits"));
+    resultCount.setText(String.format("%s %s " + Messages.For, count, count == 1 ? Messages.Hit : Messages.Hits)); //$NON-NLS-1$
   }
 
   private boolean initial = true;
@@ -311,19 +340,19 @@ public final class SearchView {
     if (pages != null && pages.size() > 0) {
       Page page = pages.get(0);
       if (allPages != null) {
-        index = allPages.indexOf(page);
+        index = allPages.indexOf(page.id());
       }
     }
   }
 
   private void initTable() {
     final int[] columns = new int[] { 60, 50, 60, 400, 200, 250 };
-    createColumn("", columns[0]);
-    createColumn("Volume", columns[1]);
-    createColumn("Page", columns[2]);
-    createColumn("Text", columns[3]);
-    createColumn("Modified", columns[4]);
-    createColumn("Tags", columns[5]);
+    createColumn("", columns[0]); //$NON-NLS-1$
+    createColumn(Messages.Volume, columns[1]);
+    createColumn(Messages.Page, columns[2]);
+    createColumn(Messages.Text, columns[3]);
+    createColumn(Messages.Modified, columns[4]);
+    createColumn(Messages.Tags, columns[5]);
     Tree tree = viewer.getTree();
     tree.setHeaderVisible(true);
     tree.setLinesVisible(true);
@@ -337,7 +366,7 @@ public final class SearchView {
     column1.getColumn().setMoveable(true);
   }
 
-  private Map<Chapter, List<Page>> chapters = new TreeMap<Chapter, List<Page>>();
+  private Map<Chapter, List<Object>> chapters = new TreeMap<Chapter, List<Object>>();
   private MetsTransformer mets;
   private String last = VOLUMES[0];
 
@@ -347,22 +376,22 @@ public final class SearchView {
       loadData();
     }
     last = current;
-    Page[] pages = content.getPages(searchField.getText().trim().toLowerCase());
+    Object[] pages = content.getPages(searchField.getText().trim().toLowerCase());
     Arrays.sort(pages, comp);
-    chapters = new TreeMap<Chapter, List<Page>>();
-    mets = new MetsTransformer(current + ".xml", DrcUiActivator.instance().db());
-    for (Page page : pages) {
-      int fileNumber = page.number();
-      Chapter chapter = mets.chapter(fileNumber, Count.Label());
-      List<Page> pagesInChapter = chapters.get(chapter);
+    chapters = new TreeMap<Chapter, List<Object>>();
+    mets = new MetsTransformer(current + ".xml", DrcUiActivator.instance().db()); //$NON-NLS-1$
+    for (Object page : pages) {
+      int fileNumber = page instanceof Page ? ((Page) page).number()
+          : new Page(null, (String) page).number();
+      Chapter chapter = mets.chapter(fileNumber, Count.File());
+      List<Object> pagesInChapter = chapters.get(chapter);
       if (pagesInChapter == null) {
-        pagesInChapter = new ArrayList<Page>();
+        pagesInChapter = new ArrayList<Object>();
         chapters.put(chapter, pagesInChapter);
       }
       pagesInChapter.add(page);
     }
     viewer.setInput(chapters);
-    viewer.expandAll();
     updateResultCount(pages.length);
   }
 
@@ -382,13 +411,14 @@ public final class SearchView {
       e.printStackTrace();
     }
   }
-  
+
   private SearchViewModelProvider content = null;
 
   private final class SearchViewModelProvider {
-    
+
     Index index;
     String selected;
+
     private SearchViewModelProvider(final IProgressMonitor m) {
       viewer.getTree().getDisplay().syncExec(new Runnable() {
         @Override
@@ -397,27 +427,60 @@ public final class SearchView {
         }
       });
       List<String> ids = asList(DrcUiActivator.instance().db().getIds(selected).get());
-      m.beginTask("Loading data from the DB...", ids.size() / 2); // we only load the XML files
-      List<Page> pages = new ArrayList<Page>();
+      m.beginTask(Messages.LoadingData, ids.size() / 2); // we only load the XML files
+      List<String> pages = new ArrayList<String>();
       for (String id : ids) {
-        if (id.endsWith(".xml")) {
+        if (id.endsWith(".xml")) { //$NON-NLS-1$
           m.subTask(id);
-          pages.add(Page.fromXml(
-              DrcUiActivator.instance().db().getXml(selected, asBuffer(Arrays.asList(id))).get()
-                  .head(), id));
+          pages.add(id);
           m.worked(1);
         }
         if (m.isCanceled()) {
           break;
         }
       }
-      index = new Index(asBuffer(pages).toList());
+      index = new Index(asBuffer(pages).toList(), DrcUiActivator.instance().db(), selected);
       m.done();
     }
 
-    public Page[] getPages(final String term) {
-      String selectedSearchOption = searchOptions.getItem(searchOptions.getSelectionIndex());
-      return index.search(term, SearchOption.withName(selectedSearchOption));
+    Object[] search;
+
+    public Object[] getPages(final String term) {
+      final String selectedSearchOption = searchOptions.getItem(searchOptions.getSelectionIndex());
+      ProgressMonitorDialog dialog = new ProgressMonitorDialog(searchField.getShell());
+      dialog.open();
+      try {
+        dialog.run(true, true, new IRunnableWithProgress() {
+          public void run(final IProgressMonitor m) throws InvocationTargetException,
+              InterruptedException {
+            if (term.trim().equals("")) { //$NON-NLS-1$
+              search = JavaConversions.asList(index.pages()).toArray(new String[] {});
+            } else {
+              List<Page> result = new ArrayList<Page>();
+              m.beginTask(Messages.SearchingIn + index.pages().size() + Messages.Pages, index.pages()
+                  .size());
+              for (String id : asList(index.pages())) {
+                Page p = page(id);
+                if (index.matches(p, term.toLowerCase(),
+                    SearchOption.withName(selectedSearchOption))) {
+                  result.add(p);
+                }
+                m.worked(1);
+                if (m.isCanceled()) {
+                  break;
+                }
+              }
+              search = result.toArray();
+            }
+
+          }
+        });
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      return search;
     }
   }
 
@@ -442,7 +505,12 @@ public final class SearchView {
 
     @Override
     public Object[] getChildren(Object parentElement) {
-      return chapters.get(parentElement).toArray(new Page[] {});
+      List<Object> ids = chapters.get(parentElement);
+      List<Page> pages = new ArrayList<Page>();
+      for (Object object : ids) {
+        pages.add(object instanceof String ? page((String) object) : (Page) object);
+      }
+      return pages.toArray(new Page[] {});
     }
 
     @Override
@@ -461,7 +529,8 @@ public final class SearchView {
   }
 
   private String selected(Combo volumes) {
-    return "PPN345572629_" + (volumes == null ? VOLUMES[0] : volumes.getItem(volumes.getSelectionIndex()));
+    return "PPN345572629_" //$NON-NLS-1$
+        + (volumes == null ? VOLUMES[0] : volumes.getItem(volumes.getSelectionIndex()));
   }
 
   private Page asPage(Object element) {
@@ -473,22 +542,22 @@ public final class SearchView {
     public String getColumnText(final Object element, final int columnIndex) {
       switch (columnIndex) {
       case 0:
-        return "";
+        return ""; //$NON-NLS-1$
       case 1:
-        return isPage(element) ? asPage(element).volume() + "" : "";
+        return isPage(element) ? asPage(element).volume() + "" : ""; //$NON-NLS-1$ //$NON-NLS-2$
       case 2:
-        return isPage(element) ? mets.label(asPage(element).number()) + "" : "";
+        return isPage(element) ? mets.label(asPage(element).number()) + "" : ""; //$NON-NLS-1$ //$NON-NLS-2$
       case 3: {
         if (isPage(element)) {
-          String text = asPage(element).toText("|");
-          return text.substring(0, Math.min(60, text.length())) + "...";
+          String text = asPage(element).toText("|"); //$NON-NLS-1$
+          return text.substring(0, Math.min(60, text.length())) + "..."; //$NON-NLS-1$
         } else
           return element.toString();
       }
       case 4:
-        return isPage(element) ? lastModificationDate(asList(asPage(element).words())) : "";
+        return isPage(element) ? lastModificationDate(asList(asPage(element).words())) : ""; //$NON-NLS-1$
       case 5:
-        return isPage(element) ? asPage(element).tags().mkString(", ") : "";
+        return isPage(element) ? asPage(element).tags().mkString(", ") : ""; //$NON-NLS-1$ //$NON-NLS-2$
       default:
         return element.toString();
       }
@@ -513,7 +582,7 @@ public final class SearchView {
         // return new Image(searchOptions.getDisplay(), new ByteArrayInputStream(
         // Index.loadImageFor((Page) element))); // TODO add thumbnails to DB, use here
         return DrcUiActivator.instance().loadImage(
-            page.edits() == 0 ? "icons/page.gif" : "icons/edited.gif");
+            page.edits() == 0 ? "icons/page.gif" : "icons/edited.gif"); //$NON-NLS-1$ //$NON-NLS-2$
       }
       return null;
     }

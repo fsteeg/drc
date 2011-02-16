@@ -17,7 +17,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.e4.core.di.IDisposable;
 import org.eclipse.e4.core.internal.services.EclipseAdapter;
 import org.eclipse.e4.core.services.adapter.Adapter;
 import org.eclipse.e4.core.services.contributions.IContributionFactory;
@@ -73,9 +72,7 @@ public class TestDrcHeadless {
   }
 
   @After public void tearDown() throws Exception {
-    if (applicationContext instanceof IDisposable) {
-      ((IDisposable) applicationContext).dispose();
-    }
+    applicationContext.dispose();
   }
 
   /* Tests to be overridden in the UI tests: */

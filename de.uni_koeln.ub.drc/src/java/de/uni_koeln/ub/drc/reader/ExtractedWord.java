@@ -25,8 +25,8 @@ public final class ExtractedWord {
   private Point endLocation;
   private boolean isParagraphStart;
   private Float fontSize;
-  Float pageWidth;
-  Float pageHeight;
+  Double pageWidth;
+  Double pageHeight;
 
   /**
    * @param text The extracted text chunk of the PDF document
@@ -39,7 +39,7 @@ public final class ExtractedWord {
    */
   public ExtractedWord(final String text, final Point startLocation, final Point endLocation,
       final boolean isParagraphStart, final Float fontSize,
-      final Float pageWidth, final Float pageHeight) {
+      final Double pageWidth, final Double pageHeight) {
     setText(text);
     this.startLocation = startLocation;
     this.endLocation = endLocation;
@@ -123,11 +123,11 @@ public final class ExtractedWord {
     return "'" + text + "' | " + getStartPoint() + " | " + getEndPoint();
   }
 
-  private int getX(final float xStart, final int width) {
+  private int getX(final double xStart, final int width) {
     return (int) ((((xStart) * width)) / pageWidth);
   }
 
-  private int getY(final float yStart, final int height) {
+  private int getY(final double yStart, final int height) {
     return (int) ((((pageHeight - yStart) * height)) / pageHeight);
   }
 

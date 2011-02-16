@@ -23,11 +23,14 @@ import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Widget;
 
 import com.quui.sinist.XmlDb;
 
@@ -36,6 +39,7 @@ import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.ui.Messages;
 import de.uni_koeln.ub.drc.ui.views.WordViewModel.WordViewContentProvider;
 import de.uni_koeln.ub.drc.ui.views.WordViewModel.WordViewLabelProvider;
 
@@ -60,8 +64,7 @@ public final class WordView {
   public void setSelection(@Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final Text text) {
     Word word = null;
     Page page = null;
-    if (text != null 
-        && (word = (Word) text.getData(Word.class.toString())) != null
+    if (text != null && (word = (Word) text.getData(Word.class.toString())) != null
         && (page = (Page) text.getData(Page.class.toString())) != null) {
       this.text = text;
       this.word = word;
@@ -75,7 +78,7 @@ public final class WordView {
       @Optional @Named( IServiceConstants.ACTIVE_SELECTION ) final List<Page> pages) {
     if (pages != null && pages.size() > 0) {
       Page page = pages.get(0);
-      System.out.println("Setting page: " + page);
+      System.out.println(Messages.SettingPage + page);
       this.page = page;
     }
   }
@@ -90,13 +93,13 @@ public final class WordView {
 
   private void initTable() {
     final int[] columns = new int[] { 185, 300, 200, 50, 70, 70, 70 };
-    createColumn("Form", columns[0], viewer);
-    createColumn("Author", columns[1], viewer);
-    createColumn("Date", columns[2], viewer);
-    createColumn("Votes", columns[3], viewer);
-    createColumn("Upvote", columns[4], viewer);
-    createColumn("Downvote", columns[5], viewer);
-    createColumn("Revert", columns[6], viewer);
+    createColumn(Messages.Form, columns[0], viewer);
+    createColumn(Messages.Author, columns[1], viewer);
+    createColumn(Messages.Date, columns[2], viewer);
+    createColumn(Messages.Votes, columns[3], viewer);
+    createColumn(Messages.Upvote, columns[4], viewer);
+    createColumn(Messages.Downvote, columns[5], viewer);
+    createColumn(Messages.Revert, columns[6], viewer);
     Table table = viewer.getTable();
     table.setHeaderVisible(true);
     table.setLinesVisible(true);
@@ -112,48 +115,34 @@ public final class WordView {
   }
 
   private void setTableInput() {
-    clearButtons();
     if (word != null) {
+      TableHelper.clearWidgets(viewer.getTable());
       viewer.setInput(WordViewModel.CONTENT.getDetails(word));
-    }
-    addButtons();
-  }
-
-  private void clearButtons() {
-    TableItem[] items = viewer.getTable().getItems();
-    for (int i = 0; i < items.length; i++) {
-      if (!items[i].isDisposed()) {
-        Object data = items[i].getData();
-        if (data != null && data instanceof Button[]) {
-          Button[] buttons = (Button[]) data;
-          for (Button button : buttons) {
-            if (button != null) {
-              button.dispose();
-            }
-          }
-        }
-      }
+      addWidgets();
     }
   }
 
-  private void addButtons() {
+  private void addWidgets() {
     TableItem[] items = viewer.getTable().getItems();
     for (int i = 0; i < items.length; i++) {
       final TableItem item = items[i];
       final int index = i;
       if (item.getText(0).trim().length() > 0) {
+        final String author = ((Modification) item.getData()).author();
+        Link link = TableHelper.insertLink(viewer.getTable(), item, author, 1);
         Button up = addVoteButton(item, index, Vote.UP, 4);
         Button down = addVoteButton(item, index, Vote.DOWN, 5);
         Button rev = addRevertButton(item, index, 6);
-        item.setData(new Button[] { up, down, rev });
+        item.setData(new Widget[] { up, down, rev, link });
       }
     }
   }
 
   private Button addRevertButton(final TableItem item, final int index, int col) {
-    final Modification modification = (Modification) viewer.getData(index + "");
+    final Modification modification = (Modification) viewer.getData(index + ""); //$NON-NLS-1$
     if (!word.history().top().equals(modification)) { // no revert for most recent modification
-      Button button = createButton(item, DrcUiActivator.instance().loadImage("icons/revert.gif"), col);
+      Button button = createButton(item, DrcUiActivator.instance().loadImage("icons/revert.gif"), //$NON-NLS-1$
+          col);
       button.setEnabled(!word.isLocked());
       button.addSelectionListener(new SelectionListener() {
         @Override
@@ -165,7 +154,7 @@ public final class WordView {
           User currentUser = DrcUiActivator.instance().currentUser();
           vote(word.history().top(), currentUser, Vote.DOWN);
           vote(modification, currentUser, Vote.UP);
-          MessageDialog.openInformation(item.getParent().getShell(), "Reverted", "Reverted to: "
+          MessageDialog.openInformation(item.getParent().getShell(), Messages.Reverted, Messages.RevertedTo
               + modification);
           text.setText(modification.form());
         }
@@ -200,16 +189,16 @@ public final class WordView {
 
   private Button addVoteButton(final TableItem item, final int index, final Vote vote, int col) {
     Button button = createButton(item,
-        vote == Vote.UP ? DrcUiActivator.instance().loadImage("icons/up.gif") : DrcUiActivator
-            .instance().loadImage("icons/down.gif"), col);
+        vote == Vote.UP ? DrcUiActivator.instance().loadImage("icons/up.gif") : DrcUiActivator //$NON-NLS-1$
+            .instance().loadImage("icons/down.gif"), col); //$NON-NLS-1$
     button.addSelectionListener(new SelectionListener() {
       @Override
       public void widgetSelected(final SelectionEvent e) {
-        Modification modification = (Modification) viewer.getData(index + "");
+        Modification modification = (Modification) viewer.getData(index + ""); //$NON-NLS-1$
         if (currentUserMayVote(modification)) {
           vote(modification, DrcUiActivator.instance().currentUser(), vote);
-          MessageDialog.openInformation(item.getParent().getShell(), "Vote " + vote, "Voted "
-              + modification + ": " + vote);
+          MessageDialog.openInformation(item.getParent().getShell(), Messages.Vote + vote, Messages.Voted
+              + modification + ": " + vote); //$NON-NLS-1$
           text.setEditable(!word.isLocked());
         }
       }
@@ -236,13 +225,13 @@ public final class WordView {
   private boolean currentUserMayVote(Modification modification) {
     User user = DrcUiActivator.instance().currentUser();
     if (modification.author().equals(user.id())) {
-      MessageDialog.openWarning(viewer.getControl().getShell(), "Cannot vote for own edits",
-          "You cannot upvote or downvote your own corrections");
+      MessageDialog.openWarning(viewer.getControl().getShell(), Messages.CannotVoteForOwnShort,
+          Messages.CannotVoteForOwnLong);
       return false;
     }
     if (modification.voters().contains(user.id())) {
-      MessageDialog.openWarning(viewer.getControl().getShell(), "Can vote only once",
-          "You can only vote once for a correction");
+      MessageDialog.openWarning(viewer.getControl().getShell(), Messages.CanVoteOnlyOnceShort,
+          Messages.CanVoteOnlyOnceLong);
       return false;
     }
     return true;

@@ -15,7 +15,7 @@ import com.quui.sinist.XmlDb
  * @author Fabian Steeg (fsteeg)
  */
 case class User(id: String, name: String, region: String, pass: String, db:XmlDb = User.defaultDb) {
-  private var edits, upvotes, upvoted, downvotes, downvoted = 0
+  var edits, upvotes, upvoted, downvotes, downvoted = 0
   var latestPage: String = ""
   var latestWord: Int = 0
   def reputation = (edits * 1 + upvotes * 1 + upvoted * 10) - (downvotes * 1 + downvoted * 2)

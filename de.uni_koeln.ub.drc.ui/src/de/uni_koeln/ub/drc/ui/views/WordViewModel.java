@@ -22,6 +22,7 @@ import de.uni_koeln.ub.drc.data.Modification;
 import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.ui.Messages;
 
 /**
  * Model, content and label providers for the {@link WordView}.
@@ -49,15 +50,13 @@ final class WordViewModel {
       if (newInput != null) {
         Modification[] newMods = (Modification[]) newInput;
         for (int i = 0; i < newMods.length; i++) {
-          viewer.setData(i + "", newMods[i]);
+          viewer.setData(i + "", newMods[i]); //$NON-NLS-1$
         }
       }
     }
   }
 
   static final class WordViewLabelProvider extends LabelProvider implements ITableLabelProvider {
-    
-    private static Map<String, User> users = new HashMap<String, User>();
     
     @Override
     public String getColumnText(final Object element, final int columnIndex) {
@@ -70,17 +69,16 @@ final class WordViewModel {
       case 2:
         return new Date(modification.date()).toString();
       case 3:
-        return modification.score() + "";
+        return modification.score() + ""; //$NON-NLS-1$
       default:
         return null;
       }
     }
 
     static String userDetails(String id) {
-      if(id.equals("OCR")) return "--";
-      if(!users.containsKey(id)) users.put(id, User.withId(DrcUiActivator.instance().userDb(), id));
-      User user = users.get(id);
-      return String.format("%s from %s (%s, %s)", user.name(), user.region(), user.id(),
+      if(id.equals("OCR")) return "--"; //$NON-NLS-1$ //$NON-NLS-2$
+      User user = User.withId(DrcUiActivator.instance().userDb(), id);
+      return String.format("%s " + Messages.From + " %s (%s, %s)", user.name(), user.region(), user.id(), //$NON-NLS-1$ //$NON-NLS-3$
           user.reputation());
     }
 
