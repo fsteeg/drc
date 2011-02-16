@@ -238,7 +238,7 @@ public final class SearchView {
 
   private void setCurrentPageLabel(Page page) {
     currentPageLabel.setText(String.format(Messages.CurrentPageVolume + " %s, " + Messages.Page + " %s, %s", page.volume(), //$NON-NLS-2$ //$NON-NLS-4$
-        mets.label(page.number()), page.tags().size() == 0 ? Messages.NotTagged : Messages.TaggedAs
+        mets.label(page.number()), page.tags().size() == 0 ? Messages.NotTagged : Messages.TaggedAs + ": "
             + page.tags().mkString(", "))); //$NON-NLS-1$
   }
 
