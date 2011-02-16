@@ -272,8 +272,10 @@ public final class CheckView {
 		scaleWidthFactor = ((double) height / image.getBounds().height);
 		int scaledWidth = (int) (scaleWidthFactor * image.getBounds().width);
 		scaleHeightFactor = ((double) scaledWidth / image.getBounds().width);
-		final Image scaledImage = new Image(parent.getDisplay(), image
-				.getImageData().scaledTo(scaledWidth, height));
+		final Image scaledImage = new Image(parent.getDisplay(), scaledWidth, height);
+    GC gc = new GC(scaledImage);
+    gc.drawImage(image, 0, 0, image.getBounds().width, image.getBounds().height, 0, 0, scaledWidth, height);
+    gc.dispose();
 		return scaledImage;
 	}
 
