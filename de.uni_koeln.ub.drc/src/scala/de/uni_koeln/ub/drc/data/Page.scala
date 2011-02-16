@@ -8,6 +8,8 @@
 
 package de.uni_koeln.ub.drc.data
 
+import javax.imageio.ImageIO
+import java.awt.image.BufferedImage
 import scala.collection.mutable.ListBuffer
 import com.quui.sinist.XmlDb
 import scala.xml._
@@ -159,8 +161,12 @@ private object PdfToPage {
   def convert(pdfLocation: String): Page = {
     val words: Buffer[Word] = Buffer()
     val paragraphs: Buffer[Paragraph] = PdfContentExtractor.extractContentFromPdf(pdfLocation).getParagraphs
-    val pageHeight = 1440 // IMG_SIZE
-    val pageWidth = 900 // IMG_SIZE
+    val pdf = new java.io.File(pdfLocation)
+    val png = pdf.getName.replace(" ", "").replace("pdf", "png")
+    val pngFile = new java.io.File(pdf.getParent, png)
+    val bufferedImage = ImageIO.read(pngFile)
+    val pageHeight = bufferedImage.getHeight()
+    val pageWidth = bufferedImage.getWidth()
     for (p <- paragraphs) {
       for (word <- p.getWords) {
         var startPos = word.getStartPointScaled(pageWidth, pageHeight)

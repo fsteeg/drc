@@ -30,7 +30,7 @@ class SpecDrcDb extends Spec with ShouldMatchers {
     it("allows access to specific pages, both XML and IMG") {
       expect(2) { db.getXml(collection, "PPN345572629_0004-0007.xml", "PPN345572629_0004-0008.xml").get.size }
       expect(classOf[Elem]) { db.getXml(collection, "PPN345572629_0004-0007.xml").get(0).getClass }
-      expect(classOf[Array[Byte]]) { db.getBin(collection, "PPN345572629_0004-0007.jpg").get(0).getClass }
+      expect(classOf[Array[Byte]]) { db.getBin(collection, "PPN345572629_0004-0007.png").get(0).getClass }
     }
 
     it("allows to retrieve XML for manipulation and store it back") {

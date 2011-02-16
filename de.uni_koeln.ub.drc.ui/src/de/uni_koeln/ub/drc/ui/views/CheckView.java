@@ -67,6 +67,8 @@ public final class CheckView {
 	private Text word;
 	private List<Button> suggestionButtons = new ArrayList<Button>();
 	private Composite bottom;
+	private double scaleWidthFactor;
+	private double scaleHeightFactor;
 
 	@Inject
 	public CheckView(final Composite parent) {
@@ -228,7 +230,7 @@ public final class CheckView {
 									    Messages.SuggestionsFor + " %s (" + Messages.Originally + " '%s'):",
 											word.history().top().form(),
 											word.original());
-							
+
 							if (!bottom.isDisposed())
 								displaySuggestionButtons(word, text);
 
@@ -261,22 +263,41 @@ public final class CheckView {
 		InputStream in = new ByteArrayInputStream(Index.loadImageFor(
 				DrcUiActivator.instance().db(), page));
 		newImage = new Image(display, in);
+		newImage = getScaledImage(newImage);
 		return newImage;
+	}
+
+	private Image getScaledImage(Image image) {
+		int height = 1440;
+		scaleWidthFactor = ((double) height / image.getBounds().height);
+		int scaledWidth = (int) (scaleWidthFactor * image.getBounds().width);
+		scaleHeightFactor = ((double) scaledWidth / image.getBounds().width);
+		final Image scaledImage = new Image(parent.getDisplay(), image
+				.getImageData().scaledTo(scaledWidth, height));
+		return scaledImage;
 	}
 
 	private void markPosition(final Text text) {
 		imageLabel.getImage().dispose();
 		Word word = (Word) text.getData(Word.class.toString());
 		Box box = word.position();
-		Rectangle rect = new Rectangle(box.x() - 10, box.y() - 4,
-				box.width() + 20, box.height() + 12); // IMG_SIZE
 		Image image = reloadImage();
+		Rectangle rect = getScaledRect(box);
 		GC gc = new GC(image);
 		drawBoxArea(rect, gc);
 		drawBoxBorder(rect, gc);
-		imageLabel.setImage(image);
 		gc.dispose();
+		imageLabel.setImage(image);
 		scrolledComposite.setOrigin(new Point(rect.x - 10, rect.y - 10)); // IMG_SIZE
+	}
+
+	private Rectangle getScaledRect(Box box) {
+		int startX = (int) ((scaleWidthFactor * box.x()) - 10);
+		int startY = (int) ((scaleHeightFactor * box.y()) - 4);
+		int boxWidth = (int) ((scaleWidthFactor * box.width()) + 20);
+		int boxHeight = (int) ((scaleHeightFactor * box.height()) + 12);
+		Rectangle rect = new Rectangle(startX, startY, boxWidth, boxHeight);
+		return rect;
 	}
 
 	private Image reloadImage() {
