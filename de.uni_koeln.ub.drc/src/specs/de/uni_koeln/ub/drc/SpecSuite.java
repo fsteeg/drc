@@ -11,12 +11,12 @@ package de.uni_koeln.ub.drc;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import de.uni_koeln.ub.drc.data.SpecDrcDb;
 import de.uni_koeln.ub.drc.data.SpecIndex;
 import de.uni_koeln.ub.drc.data.SpecModification;
 import de.uni_koeln.ub.drc.data.SpecPage;
 import de.uni_koeln.ub.drc.data.SpecUser;
 import de.uni_koeln.ub.drc.data.SpecWord;
-import de.uni_koeln.ub.drc.data.SpecDrcDb;
 import de.uni_koeln.ub.drc.util.SpecMetsTransformer;
 
 /**

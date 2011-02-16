@@ -1,0 +1,76 @@
+#{extends 'main.html' /} #{set title:'DRC' /}
+
+<div id="left">#{if active.size() > 0}
+<h3>Active Users</h3>
+<table>
+	<tr>
+		<th>Rank</th>
+		<th>Name</th>
+		<th>Region</th>
+		<th>Score</th>
+	</tr>
+	#{list items:active, as:'user'}
+	<tr class="active-user">
+		<td>${active.indexOf(user)+1}</td>
+		<td><a href="@{Application.user(user.id)}">${user.name}</a></td>
+		<td>${user.region}</td>
+		<td>${user.reputation()}</td>
+	</tr>
+	#{/list}
+</table>
+#{/if} #{if inactive.size() > 0}
+<h3>Inactive Users</h3>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Region</th>
+	</tr>
+	#{list items:inactive, as:'user'}
+	<tr class="inactive-user">
+		<td>${user.name}</td>
+		<td>${user.region}</td>
+	</tr>
+	#{/list}
+</table>
+#{/if}</div>
+
+<div id="right">
+
+<h3>About</h3>
+
+Active data: ${ids.size()} pages. #{if pages.size() > 0}
+<p>#{list items:pages, as:'page'} <a href="${page}"><img
+	src="${page}" width=80px /></a> #{/list}</p>
+#{/if}
+
+<p>Gegenstand des Projekts ist die digitale Tiefenerschließung der
+Rätoromanischen Chrestomathie von Caspar Decurtins, die in der
+Zeitschrift „Romanische Forschungen“ (Erlangen, 1896-1919) erschienen
+ist. Die Rätoromanischen Chrestomathie ist die bis heute wichtigste
+Textsammlung für das Bündnerromanische und für Sprach-,
+Literaturwissenschaft und Volkskunde eine unübertroffene Quelle. Ziel
+ist die Bereitstellung der Volltexte sowie die Erstellung eines
+rätoromanischen Textkorpus als Grundlage für korpuslinguistische und
+philologische Forschungen. Teil des Vorhabens ist die Entwicklung
+spezialisierter Korrektur- und Erschließungsverfahren in vernetzten
+Systemen. Dabei werden automatische und interaktive Korrektur über ein
+Wiki kombiniert. Die interaktive Korrektur bindet die rätoromanische
+Sprachgemeinschaft in Zusammenarbeit mit der Societad Retorumantscha,
+Chur/Schweiz, mit ein. Die im Vorhaben eingesetzten Techniken sollen in
+der Folge auf weitere Textsammlungen des Bündnerromanischen und anderer
+kleiner Sprachen angewandt werden. Das Projekt hat damit prototypischen
+Charakter für Projekte, die der Erschließung spezialisierter
+Textsammlungen gewidmet sind, die vorrangig die Dokumentation und
+Bewahrung kleinerer, auch bedrohter Sprachen zum Gegenstand haben. Die
+Sprecher dieser Sprachen wirken aktiv an der Textkorrektur und -nutzung
+mit... <a
+	href="http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html">mehr</a></p>
+
+<p>Get involved: <a href="@{Application.signup()}">sign up</a>,
+download the latest beta release of the editor for <a
+  href="http://github.com/downloads/spinfo/drc/drc-beta-win-2010-10-20.zip">Windows</a>
+or <a
+  href="http://github.com/downloads/spinfo/drc/drc-beta-mac-2010-10-20.zip">Mac</a>,
+or fork us on <a href="http://github.com/spinfo/drc">GitHub</a>.</p>
+
+</div>
