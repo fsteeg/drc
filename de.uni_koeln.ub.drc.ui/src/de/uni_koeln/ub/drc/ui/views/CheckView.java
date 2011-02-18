@@ -7,13 +7,17 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.views;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -60,7 +64,7 @@ public final class CheckView {
 	private Label imageLabel;
 	private boolean imageLoaded = false;
 	private ScrolledComposite scrolledComposite;
-	private ImageData image;
+	private ImageData imageData;
 	private Label suggestions;
 	private Job job;
 	private Button check;
@@ -223,13 +227,14 @@ public final class CheckView {
 					@Override
 					public void run() {
 						if (!complete) {
-							suggestions.setText(Messages.FindingEditSuggestions);
+							suggestions
+									.setText(Messages.FindingEditSuggestions);
 						} else {
 							String info = (word.suggestions().size() == 0) ? Messages.NoReasonableEditSuggestionsFound
-									: String.format(
-									    Messages.SuggestionsFor + " %s (" + Messages.Originally + " '%s'):",
-											word.history().top().form(),
-											word.original());
+									: String.format(Messages.SuggestionsFor
+											+ " %s (" + Messages.Originally
+											+ " '%s'):", word.history().top()
+											.form(), word.original());
 
 							if (!bottom.isDisposed())
 								displaySuggestionButtons(word, text);
@@ -258,23 +263,40 @@ public final class CheckView {
 
 	private Image loadImage(final Page page) throws IOException {
 		Display display = parent.getDisplay();
-		Image newImage = null;
 		// TODO image as lazy def in page, fetched on demand?
 		InputStream in = new ByteArrayInputStream(Index.loadImageFor(
 				DrcUiActivator.instance().db(), page));
-		newImage = new Image(display, in);
-		newImage = getScaledImage(newImage);
+
+		BufferedImage bufferedImage = scale(in);
+		ImageData imageData = convertToImageData(bufferedImage);
+		Image newImage = new Image(display, imageData);
 		return newImage;
 	}
 
-	private Image getScaledImage(Image image) {
-		int height = 1440;
-		scaleWidthFactor = ((double) height / image.getBounds().height);
-		int scaledWidth = (int) (scaleWidthFactor * image.getBounds().width);
-		scaleHeightFactor = ((double) scaledWidth / image.getBounds().width);
-		final Image scaledImage = new Image(parent.getDisplay(), image
-				.getImageData().scaledTo(scaledWidth, height));
-		return scaledImage;
+	private ImageData convertToImageData(BufferedImage bufferedImage)
+			throws IOException {
+		File temp = File.createTempFile("drc", ".tmp");
+		temp.deleteOnExit(); // TODO delete on changing
+		ImageIO.write(bufferedImage, "PNG", temp);
+		ImageData data = new ImageData(temp.getAbsolutePath());
+		return data;
+	}
+
+	private BufferedImage scale(InputStream in) throws IOException {
+		BufferedImage bufferedImage = ImageIO.read(in);
+		int height = scrolledComposite.getMinHeight();
+		scaleWidthFactor = ((double) height / bufferedImage.getHeight());
+		int scaledWidth = (int) (scaleWidthFactor * bufferedImage.getWidth());
+		scaleHeightFactor = ((double) scaledWidth / bufferedImage.getWidth());
+		java.awt.Image img = bufferedImage.getScaledInstance(scaledWidth,
+				height, BufferedImage.SCALE_AREA_AVERAGING);
+		BufferedImage scaledBufferedImage = new BufferedImage(
+				img.getWidth(null), img.getHeight(null),
+				BufferedImage.TYPE_INT_RGB);
+		Graphics graphics = scaledBufferedImage.getGraphics();
+		graphics.drawImage(img, 0, 0, null);
+		graphics.dispose();
+		return scaledBufferedImage;
 	}
 
 	private void markPosition(final Text text) {
@@ -302,7 +324,7 @@ public final class CheckView {
 
 	private Image reloadImage() {
 		Display display = parent.getDisplay();
-		Image newImage = new Image(display, image);
+		Image newImage = new Image(display, imageData);
 		return newImage;
 	}
 
@@ -311,7 +333,7 @@ public final class CheckView {
 				&& !imageLabel.getImage().isDisposed())
 			imageLabel.getImage().dispose();
 		Image loadedImage = loadImage(page);
-		image = loadedImage.getImageData();
+		imageData = loadedImage.getImageData();
 		imageLabel.setImage(loadedImage);
 		imageLoaded = true;
 	}

@@ -76,9 +76,7 @@ import de.uni_koeln.ub.drc.util.MetsTransformer;
 public final class SearchView {
 
 
-  private static final String[] VOLUMES = new String[] { "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024",
-          "0027"/*, "0033", "0035", "0036", "0037", "0038"*/};
-
+  private static final String[] VOLUMES = new String[] { "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027" }; // "0033", "0035", "0036", "0037", "0038"
   private Text searchField;
   private Text tagField;
   private Label resultCount;
@@ -240,7 +238,7 @@ public final class SearchView {
 
   private void setCurrentPageLabel(Page page) {
     currentPageLabel.setText(String.format(Messages.CurrentPageVolume + " %s, " + Messages.Page + " %s, %s", page.volume(), //$NON-NLS-2$ //$NON-NLS-4$
-        mets.label(page.number()), page.tags().size() == 0 ? Messages.NotTagged : Messages.TaggedAs
+        mets.label(page.number()), page.tags().size() == 0 ? Messages.NotTagged : Messages.TaggedAs + ": "
             + page.tags().mkString(", "))); //$NON-NLS-1$
   }
 

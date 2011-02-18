@@ -43,7 +43,7 @@ public final class SpecialCharacterView {
       '\u00D2', '\u00F2', '\u00D3', '\u00F3', '\u00D4', '\u00F4', '\u00D5', '\u00F5', '\u00D6',
       '\u00F6', '\u014C', '\u014D', '\u0152', '\u0153', /* U */'\u00D9', '\u00F9', '\u00DA',
       '\u00FA', '\u00DB', '\u00FB', '\u00DC', '\u00FC', '\u0168', '\u0169', '\u016A', '\u016B', /* N */
-      '\u00D1', '\u00F1', /* long S */'\u017F' };
+      '\u00D1', '\u00F1', /* long S '\u017F'*/ };
 
   @Inject
   public SpecialCharacterView(final Composite parent) {

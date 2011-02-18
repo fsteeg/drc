@@ -77,13 +77,9 @@ object Import extends Application {
     //val anon = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc-anonymous/")
     
     for(volume <- List(
-        "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027", "0033", "0035", "0036", "0037", "0038")) {
+        "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")) { // "0033", "0035", "0036", "0037", "0038"
       Index.initialImport(testing, "res/rom/PPN345572629_" + volume)
     }
-    
-//    for(volume <- List("0004")) {
-//      Index.initialImport(testing, "res/rom/PPN345572629_" + volume)
-//    }
     
     Meta.initialImport(testing, "res/rom/PPN345572629")
     User.initialImport(testing, "users");
