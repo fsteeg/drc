@@ -31,10 +31,10 @@ class SpecUser extends Spec with ShouldMatchers {
       expect("Cologne, Germany") { user.region }
     }
     it("can be associated with a specific DB location") {
-      val default = XmlDb("xmldb:exist://localhost:8080/exist/xmlrpc", "/db/", "drc/")
+      val default = XmlDb("xmldb:exist://localhost:8080/exist/xmlrpc", "db", "drc")
       expect(default) { user.db }
       expect(default) { User.fromXml(user.toXml).db }
-      val customDb = XmlDb("xmldb:exist://hydra2.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/")
+      val customDb = XmlDb("xmldb:exist://hydra2.spinfo.uni-koeln.de:8080/exist/xmlrpc", "db", "drc")
       val customUser = User("fsteeg", "Fabian Steeg", "Cologne, Germany", "", customDb)
       expect(customDb) { customUser.db }
       expect(customDb) { User.fromXml(customUser.toXml).db }
