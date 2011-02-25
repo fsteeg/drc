@@ -33,7 +33,7 @@ case class User(id: String, name: String, region: String, pass: String, db:XmlDb
 }
 
 object User {
-  private val defaultDb = XmlDb("xmldb:exist://localhost:8080/exist/xmlrpc", "/db/", "drc/")
+  private val defaultDb = XmlDb("xmldb:exist://localhost:8080/exist/xmlrpc", "db", "drc")
   def withId(db:XmlDb, id: String): User =
     db.getXml("users", id + ".xml") match {
       case Some(List(xml: Elem, _*)) => User.fromXml(xml)
@@ -43,7 +43,7 @@ object User {
   def fromXml(xml: Node): User = {
     val db = (xml\"db")
     val u = User((xml \ "@id").text, (xml \ "@name").text, (xml \ "@region").text, (xml \ "@pass").text,
-      if(db.isEmpty) defaultDb else XmlDb((db\"@location").text, (db\"@root").text, (db\"@prefix").text))
+      if(db.isEmpty) defaultDb else XmlDb((db\"@location").text, (db\"@root").text.replace("/",""), (db\"@prefix").text.replace("/","")))
     u.edits = (xml \ "@edits").text.trim.toInt
     u.upvotes = (xml \ "@upvotes").text.trim.toInt
     u.upvoted = (xml \ "@upvoted").text.trim.toInt

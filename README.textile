@@ -1,5 +1,15 @@
 Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy).
 
+h1. Beta 2 - Milestone 4 (2011 February 18)
+
+h2. Overview
+
+Beta 2 milestone 4 (tag: b2-m4) uses the latest Eclipse 4 version (4.1M5), adds internationalization as well as German and partial Romansch localization, and fixes a very central issue with highlighting in the new volumes (by using large images internally which are scaled down in the editor). This milestone also improves layout and functionality of the portal, fixes issues with displaying user data, and adds basic pattern-based auto correction.
+
+h2. Dependencies and Setup
+
+Dependencies and setup for the editor and the portal have not changed (see below).
+
 h1. Beta 2 - Milestone 3 (2011 January 28)
 
 h2. Overview

@@ -72,9 +72,9 @@ object SearchOption extends Enumeration {
 
 object Import extends Application {
     private val testing = Index.LocalDb
-    //val staging = XmlDb("xmldb:exist://hydra2.spinfo.uni-koeln.de:7777/exist/xmlrpc", "/db/", "drc/")
-    //val product = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/")
-    //val anon = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc-anonymous/")
+    //val staging = XmlDb("xmldb:exist://hydra2.spinfo.uni-koeln.de:7777/exist/xmlrpc", "db", "drc")
+    //val product = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "db", "drc")
+    //val anon = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "db", "drc-anonymous")
     
     for(volume <- List(
         "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")) { // "0033", "0035", "0036", "0037", "0038"
@@ -100,7 +100,7 @@ object Meta {
 
 object Index {
   
-    val LocalDb = XmlDb("xmldb:exist://localhost:7777/exist/xmlrpc", "/db/", "drc/")
+    val LocalDb = XmlDb("xmldb:exist://localhost:7777/exist/xmlrpc", "db", "drc")
     
     lazy val lexicon: Set[String] =
       (Set() ++ scala.io.Source.fromInputStream(
