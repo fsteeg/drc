@@ -57,7 +57,7 @@ public final class DrcUiActivator extends Plugin {
 
   private static final String JAAS_CONFIG_FILE = "jaas_config"; //$NON-NLS-1$
 
-  public static final String PROFILE_ROOT = "http://hydra2.spinfo.uni-koeln.de:9000/application/user?id="; //$NON-NLS-1$
+  public static final String PROFILE_ROOT = "http://hydra1.spinfo.uni-koeln.de:9000/application/user?id="; //$NON-NLS-1$
 
   public static final String OCR_ID = "OCR"; //$NON-NLS-1$
 
@@ -75,7 +75,7 @@ public final class DrcUiActivator extends Plugin {
   }
 
   private void update(BundleContext context) throws URISyntaxException {
-    URI repo = new URI("http://hydra2.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
+    URI repo = new URI("http://hydra1.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
     // URI repo = new URI("file:///Users/fsteeg/Documents/workspaces/drc/de.uni_koeln.ub.drc.rcp/target/repository"); //$NON-NLS-1$
     String productId = "de.uni_koeln.ub.drc.rcp"; //$NON-NLS-1$
     InstallOperation op = createInstallOperation(context, repo, productId);
@@ -208,7 +208,7 @@ public final class DrcUiActivator extends Plugin {
 
   public XmlDb userDb() {
     return Index.LocalDb().isAvailable() ? Index.LocalDb() : new XmlDb(
-        "xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "/db/", "drc/"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        "xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "db", "drc"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
   }
 
 }
