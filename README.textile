@@ -1,5 +1,15 @@
 Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy).
 
+h1. Beta 2 (2011 February 25)
+
+Our second beta (tag: b2) is "available for download":http://github.com/spinfo/drc/downloads (login: @anonymous@, empty pass to access a sandbox version of the data).
+
+!http://i53.tinypic.com/2d77hu8.png!
+
+You can also visit the new "portal page":http://hydra1.spinfo.uni-koeln.de for information on users, data, and to sign up to work on the real data (if you speak Romansch).
+
+!http://i51.tinypic.com/311tbfs.png!
+
 h1. Beta 2 - Milestone 4 (2011 February 18)
 
 h2. Overview
