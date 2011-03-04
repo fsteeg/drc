@@ -127,14 +127,12 @@ public final class WordView {
     for (int i = 0; i < items.length; i++) {
       final TableItem item = items[i];
       final int index = i;
-      if (item.getText(0).trim().length() > 0) {
-        final String author = ((Modification) item.getData()).author();
-        Link link = TableHelper.insertLink(viewer.getTable(), item, author, 1);
-        Button up = addVoteButton(item, index, Vote.UP, 4);
-        Button down = addVoteButton(item, index, Vote.DOWN, 5);
-        Button rev = addRevertButton(item, index, 6);
-        item.setData(new Widget[] { up, down, rev, link });
-      }
+      final String author = ((Modification) item.getData()).author();
+      Link link = TableHelper.insertLink(viewer.getTable(), item, author, 1);
+      Button up = addVoteButton(item, index, Vote.UP, 4);
+      Button down = addVoteButton(item, index, Vote.DOWN, 5);
+      Button rev = addRevertButton(item, index, 6);
+      item.setData(new Widget[] { up, down, rev, link });
     }
   }
 
