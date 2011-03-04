@@ -64,24 +64,24 @@
 				  <ws>gtk</ws>
 				  <arch>x86</arch>
 				</environment>
-				<!-- <environment>
-				  <os>macosx</os>
-				  <ws>cocoa</ws>
+				<environment>
+				  <os>win32</os>
+				  <ws>win32</ws>
 				  <arch>x86</arch>
 				</environment>
 				<environment>
-				  <os>macosx</os>
-				  <ws>cocoa</ws>
+				  <os>win32</os>
+				  <ws>win32</ws>
 				  <arch>x86_64</arch>
-				</environment> --> <!-- Building for Mac on Mac works fine -->
+				</environment>
 				<environment>
-				  <os>win32</os>
-				  <ws>win32</ws>
+				  <os>macosx</os>
+				  <ws>cocoa</ws>
 				  <arch>x86</arch>
 				</environment>
 				<environment>
-				  <os>win32</os>
-				  <ws>win32</ws>
+				  <os>macosx</os>
+				  <ws>cocoa</ws>
 				  <arch>x86_64</arch>
 				</environment>
 			  </environments>
