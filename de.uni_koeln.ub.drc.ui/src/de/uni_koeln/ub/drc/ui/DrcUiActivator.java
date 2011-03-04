@@ -70,13 +70,14 @@ public final class DrcUiActivator extends Plugin {
   public void start(final BundleContext context) throws Exception {
     super.start(context);
     instance = this;
-    //update(context);
+    update(context);
     login(context);
   }
 
   private void update(BundleContext context) throws URISyntaxException {
-    URI repo = new URI("http://hydra1.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
-    // URI repo = new URI("file:///Users/fsteeg/Documents/workspaces/drc/de.uni_koeln.ub.drc.rcp/target/repository"); //$NON-NLS-1$
+    URI repo = new URI("http://hydra2.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
+    //URI repo = new URI("http://hydra1.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
+    //URI repo = new URI("file:///Users/fsteeg/Documents/workspaces/drc/de.uni_koeln.ub.drc.rcp/target/repository"); //$NON-NLS-1$
     String productId = "de.uni_koeln.ub.drc.rcp"; //$NON-NLS-1$
     InstallOperation op = createInstallOperation(context, repo, productId);
     if (op != null) {
