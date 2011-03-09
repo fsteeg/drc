@@ -8,15 +8,15 @@
 <repository location="http://download.eclipse.org/e4/downloads/drops/S-0.11M5-201101282000/repository/"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
-<unit id="org.eclipse.equinox.sdk.feature.group" version="3.7.0.v20110123-7L7W8Z8W1Q-o0s4vt1ZSqhuUgmCP"/>
-<repository location="http://download.eclipse.org/releases/indigo"/>
-</location>
-<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
 <unit id="org.eclipse.platform.feature.group" version="4.1.0.v20101006-9HExGi1FmYIKHn5AX0yCVXk0gQTApClNiutO5KpL1ufz0"/>
 <unit id="org.eclipse.platform.source.feature.group" version="4.1.0.v20101006-9HExGi1FmYIKHn5AX0yCVXk0gQTApClNiutO5KpL1ufz0"/>
 <unit id="org.eclipse.rcp.feature.group" version="4.1.0.v20101119-1030-97C8FhKFnSIo6djHc1Rd9HEIz01_"/>
 <unit id="org.eclipse.rcp.source.feature.group" version="4.1.0.v20101119-1030-97C8FhKFnSIo6djHc1Rd9HEIz01_"/>
 <repository location="http://download.eclipse.org/e4/sdk/drops/S-4.1M5-201101282000/repository/"/>
+</location>
+<location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
+<unit id="org.eclipse.equinox.core.feature.feature.group" version="1.0.0.v20110124-7K7VF9wF7RZHQMJaQa13J93"/>
+<repository location="http://download.eclipse.org/releases/indigo"/>
 </location>
 </locations>
 </target>

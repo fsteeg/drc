@@ -25,6 +25,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -175,6 +176,7 @@ public final class EditComposite extends Composite {
         if (commitChanges) {
           dirtyable.setDirty(true);
         }
+        handleEmptyText(text);
         text.pack(true);
         text.getParent().layout();
         /*
@@ -184,6 +186,16 @@ public final class EditComposite extends Composite {
         int pos = text.getCaretPosition();
         text.setSelection(0);
         text.setSelection(pos);
+      }
+
+      private void handleEmptyText(final Text text) {
+        if (text.getText().length() == 0) {
+          // cleared words should appear gone, but provide way to change:
+          text.setLayoutData(new RowData(1, text.getSize().y));
+        } else {
+          // and should resize as before if text is re-added:
+          text.setLayoutData(null);
+        }
       }
     });
   }

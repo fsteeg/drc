@@ -23,7 +23,7 @@ object Application extends Controller {
   }
 
   private def imageLink(id: String) = "http://" + server + "/exist/rest/db/drc/" + collection + "/" +
-    id.replace(".xml", ".jpg")
+    id.replace(".xml", ".png")
 
   def user(id: String) = {
     val user = User.fromXml(db.getXml("users", id + ".xml").get(0))
@@ -39,7 +39,7 @@ object Application extends Controller {
     if (Validation.hasErrors) {
       "@signup".asTemplate
     } else {
-      val u = User(id, name, region, pass, XmlDb("xmldb:exist://hydra2.spinfo.uni-koeln.de:7777/exist/xmlrpc", "db", "drc"))
+      val u = User(id, name, region, pass, XmlDb("xmldb:exist://" + server + "/exist/xmlrpc", "db", "drc"))
       db.putXml(u.toXml, "users", id + ".xml")
       Action(user(id))
     }

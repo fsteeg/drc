@@ -85,7 +85,7 @@ public final class CheckView {
 		scrolledComposite.setExpandHorizontal(true);
 		// scrolledComposite.setMinSize(imageLabel.computeSize(SWT.MAX,
 		// SWT.MAX));
-		scrolledComposite.setMinSize(new Point(900, 1440)); // IMG_SIZE
+		scrolledComposite.setMinSize(new Point(1350, 2160)); // IMG_SIZE
 		addSuggestions();
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
 	}
