@@ -20,6 +20,7 @@ import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -55,6 +56,8 @@ public final class EditView {
   private ECommandService commandService;
   @Inject
   IEclipseContext context;
+  @Inject
+  private IEventBroker eventBroker;
 
   final MDirtyable dirtyable;
   final EditComposite editComposite;
@@ -65,6 +68,7 @@ public final class EditView {
   public void setContext() {
     editComposite.context = context; // FIXME this can't be right
     focusLatestWord();
+    eventBroker = (IEventBroker) context.get(IEventBroker.class.getName());
   }
 
   private void focusLatestWord() {
@@ -124,7 +128,6 @@ public final class EditView {
     final Page page = editComposite.getPage();
     monitor.beginTask(Messages.SavingPage, page.words().size());
     final List<Text> words = editComposite.getWords();
-
     editComposite.getDisplay().syncExec(new Runnable() {
       @Override
       public void run() {
@@ -135,6 +138,7 @@ public final class EditView {
           monitor.worked(1);
         }
         saveToXml(page);
+        eventBroker.post("pagesaved", page);
       }
 
       private void addToHistory(Text text) {
