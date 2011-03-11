@@ -144,7 +144,7 @@ public final class EditView {
         Modification oldMod = history.top();
         if (!newText.equals(oldMod.form()) && !word.original().trim().equals(Page.ParagraphMarker())) {
           User user = DrcUiActivator.instance().currentUser();
-          if (!oldMod.author().equals(user.id())) {
+          if (!oldMod.author().equals(user.id()) && !oldMod.voters().contains(user.id())) {
             oldMod.downvote(user.id());
             User.withId(DrcUiActivator.instance().userDb(), oldMod.author()).wasDownvoted();
           }
