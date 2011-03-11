@@ -29,6 +29,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -44,6 +45,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
@@ -52,6 +54,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
@@ -85,6 +88,8 @@ public final class SearchView {
 
   @Inject
   private IEclipseContext context;
+  @Inject
+  private ESelectionService selectionService;
   private List<String> allPages;
   private int index;
   private Label currentPageLabel;
@@ -144,7 +149,12 @@ public final class SearchView {
     public void widgetSelected(SelectionEvent e) {
       viewer.setSelection(new StructuredSelection());
       index = nav == Navigate.PREV ? index - 1 : index + 1;
-      updateSelection();
+      busyCursorWhile(viewer.getControl().getDisplay(), new Runnable() {
+        @Override
+        public void run() {
+          updateSelection();
+        }
+      });
     }
 
     @Override
@@ -219,7 +229,7 @@ public final class SearchView {
       Page page = page(allPages.get(index));
       setCurrentPageLabel(page);
       StructuredSelection selection = new StructuredSelection(new Page[] { page });
-      context.modify(IServiceConstants.ACTIVE_SELECTION, selection.toList());
+      selectionService.setSelection(selection.toList());
       reload(viewer.getTree().getParent(), page);
     }
   }
@@ -230,7 +240,7 @@ public final class SearchView {
       @Override
       public void run() {
         Page reloaded = page(page.id());
-        context.modify(IServiceConstants.ACTIVE_SELECTION,
+        selectionService.setSelection(
             new StructuredSelection(reloaded).toList());
       }
     });
@@ -307,29 +317,44 @@ public final class SearchView {
   }
 
   private boolean initial = true;
-
+  
   private void initTableViewer(final Composite parent) {
     viewer = new TreeViewer(parent, SWT.MULTI | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
     viewer.addSelectionChangedListener(new ISelectionChangedListener() {
       public void selectionChanged(final SelectionChangedEvent event) {
-        final IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-        if (selection.getFirstElement() instanceof Page) {
-          String oldPageLabel = currentPageLabel.getText();
-          final Page page = (Page) selection.getFirstElement();
-          setCurrentPageLabel(page);
-          context.modify(IServiceConstants.ACTIVE_SELECTION, selection.toList());
-          if (!initial) { // don't reload initial page
-            reload(parent, page);
-          } else {
-            initial = false;
+        busyCursorWhile(viewer.getControl().getDisplay(), new Runnable() {
+          @Override
+          public void run() {
+            final IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+            if (selection.getFirstElement() instanceof Page) {
+              String oldPageLabel = currentPageLabel.getText();
+              final Page page = (Page) selection.getFirstElement();
+              setCurrentPageLabel(page);
+              // FIXME: this takes really long... check all receivers
+              selectionService.setSelection(selection.toList());
+              if (!initial) { // don't reload initial page
+                reload(parent, page);
+              } else {
+                initial = false;
+              }
+            }
           }
-        }
+        });
       }
     });
     initTable();
     viewer.setContentProvider(new SearchViewContentProvider());
     viewer.setLabelProvider(new SearchViewLabelProvider());
     setInput();
+  }
+
+  private void busyCursorWhile(final Display display, final Runnable runnable) {
+    display.asyncExec(new Runnable() {
+      @Override
+      public void run() {
+        BusyIndicator.showWhile(viewer.getControl().getDisplay(), runnable);
+      }
+    });
   }
 
   @Inject
