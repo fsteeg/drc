@@ -28,17 +28,21 @@ import javax.inject.Named;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.viewers.CellLabelProvider;
+import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.LabelProviderChangedEvent;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -59,8 +63,11 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
+import org.osgi.service.event.Event;
+import org.osgi.service.event.EventHandler;
 
 import scala.collection.JavaConversions;
+import scala.collection.mutable.ListBuffer;
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.SearchOption;
@@ -90,6 +97,8 @@ public final class SearchView {
   private IEclipseContext context;
   @Inject
   private ESelectionService selectionService;
+  @Inject
+  private IEventBroker eventBroker;
   private List<String> allPages;
   private int index;
   private Label currentPageLabel;
@@ -104,10 +113,11 @@ public final class SearchView {
     }
   };
   private Combo volumes;
+  private Composite searchComposite;
 
   @Inject
   public SearchView(final Composite parent) {
-    Composite searchComposite = new Composite(parent, SWT.NONE);
+    searchComposite = new Composite(parent, SWT.NONE);
     searchComposite.setLayout(new GridLayout(7, false));
     initVolumeSelector(searchComposite);
     initSearchField(searchComposite);
@@ -132,6 +142,24 @@ public final class SearchView {
   private void addFocusListener() {
     searchField.addFocusListener(new SpecialCharacterView.TextFocusListener(context, searchField));
     tagField.addFocusListener(new SpecialCharacterView.TextFocusListener(context, tagField));
+  }
+  
+  @PostConstruct
+  private void addEventHandler() {
+    EventHandler handler = new EventHandler() {
+      @Override
+      public void handleEvent(final Event event) {
+        searchComposite.getDisplay().asyncExec(new Runnable() {
+          public void run() {
+            Page page = (Page) event.getProperty(IEventBroker.DATA);
+            if (page.edits() == 1) {
+              viewer.setLabelProvider(new SearchViewLabelProvider());
+            }
+          }
+        });
+      }
+    };
+    eventBroker.subscribe(EditView.SAVED, handler);
   }
 
   private enum Navigate {
