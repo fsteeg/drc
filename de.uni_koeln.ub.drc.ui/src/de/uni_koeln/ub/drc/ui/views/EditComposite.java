@@ -128,6 +128,7 @@ public final class EditComposite extends Composite {
         Text text = new Text(lineComposite, SWT.NONE);
         setCssName(text);
         text.setText(word.history().top().form());
+        handleEmptyText(text);
         text.setForeground(parent.getDisplay().getSystemColor(
             word.isPossibleError() ? UNCHECKED : DEFAULT));
         text.setData(Word.class.toString(), word);
@@ -188,16 +189,13 @@ public final class EditComposite extends Composite {
         text.setSelection(pos);
       }
 
-      private void handleEmptyText(final Text text) {
-        if (text.getText().length() == 0) {
-          // cleared words should appear gone, but provide way to change:
-          text.setLayoutData(new RowData(1, text.getSize().y));
-        } else {
-          // and should resize as before if text is re-added:
-          text.setLayoutData(null);
-        }
-      }
     });
+  }
+  
+  private void handleEmptyText(final Text text) {
+    if (text.getText().length() == 0) {
+      text.setText("\u2026"); // ellipsis
+    }
   }
 
   private void addFocusListener(final Text text) {
