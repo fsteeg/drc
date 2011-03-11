@@ -1,0 +1,30 @@
+/* Work in progress: architecture components diagram */
+digraph drc_architecture_overview {
+
+  node[shape=record width=1.4 style=filled fillcolor="grey95"]
+  rankdir=LR
+  
+  user[style=empty shape=box style=dashed label="Benutzer"]
+  
+  logic[label="{{Logik-\nschicht|Scala}}"]
+  
+  user->web[style=dashed arrowhead=open]
+  user->offline[style=dashed arrowhead=open]
+  presentation[label="{{Eclipse-API}}"]
+  user->portal[style=dashed arrowhead=open]
+  portal->logic[dir=both]
+  subgraph cluster0{
+   label=Client
+   web[label="{{Web-Editor|RAP}}"]
+   offline[label="{{Offline-Editor|Eclipse 4}}"]
+   portal[label="{{Portal|Web}}"]
+  }
+  web->presentation[dir=back]
+   offline->presentation[dir=back]
+   presentation->logic[dir=both constraint=false]
+  logic->data[dir=both]
+  subgraph cluster1{
+   label=Server
+   data[label="{{Daten-\nschicht|XML-DB}}"]
+  }
+}

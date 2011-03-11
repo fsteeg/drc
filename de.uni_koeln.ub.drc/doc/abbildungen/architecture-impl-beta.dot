@@ -1,0 +1,21 @@
+/* Work in progress: architecture components diagram */
+digraph drc_architecture_overview {
+bgcolor="transparent"
+  //size="40,10!"
+  node[shape=record width=1 height=0.9 style=filled fillcolor="grey95"]
+  rankdir=LR
+  
+  user[style=empty shape=box style=dashed label="Benutzer"] 
+  presentation[label="{{Präsentations-\nschicht|Eclipse 4}}"]
+  logic[label="{{Logik-\nschicht|Scala}}"]
+  data[label="{{Daten-\nschicht|XML-DB}}"]
+  user->presentation[style=dashed arrowhead=open]
+  subgraph cluster0{
+   label=Client
+   presentation->logic[dir=both]
+  }
+  subgraph cluster1{
+   label=Server
+   logic->data[dir=both]
+  }
+}
