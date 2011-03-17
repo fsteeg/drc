@@ -9,8 +9,10 @@ package de.uni_koeln.ub.drc.ui.views;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
-import java.io.File;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -71,8 +73,9 @@ public final class CheckView {
 	private Text word;
 	private List<Button> suggestionButtons = new ArrayList<Button>();
 	private Composite bottom;
-	private double scaleWidthFactor;
-	private double scaleHeightFactor;
+  private double scaleWidthFactor = 1;
+  private double scaleHeightFactor = 1;
+  private Page page;
 
 	@Inject
 	public CheckView(final Composite parent) {
@@ -83,9 +86,6 @@ public final class CheckView {
 		scrolledComposite.setContent(imageLabel);
 		scrolledComposite.setExpandVertical(true);
 		scrolledComposite.setExpandHorizontal(true);
-		// scrolledComposite.setMinSize(imageLabel.computeSize(SWT.MAX,
-		// SWT.MAX));
-		scrolledComposite.setMinSize(new Point(1350, 2160)); // IMG_SIZE
 		addSuggestions();
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
 	}
@@ -93,8 +93,8 @@ public final class CheckView {
 	@Inject
 	public void setSelection(
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final List<Page> pages) {
-		if (pages != null && pages.size() > 0) {
-			Page page = pages.get(0);
+		if (pages != null && pages.size() > 0 && (page == null || !page.equals(pages.get(0)))) {
+			page = pages.get(0);
 			try {
 				updateImage(page);
 			} catch (MalformedURLException e) {
@@ -260,29 +260,31 @@ public final class CheckView {
 				Messages.CouldNotLoadImageForCurrentPage);
 		e.printStackTrace();
 	}
-
+	
 	private Image loadImage(final Page page) throws IOException {
 		Display display = parent.getDisplay();
 		// TODO image as lazy def in page, fetched on demand?
-		InputStream in = new ByteArrayInputStream(Index.loadImageFor(
-				DrcUiActivator.instance().db(), page));
-
-		BufferedImage bufferedImage = scale(in);
-		ImageData imageData = convertToImageData(bufferedImage);
+		InputStream in = new BufferedInputStream(new ByteArrayInputStream(Index.loadImageFor(
+				DrcUiActivator.instance().db(), page)));
+		// imageData = convertToImageData(scale(in)); // TODO enable for optional scaling
+		imageData = new ImageData(in);
 		Image newImage = new Image(display, imageData);
 		return newImage;
 	}
 
+	@SuppressWarnings( "unused" ) // TODO add as option in UI
 	private ImageData convertToImageData(BufferedImage bufferedImage)
 			throws IOException {
-		File temp = File.createTempFile("drc", ".tmp");
-		temp.deleteOnExit(); // TODO delete on changing
-		ImageIO.write(bufferedImage, "PNG", temp);
-		ImageData data = new ImageData(temp.getAbsolutePath());
+	  ByteArrayOutputStream out = new ByteArrayOutputStream();
+	  ImageIO.write(bufferedImage, "png", new BufferedOutputStream(out)); //$NON-NLS-1$
+	  BufferedInputStream in = new BufferedInputStream(new ByteArrayInputStream(out.toByteArray()));
+		ImageData data = new ImageData(in);
+		in.close();
 		return data;
 	}
 
-	private BufferedImage scale(InputStream in) throws IOException {
+	@SuppressWarnings( "unused" ) // TODO add as option in UI
+  private BufferedImage scale(InputStream in) throws IOException {
 		BufferedImage bufferedImage = ImageIO.read(in);
 		int height = scrolledComposite.getMinHeight();
 		scaleWidthFactor = ((double) height / bufferedImage.getHeight());
@@ -310,14 +312,14 @@ public final class CheckView {
 		drawBoxBorder(rect, gc);
 		gc.dispose();
 		imageLabel.setImage(image);
-		scrolledComposite.setOrigin(new Point(rect.x - 10, rect.y - 10)); // IMG_SIZE
+		scrolledComposite.setOrigin(new Point(rect.x - 15, rect.y - 25)); // IMG_SIZE
 	}
 
 	private Rectangle getScaledRect(Box box) {
-		int startX = (int) ((scaleWidthFactor * box.x()) - 10);
-		int startY = (int) ((scaleHeightFactor * box.y()) - 4);
-		int boxWidth = (int) ((scaleWidthFactor * box.width()) + 20);
-		int boxHeight = (int) ((scaleHeightFactor * box.height()) + 12);
+		int startX = (int) ((scaleWidthFactor * box.x()) - 15);
+		int startY = (int) ((scaleHeightFactor * box.y()) - 6);
+		int boxWidth = (int) ((scaleWidthFactor * box.width()) + 25);
+		int boxHeight = (int) ((scaleHeightFactor * box.height()) + 18);
 		Rectangle rect = new Rectangle(startX, startY, boxWidth, boxHeight);
 		return rect;
 	}
@@ -336,6 +338,9 @@ public final class CheckView {
 		imageData = loadedImage.getImageData();
 		imageLabel.setImage(loadedImage);
 		imageLoaded = true;
+    scrolledComposite.setMinSize(scrolledComposite.getContent().computeSize(SWT.DEFAULT,
+        SWT.DEFAULT, true));
+    scrolledComposite.layout(true, true);
 	}
 
 }

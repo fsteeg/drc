@@ -358,12 +358,13 @@ public final class SearchView {
               String oldPageLabel = currentPageLabel.getText();
               final Page page = (Page) selection.getFirstElement();
               setCurrentPageLabel(page);
-              // FIXME: this takes really long... check all receivers
-              selectionService.setSelection(selection.toList());
-              if (!initial) { // don't reload initial page
-                reload(parent, page);
-              } else {
-                initial = false;
+              if (!currentPageLabel.getText().equals(oldPageLabel)) {
+                selectionService.setSelection(selection.toList());
+                if (!initial) { // don't reload initial page
+                  reload(parent, page);
+                } else {
+                  initial = false;
+                }
               }
             }
           }
