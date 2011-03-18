@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.swing.UIManager;
 
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.css.swt.CSSSWTConstants;
@@ -150,7 +151,8 @@ public final class EditComposite extends Composite {
     setCssName(lineComposite);
     RowLayout layout = new RowLayout();
     GridData data = new GridData();
-    data.widthHint = lineComposite.computeSize(parent.getSize().x, parent.getSize().y).x - 20;
+    int scrollBarSize = ((Integer) UIManager.get("ScrollBar.width"));  //$NON-NLS-1$
+    data.widthHint = lineComposite.computeSize(getSize().x, getSize().y).x - scrollBarSize;
     lineComposite.setLayoutData(data);
     lineComposite.setLayout(layout);
   }
