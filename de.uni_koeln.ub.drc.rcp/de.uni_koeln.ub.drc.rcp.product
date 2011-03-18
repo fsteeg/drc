@@ -37,11 +37,10 @@
 
    <features>
       <feature id="de.uni_koeln.ub.drc.feature"/>
-      <feature id="org.eclipse.platform" version="4.1.0.v20101006-9HExGi1FmYIKHn5AX0yCVXk0gQTApClNiutO5KpL1ufz0"/>
-      <feature id="org.eclipse.e4.rcp" version="1.0.0.v20101201-1400-7IA27CFT0z0-RfHz0Zz0HvXe8b"/>
       <feature id="org.eclipse.e4.runtime.feature" version="0.9.1.v20100917-1000-7Q6A7F9JgLWMN_OFCerfs"/>
-      <feature id="org.eclipse.e4.rcp.source" version="1.0.0.v20101201-1400-7IA27CFT0z0-RfHz0Zz0HvXe8b"/>
-      <feature id="org.eclipse.equinox.p2.user.ui" version="2.1.0.v20110122-2355-8A7RFtsFeDnQ5lZf7tez0TQA"/>
+      <feature id="org.eclipse.platform" version="4.1.0.v20110303-9IF70GdMFnUTMd104-mz-W9mNz0ESwPlAOa-_otA7mYeU"/>
+      <feature id="org.eclipse.e4.rcp" version="1.0.0.v20101206-1400-7IA37CFTy21UqDMRjk8Fmt"/>
+      <feature id="org.eclipse.equinox.p2.core.feature" version="1.0.0.v20110222-0044-7x7OFO3FT0z0-VI26bZSEjpr"/>
    </features>
 
    <configurations>

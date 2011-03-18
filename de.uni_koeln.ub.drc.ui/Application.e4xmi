@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xsi:schemaLocation="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic http://www.eclipse.org/ui/2010/UIModel/application#//ui/basic http://www.eclipse.org/ui/2010/UIModel/application/ui/menu http://www.eclipse.org/ui/2010/UIModel/application#//ui/menu" xmi:id="_dwLg8GjeEd-A-okc5hAzKQ">
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xsi:schemaLocation="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic http://www.eclipse.org/ui/2010/UIModel/application#//ui/basic http://www.eclipse.org/ui/2010/UIModel/application/ui/menu http://www.eclipse.org/ui/2010/UIModel/application#//ui/menu" xmi:id="_dwLg8GjeEd-A-okc5hAzKQ" bindingContexts="_SeXUHO8EEd6FC9cDb6iV7y">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_SeXUGO8EsdfC9cDb6iV7g" elementId="_SeXUAe8EEd6FC9cDb6iV7g" selectedElement="_SeXUCujkld6FC9cDb6iV7g" y="22" width="1024" height="1200">
     <children xsi:type="basic:PartSashContainer" xmi:id="_SeXUCujkld6FC9cDb6iV7g" elementId="_SeXUAu8EEd6FC9cDb6iV7g" selectedElement="_SeXUGO8EErtz9cDb6iV7g">
       <children xsi:type="basic:PartStack" xmi:id="_SeXUDe8klkFC9cDb6iV7f" elementId="_SeXUAu8EEd6FC9cDb6iV7g" containerData="1000" selectedElement="SearchView">
@@ -36,15 +36,14 @@
   </children>
   <handlers xmi:id="_SeXUGOyxcd6FC9cDb6iV7g" elementId="save.handler" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.handlers.SaveHandler" command="page.save"/>
   <handlers xmi:id="_SeXUGO8EExcvC9cDb6iV7f" elementId="export.handler" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.handlers.ExportHandler" command="page.export"/>
-  <bindingTables xmi:id="_SeXUEOnm,d6FC9cDb6iV7x" elementId="_SeXUAu8EEd6FC9cDb6iV7g" bindingContextId="org.eclipse.ui.contexts.dialogAndWindow">
+  <bindingTables xmi:id="_SeXUEOnm,d6FC9cDb6iV7x" elementId="_SeXUEOnm,d6FC9cDb6iV7x" bindingContext="_SeXUHO8EEd6FC9cDb6iV7y">
     <bindings xmi:id="_SeXUHu8EEd6FmmmDb6iV7g" keySequence="M1+E" elementId="export.binding" command="page.export"/>
     <bindings xmi:id="_SeXUHu8EEiop9cDb6iV7g" keySequence="M1+S" elementId="save.binding" command="page.save"/>
   </bindingTables>
-  <rootContext xmi:id="_SeXUHO8EEdcvbcDb6iV7y" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
-    <children xmi:id="_SeXUEO8EEd6FC9cDbvbn7w" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
-    <children xmi:id="_SeXUEO8EEd6FC9cDb6ibnm" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
+  <rootContext xmi:id="_SeXUHO8EEd6FC9cDb6iV7y" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
+    <children xmi:id="_SeXUEOnm,d6FC9cDb6iV7x" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
+    <children xmi:id="_SeXUEOnm,d6FC9cDb6iV7x" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
-  <bindingContexts>org.eclipse.ui.contexts.dialogAndWindow</bindingContexts>
   <commands xmi:id="page.export" elementId="page.export" commandName="Export" description=""/>
   <commands xmi:id="page.save" elementId="page.save" commandName="Save" description=""/>
   <addons xmi:id="_WL9X0cfkEd-g5Okyeg4Vbw" elementId="DnD Addon" contributionURI="platform:/plugin/org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.dndaddon.DnDAddon"/>
