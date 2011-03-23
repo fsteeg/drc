@@ -131,7 +131,12 @@ public final class SearchView {
     Label label1 = new Label(searchComposite, SWT.NONE);
     label1.setText(Messages.Volume);
     volumes = new Combo(searchComposite, SWT.READ_ONLY);
-    volumes.setItems(VOLUMES);
+    String[] volumeLabels = new String[VOLUMES.length];
+    for (int i = 0; i < VOLUMES.length; i++) {
+      volumeLabels[i] = ""+(i+1);
+    }
+    volumes.setItems(volumeLabels);
+    volumes.setData(VOLUMES);
     volumes.select(0);
     volumes.addSelectionListener(searchListener);
     Label label2 = new Label(searchComposite, SWT.NONE);
@@ -275,7 +280,7 @@ public final class SearchView {
   }
 
   private void setCurrentPageLabel(Page page) {
-    currentPageLabel.setText(String.format(Messages.CurrentPageVolume + " %s, " + Messages.Page + " %s, %s", page.volume(), //$NON-NLS-2$ //$NON-NLS-4$
+    currentPageLabel.setText(String.format(Messages.CurrentPageVolume + " %s, " + Messages.Page + " %s, %s", volumes.getSelectionIndex() + 1, //$NON-NLS-2$ //$NON-NLS-4$
         mets.label(page.number()), page.tags().size() == 0 ? Messages.NotTagged : Messages.TaggedAs + ": "
             + page.tags().mkString(", "))); //$NON-NLS-1$
   }
@@ -582,7 +587,7 @@ public final class SearchView {
 
   private String selected(Combo volumes) {
     return "PPN345572629_" //$NON-NLS-1$
-        + (volumes == null ? VOLUMES[0] : volumes.getItem(volumes.getSelectionIndex()));
+        + (volumes == null ? VOLUMES[0] : ((String[])volumes.getData())[volumes.getSelectionIndex()]);
   }
 
   private Page asPage(Object element) {
@@ -596,7 +601,7 @@ public final class SearchView {
       case 0:
         return ""; //$NON-NLS-1$
       case 1:
-        return isPage(element) ? asPage(element).volume() + "" : ""; //$NON-NLS-1$ //$NON-NLS-2$
+        return isPage(element) ? volumes.getSelectionIndex() + 1 + "" : ""; //$NON-NLS-1$ //$NON-NLS-2$
       case 2:
         return isPage(element) ? mets.label(asPage(element).number()) + "" : ""; //$NON-NLS-1$ //$NON-NLS-2$
       case 3: {
