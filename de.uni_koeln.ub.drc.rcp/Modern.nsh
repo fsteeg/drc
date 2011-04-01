@@ -1,6 +1,7 @@
 ;Change this file to customize zip2exe generated installers with a modern interface
 
 ;This file should go into the NSIS\Contrib\zip2exe\ folder, use with a Tycho-built zip
+;Our setup in Zip2Exe: load Tycho zip, installer name: DRC, default folder: $PROGRAMFILES\DRC
 
 !include "MUI.nsh"
 
