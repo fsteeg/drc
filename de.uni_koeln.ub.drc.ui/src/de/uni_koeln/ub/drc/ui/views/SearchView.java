@@ -268,15 +268,17 @@ public final class SearchView {
   }
 
   private void reload(final Composite parent, final Page page) {
-    System.out.println(Messages.ReloadingPage + page);
-    parent.getDisplay().asyncExec(new Runnable() {
-      @Override
-      public void run() {
-        Page reloaded = page(page.id());
-        selectionService.setSelection(
-            new StructuredSelection(reloaded).toList());
-      }
-    });
+    if (selectionService.getSelection() instanceof List
+        && ((List<?>) selectionService.getSelection()).size() == 1) {
+      System.out.println(Messages.ReloadingPage + page);
+      parent.getDisplay().asyncExec(new Runnable() {
+        @Override
+        public void run() {
+          Page reloaded = page(page.id());
+          selectionService.setSelection(new StructuredSelection(reloaded).toList());
+        }
+      });
+    }
   }
 
   private void setCurrentPageLabel(Page page) {
@@ -359,17 +361,15 @@ public final class SearchView {
           @Override
           public void run() {
             final IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-            if (selection.getFirstElement() instanceof Page) {
-              String oldPageLabel = currentPageLabel.getText();
+            if (selectionService.getSelection() != selection
+                && selection.getFirstElement() instanceof Page) {
               final Page page = (Page) selection.getFirstElement();
               setCurrentPageLabel(page);
-              if (!currentPageLabel.getText().equals(oldPageLabel)) {
-                selectionService.setSelection(selection.toList());
-                if (!initial) { // don't reload initial page
-                  reload(parent, page);
-                } else {
-                  initial = false;
-                }
+              selectionService.setSelection(selection.toList());
+              if (!initial) { // don't reload initial page
+                reload(parent, page);
+              } else {
+                initial = false;
               }
             }
           }
