@@ -17,21 +17,22 @@ import de.uni_koeln.ub.drc.data.Page
  */
 object DataMerger {
 
-  val posDb = XmlDb("xmldb:exist://localhost:7777/exist/xmlrpc", "db", "drc")
-  val dataDb = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "db", "drc")
-  val destDb = XmlDb("xmldb:exist://hydra2.spinfo.uni-koeln.de:7777/exist/xmlrpc", "db", "drc")
+  val posDb = XmlDb("localhost", 7777)
+  val dataDb = XmlDb("hydra1.spinfo.uni-koeln.de", 8080)
+  val destDb = XmlDb("hydra2.spinfo.uni-koeln.de", 7777)
+  val col = "drc"
   val volumes = List("0004")
 
   def main(args: Array[String]): Unit = {
     for (volume <- volumes) process("PPN345572629_" + volume)
     def process(volume: String): Unit = {
-      val ids = posDb.getIds(volume).get.sorted.filter(_.endsWith(".xml")) zip
-        dataDb.getIds(volume).get.sorted.filter(_.endsWith(".xml"))
+      val ids = posDb.getIds(col+"/"+volume).get.sorted.filter(_.endsWith(".xml")) zip
+        dataDb.getIds(col+"/"+volume).get.sorted.filter(_.endsWith(".xml"))
       for ((posId, dataId) <- ids) {
-        val posPage = Page.fromXml(posDb.getXml(volume, posId).get(0), posId)
-        val dataPage = Page.fromXml(dataDb.getXml(volume, dataId).get(0), dataId)
+        val posPage = Page.fromXml(posDb.getXml(col+"/"+volume, posId).get(0), posId)
+        val dataPage = Page.fromXml(dataDb.getXml(col+"/"+volume, dataId).get(0), dataId)
         val merged = merge(posPage, dataPage)
-        merged.saveToDb(destDb)
+        merged.saveToDb(db=destDb)
       }
     }
     def merge(posPage: Page, dataPage: Page): Page = {

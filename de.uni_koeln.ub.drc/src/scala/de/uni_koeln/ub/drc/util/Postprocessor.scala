@@ -17,8 +17,9 @@ import de.uni_koeln.ub.drc.data.Modification
  */
 object Postprocessor {
 
-  val server = "localhost:7777"
-  val db = XmlDb("xmldb:exist://" + server + "/exist/xmlrpc", "db", "drc")
+  val server = "localhost"
+  val port = 7777
+  val db = XmlDb(server, port)
   val volumes = List("0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")
   val patterns = Map("fch" -> "sch")
 
@@ -34,7 +35,7 @@ object Postprocessor {
         if form.contains(k)
       ) {
         word.history.push(Modification(form.replace(k, v), "auto"))
-        page.saveToDb(db)
+        page.saveToDb(db=db)
         println(word.history)
       }
     }
