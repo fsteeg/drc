@@ -115,7 +115,7 @@ public final class CommentsView {
               new Comment(DrcUiActivator.instance().currentUser().id(), text, System
                   .currentTimeMillis()));
           setInput();
-          page.saveToDb(DrcUiActivator.instance().db());
+          page.saveToDb(DrcUiActivator.instance().currentUser().collection(), DrcUiActivator.instance().db());
           commentField.setText(""); //$NON-NLS-1$
         }
       }

@@ -31,11 +31,11 @@ class SpecUser extends Spec with ShouldMatchers {
       expect("Cologne, Germany") { user.region }
     }
     it("can be associated with a specific DB location") {
-      val default = XmlDb("xmldb:exist://localhost:8080/exist/xmlrpc", "db", "drc")
+      val default = XmlDb("localhost", 8080)
       expect(default) { user.db }
       expect(default) { User.fromXml(user.toXml).db }
-      val customDb = XmlDb("xmldb:exist://hydra2.spinfo.uni-koeln.de:8080/exist/xmlrpc", "db", "drc")
-      val customUser = User("fsteeg", "Fabian Steeg", "Cologne, Germany", "", customDb)
+      val customDb = XmlDb("hydra2.spinfo.uni-koeln.de", 8080)
+      val customUser = User("fsteeg", "Fabian Steeg", "Cologne, Germany", "", db=customDb)
       expect(customDb) { customUser.db }
       expect(customDb) { User.fromXml(customUser.toXml).db }
     }
@@ -57,28 +57,28 @@ class SpecUser extends Spec with ShouldMatchers {
     }
     it("can be changed and persisted") {
       expect(true) {
-        user.hasUpvoted; user.save(db); User.withId(db, user.id).reputation > 0
+        user.hasUpvoted; user.save(db); User.withId(db=db, id=user.id).reputation > 0
       }
     }
   }
   describe("The User companion") {
     it("allows import of users into the DB") {
-      User.initialImport(db, "users")
+      User.initialImport(db=db, folder="users")
     }
     it("allows loading of a user from XML") {
       expect(user) { User.fromXml(user.toXml) }
     }
     it("allows access to individual saved user instances via user name") {
-      val fsteeg = User("fsteeg", "Fabian Steeg", "Cologne, Germany", "drc", db)
-      val claesn = User("claesn", "Claes Neuefeind", "Cologne, Germany", "drc", db)
-      val matana = User("matana", "Mihail Atanassov", "Cologne, Germany", "drc", db)
-      val rols = User("rols", "Jürgen Rolshoven", "Cologne, Germany", "drc", db)
-      val ocr = User("OCR", "OCR", "Russia", "drc", db)
-      expect(fsteeg) { User.withId(db, "fsteeg") }
-      expect(claesn) { User.withId(db, "claesn") }
-      expect(matana) { User.withId(db, "matana") }
-      expect(rols) { User.withId(db, "rols") }
-      expect(ocr) { User.withId(db, "OCR") }
+      val fsteeg = User("fsteeg", "Fabian Steeg", "Cologne, Germany", "drc", "drc", db)
+      val claesn = User("claesn", "Claes Neuefeind", "Cologne, Germany", "drc", "drc", db)
+      val matana = User("matana", "Mihail Atanassov", "Cologne, Germany", "drc", "drc", db)
+      val rols = User("rols", "Jürgen Rolshoven", "Cologne, Germany", "drc", "drc", db)
+      val ocr = User("OCR", "OCR", "Russia", "drc", "drc", db)
+      expect(fsteeg) { User.withId(db=db, id="fsteeg") }
+      expect(claesn) { User.withId(db=db, id="claesn") }
+      expect(matana) { User.withId(db=db, id="matana") }
+      expect(rols) { User.withId(db=db, id="rols") }
+      expect(ocr) { User.withId(db=db, id="OCR") }
     }
   }
 }

@@ -51,15 +51,15 @@ case class Page(words: List[Word], id: String) {
     formatted
   }
 
-  def saveToDb(db: XmlDb): Node = {
+  def saveToDb(collection:String=Index.DefaultCollection, db: XmlDb): Node = {
     val file = id.split("/").last
-    val collection = file.split("-")(0)
+    val c = collection + "/" + file.split("-")(0)
     val entry = file
-    val dbRes = db.getXml(collection, entry)
+    val dbRes = db.getXml(c, entry)
     val mergedPage = mergedDbVersion(dbRes, entry)
     val root = mergedPage.toXml
     val formatted = format(root)
-    db.putXml(root, collection, entry)
+    db.putXml(root, c, entry)
     root
   }
 

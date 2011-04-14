@@ -20,6 +20,7 @@ import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
 
+import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 import de.uni_koeln.ub.drc.ui.Messages;
@@ -74,7 +75,7 @@ public final class SimpleLoginModule implements LoginModule {
     String pass = passCallback.getPassword() != null ? new String(passCallback.getPassword()) : ""; //$NON-NLS-1$
     User candidate = null;
     try {
-      candidate = User.withId(DrcUiActivator.instance().userDb(), name);
+      candidate = User.withId(Index.DefaultCollection(), DrcUiActivator.instance().userDb(), name);
     } catch (Throwable x) {
       x.printStackTrace();
     }

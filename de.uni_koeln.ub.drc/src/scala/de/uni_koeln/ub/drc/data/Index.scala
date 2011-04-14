@@ -76,22 +76,24 @@ object Import extends Application {
     //val product = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "db", "drc")
     //val anon = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "db", "drc-anonymous")
     
-    for(volume <- List(
-        "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")) { // "0033", "0035", "0036", "0037", "0038"
-      Index.initialImport(testing, "res/rom/PPN345572629_" + volume)
-    }
+//    for(volume <- List(
+//        "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")) { // "0033", "0035", "0036", "0037", "0038"
+//      Index.initialImport(testing, "res/rom/PPN345572629_" + volume)
+//    }
     
-    Meta.initialImport(testing, "res/rom/PPN345572629")
-    User.initialImport(testing, "users");
+    Meta.initialImport(db=testing, location="res/rom/PPN345572629")
+    Index.initialImport(db=testing, location="res/rom/PPN345572629_0004")
+    User.initialImport(db=testing, folder="users")
 }
 
 object Meta {
   
-  def initialImport(db: XmlDb, location: String): Unit = {
-      val files = new File(location).list
+  def initialImport(collection:String = Index.DefaultCollection, db: XmlDb, location: String): Unit = {
+      val folder =  new File(location)
+      val files = folder.list
       for(file <- files.toList if file.endsWith("xml") ) {
           val xml = new File(location, file)
-          db.put(xml, Format.XML)
+          db.put(xml, Format.XML, collection + "/" + folder.getName, xml.getName)
           println("Imported meta xml: " + xml)
       }
   }
@@ -99,42 +101,44 @@ object Meta {
 }
 
 object Index {
-  
-    val LocalDb = XmlDb("xmldb:exist://localhost:7777/exist/xmlrpc", "db", "drc")
+    //def collection(s:String) = "drc/" + s
+    val DefaultCollection = "drc" 
+    val LocalDb = XmlDb("localhost", 7777, "guest", "guest")
     
     lazy val lexicon: Set[String] =
       (Set() ++ scala.io.Source.fromInputStream(
           Index.getClass.getResourceAsStream("words.txt"))("ISO-8859-1").getLines()).map(
               _.replaceAll("\\s[IVX]+", "").trim.toLowerCase)
     
-    def loadPagesFromDb(db: XmlDb, collection:String): List[Page] = {
-      val ids = db.getIds(collection)
+    def loadPagesFromDb(collectionPrefix:String = Index.DefaultCollection, db: XmlDb, collection:String): List[Page] = {
+      val ids = db.getIds(collectionPrefix + "/" +collection)
       ids match {
         case Some(list) => for(id <- list; if id.endsWith(".xml"))
-          yield Page.fromXml(db.getXml(collection, id).get(0), id)
-        case None => throw new IllegalArgumentException("Invalid collection: " + collection)
+          yield Page.fromXml(db.getXml(collectionPrefix + "/" +collection, id).get(0), id)
+        case None => throw new IllegalArgumentException("Invalid collection: " + collectionPrefix + "/" +collection)
       }
     }
     
-    def loadImageFor(db: XmlDb, page:Page): Array[Byte] = {
+    def loadImageFor(collection:String=Index.DefaultCollection, db: XmlDb, page:Page): Array[Byte] = {
       val file = page.id.split("/").last // TODO centralize, use extractor?
-      db.getBin(file.split("-")(0), file.replace(".xml", ".png")).get(0)
+      db.getBin(collection + "/" +file.split("-")(0), file.replace(".xml", ".png")).get(0)
     }
     
     /** 
      * Import page PDF files to XML.
      * @param location The directory containing PDF files to be imported into the page XML format 
      */
-    def initialImport(db: XmlDb, location: String): Unit = {
-        val files = new File(location).list
+    def initialImport(collection:String=Index.DefaultCollection, db: XmlDb, location: String): Unit = {
+        val folder =  new File(location)
+        val files = folder.list
         for(file <- files.toList if file.endsWith("pdf") ) {
             val xml = new File(location, file.replace("pdf", "xml").replace(" ", ""))
             val img = new File(xml.getParent, xml.getName.replace(".xml", ".png"))
             // TODO use separate test data (overwriting here)
             val page = Page.fromPdf(new File(location, file).getAbsolutePath)
             XML.save(xml.getAbsolutePath, page.toXml, "UTF-8", false)
-            db.put(xml, Format.XML)
-            db.put(img, Format.BIN)
+            db.put(xml, Format.XML, collection + "/" + folder.getName, xml.getName)
+            db.put(img, Format.BIN, collection + "/" + folder.getName, img.getName)
             println("Imported xml: " + xml)
             println("Imported img: " + img)
         }

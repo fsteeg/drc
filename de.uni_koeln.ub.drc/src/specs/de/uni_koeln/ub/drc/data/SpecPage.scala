@@ -115,7 +115,7 @@ class SpecPage extends Spec with ShouldMatchers {
       word.history push newMod
       expect(true) { word.history.contains(newMod) }
       expect(2) { word.history.size }
-      page.saveToDb(db)
+      page.saveToDb(db=db)
       val loadedWord = Page.fromXml(page.toXml, page.id).words(0)
       val loadedMod = loadedWord.history.top
       expect(2) { loadedWord.history.size }
@@ -169,7 +169,7 @@ class SpecPage extends Spec with ShouldMatchers {
 
   it("provides initial import of a scanned PDF") {
     val page: Page = Page.fromPdf("res/tests/PPN345572629_0004 - 0007.pdf")
-    val root = page.saveToDb(db)
+    val root = page.saveToDb(db=db)
     expect(true) { root.size > 0 }
   }
 

@@ -70,7 +70,7 @@ public final class DrcUiActivator extends Plugin {
   public void start(final BundleContext context) throws Exception {
     super.start(context);
     instance = this;
-    update(context);
+    //update(context);
     login(context);
   }
 
@@ -209,7 +209,7 @@ public final class DrcUiActivator extends Plugin {
 
   public XmlDb userDb() {
     return Index.LocalDb().isAvailable() ? Index.LocalDb() : new XmlDb(
-        "xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "db", "drc"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        "hydra1.spinfo.uni-koeln.de", 8080, "guest", "guest"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
   }
 
 }

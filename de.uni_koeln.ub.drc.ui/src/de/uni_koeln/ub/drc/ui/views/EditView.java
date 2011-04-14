@@ -36,6 +36,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import scala.collection.mutable.Stack;
+import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Modification;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.User;
@@ -151,7 +152,7 @@ public final class EditView {
           User user = DrcUiActivator.instance().currentUser();
           if (!oldMod.author().equals(user.id()) && !oldMod.voters().contains(user.id())) {
             oldMod.downvote(user.id());
-            User.withId(DrcUiActivator.instance().userDb(), oldMod.author()).wasDownvoted();
+            User.withId(Index.DefaultCollection(), DrcUiActivator.instance().userDb(), oldMod.author()).wasDownvoted();
           }
           history.push(new Modification(newText, user.id()));
           user.hasEdited();
@@ -176,6 +177,6 @@ public final class EditView {
 
   private void saveToXml(final Page page) {
     System.out.println("Saving page: " + page); //$NON-NLS-1$
-    page.saveToDb(DrcUiActivator.instance().db());
+    page.saveToDb(DrcUiActivator.instance().currentUser().collection(), DrcUiActivator.instance().db());
   }
 }

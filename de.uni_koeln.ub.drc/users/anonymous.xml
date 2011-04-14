@@ -1,4 +1,4 @@
 <user region="Notre Dame, Paris" edits="0" upvotes="0" upvoted="0"
 	downvotes="0" downvoted="0" name="Anonymous IV" id="anonymous" pass="">
-  <db location="xmldb:exist://localhost:7777/exist/xmlrpc" root="/db/" prefix="drc-anonymous/"/>
+  <db server="localhost" port="7777" collection="drc-anonymous/"/>
 </user>

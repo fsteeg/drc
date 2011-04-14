@@ -14,7 +14,7 @@ import com.quui.sinist.XmlDb
  * Initial user representation: id, full name, region, reputation and XML persistence.
  * @author Fabian Steeg (fsteeg)
  */
-case class User(id: String, name: String, region: String, pass: String, db:XmlDb = User.defaultDb) {
+case class User(id: String, name: String, region: String, pass: String, collection:String = "drc", db:XmlDb = User.defaultDb) {
   var edits, upvotes, upvoted, downvotes, downvoted = 0
   var latestPage: String = ""
   var latestWord: Int = 0
@@ -28,22 +28,22 @@ case class User(id: String, name: String, region: String, pass: String, db:XmlDb
     <user id={ id } name={ name } region={ region } pass={ pass } edits={ edits.toString } 
     upvotes={ upvotes.toString } upvoted={ upvoted.toString } downvotes={ downvotes.toString } 
     downvoted={ downvoted.toString } latestPage={ latestPage } latestWord={ latestWord.toString }>
-    <db location={db.location} root={db.root} prefix={db.prefix}/> </user>
-  def save(db:XmlDb) = db.putXml(toXml, "users", id + ".xml")
+    <db server={db.server} port={db.port.toString} collection={collection}/> </user>
+  def save(db:XmlDb) = db.putXml(toXml, collection+"/"+"users", id + ".xml")
 }
 
 object User {
-  private val defaultDb = XmlDb("xmldb:exist://localhost:8080/exist/xmlrpc", "db", "drc")
-  def withId(db:XmlDb, id: String): User =
-    db.getXml("users", id + ".xml") match {
+  private val defaultDb = XmlDb(server="localhost", port=8080)
+  def withId(collection:String=Index.DefaultCollection, db:XmlDb, id: String): User =
+    db.getXml(collection + "/" + "users", id + ".xml") match {
       case Some(List(xml: Elem, _*)) => User.fromXml(xml)
       case None => throw new IllegalStateException("Could not find user '%s' in DB '%s'".format(id, db))
     }
 
   def fromXml(xml: Node): User = {
     val db = (xml\"db")
-    val u = User((xml \ "@id").text, (xml \ "@name").text, (xml \ "@region").text, (xml \ "@pass").text,
-      if(db.isEmpty) defaultDb else XmlDb((db\"@location").text, (db\"@root").text.replace("/",""), (db\"@prefix").text.replace("/","")))
+    val u = User((xml \ "@id").text, (xml \ "@name").text, (xml \ "@region").text, (xml \ "@pass").text, (db \ "@collection").text, 
+      if(db.isEmpty) defaultDb else XmlDb((db\"@server").text, (db\"@port").text.toInt))
     u.edits = (xml \ "@edits").text.trim.toInt
     u.upvotes = (xml \ "@upvotes").text.trim.toInt
     u.upvoted = (xml \ "@upvoted").text.trim.toInt
@@ -54,7 +54,7 @@ object User {
     if(lw!="") u.latestWord = lw.toInt
     u
   }
-  def initialImport(db: XmlDb, folder: String): Unit = {
-    for (user <- new File(folder).listFiles) db.put(user, XmlDb.Format.XML)
+  def initialImport(collection:String=Index.DefaultCollection, db: XmlDb, folder: String): Unit = {
+    for (user <- new File(folder).listFiles) db.put(user, XmlDb.Format.XML, collection+"/"+"users", user.getName)
   }
 }

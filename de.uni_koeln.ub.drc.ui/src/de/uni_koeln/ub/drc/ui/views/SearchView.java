@@ -232,7 +232,7 @@ public final class SearchView {
         if (input != null && input.trim().length() != 0) {
           Page page = page(allPages.get(index));
           page.tags().$plus$eq(new Tag(input, DrcUiActivator.instance().currentUser().id()));
-          page.saveToDb(DrcUiActivator.instance().db());
+          page.saveToDb(DrcUiActivator.instance().currentUser().collection(), DrcUiActivator.instance().db());
           setCurrentPageLabel(page);
           text.setText(""); //$NON-NLS-1$
         }
@@ -253,7 +253,7 @@ public final class SearchView {
       }
     });
     return Page.fromXml(
-        DrcUiActivator.instance().db().getXml(selected, asBuffer(Arrays.asList(string))).get()
+        DrcUiActivator.instance().db().getXml(DrcUiActivator.instance().currentUser().collection() + "/" + selected, asBuffer(Arrays.asList(string))).get() //$NON-NLS-1$
             .head(), string);
   }
 
@@ -483,7 +483,7 @@ public final class SearchView {
           selected = selected(volumes);
         }
       });
-      List<String> ids = asList(DrcUiActivator.instance().db().getIds(selected).get());
+      List<String> ids = asList(DrcUiActivator.instance().db().getIds(DrcUiActivator.instance().currentUser().collection() + "/" + selected).get()); //$NON-NLS-1$
       m.beginTask(Messages.LoadingData, ids.size() / 2); // we only load the XML files
       List<String> pages = new ArrayList<String>();
       for (String id : ids) {
