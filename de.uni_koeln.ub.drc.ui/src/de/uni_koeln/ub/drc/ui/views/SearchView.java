@@ -254,7 +254,7 @@ public final class SearchView {
     });
     return Page.fromXml(
         DrcUiActivator.instance().db().getXml(DrcUiActivator.instance().currentUser().collection() + "/" + selected, asBuffer(Arrays.asList(string))).get() //$NON-NLS-1$
-            .head(), string);
+            .head());
   }
 
   private void updateSelection() {

@@ -21,7 +21,7 @@ import com.quui.sinist.XmlDb.Format
  */
 class Index(val pages: List[String], val db: XmlDb, val selected: String) {
   
-  lazy val pageObjects = pages.toArray.map((id:String) => Page.fromXml(db.getXml(selected, id).get(0), id)) 
+  lazy val pageObjects = pages.toArray.map((id:String) => Page.fromXml(db.getXml(selected, id).get(0)))
   
     /**
      * Search for pages containing a given term.
@@ -114,7 +114,7 @@ object Index {
       val ids = db.getIds(collectionPrefix + "/" +collection)
       ids match {
         case Some(list) => for(id <- list; if id.endsWith(".xml"))
-          yield Page.fromXml(db.getXml(collectionPrefix + "/" +collection, id).get(0), id)
+          yield Page.fromXml(db.getXml(collectionPrefix + "/" +collection, id).get(0))
         case None => throw new IllegalArgumentException("Invalid collection: " + collectionPrefix + "/" +collection)
       }
     }

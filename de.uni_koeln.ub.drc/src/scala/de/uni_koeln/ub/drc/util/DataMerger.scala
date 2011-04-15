@@ -29,8 +29,8 @@ object DataMerger {
       val ids = posDb.getIds(col+"/"+volume).get.sorted.filter(_.endsWith(".xml")) zip
         dataDb.getIds(col+"/"+volume).get.sorted.filter(_.endsWith(".xml"))
       for ((posId, dataId) <- ids) {
-        val posPage = Page.fromXml(posDb.getXml(col+"/"+volume, posId).get(0), posId)
-        val dataPage = Page.fromXml(dataDb.getXml(col+"/"+volume, dataId).get(0), dataId)
+        val posPage = Page.fromXml(posDb.getXml(col+"/"+volume, posId).get(0))
+        val dataPage = Page.fromXml(dataDb.getXml(col+"/"+volume, dataId).get(0))
         val merged = merge(posPage, dataPage)
         merged.saveToDb(db=destDb)
       }

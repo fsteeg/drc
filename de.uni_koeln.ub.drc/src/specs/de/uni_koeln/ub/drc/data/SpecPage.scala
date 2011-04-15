@@ -41,7 +41,7 @@ class SpecPage extends Spec with ShouldMatchers {
       page.tags += Tag("testing", "user")
       val exp = ListBuffer(Tag("sample", "user"), Tag("testing", "user"))
       expect(exp) { page.tags }
-      expect(exp) { Page.fromXml(page.toXml, "mock").tags }
+      expect(exp) { Page.fromXml(page.toXml).tags }
     }
     
     it("can be commented") {
@@ -50,7 +50,7 @@ class SpecPage extends Spec with ShouldMatchers {
       page.comments += Comment("claesn", "text2", date)
       val exp = ListBuffer(Comment("fsteeg", "text1", date), Comment("claesn", "text2", date))
       expect(exp) { page.comments }
-      expect(exp) { Page.fromXml(page.toXml, "mock").comments }
+      expect(exp) { Page.fromXml(page.toXml).comments }
     }
     
     it("can return info on its editing status") {
@@ -77,7 +77,7 @@ class SpecPage extends Spec with ShouldMatchers {
                            </voters>
                          </modification>
                        </word>
-                     </page>, System.currentTimeMillis + "").words(0).history.top.score
+                     </page>).words(0).history.top.score
 
       }
     }
@@ -85,10 +85,10 @@ class SpecPage extends Spec with ShouldMatchers {
     it("will save all embedded objects") {
       expect(1) {
         page.words(0).history.top.upvote("me")
-        Page.fromXml(page.toXml, page.id).words(0).history.top.score
+        Page.fromXml(page.toXml).words(0).history.top.score
       }
       expect(1) {
-        Page.fromXml(page.toXml, page.id).words(0).history.size
+        Page.fromXml(page.toXml).words(0).history.size
       }
     }
 
@@ -99,13 +99,13 @@ class SpecPage extends Spec with ShouldMatchers {
     it("should provide usable test data") { expect(5) { Page.mock.words.size } }
 
     it("can load a page of words from XML") {
-      val words: List[Word] = Page.fromXml(Page.mock.toXml, page.id).words
+      val words: List[Word] = Page.fromXml(Page.mock.toXml).words
       expect(Page.mock.words.size) { words.size }
       expect(Page.mock.words.toList) { words.toList }
     }
 
     it("provides roundtrip serialization") {
-      expect(page) { Page.fromXml(page.toXml, page.id) }
+      expect(page) { Page.fromXml(page.toXml) }
     }
 
     it("should serialize and deserialize added modifications") {
@@ -116,14 +116,14 @@ class SpecPage extends Spec with ShouldMatchers {
       expect(true) { word.history.contains(newMod) }
       expect(2) { word.history.size }
       page.saveToDb(db=db)
-      val loadedWord = Page.fromXml(page.toXml, page.id).words(0)
+      val loadedWord = Page.fromXml(page.toXml).words(0)
       val loadedMod = loadedWord.history.top
       expect(2) { loadedWord.history.size }
       expect(newMod) { loadedMod }
     }
 
     it("should be desializable from an XML string") {
-      val loadedFromXml = Page.fromXml(page.toXml, page.id).words(0)
+      val loadedFromXml = Page.fromXml(page.toXml).words(0)
       expect(page.words(0).history.size) { loadedFromXml.history.size }
     }
 

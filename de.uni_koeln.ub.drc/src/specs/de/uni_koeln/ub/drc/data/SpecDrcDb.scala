@@ -50,14 +50,14 @@ class SpecDrcDb extends Spec with ShouldMatchers {
     it("allows to manipulate entries as page objects and store them back") {
       val now = System.currentTimeMillis
       val xml = db.getXml(collection, entry).get(0)
-      val page = Page.fromXml(xml, entry)
+      val page = Page.fromXml(xml)
       val mod = page.words(0).history.top
       val oldScore = page.words(0).history.top.score
       mod.downvote("tests"+System.currentTimeMillis)
       expect(true) { mod.score < oldScore }
       page.saveToDb(db=db)
       expect(true) { 
-        val p = Page.fromXml(db.getXml(collection, entry).get(0), entry); 
+        val p = Page.fromXml(db.getXml(collection, entry).get(0)); 
         p.words(0).history.top.score < oldScore }
     }
 

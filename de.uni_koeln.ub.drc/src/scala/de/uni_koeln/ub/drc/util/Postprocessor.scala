@@ -28,7 +28,7 @@ object Postprocessor {
     def process(volume: String): Unit = {
       for (
         id <- db.getIds(volume).get.filter(_.endsWith(".xml"));
-        page = Page.fromXml(db.getXml(volume, id).get(0), id);
+        page = Page.fromXml(db.getXml(volume, id).get(0));
         word <- page.words;
         (k, v) <- patterns;
         form = word.history.top.form;
