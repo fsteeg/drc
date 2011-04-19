@@ -21,16 +21,16 @@ class SpecIndex extends Spec with ShouldMatchers {
   val page = Page(Word("test", Box(0, 0, 0, 0)) :: Nil, "mock")
   page.comments += Comment("me", "comment text", 0)
   page.tags += Tag("testtag", "me")
-  val pages = Page.mock :: Page.mock :: page :: Nil
+  val pages = Page.mock :: page :: Nil
   val db = Index.LocalDb
   val coll = "testing"
-  for(p<-pages) db.putXml(p.toXml, coll, p.id)
+  for(p<-pages) db.putXml(p.toXml, "drc/" + coll, p.id)
   val ids = pages map (_.id)
 
   describe("The Index") {
     val index = Index(ids, db, coll)
     it("allows full text search for a list of pages") {
-      expect(2) { index.search("catechismus").length }
+      expect(1) { index.search("catechismus").length }
       expect(1) { index.search("Test").length }
       expect(0) { index.search("catechismus".reverse).length }
     }
