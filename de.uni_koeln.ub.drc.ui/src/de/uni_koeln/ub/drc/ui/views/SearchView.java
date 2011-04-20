@@ -513,23 +513,26 @@ public final class SearchView {
             if (term.trim().equals("")) { //$NON-NLS-1$
               search = JavaConversions.asList(index.pages()).toArray(new String[] {});
             } else {
-              List<Page> result = new ArrayList<Page>();
-              m.beginTask(Messages.SearchingIn + index.pages().size() + Messages.Pages, index.pages()
-                  .size());
-              for (String id : asList(index.pages())) {
-                Page p = page(id);
-                if (index.matches(p, term.toLowerCase(),
-                    SearchOption.withName(selectedSearchOption))) {
-                  result.add(p);
+            	m.beginTask(Messages.SearchingIn + " " + index.pages().size() + " " + Messages.Pages, index.pages()
+                        .size());
+              search = null;
+              new Thread(new Runnable() {
+                public void run() {
+                  while (search == null) {
+                    m.worked(1);
+                    try {
+                      Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                      e.printStackTrace();
+                    }
+                    if (m.isCanceled()) {
+                      m.done();
+                    }
+                  }
                 }
-                m.worked(1);
-                if (m.isCanceled()) {
-                  break;
-                }
-              }
-              search = result.toArray();
+              }).start();
+              search = index.search(term);
             }
-
           }
         });
       } catch (InvocationTargetException e) {
