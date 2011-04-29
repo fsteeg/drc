@@ -86,7 +86,7 @@ import de.uni_koeln.ub.drc.util.MetsTransformer;
 public final class SearchView {
 
 
-  private static final String[] VOLUMES = new String[] { "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027" }; // "0033", "0035", "0036", "0037", "0038"
+  private static final String[] VOLUMES = new String[] { "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027", "0037" }; // "0033", "0035", "0036", "0037", "0038"
   private Text searchField;
   private Text tagField;
   private Label resultCount;
@@ -249,7 +249,7 @@ public final class SearchView {
     volumes.getDisplay().syncExec(new Runnable() {
       @Override
       public void run() {
-        selected = selected(volumes);
+    		selected = selected(volumes);
       }
     });
     return Page.fromXml(
@@ -259,11 +259,11 @@ public final class SearchView {
 
   private void updateSelection() {
     if (index < allPages.size() && index >= 0) {
-      Page page = page(allPages.get(index));
-      setCurrentPageLabel(page);
-      StructuredSelection selection = new StructuredSelection(new Page[] { page });
-      selectionService.setSelection(selection.toList());
-      reload(viewer.getTree().getParent(), page);
+  	  	Page page = page(allPages.get(index));
+  	  	setCurrentPageLabel(page);
+  	  	StructuredSelection selection = new StructuredSelection(new Page[] { page });
+  	  	selectionService.setSelection(selection.toList());
+  	  	reload(viewer.getTree().getParent(), page);
     }
   }
 
@@ -328,7 +328,7 @@ public final class SearchView {
     label.setText(Messages.In);
     searchOptions = new Combo(searchComposite, SWT.READ_ONLY);
     searchOptions.setItems(new String[] { SearchOption.all().toString(),
-        SearchOption.tags().toString(), SearchOption.comments().toString() });
+    		SearchOption.tags().toString(), SearchOption.comments().toString() });
     searchOptions.select(0);
     searchOptions.addSelectionListener(searchListener);
   }
@@ -431,6 +431,7 @@ public final class SearchView {
     String current = selected(volumes);
     if (content == null || !current.equals(last)) {
       loadData();
+      allPages = new ArrayList<String>(asList(content.index.pages()));
     }
     last = current;
     Object[] pages = content.getPages(searchField.getText().trim().toLowerCase());
