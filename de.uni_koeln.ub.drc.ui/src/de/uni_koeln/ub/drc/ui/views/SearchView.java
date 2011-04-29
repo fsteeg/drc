@@ -366,7 +366,8 @@ public final class SearchView {
               if (!currentPageLabel.getText().equals(oldPageLabel)) {
                 selectionService.setSelection(selection.toList());
                 if (!initial) { // don't reload initial page
-                  reload(parent, page);
+                	reload(parent, page);
+                	setCurrentPageLabel(page(allPages.get(index)));
                 } else {
                   initial = false;
                 }
