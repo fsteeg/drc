@@ -8,8 +8,8 @@ import play.data.validation._
 
 object Application extends Controller {
 
-  val server = "localhost" //"hydra1.spinfo.uni-koeln.de"
-  val port = 7777 //8080
+  val server = "hydra1.spinfo.uni-koeln.de"
+  val port = 8080
   val db = XmlDb(server, port)
   val col = "drc"
 
