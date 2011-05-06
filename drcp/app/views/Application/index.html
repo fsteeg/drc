@@ -1,76 +1,58 @@
 #{extends 'main.html' /} #{set title:'DRC' /}
 
-<div id="left">#{if active.size() > 0}
-<h3>Active Users</h3>
-<table>
-	<tr>
-		<th>Rank</th>
-		<th>Name</th>
-		<th>Region</th>
-		<th>Score</th>
-	</tr>
-	#{list items:active, as:'user'}
-	<tr class="active-user">
-		<td>${active.indexOf(user)+1}</td>
-		<td><a href="@{Application.user(user.id)}">${user.name}</a></td>
-		<td>${user.region}</td>
-		<td>${user.reputation()}</td>
-	</tr>
-	#{/list}
-</table>
-#{/if} #{if inactive.size() > 0}
-<h3>Inactive Users</h3>
-<table>
-	<tr>
-		<th>Name</th>
-		<th>Region</th>
-	</tr>
-	#{list items:inactive, as:'user'}
-	<tr class="inactive-user">
-		<td>${user.name}</td>
-		<td>${user.region}</td>
-	</tr>
-	#{/list}
-</table>
-#{/if}</div>
+<div id="left">
 
+	<h3>Mitmachen</h3>
+	<p>
+		Helfen Sie mit: Melden Sie <a href="@{Application.signup()}">sich
+			an</a> und laden Sie die <a href="http://github.com/spinfo/drc/downloads">aktuelle
+			Beta-Version</a> des Editors für Windows oder Mac, oder partizipieren Sie
+		an der Entwicklung auf <a href="http://github.com/spinfo/drc">GitHub</a>.
+	</p>
+
+	#{if top.size() > 0}
+	<h3>Aktive Korrektoren</h3>
+	<table>
+		<tr>
+			<th>Rank</th>
+			<th>Name</th>
+			<th>Region</th>
+			<th>Score</th>
+		</tr>
+		#{list items:top, as:'user'}
+		<tr class="active-user">
+			<td>${top.indexOf(user)+1}</td>
+			<td><a href="@{Application.user(user.id)}">${user.id}</a>
+			</td>
+			<td>${user.region}</td>
+			<td>${user.reputation()}</td>
+		</tr>
+		#{/list}
+	</table>
+	#{/if} <a href="@{Application.users}">mehr...</a>
+</div>
 <div id="right">
 
-<h3>About</h3>
+	<h3>Über das Projekt</h3>
 
-Active data: ${ids.size()} pages. #{if pages.size() > 0}
-<p>#{list items:pages, as:'page'} <a href="${page}"><img
-	src="${page}" width=80px /></a> #{/list}</p>
-#{/if}
-
-<p>Gegenstand des Projekts ist die digitale Tiefenerschließung der
-Rätoromanischen Chrestomathie von Caspar Decurtins, die in der
-Zeitschrift „Romanische Forschungen“ (Erlangen, 1896-1919) erschienen
-ist. Die Rätoromanischen Chrestomathie ist die bis heute wichtigste
-Textsammlung für das Bündnerromanische und für Sprach-,
-Literaturwissenschaft und Volkskunde eine unübertroffene Quelle. Ziel
-ist die Bereitstellung der Volltexte sowie die Erstellung eines
-rätoromanischen Textkorpus als Grundlage für korpuslinguistische und
-philologische Forschungen. Teil des Vorhabens ist die Entwicklung
-spezialisierter Korrektur- und Erschließungsverfahren in vernetzten
-Systemen. Dabei werden automatische und interaktive Korrektur über ein
-Wiki kombiniert. Die interaktive Korrektur bindet die rätoromanische
-Sprachgemeinschaft in Zusammenarbeit mit der Societad Retorumantscha,
-Chur/Schweiz, mit ein. Die im Vorhaben eingesetzten Techniken sollen in
-der Folge auf weitere Textsammlungen des Bündnerromanischen und anderer
-kleiner Sprachen angewandt werden. Das Projekt hat damit prototypischen
-Charakter für Projekte, die der Erschließung spezialisierter
-Textsammlungen gewidmet sind, die vorrangig die Dokumentation und
-Bewahrung kleinerer, auch bedrohter Sprachen zum Gegenstand haben. Die
-Sprecher dieser Sprachen wirken aktiv an der Textkorrektur und -nutzung
-mit... <a
-	href="http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html">mehr</a></p>
-
-<p>Get involved: <a href="@{Application.signup()}">sign up</a>,
-download the latest beta release of the editor for <a
-  href="http://github.com/downloads/spinfo/drc/drc-beta-win-2011-02-25.zip">Windows</a>
-or <a
-  href="http://github.com/downloads/spinfo/drc/drc-beta-mac-2011-02-25.zip">Mac</a>,
-or fork us on <a href="http://github.com/spinfo/drc">GitHub</a>.</p>
+	<p>
+		Die Rätoromanische Chrestomathie von Caspar Decurtins ist die bis
+		heute wichtigste Textsammlung des Bündnerromanischen. Die insgesamt
+		rund 8000 Seiten enthalten Texte der verschiedensten Gattungen über
+		einen Zeitraum von vier Jahrhunderten, aus allen Regionen und in allen
+		Idiomen des Bündnerromanischen. Ursprünglich zwischen 1891 und 1919
+		zusammengestellt, ist die Rätoromanische Chrestomathie nun erstmals
+		auch digital zugänglich. Helfen Sie mit, die Chrestomathie
+		originalgetreu und fehlerfrei zugänglich zu machen: Melden Sie sich an
+		und laden Sie die aktuelle Beta-Version des Editors für Windows oder
+		Mac. Hinweise zur Benutzung finden sie <a href="@{Application.faq}">hier</a>.
+		Mehr zum DRC-Projekt finden Sie <a href="@{Application.info}">hier</a>.
+	</p>
+	#{if ids.size() > 0} Erster Band: ${ids.size()} Seiten.
+	<p>
+		#{list items:pages, as:'page'} <a href="${page}"><img
+			src="${page}" width=80px /> </a> #{/list}
+	</p>
+	#{/if}
 
 </div>

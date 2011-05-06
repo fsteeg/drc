@@ -1,35 +1,46 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}">
-        #{get 'moreStyles' /}
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>
-        #{get 'moreScripts' /}
-    </head>
-    <body>
-        <div id="header">
-        <div id="title">
-                <h1>The Digital Romansch Chrestomathy Portal</h1>
-            </div>
-            <div id="logo-top">
-               <img src="/public/images/drc-top.png" width="250px"/>
-            </div>
-            <p><a href="@{Application.index}">Home</a> | <a href="@{Application.signup}">Signup</a></p>
-            <hr/>
-        </div>
-        <div id="main">
-            #{doLayout /} 
-        </div>
-        <div id="footer">
-            <hr/>
-            <div id="logo-bottom">
-               <img src="/public/images/drc-bottom.png" width="250px"/>
-            </div>
-            <p><i>The Digital Romansch Chrestomathy Portal: a collaborative digitization effort.</i></p>
-        </div>
-    </body>
+<head>
+<title>#{get 'title' /}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="@{'/public/stylesheets/main.css'}">
+#{get 'moreStyles' /}
+<link rel="shortcut icon" type="image/png"
+	href="@{'/public/images/favicon.png'}">
+<script src="@{'/public/javascripts/jquery-1.4.2.min.js'}"
+	type="text/javascript" charset="utf-8"></script>
+#{get 'moreScripts' /}
+</head>
+<body>
+	<div id="header">
+		<div id="title">
+			<h1>Digitale Rätoromanische Chrestomathie</h1>
+		</div>
+		<div id="logo-top">
+			<img src="/public/images/drc-top.png" width="250px" />
+		</div>
+		<p>
+			<a href="@{Application.index}">Start</a> | <a
+				href="@{Application.users}">Benutzer</a> | <a
+				href="@{Application.signup}">Anmeldung</a> | <a
+				href="@{Application.faq}">Fragen</a> | <a
+				href="@{Application.info}">Informationen</a> | <a
+				href="@{Application.contact}">Kontakt</a>
+		</p>
+		<hr />
+	</div>
+	<div id="main">#{doLayout /}</div>
+	<div id="footer">
+		<hr />
+		<div id="logo-bottom">
+			<img src="/public/images/drc-bottom.png" width="250px" />
+		</div>
+		<p>
+			<i>Digitale Rätoromanische Chrestomathie: ein kollaboratives
+				Digitalisierungsprojekt.</i>
+		</p>
+	</div>
+</body>
 </html>

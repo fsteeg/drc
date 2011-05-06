@@ -21,14 +21,14 @@ body {
 
 #left {
   float: left;
-  width: 50%;
+  width: 48%;
   /* background: green; */
 }
 
 #right {
-  float: left;
-  width: 50%;
-  text-align: right; /* depends on element width */
+  float: right;
+  width: 48%;
+  /* text-align: right; /* depends on element width */
   /* background: red; */
 }
 
@@ -42,7 +42,7 @@ body {
 
 table {
 	border-collapse: collapse;
-	width:95%;
+	width:100%;
 }
 
 table.form,th.form,td.form {

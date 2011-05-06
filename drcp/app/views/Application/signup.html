@@ -1,28 +1,28 @@
-#{extends 'main.html' /} #{set title:'Sign up' /}
+#{extends 'main.html' /} #{set title:'Anmeldung' /}
 
-<h1>Create new account</h1>
+<h1>Neuen Benutzer anlegen</h1>
 
 #{form @Application.createAccount()}
      #{ifErrors}
         <p class="error">
-            All fields are required!
+            Alle Felder müssen ausgefüllt werden!
         </p>
     #{/ifErrors}
     <table class="form">
     <tr class="form">
-        <td class="form"><label for="name">Your full name: </label></td>
+        <td class="form"><label for="name">Voller Name: </label></td>
         <td class="form"><input type="text" name="name" id="name" value="${params.name}"/></td>
     </tr>
     <tr class="form">
-        <td class="form"><label for="id">Your user id: </label></td>
+        <td class="form"><label for="id">Benutzername: </label></td>
         <td class="form"><input type="text" name="id" id="id" value="${params.id}"/></td>
     </tr>
     <tr class="form">
-        <td class="form"><label for="pass">Your password: </label></td>
+        <td class="form"><label for="pass">Passwort: </label></td>
         <td class="form"><input type="password" name="pass" id="pass" value="${params.pass}"/></td>
     </tr>
     <tr class="form">
-        <td class="form"><label for="region">Your location: </label></td>
+        <td class="form"><label for="region">Ort: </label></td>
         <td class="form"><input type="text" name="region" id="region" value="${params.region}"/></td>
     </tr>
     </table>
