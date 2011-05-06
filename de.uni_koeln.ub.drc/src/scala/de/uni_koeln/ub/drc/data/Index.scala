@@ -74,14 +74,14 @@ object Import extends Application {
     //val product = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "db", "drc")
     //val anon = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "db", "drc-anonymous")
     
-    Meta.initialImport(db=testing, location="res/rom/PPN345572629")
+//    Meta.initialImport(db=testing, location="res/rom/PPN345572629")
     User.initialImport(db=testing, folder="users")
     //Index.initialImport(db=testing, location="res/rom/PPN345572629_0004")
     
-    for(volume <- List( // "0033", "0035", "0036", "0037", "0038"
-        "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")) {
-        Index.initialImport(db=testing, location="res/rom/PPN345572629_" + volume)
-    }
+//    for(volume <- List( // "0033", "0035", "0036", "0037", "0038"
+//        "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")) {
+//        Index.initialImport(db=testing, location="res/rom/PPN345572629_" + volume)
+//    }
     
     
 }
