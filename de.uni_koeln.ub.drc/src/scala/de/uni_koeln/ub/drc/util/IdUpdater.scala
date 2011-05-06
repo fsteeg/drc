@@ -23,7 +23,7 @@ object IdUpdater {
   //val stageDb = XmlDb("hydra2.spinfo.uni-koeln.de", 7777)
   //val prodDb = XmlDb("hydra1.spinfo.uni-koeln.de", 8080)
   val col = "drc"
-  val volumes = List("0008") // "0004","0008","0009","0011","0012","0017","0018","0024","0027"
+  val volumes = List("0004","0008","0009","0011","0012","0017","0018","0024","0027")
 
   def main(args: Array[String]): Unit = {
     for (volume <- volumes) process("PPN345572629_" + volume, localDb)

@@ -234,6 +234,7 @@ public final class SearchView {
           page.tags().$plus$eq(new Tag(input, DrcUiActivator.instance().currentUser().id()));
           page.saveToDb(DrcUiActivator.instance().currentUser().collection(), DrcUiActivator.instance().db());
           setCurrentPageLabel(page);
+          viewer.setLabelProvider(new SearchViewLabelProvider());
           text.setText(""); //$NON-NLS-1$
         }
       }
@@ -368,6 +369,7 @@ public final class SearchView {
               selectionService.setSelection(selection.toList());
               if (!initial) { // don't reload initial page
                 reload(parent, page);
+                setCurrentPageLabel(page(allPages.get(index)));
               } else {
                 initial = false;
               }
@@ -431,6 +433,7 @@ public final class SearchView {
     String current = selected(volumes);
     if (content == null || !current.equals(last)) {
       loadData();
+      allPages = new ArrayList<String>(asList(content.index.pages()));
     }
     last = current;
     Object[] pages = content.getPages(searchField.getText().trim().toLowerCase());

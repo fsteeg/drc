@@ -70,7 +70,7 @@ public final class DrcUiActivator extends Plugin {
   public void start(final BundleContext context) throws Exception {
     super.start(context);
     instance = this;
-    update(context);
+    //update(context);
     login(context);
   }
 
