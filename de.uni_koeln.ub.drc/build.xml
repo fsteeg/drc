@@ -151,6 +151,10 @@
 	<target name="import" depends="compile">
 		<java classpathref="project.classpath" classname="de.uni_koeln.ub.drc.data.Import"/>
 	</target>
+	
+	<target name="update" depends="compile">
+	    <java classpathref="project.classpath" classname="de.uni_koeln.ub.drc.util.IdUpdater"/>
+	</target>
 
 	<target name="zip">
 		<zip destfile="${src.dir.data}/${data.volume}.zip" update="false">

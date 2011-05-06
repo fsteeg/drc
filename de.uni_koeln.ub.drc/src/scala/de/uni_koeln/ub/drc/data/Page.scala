@@ -36,7 +36,7 @@ case class Page(words: List[Word], id: String) {
   var imageBytes: Option[Array[Byte]] = None
 
   def toXml =
-    <page>
+    <page id={id}>
       { words.map(_.toXml) }
       { tags.map(_.toXml) }
       { comments.map(_.toXml) }
@@ -51,22 +51,22 @@ case class Page(words: List[Word], id: String) {
     formatted
   }
 
-  def saveToDb(db: XmlDb): Node = {
+  def saveToDb(collection:String=Index.DefaultCollection, db: XmlDb): Node = {
     val file = id.split("/").last
-    val collection = file.split("-")(0)
+    val c = collection + "/" + file.split("-")(0)
     val entry = file
-    val dbRes = db.getXml(collection, entry)
+    val dbRes = db.getXml(c, entry)
     val mergedPage = mergedDbVersion(dbRes, entry)
     val root = mergedPage.toXml
     val formatted = format(root)
-    db.putXml(root, collection, entry)
+    db.putXml(root, c, entry)
     root
   }
 
   def mergedDbVersion(dbRes: Option[List[Node]], entry: String) = dbRes match {
     case None => this // no merging needed
     case Some(res) => {
-        val dbEntry = Page.fromXml(res(0), entry)
+        val dbEntry = Page.fromXml(res(0))
         Page.mergePages(this, dbEntry)
       }
   }
@@ -77,8 +77,8 @@ object Page {
 
   val ParagraphMarker = "@"
 
-  def fromXml(page: Node, id: String): Page = {
-    val p = Page(for (word <- (page \ "word").toList) yield Word.fromXml(word), id)
+  def fromXml(page: Node): Page = {
+    val p = Page(for (word <- (page \ "word").toList) yield Word.fromXml(word), (page\"@id").text)
     for (tag <- (page \ "tag")) p.tags += Tag.fromXml(tag)
     for (comment <- (page \ "comment")) p.comments += Comment.fromXml(comment)
     p
@@ -177,6 +177,6 @@ private object PdfToPage {
       }
       words add Word(Page.ParagraphMarker, Box(0, 0, 0, 0))
     }
-    Page(words.toList, new java.io.File(pdfLocation).getName().replace("pdf", "xml"))
+    Page(words.toList, new java.io.File(pdfLocation).getName().replace(" ","").replace(".pdf",".xml"))
   }
 }

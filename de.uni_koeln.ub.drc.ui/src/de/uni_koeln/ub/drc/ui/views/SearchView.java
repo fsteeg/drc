@@ -232,7 +232,7 @@ public final class SearchView {
         if (input != null && input.trim().length() != 0) {
           Page page = page(allPages.get(index));
           page.tags().$plus$eq(new Tag(input, DrcUiActivator.instance().currentUser().id()));
-          page.saveToDb(DrcUiActivator.instance().db());
+          page.saveToDb(DrcUiActivator.instance().currentUser().collection(), DrcUiActivator.instance().db());
           setCurrentPageLabel(page);
           text.setText(""); //$NON-NLS-1$
         }
@@ -253,8 +253,8 @@ public final class SearchView {
       }
     });
     return Page.fromXml(
-        DrcUiActivator.instance().db().getXml(selected, asBuffer(Arrays.asList(string))).get()
-            .head(), string);
+        DrcUiActivator.instance().db().getXml(DrcUiActivator.instance().currentUser().collection() + "/" + selected, asBuffer(Arrays.asList(string))).get() //$NON-NLS-1$
+            .head());
   }
 
   private void updateSelection() {
@@ -268,15 +268,17 @@ public final class SearchView {
   }
 
   private void reload(final Composite parent, final Page page) {
-    System.out.println(Messages.ReloadingPage + page);
-    parent.getDisplay().asyncExec(new Runnable() {
-      @Override
-      public void run() {
-        Page reloaded = page(page.id());
-        selectionService.setSelection(
-            new StructuredSelection(reloaded).toList());
-      }
-    });
+    if (selectionService.getSelection() instanceof List
+        && ((List<?>) selectionService.getSelection()).size() == 1) {
+      System.out.println(Messages.ReloadingPage + page);
+      parent.getDisplay().asyncExec(new Runnable() {
+        @Override
+        public void run() {
+          Page reloaded = page(page.id());
+          selectionService.setSelection(new StructuredSelection(reloaded).toList());
+        }
+      });
+    }
   }
 
   private void setCurrentPageLabel(Page page) {
@@ -359,18 +361,16 @@ public final class SearchView {
           @Override
           public void run() {
             final IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-            if (selection.getFirstElement() instanceof Page) {
-              String oldPageLabel = currentPageLabel.getText();
+            if (selectionService.getSelection() != selection
+                && selection.getFirstElement() instanceof Page) {
               final Page page = (Page) selection.getFirstElement();
               setCurrentPageLabel(page);
-              if (!currentPageLabel.getText().equals(oldPageLabel)) {
-                selectionService.setSelection(selection.toList());
-                if (!initial) { // don't reload initial page
-                	reload(parent, page);
-                	setCurrentPageLabel(page(allPages.get(index)));
-                } else {
-                  initial = false;
-                }
+              selectionService.setSelection(selection.toList());
+              if (!initial) { // don't reload initial page
+                reload(parent, page);
+                setCurrentPageLabel(page(allPages.get(index)));
+              } else {
+                initial = false;
               }
             }
           }
@@ -485,7 +485,7 @@ public final class SearchView {
           selected = selected(volumes);
         }
       });
-      List<String> ids = asList(DrcUiActivator.instance().db().getIds(selected).get());
+      List<String> ids = asList(DrcUiActivator.instance().db().getIds(DrcUiActivator.instance().currentUser().collection() + "/" + selected).get()); //$NON-NLS-1$
       m.beginTask(Messages.LoadingData, ids.size() / 2); // we only load the XML files
       List<String> pages = new ArrayList<String>();
       for (String id : ids) {
@@ -515,23 +515,26 @@ public final class SearchView {
             if (term.trim().equals("")) { //$NON-NLS-1$
               search = JavaConversions.asList(index.pages()).toArray(new String[] {});
             } else {
-              List<Page> result = new ArrayList<Page>();
-              m.beginTask(Messages.SearchingIn + index.pages().size() + Messages.Pages, index.pages()
-                  .size());
-              for (String id : asList(index.pages())) {
-                Page p = page(id);
-                if (index.matches(p, term.toLowerCase(),
-                    SearchOption.withName(selectedSearchOption))) {
-                  result.add(p);
+            	m.beginTask(Messages.SearchingIn + " " + index.pages().size() + " " + Messages.Pages, index.pages()
+                        .size());
+              search = null;
+              new Thread(new Runnable() {
+                public void run() {
+                  while (search == null) {
+                    m.worked(1);
+                    try {
+                      Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                      e.printStackTrace();
+                    }
+                    if (m.isCanceled()) {
+                      m.done();
+                    }
+                  }
                 }
-                m.worked(1);
-                if (m.isCanceled()) {
-                  break;
-                }
-              }
-              search = result.toArray();
+              }).start();
+              search = index.search(term);
             }
-
           }
         });
       } catch (InvocationTargetException e) {

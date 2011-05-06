@@ -18,6 +18,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.graphics.Image;
 
 import scala.collection.JavaConversions;
+import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Modification;
 import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.data.Word;
@@ -77,7 +78,7 @@ final class WordViewModel {
 
     static String userDetails(String id) {
       if(id.equals("OCR")) return "--"; //$NON-NLS-1$ //$NON-NLS-2$
-      User user = User.withId(DrcUiActivator.instance().userDb(), id);
+      User user = User.withId(Index.DefaultCollection(), DrcUiActivator.instance().userDb(), id);
       return String.format("%s " + Messages.From + " %s (%s, %s)", user.name(), user.region(), user.id(), //$NON-NLS-1$ //$NON-NLS-3$
           user.reputation());
     }

@@ -9,14 +9,13 @@ package de.uni_koeln.ub.drc.util
 
 import scala.xml._
 import java.io._
-
 import scala.xml._
 import scala.collection.immutable._
 import java.io.FileReader
 import java.lang.StringBuilder
 import scala.util.matching.Regex
-
 import Configuration._
+import de.uni_koeln.ub.drc.data.Index
 
 /** 
  * Early experimentation: convert METS metadata (XML) for scans at http://www.digizeitschriften.de/main/dms/toc/?IDDOC=5570 
@@ -38,7 +37,7 @@ case class Chapter(volume:Int, number:Int, title:String) extends Ordered[Chapter
 
 private[util] class MetsTransformer(xml:Elem) {
   
-  def this(name:String, db: com.quui.sinist.XmlDb) = this(db.getXml("PPN345572629", name).get(0))
+  def this(name:String, db: com.quui.sinist.XmlDb) = this(db.getXml(Index.DefaultCollection+"/"+"PPN345572629", name).get(0))
   
   private val mods = xml\"dmdSec"\"mdWrap"\"xmlData"\"mods"
   private val loc = (mods\"location"\"url").text.trim

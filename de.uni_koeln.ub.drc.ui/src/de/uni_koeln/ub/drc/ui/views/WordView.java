@@ -34,6 +34,7 @@ import org.eclipse.swt.widgets.Widget;
 
 import com.quui.sinist.XmlDb;
 
+import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Modification;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.User;
@@ -211,9 +212,9 @@ public final class WordView {
     if (!modification.voters().contains(voter.id())) {
       XmlDb db = DrcUiActivator.instance().db();
       XmlDb userDb = DrcUiActivator.instance().userDb();
-      User author = User.withId(userDb, modification.author());
+      User author = User.withId(Index.DefaultCollection(), userDb, modification.author());
       vote.update(modification, author, voter);
-      page.saveToDb(db);
+      page.saveToDb(author.collection(), db);
       voter.save(userDb);
       author.save(userDb);
       setTableInput();

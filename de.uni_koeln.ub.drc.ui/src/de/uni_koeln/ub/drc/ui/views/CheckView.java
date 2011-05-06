@@ -265,6 +265,7 @@ public final class CheckView {
 		Display display = parent.getDisplay();
 		// TODO image as lazy def in page, fetched on demand?
 		InputStream in = new BufferedInputStream(new ByteArrayInputStream(Index.loadImageFor(
+		    DrcUiActivator.instance().currentUser().collection(),
 				DrcUiActivator.instance().db(), page)));
 		// imageData = convertToImageData(scale(in)); // TODO enable for optional scaling
 		imageData = new ImageData(in);

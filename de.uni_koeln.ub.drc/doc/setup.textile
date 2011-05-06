@@ -1,0 +1,19 @@
+h3. Some notes for clean setup
+
+DB:
+
+* Install exist, run on port 7777 (setup in jetty.xml)
+* Upload collection.xconf to db/system/config/db/drc
+* Copy rom.zip content to local res/rom, run @ant import@, run @ant@
+
+Editor:
+
+* Set drc.target as target platform
+* Run de.uni_koeln.ub.drc.rcp.product from IDE
+* Run @mvn clean install@ for crisp build
+
+Portal:
+
+* Install play-1.1, run @play install scala-0.8@
+* Run @play eclipsify drcp@, import project in eclipse
+* Run @play start drcp@, browse to localhost:9000

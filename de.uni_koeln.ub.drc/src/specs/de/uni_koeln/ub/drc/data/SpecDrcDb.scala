@@ -24,7 +24,8 @@ class SpecDrcDb extends Spec with ShouldMatchers {
   describe("The Db") {
 
     val db = Index.LocalDb
-    val collection = "PPN345572629_0004"
+    val plain = "PPN345572629_0004"
+    val collection = Index.DefaultCollection + "/" + plain
     val entry = "PPN345572629_0004-0007.xml"
 
     it("allows access to specific pages, both XML and IMG") {
@@ -49,23 +50,23 @@ class SpecDrcDb extends Spec with ShouldMatchers {
     it("allows to manipulate entries as page objects and store them back") {
       val now = System.currentTimeMillis
       val xml = db.getXml(collection, entry).get(0)
-      val page = Page.fromXml(xml, entry)
+      val page = Page.fromXml(xml)
       val mod = page.words(0).history.top
       val oldScore = page.words(0).history.top.score
       mod.downvote("tests"+System.currentTimeMillis)
       expect(true) { mod.score < oldScore }
-      page.saveToDb(db)
+      page.saveToDb(db=db)
       expect(true) { 
-        val p = Page.fromXml(db.getXml(collection, entry).get(0), entry); 
+        val p = Page.fromXml(db.getXml(collection, entry).get(0)); 
         p.words(0).history.top.score < oldScore }
     }
 
     it("stores XML that can be used to instantiate page objects") {
       expect(true) {
-        val pages = Index.loadPagesFromDb(db, collection)
+        val pages = Index.loadPagesFromDb(db=db, collection=plain)
         pages.forall((p: Page) => (p.getClass == classOf[Page]
           && p.imageBytes == None)
-          && Index.loadImageFor(db, pages(0)).isInstanceOf[Array[Byte]])
+          && Index.loadImageFor(db=db, page=pages(0)).isInstanceOf[Array[Byte]])
       }
     }
 

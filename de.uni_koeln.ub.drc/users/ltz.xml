@@ -1,4 +1,4 @@
 <user region="Curaglia, Switzerland" edits="0" upvotes="0" upvoted="0"
 	downvotes="0" downvoted="0" name="Florentin Lutz" id="ltz" pass="drc">
-  <db location="xmldb:exist://localhost:7777/exist/xmlrpc" root="/db/" prefix="drc/"/>
+  <db collection="drc" port="7777" server="localhost"/>
 </user>
