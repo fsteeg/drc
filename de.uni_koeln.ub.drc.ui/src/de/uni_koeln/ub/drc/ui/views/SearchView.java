@@ -434,6 +434,7 @@ public final class SearchView {
     if (content == null || !current.equals(last)) {
       loadData();
       allPages = new ArrayList<String>(asList(content.index.pages()));
+      Collections.sort(allPages);
     }
     last = current;
     Object[] pages = content.getPages(searchField.getText().trim().toLowerCase());
