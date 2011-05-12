@@ -14,16 +14,15 @@
 	<h3>Aktive Korrektoren</h3>
 	<table>
 		<tr>
-			<th>Rank</th>
+			<th>Rang</th>
 			<th>Name</th>
 			<th>Region</th>
-			<th>Score</th>
+			<th>Punkte</th>
 		</tr>
 		#{list items:top, as:'user'}
 		<tr class="active-user">
 			<td>${top.indexOf(user)+1}</td>
-			<td><a href="@{Application.user(user.id)}">${user.id}</a>
-			</td>
+			<td><a href="@{Application.user(user.id)}">${user.id}</a></td>
 			<td>${user.region}</td>
 			<td>${user.reputation()}</td>
 		</tr>
@@ -32,6 +31,35 @@
 	#{/if} <a href="@{Application.users}">mehr...</a>
 </div>
 <div id="right">
+
+	<h3>Chrestomathie-Suche</h3>
+
+	#{form @Application.search()}
+	<table class="form">
+		<tr class="form">
+			<td class="form"><label for="term">Suchbegriff: </label>
+			</td>
+			<td class="form"><input type="text" name="term" id="term"
+				value="${params.term}" />
+			</td>
+			<td class="form"> 
+				#{select 'volume', value:1, id:'volume'}
+				#{option 1}Band 1#{/option}
+				#{option 2}Band 2#{/option}
+				#{option 3}Band 3#{/option}
+				#{option 4}Band 4#{/option}
+				#{option 5}Band 5#{/option}
+				#{option 6}Band 6#{/option}
+				#{option 7}Band 7#{/option}
+				#{option 8}Band 8#{/option}
+				#{option 9}Band 9#{/option}
+				#{option 10}Alle#{/option}
+				#{/select}</td>
+			<td class="form"><input type="submit" value="Submit" />
+			</td>
+		</tr>
+	</table>
+	#{/form}
 
 	<h3>Über das Projekt</h3>
 

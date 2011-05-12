@@ -1,0 +1,12 @@
+#{extends 'main.html' /} #{set title:'Search' /}
+
+<h1>Suche nach '${term}' in #{if volume != "10"} Band ${volume}
+	#{/if} #{else} allen Bänden #{/else}</h1>
+
+Ergebnis: ${pages.size()} Seiten. #{if pages.size() > 0}
+<p>
+	#{list items:pages, as:'page'} <a href="${page}"><img src="${page}"
+		width=80px />
+	</a> #{/list}
+</p>
+#{/if}

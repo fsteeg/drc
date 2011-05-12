@@ -5,6 +5,8 @@ import de.uni_koeln.ub.drc.data._
 import play._
 import play.mvc._
 import play.data.validation._
+import scala.xml.Elem
+import scala.xml.Node
 
 object Application extends Controller {
 
@@ -56,6 +58,24 @@ object Application extends Controller {
       db.putXml(u.toXml, col + "/users", id + ".xml")
       Action(user(id))
     }
+  }
+  
+  def search(@Required term: String, @Required volume: String) = {
+    val volumes = List("0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")
+    val vol = if(volume.toInt-1<volumes.size) "PPN345572629_" + volumes(volume.toInt-1) else ""
+    val selector = "//modification/attribute::form"
+    val query = "for $m in %s[ft:query(., '%s')]/ancestor::page return string($m/attribute::id)".format(selector, term.toLowerCase)
+    val q = db.query("drc/" + vol, configure(query))
+    val pages = (q\"value").map((n:Node)=>imageLink(n.text))
+    Template(term, volume, pages)
+  }
+  
+  private def configure(query: String): scala.xml.Elem = {
+    val cdata = "<![CDATA[%s]]>".format(query)
+    <query xmlns="http://exist.sourceforge.net/NS/exist" start="1" max="20">
+      <text> { scala.xml.Unparsed(cdata) } </text>
+      <properties> <property name="indent" value="yes"/> </properties>
+    </query>
   }
 
 }
