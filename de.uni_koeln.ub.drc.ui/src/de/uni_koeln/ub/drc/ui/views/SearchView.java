@@ -330,8 +330,8 @@ public final class SearchView {
     Label label = new Label(searchComposite, SWT.NONE);
     label.setText(Messages.In);
     searchOptions = new Combo(searchComposite, SWT.READ_ONLY);
-    searchOptions.setItems(new String[] { SearchOption.all().toString(),
-        SearchOption.tags().toString(), SearchOption.comments().toString() });
+    searchOptions.setItems(new String[] { Messages.Text,
+        Messages.Tags, Messages.Comment }); //$NON-NLS-1$ //NON-NLS-2$ // NON-NLS-3$
     searchOptions.select(0);
     searchOptions.addSelectionListener(searchListener);
   }
