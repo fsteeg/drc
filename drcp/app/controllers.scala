@@ -15,12 +15,12 @@ object Application extends Controller {
   val db = XmlDb(server, port)
   val col = "drc"
 	  
-  lazy val u =
+  def loadUsers =
 	  (for (u <- db.getXml(col + "/users").get) yield User.fromXml(u))
 	  .sortBy(_.reputation).reverse.partition(_.reputation > 0)
 
   def index = {
-	val top = u._1.take(5)
+	val top = loadUsers._1.take(5)
     //val ids = db.getIds(col + "/PPN345572629_0004").get.filter(_.endsWith(".xml"))
     //val pages = ids.take(5).map(imageLink(_))
 	val ids=List()
@@ -32,7 +32,7 @@ object Application extends Controller {
   def info = { Template() }
 
   def users = {
-	val (active, inactive) = u
+	val (active, inactive) = loadUsers
     Template(active, inactive)
   }
 
@@ -51,7 +51,8 @@ object Application extends Controller {
 
   def createAccount(@Required name: String, @Required id: String, @Required pass: String, @Required region: String) = {
     println("name: %s, id: %s, pass: %s, region: %s".format(name, id, pass, region))
-    if (Validation.hasErrors) {
+    val users = loadUsers
+    if (Validation.hasErrors || (users._1 ++ users._2).exists(_.id == id)) {
       "@signup".asTemplate
     } else {
       val u = User(id, name, region, pass, col, db)
