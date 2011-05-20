@@ -3,7 +3,7 @@ build/
 .manager/
 .scala_dependencies
 bin/
-org.*
+org.*/
 javax.*
 de.uni_koeln.spinfo.*
 de.uni_koeln.phil_fak.*

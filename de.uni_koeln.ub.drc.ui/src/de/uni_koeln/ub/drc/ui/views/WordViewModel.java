@@ -8,8 +8,6 @@
 package de.uni_koeln.ub.drc.ui.views;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -27,65 +25,73 @@ import de.uni_koeln.ub.drc.ui.Messages;
 
 /**
  * Model, content and label providers for the {@link WordView}.
+ * 
  * @author Fabian Steeg (fsteeg)
  */
 final class WordViewModel {
-  public static final WordViewModel CONTENT = new WordViewModel();
+	public static final WordViewModel CONTENT = new WordViewModel();
 
-  public Modification[] getDetails(final Word word) {
-    return JavaConversions.asCollection(word.history()).toArray(new Modification[] {});
-  }
+	public Modification[] getDetails(final Word word) {
+		return JavaConversions.asCollection(word.history()).toArray(
+				new Modification[] {});
+	}
 
-  static final class WordViewContentProvider implements IStructuredContentProvider {
-    @Override
-    public Object[] getElements(final Object inputElement) {
-      Object[] elements = (Object[]) inputElement;
-      return elements;
-    }
+	static final class WordViewContentProvider implements
+			IStructuredContentProvider {
+		@Override
+		public Object[] getElements(final Object inputElement) {
+			Object[] elements = (Object[]) inputElement;
+			return elements;
+		}
 
-    @Override
-    public void dispose() {}
+		@Override
+		public void dispose() {
+		}
 
-    @Override
-    public void inputChanged(final Viewer viewer, final Object oldInput, final Object newInput) {
-      if (newInput != null) {
-        Modification[] newMods = (Modification[]) newInput;
-        for (int i = 0; i < newMods.length; i++) {
-          viewer.setData(i + "", newMods[i]); //$NON-NLS-1$
-        }
-      }
-    }
-  }
+		@Override
+		public void inputChanged(final Viewer viewer, final Object oldInput,
+				final Object newInput) {
+			if (newInput != null) {
+				Modification[] newMods = (Modification[]) newInput;
+				for (int i = 0; i < newMods.length; i++) {
+					viewer.setData(i + "", newMods[i]); //$NON-NLS-1$
+				}
+			}
+		}
+	}
 
-  static final class WordViewLabelProvider extends LabelProvider implements ITableLabelProvider {
-    
-    @Override
-    public String getColumnText(final Object element, final int columnIndex) {
-      Modification modification = (Modification) element;
-      switch (columnIndex) {
-      case 0:
-        return modification.form();
-      case 1:
-        return userDetails(modification.author());
-      case 2:
-        return new Date(modification.date()).toString();
-      case 3:
-        return modification.score() + ""; //$NON-NLS-1$
-      default:
-        return null;
-      }
-    }
+	static final class WordViewLabelProvider extends LabelProvider implements
+			ITableLabelProvider {
 
-    static String userDetails(String id) {
-      if(id.equals("OCR")) return "--"; //$NON-NLS-1$ //$NON-NLS-2$
-      User user = User.withId(Index.DefaultCollection(), DrcUiActivator.instance().userDb(), id);
-      return String.format("%s " + Messages.From + " %s (%s, %s)", user.name(), user.region(), user.id(), //$NON-NLS-1$ //$NON-NLS-3$
-          user.reputation());
-    }
+		@Override
+		public String getColumnText(final Object element, final int columnIndex) {
+			Modification modification = (Modification) element;
+			switch (columnIndex) {
+			case 0:
+				return modification.form();
+			case 1:
+				return userDetails(modification.author());
+			case 2:
+				return new Date(modification.date()).toString();
+			case 3:
+				return modification.score() + ""; //$NON-NLS-1$
+			default:
+				return null;
+			}
+		}
 
-    @Override
-    public Image getColumnImage(final Object element, final int columnIndex) {
-      return null;
-    }
-  }
+		static String userDetails(String id) {
+			if (id.equals("OCR"))return "--"; //$NON-NLS-1$ //$NON-NLS-2$
+			User user = User.withId(Index.DefaultCollection(), DrcUiActivator
+					.instance().userDb(), id);
+			return String
+					.format("%s " + Messages.From + " %s (%s, %s)", user.name(), user.region(), user.id(), //$NON-NLS-1$ //$NON-NLS-2$
+							user.reputation());
+		}
+
+		@Override
+		public Image getColumnImage(final Object element, final int columnIndex) {
+			return null;
+		}
+	}
 }

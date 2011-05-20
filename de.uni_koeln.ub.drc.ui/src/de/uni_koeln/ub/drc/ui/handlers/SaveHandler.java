@@ -29,45 +29,71 @@ import org.eclipse.swt.widgets.Shell;
 
 /**
  * Handles document saving, hooked into the menu via Application.xmi.
+ * 
  * @author Fabian Steeg (fsteeg)
  */
 public final class SaveHandler {
 
-  public boolean canExecute(@Optional @Named( IServiceConstants.ACTIVE_PART ) MDirtyable dirtyable) {
-    return dirtyable.isDirty();
-  }
-  @Execute
-  public void execute(IEclipseContext context, @Optional final IStylingEngine engine,
-      @Optional @Named( IServiceConstants.ACTIVE_SHELL ) final Shell shell,
-      @Optional @Named( IServiceConstants.ACTIVE_PART ) final MContribution contribution)
-      throws InvocationTargetException, InterruptedException {
+	/**
+	 * @param dirtyable
+	 *            The dirtyable
+	 * @return True if the dirtyable is dirty, else false
+	 */
+	public boolean canExecute(
+			@Optional @Named(IServiceConstants.ACTIVE_PART) MDirtyable dirtyable) {
+		return dirtyable.isDirty();
+	}
 
-    final IEclipseContext pmContext = context.createChild();
-    ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
-    dialog.open();
-    applyDialogStyles(engine, dialog.getShell());
-    
-    dialog.run(true, true, new IRunnableWithProgress() {
-      public void run(final IProgressMonitor monitor) throws InvocationTargetException,
-          InterruptedException {
-        pmContext.set(IProgressMonitor.class.getName(), monitor);
-        Object clientObject = contribution.getObject();
-        ContextInjectionFactory.invoke(clientObject, Persist.class, //$NON-NLS-1$
-            pmContext, null);
-      }
-    });
+	/**
+	 * @param context
+	 *            The context
+	 * @param engine
+	 *            The syling engine
+	 * @param shell
+	 *            The active shell
+	 * @param contribution
+	 *            The active part
+	 * @throws InvocationTargetException
+	 *             From progress dialiog
+	 * @throws InterruptedException
+	 *             From progress dialiog
+	 */
+	@Execute
+	public void execute(
+			IEclipseContext context,
+			@Optional final IStylingEngine engine,
+			@Optional @Named(IServiceConstants.ACTIVE_SHELL) final Shell shell,
+			@Optional @Named(IServiceConstants.ACTIVE_PART) final MContribution contribution)
+			throws InvocationTargetException, InterruptedException {
 
-    pmContext.dispose();
-  }
-  
-  static void applyDialogStyles(final IStylingEngine engine, final Control control) {
-    if (engine != null) {
-      Shell shell = control.getShell();
-      if (shell.getBackgroundMode() == SWT.INHERIT_NONE) {
-        shell.setBackgroundMode(SWT.INHERIT_DEFAULT);
-      }
-      engine.style(shell);
-    }
-  }
-  
+		final IEclipseContext pmContext = context.createChild();
+		ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
+		dialog.open();
+		applyDialogStyles(engine, dialog.getShell());
+
+		dialog.run(true, true, new IRunnableWithProgress() {
+			@Override
+			public void run(final IProgressMonitor monitor)
+					throws InvocationTargetException, InterruptedException {
+				pmContext.set(IProgressMonitor.class.getName(), monitor);
+				Object clientObject = contribution.getObject();
+				ContextInjectionFactory.invoke(clientObject, Persist.class,
+						pmContext, null);
+			}
+		});
+
+		pmContext.dispose();
+	}
+
+	static void applyDialogStyles(final IStylingEngine engine,
+			final Control control) {
+		if (engine != null) {
+			Shell shell = control.getShell();
+			if (shell.getBackgroundMode() == SWT.INHERIT_NONE) {
+				shell.setBackgroundMode(SWT.INHERIT_DEFAULT);
+			}
+			engine.style(shell);
+		}
+	}
+
 }

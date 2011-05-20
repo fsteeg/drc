@@ -19,53 +19,53 @@ import java.util.List;
  */
 public final class PageInfo {
 
-  private List<Paragraph> paragraphs = new ArrayList<Paragraph>();
-  private List<ExtractedWord> words;
+	private List<Paragraph> paragraphs = new ArrayList<Paragraph>();
+	private List<ExtractedWord> words;
 
-  /**
-   * @param words The words extracted from the PDF document
-   */
-  public PageInfo(final List<ExtractedWord> words) {
-    this.words = words;
-    toParagraphs();
-  }
+	/**
+	 * @param words
+	 *            The words extracted from the PDF document
+	 */
+	public PageInfo(final List<ExtractedWord> words) {
+		this.words = words;
+		toParagraphs();
+	}
 
-  /**
-   * @param index Position of a paragraph in the PDF document
-   * @return The paragraph from index
-   */
-  public Paragraph getParagraphAt(final int index) {
-    if (index >= 0 && index <= paragraphs.size()) {
-      return paragraphs.get(index);
-    } else {
-      return null;
-    }
-  }
+	/**
+	 * @param index
+	 *            Position of a paragraph in the PDF document
+	 * @return The paragraph from index
+	 */
+	public Paragraph getParagraphAt(final int index) {
+		if (index >= 0 && index <= paragraphs.size())
+			return paragraphs.get(index);
+		return null;
+	}
 
-  /**
-   * @return All paragraphs from the PDF document
-   */
-  public List<Paragraph> getParagraphs() {
-    return new ArrayList<Paragraph>(paragraphs);
-  }
+	/**
+	 * @return All paragraphs from the PDF document
+	 */
+	public List<Paragraph> getParagraphs() {
+		return new ArrayList<Paragraph>(paragraphs);
+	}
 
-  private void toParagraphs() {
-    Paragraph paragraph = new Paragraph();
-    paragraphs.add(paragraph);
-    for (ExtractedWord word : words) {
-      if (word.isParagraphStart()) {
-        paragraph = new Paragraph();
-        paragraph.addWord(word);
-        paragraphs.add(paragraph);
-      } else {
-        paragraph.addWord(word);
-      }
-    }
-  }
+	private void toParagraphs() {
+		Paragraph paragraph = new Paragraph();
+		paragraphs.add(paragraph);
+		for (ExtractedWord word : words) {
+			if (word.isParagraphStart()) {
+				paragraph = new Paragraph();
+				paragraph.addWord(word);
+				paragraphs.add(paragraph);
+			} else {
+				paragraph.addWord(word);
+			}
+		}
+	}
 
-  @Override
-  public String toString() {
-    return String.format("%s with %s paragraphs, %s words", getClass().getSimpleName(), paragraphs
-        .size(), words.size());
-  }
+	@Override
+	public String toString() {
+		return String.format("%s with %s paragraphs, %s words", getClass() //$NON-NLS-1$
+				.getSimpleName(), paragraphs.size(), words.size());
+	}
 }

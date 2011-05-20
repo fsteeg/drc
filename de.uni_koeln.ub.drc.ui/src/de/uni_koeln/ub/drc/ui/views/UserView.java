@@ -27,88 +27,106 @@ import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
 /**
  * View to show user details (currently for debugging purpose only).
+ * 
  * @author Fabian Steeg (fsteeg)
  */
 public final class UserView {
 
-  private TreeViewer subjectViewer;
-  private Subject subject;
+	private TreeViewer subjectViewer;
+	private Subject subject;
 
-  @Inject
-  public UserView(final Composite parent) {
-    subjectViewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
-    try {
-      subject = DrcUiActivator.instance().getLoginContext().getSubject();
-    } catch (LoginException e) {
-      e.printStackTrace();
-    }
-    subjectViewer.setContentProvider(new SubjectContentProvider());
-    subjectViewer.setLabelProvider(new SubjectLabelProvider(subject));
-    subjectViewer.setInput(subject);
-    GridLayoutFactory.fillDefaults().generateLayout(parent);
-  }
+	/**
+	 * @param parent
+	 *            The parent composite for this part
+	 */
+	@Inject
+	public UserView(final Composite parent) {
+		subjectViewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL
+				| SWT.V_SCROLL);
+		try {
+			subject = DrcUiActivator.instance().getLoginContext().getSubject();
+		} catch (LoginException e) {
+			e.printStackTrace();
+		}
+		subjectViewer.setContentProvider(new SubjectContentProvider());
+		subjectViewer.setLabelProvider(new SubjectLabelProvider(subject));
+		subjectViewer.setInput(subject);
+		GridLayoutFactory.fillDefaults().generateLayout(parent);
+	}
 
-  private static class SubjectLabelProvider extends LabelProvider {
-    private final Subject subject;
+	private static class SubjectLabelProvider extends LabelProvider {
+		private final Subject subject;
 
-    public SubjectLabelProvider(final Subject subject) {
-      this.subject = subject;
-    }
+		public SubjectLabelProvider(final Subject subject) {
+			this.subject = subject;
+		}
 
-    public String getText(final Object object) {
-      if (object == this.subject) {
-        return "User Subject (" + object.getClass().getName() + ")";
-      } else if (object == this.subject.getPrincipals()) {
-        return "Principals (" + Set.class.getName() + ")";
-      } else if (object == this.subject.getPublicCredentials()) {
-        return "Public Credentials (" + Set.class.getName() + ")";
-      } else if (object == this.subject.getPrivateCredentials()) {
-        return "Private Credentials (" + Set.class.getName() + ")";
-      } else if (object instanceof Principal) {
-        return "Name: " + ((Principal) object).getName() + " (" + object.getClass().getName() + ")";
-      }
-      return object.getClass().getName() + " [" + object.toString() + "]";
-    }
-  }
+		@Override
+		public String getText(final Object object) {
+			if (object == this.subject) {
+				return "User Subject (" + object.getClass().getName() + ")"; //$NON-NLS-1$//$NON-NLS-2$
+			} else if (object == this.subject.getPrincipals()) {
+				return "Principals (" + Set.class.getName() + ")"; //$NON-NLS-1$ //$NON-NLS-2$
+			} else if (object == this.subject.getPublicCredentials()) {
+				return "Public Credentials (" + Set.class.getName() + ")";//$NON-NLS-1$ //$NON-NLS-2$
+			} else if (object == this.subject.getPrivateCredentials()) {
+				return "Private Credentials (" + Set.class.getName() + ")";//$NON-NLS-1$ //$NON-NLS-2$
+			} else if (object instanceof Principal) {
+				return "Name: " + ((Principal) object).getName() + " ("//$NON-NLS-1$ //$NON-NLS-2$
+						+ object.getClass().getName() + ")"; //$NON-NLS-1$
+			}
+			return object.getClass().getName() + " [" + object.toString() + "]";//$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
 
-  private static class SubjectContentProvider implements ITreeContentProvider {
+	private static class SubjectContentProvider implements ITreeContentProvider {
 
-    public Object[] getElements(final Object inputElement) {
-      /* For a subject, get the children: */
-      if (inputElement instanceof Subject) {
-        return getChildren(inputElement);
-      }
-      return new Object[] {};
-    }
+		@Override
+		public Object[] getElements(final Object inputElement) {
+			/* For a subject, get the children: */
+			if (inputElement instanceof Subject) {
+				return getChildren(inputElement);
+			}
+			return new Object[] {};
+		}
 
-    public Object[] getChildren(final Object parentElement) {
-      if (parentElement instanceof Subject) {
-        return new Object[] { ((Subject) parentElement).getPrincipals(),
-            ((Subject) parentElement).getPublicCredentials(),
-            ((Subject) parentElement).getPrivateCredentials() };
-      } else if (parentElement instanceof Set) {
-        return ((Set<?>) parentElement).toArray();
-      } else {
-        return null;
-      }
-    }
+		@Override
+		public Object[] getChildren(final Object parentElement) {
+			if (parentElement instanceof Subject) {
+				return new Object[] {
+						((Subject) parentElement).getPrincipals(),
+						((Subject) parentElement).getPublicCredentials(),
+						((Subject) parentElement).getPrivateCredentials() };
+			} else if (parentElement instanceof Set) {
+				return ((Set<?>) parentElement).toArray();
+			} else {
+				return null;
+			}
+		}
 
-    public Object getParent(final Object element) {
-      return null;
-    }
+		@Override
+		public Object getParent(final Object element) {
+			return null;
+		}
 
-    public boolean hasChildren(final Object element) {
-      if (element instanceof Subject) {
-        return true;
-      } else if (element instanceof Set) {
-        return !((Set<?>) element).isEmpty();
-      }
-      return false;
-    }
+		@Override
+		public boolean hasChildren(final Object element) {
+			if (element instanceof Subject) {
+				return true;
+			} else if (element instanceof Set) {
+				return !((Set<?>) element).isEmpty();
+			}
+			return false;
+		}
 
-    public void dispose() {}
+		@Override
+		public void dispose() {
+		}
 
-    public void inputChanged(final Viewer viewer, final Object oldInput, final Object newInput) {}
-  }
+		@Override
+		public void inputChanged(final Viewer viewer, final Object oldInput,
+				final Object newInput) {
+		}
+	}
 
 }

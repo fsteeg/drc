@@ -13,24 +13,26 @@ import java.util.List;
 
 /**
  * Represents a paragraph in the scanned page.
+ * 
  * @author Mihail Atanassov <saeko.bjagai@gmail.com>
  */
 public final class Paragraph {
 
-  private List<ExtractedWord> words = new ArrayList<ExtractedWord>();
+	private List<ExtractedWord> words = new ArrayList<ExtractedWord>();
 
-  /**
-   * @param line The line to be added to the paragraph
-   */
-  void addWord(final ExtractedWord line) {
-    words.add(line);
-  }
+	/**
+	 * @param line
+	 *            The line to be added to the paragraph
+	 */
+	void addWord(final ExtractedWord line) {
+		words.add(line);
+	}
 
-  /**
-   * @return The Lines of a paragraph
-   */
-  public List<ExtractedWord> getWords() {
-    return new ArrayList<ExtractedWord>(words);
-  }
+	/**
+	 * @return The Lines of a paragraph
+	 */
+	public List<ExtractedWord> getWords() {
+		return new ArrayList<ExtractedWord>(words);
+	}
 
 }

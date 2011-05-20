@@ -73,10 +73,14 @@ public final class CheckView {
 	private Text word;
 	private List<Button> suggestionButtons = new ArrayList<Button>();
 	private Composite bottom;
-  private double scaleWidthFactor = 1;
-  private double scaleHeightFactor = 1;
-  private Page page;
+	private double scaleWidthFactor = 1;
+	private double scaleHeightFactor = 1;
+	private Page page;
 
+	/**
+	 * @param parent
+	 *            The parent composite for this part
+	 */
 	@Inject
 	public CheckView(final Composite parent) {
 		this.parent = parent;
@@ -90,10 +94,15 @@ public final class CheckView {
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
 	}
 
+	/**
+	 * @param pages
+	 *            The selected pages
+	 */
 	@Inject
 	public void setSelection(
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final List<Page> pages) {
-		if (pages != null && pages.size() > 0 && (page == null || !page.equals(pages.get(0)))) {
+		if (pages != null && pages.size() > 0
+				&& (page == null || !page.equals(pages.get(0)))) {
 			page = pages.get(0);
 			try {
 				updateImage(page);
@@ -107,11 +116,15 @@ public final class CheckView {
 		}
 	}
 
+	/**
+	 * @param text
+	 *            The active text widget
+	 */
 	@Inject
 	public void setSelection(
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final Text text) {
 		Word word = null;
-		if (imageLoaded && text != null
+		if (imageLoaded && text != null && !text.isDisposed()
 				&& (word = (Word) text.getData(Word.class.toString())) != null) {
 			this.word = text;
 			markPosition(text);
@@ -122,9 +135,7 @@ public final class CheckView {
 				 */
 				job.cancel();
 			}
-			if (text == null) {
-				suggestions.setText(Messages.NoWordSelected);
-			} else if (!check.getSelection()) {
+			if (!check.getSelection()) {
 				suggestions.setText(Messages.EditSuggestionsDisabled);
 				disposeButtons();
 			} else if (word.isLocked()) {
@@ -134,6 +145,8 @@ public final class CheckView {
 				job.setPriority(Job.DECORATE);
 				job.schedule();
 			}
+		} else if (text == null) {
+			suggestions.setText(Messages.NoWordSelected);
 		}
 	}
 
@@ -156,10 +169,6 @@ public final class CheckView {
 		});
 		suggestions = new Label(bottom, SWT.WRAP);
 		suggestions.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-	}
-
-	private void clearMarker() {
-		imageLabel.setImage(reloadImage());
 	}
 
 	private void displaySuggestionButtons(final Word word, final Text text) {
@@ -221,6 +230,7 @@ public final class CheckView {
 		disposeButtons();
 		suggestions.setText(Messages.FindingEditSuggestions);
 		job = new Job(Messages.EditSuggestionsSearchJob) {
+			@Override
 			protected IStatus run(final IProgressMonitor monitor) {
 				final boolean complete = word.prepSuggestions();
 				suggestions.getDisplay().asyncExec(new Runnable() {
@@ -232,8 +242,8 @@ public final class CheckView {
 						} else {
 							String info = (word.suggestions().size() == 0) ? Messages.NoReasonableEditSuggestionsFound
 									: String.format(Messages.SuggestionsFor
-											+ " %s (" + Messages.Originally
-											+ " '%s'):", word.history().top()
+											+ " %s (" + Messages.Originally //$NON-NLS-1$
+											+ " '%s'):", word.history().top() //$NON-NLS-1$
 											.form(), word.original());
 
 							if (!bottom.isDisposed())
@@ -260,32 +270,36 @@ public final class CheckView {
 				Messages.CouldNotLoadImageForCurrentPage);
 		e.printStackTrace();
 	}
-	
+
 	private Image loadImage(final Page page) throws IOException {
 		Display display = parent.getDisplay();
 		// TODO image as lazy def in page, fetched on demand?
-		InputStream in = new BufferedInputStream(new ByteArrayInputStream(Index.loadImageFor(
-		    DrcUiActivator.instance().currentUser().collection(),
-				DrcUiActivator.instance().db(), page)));
-		// imageData = convertToImageData(scale(in)); // TODO enable for optional scaling
+		InputStream in = new BufferedInputStream(new ByteArrayInputStream(
+				Index.loadImageFor(DrcUiActivator.instance().currentUser()
+						.collection(), DrcUiActivator.instance().db(), page)));
+		// imageData = convertToImageData(scale(in)); // TODO enable for
+		// optional scaling
 		imageData = new ImageData(in);
 		Image newImage = new Image(display, imageData);
 		return newImage;
 	}
 
-	@SuppressWarnings( "unused" ) // TODO add as option in UI
+	@SuppressWarnings("unused")
+	// TODO add as option in UI
 	private ImageData convertToImageData(BufferedImage bufferedImage)
 			throws IOException {
-	  ByteArrayOutputStream out = new ByteArrayOutputStream();
-	  ImageIO.write(bufferedImage, "png", new BufferedOutputStream(out)); //$NON-NLS-1$
-	  BufferedInputStream in = new BufferedInputStream(new ByteArrayInputStream(out.toByteArray()));
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ImageIO.write(bufferedImage, "png", new BufferedOutputStream(out)); //$NON-NLS-1$
+		BufferedInputStream in = new BufferedInputStream(
+				new ByteArrayInputStream(out.toByteArray()));
 		ImageData data = new ImageData(in);
 		in.close();
 		return data;
 	}
 
-	@SuppressWarnings( "unused" ) // TODO add as option in UI
-  private BufferedImage scale(InputStream in) throws IOException {
+	@SuppressWarnings("unused")
+	// TODO add as option in UI
+	private BufferedImage scale(InputStream in) throws IOException {
 		BufferedImage bufferedImage = ImageIO.read(in);
 		int height = scrolledComposite.getMinHeight();
 		scaleWidthFactor = ((double) height / bufferedImage.getHeight());
@@ -339,9 +353,9 @@ public final class CheckView {
 		imageData = loadedImage.getImageData();
 		imageLabel.setImage(loadedImage);
 		imageLoaded = true;
-    scrolledComposite.setMinSize(scrolledComposite.getContent().computeSize(SWT.DEFAULT,
-        SWT.DEFAULT, true));
-    scrolledComposite.layout(true, true);
+		scrolledComposite.setMinSize(scrolledComposite.getContent()
+				.computeSize(SWT.DEFAULT, SWT.DEFAULT, true));
+		scrolledComposite.layout(true, true);
 	}
 
 }
