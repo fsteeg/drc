@@ -3,10 +3,14 @@
 <h1>Suche nach '${term}' in #{if volume != "10"} Band ${volume}
 	#{/if} #{else} allen Bänden #{/else}</h1>
 
-Ergebnis: ${pages.size()} Seiten. #{if pages.size() > 0}
 <p>
-	#{list items:pages, as:'page'} <a href="${page}"><img src="${page}"
-		width=80px />
-	</a> #{/list}
+Ergebnis: ${pages.size()} Seiten.
 </p>
+
+#{if pages.size() > 0}
+<table>
+	#{list items:pages, as:'page'} 
+	${page.raw()} 
+	#{/list}
+</table>
 #{/if}

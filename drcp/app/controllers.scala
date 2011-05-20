@@ -7,6 +7,7 @@ import play.mvc._
 import play.data.validation._
 import scala.xml.Elem
 import scala.xml.Node
+import scala.xml.NodeSeq
 
 object Application extends Controller {
 
@@ -64,16 +65,33 @@ object Application extends Controller {
   def search(@Required term: String, @Required volume: String) = {
     val volumes = List("0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")
     val vol = if(volume.toInt-1<volumes.size) "PPN345572629_" + volumes(volume.toInt-1) else ""
-    val selector = "//modification/attribute::form"
-    val query = "for $m in %s[ft:query(., '%s')]/ancestor::page return string($m/attribute::id)".format(selector, term.toLowerCase)
-    val q = db.query("drc/" + vol, configure(query))
-    val pages = (q\"value").map((n:Node)=>imageLink(n.text))
+    val query = createQuery("/page", term)
+    val q = db.query("drc-plain/" + vol, configure(query))
+    val rows = (q\"tr")
+    val links = rows.map((n:Node)=>imageLink((n\\"a"\"@href").text))
+    val pages = for((row, link) <- rows zip links) yield {
+    	val text = link.replace(".png", ".xml").replace("drc/", "drc-plain/")
+    	<tr> {(row \ "td") ++ 
+    		<td><a href={link}>image</a></td> ++ 
+    		<td><a href={text}>text</a></td>} 
+        </tr>
+    } 
     Template(term, volume, pages)
+  }
+  
+  def createQuery(selector: String, term:String) = {
+      """
+      import module namespace kwic="http://exist-db.org/xquery/kwic";
+      declare option exist:serialize "omit-xml-declaration=no encoding=utf-8";
+      for $m in %s[ft:query(., '%s')]
+      order by ft:score($m) descending
+      return kwic:summarize($m, <config width="40" table="yes" link="{$m/attribute::id}"/>)
+      """.format(selector, term.toLowerCase)
   }
   
   private def configure(query: String): scala.xml.Elem = {
     val cdata = "<![CDATA[%s]]>".format(query)
-    <query xmlns="http://exist.sourceforge.net/NS/exist" start="1" max="20">
+    <query xmlns="http://exist.sourceforge.net/NS/exist" start="1" max="100">
       <text> { scala.xml.Unparsed(cdata) } </text>
       <properties> <property name="indent" value="yes"/> </properties>
     </query>
