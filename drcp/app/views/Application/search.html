@@ -1,10 +1,10 @@
-#{extends 'main.html' /} #{set title:'Search' /}
+#{extends 'main.html' /} #{set title:'crestomazia.ch' /}
 
-<h1>Suche nach '${term}' in #{if volume != "10"} Band ${volume}
-	#{/if} #{else} allen Bänden #{/else}</h1>
+<h1>&{'views.search.mode', term} #{if volume != "10"} &{'views.search.volume'} ${volume}
+	#{/if} #{else} &{'views.search.volumes'} #{/else}</h1>
 
 <p>
-Ergebnis: ${pages.size()} Seiten.
+&{'views.search.result', pages.size()}
 </p>
 
 #{if pages.size() > 0}

@@ -1,14 +1,14 @@
-#{extends 'main.html' /} #{set title:'DRC' /}
+#{extends 'main.html' /} #{set title:'crestomazia.ch' /}
 
 <div id="left">
 	#{if active.size() > 0}
-	<h3>Aktive Benutzer</h3>
+	<h3>&{'views.users.active'}</h3>
 	<table>
 		<tr>
-			<th>Rank</th>
-			<th>Name</th>
-			<th>Region</th>
-			<th>Score</th>
+			<th>&{'views.index.users.rank'}</th>
+			<th>&{'views.index.users.name'}</th>
+			<th>&{'views.index.users.region'}</th>
+			<th>&{'views.index.users.points'}</th>
 		</tr>
 		#{list items:active, as:'user'}
 		<tr class="active-user">
@@ -23,11 +23,11 @@
 <div id="buf"></div>
 <div id="right">
 	#{/if} #{if inactive.size() > 0}
-	<h3>Inaktive Benutzer</h3>
+	<h3>&{'views.users.inactive'}</h3>
 	<table>
 		<tr>
-			<th>Name</th>
-			<th>Region</th>
+			<th>&{'views.index.users.name'}</th>
+			<th>&{'views.index.users.region'}</th>
 		</tr>
 		#{list items:inactive, as:'user'}
 		<tr class="inactive-user">
@@ -37,12 +37,9 @@
 		#{/list}
 	</table>
 	#{/if}
-	<h3>Mitmachen</h3>
+	<h3>&{'views.users.participate'}</h3>
 	<p>
-		Helfen Sie mit: Melden Sie <a href="@{Application.signup()}">sich
-			an</a> und laden Sie die <a href="http://github.com/spinfo/drc/downloads">aktuelle
-			Beta-Version</a> des Editors für Windows oder Mac, oder partizipieren Sie
-		an der Entwicklung auf <a href="http://github.com/spinfo/drc">GitHub</a>.
+		&{'views.index.text.1', 'application/signup', 'http://github.com/spinfo/drc/downloads', 'http://github.com/spinfo/drc'}
 	</p>
 
 </div>
