@@ -11,6 +11,7 @@ import org.scalatest._
 import org.scalatest.matchers._
 import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
+import de.uni_koeln.ub.drc.util.PlainTextCopy
 /**
  * @see Index
  * @author Fabian Steeg (fsteeg)
@@ -24,7 +25,7 @@ class SpecIndex extends Spec with ShouldMatchers {
   val pages = Page.mock :: page :: Nil
   val db = Index.LocalDb
   val coll = "testing"
-  for(p<-pages) db.putXml(p.toXml, "drc/" + coll, p.id)
+  for(p<-pages) {db.putXml(p.toXml, "drc/" + coll, p.id); PlainTextCopy.saveToDb(p,"drc-plain/",coll, db)}
   val ids = pages map (_.id)
 
   describe("The Index") {
