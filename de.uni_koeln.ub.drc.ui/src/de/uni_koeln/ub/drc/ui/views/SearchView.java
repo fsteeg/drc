@@ -62,6 +62,9 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
 import scala.collection.JavaConversions;
+
+import com.quui.sinist.XmlDb;
+
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.Tag;
@@ -480,10 +483,11 @@ public final class SearchView {
 		last = current;
 		Object[] pages = content.getPages(searchField.getText().trim()
 				.toLowerCase());
+		XmlDb db = DrcUiActivator.instance().db();
+		pingCollection(current, page((String) pages[0]), db);
 		Arrays.sort(pages, comp);
 		chapters = new TreeMap<Chapter, List<Object>>();
-		mets = new MetsTransformer(
-				current + ".xml", DrcUiActivator.instance().db()); //$NON-NLS-1$
+		mets = new MetsTransformer(current + ".xml", db); //$NON-NLS-1$
 		for (Object page : pages) {
 			int fileNumber = page instanceof Page ? ((Page) page).number()
 					: new Page(null, (String) page).number();
@@ -497,6 +501,18 @@ public final class SearchView {
 		}
 		viewer.setInput(chapters);
 		updateResultCount(pages.length);
+	}
+
+	private void pingCollection(final String current, final Page page,
+			final XmlDb db) {
+		/* Ping the collection in the background to avoid delay on first save: */
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				db.putXml(page.toXml(), Index.DefaultCollection()
+						+ "/" + current, page.id()); //$NON-NLS-1$
+			}
+		}).start();
 	}
 
 	private void loadData() {
