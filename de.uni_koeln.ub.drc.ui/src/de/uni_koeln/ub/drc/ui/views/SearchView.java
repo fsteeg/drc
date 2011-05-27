@@ -475,16 +475,16 @@ public final class SearchView {
 
 	private void setInput() {
 		String current = selected(volumes);
+		XmlDb db = DrcUiActivator.instance().db();
 		if (content == null || !current.equals(last)) {
 			loadData();
 			allPages = new ArrayList<String>(asList(content.modelIndex.pages()));
+			pingCollection(current, page(allPages.get(0)), db);
 			Collections.sort(allPages);
 		}
 		last = current;
 		Object[] pages = content.getPages(searchField.getText().trim()
 				.toLowerCase());
-		XmlDb db = DrcUiActivator.instance().db();
-		pingCollection(current, page((String) pages[0]), db);
 		Arrays.sort(pages, comp);
 		chapters = new TreeMap<Chapter, List<Object>>();
 		mets = new MetsTransformer(current + ".xml", db); //$NON-NLS-1$
