@@ -14,6 +14,7 @@ import de.uni_koeln.ub.drc.data.Page
 import de.uni_koeln.ub.drc.data.Word
 import scala.xml.Node
 import scala.xml.PrettyPrinter
+import de.uni_koeln.ub.drc.data.Index
 
 /**
  * Copy latest version of pages as plain text to a different collection (for index and KWIC).
@@ -24,7 +25,8 @@ object PlainTextCopy {
   val localDb = XmlDb("localhost", 7777)
   //val stageDb = XmlDb("hydra2.spinfo.uni-koeln.de", 7777)
   //val prodDb = XmlDb("hydra1.spinfo.uni-koeln.de", 8080)
-  val col = "drc"
+  val col = Index.DefaultCollection
+  val suffix = "-plain"
   val volumes = List("0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")
 
   def main(args: Array[String]): Unit = {
@@ -34,7 +36,7 @@ object PlainTextCopy {
       for (id <- ids) {
         val words: List[Word] = ((db.getXml(col + "/" + volume, id).get(0) \ "word") map (Word.fromXml(_))).toList
         val page = new Page(words, id)
-        saveToDb(page, col + "-plain", volume, db)
+        saveToDb(page, col + suffix, volume, db)
         println("Copied %s".format(id))
       }
     }
@@ -42,7 +44,7 @@ object PlainTextCopy {
 
   def saveToDb(page: Page, collection: String, volume: String, db: XmlDb): Node = {
     val c = collection + "/" + volume
-    val root = <page id={ page.id }>{page.toText("\n")}</page>
+    val root = <page id={ page.id }>{ page.toText("\n") }</page>
     val formatted = format(root)
     db.putXml(root, c, page.id.split("/").last)
     root
