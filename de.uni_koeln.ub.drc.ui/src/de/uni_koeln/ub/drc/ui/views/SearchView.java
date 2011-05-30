@@ -361,7 +361,7 @@ public final class SearchView {
 		label.setText(Messages.In);
 		searchOptions = new Combo(searchComposite, SWT.READ_ONLY);
 		searchOptions.setItems(new String[] { Messages.Text, Messages.Tags,
-				Messages.Comment });
+				Messages.Comments });
 		searchOptions.select(0);
 		searchOptions.addSelectionListener(searchListener);
 	}

@@ -28,6 +28,7 @@ public class Messages extends NLS {
 	public static String CanVoteOnlyOnceLong;
 	public static String CanVoteOnlyOnceShort;
 	public static String Comment;
+	public static String Comments;
 	public static String CouldNotLoadImageForCurrentPage;
 	public static String CouldNotLoadScan;
 	public static String CurrentPageModified;
