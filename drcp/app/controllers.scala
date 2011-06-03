@@ -63,7 +63,8 @@ object Application extends Controller {
   }
   
   def search(@Required term: String, @Required volume: String) = {
-    val volumes = List("0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")
+    val volumes = List("0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027",
+    		"0033", "0035", "0036", "0037", "0038")
     val vol = if(volume.toInt-1<volumes.size) "PPN345572629_" + volumes(volume.toInt-1) else ""
     val query = createQuery("/page", term)
     val q = db.query("drc-plain/" + vol, configure(query))

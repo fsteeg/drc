@@ -85,7 +85,8 @@ public final class SearchView {
 	@SuppressWarnings("nls")
 	// "0033", "0035", "0036", "0037", "0038"
 	private static final String[] VOLUMES = new String[] { "0004", "0008",
-			"0009", "0011", "0012", "0017", "0018", "0024", "0027" };
+			"0009", "0011", "0012", "0017", "0018", "0024", "0027", "0033",
+			"0035", "0036", "0037", "0038" };
 	private Text searchField;
 	private Text tagField;
 	private Label resultCount;
