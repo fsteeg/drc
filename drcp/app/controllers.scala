@@ -4,6 +4,7 @@ import com.quui.sinist.XmlDb
 import de.uni_koeln.ub.drc.data._
 import play._
 import play.mvc._
+import play.i18n.Lang
 import play.data.validation._
 import scala.xml.Elem
 import scala.xml.Node
@@ -60,6 +61,12 @@ object Application extends Controller {
       db.putXml(u.toXml, col + "/users", id + ".xml")
       Action(user(id))
     }
+  }
+  
+  def changeLanguage(lang:String) = {
+    Lang.change(lang)
+    val refererURL = Http.Request.current().headers.get("referer").value 
+    Redirect(refererURL)
   }
   
   def search(@Required term: String, @Required volume: String) = {
