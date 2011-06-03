@@ -6,8 +6,8 @@ views.contact.header.1 = Kontakt
 
 views.contact.header.2 = Ansprechpartner
 
-views.contact.person.1 = Dr. Florentin Lutz (florentin.lutz [at] crestomazia.ch)
-views.contact.person.2 = Michele Badilatti (mi.badilatti [at] crestomazia.ch)
+views.contact.person.1 = Dr. Florentin Lutz (florentin.lutz [at] sunrise.ch)
+views.contact.person.2 = Michele Badilatti (mi.badilatti [at] bluewin.ch)
 
 views.contact.header.4 = Projektmitarbeiter
 
@@ -16,7 +16,7 @@ views.contact.person.4 = Fabian Steeg M.A. (fabian.steeg [at] uni-koeln.de)
 
 views.contact.header.3 = Projektleitung
 
-views.contact.spinfo.1 = Prof. Dr. Jürgen Rolshoven
+views.contact.spinfo.1 = Prof. Dr. Jürgen Rolshoven (rols [at] spinfo.uni-koeln.de)
 views.contact.spinfo.2 = Universität zu Köln
 views.contact.spinfo.3 = Institut für Linguistik
 views.contact.spinfo.4 = Abteilung Sprachliche Informationsverarbeitung
@@ -81,7 +81,7 @@ views.index.header.2 = Aktive Korrektoren
 views.index.header.3 = Chrestomathie-Suche
 views.index.header.4 = Über das Projekt
 
-views.index.about = Die Rätoromanische Chrestomathie von Caspar Decurtins ist die bis heute wichtigste Textsammlung des Bündnerromanischen. Die insgesamt rund 8000 Seiten enthalten Texte der verschiedensten Gattungen über einen Zeitraum von vier Jahrhunderten, aus allen Regionen und in allen Idiomen des Bündnerromanischen. Ursprünglich zwischen 1891 und 1919 zusammengestellt, ist die Rätoromanische Chrestomathie nun erstmals auch digital zugänglich. Helfen Sie mit, die Chrestomathie originalgetreu und fehlerfrei zugänglich zu machen: Melden Sie sich an und laden Sie die aktuelle Beta-Version des Editors für Windows oder Mac. Hinweise zur Benutzung finden sie <a href="%1s">hier</a>. Mehr zum DRC-Projekt finden Sie <a href="%2s">hier</a>.
+views.index.about = Die Rätoromanische Chrestomathie von Caspar Decurtins ist die bis heute wichtigste Textsammlung des Bündnerromanischen. Die insgesamt rund 8000 Seiten enthalten Texte der verschiedensten Gattungen über einen Zeitraum von vier Jahrhunderten, aus allen Regionen und in allen Idiomen des Bündnerromanischen. Ursprünglich zwischen 1891 und 1919 zusammengestellt, ist die Rätoromanische Chrestomathie nun erstmals auch digital zugänglich. Helfen Sie mit, die Chrestomathie originalgetreu und fehlerfrei zugänglich zu machen: Melden Sie <a href="%1s">sich an</a> und laden Sie die <a href="%2s">aktuelle Beta-Version</a> des Editors für Windows oder Mac. Hinweise zur Benutzung finden sie <a href="%3s">hier</a>. Mehr zum DRC-Projekt finden Sie <a href="%4s">hier</a>.
 
 views.index.about.pages = Erster Band: %s Seiten.
 
