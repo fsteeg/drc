@@ -64,6 +64,12 @@ img {
 	border: 1px solid lightgray;
 }
 
+img.floatRight { 
+    float: right; 
+    margin-top: 50px; 
+    margin-left: 15px; 
+}
+
 h1,h2,h3 {
 	color: #869AB1;
 	margin-bottom: 15px;
