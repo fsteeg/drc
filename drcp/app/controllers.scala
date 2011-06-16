@@ -19,10 +19,10 @@ object Application extends Controller {
 	  
   def loadUsers =
 	  (for (u <- db.getXml(col + "/users").get) yield User.fromXml(u))
-	  .sortBy(_.reputation).reverse.partition(_.reputation > 0)
+	  .sortBy(_.reputation).reverse
 
   def index = {
-	val top = loadUsers._1.take(5)
+	val top = loadUsers.take(5)
     //val ids = db.getIds(col + "/PPN345572629_0004").get.filter(_.endsWith(".xml"))
     //val pages = ids.take(5).map(imageLink(_))
 	val ids=List()
@@ -34,8 +34,9 @@ object Application extends Controller {
   def info = { Template() }
 
   def users = {
-	val (active, inactive) = loadUsers
-    Template(active, inactive)
+	val all = loadUsers
+	val (left, right) = all.splitAt(all.size/2)
+    Template(left, right)
   }
 
   private def imageLink(id: String) = "http://" + server + ":" + port + "/exist/rest/db/" + col + "/" +
@@ -54,7 +55,7 @@ object Application extends Controller {
   def createAccount(@Required name: String, @Required id: String, @Required pass: String, @Required region: String) = {
     println("name: %s, id: %s, pass: %s, region: %s".format(name, id, pass, region))
     val users = loadUsers
-    if (Validation.hasErrors || (users._1 ++ users._2).exists(_.id == id)) {
+    if (Validation.hasErrors || (users).exists(_.id == id)) {
       "@signup".asTemplate
     } else {
       val u = User(id, name, region, pass, col, db)

@@ -147,9 +147,10 @@ views.user.start = Helfen Sie mit: Laden Sie die <a href="%2s">aktuelle Beta-Ver
 ##  users.html  ##
 ##################
 
-views.users.active = Aktive Benutzer
-views.users.inactive = Inaktive Benutzer
+views.users = Benutzer
 views.users.participate = Mitmachen
+views.users.text = Helfen Sie mit: <a href="%1s">Melden Sie sich an</a> und laden Sie die <a href="%2s">aktuelle Beta-Version</a> des Editors für Windows oder Mac.
+
 
 ##################
 ##   main.html  ##
