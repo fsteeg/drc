@@ -54,6 +54,7 @@ views.faq.q10 = ... far correcturas?
 views.faq.q11 = ... crear chavazzins (tags)?
 views.faq.q12 = ... scriver commentaris?
 views.faq.q13 = ... memorisar las modificaziuns?
+views.faq.q14 = Wie kann ich im Internet Explorer die Sprache der Website wechseln?
 
 views.faq.a1 = As inscrivai <a href="%1s">qua</a> e telechargiai la <a href="%2s">versiun actuala</a> da l’editur da la CRD per Windows u Mac. Sin dumonda pudain nus metter a disposiziun ulteriurs downloads, p.ex. per versiuns pli spezialas dal sistem operativ u per Linux.
 views.faq.a2 = L’editur da la CRD è in sistem da correctura che permetta da modifitgar ils texts da la Crestomazia a moda collectiva. Cun l’editur na pudais Vus betg mo leger u tschertgar infurmaziuns, mabain era curreger, commentar u enritgir cun chavazzins ils texts da la Crestomazia. Tut las midadas fatgas cun l’editur vegnan memorisadas sin in server central. Uschia èsi pussaivel da mussar las correcturas, ils commentaris ed ils chavazzins a tut ils utilisaders. Quels pon da princip modifitgar danovamain questas midadas.
@@ -67,7 +68,7 @@ views.faq.a10 = La pagina che Vus tschernis vegn visualisada sco text modifitgab
 views.faq.a11 = Via ina segunda fanestra d’endataziun en la fanestra da "navigaziun" (giudim a dretga) pudais Vus endatar tants chavazzins sco quai che Vus vulais. Chavazzins gia existents vegnan visualisads en la glista da survista en la fanestra da "navigaziun".
 views.faq.a12 = Remartgas, renviaments e dumondas pon vegnir endatads sco text en la fanestra da "commentaris" (en il champ sutvart da l’editur). En questa fanestra vegnan ultra da quai visualisads tut ils commentaris che existan gia en connex cun la pagina actuala.
 views.faq.a13 = Cliccai per memorisar las modificaziuns sin il simbol da la disketta en la trav da menus, tscherni en il menu principal "datoteca"/"memorisar" u utilisai la cumbinaziun da tastas usitada per Voss sistem operativ (Strg+S per Windows, Cmd+S per MacOS). Las datas vegnan memorisadas sin in server central. Per arcunar ina u pliras paginas sin Voss disc dir, pudais Vus tscherner il punct dal menu "exportar".
-
+views.faq.a14 = Bei den meisten Browsern (z.B. Google Chrome, Firefox, Safari) können Sie die Sprache durch einen einfachen Klick wechseln. Eine Ausnahme ist der Windows Internet Explorer: Hier müssen Sie die Sprache in den Browsereinstellungen festlegen: Gehen Sie hierfür im Menü "Extras" auf "Internetoptionen", dort finden Sie eine Schaltfläche "Sprachen...", über die Sie die bevorzugte Sprache festlegen können. Die Änderung wird beim nächsten Öffnen des Explorers wirksam. <p>Alternativ können Sie auch explizit sogenannte "Cookies" von der Seite uni-koeln.de zulassen. Gehen Sie hierfür im Menü "Extras" auf "Internetoptionen", dort finden Sie auf der Registerkarte "Datenschutz" eine Schaltfläche "Sites...". Geben Sie hier "uni-koeln.de" ein und klicken Sie rechts neben dem Eingabefenster auf "Zulassen". Nun können Sie die Sprache durch einen einfachen Klick wechseln.</p>
 
 views.faq.more = Ulteriur agid survegnis Vus sut
 
@@ -82,7 +83,7 @@ views.index.header.2 = Correctur(a)s activ(a)s
 views.index.header.3 = Tschertga en la Crestomazia 
 views.index.header.4 = Davart il project
 
-views.index.greeting = <p>Charas Rumantschas, chars Rumantschs</p><p>La Crestomazia è vegnida digitalisada e stat a disposiziun ad in e scadin. Quest stgazi da la litteratura rumantscha, mess ensemen e publitgà da Caspar Decurtins, è ussa accessibel sin internet. Tuttas e tuts èn envidads da duvrar, commentar e meglierar questa digitalisaziun.</p><p>En quest senn giavisch jau bler plaschair e buna lectura.</p><p>Corina Casanova, chanceliera federala</p>
+views.index.greeting = <p>Charas Rumantschas, chars Rumantschs</p><p>La Crestomazia è vegnida digitalisada e stat a disposiziun ad in e scadin. Quest stgazi da la litteratura rumantscha, mess ensemen e publitgà da Caspar Decurtins, è ussa accessibel sin internet. Tuttas e tuts èn envidads da duvrar, commentar e meglierar questa digitalisaziun.</p><p>En quest senn giavisch jau bler plaschair e buna lectura.</p><p>Corina Casanova, chanceliera federala</p><br />
 
 views.index.about = La Crestomazia Retorumantscha da Caspar Decurtins è fin oz la pli impurtanta collecziun da texts rumantschs. Questas var 8000 paginas cumpiglian texts da different gener, da quatter tschientaners, da tut las regiuns e da tut ils idioms rumantschs. La Crestomazia Retorumantscha, edida oriundamain ils onns 1896-1919, è ussa disponibla per l’emprima giada er en l’internet. <p>Gidai era Vus a render accessibla la Crestomazia online fidaivla a l’original e senza sbagls: As annunziai e telechargiai la versiun beta actuala da l’editur per Windows u Mac. Agids per ils utilisaders chattais Vus <a href="%1s">qua</a>. </p><p>Dapli davart il project CRD chattais Vus <a href="%2s">qua</a>.</p>
 
@@ -91,6 +92,7 @@ views.index.about.pages = Tom 1: %s paginas.
 views.index.search.term = Noziun da tschertga:
 views.index.search.volume = Tom
 views.index.search.all = Tuts
+views.index.search.info = Suchoptionen: <i>Wort*</i> (Suchbegriff gefolgt von beliebig vielen Zeichen); <i>Wort?</i> (gefolgt von einem Zeichen), <i>Wort~</i> (unscharfe Suche).
 views.index.users.more = dapli...
 views.index.users.rank = Plaz
 views.index.users.name = Num
@@ -104,7 +106,6 @@ views.index.users.points = Puncts
 views.info.header.1 = La Crestomazia Retorumantscha
 
 views.info.text.1 = Caspar Decurtins (1855-1916) ha creà avant bunamain tschient onns la Crestomazia Retorumantscha monumentala. Ella vala sco la pli impurtanta basa da texts pli veglia per il rumantsch ed è da grond interess linguistic, filologic, istoric e cultural. Cun raschun vegnan l’ovra e las activitads da Caspar Decurtins cumparegliadas cun las lavurs dals frars Grimm. La publicaziun da Decurtins consista da 13 toms cun totalmain 7260 paginas text en tut ils idioms rumantschs e cumpiglia quatter tschientaners da l’istorgia da la lingua, da la Refurmaziun fin l’entschatta dal 20avel tschientaner. Ella cuntegna copias ed extracts da manuscrits, cronicas, acts da process, scrittiras giuridicas, gieus da teater, collecziuns da paraulas, ditgas, chanzuns popularas, chanzuns d’uffants, versets da striegn, notizias persunalas. La Crestomazia è damai ina funtauna inexauribla per dumondas filologicas multifaras, ma er in monument per la lingua, ils pledaders e la cultura dal rumantsch en Svizra e – sur il Grischun ora – in’ovra excepziunala per pitschnas cuminanzas linguisticas e culturalas. <p>La Crestomazia Retorumantscha è cumparida tranter il 1888 ed il 1919 en la revista romanistica “Romanische Forschungen” en numerusas furniziuns singulas, edidas da la chasa editura Junge dad Erlangen. Decurtins ha scrit davart sia collecziun da texts in’introducziun da 176 paginas (en tudestg). La Crestomazia Retorumantscha giauda anc adina in’auta stima, tant tar ils spezialists sco er en la cuminanza linguistica. Quai è remartgabel, pertge che las cundiziuns da recepziun n’èn e n’eran betg adina fitg favuraivlas. Decurtins sez n’ha betg pli pudì cumplenir si’ovra. Quai han procurà Christian Caminada, pli tard uvestg da Cuira, e la vaiva da Decurtins. Da l’autra vart n’ha la publicaziun en ina revista romanistica tudestga, per part durant l’Emprima Guerra mundiala, betg promovì ina vasta recepziun. Schebain che Decurtins ha lavurà dal puntg da vista metodic a moda detg pragmatica ed ideologicamain nuninfluenzada, vegniva e vegn si’ovra considerada criticamain dal puntg da vista editoric.</p><p> Blers dals texts rimnads da Decurtins èn vegnids recepids da la cuminanza linguistica. Quai è succedì p.ex. cun surpigliar texts en cudeschs da scola e d’instrucziun u cun als stampar en antologias e chalenders. La Crestomazia Retorumantscha è la basa textuala da numerusas perscrutaziuns romanisticas. Ultra da quai èn blers texts vegnids translatads en tudestg ed uschia rendids accessibels a spezialists na-rumantschs interessads a la cultura populara ed ad autras persunas interessadas da lingua tudestga. L’interess constant per la Crestomazia Retorumantscha ha era schlià il problem da la basa da texts sparpagliada tras las furniziuns singulas. Reprint fotomecanic da l'ediziun originala (tom I - XIII) entras la Chasa editura Octopus Andreas Joos Cuira da 1982 enfin 1984. L'onn 1985 ha Octopus cumpletà la CR cun il tom da Schons (tom XIV). La Societad Retorumantscha ha publitgà l'onn 1986 il register (tom XV) elavurà da Peter Egloff e Jon Mathieu.</p>
-
 
 views.info.header.2 = La Crestomazia Retorumantscha Digitala (CRD) – il project
 
@@ -167,3 +168,5 @@ views.main.info = Informaziuns
 views.main.contact = Contact
 views.main.footer = Crestomazia Retorumantscha Digitala: in project da digitalisaziun collaborativ.
 views.main.language = Lingua:
+views.main.language.help = (?)
+

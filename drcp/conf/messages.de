@@ -54,6 +54,7 @@ views.faq.q10 = ...korrigieren?
 views.faq.q11 = ...Schlagworte (Tags) vergeben?
 views.faq.q12 = ...kommentieren?
 views.faq.q13 = ...speichern?
+views.faq.q14 = Wie kann ich im Internet Explorer die Sprache der Website wechseln?
 
 views.faq.a1 = Melden Sie sich <a href="%1s">hier</a> an und laden Sie die <a href="%2s">aktuelle Version</a> des DRC-Editors für Windows oder Mac. Auf Anfrage können zusätzliche Downloads bereitgestellt werden, etwa für speziellere Betriebssystemversionen oder für Linux.
 views.faq.a2 = Mit dem DRC-Editor können die Texte der Chrestomathie kollaborativ, d. h. gemeinschaftlich, bearbeitet werden. Über den Editor können Sie somit nicht nur in der Chrestomathie suchen und lesen, sondern auch korrigieren, kommentieren und Schlagworte hinzufügen. Alle Veränderungen, die mit dem Editor vorgenommen werden, werden zentral auf einem Server gespeichert. Dadurch können immer auch die Korrekturen, Schlagworte und Kommentare aller anderen Nutzer angezeigt und bei Bedarf selbst wieder bearbeitet werden.
@@ -67,6 +68,7 @@ views.faq.a10 = Die jeweils ausgewählte Seite wird als veränderbarer Text im F
 views.faq.a11 = Über ein zweites Eingabefenster im Fenster "Navigation" (unten rechts) können zur angezeigten Seite beliebige Schlagworte eingegeben werden. Bereits vorhandene Schlagworte werden in der Übersichtsliste im Fenster "Navigation" angezeigt.
 views.faq.a12 = Anmerkungen, Verweise und Fragen können als Freitext im Fenster "Kommentare" eingegeben werden (im unteren Bereich des Editors). In diesem Fenster werden zudem alle zur aktuellen Seite bereits vorhandenen Kommentare angezeigt.
 views.faq.a13 = Um die Änderungen zu speichern, klicken Sie auf das Disketten-Symbol in der Menüleiste, wählen Sie im Hauptmenü "Datei"/"Speichern" oder nutzen Sie das in ihrem Betriebssystem übliche Tastekürzel (Strg+S bei Windows, Cmd+S bei MacOS). Die Daten werden zentral auf einem Server gespeichert. Um eine oder mehrere Seiten auf ihrer Festplatte zu speichern, wählen Sie den Menüpunkt "Exportieren".
+views.faq.a14 = Bei den meisten Browsern (z.B. Google Chrome, Firefox, Safari) können Sie die Sprache durch einen einfachen Klick wechseln. Eine Ausnahme ist der Windows Internet Explorer: Hier müssen Sie die Sprache in den Browsereinstellungen festlegen: Gehen Sie hierfür im Menü "Extras" auf "Internetoptionen", dort finden Sie eine Schaltfläche "Sprachen...", über die Sie die bevorzugte Sprache festlegen können. Die Änderung wird beim nächsten Öffnen des Explorers wirksam. <p>Alternativ können Sie auch explizit sogenannte "Cookies" von der Seite uni-koeln.de zulassen. Gehen Sie hierfür im Menü "Extras" auf "Internetoptionen", dort finden Sie auf der Registerkarte "Datenschutz" eine Schaltfläche "Sites...". Geben Sie hier "uni-koeln.de" ein und klicken Sie rechts neben dem Eingabefenster auf "Zulassen". Nun können Sie die Sprache durch einen einfachen Klick wechseln.</p>
 
 views.faq.more = Weitere Hilfe erhalten Sie unter
 
@@ -81,7 +83,7 @@ views.index.header.2 = Aktive Korrektoren
 views.index.header.3 = Chrestomathie-Suche
 views.index.header.4 = Über das Projekt
 
-views.index.greeting = <p>Charas Rumantschas, chars Rumantschs</p><p>La Crestomazia è vegnida digitalisada e stat a disposiziun ad in e scadin. Quest stgazi da la litteratura rumantscha, mess ensemen e publitgà da Caspar Decurtins, è ussa accessibel sin internet. Tuttas e tuts èn envidads da duvrar, commentar e meglierar questa digitalisaziun.</p><p>En quest senn giavisch jau bler plaschair e buna lectura.</p><p>Corina Casanova, chanceliera federala</p>
+views.index.greeting = <p>Charas Rumantschas, chars Rumantschs</p><p>La Crestomazia è vegnida digitalisada e stat a disposiziun ad in e scadin. Quest stgazi da la litteratura rumantscha, mess ensemen e publitgà da Caspar Decurtins, è ussa accessibel sin internet. Tuttas e tuts èn envidads da duvrar, commentar e meglierar questa digitalisaziun.</p><p>En quest senn giavisch jau bler plaschair e buna lectura.</p><p>Corina Casanova, chanceliera federala</p><br />
 
 views.index.about = Die Rätoromanische Chrestomathie von Caspar Decurtins ist die bis heute wichtigste Textsammlung des Bündnerromanischen. Die insgesamt rund 8000 Seiten enthalten Texte der verschiedensten Gattungen über einen Zeitraum von vier Jahrhunderten, aus allen Regionen und in allen Idiomen des Bündnerromanischen. Ursprünglich zwischen 1891 und 1919 zusammengestellt, ist die Rätoromanische Chrestomathie nun erstmals auch digital zugänglich. <p>Helfen Sie mit, die Chrestomathie originalgetreu und fehlerfrei zugänglich zu machen: Melden Sie sich an und laden Sie die aktuelle Beta-Version des Editors für Windows oder Mac. Hinweise zur Benutzung finden sie <a href="%1s">hier</a>.</p><p>Mehr zum DRC-Projekt finden Sie <a href="%2s">hier</a>.</p>
 
@@ -90,6 +92,7 @@ views.index.about.pages = Erster Band: %s Seiten.
 views.index.search.term = Suchbegriff:
 views.index.search.volume = Band
 views.index.search.all = Alle
+views.index.search.info = Suchoptionen: <i>Wort*</i> (Suchbegriff gefolgt von beliebig vielen Zeichen); <i>Wort?</i> (gefolgt von einem Zeichen), <i>Wort~</i> (unscharfe Suche).
 views.index.users.more = mehr...
 views.index.users.rank = Rang
 views.index.users.name = Name
@@ -151,7 +154,6 @@ views.users = Benutzer
 views.users.participate = Mitmachen
 views.users.text = Helfen Sie mit: <a href="%1s">Melden Sie sich an</a> und laden Sie die <a href="%2s">aktuelle Beta-Version</a> des Editors für Windows oder Mac.
 
-
 ##################
 ##   main.html  ##
 ##################
@@ -165,4 +167,5 @@ views.main.info = Informationen
 views.main.contact = Kontakt
 views.main.footer = Digitale Rätoromanische Chrestomathie: Ein kollaboratives Digitalisierungsprojekt.
 views.main.language = Sprache:
+views.main.language.help = (?)
 
