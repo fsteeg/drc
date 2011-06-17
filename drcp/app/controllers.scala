@@ -2,6 +2,7 @@ package controllers
 
 import com.quui.sinist.XmlDb
 import de.uni_koeln.ub.drc.data._
+import de.uni_koeln.ub.drc.util.MetsTransformer
 import play._
 import play.mvc._
 import play.i18n.Lang
@@ -79,8 +80,13 @@ object Application extends Controller {
     val rows = (q\"tr")
     val links = rows.map((n:Node)=>imageLink((n\\"a"\"@href").text))
     val pages = for((row, link) <- rows zip links) yield {
+    	val file = link.split("/").last.split("_").last.split("-")
+    	val (volume, page) = (file.head, file.last.split("\\.").head)
+    	//val mets = new MetsTransformer("PPN345572629_" + volume + ".xml", db)
     	val text = link.replace(".png", ".xml").replace("drc/", "drc-plain/")
     	<tr> {(row \ "td") ++ 
+    		<td>{Index.Volumes(volume.toInt)}</td> ++ 
+    		//<td>{mets.label(page.toInt)}</td> ++ // TODO: cache
     		<td><a href={link}>image</a></td> ++ 
     		<td><a href={text}>text</a></td>} 
         </tr>

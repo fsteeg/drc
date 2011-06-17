@@ -23,7 +23,7 @@ import de.uni_koeln.ub.drc.data.Index
  * @see MetsTransformerSpec
  * @author Fabian Steeg (fsteeg)
  **/
-private[util] object Count extends Enumeration {
+object Count extends Enumeration {
   type Count = Value
   val Label = Value
   val File = Value
@@ -35,7 +35,7 @@ case class Chapter(volume:Int, number:Int, title:String) extends Ordered[Chapter
   override def toString = "Chapter %s: %s".format(if (number == Integer.MAX_VALUE) "X" else number, title)
 }
 
-private[util] class MetsTransformer(xml:Elem, name:String = "") {
+class MetsTransformer(xml:Elem, name:String = "") {
   
   def this(name:String, db: com.quui.sinist.XmlDb) = this(db.getXml(Index.DefaultCollection+"/"+"PPN345572629", name).get(0), name)
   
@@ -54,7 +54,7 @@ private[util] class MetsTransformer(xml:Elem, name:String = "") {
   private var physMap: Map[String, String] = buildPhysMap // physID -> label, e.g. phys562 -> 549
   private var linkMap: Map[String, String] = buildLinkMap // physID -> logID, e.g. phys562 -> log67
   
-  private[util] def label(file:Int) : String = { // result is String, can be "XVI"
+  def label(file:Int) : String = { // result is String, can be "XVI"
 	  val rf = physMap(fileMap(file.toString))
 	  name match {
     	case s:String if s.contains("_0008.") => "%s (RF)".format(rf) // only correct in RF
@@ -64,7 +64,7 @@ private[util] class MetsTransformer(xml:Elem, name:String = "") {
       }
   }
   
-  private[util] def chapter(page:Int, mode:Count.Value = Count.File): Chapter = {
+  def chapter(page:Int, mode:Count.Value = Count.File): Chapter = {
     lazy val labelMap = physMap.map(_.swap)
     val chapter = try { 
       logMap(linkMap( mode match {
