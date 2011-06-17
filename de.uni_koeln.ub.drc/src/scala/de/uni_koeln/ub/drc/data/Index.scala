@@ -119,6 +119,26 @@ object Meta {
 }
 
 object Index {
+
+  val Volumes = Map(
+	4 -> "I, 1.",
+	8 -> "I, 2. - 3.",
+	9 -> "II, 1.",
+	11 -> "II, 2. - 3.",
+	14 -> "III",
+	30 -> "IV",
+	12 -> "V",
+	17 -> "VI",
+	18 -> "VII",
+	24 -> "VIII",
+	27 -> "IX",
+	35 -> "X, 1. - 3.",
+	36 -> "X, 3.",
+	37 -> "XI",
+	38 -> "XII",
+	33 -> "XIII"
+  )
+	
   //def collection(s:String) = "drc/" + s
   val DefaultCollection = "drc"
   val LocalDb = XmlDb("localhost", 7777, "guest", "guest")

@@ -35,9 +35,9 @@ case class Chapter(volume:Int, number:Int, title:String) extends Ordered[Chapter
   override def toString = "Chapter %s: %s".format(if (number == Integer.MAX_VALUE) "X" else number, title)
 }
 
-private[util] class MetsTransformer(xml:Elem) {
+private[util] class MetsTransformer(xml:Elem, name:String = "") {
   
-  def this(name:String, db: com.quui.sinist.XmlDb) = this(db.getXml(Index.DefaultCollection+"/"+"PPN345572629", name).get(0))
+  def this(name:String, db: com.quui.sinist.XmlDb) = this(db.getXml(Index.DefaultCollection+"/"+"PPN345572629", name).get(0), name)
   
   private val mods = xml\"dmdSec"\"mdWrap"\"xmlData"\"mods"
   private val loc = (mods\"location"\"url").text.trim
@@ -54,7 +54,15 @@ private[util] class MetsTransformer(xml:Elem) {
   private var physMap: Map[String, String] = buildPhysMap // physID -> label, e.g. phys562 -> 549
   private var linkMap: Map[String, String] = buildLinkMap // physID -> logID, e.g. phys562 -> log67
   
-  private[util] def label(file:Int) : String = physMap(fileMap(file.toString)) // result is String, can be "XVI"
+  private[util] def label(file:Int) : String = { // result is String, can be "XVI"
+	  val rf = physMap(fileMap(file.toString))
+	  name match {
+    	case s:String if s.contains("_0008.") => "%s (RF)".format(rf) // only correct in RF
+    	case s:String if s.contains("_0011.") => "%s (RF)".format(rf) // ""
+    	case s:String if s.contains("_0036.") => "%s (RF)".format(rf) // ""
+    	case _ => rf // same page numbers in RF and book edition
+      }
+  }
   
   private[util] def chapter(page:Int, mode:Count.Value = Count.File): Chapter = {
     lazy val labelMap = physMap.map(_.swap)

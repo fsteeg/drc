@@ -136,7 +136,8 @@ public final class SearchView {
 		volumes = new Combo(searchComposite, SWT.READ_ONLY);
 		String[] volumeLabels = new String[VOLUMES.length];
 		for (int i = 0; i < VOLUMES.length; i++) {
-			volumeLabels[i] = "" + (i + 1); //$NON-NLS-1$
+			volumeLabels[i] = Index.Volumes().get(Integer.parseInt(VOLUMES[i]))
+					.get();
 		}
 		volumes.setItems(volumeLabels);
 		volumes.setData(VOLUMES);
@@ -308,7 +309,7 @@ public final class SearchView {
 		currentPageLabel
 				.setText(String
 						.format(Messages.CurrentPageVolume
-								+ " %s, " + Messages.Page + " %s, %s", volumes.getSelectionIndex() + 1, //$NON-NLS-1$ //$NON-NLS-2$
+								+ " %s, " + Messages.Page + " %s, %s", volumes.getItem(volumes.getSelectionIndex()), //$NON-NLS-1$ //$NON-NLS-2$
 								mets.label(page.number()),
 								page.tags().size() == 0 ? Messages.NotTagged
 										: Messages.TaggedAs + ": " //$NON-NLS-1$
@@ -690,7 +691,8 @@ public final class SearchView {
 			case 0:
 				return ""; //$NON-NLS-1$
 			case 1:
-				return isPage(element) ? volumes.getSelectionIndex() + 1 + "" : ""; //$NON-NLS-1$ //$NON-NLS-2$
+				return isPage(element) ? volumes.getItem(volumes
+						.getSelectionIndex()) : ""; //$NON-NLS-1$
 			case 2:
 				return isPage(element) ? mets.label(asPage(element).number())
 						+ "" : ""; //$NON-NLS-1$ //$NON-NLS-2$
