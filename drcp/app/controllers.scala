@@ -82,11 +82,11 @@ object Application extends Controller {
     val pages = for((row, link) <- rows zip links) yield {
     	val file = link.split("/").last.split("_").last.split("-")
     	val (volume, page) = (file.head, file.last.split("\\.").head)
-    	val mets = new MetsTransformer("PPN345572629_" + volume + ".xml", db)
+    	//val mets = new MetsTransformer("PPN345572629_" + volume + ".xml", db)
     	val text = link.replace(".png", ".xml").replace("drc/", "drc-plain/")
     	<tr> {(row \ "td") ++ 
     		<td>{Index.Volumes(volume.toInt)}</td> ++ 
-    		<td>{mets.label(page.toInt)}</td> ++
+    		//<td>{mets.label(page.toInt)}</td> ++ // TODO: cache
     		<td><a href={link}>image</a></td> ++ 
     		<td><a href={text}>text</a></td>} 
         </tr>
