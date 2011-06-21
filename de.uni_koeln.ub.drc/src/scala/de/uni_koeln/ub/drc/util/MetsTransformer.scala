@@ -32,7 +32,7 @@ object Count extends Enumeration {
 case class Chapter(volume:Int, number:Int, title:String) extends Ordered[Chapter] {
   def compare(that:Chapter) = 
     if(this.volume==that.volume) this.number compare that.number else this.volume compare that.volume
-  override def toString = "Chapter %s: %s".format(if (number == Integer.MAX_VALUE) "X" else number, title)
+  override def toString = "Chapitel %s: %s".format(if (number == Integer.MAX_VALUE) "X" else number, title)
 }
 
 class MetsTransformer(xml:Elem, name:String = "") {

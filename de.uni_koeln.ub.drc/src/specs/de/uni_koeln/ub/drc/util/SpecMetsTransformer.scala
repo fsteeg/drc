@@ -76,7 +76,7 @@ class SpecMetsTransformer extends Spec with ShouldMatchers {
       val mode = Count.File
       expect((Integer.MAX_VALUE, "Unknown")) { val c = mets.chapter(Integer.MAX_VALUE, mode); (c.number, c.title) }
       expect((Integer.MAX_VALUE, "Unknown")) { val c = mets.chapter(Integer.MIN_VALUE, mode); (c.number, c.title) }
-      expect("Chapter X: Unknown") { mets.chapter(Integer.MIN_VALUE, mode).toString }
+      expect("Chapitel X: Unknown") { mets.chapter(Integer.MIN_VALUE, mode).toString }
     }
     
     it("provides conversion from file numbers to page labels") {
