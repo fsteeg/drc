@@ -699,7 +699,8 @@ public final class SearchView {
 			case 3: {
 				if (isPage(element)) {
 					String text = asPage(element).toText("|"); //$NON-NLS-1$
-					return text.substring(0, Math.min(60, text.length()))
+					return "Text: " //$NON-NLS-1$
+							+ text.substring(0, Math.min(60, text.length()))
 							+ "..."; //$NON-NLS-1$
 				}
 				return element.toString();
