@@ -272,21 +272,17 @@ public final class CheckView {
 	}
 
 	private Image loadImage(final Page page) throws IOException {
-		Display display = parent.getDisplay();
-		// TODO image as lazy def in page, fetched on demand?
-		InputStream in = new BufferedInputStream(new ByteArrayInputStream(
-				Index.loadImageFor(DrcUiActivator.instance().currentUser()
-						.collection(), DrcUiActivator.instance().db(), page)));
+		final InputStream in = getInputStream(page);
 		// imageData = convertToImageData(scale(in)); // TODO enable for
 		// optional scaling
 		imageData = new ImageData(in);
-		Image newImage = new Image(display, imageData);
+		Image newImage = new Image(parent.getDisplay(), imageData);
 		return newImage;
 	}
 
 	@SuppressWarnings("unused")
 	// TODO add as option in UI
-	private ImageData convertToImageData(BufferedImage bufferedImage)
+	private ImageData convertToImageData(final BufferedImage bufferedImage)
 			throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ImageIO.write(bufferedImage, "png", new BufferedOutputStream(out)); //$NON-NLS-1$
@@ -322,11 +318,15 @@ public final class CheckView {
 		Box box = word.position();
 		Image image = reloadImage();
 		Rectangle rect = getScaledRect(box);
-		GC gc = new GC(image);
+		Image newImage = new Image(parent.getDisplay(), new Rectangle(
+				image.getBounds().x, image.getBounds().y,
+				image.getBounds().width, image.getBounds().height));
+		GC gc = new GC(newImage);
+		gc.drawImage(image, 0, 0);
 		drawBoxArea(rect, gc);
 		drawBoxBorder(rect, gc);
 		gc.dispose();
-		imageLabel.setImage(image);
+		imageLabel.setImage(newImage);
 		scrolledComposite.setOrigin(new Point(rect.x - 15, rect.y - 25)); // IMG_SIZE
 	}
 
@@ -350,12 +350,20 @@ public final class CheckView {
 				&& !imageLabel.getImage().isDisposed())
 			imageLabel.getImage().dispose();
 		Image loadedImage = loadImage(page);
+		// lazyLoader.schedule();
 		imageData = loadedImage.getImageData();
 		imageLabel.setImage(loadedImage);
 		imageLoaded = true;
 		scrolledComposite.setMinSize(scrolledComposite.getContent()
 				.computeSize(SWT.DEFAULT, SWT.DEFAULT, true));
 		scrolledComposite.layout(true, true);
+	}
+
+	private InputStream getInputStream(final Page page) {
+		InputStream in = new BufferedInputStream(new ByteArrayInputStream(
+				Index.loadImageFor(DrcUiActivator.instance().currentUser()
+						.collection(), DrcUiActivator.instance().db(), page)));
+		return in;
 	}
 
 }
