@@ -33,6 +33,7 @@ object Application extends Controller {
   def contact = { Template() }
   def faq = { Template() }
   def info = { Template() }
+  def press = { Template() }
 
   def users = {
 	val all = loadUsers
