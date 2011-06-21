@@ -1,18 +1,15 @@
-#{extends 'main.html' /} #{set title:'User' /}
+#{extends 'main.html' /} #{set title:'crestomazia.ch' /}
 
 <h1>${user.id}</h1>
 
-<p>Score: ${user.reputation()} (${user.edits} edits, ${user.upvotes} upvotes, ${user.downvotes} 
-downvotes, ${user.upvoted} upvoted, ${user.downvoted} downvoted)</p>
-<p>Region: ${user.region}</p>
+<p>
+&{'views.user.summary', user.reputation(), user.edits, user.upvotes, user.downvotes, user.upvoted, user.downvoted}
+</p>
+<p>&{'views.user.region'} ${user.region}</p>
 #{if link.endsWith(".png")}
-<p>Last edited: volume ${page.volume()}, page ${page.number()}</p>
+<p>&{'views.user.last.edited', page.volume(), page.number()}</p>
 <p><img src="${link}" width="350px" /></p>
 #{/if}
 #{else}
-<p class="attention">To get started, download the latest beta release of the editor for
-<a
-  href="http://github.com/downloads/spinfo/drc/drc-beta-win-2011-02-25.zip">Windows</a>
-or <a
-  href="http://github.com/downloads/spinfo/drc/drc-beta-mac-2011-02-25.zip">Mac</a>.
+<p class="attention">&{'views.user.start', 'http://github.com/spinfo/drc/downloads'}</p>
 #{/else}

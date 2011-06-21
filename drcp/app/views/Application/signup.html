@@ -1,28 +1,28 @@
-#{extends 'main.html' /} #{set title:'Anmeldung' /}
+#{extends 'main.html' /} #{set title:'crestomazia.ch' /}
 
-<h1>Neuen Benutzer anlegen</h1>
+<h1>&{'views.signup.header.1'}</h1>
 
 #{form @Application.createAccount()}
      #{ifErrors}
         <p class="error">
-            Alle Felder müssen ausgefüllt werden!
+            &{'views.signup.error'}
         </p>
     #{/ifErrors}
     <table class="form">
     <tr class="form">
-        <td class="form"><label for="name">Voller Name: </label></td>
+        <td class="form"><label for="name">&{'views.signup.name'}</label></td>
         <td class="form"><input type="text" name="name" id="name" value="${params.name}"/></td>
     </tr>
     <tr class="form">
-        <td class="form"><label for="id">Benutzername: </label></td>
+        <td class="form"><label for="id">&{'views.signup.id'}</label></td>
         <td class="form"><input type="text" name="id" id="id" value="${params.id}"/></td>
     </tr>
     <tr class="form">
-        <td class="form"><label for="pass">Passwort: </label></td>
+        <td class="form"><label for="pass">&{'views.signup.pass'}</label></td>
         <td class="form"><input type="password" name="pass" id="pass" value="${params.pass}"/></td>
     </tr>
     <tr class="form">
-        <td class="form"><label for="region">Ort: </label></td>
+        <td class="form"><label for="region">&{'views.signup.region'}</label></td>
         <td class="form"><input type="text" name="region" id="region" value="${params.region}"/></td>
     </tr>
     </table>

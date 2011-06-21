@@ -2,8 +2,10 @@ package controllers
 
 import com.quui.sinist.XmlDb
 import de.uni_koeln.ub.drc.data._
+import de.uni_koeln.ub.drc.util.MetsTransformer
 import play._
 import play.mvc._
+import play.i18n.Lang
 import play.data.validation._
 import scala.xml.Elem
 import scala.xml.Node
@@ -18,10 +20,10 @@ object Application extends Controller {
 	  
   def loadUsers =
 	  (for (u <- db.getXml(col + "/users").get) yield User.fromXml(u))
-	  .sortBy(_.reputation).reverse.partition(_.reputation > 0)
+	  .sortBy(_.reputation).reverse
 
   def index = {
-	val top = loadUsers._1.take(5)
+	val top = loadUsers.take(5)
     //val ids = db.getIds(col + "/PPN345572629_0004").get.filter(_.endsWith(".xml"))
     //val pages = ids.take(5).map(imageLink(_))
 	val ids=List()
@@ -31,10 +33,12 @@ object Application extends Controller {
   def contact = { Template() }
   def faq = { Template() }
   def info = { Template() }
+  def press = { Template() }
 
   def users = {
-	val (active, inactive) = loadUsers
-    Template(active, inactive)
+	val all = loadUsers
+	val (left, right) = all.splitAt(all.size/2)
+    Template(left, right)
   }
 
   private def imageLink(id: String) = "http://" + server + ":" + port + "/exist/rest/db/" + col + "/" +
@@ -53,7 +57,7 @@ object Application extends Controller {
   def createAccount(@Required name: String, @Required id: String, @Required pass: String, @Required region: String) = {
     println("name: %s, id: %s, pass: %s, region: %s".format(name, id, pass, region))
     val users = loadUsers
-    if (Validation.hasErrors || (users._1 ++ users._2).exists(_.id == id)) {
+    if (Validation.hasErrors || (users).exists(_.id == id)) {
       "@signup".asTemplate
     } else {
       val u = User(id, name, region, pass, col, db)
@@ -62,21 +66,34 @@ object Application extends Controller {
     }
   }
   
+  def changeLanguage(lang:String) = {
+    Lang.change(lang)
+    val refererURL = Http.Request.current().headers.get("referer").value 
+    Redirect(refererURL)
+  }
+  
   def search(@Required term: String, @Required volume: String) = {
-    val volumes = List("0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")
+    val volumes = List("0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027",
+    		"0035", "0036", "0037", "0038", "0033")
     val vol = if(volume.toInt-1<volumes.size) "PPN345572629_" + volumes(volume.toInt-1) else ""
     val query = createQuery("/page", term)
     val q = db.query("drc-plain/" + vol, configure(query))
     val rows = (q\"tr")
     val links = rows.map((n:Node)=>imageLink((n\\"a"\"@href").text))
     val pages = for((row, link) <- rows zip links) yield {
+    	val file = link.split("/").last.split("_").last.split("-")
+    	val (volume, page) = (file.head, file.last.split("\\.").head)
+    	//val mets = new MetsTransformer("PPN345572629_" + volume + ".xml", db)
     	val text = link.replace(".png", ".xml").replace("drc/", "drc-plain/")
     	<tr> {(row \ "td") ++ 
+    		<td>{Index.Volumes(volume.toInt)}</td> ++ 
+    		//<td>{mets.label(page.toInt)}</td> ++ // TODO: cache
     		<td><a href={link}>image</a></td> ++ 
     		<td><a href={text}>text</a></td>} 
         </tr>
     } 
-    Template(term, volume, pages)
+    val label = if(volume.toInt-1<volumes.size) Index.Volumes(volumes(volume.toInt-1).toInt) else ""
+    Template(term, label, pages, volume)
   }
   
   def createQuery(selector: String, term:String) = {

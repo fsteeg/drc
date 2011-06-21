@@ -1,0 +1,172 @@
+##################
+## contact.html ##
+##################
+
+views.contact.header.1 = Contact
+
+views.contact.header.2 = Persuna da contact
+
+views.contact.person.1 = Dr. Florentin Lutz (florentin.lutz [at] sunrise.ch)
+views.contact.person.2 = Michele Badilatti (mi.badilatti [at] bluewin.ch)
+
+views.contact.header.4 = Collavuratura dal project
+
+views.contact.person.3 = Claes Neuefeind M.A. (c.neuefeind [at] uni-koeln.de)
+views.contact.person.4 = Fabian Steeg M.A. (fabian.steeg [at] uni-koeln.de)
+
+views.contact.header.3 = Direcziun dal project
+
+views.contact.spinfo.1 = Prof. Dr. Jürgen Rolshoven (rols [at] spinfo.uni-koeln.de)
+views.contact.spinfo.2 = Universitad da Cologna 
+views.contact.spinfo.3 = Institut da linguistica 
+views.contact.spinfo.4 = Partiziun informatica da linguas
+views.contact.spinfo.5 = Albertus-Magnus-Platz
+views.contact.spinfo.6 = D-50923 Köln
+
+views.contact.ub.1 = Prof. Dr. Wolfgang Schmitz
+views.contact.ub.2 = Directur actual da la
+views.contact.ub.3 = biblioteca universitara e municipala da Cologna
+views.contact.ub.4 = Manader da l'archiv universitar da Cologna 
+views.contact.ub.5 = Universitätsstraße 33
+views.contact.ub.6 = D-50931 Köln
+
+views.contact.header.5 = Students-collavuraturs
+
+views.contact.person.5 = Michail Atanassov
+views.contact.person.6 = Frauke Schmidt
+
+##################
+##  faq.html    ##
+##################
+
+views.faq.header.1 = Dumondas frequentas
+
+views.faq.q1 = Co poss jau collavurar a la CRD?
+views.faq.q2 = Tge è l’editur da la CRD?
+views.faq.q3 = Co met jau en funcziun l’editur da la CRD?
+views.faq.q4 = Dovrel jau ulteriurs programs?
+views.faq.q5 = Pertge dovrel jau in conto?
+views.faq.q6 = Stoss jau ma registrar?
+views.faq.q7 = Co poss jau ordinar autramain ils champs da l’editur da la CRD?
+views.faq.q8 = Co poss jau, cun agid da l’editur da la CRD, ... 
+views.faq.q9 = ... tschertgar infurmaziuns en la Crestomazia?
+views.faq.q10 = ... far correcturas?
+views.faq.q11 = ... crear chavazzins (tags)?
+views.faq.q12 = ... scriver commentaris?
+views.faq.q13 = ... memorisar las modificaziuns?
+views.faq.q14 = Wie kann ich im Internet Explorer die Sprache der Website wechseln?
+
+views.faq.a1 = As inscrivai <a href="%1s">qua</a> e telechargiai la <a href="%2s">versiun actuala</a> da l’editur da la CRD per Windows u Mac. Sin dumonda pudain nus metter a disposiziun ulteriurs downloads, p.ex. per versiuns pli spezialas dal sistem operativ u per Linux.
+views.faq.a2 = L’editur da la CRD è in sistem da correctura che permetta da modifitgar ils texts da la Crestomazia a moda collectiva. Cun l’editur na pudais Vus betg mo leger u tschertgar infurmaziuns, mabain era curreger, commentar u enritgir cun chavazzins ils texts da la Crestomazia. Tut las midadas fatgas cun l’editur vegnan memorisadas sin in server central. Uschia èsi pussaivel da mussar las correcturas, ils commentaris ed ils chavazzins a tut ils utilisaders. Quels pon da princip modifitgar danovamain questas midadas.
+views.faq.a3 = Windows: Cun la datoteca telechargiada pudais Vus installar l’editur da la CRD sin Voss computer. Cun far in clic dubel s’avra ina fanestra da dialog. Là pudais Vus decider, nua ch’il program duai vegnir installà. Silsuenter pudais Vus aviar il program sur il menu da start e deinstallar el cura che Vus vulais. <p>MacOS: Decumprimi l’archiv da zip telechargià nua che Vus vulais (p.ex. sin Voss desktop). En l’ordinatur decumprimì chattais Vus la datoteca cun il program "CRD". Aviai il program cun far in clic dubel sin quella datoteca. Per deinstallar il program basti da stizzar l’entir ordinatur.<\p>
+views.faq.a4 = Per ils sistems operativs usitads na dovr’ins betg ulteriurs programs. L’editur sa basa sin Java ch’è per ordinari gia installà. Sch’i duess tuttina dar problems, As drizzai directamain a nus.
+views.faq.a5 = Ils differents nums d’utilisaders èn la basa per la lavur cuminaivla. Tut las midadas fatgas sur l’editur vegnan colliadas cun Voss conto (endrizzà sez) e memorisadas sin in server central. Uschia po mintga utilisader vesair las correcturas, ils commentaris ed ils chavazzins dals auters utilisaders e da princip modifitgar danovamain questas midadas. Ultra da quai pon plirs utilisaders lavurar il medem mument cun l’editur da la CRD.
+views.faq.a6 = Vus duvrais in conto per pudair lavurar cun l’editur. Qua pudais Vus endrizzar sez Voss conto. Il num d’utilisader ed il pled-clav pudais Vus tscherner libramain, uschia che Vus pudais lavurar a moda anonima era cun in agen conto. Sche Vus vulais l’emprim simplamain mo empruvar ora l’editur, pudais Vus As annunziar cun il num d’utilisader "Anonymous" e senza pled-clav.
+views.faq.a7 = L’ordinaziun dals champs n’è betg fixa. Ils singuls champs pon vegnir spustads libramain entaifer la fanestra principala e modifitgads en lur grondezza. Cliccai per far quai sin la glista da titel da la fanestra respectiva e tegnai smatgada la tasta da la mieur. Il champ sa lascha ussa trair en in’autra posiziun. Ils champs pon vegnir plazzads tant in sper l’auter sco er in sur l’auter en furma da cartas da registraziun (p.ex. las fanestras "cronologia da la correctura" e "segns spezials" en il champ sutvart).
+views.faq.a9 = Vus pudais scriver noziuns da tschertga en la fanestra d’endataziun en il champ survart ("navigaziun"). En la vista da "glistas" vegnan visualisadas tut las paginas che correspundan a la noziun da tschertga. Cun cliccar sin ina lingia en il resultat da la retschertga s’avra la vista detagliada da la pagina tschernida en il champ sutvart. Indicaziuns davart la pagina visualisada actualmain (tom, numer da pagina e chavazzins gia utilisads) chattais Vus sut la glista da resultats. Là chattais Vus era duas tastas da direcziun per sfegliar la Crestomazia pagina per pagina (pagina precedenta resp. proxima pagina).
+views.faq.a10 = La pagina che Vus tschernis vegn visualisada sco text modifitgabel en la fanestra dad "elavurar". Il text po vegnir modifitgà pled per pled. Per controllar cas nunclers vegn adina visualisà en la fanestra da "controllar" in maletg dal text original. Las modificaziuns dals singuls pleds vegnan inditgadas en la fanestra "cronologia da la correctura".
+views.faq.a11 = Via ina segunda fanestra d’endataziun en la fanestra da "navigaziun" (giudim a dretga) pudais Vus endatar tants chavazzins sco quai che Vus vulais. Chavazzins gia existents vegnan visualisads en la glista da survista en la fanestra da "navigaziun".
+views.faq.a12 = Remartgas, renviaments e dumondas pon vegnir endatads sco text en la fanestra da "commentaris" (en il champ sutvart da l’editur). En questa fanestra vegnan ultra da quai visualisads tut ils commentaris che existan gia en connex cun la pagina actuala.
+views.faq.a13 = Cliccai per memorisar las modificaziuns sin il simbol da la disketta en la trav da menus, tscherni en il menu principal "datoteca"/"memorisar" u utilisai la cumbinaziun da tastas usitada per Voss sistem operativ (Strg+S per Windows, Cmd+S per MacOS). Las datas vegnan memorisadas sin in server central. Per arcunar ina u pliras paginas sin Voss disc dir, pudais Vus tscherner il punct dal menu "exportar".
+views.faq.a14 = Bei den meisten Browsern (z.B. Google Chrome, Firefox, Safari) können Sie die Sprache durch einen einfachen Klick wechseln. Eine Ausnahme ist der Windows Internet Explorer: Hier müssen Sie die Sprache in den Browsereinstellungen festlegen: Gehen Sie hierfür im Menü "Extras" auf "Internetoptionen", dort finden Sie eine Schaltfläche "Sprachen...", über die Sie die bevorzugte Sprache festlegen können. Die Änderung wird beim nächsten Öffnen des Explorers wirksam. <p>Alternativ können Sie auch explizit sogenannte "Cookies" von der Seite uni-koeln.de zulassen. Gehen Sie hierfür im Menü "Extras" auf "Internetoptionen", dort finden Sie auf der Registerkarte "Datenschutz" eine Schaltfläche "Sites...". Geben Sie hier "uni-koeln.de" ein und klicken Sie rechts neben dem Eingabefenster auf "Zulassen". Nun können Sie die Sprache durch einen einfachen Klick wechseln.</p>
+
+views.faq.more = Ulteriur agid survegnis Vus sut
+
+##################
+##  index.html  ##
+##################
+
+views.index.text.1 = As participai era Vus: <a href="%1s">As annunziai</a> e telechargiai la <a href="%2s">versiun beta actuala</a> da l’editur per Windows u Mac ubain faschai in’atgna versiun sin <a href="%3s">GitHub</a>.
+
+views.index.header.1 = Sa participar 
+views.index.header.2 = Correctur(a)s activ(a)s
+views.index.header.3 = Tschertga en la Crestomazia 
+views.index.header.4 = Davart il project
+
+views.index.greeting = <p>Charas Rumantschas, chars Rumantschs</p><p>La Crestomazia è vegnida digitalisada e stat a disposiziun ad in e scadin. Quest stgazi da la litteratura rumantscha, mess ensemen e publitgà da Caspar Decurtins, è ussa accessibel sin internet. Tuttas e tuts èn envidads da duvrar, commentar e meglierar questa digitalisaziun.</p><p>En quest senn giavisch jau bler plaschair e buna lectura.</p><p>Corina Casanova, chanceliera federala</p><br />
+
+views.index.about = La Crestomazia Retorumantscha da Caspar Decurtins è fin oz la pli impurtanta collecziun da texts rumantschs. Questas var 8000 paginas cumpiglian texts da different gener, da quatter tschientaners, da tut las regiuns e da tut ils idioms rumantschs. La Crestomazia Retorumantscha, edida oriundamain ils onns 1896-1919, è ussa disponibla per l’emprima giada er en l’internet. <p>Gidai era Vus a render accessibla la Crestomazia online fidaivla a l’original e senza sbagls: As annunziai e telechargiai la versiun beta actuala da l’editur per Windows u Mac. Agids per ils utilisaders chattais Vus <a href="%1s">qua</a>. </p><p>Dapli davart il project CRD chattais Vus <a href="%2s">qua</a>.</p>
+
+views.index.about.pages = Tom 1: %s paginas.
+
+views.index.search.term = Noziun da tschertga:
+views.index.search.volume = Tom
+views.index.search.all = Tuts
+views.index.search.info = Suchoptionen: <i>Wort*</i> (Suchbegriff gefolgt von beliebig vielen Zeichen); <i>Wort?</i> (gefolgt von einem Zeichen), <i>Wort~</i> (unscharfe Suche).
+views.index.users.more = dapli...
+views.index.users.rank = Plaz
+views.index.users.name = Num
+views.index.users.region = Regiun
+views.index.users.points = Puncts
+
+##################
+##   info.html  ##
+##################
+
+views.info.header.1 = La Crestomazia Retorumantscha
+
+views.info.text.1 = Caspar Decurtins (1855-1916) ha creà avant bunamain tschient onns la Crestomazia Retorumantscha monumentala. Ella vala sco la pli impurtanta basa da texts pli veglia per il rumantsch ed è da grond interess linguistic, filologic, istoric e cultural. Cun raschun vegnan l’ovra e las activitads da Caspar Decurtins cumparegliadas cun las lavurs dals frars Grimm. La publicaziun da Decurtins consista da 13 toms cun totalmain 7260 paginas text en tut ils idioms rumantschs e cumpiglia quatter tschientaners da l’istorgia da la lingua, da la Refurmaziun fin l’entschatta dal 20avel tschientaner. Ella cuntegna copias ed extracts da manuscrits, cronicas, acts da process, scrittiras giuridicas, gieus da teater, collecziuns da paraulas, ditgas, chanzuns popularas, chanzuns d’uffants, versets da striegn, notizias persunalas. La Crestomazia è damai ina funtauna inexauribla per dumondas filologicas multifaras, ma er in monument per la lingua, ils pledaders e la cultura dal rumantsch en Svizra e – sur il Grischun ora – in’ovra excepziunala per pitschnas cuminanzas linguisticas e culturalas. <p>La Crestomazia Retorumantscha è cumparida tranter il 1888 ed il 1919 en la revista romanistica “Romanische Forschungen” en numerusas furniziuns singulas, edidas da la chasa editura Junge dad Erlangen. Decurtins ha scrit davart sia collecziun da texts in’introducziun da 176 paginas (en tudestg). La Crestomazia Retorumantscha giauda anc adina in’auta stima, tant tar ils spezialists sco er en la cuminanza linguistica. Quai è remartgabel, pertge che las cundiziuns da recepziun n’èn e n’eran betg adina fitg favuraivlas. Decurtins sez n’ha betg pli pudì cumplenir si’ovra. Quai han procurà Christian Caminada, pli tard uvestg da Cuira, e la vaiva da Decurtins. Da l’autra vart n’ha la publicaziun en ina revista romanistica tudestga, per part durant l’Emprima Guerra mundiala, betg promovì ina vasta recepziun. Schebain che Decurtins ha lavurà dal puntg da vista metodic a moda detg pragmatica ed ideologicamain nuninfluenzada, vegniva e vegn si’ovra considerada criticamain dal puntg da vista editoric.</p><p> Blers dals texts rimnads da Decurtins èn vegnids recepids da la cuminanza linguistica. Quai è succedì p.ex. cun surpigliar texts en cudeschs da scola e d’instrucziun u cun als stampar en antologias e chalenders. La Crestomazia Retorumantscha è la basa textuala da numerusas perscrutaziuns romanisticas. Ultra da quai èn blers texts vegnids translatads en tudestg ed uschia rendids accessibels a spezialists na-rumantschs interessads a la cultura populara ed ad autras persunas interessadas da lingua tudestga. L’interess constant per la Crestomazia Retorumantscha ha era schlià il problem da la basa da texts sparpagliada tras las furniziuns singulas. Reprint fotomecanic da l'ediziun originala (tom I - XIII) entras la Chasa editura Octopus Andreas Joos Cuira da 1982 enfin 1984. L'onn 1985 ha Octopus cumpletà la CR cun il tom da Schons (tom XIV). La Societad Retorumantscha ha publitgà l'onn 1986 il register (tom XV) elavurà da Peter Egloff e Jon Mathieu.</p>
+
+views.info.header.2 = La Crestomazia Retorumantscha Digitala (CRD) – il project
+
+views.info.text.2 = La finamira dal project CRD è da metter a disposiziun la Crestomazia Retorumantscha sco collecziun da texts tschertgabels a moda electronica. Per cuntanscher quai èsi necessari d’als scannar, registrar electronicamain, curreger e als preparar per la publicaziun online. Ina Crestomazia digitala, accessibla gratuitamain a mintgin, dat numerus novs impuls per l’utilisaziun scientifica, mediala, educativa, ma era privata. Las pussaivladads che sa porschan èn multifaras: retschertgar persunas e nums locals tenor criteris istorics e genealogics, lavurar a moda creativa cun la collecziun agiuntond agens texts u translaziuns, nizzegiar la Crestomazia per lavurs lexicograficas, sco era per evaluar quella linguisticamain (cun sustegn dal computer), per exempel per eruir midadas linguisticas e dumondas dal contact linguistic u per far georeferenziaziuns dals texts per als utilisar en il turissem da qualitad. <p>La basa per render accessibels ils texts integrals èn ils documents scannads (ils digitalisats) da la Crestomazia. Per ils emprims 13 toms, cumparids en la revista "Romanische Forschungen", ha la Biblioteca statala ed universitara da Göttingen creà ils digitalisats en il rom dal project "Digizeitschriften", promovì da la Deutsche Forschungsgemeinschaft. Cun il consentiment amiaivel da la Societad Retorumantscha ha la Biblioteca universitara e municipala da Cologna ultra da quai digitalisà ils dus toms cumplementars da l’ediziun Octopus Andreas Joos (Cuira, 1983-1986), tranter auter il tom cun il register da la Crestomazia, elavurà da Peter Egloff e Jon Mathieu.</p><p> Las differentas tradiziuns da scripziun e las tipografias variadas da la Crestomazia rendan quasi impussibla ina l’identificaziun dals segns automatica senza sbagls (OCR Optical Character Recognition / identificaziun optica dals segns). Il project CRD integrescha perquai la cuminanza linguistica rumantscha per curreger ils documents. Per meglierar e preparar ils texts electronics ha la partiziun informatica da linguas da l’Universitad da Cologna sviluppà in sistem basà sin il web. En quel ves’ins ils texts legids automaticamain (ils texts modificabels) ed ils documents originals (ils digitalisats); meglieraziuns, commentaris e renviaments pon vegnir proponids ed integrads tenor ils princips da wikipedia. La cuminanza linguistica d’ina lingua pitschna vegn qua tras per l’emprima giada integrada en il process d’in mantegniment linguistic activ resp. interactiv. Il project survegn uschia in caracter prototipic per documentar e conservar l’ierta culturala da linguas pli pitschnas, era da talas ch’èn periclitadas. Ultra da quai vala el – tras sia idea innovativa da laschar participar la cuminanza linguistica a las correcturas ed als commentaris (enritgiment) – sco prototip per schliar problems da digitalisaziun tras cuminanzas socialas.<p>
+
+views.info.more = Dapli davart il project chattais Vus <a href="%s">qua</a>.
+
+views.info.header.3 = Ils partenaris ed ils sponsurs dal project
+
+views.info.text.3 = La digitalisaziun a fund e l’elavuraziun da l’editur per meglierar ils texts vegnan finanziadas da la Deutsche Forschungsgemeinschaft e realisadas a l’Universitad da Cologna tras prof. dr. Jürgen Rolshoven, partiziun informatica da linguas, e prof. dr. Wolfgang Schmitz, directur da la Biblioteca universitara e municipala da Cologna. Il management da meglieraziun tras Florentin Lutz vegn sustegnì dal Legat Anton Cadonau, da l’Institut grischun per la perscrutaziun da la cultura, dal chantun Grischun e da la Societad Retorumantscha.
+
+##################
+## search.html  ##
+##################
+
+views.search.mode = Tschertga per '%s' en
+views.search.volume = Tom
+views.search.volumes = Tuts ils toms
+views.search.result = Resultat: %s paginas.
+
+##################
+## signup.html  ##
+##################
+
+views.signup.header.1 = Endrizzar in nov utilisader 
+views.signup.error = Scriver en tut ils champs!
+views.signup.name = Num cumplain: 
+views.signup.id = Num da l'utilisader: 
+views.signup.pass = Pled-clav: 
+views.signup.region = Lieu: 
+
+##################
+##  user.html   ##
+##################
+
+views.user.summary = Puncts: %1s (%2s tractà pleds, ha revalità %3s, ha svalità %4s, è vegnì revalità %5s giadas, è vegnì svalità %6s giadas)
+views.user.region = Regiun: 
+views.user.last.edited = Ultima modificaziun: Tom %1s, pagina %2s
+views.user.start = Gidai: chargiai la <a href="%2s">versiun beta actuala</a> da l' editur per Windows u per Mac e curregi! 
+
+##################
+##  users.html  ##
+##################
+
+views.users = Utilisaders
+views.users.participate = Sa participar
+views.users.text = As participai era Vus: <a href="%1s">As annunziai</a> e telechargiai la <a href="%2s">versiun beta actuala</a> da l’editur per Windows u Mac.
+
+
+##################
+##   main.html  ##
+##################
+
+views.main.header = Crestomazia Retorumantscha Digitala
+views.main.start = Start
+views.main.users = Utilisader 
+views.main.signup = Connexiun
+views.main.faq = Dumondas
+views.main.info = Informaziuns
+views.main.contact = Contact
+views.main.footer = Crestomazia Retorumantscha Digitala: in project da digitalisaziun collaborativ.
+views.main.language = Lingua:
+views.main.language.help = (?)
+

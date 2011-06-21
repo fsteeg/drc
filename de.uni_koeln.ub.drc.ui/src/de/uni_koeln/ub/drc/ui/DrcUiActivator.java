@@ -142,6 +142,8 @@ public final class DrcUiActivator extends Plugin {
 					toInstall);
 		} catch (ProvisionException e) {
 			e.printStackTrace();
+		} catch (NullPointerException e) { // failing update for inner workbench
+			e.printStackTrace();
 		}
 		return null;
 	}

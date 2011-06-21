@@ -1,48 +1,42 @@
-#{extends 'main.html' /} #{set title:'DRC' /}
-
+#{extends 'main.html' /} #{set title:'crestomazia.ch' /}
+<h3>&{'views.users.participate'}</h3>
+<p>
+	&{'views.users.text', 'application/signup', 'http://github.com/spinfo/drc/downloads'}
+</p>
 <div id="left">
-	#{if active.size() > 0}
-	<h3>Aktive Benutzer</h3>
+	
+	#{if left.size() > 0}
+	<h3>&{left.size()+right.size()} &{'views.users'}</h3>
 	<table>
 		<tr>
-			<th>Rank</th>
-			<th>Name</th>
-			<th>Region</th>
-			<th>Score</th>
+			<th>&{'views.index.users.rank'}</th>
+			<th>&{'views.index.users.name'}</th>
+			<th>&{'views.index.users.region'}</th>
+			<th>&{'views.index.users.points'}</th>
 		</tr>
-		#{list items:active, as:'user'}
+		#{list items:left, as:'user'}
 		<tr class="active-user">
-			<td>${active.indexOf(user)+1}</td>
-			<td><a href="@{Application.user(user.id)}">${user.id}</a></td>
-			<td>${user.region}</td>
-			<td>${user.reputation()}</td>
+			#{user user:user, rank:left.indexOf(user)+1/}
 		</tr>
 		#{/list}
 	</table>
 </div>
 <div id="buf"></div>
 <div id="right">
-	#{/if} #{if inactive.size() > 0}
-	<h3>Inaktive Benutzer</h3>
+	#{/if} #{if right.size() > 0}
+	<h3>&nbsp;</h3>
 	<table>
 		<tr>
-			<th>Name</th>
-			<th>Region</th>
+			<th>&{'views.index.users.rank'}</th>
+			<th>&{'views.index.users.name'}</th>
+			<th>&{'views.index.users.region'}</th>
+			<th>&{'views.index.users.points'}</th>
 		</tr>
-		#{list items:inactive, as:'user'}
+		#{list items:right, as:'user'}
 		<tr class="inactive-user">
-			<td>${user.id}</td>
-			<td>${user.region}</td>
+			#{user user:user, rank:left.size()+right.indexOf(user)+1/}
 		</tr>
 		#{/list}
 	</table>
 	#{/if}
-	<h3>Mitmachen</h3>
-	<p>
-		Helfen Sie mit: Melden Sie <a href="@{Application.signup()}">sich
-			an</a> und laden Sie die <a href="http://github.com/spinfo/drc/downloads">aktuelle
-			Beta-Version</a> des Editors für Windows oder Mac, oder partizipieren Sie
-		an der Entwicklung auf <a href="http://github.com/spinfo/drc">GitHub</a>.
-	</p>
-
 </div>

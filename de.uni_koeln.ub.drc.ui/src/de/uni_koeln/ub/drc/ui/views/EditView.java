@@ -33,6 +33,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import scala.collection.mutable.Stack;
+
+import com.quui.sinist.XmlDb;
+
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Modification;
 import de.uni_koeln.ub.drc.data.Page;
@@ -40,6 +43,7 @@ import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 import de.uni_koeln.ub.drc.ui.Messages;
+import de.uni_koeln.ub.drc.util.PlainTextCopy;
 
 /**
  * A view that the area to edit the text. Marks the section in the image file
@@ -148,7 +152,23 @@ public final class EditView {
 					monitor.worked(1);
 				}
 				saveToXml(page);
+				plainTextCopy(page);
 				eventBroker.post(EditView.SAVED, page);
+			}
+
+			private void plainTextCopy(final Page page) {
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						String col = Index.DefaultCollection()
+								+ PlainTextCopy.suffix();
+						String vol = page.id().split("-")[0]; //$NON-NLS-1$
+						XmlDb db = DrcUiActivator.instance().db();
+						System.out.printf("Copy text to '%s', '%s' in %s\n", //$NON-NLS-1$
+								col, vol, db);
+						PlainTextCopy.saveToDb(page, col, vol, db);
+					}
+				}).start();
 			}
 
 			private void addToHistory(Text text) {

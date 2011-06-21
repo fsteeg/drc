@@ -62,6 +62,9 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
 import scala.collection.JavaConversions;
+
+import com.quui.sinist.XmlDb;
+
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.Tag;
@@ -82,7 +85,8 @@ public final class SearchView {
 	@SuppressWarnings("nls")
 	// "0033", "0035", "0036", "0037", "0038"
 	private static final String[] VOLUMES = new String[] { "0004", "0008",
-			"0009", "0011", "0012", "0017", "0018", "0024", "0027" };
+			"0009", "0011", "0012", "0017", "0018", "0024", "0027", "0033",
+			"0035", "0036", "0037", "0038" };
 	private Text searchField;
 	private Text tagField;
 	private Label resultCount;
@@ -132,7 +136,8 @@ public final class SearchView {
 		volumes = new Combo(searchComposite, SWT.READ_ONLY);
 		String[] volumeLabels = new String[VOLUMES.length];
 		for (int i = 0; i < VOLUMES.length; i++) {
-			volumeLabels[i] = "" + (i + 1); //$NON-NLS-1$
+			volumeLabels[i] = Index.Volumes().get(Integer.parseInt(VOLUMES[i]))
+					.get();
 		}
 		volumes.setItems(volumeLabels);
 		volumes.setData(VOLUMES);
@@ -304,7 +309,7 @@ public final class SearchView {
 		currentPageLabel
 				.setText(String
 						.format(Messages.CurrentPageVolume
-								+ " %s, " + Messages.Page + " %s, %s", volumes.getSelectionIndex() + 1, //$NON-NLS-1$ //$NON-NLS-2$
+								+ " %s, " + Messages.Page + " %s, %s", volumes.getItem(volumes.getSelectionIndex()), //$NON-NLS-1$ //$NON-NLS-2$
 								mets.label(page.number()),
 								page.tags().size() == 0 ? Messages.NotTagged
 										: Messages.TaggedAs + ": " //$NON-NLS-1$
@@ -358,7 +363,7 @@ public final class SearchView {
 		label.setText(Messages.In);
 		searchOptions = new Combo(searchComposite, SWT.READ_ONLY);
 		searchOptions.setItems(new String[] { Messages.Text, Messages.Tags,
-				Messages.Comment });
+				Messages.Comments });
 		searchOptions.select(0);
 		searchOptions.addSelectionListener(searchListener);
 	}
@@ -472,9 +477,11 @@ public final class SearchView {
 
 	private void setInput() {
 		String current = selected(volumes);
+		XmlDb db = DrcUiActivator.instance().db();
 		if (content == null || !current.equals(last)) {
 			loadData();
 			allPages = new ArrayList<String>(asList(content.modelIndex.pages()));
+			pingCollection(current, page(allPages.get(0)), db);
 			Collections.sort(allPages);
 		}
 		last = current;
@@ -482,8 +489,7 @@ public final class SearchView {
 				.toLowerCase());
 		Arrays.sort(pages, comp);
 		chapters = new TreeMap<Chapter, List<Object>>();
-		mets = new MetsTransformer(
-				current + ".xml", DrcUiActivator.instance().db()); //$NON-NLS-1$
+		mets = new MetsTransformer(current + ".xml", db); //$NON-NLS-1$
 		for (Object page : pages) {
 			int fileNumber = page instanceof Page ? ((Page) page).number()
 					: new Page(null, (String) page).number();
@@ -497,6 +503,18 @@ public final class SearchView {
 		}
 		viewer.setInput(chapters);
 		updateResultCount(pages.length);
+	}
+
+	private void pingCollection(final String current, final Page page,
+			final XmlDb db) {
+		/* Ping the collection in the background to avoid delay on first save: */
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				db.putXml(page.toXml(), Index.DefaultCollection()
+						+ "/" + current, page.id()); //$NON-NLS-1$
+			}
+		}).start();
 	}
 
 	private void loadData() {
@@ -673,14 +691,16 @@ public final class SearchView {
 			case 0:
 				return ""; //$NON-NLS-1$
 			case 1:
-				return isPage(element) ? volumes.getSelectionIndex() + 1 + "" : ""; //$NON-NLS-1$ //$NON-NLS-2$
+				return isPage(element) ? volumes.getItem(volumes
+						.getSelectionIndex()) : ""; //$NON-NLS-1$
 			case 2:
 				return isPage(element) ? mets.label(asPage(element).number())
 						+ "" : ""; //$NON-NLS-1$ //$NON-NLS-2$
 			case 3: {
 				if (isPage(element)) {
 					String text = asPage(element).toText("|"); //$NON-NLS-1$
-					return text.substring(0, Math.min(60, text.length()))
+					return "Text: " //$NON-NLS-1$
+							+ text.substring(0, Math.min(60, text.length()))
 							+ "..."; //$NON-NLS-1$
 				}
 				return element.toString();
