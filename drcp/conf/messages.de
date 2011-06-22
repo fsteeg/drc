@@ -85,7 +85,7 @@ views.index.header.4 = Über das Projekt
 
 views.index.greeting = <p>Liebe Romaninnen, liebe Romanen</p><p>Die Chrestomathie wurde digitalisiert und steht nun jedem zur Verfügung. Diese wertvolle Sammlung  rätoromanischer Literatur, zusammengetragen und publiziert von Caspar Decurtins, liegt im Internet vor. Alle sind eingeladen, diese digitalen Texte zu nutzen, zu kommentieren und zu verbessern.</p><p>In diesem Sinne wünsche ich viel Freude und viel Spass beim Lesen.</p><p>Corina Casanova, Bundeskanzlerin</p><br />
 
-views.index.about = Die Rätoromanische Chrestomathie von Caspar Decurtins ist die bis heute wichtigste Textsammlung des Bündnerromanischen. Die insgesamt rund 8000 Seiten enthalten Texte der verschiedensten Gattungen über einen Zeitraum von vier Jahrhunderten, aus allen Regionen und in allen Idiomen des Bündnerromanischen. Ursprünglich zwischen 1891 und 1919 zusammengestellt, ist die Rätoromanische Chrestomathie nun erstmals auch digital zugänglich. <p>Helfen Sie mit, die Chrestomathie originalgetreu und fehlerfrei zugänglich zu machen: Melden Sie sich an und laden Sie die aktuelle Beta-Version des Editors für Windows oder Mac. Hinweise zur Benutzung finden sie <a href="%1s">hier</a>.</p><p>Mehr zum DRC-Projekt finden Sie <a href="%2s">hier</a>.</p>
+views.index.about = Die Rätoromanische Chrestomathie von Caspar Decurtins ist die bis heute wichtigste Textsammlung des Bündnerromanischen. Die insgesamt rund 8000 Seiten enthalten Texte der verschiedensten Gattungen über einen Zeitraum von vier Jahrhunderten, aus allen Regionen und in allen Idiomen des Bündnerromanischen. Ursprünglich zwischen 1891 und 1919 zusammengestellt, ist die Rätoromanische Chrestomathie nun erstmals auch digital verfügbar. <p>Helfen Sie mit, die Chrestomathie originalgetreu und fehlerfrei zugänglich zu machen: Melden Sie sich an und laden Sie die aktuelle Beta-Version des Editors für Windows oder Mac. Hinweise zur Benutzung finden sie <a href="%1s">hier</a>.</p><p>Mehr zum DRC-Projekt finden Sie <a href="%2s">hier</a>.</p>
 
 views.index.about.pages = Erster Band: %s Seiten.
 
@@ -172,7 +172,7 @@ views.main.language.help = (?)
 
 
 ##################
-##  press.html    ##
+##  press.html  ##
 ##################
 
 views.press.header.1 = DRC in der Presse
