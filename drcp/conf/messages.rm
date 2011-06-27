@@ -179,7 +179,7 @@ views.main.language.help = (?)
 views.press.header.1 = DRC in der Presse
 views.press.header.2 = Vorträge und Präsentationen
 
-views.press.news.1 = <a href="%1s" target="_blank">La crestomazia è online (SF-RTR, 06.06.2011, 17.40)</a>
+views.press.news.1 = <a href="%1s" target="_blank">La Crestomazia è online (SF-RTR, 06.06.2011, 17.40)</a>
 views.press.news.2 = <a href="%1s" target="_blank">La Crestomazia Retorumantscha è online (SF-RTR, 06.06.2011, 11.01)</a>
 views.press.news.3 = <a href="%1s" target="_blank">Crestomazia Retorumantscha per tuts(SF-RTR, 07.06.2011, 11.15)</a>
 views.press.news.4 = <a href="%1s" target="_blank">Digitale Innovation für die Romanen (Südostschweiz, 07.06.2011)</a>
