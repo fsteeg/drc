@@ -41,7 +41,7 @@
 	</p>
 	<h3>&{'views.index.header.1'}</h3>
 	<p>
-		&{'views.index.text.1', 'application/signup', 'http://github.com/spinfo/drc/downloads', 'http://github.com/spinfo/drc'}
+		&{'views.index.text.1', 'application/signup', 'http://github.com/spinfo/drc/downloads', 'http://github.com/spinfo/drc', 'application/faq'}
 	</p>
 
 	#{if top.size() > 0}
@@ -68,12 +68,12 @@
 
 	<img src="/public/images/casanova.jpg" width="150px" class="floatRight"/>
 	
-    <i>&{'views.index.greeting'}</i>
+    <i>&{'views.index.greeting', 'application/salid'}</i>
 
 	<h3>&{'views.index.header.4'}</h3>
 	
 	<p> 
-		&{'views.index.about', 'application/signup', 'http://github.com/spinfo/drc/downloads', 'application/faq', 'application/info'} 
+		&{'views.index.about', 'application/info'} 
 	</p>
 	#{if ids.size() > 0} &{'views.index.about.pages', ids.size()}
 	<p>
