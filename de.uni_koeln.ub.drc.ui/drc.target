@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="DRC Target" sequenceNumber="27">
+<target name="DRC Target" sequenceNumber="33">
 <locations>
 <location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.sdk.feature.group" version="4.1.0.v20110612-1800-7T7fA7F8Yx_Ql6roaf3xFVgvydz-4Tz-cklGYpOPNjXlT"/>
-<unit id="org.eclipse.rcp.id" version="4.1.0.I20110617-1015"/>
-<repository location="http://download.eclipse.org/e4/sdk/drops/S-4.1RC5a-201106171015/repository"/>
+<unit id="org.eclipse.e4.runtime.feature.feature.group" version="0.9.1.v20100917-1000-7R77F9wF9JgLWVN4kcCmbZE"/>
+<repository location="http://download.eclipse.org/e4/downloads/drops/R-0.11-201106201631/repository"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.e4.runtime.feature.feature.group" version="0.9.1.v20100917-1000-7R77F9wF9JgLWVN4kcCmbZE"/>
-<repository location="http://download.eclipse.org/e4/downloads/drops/S-0.11RC5a-201106171015/repository"/>
+<unit id="org.eclipse.platform.sdk" version="4.1.0.I20110620-1631"/>
+<repository location="http://download.eclipse.org/e4/sdk/drops/R-4.1-201106201631/repository"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.equinox.p2.core.feature.feature.group" version="1.0.0.v20110519-8290FZ-FWmE7gdAgmOPL2_C"/>
 <unit id="org.eclipse.pde.junit.runtime.addon.feature.group" version="1.0.100.v20110331-7C7GDHAkHgHr9v0L4DF585202816"/>
-<repository location="http://download.eclipse.org/eclipse/updates/3.7milestones"/>
+<repository location="http://download.eclipse.org/eclipse/updates/3.7"/>
 </location>
 </locations>
 </target>
