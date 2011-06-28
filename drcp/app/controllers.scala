@@ -34,6 +34,7 @@ object Application extends Controller {
   def faq = { Template() }
   def info = { Template() }
   def press = { Template() }
+  def salid = { Template() }
 
   def users = {
 	val all = loadUsers
