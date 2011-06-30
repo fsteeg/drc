@@ -76,7 +76,9 @@ views.faq.more = Ulteriur agid survegnis Vus sut
 ##  index.html  ##
 ##################
 
-views.index.text.1 = As participai era Vus: <a href="%1s">As annunziai</a> e telechargiai la <a href="%2s">versiun beta actuala</a> da l’editur per Windows u Mac ubain faschai in’atgna versiun sin <a href="%3s">GitHub</a>.
+views.index.text.1 = <p>Gidai era Vus a render accessibla la Crestomazia online fidaivla a l’original e senza sbagls: As <a href="%1s">annunziai</a> e telechargiai la <a href="%2s">versiun beta actuala</a> da l’editur per Windows u Mac ubain faschai in’atgna versiun sin <a href="%3s">GitHub</a>.<p>Agids per ils utilisaders chattais Vus <a href="%4s">qua</a>. </p>
+
+views.index.text.2 = As participai era Vus: <a href="%1s">As annunziai</a> e telechargiai la <a href="%2s">versiun beta actuala</a> da l’editur per Windows u Mac ubain faschai in’atgna versiun sin <a href="%3s">GitHub</a>.
 
 views.index.header.1 = Sa participar 
 views.index.header.2 = Correctur(a)s activ(a)s
@@ -85,7 +87,7 @@ views.index.header.4 = Davart il project
 
 views.index.greeting = <p>Charas Rumantschas, chars Rumantschs</p><p>La Crestomazia è vegnida digitalisada e stat a disposiziun ad in e scadin. Quest stgazi da la litteratura rumantscha, mess ensemen e publitgà da Caspar Decurtins, è ussa accessibel sin internet. Tuttas e tuts èn envidads da duvrar, commentar e meglierar questa digitalisaziun.</p><p>En quest senn giavisch jau bler plaschair e buna lectura.</p><p>Corina Casanova, chanceliera federala</p><br />
 
-views.index.about = La Crestomazia Retorumantscha da Caspar Decurtins è fin oz la pli impurtanta collecziun da texts rumantschs. Questas var 8000 paginas cumpiglian texts da different gener, da quatter tschientaners, da tut las regiuns e da tut ils idioms rumantschs. La Crestomazia Retorumantscha, edida oriundamain ils onns 1896-1919, è ussa disponibla per l’emprima giada er en l’internet. <p>Gidai era Vus a render accessibla la Crestomazia online fidaivla a l’original e senza sbagls: As annunziai e telechargiai la versiun beta actuala da l’editur per Windows u Mac. Agids per ils utilisaders chattais Vus <a href="%1s">qua</a>. </p><p>Dapli davart il project CRD chattais Vus <a href="%2s">qua</a>.</p>
+views.index.about = La Crestomazia Retorumantscha da Caspar Decurtins è fin oz la pli impurtanta collecziun da texts rumantschs. Questas var 8000 paginas cumpiglian texts da different gener, da quatter tschientaners, da tut las regiuns e da tut ils idioms rumantschs. La Crestomazia Retorumantscha, edida oriundamain ils onns 1896-1919, è ussa disponibla per l’emprima giada er en l’internet. <p>Dapli davart il project CRD chattais Vus <a href="%4s">qua</a>.</p>
 
 views.index.about.pages = Tom 1: %s paginas.
 
@@ -169,7 +171,29 @@ views.main.pub = Pressa
 views.main.contact = Contact
 views.main.footer = Crestomazia Retorumantscha Digitala: in project da digitalisaziun collaborativ.
 views.main.language = Lingua:
-views.main.language.help = (?)
+views.main.language.help = (Internet Explorer?)
+
+
+##################
+##  press.html  ##
+##################
+
+views.press.header.1 = DRC in der Presse
+views.press.header.2 = Vorträge und Präsentationen
+
+views.press.news.1 = <a href="%1s" target="_blank">La Crestomazia è online (SF-RTR, 06.06.2011, 17.40)</a>
+views.press.news.2 = <a href="%1s" target="_blank">La Crestomazia Retorumantscha è online (SF-RTR, 06.06.2011, 11.01)</a>
+views.press.news.3 = <a href="%1s" target="_blank">Crestomazia Retorumantscha per tuts(SF-RTR, 07.06.2011, 11.15)</a>
+views.press.news.4 = <a href="%1s" target="_blank">Digitale Innovation für die Romanen (Südostschweiz, 07.06.2011)</a>
+views.press.news.5 = <a href="%1s" target="_blank">La Crestomazia en la rait (La Quotidiana, 07.06.2011)</a>
+views.press.news.6 = <a href="%1s" target="_blank">La Crestomazia accessibla a mintgin (La Quotidiana, 07.06.2011)</a>
+views.press.news.7 = <a href="%1s" target="_blank">Romanische Sprachschätze per Mausklick (Bündner Tagblatt, 07.06.2011)</a>
+
+views.press.publ.1 = <a href="%1s" target="_blank">Digitale Rätoromanische Chrestomathie - Eine réécriture communautaire</a></br>(Gastvortrag an der Universität Zürich, 09.12.2010)
+views.press.publ.2 = <a href="%1s" target="_blank">"Stai si, defenda, Romontsch, tiu vegl lungatg“ - Digitalisierung als Mittel kultureller Selbstermächtigung kleinerer Sprachgemeinschaften</a></br>(Vortrag im Rahmen der "Languagetalks 2011", LMU München, 16.-18. Februar 2011)
+views.press.publ.3 = <a href="%1s" target="_blank">Posterpräsentation bei der DGfS-Jahrestagung (Göttingen, 23.-25. Februar 2011)</a></br>
+views.press.publ.4 = Digitale Rätoromanische Chrestomathie - Werkzeuge und Verfahren für die Korpuserstellung durch kollaborative Volltexterschließung</br>(Vortrag bei der GSCL-Jahrestagung 2011, Hamburg, 28.-30.09.2011 
+
 
 ##################
 ##  press.html  ##
