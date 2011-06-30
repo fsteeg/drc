@@ -33,6 +33,8 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.GC;
@@ -44,8 +46,8 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Scale;
 import org.eclipse.swt.widgets.Text;
 
 import de.uni_koeln.ub.drc.data.Box;
@@ -76,6 +78,10 @@ public final class CheckView {
 	private double scaleWidthFactor = 1;
 	private double scaleHeightFactor = 1;
 	private Page page;
+	private Composite zoomBottom;
+	private Scale scale;
+	private float scaleFactor;
+	private boolean zoom;
 
 	/**
 	 * @param parent
@@ -91,6 +97,7 @@ public final class CheckView {
 		scrolledComposite.setExpandVertical(true);
 		scrolledComposite.setExpandHorizontal(true);
 		addSuggestions();
+		scale();
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
 	}
 
@@ -148,6 +155,49 @@ public final class CheckView {
 		} else if (text == null) {
 			suggestions.setText(Messages.NoWordSelected);
 		}
+	}
+
+	private void scale() {
+		zoomBottom = new Composite(parent, SWT.NONE);
+		GridLayout layout = new GridLayout(4, false);
+		zoomBottom.setLayout(layout);
+		Label label = new Label(zoomBottom, SWT.NONE);
+		label.setText(Messages.Zoom);
+		Label label2 = new Label(zoomBottom, SWT.NONE);
+		label2.setText(Messages.Minus);
+		scale = new Scale(zoomBottom, SWT.NONE);
+		Label label3 = new Label(zoomBottom, SWT.NONE);
+		label3.setText(Messages.Plus);
+		Rectangle clientArea = zoomBottom.getClientArea();
+		scale.setBounds(clientArea.x, clientArea.y, 200, 64);
+		scale.setOrientation(SWT.RIGHT_TO_LEFT);
+		scale.setMinimum(10);
+		scale.setMaximum(100);
+		scale.setSelection(10);
+		scale.setIncrement(1);
+		scale.setToolTipText(Messages.ZoomToolTip);
+		scale.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+				int diff = scale.getMaximum() - scale.getSelection()
+						+ scale.getMinimum();
+				scaleFactor = diff / 100F;
+				if (scaleFactor == 1.0)
+					zoom = false;
+				else
+					zoom = true;
+				markPosition(word);
+			}
+
+			@Override
+			public void mouseDown(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+			}
+		});
 	}
 
 	private void addSuggestions() {
@@ -220,7 +270,7 @@ public final class CheckView {
 
 	private void drawBoxBorder(final Rectangle rect, final GC gc) {
 		gc.setAlpha(200);
-		gc.setLineWidth(1);
+		gc.setLineWidth(2);
 		gc.setForeground(parent.getDisplay().getSystemColor(
 				SWT.COLOR_DARK_GREEN));
 		gc.drawRectangle(rect);
@@ -317,17 +367,48 @@ public final class CheckView {
 		Word word = (Word) text.getData(Word.class.toString());
 		Box box = word.position();
 		Image image = reloadImage();
+		int height = image.getBounds().height;
+		int width = image.getBounds().width;
+		Image newImage = emptyImage(image);
 		Rectangle rect = getScaledRect(box);
-		Image newImage = new Image(parent.getDisplay(), new Rectangle(
-				image.getBounds().x, image.getBounds().y,
-				image.getBounds().width, image.getBounds().height));
 		GC gc = new GC(newImage);
 		gc.drawImage(image, 0, 0);
+		image.dispose();
 		drawBoxArea(rect, gc);
 		drawBoxBorder(rect, gc);
 		gc.dispose();
+		if (zoom) {
+			newImage = scaleImage(newImage);
+			Point p = newOrigin(box, height, width, newImage);
+			scrolledComposite.setOrigin(p);
+		} else {
+			scrolledComposite.setOrigin(new Point(rect.x - 15, rect.y - 25)); // IMG_SIZE
+		}
 		imageLabel.setImage(newImage);
-		scrolledComposite.setOrigin(new Point(rect.x - 15, rect.y - 25)); // IMG_SIZE
+	}
+
+	private Point newOrigin(Box box, int oldHeigt, int oldWidth, Image newImage) {
+		int h = newImage.getBounds().height;
+		int w = newImage.getBounds().width;
+		int x = ((oldWidth - w) / 2) + (int) (box.x() * scaleFactor);
+		int y = ((oldHeigt - h) / 2) + (int) (box.y() * scaleFactor);
+		return new Point(x - 15, y - 25);
+	}
+
+	private Image scaleImage(final Image image) {
+		Rectangle rect = image.getBounds();
+		ImageData data = image.getImageData().scaledTo(
+				(int) (rect.width * scaleFactor),
+				(int) (rect.height * scaleFactor));
+		image.dispose();
+		return new Image(parent.getDisplay(), data);
+	}
+
+	private Image emptyImage(final Image image) {
+		Rectangle rect = new Rectangle(image.getBounds().x,
+				image.getBounds().y, image.getBounds().width,
+				image.getBounds().height);
+		return new Image(parent.getDisplay(), rect);
 	}
 
 	private Rectangle getScaledRect(Box box) {
@@ -335,14 +416,11 @@ public final class CheckView {
 		int startY = (int) ((scaleHeightFactor * box.y()) - 6);
 		int boxWidth = (int) ((scaleWidthFactor * box.width()) + 25);
 		int boxHeight = (int) ((scaleHeightFactor * box.height()) + 18);
-		Rectangle rect = new Rectangle(startX, startY, boxWidth, boxHeight);
-		return rect;
+		return new Rectangle(startX, startY, boxWidth, boxHeight);
 	}
 
 	private Image reloadImage() {
-		Display display = parent.getDisplay();
-		Image newImage = new Image(display, imageData);
-		return newImage;
+		return new Image(parent.getDisplay(), imageData);
 	}
 
 	private void updateImage(final Page page) throws IOException {
@@ -350,7 +428,6 @@ public final class CheckView {
 				&& !imageLabel.getImage().isDisposed())
 			imageLabel.getImage().dispose();
 		Image loadedImage = loadImage(page);
-		// lazyLoader.schedule();
 		imageData = loadedImage.getImageData();
 		imageLabel.setImage(loadedImage);
 		imageLoaded = true;

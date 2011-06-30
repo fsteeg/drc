@@ -80,6 +80,11 @@ public class Messages extends NLS {
 	public static String Votes;
 	public static String YourRecentEdit;
 	public static String From;
+	public static String Zoom;
+	public static String Plus;
+	public static String Minus;
+	public static String ZoomToolTip;
+
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
