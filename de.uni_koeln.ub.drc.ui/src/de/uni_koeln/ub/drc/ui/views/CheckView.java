@@ -90,6 +90,7 @@ public final class CheckView {
 	@Inject
 	public CheckView(final Composite parent) {
 		this.parent = parent;
+		scale();
 		scrolledComposite = new ScrolledComposite(parent, SWT.V_SCROLL
 				| SWT.H_SCROLL | SWT.BORDER);
 		imageLabel = new Label(scrolledComposite, SWT.BORDER | SWT.CENTER);
@@ -97,7 +98,6 @@ public final class CheckView {
 		scrolledComposite.setExpandVertical(true);
 		scrolledComposite.setExpandHorizontal(true);
 		addSuggestions();
-		scale();
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
 	}
 
@@ -161,28 +161,29 @@ public final class CheckView {
 		zoomBottom = new Composite(parent, SWT.NONE);
 		GridLayout layout = new GridLayout(4, false);
 		zoomBottom.setLayout(layout);
-		Label label = new Label(zoomBottom, SWT.NONE);
-		label.setText(Messages.Zoom);
-		Label label2 = new Label(zoomBottom, SWT.NONE);
-		label2.setText(Messages.Minus);
+		Label zoomLabel = new Label(zoomBottom, SWT.NONE);
+		zoomLabel.setText(Messages.Zoom);
+		Label downScaleLabel = new Label(zoomBottom, SWT.NONE);
+		downScaleLabel.setText(Messages.Minus);
 		scale = new Scale(zoomBottom, SWT.NONE);
-		Label label3 = new Label(zoomBottom, SWT.NONE);
-		label3.setText(Messages.Plus);
+		Label upScaleLabel = new Label(zoomBottom, SWT.NONE);
+		upScaleLabel.setText(Messages.Plus);
 		Rectangle clientArea = zoomBottom.getClientArea();
 		scale.setBounds(clientArea.x, clientArea.y, 200, 64);
-		scale.setOrientation(SWT.RIGHT_TO_LEFT);
-		scale.setMinimum(10);
+		scale.setOrientation(SWT.LEFT_TO_RIGHT);
+		scale.setMinimum(30);
 		scale.setMaximum(100);
-		scale.setSelection(10);
-		scale.setIncrement(1);
+		scale.setSelection(100);
 		scale.setToolTipText(Messages.ZoomToolTip);
+		addListener();
+	}
+
+	private void addListener() {
 		scale.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseUp(MouseEvent e) {
-				int diff = scale.getMaximum() - scale.getSelection()
-						+ scale.getMinimum();
-				scaleFactor = diff / 100F;
+				scaleFactor = scale.getSelection() / 100F;
 				if (scaleFactor == 1.0)
 					zoom = false;
 				else
