@@ -4,7 +4,7 @@ h1. Beta 3 (2011 June 30)
 
 Our third beta (tag: b3) is available. It adds more data, a complete portal site, full internationalization and Romansch localization for the editor and the portal, faster search based on a Lucene index, and more. New features are made available via internal updates, so in the future, we will release new "downloads":http://github.com/spinfo/drc/downloads for major updates only.
 
-!http://i55.tinypic.com/e6t744.png!
+!http://i52.tinypic.com/117abmw.png!
 
 The portal page, providing access to the data as well as information on the project and its users, is now live at "http://www.crestomazia.ch":http://www.crestomazia.ch
 
