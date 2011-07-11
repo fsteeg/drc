@@ -7,19 +7,14 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.views;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -75,13 +70,13 @@ public final class CheckView {
 	private Text word;
 	private List<Button> suggestionButtons = new ArrayList<Button>();
 	private Composite bottom;
-	private double scaleWidthFactor = 1;
-	private double scaleHeightFactor = 1;
 	private Page page;
 	private Composite zoomBottom;
 	private Scale scale;
-	private float scaleFactor;
-	private boolean zoom;
+	private float scaleFactor = 1;
+	private Image cachedImage;
+	private int originalHeight;
+	private int originalWidth;
 
 	/**
 	 * @param parent
@@ -182,13 +177,15 @@ public final class CheckView {
 		scale.addMouseListener(new MouseListener() {
 
 			@Override
-			public void mouseUp(MouseEvent e) {
+			public void mouseUp(MouseEvent event) {
 				scaleFactor = scale.getSelection() / 100F;
-				if (scaleFactor == 1.0)
-					zoom = false;
-				else
-					zoom = true;
-				markPosition(word);
+				if (word != null)
+					try {
+						updateImage(page);
+						markPosition(word);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 			}
 
 			@Override
@@ -324,75 +321,55 @@ public final class CheckView {
 
 	private Image loadImage(final Page page) throws IOException {
 		final InputStream in = getInputStream(page);
-		// imageData = convertToImageData(scale(in)); // TODO enable for
-		// optional scaling
 		imageData = new ImageData(in);
 		Image newImage = new Image(parent.getDisplay(), imageData);
 		return newImage;
 	}
 
-	@SuppressWarnings("unused")
-	// TODO add as option in UI
-	private ImageData convertToImageData(final BufferedImage bufferedImage)
-			throws IOException {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		ImageIO.write(bufferedImage, "png", new BufferedOutputStream(out)); //$NON-NLS-1$
-		BufferedInputStream in = new BufferedInputStream(
-				new ByteArrayInputStream(out.toByteArray()));
-		ImageData data = new ImageData(in);
-		in.close();
-		return data;
-	}
-
-	@SuppressWarnings("unused")
-	// TODO add as option in UI
-	private BufferedImage scale(InputStream in) throws IOException {
-		BufferedImage bufferedImage = ImageIO.read(in);
-		int height = scrolledComposite.getMinHeight();
-		scaleWidthFactor = ((double) height / bufferedImage.getHeight());
-		int scaledWidth = (int) (scaleWidthFactor * bufferedImage.getWidth());
-		scaleHeightFactor = ((double) scaledWidth / bufferedImage.getWidth());
-		java.awt.Image img = bufferedImage.getScaledInstance(scaledWidth,
-				height, BufferedImage.SCALE_AREA_AVERAGING);
-		BufferedImage scaledBufferedImage = new BufferedImage(
-				img.getWidth(null), img.getHeight(null),
-				BufferedImage.TYPE_INT_RGB);
-		Graphics graphics = scaledBufferedImage.getGraphics();
-		graphics.drawImage(img, 0, 0, null);
-		graphics.dispose();
-		return scaledBufferedImage;
-	}
-
 	private void markPosition(final Text text) {
-		imageLabel.getImage().dispose();
-		Word word = (Word) text.getData(Word.class.toString());
-		Box box = word.position();
-		Image image = reloadImage();
-		int height = image.getBounds().height;
-		int width = image.getBounds().width;
-		Image newImage = emptyImage(image);
-		Rectangle rect = getScaledRect(box);
-		GC gc = new GC(newImage);
-		gc.drawImage(image, 0, 0);
-		image.dispose();
-		drawBoxArea(rect, gc);
-		drawBoxBorder(rect, gc);
-		gc.dispose();
-		if (zoom) {
-			newImage = scaleImage(newImage);
-			Point p = newOrigin(box, height, width, newImage);
+		if (imageLabel.getImage() != null) {
+			imageLabel.getImage().dispose();
+
+			Word word = (Word) text.getData(Word.class.toString());
+			Box box = word.position();
+			Rectangle rect = getScaledRect(box);
+
+			Image displayedImage = new Image(parent.getDisplay(),
+					cachedImage.getImageData());
+
+			GC gc = new GC(displayedImage);
+			drawBoxArea(rect, gc);
+			drawBoxBorder(rect, gc);
+			gc.dispose();
+
+			imageLabel.setImage(displayedImage);
+			Point p = newOrigin(box, originalHeight, originalWidth,
+					displayedImage);
 			scrolledComposite.setOrigin(p);
-		} else {
-			scrolledComposite.setOrigin(new Point(rect.x - 15, rect.y - 25)); // IMG_SIZE
 		}
-		imageLabel.setImage(newImage);
+	}
+
+	private void cacheImage(final Image img) {
+		if (cachedImage != null)
+			cachedImage.dispose();
+		cachedImage = new Image(parent.getDisplay(), new Rectangle(
+				img.getBounds().x, img.getBounds().y, img.getBounds().width,
+				img.getBounds().height));
+		GC gc = new GC(cachedImage);
+		gc.drawImage(img, 0, 0);
+		gc.dispose();
+		if (scaleFactor < 1) {
+			cachedImage = scaleImage(cachedImage);
+		}
+		originalHeight = cachedImage.getBounds().height;
+		originalWidth = cachedImage.getBounds().width;
 	}
 
 	private Point newOrigin(Box box, int oldHeigt, int oldWidth, Image newImage) {
-		int h = newImage.getBounds().height;
-		int w = newImage.getBounds().width;
-		int x = ((oldWidth - w) / 2) + (int) (box.x() * scaleFactor);
-		int y = ((oldHeigt - h) / 2) + (int) (box.y() * scaleFactor);
+		int height = newImage.getBounds().height;
+		int width = newImage.getBounds().width;
+		int x = ((oldWidth - width) / 2) + (int) (box.x() * scaleFactor);
+		int y = ((oldHeigt - height) / 2) + (int) (box.y() * scaleFactor);
 		return new Point(x - 15, y - 25);
 	}
 
@@ -405,32 +382,23 @@ public final class CheckView {
 		return new Image(parent.getDisplay(), data);
 	}
 
-	private Image emptyImage(final Image image) {
-		Rectangle rect = new Rectangle(image.getBounds().x,
-				image.getBounds().y, image.getBounds().width,
-				image.getBounds().height);
-		return new Image(parent.getDisplay(), rect);
-	}
-
 	private Rectangle getScaledRect(Box box) {
-		int startX = (int) ((scaleWidthFactor * box.x()) - 15);
-		int startY = (int) ((scaleHeightFactor * box.y()) - 6);
-		int boxWidth = (int) ((scaleWidthFactor * box.width()) + 25);
-		int boxHeight = (int) ((scaleHeightFactor * box.height()) + 18);
+		int startX = (int) ((scaleFactor * box.x()) - (15 * scaleFactor));
+		int startY = (int) ((scaleFactor * box.y()) - (6 * scaleFactor));
+		int boxWidth = (int) ((scaleFactor * box.width()) + (25 * scaleFactor));
+		int boxHeight = (int) ((scaleFactor * box.height()) + (18 * scaleFactor));
 		return new Rectangle(startX, startY, boxWidth, boxHeight);
-	}
-
-	private Image reloadImage() {
-		return new Image(parent.getDisplay(), imageData);
 	}
 
 	private void updateImage(final Page page) throws IOException {
 		if (imageLabel != null && imageLabel.getImage() != null
 				&& !imageLabel.getImage().isDisposed())
 			imageLabel.getImage().dispose();
-		Image loadedImage = loadImage(page);
-		imageData = loadedImage.getImageData();
-		imageLabel.setImage(loadedImage);
+		cacheImage(loadImage(page));
+		Image dispayedImage = new Image(parent.getDisplay(),
+				cachedImage.getImageData());
+		imageData = dispayedImage.getImageData();
+		imageLabel.setImage(dispayedImage);
 		imageLoaded = true;
 		scrolledComposite.setMinSize(scrolledComposite.getContent()
 				.computeSize(SWT.DEFAULT, SWT.DEFAULT, true));
