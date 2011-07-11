@@ -89,19 +89,18 @@ object SearchOption extends Enumeration {
 
 object Import extends Application {
   private val testing = Index.LocalDb
-  //val staging = XmlDb("xmldb:exist://hydra2.spinfo.uni-koeln.de:7777/exist/xmlrpc", "db", "drc")
-  //val product = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "db", "drc")
-  //val anon = XmlDb("xmldb:exist://hydra1.spinfo.uni-koeln.de:8080/exist/xmlrpc", "db", "drc-anonymous")
 
-  //    Meta.initialImport(db=testing, location="res/rom/PPN345572629")
-  User.initialImport(db = testing, folder = "users")
+  //val staging = XmlDb("hydra2.spinfo.uni-koeln.de", 7777)
+  //val product = XmlDb("hydra1.spinfo.uni-koeln.de", 8080)
+
+  //Meta.initialImport(db=testing, location="res/rom/PPN345572629")
+  //User.initialImport(db = testing, folder = "users")
   //Index.initialImport(db=testing, location="res/rom/PPN345572629_0004")
 
-  //    for(volume <- List( // "0033", "0035", "0036", "0037", "0038"
-  //        "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")) {
-  //        Index.initialImport(db=testing, location="res/rom/PPN345572629_" + volume)
-  //    }
-
+  //for(volume <- List( // "0033", "0035", "0036", "0037", "0038"
+  //  "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")) {
+  //  Index.initialImport(db=testing, location="res/rom/PPN345572629_" + volume)
+  //}
 }
 
 object Meta {
@@ -121,24 +120,23 @@ object Meta {
 object Index {
 
   val Volumes = Map(
-	4 -> "I, 1.",
-	8 -> "I, 2. - 3.",
-	9 -> "II, 1.",
-	11 -> "II, 2. - 3.",
-	14 -> "III",
-	30 -> "IV",
-	12 -> "V",
-	17 -> "VI",
-	18 -> "VII",
-	24 -> "VIII",
-	27 -> "IX",
-	35 -> "X, 1. - 3.",
-	36 -> "X, 3.",
-	37 -> "XI",
-	38 -> "XII",
-	33 -> "XIII"
-  )
-	
+    4 -> "I, 1.",
+    8 -> "I, 2. - 3.",
+    9 -> "II, 1.",
+    11 -> "II, 2. - 3.",
+    14 -> "III",
+    30 -> "IV",
+    12 -> "V",
+    17 -> "VI",
+    18 -> "VII",
+    24 -> "VIII",
+    27 -> "IX",
+    35 -> "X, 1. - 3.",
+    36 -> "X, 3.",
+    37 -> "XI",
+    38 -> "XII",
+    33 -> "XIII")
+
   //def collection(s:String) = "drc/" + s
   val DefaultCollection = "drc"
   val LocalDb = XmlDb("localhost", 7777, "guest", "guest")
