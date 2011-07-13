@@ -28,6 +28,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.ui.css.swt.CSSSWTConstants;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
@@ -55,6 +56,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
@@ -207,16 +209,31 @@ public final class SearchView {
 
 	private void addPageInfoBar(Composite parent) {
 		Composite bottomComposite = new Composite(parent, SWT.NONE);
-		bottomComposite.setLayout(new GridLayout(6, false));
+		bottomComposite.setLayout(new GridLayout(7, false));
 		Button prev = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
 		prev.setImage(DrcUiActivator.instance().loadImage("icons/prev.gif")); //$NON-NLS-1$
 		prev.addSelectionListener(new NavigationListener(Navigate.PREV));
 		Button next = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
 		next.setImage(DrcUiActivator.instance().loadImage("icons/next.gif")); //$NON-NLS-1$
 		next.addSelectionListener(new NavigationListener(Navigate.NEXT));
+		pageChecked(bottomComposite);
 		currentPageLabel = new Label(bottomComposite, SWT.NONE);
 		insertAddCommentButton(bottomComposite);
 		currentPageLabel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+	}
+
+	private void pageChecked(Composite bottomComposite) {
+		Button close = new Button(bottomComposite, SWT.NONE);
+		close.setText(Messages.ClosePage); // Translate also in rm
+		close.setData(CSSSWTConstants.CSS_CLASS_NAME_KEY, "closeButton");//$NON-NLS-1$
+		close.addListener(SWT.MouseUp, new Listener() {
+
+			@Override
+			public void handleEvent(org.eclipse.swt.widgets.Event event) {
+				// TODO: Mark the current page as corrected.
+			}
+
+		});
 	}
 
 	private void insertAddCommentButton(Composite bottomComposite) {

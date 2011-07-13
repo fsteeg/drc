@@ -32,6 +32,7 @@ case class Page(words: List[Word], id: String) {
   
   val tags: ListBuffer[Tag] = new ListBuffer()
   val comments: ListBuffer[Comment] = new ListBuffer()
+  val status: ListBuffer[Status] = new ListBuffer()
 
   var imageBytes: Option[Array[Byte]] = None
 
@@ -40,6 +41,7 @@ case class Page(words: List[Word], id: String) {
       { words.map(_.toXml) }
       { tags.map(_.toXml) }
       { comments.map(_.toXml) }
+      { status.map(_.toXml) }
     </page>
 
   def toText(delim: String) =
@@ -134,6 +136,14 @@ private[data] case class Comment(user: String, text: String, date: Long) {
 
 private[data] object Comment {
   def fromXml(xml: Node) = Comment((xml \ "@user").text, xml.text, (xml \ "@date").text.toLong)
+  }
+
+private[data] case class Status(user: String, date: Long, finished: Boolean) {
+  def toXml = <status user={ user } date={ date.toString } finished={ finished.toString }></status>
+}
+
+private[data] object Status {
+  def fromXml(xml: Node) = Status((xml \ "@user").text,(xml \ "@date").text.toLong, (xml \ "@finished").text.toBoolean)
 }
 
 private[data] case class Tag(text: String, user: String) {
