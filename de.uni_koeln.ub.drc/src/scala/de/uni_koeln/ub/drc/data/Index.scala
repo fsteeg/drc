@@ -119,7 +119,27 @@ object Meta {
 
 object Index {
 
-  val Volumes = Map(
+  /** RF labels, ordered by Octopus volumes */
+  val RF: List[String] = List(
+    "0004",
+    "0008",
+    "0009",
+    "0011",
+    // "0014", // TODO add volume 14
+    "0030",
+    "0012",
+    "0017",
+    "0018",
+    "0024",
+    "0027",
+    "0035",
+    "0036",
+    "0037",
+    "0038",
+    "0033")
+
+  /** Mapping of RF ids to Octopus labels */
+  val Volumes: Map[Int, String] = Map(
     4 -> "I, 1.",
     8 -> "I, 2. - 3.",
     9 -> "II, 1.",

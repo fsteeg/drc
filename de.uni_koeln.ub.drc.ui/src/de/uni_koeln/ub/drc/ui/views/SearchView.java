@@ -82,11 +82,6 @@ import de.uni_koeln.ub.drc.util.MetsTransformer;
  */
 public final class SearchView {
 
-	@SuppressWarnings("nls")
-	// "0033", "0035", "0036", "0037", "0038"
-	private static final String[] VOLUMES = new String[] { "0004", "0008",
-			"0009", "0011", "0012", "0017", "0018", "0024", "0027", "0033",
-			"0035", "0036", "0037", "0038" };
 	private Text searchField;
 	private Text tagField;
 	private Label resultCount;
@@ -134,13 +129,13 @@ public final class SearchView {
 		Label label1 = new Label(searchComposite, SWT.NONE);
 		label1.setText(Messages.Volume);
 		volumes = new Combo(searchComposite, SWT.READ_ONLY);
-		String[] volumeLabels = new String[VOLUMES.length];
-		for (int i = 0; i < VOLUMES.length; i++) {
-			volumeLabels[i] = Index.Volumes().get(Integer.parseInt(VOLUMES[i]))
-					.get();
+		String[] volumeLabels = new String[Index.RF().size()];
+		for (int i = 0; i < Index.RF().size(); i++) {
+			volumeLabels[i] = Index.Volumes()
+					.get(Integer.parseInt((String) Index.RF().apply(i))).get();
 		}
 		volumes.setItems(volumeLabels);
-		volumes.setData(VOLUMES);
+		volumes.setData(JavaConversions.asList(Index.RF()));
 		volumes.select(0);
 		volumes.addSelectionListener(searchListener);
 		Label label2 = new Label(searchComposite, SWT.NONE);
@@ -473,7 +468,7 @@ public final class SearchView {
 
 	private Map<Chapter, List<Object>> chapters = new TreeMap<Chapter, List<Object>>();
 	private MetsTransformer mets;
-	private String last = VOLUMES[0];
+	private String last = JavaConversions.asList(Index.RF()).get(0);
 
 	private void setInput() {
 		String current = selected(volumes);
@@ -672,11 +667,12 @@ public final class SearchView {
 		return element instanceof Page;
 	}
 
+	@SuppressWarnings("unchecked")
 	private String selected(Combo volumes) {
 		return "PPN345572629_" //$NON-NLS-1$
-				+ (volumes == null ? VOLUMES[0]
-						: ((String[]) volumes.getData())[volumes
-								.getSelectionIndex()]);
+				+ (volumes == null ? JavaConversions.asList(Index.RF()).get(0)
+						: ((List<String>) volumes.getData()).get(volumes
+								.getSelectionIndex()));
 	}
 
 	private Page asPage(Object element) {
