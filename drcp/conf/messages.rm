@@ -54,7 +54,7 @@ views.faq.q10 = ... far correcturas?
 views.faq.q11 = ... crear chavazzins (tags)?
 views.faq.q12 = ... scriver commentaris?
 views.faq.q13 = ... memorisar las modificaziuns?
-views.faq.q14 = Wie kann ich im Internet Explorer die Sprache der Website wechseln?
+views.faq.q14 = Co poss jau midar en l'Internet Explorer la lingua da la website?
 
 views.faq.a1 = As inscrivai <a href="%1s">qua</a> e telechargiai la <a href="%2s">versiun actuala</a> da l’editur da la CRD per Windows u Mac. Sin dumonda pudain nus metter a disposiziun ulteriurs downloads, p.ex. per versiuns pli spezialas dal sistem operativ u per Linux.
 views.faq.a2 = L’editur da la CRD è in sistem da correctura che permetta da modifitgar ils texts da la Crestomazia a moda collectiva. Cun l’editur na pudais Vus betg mo leger u tschertgar infurmaziuns, mabain era curreger, commentar u enritgir cun chavazzins ils texts da la Crestomazia. Tut las midadas fatgas cun l’editur vegnan memorisadas sin in server central. Uschia èsi pussaivel da mussar las correcturas, ils commentaris ed ils chavazzins a tut ils utilisaders. Quels pon da princip modifitgar danovamain questas midadas.
@@ -68,7 +68,7 @@ views.faq.a10 = La pagina che Vus tschernis vegn visualisada sco text modifitgab
 views.faq.a11 = Via ina segunda fanestra d’endataziun en la fanestra da "navigaziun" (giudim a dretga) pudais Vus endatar tants chavazzins sco quai che Vus vulais. Chavazzins gia existents vegnan visualisads en la glista da survista en la fanestra da "navigaziun".
 views.faq.a12 = Remartgas, renviaments e dumondas pon vegnir endatads sco text en la fanestra da "commentaris" (en il champ sutvart da l’editur). En questa fanestra vegnan ultra da quai visualisads tut ils commentaris che existan gia en connex cun la pagina actuala.
 views.faq.a13 = Cliccai per memorisar las modificaziuns sin il simbol da la disketta en la trav da menus, tscherni en il menu principal "datoteca"/"memorisar" u utilisai la cumbinaziun da tastas usitada per Voss sistem operativ (Strg+S per Windows, Cmd+S per MacOS). Las datas vegnan memorisadas sin in server central. Per arcunar ina u pliras paginas sin Voss disc dir, pudais Vus tscherner il punct dal menu "exportar".
-views.faq.a14 = Bei den meisten Browsern (z.B. Google Chrome, Firefox, Safari) können Sie die Sprache durch einen einfachen Klick wechseln. Eine Ausnahme ist der Windows Internet Explorer: Hier müssen Sie die Sprache in den Browsereinstellungen festlegen: Gehen Sie hierfür im Menü "Extras" auf "Internetoptionen", dort finden Sie eine Schaltfläche "Sprachen...", über die Sie die bevorzugte Sprache festlegen können. Die Änderung wird beim nächsten Öffnen des Explorers wirksam. <p>Alternativ können Sie auch explizit sogenannte "Cookies" von der Seite uni-koeln.de zulassen. Gehen Sie hierfür im Menü "Extras" auf "Internetoptionen", dort finden Sie auf der Registerkarte "Datenschutz" eine Schaltfläche "Sites...". Geben Sie hier "uni-koeln.de" ein und klicken Sie rechts neben dem Eingabefenster auf "Zulassen". Nun können Sie die Sprache durch einen einfachen Klick wechseln.</p>
+views.faq.a14 = Tar la gronda part dals navigaturs (p.ex. Google Chrome, Firefox, Safari) pudais Vus midar la lingua cun far in simpel clic. In'excepziun è il Windows Internet Explorer: tar quel stuais Vus fixar la lingua en ils parameters dal navigatur. Elegi il menu "Extras" e cliccai alura sin "Internetoptionen", là chattais Vus il buttun "Sprachen". Cun quel pudais Vus fixar la lingua preferida. La midada vegn activa la proxima giada che Vus aviais l'Internet Explorer. <p>Alternativamain pudais Vus era lubir explicitamain uschenumnads "cookies" da la pagina www.uni-koeln.de. Elegi per quel intent il menu "Extras" e cliccai alura sin "Internetoptionen". Cliccai en la carta da register "Datenschutz" il buttun "Sites". Endatai en quel lieu "uni-koeln.de" e cliccai sin "Zulassen" a dretga dal champ d'endataziun. Ussa pudais Vus midar la lingua cun far in simpel clic.</p>
 
 views.faq.more = Ulteriur agid survegnis Vus sut
 
@@ -94,7 +94,7 @@ views.index.about.pages = Tom 1: %s paginas.
 views.index.search.term = Noziun da tschertga:
 views.index.search.volume = Tom
 views.index.search.all = Tuts
-views.index.search.info = Suchoptionen: <i>Wort*</i> (Suchbegriff gefolgt von beliebig vielen Zeichen); <i>Wort?</i> (gefolgt von einem Zeichen), <i>Wort~</i> (unscharfe Suche).
+views.index.search.info = Opziuns da tschertga: <i>pled*</i> (noziun da tschertga suandada d'in dumber da segns illimità); <i>pled?</i> (noziun da tschertga suandada d'in segn), <i>pled~</i> (tschertga pli averta).
 views.index.users.more = dapli...
 views.index.users.rank = Plaz
 views.index.users.name = Num
@@ -181,27 +181,6 @@ views.main.language.help = (Internet Explorer?)
 views.press.header.1 = DRC in der Presse
 views.press.header.2 = Vorträge und Präsentationen
 
-views.press.news.1 = <a href="%1s" target="_blank">La Crestomazia è online (SF-RTR, 06.06.2011, 17.40)</a>
-views.press.news.2 = <a href="%1s" target="_blank">La Crestomazia Retorumantscha è online (SF-RTR, 06.06.2011, 11.01)</a>
-views.press.news.3 = <a href="%1s" target="_blank">Crestomazia Retorumantscha per tuts(SF-RTR, 07.06.2011, 11.15)</a>
-views.press.news.4 = <a href="%1s" target="_blank">Digitale Innovation für die Romanen (Südostschweiz, 07.06.2011)</a>
-views.press.news.5 = <a href="%1s" target="_blank">La Crestomazia en la rait (La Quotidiana, 07.06.2011)</a>
-views.press.news.6 = <a href="%1s" target="_blank">La Crestomazia accessibla a mintgin (La Quotidiana, 07.06.2011)</a>
-views.press.news.7 = <a href="%1s" target="_blank">Romanische Sprachschätze per Mausklick (Bündner Tagblatt, 07.06.2011)</a>
-
-views.press.publ.1 = <a href="%1s" target="_blank">Digitale Rätoromanische Chrestomathie - Eine réécriture communautaire</a></br>(Gastvortrag an der Universität Zürich, 09.12.2010)
-views.press.publ.2 = <a href="%1s" target="_blank">"Stai si, defenda, Romontsch, tiu vegl lungatg“ - Digitalisierung als Mittel kultureller Selbstermächtigung kleinerer Sprachgemeinschaften</a></br>(Vortrag im Rahmen der "Languagetalks 2011", LMU München, 16.-18. Februar 2011)
-views.press.publ.3 = <a href="%1s" target="_blank">Posterpräsentation bei der DGfS-Jahrestagung (Göttingen, 23.-25. Februar 2011)</a></br>
-views.press.publ.4 = Digitale Rätoromanische Chrestomathie - Werkzeuge und Verfahren für die Korpuserstellung durch kollaborative Volltexterschließung</br>(Vortrag bei der GSCL-Jahrestagung 2011, Hamburg, 28.-30.09.2011 
-
-
-##################
-##  press.html  ##
-##################
-
-views.press.header.1 = DRC in der Presse
-views.press.header.2 = Vorträge und Präsentationen
-
 views.press.news.1 = <a href="%1s" target="_blank">La crestomazia è online (SF-RTR, 06.06.2011, 17.40)</a>
 views.press.news.2 = <a href="%1s" target="_blank">La Crestomazia Retorumantscha è online (SF-RTR, 06.06.2011, 11.01)</a>
 views.press.news.3 = <a href="%1s" target="_blank">Crestomazia Retorumantscha per tuts(SF-RTR, 07.06.2011, 11.15)</a>
@@ -210,10 +189,7 @@ views.press.news.5 = <a href="%1s" target="_blank">La Crestomazia en la rait (La
 views.press.news.6 = <a href="%1s" target="_blank">La Crestomazia accessibla a mintgin (La Quotidiana, 07.06.2011)</a>
 views.press.news.7 = <a href="%1s" target="_blank">Romanische Sprachschätze per Mausklick (Bündner Tagblatt, 07.06.2011)</a>
 
-views.press.publ.1 = <a href="%1s" target="_blank">Digitale Rätoromanische Chrestomathie - Eine réécriture communautaire</a></br>(Gastvortrag an der Universität Zürich, 09.12.2010)
-views.press.publ.2 = <a href="%1s" target="_blank">"Stai si, defenda, Romontsch, tiu vegl lungatg“ - Digitalisierung als Mittel kultureller Selbstermächtigung kleinerer Sprachgemeinschaften</a></br>(Vortrag im Rahmen der "Languagetalks 2011", LMU München, 16.-18. Februar 2011)
-views.press.publ.3 = <a href="%1s" target="_blank">Posterpräsentation bei der DGfS-Jahrestagung (Göttingen, 23.-25. Februar 2011)</a></br>
-views.press.publ.4 = Digitale Rätoromanische Chrestomathie - Werkzeuge und Verfahren für die Korpuserstellung durch kollaborative Volltexterschließung</br>(Vortrag bei der GSCL-Jahrestagung 2011, Hamburg, 28.-30.09.2011 
-
-
-
+views.press.publ.1 = <a href="%1s" target="_blank">Digitale Rätoromanische Chrestomathie - Eine réécriture communautaire</a><br /> (Gastvortrag an der Universität Zürich, 09.12.2010)
+views.press.publ.2 = <a href="%1s" target="_blank">"Stai si, defenda, Romontsch, tiu vegl lungatg“ - Digitalisierung als Mittel kultureller Selbstermächtigung kleinerer Sprachgemeinschaften</a><br /> (Vortrag im Rahmen der "Languagetalks 2011", LMU München, 16.-18. Februar 2011)
+views.press.publ.3 = <a href="%1s" target="_blank">Posterpräsentation bei der DGfS-Jahrestagung (Göttingen, 23.-25. Februar 2011)</a>
+views.press.publ.4 = Digitale Rätoromanische Chrestomathie - Werkzeuge und Verfahren für die Korpuserstellung durch kollaborative Volltexterschließung<br /> (Vortrag bei der GSCL-Jahrestagung 2011, Hamburg, 28.-30.09.2011)
