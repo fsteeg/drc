@@ -22,23 +22,16 @@ import de.uni_koeln.ub.drc.data.Index
  */
 object PlainTextCopy {
 
-  val localDb = XmlDb("localhost", 7777)
-  //val stageDb = XmlDb("hydra2.spinfo.uni-koeln.de", 7777)
-  //val prodDb = XmlDb("hydra1.spinfo.uni-koeln.de", 8080)
-  val col = Index.DefaultCollection
+  private val col = Index.DefaultCollection
   val suffix = "-plain"
-  val volumes = List("0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")
 
-  def main(args: Array[String]): Unit = {
-    for (volume <- volumes) process("PPN345572629_" + volume, localDb)
-    def process(volume: String, db: XmlDb): Unit = {
-      val ids = db.getIds(col + "/" + volume).get.sorted.filter(_.endsWith(".xml"))
-      for (id <- ids) {
-        val words: List[Word] = ((db.getXml(col + "/" + volume, id).get(0) \ "word") map (Word.fromXml(_))).toList
-        val page = new Page(words, id)
-        saveToDb(page, col + suffix, volume, db)
-        println("Copied %s".format(id))
-      }
+  def process(volume: String, db: XmlDb): Unit = {
+    val ids = db.getIds(col + "/" + volume).get.sorted.filter(_.endsWith(".xml"))
+    for (id <- ids) {
+      val words: List[Word] = ((db.getXml(col + "/" + volume, id).get(0) \ "word") map (Word.fromXml(_))).toList
+      val page = new Page(words, id)
+      saveToDb(page, col + suffix, volume, db)
+      println("Copied %s".format(id))
     }
   }
 
@@ -50,7 +43,7 @@ object PlainTextCopy {
     root
   }
 
-  def format(root: Node) = {
+  private def format(root: Node) = {
     val formatted = new StringBuilder
     new PrettyPrinter(120, 2).format(root, formatted)
     formatted

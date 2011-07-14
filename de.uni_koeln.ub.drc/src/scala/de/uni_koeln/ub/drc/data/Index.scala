@@ -17,6 +17,7 @@ import com.quui.sinist.XmlDb
 import com.quui.sinist.XmlDb.Format
 import de.uni_koeln.ub.drc.util.PlainTextCopy
 import scala.xml.Node
+import de.uni_koeln.ub.drc.util.Postprocessor
 /**
  * Simple experimental index for initial page selection.
  * @param pages The pages to index
@@ -88,19 +89,28 @@ object SearchOption extends Enumeration {
 }
 
 object Import extends Application {
-  private val testing = Index.LocalDb
 
-  //val staging = XmlDb("hydra2.spinfo.uni-koeln.de", 7777)
-  //val product = XmlDb("hydra1.spinfo.uni-koeln.de", 8080)
+  private val db = Index.LocalDb
+  //val db = XmlDb("hydra2.spinfo.uni-koeln.de", 7777)
+  //val db = XmlDb("hydra1.spinfo.uni-koeln.de", 8080)
 
-  //Meta.initialImport(db=testing, location="res/rom/PPN345572629")
-  //User.initialImport(db = testing, folder = "users")
-  //Index.initialImport(db=testing, location="res/rom/PPN345572629_0004")
+  val folder = "res/rom/"
+  val prefix = "PPN345572629_"
+  val volumes = List(
+    "0004", "0008", "0009", "0011", "0012", /*0014,*/ "0017", "0018",
+    "0024", "0027", "0030", "0033", "0035", "0036", "0037", "0038")
 
-  //for(volume <- List( // "0033", "0035", "0036", "0037", "0038"
-  //  "0004", "0008", "0009", "0011", "0012", "0017", "0018", "0024", "0027")) {
-  //  Index.initialImport(db=testing, location="res/rom/PPN345572629_" + volume)
-  //}
+  for (volume <- volumes) {
+    // Stuff to do for every volume:
+    Index.initialImport(db = db, location = folder + prefix + volume)
+    Postprocessor.process(prefix + volume, db)
+    PlainTextCopy.process(prefix + volume, db)
+  }
+
+  // Stuff to do once:
+  //Meta.initialImport(db=db, location="res/rom/PPN345572629")
+  //User.initialImport(db=db, folder="users")
+
 }
 
 object Meta {
