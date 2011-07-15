@@ -178,8 +178,8 @@ views.main.language.help = (Internet Explorer?)
 ##  press.html  ##
 ##################
 
-views.press.header.1 = DRC in der Presse
-views.press.header.2 = Vorträge und Präsentationen
+views.press.header.1 = CRD en la pressa
+views.press.header.2 = Referats e preschentaziuns
 
 views.press.news.1 = <a href="%1s" target="_blank">La crestomazia è online (SF-RTR, 06.06.2011, 17.40)</a>
 views.press.news.2 = <a href="%1s" target="_blank">La Crestomazia Retorumantscha è online (SF-RTR, 06.06.2011, 11.01)</a>
