@@ -37,6 +37,10 @@ Text {
   font: Verdana 13px;
 }
 
+.closeButton {
+  font: Verdana 10px;
+}
+
 CTabFolder {
   tab-renderer: url('platform:/plugin/org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.CTabRendering');
   tab-outline: #B6BCCC;
