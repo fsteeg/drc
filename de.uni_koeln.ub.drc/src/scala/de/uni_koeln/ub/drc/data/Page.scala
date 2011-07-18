@@ -1,10 +1,12 @@
-/**************************************************************************************************
+/**
+ * ************************************************************************************************
  * Copyright (c) 2010 Fabian Steeg. All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0 which accompanies this
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * <p/>
  * Contributors: Fabian Steeg - initial API and implementation
- *************************************************************************************************/
+ * ***********************************************************************************************
+ */
 
 package de.uni_koeln.ub.drc.data
 
@@ -29,7 +31,7 @@ case class Page(words: List[Word], id: String) {
   def volume = if (toks.size == 4) toks(1).toInt else throw new IllegalStateException(id)
   def number = if (toks.size == 4) toks(2).toInt else throw new IllegalStateException(id)
   def edits = (0 /: words)(_ + _.history.size) - words.size
-  
+
   val tags: ListBuffer[Tag] = new ListBuffer()
   val comments: ListBuffer[Comment] = new ListBuffer()
   val status: ListBuffer[Status] = new ListBuffer()
@@ -37,7 +39,7 @@ case class Page(words: List[Word], id: String) {
   var imageBytes: Option[Array[Byte]] = None
 
   def toXml =
-    <page id={id}>
+    <page id={ id }>
       { words.map(_.toXml) }
       { tags.map(_.toXml) }
       { comments.map(_.toXml) }
@@ -53,7 +55,7 @@ case class Page(words: List[Word], id: String) {
     formatted
   }
 
-  def saveToDb(collection:String=Index.DefaultCollection, db: XmlDb): Node = {
+  def saveToDb(collection: String = Index.DefaultCollection, db: XmlDb): Node = {
     val file = id.split("/").last
     val c = collection + "/" + file.split("-")(0)
     val entry = file
@@ -68,10 +70,12 @@ case class Page(words: List[Word], id: String) {
   def mergedDbVersion(dbRes: Option[List[Node]], entry: String) = dbRes match {
     case None => this // no merging needed
     case Some(res) => {
-        val dbEntry = Page.fromXml(res(0))
-        Page.mergePages(this, dbEntry)
-      }
+      val dbEntry = Page.fromXml(res(0))
+      Page.mergePages(this, dbEntry)
+    }
   }
+
+  def done = status.size > 0 && status.last.finished
 
 }
 
@@ -80,9 +84,10 @@ object Page {
   val ParagraphMarker = "@"
 
   def fromXml(page: Node): Page = {
-    val p = Page(for (word <- (page \ "word").toList) yield Word.fromXml(word), (page\"@id").text)
+    val p = Page(for (word <- (page \ "word").toList) yield Word.fromXml(word), (page \ "@id").text)
     for (tag <- (page \ "tag")) p.tags += Tag.fromXml(tag)
     for (comment <- (page \ "comment")) p.comments += Comment.fromXml(comment)
+    for (status <- (page \ "status")) p.status += Status.fromXml(status)
     p
   }
 
@@ -108,9 +113,9 @@ object Page {
       for (w <- "Daniel Bonifaci Catechismus Als Slaunt".split(" ").toList)
         yield Word(w, map(w.toLowerCase)), "testing-mock")
 
-  /** 
+  /**
    * @param lists The lists of pages to merge (each independently edited, e.g. by different users)
-   * @return A single list of pages containing the merged content 
+   * @return A single list of pages containing the merged content
    */
   def merge(lists: List[Page]*): Seq[Page] = {
     for (p1 <- lists.head; list2 <- lists.tail; p2 <- list2; if p1.id == p2.id)
@@ -136,14 +141,14 @@ private[data] case class Comment(user: String, text: String, date: Long) {
 
 private[data] object Comment {
   def fromXml(xml: Node) = Comment((xml \ "@user").text, xml.text, (xml \ "@date").text.toLong)
-  }
+}
 
 private[data] case class Status(user: String, date: Long, finished: Boolean) {
   def toXml = <status user={ user } date={ date.toString } finished={ finished.toString }></status>
 }
 
 private[data] object Status {
-  def fromXml(xml: Node) = Status((xml \ "@user").text,(xml \ "@date").text.toLong, (xml \ "@finished").text.toBoolean)
+  def fromXml(xml: Node) = Status((xml \ "@user").text, (xml \ "@date").text.toLong, (xml \ "@finished").text.toBoolean)
 }
 
 private[data] case class Tag(text: String, user: String) {
@@ -155,10 +160,10 @@ private[data] object Tag {
   def fromXml(xml: Node) = Tag((xml \ "@text").text, (xml \ "@user").text)
 }
 
-/** 
+/**
  *  Experimental heuristics for creating an XML page representation from a scanned PDF.
  *  Includes computation of the highlighting box based on line start coordinated read from the PDF.
- *  @author Fabian Steeg (fsteeg) 
+ *  @author Fabian Steeg (fsteeg)
  */
 private object PdfToPage {
 
@@ -187,6 +192,6 @@ private object PdfToPage {
       }
       words add Word(Page.ParagraphMarker, Box(0, 0, 0, 0))
     }
-    Page(words.toList, new java.io.File(pdfLocation).getName().replace(" ","").replace(".pdf",".xml"))
+    Page(words.toList, new java.io.File(pdfLocation).getName().replace(" ", "").replace(".pdf", ".xml"))
   }
 }

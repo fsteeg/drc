@@ -143,7 +143,7 @@ public final class EditComposite extends Composite {
 				text.setData(Word.class.toString(), word);
 				text.setData(Page.class.toString(), page);
 				addListeners(text);
-				text.setEditable(!word.isLocked());
+				text.setEditable(!word.isLocked() && !page.done());
 				list.add(text);
 			}
 		}
@@ -246,7 +246,7 @@ public final class EditComposite extends Composite {
 					setMessage(String.format(Messages.Entry
 							+ " '%s' " + Messages.IsLocked, text.getText())); //$NON-NLS-1$
 				}
-				text.setEditable(!word.isLocked());
+				text.setEditable(!word.isLocked() && !page.done());
 				context.modify(IServiceConstants.ACTIVE_SELECTION, text);
 				text.setToolTipText(word.formattedHistory());
 				if (prev != null

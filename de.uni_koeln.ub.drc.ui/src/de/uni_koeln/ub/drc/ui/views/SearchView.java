@@ -28,7 +28,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
-import org.eclipse.e4.ui.css.swt.CSSSWTConstants;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
@@ -69,6 +68,7 @@ import com.quui.sinist.XmlDb;
 
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
+import de.uni_koeln.ub.drc.data.Status;
 import de.uni_koeln.ub.drc.data.Tag;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
@@ -110,6 +110,7 @@ public final class SearchView {
 	};
 	private Combo volumes;
 	private Composite searchComposite;
+	private Button close;
 
 	/**
 	 * @param parent
@@ -211,23 +212,29 @@ public final class SearchView {
 		Button next = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
 		next.setImage(DrcUiActivator.instance().loadImage("icons/next.gif")); //$NON-NLS-1$
 		next.addSelectionListener(new NavigationListener(Navigate.NEXT));
-		pageChecked(bottomComposite);
 		currentPageLabel = new Label(bottomComposite, SWT.NONE);
 		insertAddCommentButton(bottomComposite);
 		currentPageLabel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		addPageCheckedButton(bottomComposite);
 	}
 
-	private void pageChecked(Composite bottomComposite) {
-		Button close = new Button(bottomComposite, SWT.NONE);
-		close.setText(Messages.ClosePage); // Translate also in rm
-		close.setData(CSSSWTConstants.CSS_CLASS_NAME_KEY, "closeButton");//$NON-NLS-1$
+	private void addPageCheckedButton(Composite parent) {
+		close = new Button(parent, SWT.CHECK);
+		close.setText(Messages.ClosePage);
 		close.addListener(SWT.MouseUp, new Listener() {
-
 			@Override
 			public void handleEvent(org.eclipse.swt.widgets.Event event) {
-				// TODO: Mark the current page as corrected.
+				Page page = page(allPages.get(index));
+				page.status().$plus$eq(
+						new Status(
+								DrcUiActivator.instance().currentUser().id(),
+								System.currentTimeMillis(), close
+										.getSelection()));
+				page.saveToDb(DrcUiActivator.instance().currentUser()
+						.collection(), DrcUiActivator.instance().db());
+				viewer.setLabelProvider(new SearchViewLabelProvider());
+				reload(close.getParent(), page);
 			}
-
 		});
 	}
 
@@ -240,15 +247,15 @@ public final class SearchView {
 		addComment.setImage(DrcUiActivator.instance()
 				.loadImage("icons/add.gif")); //$NON-NLS-1$
 		SelectionListener listener = new SelectionListener() {
-
 			@Override
-			public void widgetSelected(SelectionEvent e) { // on button click
+			// on button click
+			public void widgetSelected(SelectionEvent e) {
 				addComment(tagField);
 			}
 
 			@Override
-			public void widgetDefaultSelected(SelectionEvent e) { // on enter in
-																	// text
+			// on enter in text
+			public void widgetDefaultSelected(SelectionEvent e) {
 				addComment(tagField);
 			}
 
@@ -266,7 +273,6 @@ public final class SearchView {
 					text.setText(""); //$NON-NLS-1$
 				}
 			}
-
 		};
 		addComment.addSelectionListener(listener);
 		tagField.addSelectionListener(listener);
@@ -326,6 +332,7 @@ public final class SearchView {
 								page.tags().size() == 0 ? Messages.NotTagged
 										: Messages.TaggedAs + ": " //$NON-NLS-1$
 												+ page.tags().mkString(", "))); //$NON-NLS-1$
+		close.setSelection(page.done());
 	}
 
 	/**
@@ -740,14 +747,11 @@ public final class SearchView {
 		public Image getColumnImage(final Object element, final int columnIndex) {
 			if (columnIndex == 0 && element instanceof Page) {
 				Page page = (Page) element;
-				// return new Image(searchOptions.getDisplay(), new
-				// ByteArrayInputStream(
-				// Index.loadImageFor((Page) element))); // TODO add thumbnails
-				// to DB, use here
 				return DrcUiActivator
 						.instance()
 						.loadImage(
-								page.edits() == 0 ? "icons/page.gif" : "icons/edited.gif"); //$NON-NLS-1$ //$NON-NLS-2$
+								page.done() ? "icons/complete_status.gif" //$NON-NLS-1$
+										: page.edits() == 0 ? "icons/page.gif" : "icons/edited.gif"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			return null;
 		}

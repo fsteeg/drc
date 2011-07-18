@@ -7,7 +7,7 @@
  *************************************************************************************************/
 
 Label {
-	font: Verdana 14px;
+	font: Verdana 12px;
 	color: black /* rgb(178, 34, 34) */;
 	background-color: white;
 }
@@ -35,10 +35,6 @@ Text {
 
 .specialCharacter {
   font: Verdana 13px;
-}
-
-.closeButton {
-  font: Verdana 10px;
 }
 
 CTabFolder {
