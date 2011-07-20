@@ -1,0 +1,46 @@
+@(title:String = "")(body: => Html)
+@import play.i18n.Messages._
+@import controllers.Application._
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>@title</title>
+    <link rel="stylesheet" href="@asset("public/stylesheets/main.css")">
+    <link rel="shortcut icon" href="@asset("public/images/favicon.png")">
+    <script src="@asset("public/javascripts/jquery-1.4.2.min.js")"></script>
+  </head>
+  <body>
+  <div id="header">
+    <div id="title">
+      <h1>@get("views.main.header")</h1>
+    </div>
+    <div id="logo-top">
+      <img src="/public/images/drc-top.png" width="250px" />
+    </div>
+    <p>
+      <a href="@action(index)">@get("views.main.start")</a> |
+      <a href="@action(users)">@get("views.main.users")</a> | <a
+        href="@action(signup)">@get("views.main.signup")</a> | <a
+        href="@action(faq)">@get("views.main.faq")</a> | <a
+        href="@action(info)">@get("views.main.info")</a> | <a
+        href="@action(press)">@get("views.main.pub")</a> | <a
+        href="@action(contact)">@get("views.main.contact")</a> | 
+        @get("views.main.language") <a
+        href="@action(changeLanguage("rm"))">rm</a> <a
+        href="@action(changeLanguage("de"))">de</a> <a
+        href="@action(faq)#q14">@get("views.main.language.help") </a>
+    </p>
+    <hr />
+  </div>
+  <div id="main">@body</div>
+  <div id="footer">
+    <hr />
+    <div id="logo-bottom">
+      <img src="/public/images/drc-bottom.png" width="250px" />
+    </div>
+    <p>
+      <i>@get("views.main.footer")</i>
+    </p>
+  </div>
+</body>
+</html>

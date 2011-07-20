@@ -12,34 +12,37 @@ import scala.xml.Node
 import scala.xml.NodeSeq
 
 object Application extends Controller {
+  
+  import views.Application._
 
-  val server = "hydra1.spinfo.uni-koeln.de"
-  val port = 8080
+  val server = "localhost"//"hydra1.spinfo.uni-koeln.de"
+  val port = 7777//8080
   val db = XmlDb(server, port)
   val col = "drc"
-	  
+
   def loadUsers =
-	  (for (u <- db.getXml(col + "/users").get) yield User.fromXml(u))
-	  .sortBy(_.reputation).reverse
+    (for (u <- db.getXml(col + "/users").get) yield User.fromXml(u))
+      .sortBy(_.reputation).reverse
 
   def index = {
-	val top = loadUsers.take(5)
+    val top = loadUsers.take(5)
     //val ids = db.getIds(col + "/PPN345572629_0004").get.filter(_.endsWith(".xml"))
     //val pages = ids.take(5).map(imageLink(_))
-	val ids=List()
-    Template(top, ids/*, pages*/)
+    val ids = List()
+    val pages = List()
+    html.index(top)
   }
-  
-  def contact = { Template() }
-  def faq = { Template() }
-  def info = { Template() }
-  def press = { Template() }
-  def salid = { Template() }
+
+  def contact = { html.contact() }
+  def faq = { html.faq() }
+  def info = { html.info() }
+  def press = { html.press() }
+  def salid = { html.salid() }
 
   def users = {
-	val all = loadUsers
-	val (left, right) = all.splitAt(all.size/2)
-    Template(left, right)
+    val all = loadUsers
+    val (left, right) = all.splitAt(all.size / 2)
+    html.users(left, right)
   }
 
   private def imageLink(id: String) = "http://" + server + ":" + port + "/exist/rest/db/" + col + "/" +
@@ -47,57 +50,78 @@ object Application extends Controller {
       (if (id.contains("-")) id.substring(0, id.indexOf('-')) else id) + "/" + id.replace(".xml", ".png"))
 
   def user(id: String) = {
-    val user = User.fromXml(db.getXml(col + "/users", id + ".xml").get(0))
-    val link = imageLink(user.latestPage)
-    val page = new Page(null, user.latestPage)
-    Template(user, link, page)
+    val user:User = User.fromXml(db.getXml(col + "/users", id + ".xml").get(0))
+    val link:String = imageLink(user.latestPage)
+    val page:Page = new Page(null, user.latestPage)
+    html.user(user, link, page)
   }
 
-  def signup = Template
+  def signup = html.signup()
 
+  def account() = {
+    val name = params.get("name")
+    val id = params.get("id")
+    val pass = params.get("pass")
+    val region = params.get("region")
+    Validation.required("name", name).message(play.i18n.Messages.get("views.signup.error"))
+    Validation.required("id", id).message(play.i18n.Messages.get("views.signup.error"))
+    Validation.required("pass", pass).message(play.i18n.Messages.get("views.signup.error"))
+    Validation.required("region", region).message(play.i18n.Messages.get("views.signup.error"))
+    createAccount(name, id, pass, region)
+  }
+  
   def createAccount(@Required name: String, @Required id: String, @Required pass: String, @Required region: String) = {
     println("name: %s, id: %s, pass: %s, region: %s".format(name, id, pass, region))
     val users = loadUsers
     if (Validation.hasErrors || (users).exists(_.id == id)) {
-      "@signup".asTemplate
+      signup
     } else {
       val u = User(id, name, region, pass, col, db)
       db.putXml(u.toXml, col + "/users", id + ".xml")
       Action(user(id))
     }
   }
-  
-  def changeLanguage(lang:String) = {
+
+  def changeLanguage(lang: String) = {
     Lang.change(lang)
-    val refererURL = Http.Request.current().headers.get("referer").value 
+    val refererURL = Http.Request.current().headers.get("referer").value
     Redirect(refererURL)
+  }
+
+  def find() = {
+    val term = params.get("term")
+    val volume = params.get("volume")
+    search(term, volume)
   }
   
   def search(@Required term: String, @Required volume: String) = {
     val volumes = Index.RF
-    val vol = if(volume.toInt-1>=0) "PPN345572629_" + volumes(volume.toInt-1) else ""
+    val vol = if (volume.toInt - 1 >= 0) "PPN345572629_" + volumes(volume.toInt - 1) else ""
     val query = createQuery("/page", term)
     val q = db.query("drc-plain/" + vol, configure(query))
-    val rows = (q\"tr")
-    val links = rows.map((n:Node)=>imageLink((n\\"a"\"@href").text))
-    val pages = for((row, link) <- rows zip links) yield {
-    	val file = link.split("/").last.split("_").last.split("-")
-    	val (volume, page) = (file.head, file.last.split("\\.").head)
-    	//val mets = new MetsTransformer("PPN345572629_" + volume + ".xml", db)
-    	val text = link.replace(".png", ".xml").replace("drc/", "drc-plain/")
-    	<tr> {(row \ "td") ++ 
-    		<td>{Index.Volumes(volume.toInt)}</td> ++ 
-    		//<td>{mets.label(page.toInt)}</td> ++ // TODO: cache
-    		<td><a href={link}>image</a></td> ++ 
-    		<td><a href={text}>text</a></td>} 
-        </tr>
-    } 
-    val label = if(volume.toInt-1>=0) Index.Volumes(volumes(volume.toInt-1).toInt) else ""
-    Template(term, label, pages, volume)
-  }
-  
-  def createQuery(selector: String, term:String) = {
-      """
+    val rows = (q \ "tr")
+    val links = rows.map((n: Node) => imageLink((n \\ "a" \ "@href").text))
+    val pages:Seq[Elem] = for ((row, link) <- rows zip links) yield {
+      val file = link.split("/").last.split("_").last.split("-")
+      val (volume, page) = (file.head, file.last.split("\\.").head)
+      //val mets = new MetsTransformer("PPN345572629_" + volume + ".xml", db)
+      val text = link.replace(".png", ".xml").replace("drc/", "drc-plain/")
+      <tr>
+        {
+          (row \ "td") ++
+            <td>{ Index.Volumes(volume.toInt) }</td> ++
+            //<td>{mets.label(page.toInt)}</td> ++ // TODO: cache
+            <td><a href={ link }>image</a></td> ++
+            <td><a href={ text }>text</a></td>
+        }
+      </tr>
+    }
+    val label = if (volume.toInt - 1 >= 0) Index.Volumes(volumes(volume.toInt - 1).toInt) else ""
+    html.search(term, label, pages, volume)
+ }
+
+  def createQuery(selector: String, term: String) = {
+    """
       import module namespace kwic="http://exist-db.org/xquery/kwic";
       declare option exist:serialize "omit-xml-declaration=no encoding=utf-8";
       for $m in %s[ft:query(., '%s')]
@@ -105,12 +129,12 @@ object Application extends Controller {
       return kwic:summarize($m, <config width="40" table="yes" link="{$m/attribute::id}"/>)
       """.format(selector, term.toLowerCase)
   }
-  
+
   private def configure(query: String): scala.xml.Elem = {
     val cdata = "<![CDATA[%s]]>".format(query)
     <query xmlns="http://exist.sourceforge.net/NS/exist" start="1" max="100">
-      <text> { scala.xml.Unparsed(cdata) } </text>
-      <properties> <property name="indent" value="yes"/> </properties>
+      <text>{ scala.xml.Unparsed(cdata) }</text>
+      <properties><property name="indent" value="yes"/></properties>
     </query>
   }
 

@@ -1,0 +1,38 @@
+@()(
+    implicit 
+    params:play.mvc.Scope.Params,
+    flash:play.mvc.Scope.Flash,
+    errors:Map[String,play.data.validation.Error]
+)
+@import play.i18n.Messages._
+@import views.tags.html._
+@main("crestomazia.ch") {
+<h1>@Html(get("views.signup.header.1"))</h1>
+
+@form(controllers.Application.account()) {
+     @if(errors){
+        <p class="error">
+            @Html(get("views.signup.error"))
+        </p>
+    }
+    <table class="form">
+    <tr class="form">
+        <td class="form"><label for="name">@Html(get("views.signup.name"))</label></td>
+        <td class="form"><input type="text" name="name" id="name" value="@params.get("name")"/></td>
+    </tr>
+    <tr class="form">
+        <td class="form"><label for="id">@Html(get("views.signup.id"))</label></td>
+        <td class="form"><input type="text" name="id" id="id" value="@params.get("id")"/></td>
+    </tr>
+    <tr class="form">
+        <td class="form"><label for="pass">@Html(get("views.signup.pass"))</label></td>
+        <td class="form"><input type="password" name="pass" id="pass" value="@params.get("pass")"/></td>
+    </tr>
+    <tr class="form">
+        <td class="form"><label for="region">@Html(get("views.signup.region"))</label></td>
+        <td class="form"><input type="text" name="region" id="region" value="@params.get("region")"/></td>
+    </tr>
+    </table>
+    <p><input type="submit" value="Submit" /></p>
+}
+}

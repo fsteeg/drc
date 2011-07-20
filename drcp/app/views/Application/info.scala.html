@@ -1,0 +1,15 @@
+@import play.i18n.Messages._
+@main("crestomazia.ch") {
+
+<h1>@Html(get("views.info.header.1"))</h1>
+<p>@Html(get("views.info.text.1"))</p>
+<h1>@Html(get("views.info.header.2"))</h1>
+<p>@Html(get("views.info.text.2"))</p>
+
+<p>
+	@Html(get("views.info.more", "http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html"))
+</p>
+
+<h1>@Html(get("views.info.header.3"))</h1>
+<p>@Html(get("views.info.text.3"))</p>
+}

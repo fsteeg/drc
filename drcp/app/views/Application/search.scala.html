@@ -1,0 +1,20 @@
+@(term:String, label:String, pages:Seq[scala.xml.Elem], volume:String)
+@import play.i18n.Messages._
+@main("crestomazia.ch") {
+
+<h1>@Html(get("views.search.mode", term)) @if(volume != "0") { @Html(get("views.search.volume")) @label
+	} else { @Html(get("views.search.volumes")) }</h1>
+
+<p>
+@Html(get("views.search.result", pages.size.toString))
+</p>
+
+@if(pages.size > 0){
+<table>
+	@for(page<-pages){ 
+	@Html(page.toString)
+	}
+</table>
+}
+
+}

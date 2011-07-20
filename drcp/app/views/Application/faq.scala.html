@@ -1,0 +1,82 @@
+@import play.i18n.Messages._
+
+@main("crestomazia.ch") {
+
+<h1>@Html(get("views.faq.header.1"))</h1>
+
+<a href="#q1">@Html(get("views.faq.q1"))</a>
+<br />
+<a href="#q2">@Html(get("views.faq.q2"))</a>
+<br />
+<a href="#q3">@Html(get("views.faq.q3"))</a>
+<br />
+<a href="#q4">@Html(get("views.faq.q4"))</a>
+<br />
+<a href="#q5">@Html(get("views.faq.q5"))</a>
+<br />
+<a href="#q6">@Html(get("views.faq.q6"))</a>
+<br />
+<a href="#q7">@Html(get("views.faq.q7"))</a>
+<br />
+<a href="#q8">@Html(get("views.faq.q8"))</a>
+<!--
+<br />
+<a href="#q9">@Html(get("views.faq.q9"))</a>
+<br />
+<a href="#q10">@Html(get("views.faq.q10"))</a>
+<br />
+<a href="#q11">@Html(get("views.faq.q11"))</a>
+<br />
+<a href="#q12">@Html(get("views.faq.q12"))</a>
+<br />
+<a href="#q13">@Html(get("views.faq.q13"))</a>
+ -->
+<br />
+<a href="#q14">@Html(get("views.faq.q14"))</a>
+<br />
+
+ 
+<h2 id="q1">@Html(get("views.faq.q1"))</h2>
+<p>@Html(get("views.faq.a1", "../application/signup", "http://github.com/spinfo/drc/downloads"))</p>
+
+<h2 id="q2">@Html(get("views.faq.q2"))</h2>
+<p>@Html(get("views.faq.a2"))</p>
+
+<h2 id="q3">@Html(get("views.faq.q3"))</h2>
+<p>@Html(get("views.faq.a3"))</p>
+
+<h2 id="q4">@Html(get("views.faq.q4"))</h2>
+<p>@Html(get("views.faq.a4"))</p>
+
+<h2 id="q5">@Html(get("views.faq.q5"))</h2>
+<p>@Html(get("views.faq.a5"))</p>
+
+<h2 id="q6">@Html(get("views.faq.q6"))</h2>
+<p>@Html(get("views.faq.a6"))</p>
+
+<h2 id="q7">@Html(get("views.faq.q7"))</h2>
+<p>@Html(get("views.faq.a7"))</p>
+	
+<h2 id="q8">@Html(get("views.faq.q8"))</h2>
+
+<h3 id="q9">@Html(get("views.faq.q9"))</h3>
+<p>@Html(get("views.faq.a9"))</p>
+
+<h3 id="q10">@Html(get("views.faq.q10"))</h3>
+<p>@Html(get("views.faq.a10"))</p>
+
+<h3 id="q11">@Html(get("views.faq.q11"))</h3>
+<p>@Html(get("views.faq.a11"))</p>
+
+<h3 id="q12">@Html(get("views.faq.q12"))</h3>
+<p>@Html(get("views.faq.a12"))</p>
+
+<h3 id="q13">@Html(get("views.faq.q13"))</h3>
+<p>@Html(get("views.faq.a13"))</p>
+
+<h2 id="q14">@Html(get("views.faq.q14"))</h2>
+<p>@Html(get("views.faq.a14"))</p>
+
+<p>@Html(get("views.faq.more")) <a href="@action(controllers.Application.contact)">@Html(get("views.contact.header.1"))</a></p>
+
+}

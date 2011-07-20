@@ -1,0 +1,22 @@
+@(user:de.uni_koeln.ub.drc.data.User, link:String, page:de.uni_koeln.ub.drc.data.Page)
+@import play.i18n.Messages._
+@main("crestomazia.ch") {
+<h1>@user.id</h1>
+
+<p>
+@Html(get("views.user.summary", 
+  user.reputation.toString, 
+  user.edits.toString, 
+  user.upvotes.toString, 
+  user.downvotes.toString, 
+  user.upvoted.toString, 
+  user.downvoted.toString))
+</p>
+<p>@Html(get("views.user.region")) @user.region</p>
+@if(link.endsWith(".png")){
+<p>@Html(get("views.user.last.edited", page.volume.toString, page.number.toString))</p>
+<p><img src="@link" width="350px" /></p>
+} else {
+<p class="attention">@Html(get("views.user.start", "http://github.com/spinfo/drc/downloads"))</p>
+}
+}

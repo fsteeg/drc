@@ -1,0 +1,13 @@
+@(user:de.uni_koeln.ub.drc.data.User, rank:Int)
+<td>
+	@if(user.reputation > 0) { @rank } else { - }
+</td>
+<td>
+	@if(user.reputation > 0) { 
+	 <a href="@action(controllers.Application.user(user.id))">@user.id</a> 
+	} else { @user.id }
+</td>
+<td>@user.region</td>
+<td>
+	@if(user.reputation > 0) { @user.reputation } else { - }
+</td>

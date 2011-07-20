@@ -1,0 +1,46 @@
+@(left:List[de.uni_koeln.ub.drc.data.User], right:List[de.uni_koeln.ub.drc.data.User])
+@import play.i18n.Messages._
+@import views.tags.html._
+@main("crestomazia.ch") {
+<h3>@Html(get("views.users.participate"))</h3>
+<p>
+	@Html(get("views.users.text", "application/signup", "http://github.com/spinfo/drc/downloads"))
+</p>
+<div id="left">
+	
+	@if(left.size > 0){
+	<h3>@(left.size+right.size) @Html(get("views.users"))</h3>
+	<table>
+		<tr>
+			<th>@Html(get("views.index.users.rank"))</th>
+			<th>@Html(get("views.index.users.name"))</th>
+			<th>@Html(get("views.index.users.region"))</th>
+			<th>@Html(get("views.index.users.points"))</th>
+		</tr>
+		@for(u<-left){
+		<tr class="active-user">
+			@user(u, left.indexOf(u)+1)
+		</tr>
+		}
+	</table>
+</div>
+<div id="buf"></div>
+<div id="right">
+	} @if(right.size > 0){
+	<h3>&nbsp;</h3>
+	<table>
+		<tr>
+			<th>@Html(get("views.index.users.rank"))</th>
+			<th>@Html(get("views.index.users.name"))</th>
+			<th>@Html(get("views.index.users.region"))</th>
+			<th>@Html(get("views.index.users.points"))</th>
+		</tr>
+		@for(u<-right){
+		<tr class="inactive-user">
+			@user(u, left.size+right.indexOf(u)+1)
+		</tr>
+		}
+	</table>
+	}
+</div>
+}
