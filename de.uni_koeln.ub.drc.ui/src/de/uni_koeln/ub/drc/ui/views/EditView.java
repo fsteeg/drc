@@ -99,7 +99,6 @@ public final class EditView {
 		sc.setContent(editComposite);
 		sc.setExpandVertical(true);
 		sc.setExpandHorizontal(true);
-		sc.setMinSize(editComposite.computeSize(SWT.DEFAULT, SWT.MAX));
 		editComposite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
 	}
@@ -125,6 +124,7 @@ public final class EditView {
 				}
 			}
 			editComposite.update(page);
+			sc.setMinSize(editComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		} else {
 			return;
 		}
