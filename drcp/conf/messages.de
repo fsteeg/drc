@@ -181,8 +181,6 @@ views.main.pub = Presse
 views.main.contact = Kontakt
 views.main.footer = Digitale Rätoromanische Chrestomathie: Ein kollaboratives Digitalisierungsprojekt.
 views.main.language = Sprache:
-views.main.language.help = (Wechselt nicht?)
-
 
 ##################
 ##  press.html  ##
