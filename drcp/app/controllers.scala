@@ -83,6 +83,7 @@ object Application extends Controller {
   }
 
   def changeLanguage(lang: String) = {
+    response.setHeader("P3P", "CP=\"CAO PSA OUR\"")
     Lang.change(lang)
     val refererURL = Http.Request.current().headers.get("referer").value
     Redirect(refererURL)
