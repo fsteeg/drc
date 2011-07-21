@@ -1,14 +1,8 @@
-@()(
-    implicit 
-    params:play.mvc.Scope.Params,
-    flash:play.mvc.Scope.Flash,
-    errors:Map[String,play.data.validation.Error]
-)
+@()(implicit params:play.mvc.Scope.Params, errors:Map[String,play.data.validation.Error])
 @import play.i18n.Messages._
 @import views.tags.html._
 @main("crestomazia.ch") {
 <h1>@Html(get("views.signup.header.1"))</h1>
-
 @form(controllers.Application.account()) {
      @if(errors){
         <p class="error">

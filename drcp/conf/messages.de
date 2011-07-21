@@ -154,7 +154,7 @@ views.signup.region = Ort:
 ##  user.html   ##
 ##################
 
-views.user.summary = Punkte: %1s (%2s Wörter bearbeitet, hat %3s aufgewertet, hat %4s abgewertet, wurde %5s mal aufgewertet, wurde %6s mal abgewertet)
+views.user.summary = Punkte: %1s (hat %2s Wörter bearbeitet, hat %3s aufgewertet, hat %4s abgewertet, wurde %5s mal aufgewertet, wurde %6s mal abgewertet)
 views.user.region = Region: 
 views.user.last.edited = Zuletzt bearbeitet: Band %1s, Seite %2s
 views.user.start = Helfen Sie mit: Laden Sie die <a href="%2s">aktuelle Beta-Version</a> des Editors für Windows oder Mac, und korrigieren Sie mit!

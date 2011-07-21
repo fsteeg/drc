@@ -143,7 +143,7 @@ views.signup.region = Lieu:
 ##  user.html   ##
 ##################
 
-views.user.summary = Puncts: %1s (%2s tractà pleds, ha revalità %3s, ha svalità %4s, è vegnì revalità %5s giadas, è vegnì svalità %6s giadas)
+views.user.summary = Puncts: %1s (ha %2s tractà pleds, ha revalità %3s, ha svalità %4s, è vegnì revalità %5s giadas, è vegnì svalità %6s giadas)
 views.user.region = Regiun: 
 views.user.last.edited = Ultima modificaziun: Tom %1s, pagina %2s
 views.user.start = Gidai: chargiai la <a href="%2s">versiun beta actuala</a> da l' editur per Windows u per Mac e curregi! 

@@ -6,6 +6,7 @@ import de.uni_koeln.ub.drc.util.MetsTransformer
 import play._
 import play.mvc._
 import play.i18n.Lang
+import play.i18n.Messages._
 import play.data.validation._
 import scala.xml.Elem
 import scala.xml.Node
@@ -15,8 +16,8 @@ object Application extends Controller {
   
   import views.Application._
 
-  val server = "localhost"//"hydra1.spinfo.uni-koeln.de"
-  val port = 7777//8080
+  val server = "hydra1.spinfo.uni-koeln.de"
+  val port = 8080
   val db = XmlDb(server, port)
   val col = "drc"
 
@@ -26,18 +27,14 @@ object Application extends Controller {
 
   def index = {
     val top = loadUsers.take(5)
-    //val ids = db.getIds(col + "/PPN345572629_0004").get.filter(_.endsWith(".xml"))
-    //val pages = ids.take(5).map(imageLink(_))
-    val ids = List()
-    val pages = List()
     html.index(top)
   }
 
-  def contact = { html.contact() }
-  def faq = { html.faq() }
-  def info = { html.info() }
-  def press = { html.press() }
-  def salid = { html.salid() }
+  def contact = html.contact()
+  def faq = html.faq()
+  def info = html.info()
+  def press = html.press()
+  def salid = html.salid()
 
   def users = {
     val all = loadUsers
@@ -63,10 +60,11 @@ object Application extends Controller {
     val id = params.get("id")
     val pass = params.get("pass")
     val region = params.get("region")
-    Validation.required("name", name).message(play.i18n.Messages.get("views.signup.error"))
-    Validation.required("id", id).message(play.i18n.Messages.get("views.signup.error"))
-    Validation.required("pass", pass).message(play.i18n.Messages.get("views.signup.error"))
-    Validation.required("region", region).message(play.i18n.Messages.get("views.signup.error"))
+    val message = get("views.signup.error")
+    Validation.required("name", name).message(message)
+    Validation.required("id", id).message(message)
+    Validation.required("pass", pass).message(message)
+    Validation.required("region", region).message(message)
     createAccount(name, id, pass, region)
   }
   
@@ -105,13 +103,12 @@ object Application extends Controller {
     val pages:Seq[Elem] = for ((row, link) <- rows zip links) yield {
       val file = link.split("/").last.split("_").last.split("-")
       val (volume, page) = (file.head, file.last.split("\\.").head)
-      //val mets = new MetsTransformer("PPN345572629_" + volume + ".xml", db)
       val text = link.replace(".png", ".xml").replace("drc/", "drc-plain/")
       <tr>
         {
           (row \ "td") ++
             <td>{ Index.Volumes(volume.toInt) }</td> ++
-            //<td>{mets.label(page.toInt)}</td> ++ // TODO: cache
+            //<td>{new MetsTransformer("PPN345572629_" + volume + ".xml", db).label(page.toInt)}</td> ++ // TODO: cache
             <td><a href={ link }>image</a></td> ++
             <td><a href={ text }>text</a></td>
         }
