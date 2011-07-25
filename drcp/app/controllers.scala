@@ -11,6 +11,8 @@ import play.data.validation._
 import scala.xml.Elem
 import scala.xml.Node
 import scala.xml.NodeSeq
+import scala.xml.XML
+import scala.xml.Unparsed
 
 object Application extends Controller {
   
@@ -45,6 +47,8 @@ object Application extends Controller {
   private def imageLink(id: String) = "http://" + server + ":" + port + "/exist/rest/db/" + col + "/" +
     (if (id.matches(".*?PPN345572629_0004-000[1-6].*?")) id /* temp workaround for old data */ else
       (if (id.contains("-")) id.substring(0, id.indexOf('-')) else id) + "/" + id.replace(".xml", ".png"))
+      
+  private def textLink(link: String) = link.replace(".png", ".xml").replace("drc/", "drc-plain/")
 
   def user(id: String) = {
     val user:User = User.fromXml(db.getXml(col + "/users", id + ".xml").get(0))
@@ -103,10 +107,10 @@ object Application extends Controller {
     val pages:Seq[Elem] = for ((row, link) <- rows zip links) yield {
       val file = link.split("/").last.split("_").last.split("-")
       val (volume, page) = (file.head, file.last.split("\\.").head)
-      val text = link.replace(".png", ".xml").replace("drc/", "drc-plain/")
+      val text = textLink(link)
       <tr>
         {
-          (row \ "td") ++
+          withLink((row \ "td").toString) ++
             <td>{ Index.Volumes(volume.toInt) }</td> ++
             //<td>{new MetsTransformer("PPN345572629_" + volume + ".xml", db).label(page.toInt)}</td> ++ // TODO: cache
             <td><a href={ link }>image</a></td> ++
@@ -117,6 +121,12 @@ object Application extends Controller {
     val label = if (volume.toInt - 1 >= 0) Index.Volumes(volumes(volume.toInt - 1).toInt) else ""
     html.search(term, label, pages, volume)
  }
+  
+  def withLink(elems:String) = {
+    val LinkParser = """(?s).*?href="([^"]+)".*?""".r
+    val LinkParser(id) = elems
+    XML.loadString(<i>{ Unparsed(elems.replace(id,textLink(imageLink(id)))) }</i>.toString) \"td"
+  }
 
   def createQuery(selector: String, term: String) = {
     """
@@ -131,7 +141,7 @@ object Application extends Controller {
   private def configure(query: String): scala.xml.Elem = {
     val cdata = "<![CDATA[%s]]>".format(query)
     <query xmlns="http://exist.sourceforge.net/NS/exist" start="1" max="100">
-      <text>{ scala.xml.Unparsed(cdata) }</text>
+      <text>{ Unparsed(cdata) }</text>
       <properties><property name="indent" value="yes"/></properties>
     </query>
   }
