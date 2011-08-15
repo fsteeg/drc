@@ -85,6 +85,7 @@ public class Messages extends NLS {
 	public static String Minus;
 	public static String ZoomToolTip;
 	public static String ClosePage;
+	public static String NoMeta;
 
 	static {
 		// initialize resource bundle

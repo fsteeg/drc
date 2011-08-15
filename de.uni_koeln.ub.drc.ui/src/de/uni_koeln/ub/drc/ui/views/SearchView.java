@@ -508,11 +508,22 @@ public final class SearchView {
 				.toLowerCase());
 		Arrays.sort(pages, comp);
 		chapters = new TreeMap<Chapter, List<Object>>();
-		mets = new MetsTransformer(current + ".xml", db); //$NON-NLS-1$
+		boolean meta = true;
+		try {
+			mets = new MetsTransformer(current + ".xml", db); //$NON-NLS-1$
+		} catch (NullPointerException x) {
+			// No matadata available for selected volume
+			meta = false;
+		}
 		for (Object page : pages) {
 			int fileNumber = page instanceof Page ? ((Page) page).number()
 					: new Page(null, (String) page).number();
-			Chapter chapter = mets.chapter(fileNumber, Count.File());
+			Chapter chapter = null;
+			if (meta) {
+				chapter = mets.chapter(fileNumber, Count.File());
+			} else {
+				chapter = new Chapter(0, 1, Messages.NoMeta);
+			}
 			List<Object> pagesInChapter = chapters.get(chapter);
 			if (pagesInChapter == null) {
 				pagesInChapter = new ArrayList<Object>();
@@ -714,7 +725,8 @@ public final class SearchView {
 				return isPage(element) ? volumes.getItem(volumes
 						.getSelectionIndex()) : ""; //$NON-NLS-1$
 			case 2:
-				return isPage(element) ? mets.label(asPage(element).number())
+				return isPage(element) && mets != null ? mets.label(asPage(
+						element).number())
 						+ "" : ""; //$NON-NLS-1$ //$NON-NLS-2$
 			case 3: {
 				if (isPage(element)) {
