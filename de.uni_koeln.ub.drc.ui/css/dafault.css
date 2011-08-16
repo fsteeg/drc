@@ -9,24 +9,14 @@
 Label {
 	font: Verdana 12px;
 	color: black /* rgb(178, 34, 34) */;
-	background-color: white;
 }
 
 Combo {
   font: Verdana;
 }
 
-Composite {
-	background-color: white;
-}
-
-Shell {
-  background-color: white;
-}
-
 Text {
 	font: Times 14px;
-	background-color: white; /* #e8e8e8 #cccccc 60%; */
 }
 
 .editComposite {
@@ -42,4 +32,5 @@ CTabFolder {
   tab-outline: #B6BCCC;
   outer-keyline-color: #B6BCCC;
   shadow-visible: true;
+  background-color: white;
 }
