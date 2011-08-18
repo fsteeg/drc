@@ -165,7 +165,12 @@ public final class SearchView {
 					@Override
 					public void run() {
 						Page page = (Page) event.getProperty(IEventBroker.DATA);
-						if (page.edits() == 1) {
+						String topic = event.getTopic();
+						boolean firstEdit = topic.equals(EditView.SAVED)
+								&& page.edits() == 1;
+						boolean newComment = topic
+								.equals(CommentsView.NEW_COMMENT);
+						if (firstEdit || newComment) {
 							viewer.setLabelProvider(new SearchViewLabelProvider());
 						}
 					}
@@ -173,6 +178,7 @@ public final class SearchView {
 			}
 		};
 		eventBroker.subscribe(EditView.SAVED, handler);
+		eventBroker.subscribe(CommentsView.NEW_COMMENT, handler);
 	}
 
 	private enum Navigate {
@@ -213,7 +219,7 @@ public final class SearchView {
 		next.setImage(DrcUiActivator.instance().loadImage("icons/next.gif")); //$NON-NLS-1$
 		next.addSelectionListener(new NavigationListener(Navigate.NEXT));
 		currentPageLabel = new Label(bottomComposite, SWT.NONE);
-		insertAddCommentButton(bottomComposite);
+		insertAddTagButton(bottomComposite);
 		currentPageLabel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		addPageCheckedButton(bottomComposite);
 	}
@@ -238,7 +244,7 @@ public final class SearchView {
 		});
 	}
 
-	private void insertAddCommentButton(Composite bottomComposite) {
+	private void insertAddTagButton(Composite bottomComposite) {
 		Label label = new Label(bottomComposite, SWT.NONE);
 		label.setText(Messages.AddTag);
 		tagField = new Text(bottomComposite, SWT.BORDER);
@@ -250,16 +256,16 @@ public final class SearchView {
 			@Override
 			// on button click
 			public void widgetSelected(SelectionEvent e) {
-				addComment(tagField);
+				addTag(tagField);
 			}
 
 			@Override
 			// on enter in text
 			public void widgetDefaultSelected(SelectionEvent e) {
-				addComment(tagField);
+				addTag(tagField);
 			}
 
-			private void addComment(final Text text) {
+			private void addTag(final Text text) {
 				String input = text.getText();
 				if (input != null && input.trim().length() != 0) {
 					Page page = page(allPages.get(index));
@@ -470,13 +476,14 @@ public final class SearchView {
 	}
 
 	private void initTable() {
-		final int[] columns = new int[] { 60, 50, 60, 400, 200, 250 };
+		final int[] columns = new int[] { 60, 50, 60, 400, 200, 150, 100 };
 		createColumn("", columns[0]); //$NON-NLS-1$
 		createColumn(Messages.Volume, columns[1]);
 		createColumn(Messages.Page, columns[2]);
 		createColumn(Messages.Text, columns[3]);
 		createColumn(Messages.Modified, columns[4]);
 		createColumn(Messages.Tags, columns[5]);
+		createColumn(Messages.Comments, columns[6]);
 		Tree tree = viewer.getTree();
 		tree.setHeaderVisible(true);
 		tree.setLinesVisible(true);
@@ -742,6 +749,8 @@ public final class SearchView {
 						element).words())) : ""; //$NON-NLS-1$
 			case 5:
 				return isPage(element) ? asPage(element).tags().mkString(", ") : ""; //$NON-NLS-1$ //$NON-NLS-2$
+			case 6:
+				return isPage(element) ? asPage(element).comments().size() + "" : ""; //$NON-NLS-1$ //$NON-NLS-2$
 			default:
 				return element.toString();
 			}

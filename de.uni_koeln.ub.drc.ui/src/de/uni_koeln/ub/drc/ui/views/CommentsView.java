@@ -18,6 +18,7 @@ import javax.inject.Named;
 
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -53,8 +54,11 @@ import de.uni_koeln.ub.drc.ui.views.WordViewModel.WordViewLabelProvider;
  */
 public final class CommentsView {
 
+	static final String NEW_COMMENT = "new_comment"; //$NON-NLS-1$
 	@Inject
 	private IEclipseContext context;
+	@Inject
+	private IEventBroker eventBroker;
 	private TableViewer viewer;
 	private Page page;
 	private Text commentField;
@@ -137,6 +141,7 @@ public final class CommentsView {
 					page.saveToDb(DrcUiActivator.instance().currentUser()
 							.collection(), DrcUiActivator.instance().db());
 					commentField.setText(""); //$NON-NLS-1$
+					eventBroker.post(CommentsView.NEW_COMMENT, page);
 				}
 			}
 		};
