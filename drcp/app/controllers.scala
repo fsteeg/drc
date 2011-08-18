@@ -1,3 +1,10 @@
+/**************************************************************************************************
+ * Copyright (c) 2010, 2011 Fabian Steeg. All rights reserved. This program and the accompanying 
+ * materials are made available under the terms of the Eclipse Public License v1.0 which accompanies 
+ * this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * <p/>
+ * Contributors: Fabian Steeg - initial API and implementation
+ *************************************************************************************************/
 package controllers
 
 import com.quui.sinist.XmlDb
@@ -14,7 +21,7 @@ import scala.xml.NodeSeq
 import scala.xml.XML
 import scala.xml.Unparsed
 
-object Application extends Controller {
+object Application extends Controller with Secure {
   
   import views.Application._
 
@@ -73,7 +80,7 @@ object Application extends Controller {
   }
   
   def createAccount(@Required name: String, @Required id: String, @Required pass: String, @Required region: String) = {
-    println("name: %s, id: %s, pass: %s, region: %s".format(name, id, pass, region))
+    println("signup; name: %s, id: %s, pass: %s, region: %s".format(name, id, pass, region))
     val users = loadUsers
     if (Validation.hasErrors || (users).exists(_.id == id)) {
       signup
@@ -82,6 +89,33 @@ object Application extends Controller {
       db.putXml(u.toXml, col + "/users", id + ".xml")
       Action(user(id))
     }
+  }
+  
+  def login = html.login()
+  
+  def loginCheck() = {
+    val id = params.get("id")
+    val pass = params.get("pass")
+    val message = get("views.signup.error")
+    Validation.required("id", id).message(message)
+    Validation.required("pass", pass).message(message)
+    loginWith(id, pass)
+  }
+  
+  def loginWith(@Required id: String, @Required pass: String) = {
+    println("login; id: %s, pass: %s".format(id, pass))
+    val users = loadUsers
+    if (Validation.hasErrors || User.withId(col, db, id) == null || User.withId(col, db, id).pass != pass) {
+      Action(login) // TODO: detailed error message
+    } else {
+      session.put("username", id)
+      Action(index)
+    }
+  }
+  
+  def logout = {
+    session.put("username", null)
+    Redirect(Http.Request.current().headers.get("referer").value)
   }
 
   def changeLanguage(lang: String) = {

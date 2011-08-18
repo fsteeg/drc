@@ -1,6 +1,8 @@
 @(title:String = "")(body: => Html)
 @import play.i18n.Messages._
 @import controllers.Application._
+@import play._
+@import play.mvc._
 <!DOCTYPE html>
 <html>
   <head>
@@ -27,7 +29,13 @@
         href="@action(contact)">@get("views.main.contact")</a> | 
         @get("views.main.language") <a
         href="@action(changeLanguage("rm"))">rm</a> <a
-        href="@action(changeLanguage("de"))">de</a>
+        href="@action(changeLanguage("de"))">de</a> | 
+        @if(session.get("username") != null) { 
+        	@get("views.main.logged"): <a href="@action(user(session.get("username")))">@session.get("username")</a> | 
+        	<a href="@action(logout)">@get("views.main.logout")</a>
+        } else {
+        	<a href="@action(login)">@get("views.main.login")</a>
+        }
     </p>
     <hr />
   </div>

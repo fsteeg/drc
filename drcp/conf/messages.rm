@@ -171,6 +171,9 @@ views.main.pub = Pressa
 views.main.contact = Contact
 views.main.footer = Crestomazia Retorumantscha Digitala: in project da digitalisaziun collaborativ.
 views.main.language = Lingua:
+views.main.logged = Logged in as
+views.main.login = Login
+views.main.logout = Logout
 
 ##################
 ##  press.html  ##

@@ -174,13 +174,16 @@ views.users.text = Helfen Sie mit: <a href="%1s">Melden Sie sich an</a> und lade
 views.main.header = Digitale Rätoromanische Chrestomathie
 views.main.start = Start
 views.main.users = Benutzer
-views.main.signup = Anmeldung
+views.main.signup = Registrierung
 views.main.faq = Fragen
 views.main.info = Informationen
 views.main.pub = Presse
 views.main.contact = Kontakt
 views.main.footer = Digitale Rätoromanische Chrestomathie: Ein kollaboratives Digitalisierungsprojekt.
 views.main.language = Sprache:
+views.main.logged = Angemeldet als
+views.main.login = Anmelden
+views.main.logout = Abmelden
 
 ##################
 ##  press.html  ##

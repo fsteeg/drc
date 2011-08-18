@@ -1,0 +1,24 @@
+@()(implicit params:play.mvc.Scope.Params, errors:Map[String,play.data.validation.Error])
+@import play.i18n.Messages._
+@import views.tags.html._
+@main("crestomazia.ch") {
+<h1>@get("views.main.login")</h1>
+@form(controllers.Application.loginCheck()) {
+     @if(errors){
+        <p class="error">
+            @Html(get("views.signup.error"))
+        </p>
+    }
+    <table class="form">
+    <tr class="form">
+        <td class="form"><label for="id">@Html(get("views.signup.id"))</label></td>
+        <td class="form"><input type="text" name="id" id="id" value="@params.get("id")"/></td>
+    </tr>
+    <tr class="form">
+        <td class="form"><label for="pass">@Html(get("views.signup.pass"))</label></td>
+        <td class="form"><input type="password" name="pass" id="pass" value="@params.get("pass")"/></td>
+    </tr>
+    </table>
+    <p><input type="submit" value="Submit" /></p>
+}
+}
