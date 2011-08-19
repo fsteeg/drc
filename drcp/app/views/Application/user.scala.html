@@ -1,7 +1,10 @@
-@(user:de.uni_koeln.ub.drc.data.User, link:String, page:de.uni_koeln.ub.drc.data.Page)
+@(user:de.uni_koeln.ub.drc.data.User, link:String, page:de.uni_koeln.ub.drc.data.Page)(implicit session:play.mvc.Scope.Session)
 @import play.i18n.Messages._
 @main("crestomazia.ch") {
 <h1>@user.id</h1>
+@if(session.get("username")!=null){
+	<a href="@action(controllers.Application.edit)">@get("views.user.edit")</a>
+}
 <p>
 @Html(get("views.user.summary", 
   user.reputation.toString, 

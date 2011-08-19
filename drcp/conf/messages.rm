@@ -155,7 +155,7 @@ views.user.start = Gidai: chargiai la <a href="%2s">versiun beta actuala</a> da 
 views.users = Utilisaders
 views.users.participate = Sa participar
 views.users.text = As participai era Vus: <a href="%1s">As annunziai</a> e telechargiai la <a href="%2s">versiun beta actuala</a> da l’editur per Windows u Mac.
-
+views.user.edit = Edit user data
 
 ##################
 ##   main.html  ##

@@ -38,6 +38,10 @@ object Application extends Controller with Secure {
     val top = loadUsers.take(5)
     html.index(top)
   }
+  
+  def edit = html.edit(User.withId(col, db, currentUser))
+  
+  private def currentUser = session.get("username")
 
   def contact = html.contact()
   def faq = html.faq()
@@ -58,7 +62,7 @@ object Application extends Controller with Secure {
   private def textLink(link: String) = link.replace(".png", ".xml").replace("drc/", "drc-plain/")
 
   def user(id: String) = {
-    val user:User = User.fromXml(db.getXml(col + "/users", id + ".xml").get(0))
+    val user:User = User.withId(col, db, id)
     val link:String = imageLink(user.latestPage)
     val page:Page = new Page(null, user.latestPage)
     html.user(user, link, page)
@@ -82,13 +86,26 @@ object Application extends Controller with Secure {
   def createAccount(@Required name: String, @Required id: String, @Required pass: String, @Required region: String) = {
     println("signup; name: %s, id: %s, pass: %s, region: %s".format(name, id, pass, region))
     val users = loadUsers
-    if (Validation.hasErrors || (users).exists(_.id == id)) {
+    val changeExistingAccount = params.get("change") != null
+    if (Validation.hasErrors || ((users).exists(_.id == id) && !changeExistingAccount)) {
       signup
     } else {
       val u = User(id, name, region, pass, col, db)
+      if(changeExistingAccount) 
+        update(u, User.withId(col, db, id))
       db.putXml(u.toXml, col + "/users", id + ".xml")
       Action(user(id))
     }
+  }
+  
+  def update(u:User,old:User) = {
+    u.upvotes = old.upvotes
+    u.upvoted = old.upvoted
+    u.downvotes = old.downvotes
+    u.downvoted = old.downvoted
+    u.edits = old.edits
+    u.latestPage = old.latestPage
+    u.latestWord = old.latestWord
   }
   
   def login = html.login()
@@ -109,7 +126,7 @@ object Application extends Controller with Secure {
       Action(login) // TODO: detailed error message
     } else {
       session.put("username", id)
-      Action(index)
+      Action(user(id))
     }
   }
   

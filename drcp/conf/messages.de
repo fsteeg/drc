@@ -158,6 +158,7 @@ views.user.summary = Punkte: %1s (hat %2s Wörter bearbeitet, hat %3s aufgewerte
 views.user.region = Region: 
 views.user.last.edited = Zuletzt bearbeitet: Band %1s, Seite %2s
 views.user.start = Helfen Sie mit: Laden Sie die <a href="%2s">aktuelle Beta-Version</a> des Editors für Windows oder Mac, und korrigieren Sie mit!
+views.user.edit = Benutzerdaten bearbeiten
 
 ##################
 ##  users.html  ##

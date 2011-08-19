@@ -1,0 +1,31 @@
+@(user:de.uni_koeln.ub.drc.data.User)(implicit params:play.mvc.Scope.Params, errors:Map[String,play.data.validation.Error])
+@import play.i18n.Messages._
+@main("crestomazia.ch") {
+<h1>@get("views.user.edit")</h1>
+@form(controllers.Application.account()) {
+     @if(errors){
+        <p class="error">
+            @Html(get("views.signup.error"))
+        </p>
+    }
+    <table class="form">
+    <tr class="form">
+        <td class="form"><label for="name">@Html(get("views.signup.name"))</label></td>
+        <td class="form"><input type="text" name="name" id="name" value="@user.name"/></td>
+    </tr>
+    <tr class="form">
+        <td class="form"><label for="id">@Html(get("views.signup.id"))</label></td>
+        <td class="form"><input type="text" name="id" id="id" value="@user.id" readonly="readonly"/></td>
+    </tr>
+    <tr class="form">
+        <td class="form"><label for="pass">@Html(get("views.signup.pass"))</label></td>
+        <td class="form"><input type="password" name="pass" id="pass" value="@user.pass"/></td>
+    </tr>
+    <tr class="form">
+        <td class="form"><label for="region">@Html(get("views.signup.region"))</label></td>
+        <td class="form"><input type="text" name="region" id="region" value="@user.region"/></td>
+    </tr>
+    </table>
+    <p><input type="submit" value="Submit" name="change" id="change"/></p>
+}
+}
