@@ -53,7 +53,7 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements
 
 	private static final String TITLE = Messages.LoginToDrc;
 	private static final String LOGIN = Messages.Login;
-	private static final Point SIZE = new Point(250, 150);
+	private static final Point SIZE = new Point(300, 175);
 	private boolean inputProcessed = false;
 	private List<Callback> callbacks;
 
@@ -62,6 +62,8 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements
 	 */
 	public SimpleLoginDialog() {
 		super(Display.getDefault().getActiveShell());
+		setShellStyle(SWT.DIALOG_TRIM | SWT.RESIZE | SWT.MAX
+				| SWT.APPLICATION_MODAL);
 	}
 
 	/**
