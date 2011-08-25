@@ -1,5 +1,11 @@
 Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy).
 
+h1. Beta 4 (2011 August 25)
+
+Beta 4 (tag: b4) adds more data, the ability to mark pages as done, and various bugfixes and minor improvements to the editor and portal. The portal now contains authentication to allow modification of user account data. For a full list of changes see the "commits":https://github.com/spinfo/drc/commits/master. You can get the editor from the "downloads":http://github.com/spinfo/drc/downloads page and visit the portal at "http://www.crestomazia.ch":http://www.crestomazia.ch.
+
+!http://i53.tinypic.com/33y12f4.png!
+
 h1. Beta 3 (2011 June 30)
 
 Our third beta (tag: b3) is available. It adds more data, a complete portal site, full internationalization and Romansch localization for the editor and the portal, faster search based on a Lucene index, and more. New features are made available via internal updates, so in the future, we will release new "downloads":http://github.com/spinfo/drc/downloads for major updates only.
