@@ -1,10 +1,12 @@
-/**************************************************************************************************
+/**
+ * ************************************************************************************************
  * Copyright (c) 2010 Fabian Steeg. All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0 which accompanies this
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * <p/>
  * Contributors: Fabian Steeg - initial API and implementation
- *************************************************************************************************/
+ * ***********************************************************************************************
+ */
 package de.uni_koeln.ub.drc.data
 
 import scala.collection.mutable.Stack
@@ -20,7 +22,7 @@ import scala.collection.mutable
  * and absolute here, they will be obtained from the scanned PDF files and converted to relative
  * values to allow display at various image sizes) and a stack of modifications, the top of which is
  * the current form. The history has to be maintained for review and corrections.
- * 
+ *
  * @param original The original form of the word as recognized by the OCR
  * @param position The position of the word in the scanned document
  * @author Fabian Steeg (fsteeg)
@@ -29,6 +31,9 @@ case class Word(original: String, position: Box) {
 
   /** A word's history is a stack of modifications, the top of which is the current form. */
   val history: Stack[Modification] = new Stack[Modification]()
+
+  /** A word's tags is a map of String to String. */
+  val tags = new scala.collection.mutable.HashMap[String, String]()
 
   if (history.size == 0)
     history.push(Modification(original, "OCR"))
@@ -85,6 +90,7 @@ case class Word(original: String, position: Box) {
     <word original={ original }>
       { position.toXml }
       { history.map(_.toXml) }
+      { for ((k, v) <- tags) yield <tag key={ k } value={ v }/> }
     </word>
 }
 
@@ -96,6 +102,7 @@ object Word {
       val mod = Modification.fromXml(m)
       w.history.push(mod)
     })
+    (word \ "tag").foreach(t => { w.tags += (t \ "@key").text -> (t \ "@value").text })
     w
   }
 
