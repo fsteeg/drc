@@ -12,6 +12,9 @@ import org.eclipse.osgi.util.NLS;
 @SuppressWarnings("javadoc")
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "plugin"; //$NON-NLS-1$
+	public static String AddAnnotationTo;
+	public static String Value;
+	public static String Key;
 	public static String AddNewComment;
 	public static String AddNewTagToCurrentPage;
 	public static String AddTag;

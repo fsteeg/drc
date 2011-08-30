@@ -22,6 +22,9 @@
         <children xsi:type="basic:Part" xmi:id="WordView" elementId="WordView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.WordView" label="%WordHistory" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/part_history.gif" tooltip="%WordHistory">
           <tags>NoClose</tags>
         </children>
+        <children xsi:type="basic:Part" xmi:id="TagView" elementId="TagView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.TagView" label="%WordTags" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/part_tags.gif" tooltip="%WordTags">
+          <tags>NoClose</tags>
+        </children>
         <children xsi:type="basic:Part" xmi:id="CommentsView" elementId="CommentsView" contributionURI="platform:/plugin/de.uni_koeln.ub.drc.ui/de.uni_koeln.ub.drc.ui.views.CommentsView" label="%PageComments" iconURI="platform:/plugin/de.uni_koeln.ub.drc.ui/icons/part_comments.gif" tooltip="%PageComments">
           <tags>NoClose</tags>
         </children>
