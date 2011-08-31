@@ -62,12 +62,14 @@ import org.eclipse.swt.widgets.TreeItem;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
+import scala.Enumeration;
 import scala.collection.JavaConversions;
 
 import com.quui.sinist.XmlDb;
 
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.Page;
+import de.uni_koeln.ub.drc.data.SearchOption;
 import de.uni_koeln.ub.drc.data.Status;
 import de.uni_koeln.ub.drc.data.Tag;
 import de.uni_koeln.ub.drc.data.Word;
@@ -87,8 +89,15 @@ public final class SearchView {
 	private Text searchField;
 	private Text tagField;
 	private Label resultCount;
-	private Combo searchOptions;
 	private TreeViewer viewer;
+	private Combo searchOptions;
+	private TreeMap<String, Enumeration.Value> options = new TreeMap<String, Enumeration.Value>() {
+		{
+			put(Messages.Text, SearchOption.all());
+			put(Messages.Tags, SearchOption.tags());
+			put(Messages.Comments, SearchOption.comments());
+		}
+	};
 
 	@Inject
 	private IEclipseContext context;
@@ -387,9 +396,10 @@ public final class SearchView {
 		Label label = new Label(searchComposite, SWT.NONE);
 		label.setText(Messages.In);
 		searchOptions = new Combo(searchComposite, SWT.READ_ONLY);
-		searchOptions.setItems(new String[] { Messages.Text, Messages.Tags,
-				Messages.Comments });
-		searchOptions.select(0);
+		searchOptions.setItems(options.keySet().toArray(
+				new String[options.keySet().size()]));
+		searchOptions.select(new ArrayList<String>(options.keySet())
+				.indexOf(Messages.Text));
 		searchOptions.addSelectionListener(searchListener);
 	}
 
@@ -614,6 +624,8 @@ public final class SearchView {
 		Object[] search;
 
 		public Object[] getPages(final String term) {
+			final String type = searchOptions.getItem(searchOptions
+					.getSelectionIndex());
 			ProgressMonitorDialog dialog = new ProgressMonitorDialog(
 					searchField.getShell());
 			dialog.open();
@@ -647,7 +659,10 @@ public final class SearchView {
 									}
 								}
 							}).start();
-							search = modelIndex.search(term);
+							search = modelIndex.search(term, options.get(type));
+							System.out.println(String
+									.format("Searching for '%s' in %s returned %s results", //$NON-NLS-1$
+											term, type, search.length));
 						}
 					}
 				});
