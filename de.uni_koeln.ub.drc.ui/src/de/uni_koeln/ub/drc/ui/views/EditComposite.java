@@ -52,7 +52,7 @@ public final class EditComposite extends Composite {
 	private boolean commitChanges = false;
 	private List<Text> words;
 	private List<Composite> lines = new ArrayList<Composite>();
-	IEclipseContext context;
+	private IEclipseContext context;
 	private Label status;
 
 	/**
@@ -127,8 +127,9 @@ public final class EditComposite extends Composite {
 		this.page = page;
 		Composite lineComposite = new Composite(c, SWT.NONE);
 		setLineLayout(lineComposite);
-		lines.add(lineComposite);
-		for (Word word : JavaConversions.asIterable(page.words())) {
+		if (lines != null)
+			lines.add(lineComposite);
+		for (Word word : JavaConversions.asJavaIterable(page.words())) {
 			if (word.original().equals(Page.ParagraphMarker())) {
 				lineComposite = new Composite(c, SWT.NONE);
 				setLineLayout(lineComposite);
@@ -138,8 +139,8 @@ public final class EditComposite extends Composite {
 				setCssName(text);
 				text.setText(word.history().top().form());
 				handleEmptyText(text);
-				text.setForeground(parent.getDisplay().getSystemColor(
-						word.isPossibleError() ? UNCHECKED : DEFAULT));
+				// option: word.isPossibleError() ? UNCHECKED : DEFAULT
+				text.setForeground(parent.getDisplay().getSystemColor(DEFAULT));
 				text.setData(Word.class.toString(), word);
 				text.setData(Page.class.toString(), page);
 				addListeners(text);
@@ -265,5 +266,9 @@ public final class EditComposite extends Composite {
 						.getSystemColor(DUBIOUS));
 			}
 		});
+	}
+
+	void setContext(IEclipseContext context) {
+		this.context = context;
 	}
 }

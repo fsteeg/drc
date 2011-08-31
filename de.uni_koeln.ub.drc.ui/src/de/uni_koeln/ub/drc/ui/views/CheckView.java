@@ -398,7 +398,8 @@ public final class CheckView {
 		Image dispayedImage = new Image(parent.getDisplay(),
 				cachedImage.getImageData());
 		imageData = dispayedImage.getImageData();
-		imageLabel.setImage(dispayedImage);
+		if (imageLabel != null)
+			imageLabel.setImage(dispayedImage);
 		imageLoaded = true;
 		scrolledComposite.setMinSize(scrolledComposite.getContent()
 				.computeSize(SWT.DEFAULT, SWT.DEFAULT, true));

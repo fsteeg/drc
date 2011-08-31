@@ -69,7 +69,7 @@ public final class EditView {
 	 */
 	@PostConstruct
 	public void setContext() {
-		editComposite.context = context;
+		editComposite.setContext(context);
 		focusLatestWord();
 		eventBroker = (IEventBroker) context.get(IEventBroker.class.getName());
 	}

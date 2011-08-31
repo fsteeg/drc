@@ -32,7 +32,7 @@ final class WordViewModel {
 	public static final WordViewModel CONTENT = new WordViewModel();
 
 	public Modification[] getDetails(final Word word) {
-		return JavaConversions.asCollection(word.history()).toArray(
+		return JavaConversions.asJavaCollection(word.history()).toArray(
 				new Modification[] {});
 	}
 

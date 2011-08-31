@@ -7,8 +7,6 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.views;
 
-import static scala.collection.JavaConversions.asList;
-
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +39,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 
+import scala.collection.JavaConversions;
 import de.uni_koeln.ub.drc.data.Comment;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
@@ -180,7 +179,8 @@ public final class CommentsView {
 	private void setInput() {
 		if (page != null) {
 			TableHelper.clearWidgets(viewer.getTable());
-			viewer.setInput(asList(page.comments()).toArray(new Comment[] {}));
+			viewer.setInput(JavaConversions.seqAsJavaList(page.comments())
+					.toArray(new Comment[] {}));
 			addLinks();
 		}
 	}

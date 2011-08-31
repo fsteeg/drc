@@ -7,9 +7,6 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.views;
 
-import static scala.collection.JavaConversions.asBuffer;
-import static scala.collection.JavaConversions.asList;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -91,13 +88,7 @@ public final class SearchView {
 	private Label resultCount;
 	private TreeViewer viewer;
 	private Combo searchOptions;
-	private TreeMap<String, Enumeration.Value> options = new TreeMap<String, Enumeration.Value>() {
-		{
-			put(Messages.Text, SearchOption.all());
-			put(Messages.Tags, SearchOption.tags());
-			put(Messages.Comments, SearchOption.comments());
-		}
-	};
+	private TreeMap<String, Enumeration.Value> options = new TreeMap<String, Enumeration.Value>();
 
 	@Inject
 	private IEclipseContext context;
@@ -144,10 +135,10 @@ public final class SearchView {
 		String[] volumeLabels = new String[Index.RF().size()];
 		for (int i = 0; i < Index.RF().size(); i++) {
 			volumeLabels[i] = Index.Volumes()
-					.get(Integer.parseInt((String) Index.RF().apply(i))).get();
+					.get(Integer.parseInt(Index.RF().apply(i))).get();
 		}
 		volumes.setItems(volumeLabels);
-		volumes.setData(JavaConversions.asList(Index.RF()));
+		volumes.setData(JavaConversions.seqAsJavaList(Index.RF()));
 		volumes.select(0);
 		volumes.addSelectionListener(searchListener);
 		Label label2 = new Label(searchComposite, SWT.NONE);
@@ -308,7 +299,7 @@ public final class SearchView {
 						.db()
 						.getXml(DrcUiActivator.instance().currentUser()
 								.collection()
-								+ "/" + selected, asBuffer(Arrays.asList(string))).get() //$NON-NLS-1$
+								+ "/" + selected, JavaConversions.asScalaBuffer(Arrays.asList(string))).get() //$NON-NLS-1$
 						.head());
 	}
 
@@ -358,7 +349,8 @@ public final class SearchView {
 		if (viewer.getTree().getItems().length == 0) {
 			throw new IllegalArgumentException(Messages.NoEntries);
 		}
-		allPages = new ArrayList<String>(asList(content.modelIndex.pages()));
+		allPages = new ArrayList<String>(
+				JavaConversions.seqAsJavaList(content.modelIndex.pages()));
 		Collections.sort(allPages);
 		for (String pageId : allPages) {
 			if (pageId.equals(DrcUiActivator.instance().currentUser()
@@ -395,6 +387,9 @@ public final class SearchView {
 	private void initOptionsCombo(final Composite searchComposite) {
 		Label label = new Label(searchComposite, SWT.NONE);
 		label.setText(Messages.In);
+		options.put(Messages.Text, SearchOption.all());
+		options.put(Messages.Tags, SearchOption.tags());
+		options.put(Messages.Comments, SearchOption.comments());
 		searchOptions = new Combo(searchComposite, SWT.READ_ONLY);
 		searchOptions.setItems(options.keySet().toArray(
 				new String[options.keySet().size()]));
@@ -509,14 +504,15 @@ public final class SearchView {
 
 	private Map<Chapter, List<Object>> chapters = new TreeMap<Chapter, List<Object>>();
 	private MetsTransformer mets;
-	private String last = JavaConversions.asList(Index.RF()).get(0);
+	private String last = JavaConversions.seqAsJavaList(Index.RF()).get(0);
 
 	private void setInput() {
 		String current = selected(volumes);
 		XmlDb db = DrcUiActivator.instance().db();
 		if (content == null || !current.equals(last)) {
 			loadData();
-			allPages = new ArrayList<String>(asList(content.modelIndex.pages()));
+			allPages = new ArrayList<String>(
+					JavaConversions.seqAsJavaList(content.modelIndex.pages()));
 			pingCollection(current, page(allPages.get(0)), db);
 			Collections.sort(allPages);
 		}
@@ -588,7 +584,7 @@ public final class SearchView {
 	private final class SearchViewModelProvider {
 
 		Index modelIndex;
-		String modelSelected;
+		String modelSelected = null;
 
 		private SearchViewModelProvider(final IProgressMonitor m) {
 			viewer.getTree().getDisplay().syncExec(new Runnable() {
@@ -597,7 +593,7 @@ public final class SearchView {
 					modelSelected = selected(volumes);
 				}
 			});
-			List<String> ids = asList(DrcUiActivator
+			List<String> ids = JavaConversions.seqAsJavaList(DrcUiActivator
 					.instance()
 					.db()
 					.getIds(DrcUiActivator.instance().currentUser()
@@ -616,8 +612,8 @@ public final class SearchView {
 					break;
 				}
 			}
-			modelIndex = new Index(asBuffer(pages).toList(), DrcUiActivator
-					.instance().db(), modelSelected);
+			modelIndex = new Index(JavaConversions.asScalaBuffer(pages)
+					.toList(), DrcUiActivator.instance().db(), modelSelected);
 			m.done();
 		}
 
@@ -636,7 +632,8 @@ public final class SearchView {
 							throws InvocationTargetException,
 							InterruptedException {
 						if (term.trim().equals("")) { //$NON-NLS-1$
-							search = JavaConversions.asList(modelIndex.pages())
+							search = JavaConversions.seqAsJavaList(
+									modelIndex.pages())
 									.toArray(new String[] {});
 						} else {
 							m.beginTask(Messages.SearchingIn + " " //$NON-NLS-1$
@@ -727,9 +724,9 @@ public final class SearchView {
 	@SuppressWarnings("unchecked")
 	private String selected(Combo volumes) {
 		return "PPN345572629_" //$NON-NLS-1$
-				+ (volumes == null ? JavaConversions.asList(Index.RF()).get(0)
-						: ((List<String>) volumes.getData()).get(volumes
-								.getSelectionIndex()));
+				+ (volumes == null ? JavaConversions.seqAsJavaList(Index.RF())
+						.get(0) : ((List<String>) volumes.getData())
+						.get(volumes.getSelectionIndex()));
 	}
 
 	private Page asPage(Object element) {
@@ -760,8 +757,8 @@ public final class SearchView {
 				return element.toString();
 			}
 			case 4:
-				return isPage(element) ? lastModificationDate(asList(asPage(
-						element).words())) : ""; //$NON-NLS-1$
+				return isPage(element) ? lastModificationDate(JavaConversions
+						.seqAsJavaList(asPage(element).words())) : ""; //$NON-NLS-1$
 			case 5:
 				return isPage(element) ? asPage(element).tags().mkString(", ") : ""; //$NON-NLS-1$ //$NON-NLS-2$
 			case 6:
