@@ -124,7 +124,7 @@ public final class EditView {
 				}
 			}
 			editComposite.update(page);
-			sc.setMinSize(editComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+			sc.setMinHeight(editComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
 		} else {
 			return;
 		}
