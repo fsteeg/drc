@@ -12,8 +12,8 @@ package de.uni_koeln.ub.drc.data
 import scala.collection.mutable.Stack
 import scala.xml._
 import java.io.{ InputStreamReader, FileInputStream, BufferedReader }
-
 import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
 
 /**
  * Experimental representation of a Word, the basic unit of work when editing. Conceptually, it is
@@ -32,8 +32,7 @@ case class Word(original: String, position: Box) {
   /** A word's history is a stack of modifications, the top of which is the current form. */
   val history: Stack[Modification] = new Stack[Modification]()
 
-  /** A word's tags is a map of String to String. */
-  val tags = new scala.collection.mutable.HashMap[String, String]()
+  val annotations: ListBuffer[Annotation] = ListBuffer()
 
   if (history.size == 0)
     history.push(Modification(original, "OCR"))
@@ -90,7 +89,7 @@ case class Word(original: String, position: Box) {
     <word original={ original }>
       { position.toXml }
       { history.map(_.toXml) }
-      { for ((k, v) <- tags) yield <tag key={ k } value={ v }/> }
+      { annotations.map(_.toXml) }
     </word>
 }
 
@@ -102,8 +101,17 @@ object Word {
       val mod = Modification.fromXml(m)
       w.history.push(mod)
     })
-    (word \ "tag").foreach(t => { w.tags += (t \ "@key").text -> (t \ "@value").text })
+    (word \ "annotation").foreach(a => { w.annotations += Annotation.fromXml(a) })
     w
   }
 
+}
+
+private[data] case class Annotation(key: String, value: String, user: String, date: Long) {
+  def toXml = <annotation key={ key } value={ value } user={ user } date={ date.toString }/>
+}
+
+private[data] object Annotation {
+  def fromXml(xml: Node) =
+    Annotation((xml \ "@key").text, (xml \ "@value").text, (xml \ "@user").text, (xml \ "@date").text.toLong)
 }

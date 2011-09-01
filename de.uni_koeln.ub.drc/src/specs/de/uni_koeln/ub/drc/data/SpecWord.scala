@@ -59,10 +59,13 @@ private[drc] class SpecWord extends Spec with ShouldMatchers {
       expect(0) { word.suggestions.size }
     }
     it("can be enriched with free tags") {
-      word.tags += "random" -> "stuff"
-      word.tags += "more" -> "cool stuff"
-      expect("stuff") { Word.fromXml(word.toXml).tags("random") }
-      expect("cool stuff") { Word.fromXml(word.toXml).tags("more") }
+      val time = System.currentTimeMillis
+      word.annotations += Annotation("random", "stuff", "fsteeg", time)
+      word.annotations += Annotation("more", "cool stuff", "fsteeg", time)
+      expect("stuff") { Word.fromXml(word.toXml).annotations(0).value }
+      expect("cool stuff") { Word.fromXml(word.toXml).annotations(1).value }
+      expect("fsteeg") { Word.fromXml(word.toXml).annotations(0).user }
+      expect(time) { Word.fromXml(word.toXml).annotations(0).date }
     }
   }
 

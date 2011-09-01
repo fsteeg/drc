@@ -7,8 +7,8 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.views;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map.Entry;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -30,10 +30,14 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Widget;
 
 import scala.collection.JavaConversions;
+import de.uni_koeln.ub.drc.data.Annotation;
 import de.uni_koeln.ub.drc.data.Page;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
@@ -98,7 +102,10 @@ public final class TagView {
 				String inputVal = val.getText();
 				if (inputKey != null && inputKey.trim().length() != 0
 						&& inputVal != null && inputVal.trim().length() != 0) {
-					word.tags().put(inputKey, inputVal);
+					word.annotations().$plus$eq(
+							new Annotation(inputKey, inputVal, DrcUiActivator
+									.instance().currentUser().id(), System
+									.currentTimeMillis()));
 					page.saveToDb(DrcUiActivator.instance().currentUser()
 							.collection(), DrcUiActivator.instance().db());
 					setTableInput();
@@ -168,9 +175,11 @@ public final class TagView {
 	}
 
 	private void initTable() {
-		final int[] columns = new int[] { 150, 150 };
+		final int[] columns = new int[] { 150, 150, 350, 250 };
 		createColumn(Messages.Key, columns[0], viewer);
 		createColumn(Messages.Value, columns[1], viewer);
+		createColumn(Messages.User, columns[2], viewer);
+		createColumn(Messages.Date, columns[3], viewer);
 		Table table = viewer.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
@@ -191,6 +200,20 @@ public final class TagView {
 			TableHelper.clearWidgets(viewer.getTable());
 			viewer.setInput(TagViewModel.CONTENT.getDetails(word));
 		}
+		addLinks();
+	}
+
+	private void addLinks() {
+		Table table = viewer.getTable();
+		TableItem[] items = table.getItems();
+		for (int i = 0; i < items.length; i++) {
+			final TableItem item = items[i];
+			final String author = ((Annotation) item.getData()).user();
+			Link link = TableHelper.insertLink(viewer.getTable(), item, author,
+					2);
+			item.setData(new Widget[] { link });
+		}
+
 	}
 }
 
@@ -202,9 +225,9 @@ public final class TagView {
 final class TagViewModel {
 	public static final TagViewModel CONTENT = new TagViewModel();
 
-	public Entry<?, ?>[] getDetails(final Word word) {
-		return JavaConversions.mapAsJavaMap(word.tags()).entrySet()
-				.toArray(new Entry[0]);
+	public Annotation[] getDetails(final Word word) {
+		return JavaConversions.bufferAsJavaList(word.annotations()).toArray(
+				new Annotation[0]);
 	}
 
 	static final class TagViewContentProvider implements
@@ -223,7 +246,7 @@ final class TagViewModel {
 		public void inputChanged(final Viewer viewer, final Object oldInput,
 				final Object newInput) {
 			if (newInput != null) {
-				Entry<?, ?>[] newTags = (Entry[]) newInput;
+				Annotation[] newTags = (Annotation[]) newInput;
 				for (int i = 0; i < newTags.length; i++) {
 					viewer.setData(i + "", newTags[i]); //$NON-NLS-1$
 				}
@@ -236,12 +259,17 @@ final class TagViewModel {
 
 		@Override
 		public String getColumnText(final Object element, final int columnIndex) {
-			Entry<?, ?> tag = (Entry<?, ?>) element;
+			Annotation tag = (Annotation) element;
 			switch (columnIndex) {
 			case 0:
-				return tag.getKey().toString();
+				return tag.key();
 			case 1:
-				return tag.getValue().toString();
+				return tag.value();
+			case 2:
+				return WordViewModel.WordViewLabelProvider.userDetails(tag
+						.user());
+			case 3:
+				return new Date(tag.date()).toString();
 			default:
 				return null;
 			}
