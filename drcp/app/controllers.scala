@@ -161,8 +161,8 @@ object Application extends Controller with Secure {
       val text = textLink(link)
       <tr>
         {
-          withLink((row \ "td").toString) ++
-            <td>{ Index.Volumes(volume.toInt) }</td> ++
+          <td>{ Index.Volumes(volume.toInt) }</td> ++
+            withLink((row \ "td").toString) ++
             //<td>{new MetsTransformer("PPN345572629_" + volume + ".xml", db).label(page.toInt)}</td> ++ // TODO: cache
             <td><a href={ link }>image</a></td> ++
             <td><a href={ text }>text</a></td>
