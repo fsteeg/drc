@@ -191,7 +191,7 @@ object Application extends Controller with Secure {
 
   private def configure(query: String): scala.xml.Elem = {
     val cdata = "<![CDATA[%s]]>".format(query)
-    <query xmlns="http://exist.sourceforge.net/NS/exist" start="1" max="100">
+    <query xmlns="http://exist.sourceforge.net/NS/exist" start="1" max="999">
       <text>{ Unparsed(cdata) }</text>
       <properties><property name="indent" value="yes"/></properties>
     </query>
