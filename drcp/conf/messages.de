@@ -94,7 +94,7 @@ views.index.about.pages = Erster Band: %s Seiten.
 views.index.search.term = Suchbegriff:
 views.index.search.volume = Band
 views.index.search.all = Alle
-views.index.search.info = Suchoptionen: <i>Wort*</i> (Suchbegriff gefolgt von beliebig vielen Zeichen); <i>Wort?</i> (gefolgt von einem Zeichen), <i>Wort~</i> (unscharfe Suche).
+views.index.search.info = Suchoptionen: <i>Wort*</i> (Suchbegriff gefolgt von beliebig vielen Zeichen); <i>Wort?</i> (gefolgt von einem Zeichen), <i>Wort~</i> (unscharfe Suche), <i>"Wort1 Wort2"</i> (Phrasensuche), <i>+Wort +Wort</i> (beide Suchbegriffe), <i>Wort1 Wort2</i> (min. einer der Suchbegriffe).
 views.index.users.more = mehr...
 views.index.users.rank = Rang
 views.index.users.name = Name
@@ -200,8 +200,10 @@ views.press.news.4 = <a href="%1s" target="_blank">Digitale Innovation für die 
 views.press.news.5 = <a href="%1s" target="_blank">La Crestomazia en la rait (La Quotidiana, 07.06.2011)</a>
 views.press.news.6 = <a href="%1s" target="_blank">La Crestomazia accessibla a mintgin (La Quotidiana, 07.06.2011)</a>
 views.press.news.7 = <a href="%1s" target="_blank">Romanische Sprachschätze per Mausklick (Bündner Tagblatt, 07.06.2011)</a>
+views.press.news.8 = <a href="%1s" target="_blank">Gemeinsam an der Überlieferung arbeiten (NZZ Nr. 175, 29.07.2011, S.10)</a>
 
 views.press.publ.1 = <a href="%1s" target="_blank">Digitale Rätoromanische Chrestomathie - Eine réécriture communautaire</a><br /> (Gastvortrag an der Universität Zürich, 09.12.2010)
-views.press.publ.2 = <a href="%1s" target="_blank">"Stai si, defenda, Romontsch, tiu vegl lungatg“ - Digitalisierung als Mittel kultureller Selbstermächtigung kleinerer Sprachgemeinschaften</a><br /> (Vortrag im Rahmen der "Languagetalks 2011", LMU München, 16.-18. Februar 2011)
+views.press.publ.2 = "Stai si, defenda, Romontsch, tiu vegl lungatg" - Digitalisierung als Mittel kultureller Selbstermächtigung kleinerer Sprachgemeinschaften<br /> (Vortrag im Rahmen der "Languagetalks 2011", LMU München, 16.-18. Februar 2011)
 views.press.publ.3 = <a href="%1s" target="_blank">Posterpräsentation bei der DGfS-Jahrestagung (Göttingen, 23.-25. Februar 2011)</a>
-views.press.publ.4 = Digitale Rätoromanische Chrestomathie - Werkzeuge und Verfahren für die Korpuserstellung durch kollaborative Volltexterschließung<br /> (Vortrag bei der GSCL-Jahrestagung 2011, Hamburg, 28.-30.09.2011)
+views.press.publ.4 = Digitale Rätoromanische Chrestomathie<br /> (Vortrag beim Rätoromanistischen Kolloquium 2011, Lavin, 28.-31.08.2011)
+views.press.publ.5 = Digitale Rätoromanische Chrestomathie - Werkzeuge und Verfahren für die Korpuserstellung durch kollaborative Volltexterschließung<br /> (Vortrag bei der GSCL-Jahrestagung 2011, Hamburg, 28.-30.09.2011)

@@ -370,7 +370,7 @@ public final class CheckView {
 		int width = newImage.getBounds().width;
 		int x = ((oldWidth - width) / 2) + (int) (box.x() * scaleFactor);
 		int y = ((oldHeigt - height) / 2) + (int) (box.y() * scaleFactor);
-		return new Point(x - 15, y - 25);
+		return new Point(x - 25, y - 25);
 	}
 
 	private Image scaleImage(final Image image) {

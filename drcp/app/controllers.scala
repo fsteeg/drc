@@ -161,8 +161,8 @@ object Application extends Controller with Secure {
       val text = textLink(link)
       <tr>
         {
-          withLink((row \ "td").toString) ++
-            <td>{ Index.Volumes(volume.toInt) }</td> ++
+          <td>{ Index.Volumes(volume.toInt) }</td> ++
+            withLink((row \ "td").toString) ++
             //<td>{new MetsTransformer("PPN345572629_" + volume + ".xml", db).label(page.toInt)}</td> ++ // TODO: cache
             <td><a href={ link }>image</a></td> ++
             <td><a href={ text }>text</a></td>
@@ -191,7 +191,7 @@ object Application extends Controller with Secure {
 
   private def configure(query: String): scala.xml.Elem = {
     val cdata = "<![CDATA[%s]]>".format(query)
-    <query xmlns="http://exist.sourceforge.net/NS/exist" start="1" max="100">
+    <query xmlns="http://exist.sourceforge.net/NS/exist" start="1" max="999">
       <text>{ Unparsed(cdata) }</text>
       <properties><property name="indent" value="yes"/></properties>
     </query>
