@@ -28,6 +28,7 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
@@ -78,7 +79,9 @@ public final class TagView {
 	private void insertAddTagButton(Composite bottomComposite) {
 		label = new Label(bottomComposite, SWT.NONE);
 		updateLabel();
-		final Text tagFieldKey = new Text(bottomComposite, SWT.BORDER);
+		final Combo tagFieldKey = new Combo(bottomComposite, SWT.READ_ONLY);
+		tagFieldKey
+				.setItems(new String[] { "POS", "SEM", "LEM", "SIC", "ETC" }); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$
 		final Text tagFieldVal = new Text(bottomComposite, SWT.BORDER);
 		addTag = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
 		addTag.setEnabled(word != null);
@@ -97,7 +100,7 @@ public final class TagView {
 				addTag(tagFieldKey, tagFieldVal);
 			}
 
-			private void addTag(final Text key, final Text val) {
+			private void addTag(final Combo key, final Text val) {
 				String inputKey = key.getText();
 				String inputVal = val.getText();
 				if (inputKey != null && inputKey.trim().length() != 0
