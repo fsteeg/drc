@@ -29,6 +29,26 @@ object Application extends Controller with Secure {
   val port = 8080
   val db = XmlDb(server, port)
   val col = "drc"
+  
+  val Prefix = "PPN345572629_"
+  val Meta: Map[Int, MetsTransformer] = Map(
+    4 -> meta("0004"),
+    8 -> meta("0008"),
+    9 -> meta("0009"),
+    11 -> meta("0011"),
+    30 -> meta("0030"),
+    12 -> meta("0012"),
+    17 -> meta("0017"),
+    18 -> meta("0018"),
+    24 -> meta("0024"),
+    27 -> meta("0027"),
+    35 -> meta("0035"),
+    36 -> meta("0036"),
+    37 -> meta("0037"),
+    38 -> meta("0038"),
+    33 -> meta("0033"))
+  
+  private def meta(id:String) = new MetsTransformer(Prefix + id + ".xml", db)
 
   def loadUsers =
     (for (u <- db.getXml(col + "/users").get) yield User.fromXml(u))
@@ -65,7 +85,8 @@ object Application extends Controller with Secure {
     val user:User = User.withId(col, db, id)
     val link:String = imageLink(user.latestPage)
     val page:Page = new Page(null, user.latestPage)
-    html.user(user, link, page)
+    val meta:MetsTransformer = Meta(page.volume)
+    html.user(user, link, page, meta)
   }
 
   def signup = html.signup()
@@ -162,8 +183,8 @@ object Application extends Controller with Secure {
       <tr>
         {
           <td>{ Index.Volumes(volume.toInt) }</td> ++
+            <td>{ if(Meta.contains(volume.toInt)) Meta(volume.toInt).label(page.toInt) else "n/a" }</td> ++
             withLink((row \ "td").toString) ++
-            //<td>{new MetsTransformer("PPN345572629_" + volume + ".xml", db).label(page.toInt)}</td> ++ // TODO: cache
             <td><a href={ link }>image</a></td> ++
             <td><a href={ text }>text</a></td>
         }
