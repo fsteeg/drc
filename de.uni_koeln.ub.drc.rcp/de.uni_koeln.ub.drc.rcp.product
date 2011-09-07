@@ -3,7 +3,6 @@
 
 <product name="DRC RCP" uid="de.uni_koeln.ub.drc.rcp" id="de.uni_koeln.ub.drc.ui.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.2.0.qualifier" useFeatures="true" includeLaunchers="true">
 
-
    <configIni use="default">
    </configIni>
 
@@ -27,20 +26,18 @@
       </win>
    </launcher>
 
-
    <vm>
    </vm>
-
 
    <plugins>
    </plugins>
 
    <features>
       <feature id="de.uni_koeln.ub.drc.feature"/>
-      <feature id="org.eclipse.e4.rcp" version="1.1.0.v20110603-1130-7FAf5FTy21UwASRxk9hO1"/>
-      <feature id="org.eclipse.platform" version="4.1.0.v20110612-1800-9JExGmnFnUTMfL0Ian1NYT9GaEGDLpqOm5Kb8S195SuEv"/>
-      <feature id="org.eclipse.equinox.p2.core.feature" version="1.0.0.v20110519-8290FZ-FWmE7gdAgmOPL2_C"/>
       <feature id="org.eclipse.e4.runtime.feature" version="0.9.1.v20100917-1000-7R77F9wF9JgLWVN4kcCmbZE"/>
+      <feature id="org.eclipse.e4.rcp" version="1.1.0.v20110712-1859-7HAM6FTy21UwAdZFk2I9P"/>
+      <feature id="org.eclipse.platform" version="4.1.0.v20110612-1800-9JEzHAmFo6EMgM1Md5fy6vtfQeHDeb96Xdc9fX8spF6Jq"/>
+      <feature id="org.eclipse.equinox.p2.core.feature" version="1.0.0.v20110808-1657-8290Fm3FWmE7gdBapn_sFaR"/>
    </features>
 
    <configurations>
