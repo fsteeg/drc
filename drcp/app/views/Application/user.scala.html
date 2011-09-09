@@ -17,7 +17,7 @@
 </p>
 <p>@Html(get("views.user.region")) @user.region</p>
 @if(link.endsWith(".png")){
-<p>@Html(get("views.user.last.edited", Index.Volumes(page.volume), meta.label(page.number)))</p>
+<p>@{val p = if(meta!=null) meta.label(page.number) else "n/a"; Html(get("views.user.last.edited", Index.Volumes(page.volume), p))}</p>
 <p><img src="@link" width="350px" /></p>
 } else {
 <p class="attention">@Html(get("views.user.start", "http://github.com/spinfo/drc/downloads"))</p>

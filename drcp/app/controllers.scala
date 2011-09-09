@@ -50,7 +50,8 @@ object Application extends Controller with Secure {
     36 -> meta("0036"),
     37 -> meta("0037"),
     38 -> meta("0038"),
-    33 -> meta("0033"))
+    33 -> meta("0033"),
+    14 -> null) // no metadata for volume 14
   
   private def meta(id:String) = new MetsTransformer(Prefix + id + ".xml", db)
 
