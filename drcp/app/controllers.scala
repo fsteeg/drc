@@ -87,10 +87,10 @@ object Application extends Controller with Secure {
 
   def user(id: String) = {
     val user:User = User.withId(col, db, id)
-    val link:String = imageLink(user.latestPage)
-    val page:Page = new Page(null, user.latestPage)
-    val meta:MetsTransformer = Meta(page.volume)
-    html.user(user, link, page, meta)
+    val hasEdited = !user.latestPage.trim.isEmpty
+    val page: Page = if(hasEdited) new Page(null, user.latestPage) else null
+    val meta: MetsTransformer = if(page != null) Meta(page.volume) else null
+    html.user(user, imageLink(user.latestPage), page, meta)
   }
 
   def signup = html.signup()
