@@ -174,6 +174,7 @@ views.main.language = Lingua:
 views.main.logged = Logged in as
 views.main.login = Login
 views.main.logout = Logout
+views.main.text = Text
 
 ##################
 ##  press.html  ##
@@ -196,3 +197,11 @@ views.press.publ.2 = "Stai si, defenda, Romontsch, tiu vegl lungatg" - Digitalis
 views.press.publ.3 = <a href="%1s" target="_blank">Posterpräsentation bei der DGfS-Jahrestagung (Göttingen, 23.-25. Februar 2011)</a>
 views.press.publ.4 = Digitale Rätoromanische Chrestomathie<br /> (Vortrag beim Rätoromanistischen Kolloquium 2011, Lavin, 28.-31.08.2011)
 views.press.publ.5 = Digitale Rätoromanische Chrestomathie - Werkzeuge und Verfahren für die Korpuserstellung durch kollaborative Volltexterschließung<br /> (Vortrag bei der GSCL-Jahrestagung 2011, Hamburg, 28.-30.09.2011)
+
+##################
+##  text.html    ##
+##################
+
+views.text.header = Full Text Download
+views.text.volume = Download
+views.text.info = Here, you can generate and download the current text of the DRC as an UTF8-encoded plain text file. Select the volume to download, or select the option to get all volumes (will take some time, resulting file will be about 15 MB), and press the button.

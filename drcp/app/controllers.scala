@@ -20,6 +20,9 @@ import scala.xml.Node
 import scala.xml.NodeSeq
 import scala.xml.XML
 import scala.xml.Unparsed
+import java.io.File
+import java.io.FileWriter
+import scala.collection.mutable.ListBuffer
 
 object Application extends Controller with Secure {
   
@@ -31,6 +34,7 @@ object Application extends Controller with Secure {
   val col = "drc"
   
   val Prefix = "PPN345572629_"
+  val Plain = "drc-plain/"
   val Meta: Map[Int, MetsTransformer] = Map(
     4 -> meta("0004"),
     8 -> meta("0008"),
@@ -79,7 +83,7 @@ object Application extends Controller with Secure {
     (if (id.matches(".*?PPN345572629_0004-000[1-6].*?")) id /* temp workaround for old data */ else
       (if (id.contains("-")) id.substring(0, id.indexOf('-')) else id) + "/" + id.replace(".xml", ".png"))
       
-  private def textLink(link: String) = link.replace(".png", ".xml").replace("drc/", "drc-plain/")
+  private def textLink(link: String) = link.replace(".png", ".xml").replace("drc/", Plain)
 
   def user(id: String) = {
     val user:User = User.withId(col, db, id)
@@ -169,11 +173,41 @@ object Application extends Controller with Secure {
     search(term, volume)
   }
   
+  def text = html.text()
+  
+  def load() = {
+    val volume = params.get("volume")
+    val volumes = Index.RF
+    val vol = if (volume.toInt - 1 >= 0) Prefix + volumes(volume.toInt - 1) else "drc-all"
+    val ids = (db.getIds(Plain + vol).getOrElse(all)).sorted
+    val file = write(ids, vol)
+    println("Generated: " + file.getAbsolutePath())
+    response.contentType = "application/download"
+    response.setHeader("Content-Disposition", "attachment; filename=" + file.getName())
+    response.direct = file
+  }
+  
+  private def all:List[String] = {
+    val buf = new ListBuffer[String]
+    for(vol<-Index.RF) buf ++= db.getIds(Plain+Prefix + vol).get
+    buf.toList
+  }
+  
+  private def write(ids:List[String], vol:String): File = {
+    val tmp = File.createTempFile(vol+"_",".utf8.txt"); tmp.deleteOnExit()
+    val builder = new StringBuilder
+    for(id <- ids) {
+      val e: Elem = db.getXml(Plain + id.split("-")(0), id).get(0)
+      builder.append("\n").append(id).append("\n\n").append(e.text)
+    }
+    val fw = new FileWriter(tmp); fw.write(builder.toString.trim); fw.close; tmp
+  }
+  
   def search(@Required term: String, @Required volume: String) = {
     val volumes = Index.RF
-    val vol = if (volume.toInt - 1 >= 0) "PPN345572629_" + volumes(volume.toInt - 1) else ""
+    val vol = if (volume.toInt - 1 >= 0) Prefix + volumes(volume.toInt - 1) else ""
     val query = createQuery("/page", term)
-    val q = db.query("drc-plain/" + vol, configure(query))
+    val q = db.query(Plain + vol, configure(query))
     val rows = (q \ "tr")
     val links = rows.map((n: Node) => imageLink((n \\ "a" \ "@href").text))
     val pages:Seq[Elem] = for ((row, link) <- rows zip links) yield {

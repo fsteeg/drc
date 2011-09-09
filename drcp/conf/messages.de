@@ -185,6 +185,7 @@ views.main.language = Sprache:
 views.main.logged = Angemeldet als
 views.main.login = Anmelden
 views.main.logout = Abmelden
+views.main.text = Text
 
 ##################
 ##  press.html  ##
@@ -207,3 +208,11 @@ views.press.publ.2 = "Stai si, defenda, Romontsch, tiu vegl lungatg" - Digitalis
 views.press.publ.3 = <a href="%1s" target="_blank">Posterpräsentation bei der DGfS-Jahrestagung (Göttingen, 23.-25. Februar 2011)</a>
 views.press.publ.4 = Digitale Rätoromanische Chrestomathie<br /> (Vortrag beim Rätoromanistischen Kolloquium 2011, Lavin, 28.-31.08.2011)
 views.press.publ.5 = Digitale Rätoromanische Chrestomathie - Werkzeuge und Verfahren für die Korpuserstellung durch kollaborative Volltexterschließung<br /> (Vortrag bei der GSCL-Jahrestagung 2011, Hamburg, 28.-30.09.2011)
+
+##################
+##  text.html    ##
+##################
+
+views.text.header = Volltext Laden
+views.text.volume = Lade
+views.text.info = Hier können Sie den aktuellen Text der DRC als UTF8-kodierte Textdatei generieren und laden. Wählen Sie den gewünschten Band oder die Option alle Bände zu laden (dauert einige Zeit, resultierende Datei ist etwa 15 MB gross), und drücken Sie den Knopf.
