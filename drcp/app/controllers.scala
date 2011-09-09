@@ -218,7 +218,7 @@ object Application extends Controller with Secure {
       <tr>
         {
           <td>{ Index.Volumes(volume.toInt) }</td> ++
-            <td>{ if(Meta.contains(volume.toInt)) Meta(volume.toInt).label(page.toInt) else "n/a" }</td> ++
+            <td>{ if(Meta(volume.toInt)!=null) Meta(volume.toInt).label(page.toInt) else "n/a" }</td> ++
             withLink((row \ "td").toString) ++
             <td><a href={ link }>image</a></td> ++
             <td><a href={ text }>text</a></td>
