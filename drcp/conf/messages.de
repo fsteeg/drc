@@ -194,14 +194,16 @@ views.main.text = Text
 views.press.header.1 = DRC in der Presse
 views.press.header.2 = Vorträge und Präsentationen
 
-views.press.news.1 = <a href="%1s" target="_blank">La Crestomazia è online (SF-RTR, 06.06.2011, 17.40)</a>
-views.press.news.2 = <a href="%1s" target="_blank">La Crestomazia Retorumantscha è online (SF-RTR, 06.06.2011, 11.01)</a>
-views.press.news.3 = <a href="%1s" target="_blank">Crestomazia Retorumantscha per tuts(SF-RTR, 07.06.2011, 11.15)</a>
-views.press.news.4 = <a href="%1s" target="_blank">Digitale Innovation für die Romanen (Südostschweiz, 07.06.2011)</a>
-views.press.news.5 = <a href="%1s" target="_blank">La Crestomazia en la rait (La Quotidiana, 07.06.2011)</a>
-views.press.news.6 = <a href="%1s" target="_blank">La Crestomazia accessibla a mintgin (La Quotidiana, 07.06.2011)</a>
-views.press.news.7 = <a href="%1s" target="_blank">Romanische Sprachschätze per Mausklick (Bündner Tagblatt, 07.06.2011)</a>
-views.press.news.8 = <a href="%1s" target="_blank">Gemeinsam an der Überlieferung arbeiten (NZZ Nr. 175, 29.07.2011, S.10)</a>
+views.press.news.1 = <a href="%1s" target="_blank">Crestomazia Retorumantscha Digitala </a><br /> In: Mitteilungen des Vereins für Bündner Kulturforschung 11 (2010), S. 26-27. Hrsg vom Institut für Kulturforschung Graubünden, Chur.
+views.press.news.2 = <a href="%1s" target="_blank">La crestomazia è online (SF-RTR, 06.06.2011, 17.40)</a>
+views.press.news.3 = <a href="%1s" target="_blank">La Crestomazia Retorumantscha è online (SF-RTR, 06.06.2011, 11.01)</a>
+views.press.news.4 = <a href="%1s" target="_blank">Crestomazia Retorumantscha per tuts(SF-RTR, 07.06.2011, 11.15)</a>
+views.press.news.5 = <a href="%1s" target="_blank">Digitale Innovation für die Romanen (Südostschweiz, 07.06.2011)</a>
+views.press.news.6 = <a href="%1s" target="_blank">La Crestomazia en la rait (La Quotidiana, 07.06.2011)</a>
+views.press.news.7 = <a href="%1s" target="_blank">La Crestomazia accessibla a mintgin (La Quotidiana, 07.06.2011)</a>
+views.press.news.8 = <a href="%1s" target="_blank">Romanische Sprachschätze per Mausklick (Bündner Tagblatt, 07.06.2011)</a>
+views.press.news.9 = <a href="%1s" target="_blank">Gemeinsam an der Überlieferung arbeiten (NZZ Nr. 175, 29.07.2011, S.10)</a>
+views.press.news.10 = <a href="%1s" target="_blank">Buna partizipaziun e blers contacts (La Quotidiana, 02.09.2011, S.11)</a>
 
 views.press.publ.1 = <a href="%1s" target="_blank">Digitale Rätoromanische Chrestomathie - Eine réécriture communautaire</a><br /> (Gastvortrag an der Universität Zürich, 09.12.2010)
 views.press.publ.2 = "Stai si, defenda, Romontsch, tiu vegl lungatg" - Digitalisierung als Mittel kultureller Selbstermächtigung kleinerer Sprachgemeinschaften<br /> (Vortrag im Rahmen der "Languagetalks 2011", LMU München, 16.-18. Februar 2011)
