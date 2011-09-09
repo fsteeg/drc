@@ -95,6 +95,7 @@ views.index.search.term = Noziun da tschertga:
 views.index.search.volume = Tom
 views.index.search.all = Tuts
 views.index.search.info = Opziuns da tschertga: <i>pled*</i> (noziun da tschertga suandada d'in dumber da segns illimità); <i>pled?</i> (noziun da tschertga suandada d'in segn), <i>pled~</i> (tschertga pli averta), <i>"pled1 pled2"</i> (tschertga da frasa), <i>+pled +pled</i> (omaduas noziuns da tschertga), <i>pled1 pled2</i> (almain ina da las noziuns da tschertga).
+views.index.search.button = Trametter
 views.index.users.more = dapli...
 views.index.users.rank = Plaz
 views.index.users.name = Num
@@ -125,7 +126,7 @@ views.info.text.3 = La digitalisaziun a fund e l’elavuraziun da l’editur per
 
 views.search.mode = Tschertga per '%s' en
 views.search.volume = Tom
-views.search.volumes = Tuts ils toms
+views.search.volumes = Tut ils Toms
 views.search.result = Resultat: %s paginas.
 
 ##################
@@ -143,7 +144,7 @@ views.signup.region = Lieu:
 ##  user.html   ##
 ##################
 
-views.user.summary = Puncts: %1s (ha %2s tractà pleds, ha revalità %3s, ha svalità %4s, è vegnì revalità %5s giadas, è vegnì svalità %6s giadas)
+views.user.summary = Puncts: %1s (ha tractà %2s pleds, ha revalità %3s, ha svalità %4s, è vegnì revalità %5s giadas, è vegnì svalità %6s giadas)
 views.user.region = Regiun: 
 views.user.last.edited = Ultima modificaziun: Tom %1s, pagina %2s
 views.user.start = Gidai: chargiai la <a href="%2s">versiun beta actuala</a> da l' editur per Windows u per Mac e curregi! 

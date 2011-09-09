@@ -95,6 +95,7 @@ views.index.search.term = Suchbegriff:
 views.index.search.volume = Band
 views.index.search.all = Alle
 views.index.search.info = Suchoptionen: <i>Wort*</i> (Suchbegriff gefolgt von beliebig vielen Zeichen); <i>Wort?</i> (gefolgt von einem Zeichen), <i>Wort~</i> (unscharfe Suche), <i>"Wort1 Wort2"</i> (Phrasensuche), <i>+Wort +Wort</i> (beide Suchbegriffe), <i>Wort1 Wort2</i> (min. einer der Suchbegriffe).
+views.index.search.button = Abschicken
 views.index.users.more = mehr...
 views.index.users.rank = Rang
 views.index.users.name = Name
