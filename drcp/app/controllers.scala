@@ -210,26 +210,12 @@ object Application extends Controller with Secure {
     val query = createQuery("/page", term)
     val q = db.query(Plain + vol, configure(query))
     val rows = (q \ "tr")
-    val links = rows.map((n: Node) => imageLink((n \\ "a" \ "@href").text))
-    val pages:Seq[Elem] = for ((row, link) <- rows zip links) yield {
-      val file = link.split("/").last.split("_").last.split("-")
-      val (volume, page) = (file.head, file.last.split("\\.").head)
-      val text = textLink(link)
-      <tr>
-        {
-          <td>{ Index.Volumes(volume.toInt) }</td> ++
-            <td>{ if(Meta(volume.toInt)!=null) Meta(volume.toInt).label(page.toInt) else "n/a" }</td> ++
-            withLink((row \ "td").toString) ++
-            <td><a href={ link }>image</a></td> ++
-            <td><a href={ text }>text</a></td>
-        }
-      </tr>
-    }
+    val hits: Seq[Hit] = (for (row <- rows) yield parse(row)).sorted
     val label = if (volume.toInt - 1 >= 0) Index.Volumes(volumes(volume.toInt - 1).toInt) else ""
-    html.search(term, label, pages, volume)
- }
-  
-  def withLink(elems:String) = {
+    html.search(term, label, hits, volume)
+  }
+
+  def withLink(elems: String) = {
     val LinkParser = """(?s).*?href="([^"]+)".*?""".r
     val LinkParser(id) = elems
     XML.loadString(<i>{ Unparsed(elems.replace(id,textLink(imageLink(id)))) }</i>.toString) \"td"
@@ -251,6 +237,43 @@ object Application extends Controller with Secure {
       <text>{ Unparsed(cdata) }</text>
       <properties><property name="indent" value="yes"/></properties>
     </query>
+  }
+
+  case class Hit(
+    term: String = "",
+    before: String = "",
+    after: String = "",
+    xml: String = "",
+    volume: String = "",
+    mappedVolume: String = "",
+    page: String = "",
+    textLink: String = "",
+    imageLink: String = "") extends Ordered[Hit] {
+      def compare(that:Hit) = {
+        if(this.volume == that.volume) // Sort first by volume 
+          this.page.split(" ")(0).toInt compare that.page.split(" ")(0).toInt // Sort second by page
+        else
+          Index.RF.indexOf(this.volume) compare (Index.RF.indexOf(that.volume))
+      }
+  }
+
+  def parse(elem: Node): Hit = {
+    val ds: Seq[Node] = elem \ "td"
+    val link = (ds(1) \ "a" \ "@href").text
+    val file = link.split("/").last.split("_").last.split("-")
+    val (volume, page) = (file.head, file.last.split("\\.").head)
+    val mappedVolume = Index.Volumes(volume.toInt)
+    val mappedPage = if (Meta(volume.toInt) != null) Meta(volume.toInt).label(page.toInt) else "n/a"
+    Hit(
+      term = ds(1).text.trim,
+      before = ds(0).text.trim,
+      after = ds(2).text.trim,
+      xml = link,
+      volume = volume,
+      mappedVolume = mappedVolume,
+      page = mappedPage,
+      textLink = textLink(imageLink(link)),
+      imageLink = imageLink(link))
   }
 
 }

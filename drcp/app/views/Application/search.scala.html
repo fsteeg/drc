@@ -1,4 +1,4 @@
-@(term:String, label:String, pages:Seq[scala.xml.Elem], volume:String)
+@(term:String, label:String, pages:Seq[controllers.Application.Hit], volume:String)
 @import play.i18n.Messages._
 @main("crestomazia.ch") {
 
@@ -11,8 +11,15 @@
 
 @if(pages.size > 0){
 <table>
-	@for(page<-pages){ 
-		@Html(page.toString)
+	@for(page<-pages){
+		<tr>
+			<td>@page.mappedVolume</td>
+			<td>@page.page</td>
+			<td class="previous">@page.before</td>
+			<td class="hi"><a href="@page.textLink">@page.term</a></td>
+			<td class="following">@page.after</td>
+			<td><a href="@page.imageLink">scan</a></td>
+		</tr>
 	}
 </table>
 }

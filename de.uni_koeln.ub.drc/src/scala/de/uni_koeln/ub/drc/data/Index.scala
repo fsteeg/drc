@@ -154,7 +154,6 @@ object Index {
     8 -> "I, 2. - 3.",
     9 -> "II, 1.",
     11 -> "II, 2. - 3.",
-    14 -> "XIV",
     30 -> "IV",
     12 -> "V",
     17 -> "VI",
@@ -165,7 +164,8 @@ object Index {
     36 -> "X, 3.",
     37 -> "XI",
     38 -> "XII",
-    33 -> "XIII")
+    33 -> "XIII",
+    14 -> "XIV")
 
   //def collection(s:String) = "drc/" + s
   val DefaultCollection = "drc"

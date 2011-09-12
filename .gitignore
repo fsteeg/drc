@@ -24,3 +24,4 @@ drcp/server.pid
 *.class
 drcp/eclipse/classes
 drcp/eclipse/*.launch
+drcp/test-result
