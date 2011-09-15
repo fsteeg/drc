@@ -56,7 +56,7 @@ views.faq.q12 = ...kommentieren?
 views.faq.q13 = ...speichern?
 views.faq.q14 = Wie kann ich im Internet Explorer die Sprache der Website wechseln?
 
-views.faq.a1 = Melden Sie sich <a href="%1s">hier</a> an und laden Sie die <a href="%2s">aktuelle Version</a> des DRC-Editors für Windows oder Mac. Auf Anfrage können zusätzliche Downloads bereitgestellt werden, etwa für speziellere Betriebssystemversionen oder für Linux.
+views.faq.a1 = Melden Sie sich <a href="%1s">hier</a> an und laden Sie die <a target="_blank" href="%2s">aktuelle Version</a> des DRC-Editors für Windows oder Mac. Auf Anfrage können zusätzliche Downloads bereitgestellt werden, etwa für speziellere Betriebssystemversionen oder für Linux.
 views.faq.a2 = Mit dem DRC-Editor können die Texte der Chrestomathie kollaborativ, d. h. gemeinschaftlich, bearbeitet werden. Über den Editor können Sie somit nicht nur in der Chrestomathie suchen und lesen, sondern auch korrigieren, kommentieren und Schlagworte hinzufügen. Alle Veränderungen, die mit dem Editor vorgenommen werden, werden zentral auf einem Server gespeichert. Dadurch können immer auch die Korrekturen, Schlagworte und Kommentare aller anderen Nutzer angezeigt und bei Bedarf selbst wieder bearbeitet werden.
 views.faq.a3 = Windows: Mit der die heruntergeladenen Datei können Sie den DRC-Editor auf ihrem PC installieren. Durch Doppelklick auf öffnet sich ein Dialogfenster, in dem Sie festlegen können, wo das Programm installiert werden soll. Das Programm kann anschließend über das Startmenü gestartet und jederzeit wieder deinstalliert werden.<p>MacOS: Entpacken Sie das heruntergeladene Zip-Archiv an einem Ort Ihrer Wahl (z.B. auf dem Schreibtisch). Im entpackten Ordner findet sich die Programmdatei "DRC". Starten Sie das Programm durch einen Doppelklick auf diese Datei. Um das Programm zu deinstallieren, löschen Sie einfach den gesamten Ordner.<\p>
 views.faq.a4 = Für die gängigen Betriebssysteme ist keine zusätzliche Software erforderlich. Der Editor basiert auf Java, das in der Regel vorinstalliert ist. Sollten dennoch Probleme auftreten, wenden Sie sich bitte einfach direkt an uns.
@@ -76,9 +76,9 @@ views.faq.more = Weitere Hilfe erhalten Sie unter
 ##  index.html  ##
 ##################
 
-views.index.text.1 = <p>Helfen Sie mit, die Chrestomathie originalgetreu und fehlerfrei zugänglich zu machen: <a href="%1s">Melden Sie sich an</a> und laden Sie die aktuelle <a href="%2s">Beta-Version</a> des Editors für Windows oder Mac, oder partizipieren Sie an der Entwicklung auf <a href="%3s">GitHub</a>. <p>Hinweise zur Benutzung des Editors finden sie <a href="%4s">hier</a>.</p>
+views.index.text.1 = <p>Helfen Sie mit, die Chrestomathie originalgetreu und fehlerfrei zugänglich zu machen: <a href="%1s">Melden Sie sich an</a> und laden Sie die aktuelle <a target="_blank" href="%2s">Beta-Version</a> des Editors für Windows oder Mac, oder partizipieren Sie an der Entwicklung auf <a target="_blank" href="%3s">GitHub</a>. <p>Hinweise zur Benutzung des Editors finden sie <a href="%4s">hier</a>.</p>
 
-views.index.text.2 = Helfen Sie mit: <a href="%1s">Melden Sie sich an</a> und laden Sie die aktuelle <a href="%2s">Beta-Version</a> des Editors für Windows oder Mac, oder partizipieren Sie an der Entwicklung auf <a href="%3s">GitHub</a>.
+views.index.text.2 = Helfen Sie mit: <a href="%1s">Melden Sie sich an</a> und laden Sie die aktuelle <a target="_blank" href="%2s">Beta-Version</a> des Editors für Windows oder Mac, oder partizipieren Sie an der Entwicklung auf <a target="_blank" href="%3s">GitHub</a>.
 
 views.index.header.1 = Mitmachen
 views.index.header.2 = Aktive Korrektoren
@@ -87,7 +87,7 @@ views.index.header.4 = Über das Projekt
 
 views.index.greeting = <p>Charas Rumantschas, chars Rumantschs</p><p>La Crestomazia è vegnida digitalisada e stat a disposiziun ad in e scadin. Quest stgazi da la litteratura rumantscha, mess ensemen e publitgà da Caspar Decurtins, è ussa accessibel sin internet. Tuttas e tuts èn envidads da duvrar, commentar e meglierar questa digitalisaziun.</p><p>En quest senn giavisch jau bler plaschair e buna lectura.</p><p>Corina Casanova, chanceliera federala</p><a href="%1s">Zur deutschen Übersetzung</a></p><br />
 
-views.index.about = Die Rätoromanische Chrestomathie von Caspar Decurtins ist die bis heute wichtigste Textsammlung des Bündnerromanischen. Die insgesamt rund 8000 Seiten enthalten Texte der verschiedensten Gattungen über einen Zeitraum von vier Jahrhunderten, aus allen Regionen und in allen Idiomen des Bündnerromanischen. Ursprünglich zwischen 1891 und 1919 zusammengestellt, ist die Rätoromanische Chrestomathie nun erstmals auch digital verfügbar.<p>Mehr zum DRC-Projekt finden Sie <a href="%4s">hier</a>.</p>
+views.index.about = Die Rätoromanische Chrestomathie von Caspar Decurtins ist die bis heute wichtigste Textsammlung des Bündnerromanischen. Die insgesamt rund 8000 Seiten enthalten Texte der verschiedensten Gattungen über einen Zeitraum von vier Jahrhunderten, aus allen Regionen und in allen Idiomen des Bündnerromanischen. Ursprünglich zwischen 1891 und 1919 zusammengestellt, ist die Rätoromanische Chrestomathie nun erstmals auch digital verfügbar.<p>Mehr zum DRC-Projekt finden Sie <a target="_blank" href="%4s">hier</a>.</p>
 
 views.index.about.pages = Erster Band: %s Seiten.
 
@@ -125,7 +125,7 @@ views.info.header.2 = Digitale Rätoromanische Chrestomathie (DRC) - das Projekt
 
 views.info.text.2 = Ziel des DRC-Projekts ist die Bereitstellung der Rätoromanischen Chrestomathie als elektronisch durchsuchbare Textsammlung. Hierfür müssen die Texte gescannt, elektronisch eingelesen, korrigiert und aufbereitet werden. Eine digitale, für jeden frei zugängliche Chrestomathie bietet eine Vielzahl neuer Impulse für die wissenschaftliche, mediale, edukative, aber auch private Nutzung. Die Möglichkeiten reichen von historischen und genealogischen Recherchen nach Personen und Ortsnamen über die kreative Auseinandersetzung durch Hinzufügung eigener Texte oder Übersetzungen bis hin zur lexikographischen Arbeit mit der Chrestomathie, zu deren (computer-)linguistischen Auswertung, etwa hinsichtlich Fragen des Sprachwandels und Sprachkontakts, oder zur Georeferenzierung der Texte für eine Nutzung im Qualitätstourismus.<p> Grundlage für die Erschließung der Volltexte sind die gescannten Bilder (Digitalisate) der Chrestomathie. Für die ersten 13 Bände, die in den "Romanischen Forschungen" erschienen sind, wurden die Digitalisate von der Staats- und Universitätsbibliothek Göttingen im Rahmen des von der Deutschen Forschungsgemeinschaft geförderten Projekts "Digizeitschriften" erstellt. Mit freundlicher Genehmigung der Societad Retorumantscha wurden zudem die beiden Ergänzungsbände der Octopus-Ausgabe (Chur, 1982-1986) durch die Universitäts- und Stadtbibliothek Köln digitalisiert, darunter der von Peter Egloff und Jon Mathieu erstellte Registerband zur Chrestomathie.</p><p> Die unterschiedlichen Verschriftungstraditionen und variierenden Typographien der Chrestomathie machen eine fehlerfreie automatische Zeichenerkennung (OCR, Optical Character Recognition) faktisch unmöglich. Das DRC-Projekt setzt deshalb bei der Korrektur auf die Zusammenarbeit mit der romanischen Sprachgemeinschaft. Für die Verbesserung und Auszeichnung der Texte - die Melioration - hat die Sprachliche Informationsverarbeitung der Universität zu Köln ein webbasiertes System entwickelt. Darin sind die automatisch gelesenen Texte den Ausgangsbildern (Digitalisaten) gegenübergestellt; Verbesserungen, Kommentare und Verweise können nach Wiki-Prinzipien vorgeschlagen und eingebracht werden. Erstmalig wird so die Sprachgemeinschaft einer Kleinsprache in den Prozess einer aktiven - oder besser interaktiven - Sprachbewahrung eingebunden. Das Vorhaben hat damit prototypischen Charakter für die Dokumentation und Bewahrung des kulturellen Erbes kleinerer, auch bedrohter Sprachen. Das Projekt ist in seinem innovativen Ansatz der Partizipation der Sprachgemeinschaft an Korrektur und Kommentierung (Anreicherung) der Textsammlung zudem prototypisch für die Lösung von Digitalisierungsproblemen durch soziale Gemeinschaften.</p>
 
-views.info.more = Mehr Informationen zum Projekt finden Sie <a href="%s">hier</a>.
+views.info.more = Mehr Informationen zum Projekt finden Sie <a target="_blank" href="%s">hier</a>.
 
 views.info.header.3 = Projektpartner und Sponsoren
 
@@ -158,7 +158,7 @@ views.signup.region = Ort:
 views.user.summary = Punkte: %1s (hat %2s Wörter bearbeitet, hat %3s aufgewertet, hat %4s abgewertet, wurde %5s mal aufgewertet, wurde %6s mal abgewertet)
 views.user.region = Region: 
 views.user.last.edited = Zuletzt bearbeitet: Band %1s, Seite %2s
-views.user.start = Helfen Sie mit: Laden Sie die <a href="%2s">aktuelle Beta-Version</a> des Editors für Windows oder Mac, und korrigieren Sie mit!
+views.user.start = Helfen Sie mit: Laden Sie die <a target="_blank" href="%2s">aktuelle Beta-Version</a> des Editors für Windows oder Mac, und korrigieren Sie mit!
 views.user.edit = Benutzerdaten bearbeiten
 
 ##################
@@ -167,7 +167,7 @@ views.user.edit = Benutzerdaten bearbeiten
 
 views.users = Benutzer
 views.users.participate = Mitmachen
-views.users.text = Helfen Sie mit: <a href="%1s">Melden Sie sich an</a> und laden Sie die <a href="%2s">aktuelle Beta-Version</a> des Editors für Windows oder Mac.
+views.users.text = Helfen Sie mit: <a href="%1s">Melden Sie sich an</a> und laden Sie die <a target="_blank" href="%2s">aktuelle Beta-Version</a> des Editors für Windows oder Mac.
 
 ##################
 ##   main.html  ##
