@@ -205,6 +205,6 @@ views.press.publ.5 = Digitale Rätoromanische Chrestomathie - Werkzeuge und Verf
 ##  text.html    ##
 ##################
 
-views.text.header = Full Text Download
-views.text.volume = Download
-views.text.info = Here, you can generate and download the current text of the DRC as an UTF8-encoded plain text file. Select the volume to download, or select the option to get all volumes (will take some time, resulting file will be about 15 MB), and press the button.
+views.text.header = Telechargiada dal text accessibel
+views.text.volume = Telechargiada
+views.text.info = Qua pudais Vus exportar e telechargiar il text da la Crestomazia Retorumantscha sco datoteca da texts codada en il format UTF8. Il text correspunda mintgamai al stadi actual da l’elavuraziun. Vus pudais telechargiar singuls toms ubain l’entira ovra (telechargiar l’entira ovra dura in pau pli ditg perquai che la datoteca che resulta ha ina grondezza da 15 MB).
