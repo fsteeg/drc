@@ -333,11 +333,8 @@ public final class SearchView {
 		currentPageLabel
 				.setText(String
 						.format(Messages.CurrentPageVolume
-								+ " %s, " + Messages.Page + " %s, %s", volumes.getItem(volumes.getSelectionIndex()), //$NON-NLS-1$ //$NON-NLS-2$
-								mets.label(page.number()),
-								page.tags().size() == 0 ? Messages.NotTagged
-										: Messages.TaggedAs + ": " //$NON-NLS-1$
-												+ page.tags().mkString(", "))); //$NON-NLS-1$
+								+ " %s, " + Messages.Page + " %s", volumes.getItem(volumes.getSelectionIndex()), //$NON-NLS-1$ //$NON-NLS-2$
+								mets.label(page.number())));
 		close.setSelection(page.done());
 	}
 
