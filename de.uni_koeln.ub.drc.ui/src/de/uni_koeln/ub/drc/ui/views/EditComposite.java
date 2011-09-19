@@ -104,7 +104,6 @@ public final class EditComposite extends Composite {
 						setLineLayout(line);
 					}
 				}
-				parent.setSize(parent.getParent().getSize());
 			}
 
 			@Override
