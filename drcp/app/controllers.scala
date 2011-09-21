@@ -251,7 +251,11 @@ object Application extends Controller with Secure {
     imageLink: String = "") extends Ordered[Hit] {
       def compare(that:Hit) = {
         if(this.volume == that.volume) // Sort first by volume 
-          this.page.split(" ")(0).toInt compare that.page.split(" ")(0).toInt // Sort second by page
+          try {
+            this.page.split(" ")(0).toInt compare that.page.split(" ")(0).toInt // Sort second by page
+          } catch {
+            case _:NumberFormatException => this.page compare that.page // e.g. "n/a"
+          }
         else
           Index.RF.indexOf(this.volume) compare (Index.RF.indexOf(that.volume))
       }
