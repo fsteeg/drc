@@ -1,5 +1,9 @@
 Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy).
 
+h1. Beta 5 (2011 September 23)
+
+Beta 5 (tag: b5) adds a new view for word-level annotation and various fixes in the editor. The portal now offers full text download of the current data and contains volume XIV. Search results in the portal have an improved KWIC layout and are now sorted chronologically. For a full list of changes see the "commits":https://github.com/spinfo/drc/commits/master. You can get the editor from the "downloads":http://github.com/spinfo/drc/downloads page and visit the portal at "http://www.crestomazia.ch":http://www.crestomazia.ch.
+
 h1. Beta 4 (2011 August 25)
 
 Beta 4 (tag: b4) adds more data, the ability to mark pages as done, and various bugfixes and minor improvements to the editor and portal. The portal now contains authentication to allow modification of user account data. For a full list of changes see the "commits":https://github.com/spinfo/drc/commits/master. You can get the editor from the "downloads":http://github.com/spinfo/drc/downloads page and visit the portal at "http://www.crestomazia.ch":http://www.crestomazia.ch.
