@@ -70,7 +70,6 @@ public final class EditView {
 	@PostConstruct
 	public void setContext() {
 		editComposite.setContext(context);
-		focusLatestWord();
 		eventBroker = (IEventBroker) context.get(IEventBroker.class.getName());
 	}
 
@@ -78,7 +77,7 @@ public final class EditView {
 		if (editComposite != null && editComposite.getWords() != null) {
 			Text text = editComposite.getWords().get(
 					DrcUiActivator.instance().currentUser().latestWord());
-			text.setFocus();
+			// text.setFocus(); // FIXME collides with page selection sometimes
 			sc.showControl(text);
 		}
 	}
@@ -125,6 +124,10 @@ public final class EditView {
 			}
 			editComposite.update(page);
 			sc.setMinHeight(editComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+			if (page.id().equals(
+					DrcUiActivator.instance().currentUser().latestPage())) {
+				focusLatestWord();
+			}
 		} else {
 			return;
 		}

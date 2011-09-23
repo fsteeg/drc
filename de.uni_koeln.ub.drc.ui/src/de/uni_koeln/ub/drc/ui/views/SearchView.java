@@ -343,6 +343,11 @@ public final class SearchView {
 	 */
 	@PostConstruct
 	public void select() {
+		String latestPage = DrcUiActivator.instance().currentUser()
+				.latestPage();
+		String volume = latestPage.split("_")[1].split("-")[0]; //$NON-NLS-1$ //$NON-NLS-2$
+		volumes.select(Index.RF().indexOf(volume));
+		setInput();
 		if (viewer.getTree().getItems().length == 0) {
 			throw new IllegalArgumentException(Messages.NoEntries);
 		}
@@ -350,8 +355,7 @@ public final class SearchView {
 				JavaConversions.seqAsJavaList(content.modelIndex.pages()));
 		Collections.sort(allPages);
 		for (String pageId : allPages) {
-			if (pageId.equals(DrcUiActivator.instance().currentUser()
-					.latestPage())) {
+			if (pageId.equals(latestPage)) {
 				select(pageId);
 				break;
 			}
