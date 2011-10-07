@@ -96,9 +96,8 @@ object Import extends Application {
 
   val folder = "res/rom/"
   val prefix = "PPN345572629_"
-  val volumes = List(
-    "0004", "0008", "0009", "0011", "0012", "0014", "0017", "0018",
-    "0024", "0027", "0030", "0033", "0035", "0036", "0037", "0038")
+  val volumes = List( /*"0003", "0004", "0008", "0009", "0011", "0012", "0014", "0017", "0018",
+  "0024", "0027", "0030", "0033", "0035", "0036", "0037", "0038" */ )
 
   for (volume <- volumes) {
     // Stuff to do for every volume:
@@ -146,7 +145,8 @@ object Index {
     "0037",
     "0038",
     "0033",
-    "0014")
+    "0014",
+    "0003")
 
   /** Mapping of RF ids to Octopus labels */
   val Volumes: Map[Int, String] = Map(
@@ -165,7 +165,8 @@ object Index {
     37 -> "XI",
     38 -> "XII",
     33 -> "XIII",
-    14 -> "XIV")
+    14 -> "XIV, 1.",
+    3 -> "XIV, 2.")
 
   //def collection(s:String) = "drc/" + s
   val DefaultCollection = "drc"

@@ -25,3 +25,4 @@ drcp/server.pid
 drcp/eclipse/classes
 drcp/eclipse/*.launch
 drcp/test-result
+.cache
