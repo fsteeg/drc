@@ -179,7 +179,7 @@ public final class CommentsView {
 	private void setInput() {
 		if (page != null) {
 			TableHelper.clearWidgets(viewer.getTable());
-			viewer.setInput(JavaConversions.seqAsJavaList(page.comments())
+			viewer.setInput(JavaConversions.asJavaList(page.comments())
 					.toArray(new Comment[] {}));
 			addLinks();
 		}

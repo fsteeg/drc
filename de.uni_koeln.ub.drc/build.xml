@@ -5,7 +5,8 @@
 	<property name="build.dir" location="build" />
 	<property name="lib.dir" location="lib" />
 	<property name="deploy.dir.root" location="../de.uni_koeln.ub.drc.ui/" />
-	<property name="deploy.dir.lib" location="${deploy.dir.root}/lib" />
+	<property name="deploy.dir.edit" location="${deploy.dir.root}/lib" />
+	<property name="deploy.dir.drcp" location="../drcp/lib" />
 	<property name="deploy.dir.data" location="${deploy.dir.root}/pages" />
 	<property name="deploy.dir.data.users" location="${deploy.dir.root}/users" />
 	<property name="src.dir.data.users" location="users" />
@@ -134,19 +135,29 @@
 		</jar>
 	</target>
 
-	<!-- Deploy our jar and the libraries -->
+	<!-- Deploy our jars and the libraries -->
 	<target name="deploy" depends="jar">
-		<copy todir="${deploy.dir.lib}">
-			<!-- deploy our jars -->
-			<fileset dir="${build.dist.dir.java}" casesensitive="yes">
-				<include name="*.jar" />
-			</fileset>
+		<deploy todir="${deploy.dir.edit}"/>
+		<deploy todir="${deploy.dir.drcp}"/>
+		<copy todir="${deploy.dir.edit}">
 			<!-- deploy required jars (only top level jars) -->
 			<fileset dir="${lib.dir}" casesensitive="yes">
 				<include name="*.jar" />
 			</fileset>
-		</copy>
+	    </copy>
 	</target>
+	
+	<macrodef name="deploy">
+	  <attribute name="todir"/>
+	  <sequential>
+	    <copy todir="@{todir}">
+	    	<!-- deploy our jars -->
+			<fileset dir="${build.dist.dir.java}" casesensitive="yes">
+				<include name="*.jar" />
+			</fileset>
+	    </copy>
+	  </sequential>
+	</macrodef>
 
 	<target name="import" depends="compile">
 		<java classpathref="project.classpath" classname="de.uni_koeln.ub.drc.data.Import"/>

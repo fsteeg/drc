@@ -25,4 +25,5 @@ drcp/server.pid
 drcp/eclipse/classes
 drcp/eclipse/*.launch
 drcp/test-result
+drcp/lib/drc-*.jar
 .cache

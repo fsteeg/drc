@@ -229,7 +229,7 @@ final class TagViewModel {
 	public static final TagViewModel CONTENT = new TagViewModel();
 
 	public Annotation[] getDetails(final Word word) {
-		return JavaConversions.bufferAsJavaList(word.annotations()).toArray(
+		return JavaConversions.asJavaList(word.annotations()).toArray(
 				new Annotation[0]);
 	}
 
