@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<fragment>
+   <extension
+         point="org.eclipse.rap.ui.entrypoint">
+      <entrypoint
+            class="de.uni_koeln.ub.drc.ui.rap.EntryPoint"
+            id="de.uni_koeln.ub.drc.ui.rap.entrypoint"
+            parameter="de.uni_koeln.ub.drc.ui.rap.entrypoint">
+      </entrypoint>
+   </extension>
+   <!--<extension
+         point="org.eclipse.rap.ui.branding">
+      <branding
+            defaultEntrypointId="de.uni_koeln.ub.drc.ui.rap.entrypoint"
+            id="de.uni_koeln.ub.drc.ui.rap.branding"
+            servletName="drc_rap"
+            themeId="org.eclipse.rap.design.example.fancy.theme">
+      </branding>
+   </extension>-->
+   <extension
+         point="org.eclipse.rap.ui.themes">
+      <theme
+            file="css/default.css"
+            id="de.uni_koeln.ub.drc.ui.rap.defaultTheme"
+            name="Default theme">
+      </theme>
+   </extension>
+   <extension
+         point="org.eclipse.rap.ui.branding">
+      <branding
+            defaultEntrypointId="de.uni_koeln.ub.drc.ui.rap.entrypoint"
+            id="de.uni_koeln.ub.drc.ui.rap.branding"
+            servletName="drc_rap"
+            themeId="de.uni_koeln.ub.drc.ui.rap.defaultTheme">
+      </branding>
+   </extension></fragment>
