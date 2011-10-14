@@ -1,3 +1,10 @@
+/**************************************************************************************************
+ * Copyright (c) 2011 Mihail Atanassov. All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0 which accompanies this
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * <p/>
+ * Contributors: Mihail Atanassov - initial API and implementation
+ *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.facades;
 
 import java.lang.reflect.Constructor;
@@ -17,13 +24,12 @@ public class NLSHelperImpl extends NLSHelper {
 		return internalGet(bundle, clazz);
 	}
 
-	@SuppressWarnings("rawtypes")
 	private Object internalGet(final ResourceBundle bundle, final Class<?> clazz) {
 		Object result;
 		try {
-			Constructor constructor = clazz.getDeclaredConstructor(null);
+			Constructor<?> constructor = clazz.getDeclaredConstructor((Class<?>[]) null);
 			constructor.setAccessible(true);
-			result = constructor.newInstance(null);
+			result = constructor.newInstance((Object[]) null);
 		} catch (final Exception ex) {
 			throw new IllegalStateException(ex.getMessage());
 		}

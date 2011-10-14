@@ -49,7 +49,7 @@ import de.uni_koeln.ub.drc.ui.views.TagViewModel.TagViewLabelProvider;
 /**
  * View containing tag details for the currently selected word.
  * 
- * @author Fabian Steeg (fsteeg)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
 public final class TagView extends ViewPart {
 
@@ -80,7 +80,11 @@ public final class TagView extends ViewPart {
 	public void setFocus() {
 	}
 
-	public void selectedWord(Word word, Text text) {
+	/**
+	 * @param word
+	 *            The selected word
+	 */
+	public void setWord(final Word word) {
 		this.word = word;
 		updateLabel();
 		setTableInput();
@@ -90,6 +94,7 @@ public final class TagView extends ViewPart {
 		ISelectionService selectionService = (ISelectionService) getSite()
 				.getService(ISelectionService.class);
 		selectionService.addSelectionListener(new ISelectionListener() {
+			@Override
 			public void selectionChanged(IWorkbenchPart part,
 					ISelection selection) {
 				IStructuredSelection structuredSelection = (IStructuredSelection) selection;
@@ -108,17 +113,6 @@ public final class TagView extends ViewPart {
 	private void setPage(Page page) {
 		this.page = page;
 	}
-
-	// /**
-	// * @param parent
-	// * The parent composite for this part
-	// */
-	// @Inject
-	// public TagView(final Composite parent) {
-	// initTableViewer(parent);
-	// addNewTagBar(parent);
-	// GridLayoutFactory.fillDefaults().generateLayout(parent);
-	// }
 
 	private void addNewTagBar(Composite parent) {
 		Composite bottomComposite = new Composite(parent, SWT.NONE);
@@ -183,42 +177,6 @@ public final class TagView extends ViewPart {
 			label.getParent().pack();
 		}
 	}
-
-	// /**
-	// * @param text
-	// * The selected text widget
-	// */
-	// @Inject
-	// public void setSelection(
-	// @Optional @Named(IServiceConstants.ACTIVE_SELECTION) final Text text) {
-	// Word word = null;
-	// Page page = null;
-	// if (text != null
-	// && (word = (Word) text.getData(Word.class.toString())) != null
-	// && (page = (Page) text.getData(Page.class.toString())) != null) {
-	// this.word = word;
-	// this.page = page;
-	// }
-	// updateLabel();
-	// setTableInput();
-	// }
-	//
-	// /**
-	// * @param pages
-	// * The selected pages
-	// */
-	// @Inject
-	// public void setSelection(
-	// @Optional @Named(IServiceConstants.ACTIVE_SELECTION) final List<Page>
-	// pages) {
-	// if (pages != null && pages.size() > 0) {
-	// Page page = pages.get(0);
-	// System.out.println(Messages.SettingPage + page);
-	// this.page = page;
-	// this.word = null;
-	// }
-	// updateLabel();
-	// }
 
 	private void initTableViewer(final Composite parent) {
 		viewer = new TableViewer(parent, SWT.MULTI | SWT.V_SCROLL

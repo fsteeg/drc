@@ -49,7 +49,7 @@ import de.uni_koeln.ub.drc.util.PlainTextCopy;
  * A view that the area to edit the text. Marks the section in the image file
  * that corresponds to the word in focus (in {@link CheckView}).
  * 
- * @author Fabian Steeg (fsteeg)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
 public final class EditView extends ViewPart implements ISaveablePart {
 
@@ -57,12 +57,6 @@ public final class EditView extends ViewPart implements ISaveablePart {
 	 * The class / EditView ID
 	 */
 	public static final String ID = EditView.class.getName().toLowerCase();
-
-	// @Inject
-	// IEclipseContext context;
-	// @Inject
-	// private IEventBroker eventBroker;
-	// final MDirtyable dirtyable;
 
 	static final String SAVED = "pagesaved"; //$NON-NLS-1$
 	EditComposite editComposite;
@@ -72,7 +66,6 @@ public final class EditView extends ViewPart implements ISaveablePart {
 
 	@Override
 	public void createPartControl(final Composite parent) {
-		// this.dirtyable = dirtyable;
 		sc = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.BORDER);
 		label = new Label(parent, SWT.CENTER | SWT.WRAP);
 		label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -116,21 +109,6 @@ public final class EditView extends ViewPart implements ISaveablePart {
 		contextService.activateContext(ID);
 	}
 
-	/* NOT WORKING */
-	// @SuppressWarnings( "unused" )
-	// private void addKeyBinding(Composite parent) {
-	// Display display = parent.getDisplay();
-	// display.setData(RWT.ACTIVE_KEYS, new String[] { "CTRL+S" });
-	// display.addFilter(SWT.KeyDown, new Listener() {
-	// @Override
-	// public void handleEvent(Event event) {
-	// if (event.stateMask == SWT.CTRL && event.character == 'S')
-	// saveToXml((Page) event.data);
-	// }
-	// });
-	//
-	// }
-
 	protected void setDirty(boolean dirty) {
 		if (dirtyable != dirty) {
 			dirtyable = dirty;
@@ -142,13 +120,13 @@ public final class EditView extends ViewPart implements ISaveablePart {
 		ISelectionService selectionService = (ISelectionService) getSite()
 				.getService(ISelectionService.class);
 		selectionService.addSelectionListener(new ISelectionListener() {
+			@Override
 			@SuppressWarnings("unchecked")
 			public void selectionChanged(IWorkbenchPart part,
 					ISelection selection) {
 				IStructuredSelection structuredSelection = (IStructuredSelection) selection;
 				if (structuredSelection.getFirstElement() instanceof Page) {
-					List<Page> pages = (List<Page>) structuredSelection
-							.toList();
+					List<Page> pages = structuredSelection.toList();
 					if (pages != null && pages.size() > 0) {
 						Page page = pages.get(0);
 						if (dirtyable) {
@@ -163,9 +141,6 @@ public final class EditView extends ViewPart implements ISaveablePart {
 													.getYesLabel(),
 											IDialogConstantsHelper.getNoLabel() },
 									0);
-							// IDialogConstants.get().YES_LABEL,
-							// IDialogConstants.get().NO_LABEL },
-							// 0);
 							dialog.create();
 							if (dialog.open() == Window.OK) {
 								doSave(null);
@@ -186,15 +161,6 @@ public final class EditView extends ViewPart implements ISaveablePart {
 
 	}
 
-	// /**
-	// * Pass this view's context to the embedded composite
-	// */
-	// @PostConstruct
-	// public void setContext() {
-	// editComposite.context = context;
-	// eventBroker = (IEventBroker) context.get(IEventBroker.class.getName());
-	// }
-
 	private void focusLatestWord() {
 		if (editComposite != null && editComposite.getWords() != null) {
 			Text text = editComposite.getWords().get(
@@ -203,45 +169,6 @@ public final class EditView extends ViewPart implements ISaveablePart {
 			sc.showControl(text);
 		}
 	}
-
-	// /**
-	// * @param parent
-	// * The parent composite for this part
-	// * @param dirtyable
-	// * The dirtyable to display edit status
-	// */
-	// @Inject
-	// public EditView(final Composite parent, final MDirtyable dirtyable) {
-	// }
-
-	// /**
-	// * @param pages
-	// * The selected pages
-	// */
-	// @Inject
-	// public void setSelection(
-	// @Optional @Named(IServiceConstants.ACTIVE_SELECTION) final List<Page>
-	// pages) {
-	// if (pages != null && pages.size() > 0) {
-	// Page page = pages.get(0);
-	// if (dirtyable.isDirty()) {
-	// MessageDialog dialog = new MessageDialog(
-	// editComposite.getShell(), Messages.SavePage, null,
-	// Messages.CurrentPageModified, MessageDialog.CONFIRM,
-	// new String[] { IDialogConstants.get().YES_LABEL,
-	// IDialogConstants.get().NO_LABEL }, 0);
-	// dialog.create();
-	// if (dialog.open() == Window.OK) {
-	// doSave(null);
-	// }
-	// }
-	// editComposite.update(page);
-	// sc.setMinSize(editComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-	// } else {
-	// return;
-	// }
-	// dirtyable.setDirty(false);
-	// }
 
 	/**
 	 * @param progressMonitor
@@ -275,7 +202,6 @@ public final class EditView extends ViewPart implements ISaveablePart {
 				Text text = editComposite.getPrev();
 				Word word = (Word) text.getData(Word.class.toString());
 				wv.selectedWord(word, text);
-				// eventBroker.post(EditView.SAVED, page);
 			}
 
 			private void plainTextCopy(final Page page) {
@@ -326,7 +252,6 @@ public final class EditView extends ViewPart implements ISaveablePart {
 				}
 			}
 		});
-		// dirtyable.setDirty(false);
 		setDirty(false);
 	}
 

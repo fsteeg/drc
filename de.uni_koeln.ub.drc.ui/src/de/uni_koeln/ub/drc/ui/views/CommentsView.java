@@ -50,7 +50,7 @@ import de.uni_koeln.ub.drc.ui.views.WordViewModel.WordViewLabelProvider;
 /**
  * View on comments for a page.
  * 
- * @author Fabian Steeg (fsteeg)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
 public final class CommentsView extends ViewPart {
 
@@ -84,13 +84,13 @@ public final class CommentsView extends ViewPart {
 				.getService(ISelectionService.class);
 		selectionService.addSelectionListener(new ISelectionListener() {
 
+			@Override
 			@SuppressWarnings("unchecked")
 			public void selectionChanged(IWorkbenchPart part,
 					ISelection selection) {
 				IStructuredSelection structuredSelection = (IStructuredSelection) selection;
 				if (structuredSelection.getFirstElement() instanceof Page) {
-					List<Page> pages = (List<Page>) structuredSelection
-							.toList();
+					List<Page> pages = structuredSelection.toList();
 					if (pages != null && pages.size() > 0) {
 						page = pages.get(0);
 						setInput();
@@ -99,35 +99,6 @@ public final class CommentsView extends ViewPart {
 			}
 		});
 	}
-
-	// /**
-	// * @param text
-	// * The selected text widget
-	// */
-	// @Inject
-	// public void setSelection(
-	// @Optional @Named(IServiceConstants.ACTIVE_SELECTION) final Text text) {
-	// Page page = null;
-	// if (text != null
-	// && (page = (Page) text.getData(Page.class.toString())) != null) {
-	// this.page = page;
-	// setInput();
-	// }
-	// }
-
-	// /**
-	// * @param pages
-	// * The selected pages
-	// */
-	// @Inject
-	// public void setSelection(
-	// @Optional @Named(IServiceConstants.ACTIVE_SELECTION) final List<Page>
-	// pages) {
-	// if (pages != null && pages.size() > 0) {
-	// page = pages.get(0);
-	// setInput();
-	// }
-	// }
 
 	/* DI */@SuppressWarnings("unused")
 	@PostConstruct

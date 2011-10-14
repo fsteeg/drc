@@ -39,12 +39,10 @@ import de.uni_koeln.ub.drc.ui.facades.CSSSWTConstantsHelper;
 /**
  * Composite holding the edit area. Used by the {@link EditView}.
  * 
- * @author Fabian Steeg (fsteeg)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
 public class EditComposite extends Composite {
 
-	// private MDirtyable dirtyable;
-	// IEclipseContext context;
 	private Composite parent;
 	private Page page;
 	private boolean commitChanges = false;
@@ -57,14 +55,12 @@ public class EditComposite extends Composite {
 	 * @param editView
 	 *            The parent edit view for this composite
 	 * @param style
-	 *            The syle bits for this composite
+	 *            The style bits for this composite
 	 */
-	// @Inject
 	public EditComposite(final EditView editView, final int style) {
 		super(editView.sc, style);
 		this.editView = editView;
 		this.parent = editView.sc;
-		// this.dirtyable = editView.dirtyable;
 		this.status = editView.label;
 		parent.getShell().setBackgroundMode(SWT.INHERIT_DEFAULT);
 		GridLayout layout = new GridLayout(1, false);
@@ -135,11 +131,6 @@ public class EditComposite extends Composite {
 			} else {
 				Text text = new Text(lineComposite, SWT.NONE);
 				setCssName(text);
-				// TODO: RAP '&' display problem
-				// if (word.original().equals("&"))
-				//					text.setText(word.history().top().form() + "&"); //$NON-NLS-1$
-				// else
-				//
 				text.setText(word.history().top().form());
 				handleEmptyText(text);
 				// option: word.isPossibleError() ? UNCHECKED : DEFAULT
@@ -181,6 +172,9 @@ public class EditComposite extends Composite {
 	final static int DEFAULT = SWT.COLOR_BLACK;
 	final static int UNCHECKED = SWT.COLOR_BLACK; // no coloring for now
 
+	/**
+	 * @return The previous text widget
+	 */
 	public Text getPrev() {
 		return prev;
 	}
@@ -189,7 +183,6 @@ public class EditComposite extends Composite {
 		text.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(final ModifyEvent e) {
-				System.out.println("ModifyEvent " + e);
 				User user = DrcUiActivator.getDefault().currentUser();
 				user.latestPage_$eq(page.id());
 				user.latestWord_$eq(words.indexOf(text));
@@ -229,9 +222,7 @@ public class EditComposite extends Composite {
 			public void focusLost(final FocusEvent e) {
 				prev = text; // remember so we can clear only when new focus
 				// gained, not when lost
-				// context.modify(IServiceConstants.ACTIVE_SELECTION,
-				// null);
-				// if (!text.getText().equals("&&"))
+				// FIXME: Wrong layout of '&' in rap
 				checkWordValidity(text);
 			}
 
@@ -259,8 +250,6 @@ public class EditComposite extends Composite {
 									+ " '%s' " + Messages.get().IsLocked, text.getText())); //$NON-NLS-1$
 				}
 				text.setEditable(!word.isLocked() && !page.done());
-				// context.modify(IServiceConstants.ACTIVE_SELECTION, text);
-
 				CheckView cv = (CheckView) PlatformUI.getWorkbench()
 						.getActiveWorkbenchWindow().getActivePage()
 						.findView(CheckView.ID);
@@ -268,7 +257,7 @@ public class EditComposite extends Composite {
 				SpecialCharacterView scv = (SpecialCharacterView) PlatformUI
 						.getWorkbench().getActiveWorkbenchWindow()
 						.getActivePage().findView(SpecialCharacterView.ID);
-				scv.selectedWord(text);
+				scv.setText(text);
 				WordView wv = (WordView) PlatformUI.getWorkbench()
 						.getActiveWorkbenchWindow().getActivePage()
 						.findView(WordView.ID);
@@ -276,8 +265,7 @@ public class EditComposite extends Composite {
 				TagView tv = (TagView) PlatformUI.getWorkbench()
 						.getActiveWorkbenchWindow().getActivePage()
 						.findView(TagView.ID);
-				tv.selectedWord(word, text);
-
+				tv.setWord(word);
 				text.setToolTipText(word.formattedHistory());
 				if (prev != null
 						&& !prev.isDisposed()

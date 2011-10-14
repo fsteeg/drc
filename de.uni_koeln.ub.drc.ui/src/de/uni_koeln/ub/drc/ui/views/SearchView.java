@@ -20,8 +20,6 @@ import java.util.TreeMap;
 import javax.annotation.PostConstruct;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -73,7 +71,7 @@ import de.uni_koeln.ub.drc.util.MetsTransformer;
 /**
  * View containing a search field and a table viewer displaying pages.
  * 
- * @author Fabian Steeg (fsteeg)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
 public final class SearchView extends ViewPart {
 
@@ -96,13 +94,6 @@ public final class SearchView extends ViewPart {
 	private Label currentPageLabel;
 	private List<Page> toExport;
 	private String selected;
-
-	// @Inject
-	// private IEclipseContext context;
-	// @Inject
-	// private ESelectionService selectionService;
-	// @Inject
-	// private IEventBroker eventBroker;
 
 	/**
 	 * @param parent
@@ -201,32 +192,6 @@ public final class SearchView extends ViewPart {
 		tagField.addFocusListener(new SpecialCharacterView.TextFocusListener(
 				tagField));
 	}
-
-	// /* DI */@SuppressWarnings("unused")
-	// @PostConstruct
-	// private void addEventHandler() {
-	// EventHandler handler = new EventHandler() {
-	// @Override
-	// public void handleEvent(final Event event) {
-	// searchComposite.getDisplay().asyncExec(new Runnable() {
-	// @Override
-	// public void run() {
-	// Page page = (Page) event.getProperty(IEventBroker.DATA);
-	// String topic = event.getTopic();
-	// boolean firstEdit = topic.equals(EditView.SAVED)
-	// && page.edits() == 1;
-	// boolean newComment = topic
-	// .equals(CommentsView.NEW_COMMENT);
-	// if (firstEdit || newComment) {
-	// viewer.setLabelProvider(new SearchViewLabelProvider());
-	// }
-	// }
-	// });
-	// }
-	// };
-	// eventBroker.subscribe(EditView.SAVED, handler);
-	// eventBroker.subscribe(CommentsView.NEW_COMMENT, handler);
-	// }
 
 	private enum Navigate {
 		NEXT, PREV
@@ -402,9 +367,6 @@ public final class SearchView extends ViewPart {
 		searchField = new Text(parent, SWT.BORDER);
 		searchField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		searchField.addSelectionListener(searchListener);
-		// searchField
-		// .addFocusListener(new SpecialCharacterView.TextFocusListener(
-		// searchField));
 	}
 
 	private void initOptionsCombo(final Composite searchComposite) {
@@ -439,8 +401,6 @@ public final class SearchView extends ViewPart {
 						.format("%s %s " + Messages.get().For, count, count == 1 ? Messages.get().Hit : Messages.get().Hits)); //$NON-NLS-1$
 	}
 
-	// private boolean initial = true;
-
 	private void initTableViewer(final Composite parent) {
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.V_SCROLL
 				| SWT.FULL_SELECTION | SWT.BORDER);
@@ -457,7 +417,7 @@ public final class SearchView extends ViewPart {
 								Object item = selection.getFirstElement();
 								if (item instanceof Page) {
 									final Page page = (Page) item;
-									toExport = (List<Page>) selection.toList();
+									toExport = selection.toList();
 									index = allPages.indexOf(page.id());
 									setCurrentPageLabel(page);
 								}
@@ -469,7 +429,6 @@ public final class SearchView extends ViewPart {
 		initTable();
 		viewer.setContentProvider(new SearchViewContentProvider());
 		viewer.setLabelProvider(new SearchViewLabelProvider());
-		// setInput();
 		DrcUiActivator.getDefault().register(this);
 		getSite().setSelectionProvider(viewer);
 	}
@@ -510,6 +469,9 @@ public final class SearchView extends ViewPart {
 	private MetsTransformer mets;
 	private String last = JavaConversions.asJavaList(Index.RF()).get(0);
 
+	/**
+	 * Load SearchView content
+	 */
 	public void setInput() {
 		String current = selected(volumes);
 		XmlDb db = DrcUiActivator.getDefault().db();
@@ -565,24 +527,6 @@ public final class SearchView extends ViewPart {
 	}
 
 	private void loadData() {
-		// IRunnableWithProgress runnable = new IRunnableWithProgress() {
-		// @Override
-		// public void run(IProgressMonitor monitor) throws
-		// InvocationTargetException,
-		// InterruptedException {
-		// content = new SearchViewModelProvider(monitor);
-		// }
-		// };
-		// ProgressMonitorDialog dialog = new
-		// ProgressMonitorDialog(searchField.getShell());
-		// try {
-		// dialog.run(true, false, runnable);
-		// } catch (InvocationTargetException e) {
-		// e.printStackTrace();
-		// } catch (InterruptedException e) {
-		// e.printStackTrace();
-		// }
-
 		try {
 			IRunnableWithProgress op = new IRunnableWithProgress() {
 
@@ -597,32 +541,14 @@ public final class SearchView extends ViewPart {
 		} catch (InvocationTargetException e) {
 		} catch (InterruptedException e) {
 		}
-		// ProgressMonitorDialog dialog = new ProgressMonitorDialog(
-		// searchField.getShell());
-		// // dialog.open();
-		// try {
-		// dialog.run(false, true, new IRunnableWithProgress() {
-		// @Override
-		// public void run(final IProgressMonitor monitor)
-		// throws InvocationTargetException, InterruptedException {
-		// content = new SearchViewModelProvider(monitor);
-		// }
-		// });
-		// } catch (InvocationTargetException e) {
-		// e.printStackTrace();
-		// } catch (InterruptedException e) {
-		// e.printStackTrace();
-		// }
-
-		// content = new SearchViewModelProvider(new NullProgressMonitor());
 	}
 
 	private SearchViewModelProvider content = null;
 
 	private final class SearchViewModelProvider {
+
 		Index modelIndex;
 		String modelSelected = null;
-		private Job job;
 
 		private SearchViewModelProvider(IProgressMonitor monitor) {
 			viewer.getTree().getDisplay().syncExec(new Runnable() {
@@ -653,52 +579,6 @@ public final class SearchView extends ViewPart {
 			modelIndex = new Index(JavaConversions.asScalaBuffer(pages)
 					.toList(), DrcUiActivator.getDefault().db(), modelSelected);
 			monitor.done();
-		}
-
-		private void setContent() {
-			final String message = Messages.get().LoadingData;
-			job = new Job("Loading Data") {
-				protected IStatus run(final IProgressMonitor monitor) {
-					viewer.getTree().getDisplay().syncExec(new Runnable() {
-						@Override
-						public void run() {
-							modelSelected = selected(volumes);
-						}
-					});
-					List<String> ids = JavaConversions
-							.asJavaList(DrcUiActivator
-									.getDefault()
-									.db()
-									.getIds(DrcUiActivator.getDefault()
-											.currentUser().collection()
-											+ "/" + modelSelected).get()); //$NON-NLS-1$
-					monitor.beginTask(message, ids.size() / 2);
-					List<String> pages = new ArrayList<String>();
-					for (int i = 0; i < ids.size(); i++) {
-						if (ids.get(i).endsWith(".xml")) { //$NON-NLS-1$
-							monitor.subTask(ids.get(i));
-							pages.add(ids.get(i));
-							monitor.worked(1);
-							System.err.println(ids.get(i));
-						}
-						if (monitor.isCanceled()) {
-							monitor.done();
-							return org.eclipse.core.runtime.Status.CANCEL_STATUS;
-						}
-					}
-					modelIndex = new Index(JavaConversions.asScalaBuffer(pages)
-							.toList(), DrcUiActivator.getDefault().db(),
-							modelSelected);
-					monitor.done();
-
-					return org.eclipse.core.runtime.Status.OK_STATUS;
-				}
-			};
-			job.setName(job.getName() + " " + job.hashCode()); //$NON-NLS-1$
-			job.setUser(true);
-			job.setThread(Thread.currentThread());
-			job.schedule();
-			content = this;
 		}
 
 		Object[] search;

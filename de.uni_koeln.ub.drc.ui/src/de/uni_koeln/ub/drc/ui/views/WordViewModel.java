@@ -26,9 +26,10 @@ import de.uni_koeln.ub.drc.ui.Messages;
 /**
  * Model, content and label providers for the {@link WordView}.
  * 
- * @author Fabian Steeg (fsteeg)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
 final class WordViewModel {
+
 	public static final WordViewModel CONTENT = new WordViewModel();
 
 	public Modification[] getDetails(final Word word) {

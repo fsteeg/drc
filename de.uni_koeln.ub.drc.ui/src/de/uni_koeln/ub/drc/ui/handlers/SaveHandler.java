@@ -20,7 +20,9 @@ import de.uni_koeln.ub.drc.ui.views.EditView;
  * @author Fabian Steeg (fsteeg)
  */
 public final class SaveHandler extends AbstractHandler {
-
+	/**
+	 * The class / SaveHandler ID
+	 */
 	public static final String ID = SaveHandler.class.getName().toLowerCase();
 
 	@Override

@@ -45,7 +45,7 @@ import de.uni_koeln.ub.drc.ui.views.WordViewModel.WordViewLabelProvider;
 /**
  * View containing details for the currently selected word.
  * 
- * @author Fabian Steeg (fsteeg)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
 public final class WordView extends ViewPart {
 
@@ -75,7 +75,13 @@ public final class WordView extends ViewPart {
 	public void setFocus() {
 	}
 
-	public void selectedWord(Word word, Text text) {
+	/**
+	 * @param word
+	 *            The selected word
+	 * @param text
+	 *            The selected text widget
+	 */
+	public void selectedWord(final Word word, final Text text) {
 		this.text = text;
 		this.word = word;
 		setTableInput();
@@ -85,6 +91,7 @@ public final class WordView extends ViewPart {
 		ISelectionService selectionService = (ISelectionService) getSite()
 				.getService(ISelectionService.class);
 		selectionService.addSelectionListener(new ISelectionListener() {
+			@Override
 			public void selectionChanged(IWorkbenchPart part,
 					ISelection selection) {
 				IStructuredSelection structuredSelection = (IStructuredSelection) selection;
@@ -105,40 +112,6 @@ public final class WordView extends ViewPart {
 	private void setText(Text text) {
 		this.text = text;
 	}
-
-	// /**
-	// * @param text
-	// * The selected text widget
-	// */
-	// @Inject
-	// public void setSelection(
-	// @Optional @Named(IServiceConstants.ACTIVE_SELECTION) final Text text) {
-	// Word word = null;
-	// Page page = null;
-	// if (text != null
-	// && (word = (Word) text.getData(Word.class.toString())) != null
-	// && (page = (Page) text.getData(Page.class.toString())) != null) {
-	// this.text = text;
-	// this.word = word;
-	// this.page = page;
-	// }
-	// setTableInput();
-	// }
-
-	// /**
-	// * @param pages
-	// * The selected pages
-	// */
-	// @Inject
-	// public void setSelection(
-	// @Optional @Named(IServiceConstants.ACTIVE_SELECTION) final List<Page>
-	// pages) {
-	// if (pages != null && pages.size() > 0) {
-	// Page page = pages.get(0);
-	// System.out.println(Messages.SettingPage + page);
-	// this.page = page;
-	// }
-	// }
 
 	private void initTableViewer(final Composite parent) {
 		viewer = new TableViewer(parent, SWT.MULTI | SWT.V_SCROLL
@@ -201,8 +174,7 @@ public final class WordView extends ViewPart {
 		final Modification modification = (Modification) viewer.getData(index
 				+ ""); //$NON-NLS-1$
 		if (!word.history().top().equals(modification)) { // no revert for most
-			// recent
-			// modification
+			// recent modification
 			Button button = createButton(item, DrcUiActivator.getDefault()
 					.loadImage("icons/revert.gif"), //$NON-NLS-1$
 					col);

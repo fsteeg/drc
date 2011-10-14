@@ -1,9 +1,9 @@
 /**************************************************************************************************
- * Copyright (c) 2010 Mihail Atanassov. All rights reserved. This program and the accompanying materials
+ * Copyright (c) 2010 Fabian Steeg. All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0 which accompanies this
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * <p/>
- * Contributors: Mihail Atanassov - initial API and implementation
+ * Contributors: Fabian Steeg - initial API and implementation
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.views;
 
@@ -56,7 +56,7 @@ import de.uni_koeln.ub.drc.ui.Messages;
  * View containing the scanned page used to check the original word while
  * editing.
  * 
- * @author Mihail Atanassov (matana)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
 public class CheckView extends ViewPart {
 
@@ -110,31 +110,10 @@ public class CheckView extends ViewPart {
 	 *            The active text widget
 	 */
 	public void highlight(final Word word, final Text text) {
-		System.out.println("selected word: " + word);
 		this.word = word;
 		this.text = text;
 		canvas.redraw();
 		doJob();
-
-		// if (img != null) {
-		// img.dispose();
-		//
-		// Box box = word.position();
-		// Rectangle rect = getScaledRect(box);
-		//
-		// Image displayedImage = new Image(parent.getDisplay(),
-		// cachedImage.getImageData());
-		//
-		// GC gc = new GC(displayedImage);
-		// drawBoxArea(rect, gc);
-		// drawBoxBorder(rect, gc);
-		// gc.dispose();
-		//
-		// imageLabel.setImage(displayedImage);
-		// Point p = newOrigin(box, originalHeight, originalWidth,
-		// displayedImage);
-		// scrolledComposite.setOrigin(p);
-		// }
 	}
 
 	private void attachSelectionListener() {
@@ -144,18 +123,16 @@ public class CheckView extends ViewPart {
 
 			private ImageData imageData;
 
+			@Override
 			@SuppressWarnings("unchecked")
 			public void selectionChanged(IWorkbenchPart part,
 					ISelection selection) {
 				IStructuredSelection structuredSelection = (IStructuredSelection) selection;
 				if (structuredSelection.getFirstElement() instanceof Page) {
-					List<Page> pages = (List<Page>) structuredSelection
-							.toList();
+					List<Page> pages = structuredSelection.toList();
 					if (pages != null && pages.size() > 0) {
 						Page page = pages.get(0);
 						updateImage(page);
-						// scrolledComposite.redraw();
-						// scrolledComposite.update();
 					}
 				}
 			}

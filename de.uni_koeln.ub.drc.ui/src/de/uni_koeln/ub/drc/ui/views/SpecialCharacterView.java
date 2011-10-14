@@ -28,7 +28,9 @@ import de.uni_koeln.ub.drc.ui.facades.CSSSWTConstantsHelper;
  * @author Mihail Atanassov (matana)
  */
 public class SpecialCharacterView extends ViewPart {
-
+	/**
+	 * The class / SpecialCharacterView ID
+	 */
 	public static final String ID = SpecialCharacterView.class.getName()
 			.toLowerCase();
 
@@ -76,8 +78,6 @@ public class SpecialCharacterView extends ViewPart {
 			RowData rowData = new RowData(30, 30);
 			button.setLayoutData(rowData);
 			button.setData(CSSSWTConstantsHelper.getCSS(), "specialCharacter"); //$NON-NLS-1$
-			// button.setData(CSSSWTConstants.CSS_CLASS_NAME_KEY,
-			//								"specialCharacter"); //$NON-NLS-1$
 			button.setText("" + SC[i]); //$NON-NLS-1$
 			button.addSelectionListener(new SelectionListener() {
 
@@ -104,27 +104,26 @@ public class SpecialCharacterView extends ViewPart {
 
 	protected static class TextFocusListener implements FocusListener {
 
-		// private IEclipseContext context;
 		public Text text;
 
 		public TextFocusListener(final Text text) {
-			// this.context = context;
 			this.text = text;
 		}
 
 		@Override
 		public void focusGained(FocusEvent e) {
-			System.out.println(text.setFocus());
-			// context.modify(IServiceConstants.ACTIVE_SELECTION, text);
 		}
 
 		@Override
 		public void focusLost(FocusEvent e) {
-			System.err.println("SpecialCharacterView_isText");
 		}
 	}
 
-	public void selectedWord(Text text) {
+	/**
+	 * @param text
+	 *            The selected text widget
+	 */
+	public void setText(final Text text) {
 		this.text = text;
 	}
 

@@ -1,3 +1,10 @@
+/**************************************************************************************************
+ * Copyright (c) 2011 Mihail Atanassov. All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0 which accompanies this
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * <p/>
+ * Contributors: Mihail Atanassov - initial API and implementation
+ *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.rap;
 
 import java.net.URL;
@@ -80,8 +87,6 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 			int result = ErrorDialog.openError(null, Messages.get().Error,
 					Messages.get().LoginFailed, status);
 			if (result == ErrorDialog.CANCEL) {
-				// stop(bundleContext);
-				// System.exit(0);
 				redirect();
 			} else {
 				login(bundleContext);
@@ -141,7 +146,6 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 			if (drcUiActivator != null
 					&& drcUiActivator.getLoginContext() != null)
 				drcUiActivator.getLoginContext().logout();
-			// instance.stop(instance.getBundle().getBundleContext());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

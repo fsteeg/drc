@@ -28,7 +28,7 @@ import de.uni_koeln.ub.drc.ui.Messages;
 /**
  * Simple login module implementation.
  * 
- * @author Fabian Steeg (fsteeg)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
 public final class SimpleLoginModule implements LoginModule {
 
@@ -65,13 +65,8 @@ public final class SimpleLoginModule implements LoginModule {
 		PasswordCallback passCallback = new PasswordCallback(
 				Messages.get().Password, false);
 		try {
-			callbackHandler.handle(new Callback[] {
-			/*
-			 * new
-			 * TextOutputCallback(TextOutputCallback.INFORMATION,"Please login"
-			 * ),
-			 */
-			userCallback, passCallback });
+			callbackHandler
+					.handle(new Callback[] { userCallback, passCallback });
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (UnsupportedCallbackException e) {

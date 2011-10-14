@@ -7,36 +7,29 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.facades;
 
+import java.text.MessageFormat;
+
 /**
  * @author Mihail Atanassov (matana)
- * 
  */
-public abstract class IDialogConstantsHelper {
-
-	protected static final String BUNDLE_NAME = "plugin"; //$NON-NLS-1$
-	private final static IDialogConstantsHelper IMPL;
-
-	static {
-		IMPL = (IDialogConstantsHelper) ImplementationLoader
-				.newInstance(IDialogConstantsHelper.class);
-	}
+public class ImplementationLoader {
 
 	/**
-	 * @return YES label
+	 * @param type
+	 *            The facade to get an implementation for
+	 * @return The implementation
 	 */
-	public static String getYesLabel() {
-		return IMPL.getYesLabelInternal();
+	public static Object newInstance(final Class<?> type) {
+		String name = type.getName();
+		Object result = null;
+		try {
+			result = type.getClassLoader().loadClass(name + "Impl") //$NON-NLS-1$
+					.newInstance();
+		} catch (Throwable t) {
+			String txt = "Could not load implementation for {0}"; //$NON-NLS-1$
+			String msg = MessageFormat.format(txt, new Object[] { name });
+			throw new RuntimeException(msg, t);
+		}
+		return result;
 	}
-
-	/**
-	 * @return NO label
-	 */
-	public static String getNoLabel() {
-		return IMPL.getNoLabelInternal();
-	}
-
-	abstract String getNoLabelInternal();
-
-	abstract String getYesLabelInternal();
-
 }

@@ -43,7 +43,7 @@ import de.uni_koeln.ub.drc.ui.Messages;
 /**
  * Handles the callbacks from the LoginModule with a login dialog.
  * 
- * @author Fabian Steeg (fsteeg)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
 public class SimpleLoginDialog extends /* TitleArea */Dialog implements
 		CallbackHandler {
@@ -77,16 +77,6 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements
 	public void handle(final Callback[] callbacks) throws IOException {
 		this.callbacks = Arrays.asList(callbacks);
 		openDialog();
-		// ModalContext.setAllowReadAndDispatch(true);
-		// System.out.println("Waiting...");
-		// try {
-		// ModalContext.run(waitForButtonPress(), true,
-		// new NullProgressMonitor(), Display.getDefault());
-		// } catch (InvocationTargetException e) {
-		// e.printStackTrace();
-		// } catch (InterruptedException e) {
-		// e.printStackTrace();
-		// }
 	}
 
 	private void openDialog() {
@@ -101,7 +91,6 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements
 			@Override
 			public void run(final IProgressMonitor monitor) {
 				while (!inputProcessed) {
-					System.out.println("Not processed.");
 					try {
 						Thread.sleep(interval);
 					} catch (InterruptedException e) {
@@ -138,14 +127,6 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements
 	@Override
 	protected void cancelPressed() {
 		PlatformUI.getWorkbench().close();
-		/* If the login is cancelled, we shut down: */
-		// Activator activator = Activator.getDefault();
-		// try {
-		// activator.stop(activator.getBundle().getBundleContext());
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-		// System.exit(0); // OK here?
 	}
 
 	/**

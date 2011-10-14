@@ -1,3 +1,10 @@
+/**************************************************************************************************
+ * Copyright (c) 2010 Fabian Steeg. All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0 which accompanies this
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * <p/>
+ * Contributors: Fabian Steeg - initial API and implementation
+ *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui;
 
 import java.net.URL;
@@ -25,14 +32,19 @@ import de.uni_koeln.ub.drc.ui.views.SearchView;
 /**
  * The activator class controls the plug-in life cycle
  */
+/**
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
+ * 
+ */
 public class DrcUiActivator extends Plugin {
 
-	// The plug-in ID
+	/**
+	 * The plug-in ID
+	 */
 	public static final String PLUGIN_ID = "de.uni_koeln.ub.drc.ui"; //$NON-NLS-1$
 	// The shared instance
 	private static DrcUiActivator plugin;
 	private XmlDb db;
-	//	private static final String JAAS_CONFIG_FILE = "jaas_config"; //$NON-NLS-1$
 	private ILoginContext loginContext;
 	private SearchView searchView;
 
@@ -52,26 +64,13 @@ public class DrcUiActivator extends Plugin {
 	public DrcUiActivator() {
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
-	 * )
-	 */
+	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		// login(context);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
-	 * )
-	 */
+	@Override
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
@@ -85,18 +84,6 @@ public class DrcUiActivator extends Plugin {
 	public static DrcUiActivator getDefault() {
 		return plugin;
 	}
-
-	// /**
-	// * Returns an image descriptor for the image file at the given plug-in
-	// * relative path
-	// *
-	// * @param path
-	// * the path
-	// * @return the image descriptor
-	// */
-	// public static ImageDescriptor getImageDescriptor(String path) {
-	// return imageDescriptorFromPlugin(PLUGIN_ID, path);
-	// }
 
 	/**
 	 * @return The data DB we are using
@@ -125,10 +112,6 @@ public class DrcUiActivator extends Plugin {
 	/**
 	 * @return The user that is currently logged in
 	 */
-	// public User currentUser() {
-	// return User.withId(Index.DefaultCollection(), db, "matana");
-	// }
-
 	public User currentUser() {
 		User user = null;
 		try {
@@ -161,31 +144,19 @@ public class DrcUiActivator extends Plugin {
 		return desc.createImage();
 	}
 
-	// private void login(BundleContext bundleContext) throws Exception {
-	//		String configName = "SIMPLE"; //$NON-NLS-1$
-	// URL configUrl = bundleContext.getBundle().getEntry(JAAS_CONFIG_FILE);
-	// loginContext = LoginContextFactory.createContext(configName, configUrl);
-	// try {
-	// loginContext.login();
-	// } catch (LoginException e) {
-	// IStatus status = new Status(IStatus.ERROR,
-	//					"de.uni_koeln.ub.drc.ui", "Login failed", e); //$NON-NLS-1$ //$NON-NLS-2$
-	// int result = ErrorDialog.openError(null, Messages.Error,
-	// Messages.LoginFailed, status);
-	// if (result == ErrorDialog.CANCEL) {
-	// stop(bundleContext);
-	// System.exit(0);
-	// } else {
-	// login(bundleContext);
-	// }
-	// }
-	// }
-
+	/**
+	 * @param loginContext
+	 *            The ILoginContext
+	 */
 	public void setLoginContext(ILoginContext loginContext) {
 		this.loginContext = loginContext;
 		this.searchView.setInput();
 	}
 
+	/**
+	 * @param searchView
+	 *            The SearchView
+	 */
 	public void register(SearchView searchView) {
 		this.searchView = searchView;
 	}
