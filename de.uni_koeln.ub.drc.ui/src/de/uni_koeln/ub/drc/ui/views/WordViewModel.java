@@ -83,9 +83,9 @@ final class WordViewModel {
 		static String userDetails(String id) {
 			if (id.equals("OCR"))return "--"; //$NON-NLS-1$ //$NON-NLS-2$
 			User user = User.withId(Index.DefaultCollection(), DrcUiActivator
-					.instance().userDb(), id);
+					.getDefault().userDb(), id);
 			return String
-					.format("%s " + Messages.From + " %s (%s, %s)", user.name(), user.region(), user.id(), //$NON-NLS-1$ //$NON-NLS-2$
+					.format("%s " + Messages.get().From + " %s (%s, %s)", user.name(), user.region(), user.id(), //$NON-NLS-1$ //$NON-NLS-2$
 							user.reputation());
 		}
 

@@ -18,15 +18,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.core.services.events.IEventBroker;
-import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -56,8 +51,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
-import org.osgi.service.event.Event;
-import org.osgi.service.event.EventHandler;
+import org.eclipse.ui.part.ViewPart;
 
 import scala.Enumeration;
 import scala.collection.JavaConversions;
@@ -81,7 +75,12 @@ import de.uni_koeln.ub.drc.util.MetsTransformer;
  * 
  * @author Fabian Steeg (fsteeg)
  */
-public final class SearchView {
+public final class SearchView extends ViewPart {
+
+	/**
+	 * The class / SearchView ID
+	 */
+	public static final String ID = SearchView.class.getName().toLowerCase();
 
 	private Text searchField;
 	private Text tagField;
@@ -89,35 +88,29 @@ public final class SearchView {
 	private TreeViewer viewer;
 	private Combo searchOptions;
 	private TreeMap<String, Enumeration.Value> options = new TreeMap<String, Enumeration.Value>();
-
-	@Inject
-	private IEclipseContext context;
-	@Inject
-	private ESelectionService selectionService;
-	@Inject
-	private IEventBroker eventBroker;
-	private List<String> allPages;
-	private int index;
-	private Label currentPageLabel;
-
-	private Comparator<Object> comp = new Comparator<Object>() {
-		@Override
-		public int compare(Object p1, Object p2) {
-			if (p1 instanceof Page && p2 instanceof Page)
-				return ((Page) p1).id().compareTo(((Page) p2).id());
-			return p1.toString().compareTo(p2.toString());
-		}
-	};
 	private Combo volumes;
 	private Composite searchComposite;
 	private Button close;
+	private List<String> allPages;
+	private int index;
+	private Label currentPageLabel;
+	private List<Page> toExport;
+	private String selected;
+
+	// @Inject
+	// private IEclipseContext context;
+	// @Inject
+	// private ESelectionService selectionService;
+	// @Inject
+	// private IEventBroker eventBroker;
 
 	/**
 	 * @param parent
 	 *            The parent composite for this part
 	 */
-	@Inject
-	public SearchView(final Composite parent) {
+	@Override
+	public void createPartControl(Composite parent) {
+		getSite().setSelectionProvider(viewer);
 		searchComposite = new Composite(parent, SWT.NONE);
 		searchComposite.setLayout(new GridLayout(7, false));
 		initVolumeSelector(searchComposite);
@@ -128,9 +121,63 @@ public final class SearchView {
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
 	}
 
+	@Override
+	public void setFocus() {
+	}
+
+	/**
+	 * @return The selection to export
+	 */
+	public List<Page> getSelectedPages() {
+		return toExport;
+	}
+
+	/**
+	 * Select the last word edited by this user.
+	 */
+	@PostConstruct
+	public void select() {
+		String latestPage = DrcUiActivator.getDefault().currentUser()
+				.latestPage();
+		String volume = latestPage.split("_")[1].split("-")[0]; //$NON-NLS-1$ //$NON-NLS-2$
+		volumes.select(Index.RF().indexOf(volume));
+		setInput();
+		if (viewer.getTree().getItems().length == 0) {
+			throw new IllegalArgumentException(Messages.get().NoEntries);
+		}
+		allPages = new ArrayList<String>(
+				JavaConversions.asJavaList(content.modelIndex.pages()));
+		Collections.sort(allPages);
+		for (String pageId : allPages) {
+			if (pageId.equals(latestPage)) {
+				select(pageId);
+				break;
+			}
+		}
+		if (viewer.getSelection().isEmpty()) {
+			viewer.setSelection(new StructuredSelection(allPages.get(0)));
+		}
+	}
+
+	/**
+	 * Updates the TreeViewer after a Word has been modified and saved.
+	 */
+	public void updateTreeViewer() {
+		viewer.setLabelProvider(new SearchViewLabelProvider());
+	}
+
+	private Comparator<Object> comp = new Comparator<Object>() {
+		@Override
+		public int compare(Object p1, Object p2) {
+			if (p1 instanceof Page && p2 instanceof Page)
+				return ((Page) p1).id().compareTo(((Page) p2).id());
+			return p1.toString().compareTo(p2.toString());
+		}
+	};
+
 	private void initVolumeSelector(Composite searchComposite) {
 		Label label1 = new Label(searchComposite, SWT.NONE);
-		label1.setText(Messages.Volume);
+		label1.setText(Messages.get().Volume);
 		volumes = new Combo(searchComposite, SWT.READ_ONLY);
 		String[] volumeLabels = new String[Index.RF().size()];
 		for (int i = 0; i < Index.RF().size(); i++) {
@@ -142,7 +189,7 @@ public final class SearchView {
 		volumes.select(0);
 		volumes.addSelectionListener(searchListener);
 		Label label2 = new Label(searchComposite, SWT.NONE);
-		label2.setText(Messages.Has);
+		label2.setText(Messages.get().Has);
 	}
 
 	/* DI */@SuppressWarnings("unused")
@@ -150,36 +197,36 @@ public final class SearchView {
 	private void addFocusListener() {
 		searchField
 				.addFocusListener(new SpecialCharacterView.TextFocusListener(
-						context, searchField));
+						searchField));
 		tagField.addFocusListener(new SpecialCharacterView.TextFocusListener(
-				context, tagField));
+				tagField));
 	}
 
-	/* DI */@SuppressWarnings("unused")
-	@PostConstruct
-	private void addEventHandler() {
-		EventHandler handler = new EventHandler() {
-			@Override
-			public void handleEvent(final Event event) {
-				searchComposite.getDisplay().asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						Page page = (Page) event.getProperty(IEventBroker.DATA);
-						String topic = event.getTopic();
-						boolean firstEdit = topic.equals(EditView.SAVED)
-								&& page.edits() == 1;
-						boolean newComment = topic
-								.equals(CommentsView.NEW_COMMENT);
-						if (firstEdit || newComment) {
-							viewer.setLabelProvider(new SearchViewLabelProvider());
-						}
-					}
-				});
-			}
-		};
-		eventBroker.subscribe(EditView.SAVED, handler);
-		eventBroker.subscribe(CommentsView.NEW_COMMENT, handler);
-	}
+	// /* DI */@SuppressWarnings("unused")
+	// @PostConstruct
+	// private void addEventHandler() {
+	// EventHandler handler = new EventHandler() {
+	// @Override
+	// public void handleEvent(final Event event) {
+	// searchComposite.getDisplay().asyncExec(new Runnable() {
+	// @Override
+	// public void run() {
+	// Page page = (Page) event.getProperty(IEventBroker.DATA);
+	// String topic = event.getTopic();
+	// boolean firstEdit = topic.equals(EditView.SAVED)
+	// && page.edits() == 1;
+	// boolean newComment = topic
+	// .equals(CommentsView.NEW_COMMENT);
+	// if (firstEdit || newComment) {
+	// viewer.setLabelProvider(new SearchViewLabelProvider());
+	// }
+	// }
+	// });
+	// }
+	// };
+	// eventBroker.subscribe(EditView.SAVED, handler);
+	// eventBroker.subscribe(CommentsView.NEW_COMMENT, handler);
+	// }
 
 	private enum Navigate {
 		NEXT, PREV
@@ -213,10 +260,10 @@ public final class SearchView {
 		Composite bottomComposite = new Composite(parent, SWT.NONE);
 		bottomComposite.setLayout(new GridLayout(7, false));
 		Button prev = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
-		prev.setImage(DrcUiActivator.instance().loadImage("icons/prev.gif")); //$NON-NLS-1$
+		prev.setImage(DrcUiActivator.getDefault().loadImage("icons/prev.gif")); //$NON-NLS-1$
 		prev.addSelectionListener(new NavigationListener(Navigate.PREV));
 		Button next = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
-		next.setImage(DrcUiActivator.instance().loadImage("icons/next.gif")); //$NON-NLS-1$
+		next.setImage(DrcUiActivator.getDefault().loadImage("icons/next.gif")); //$NON-NLS-1$
 		next.addSelectionListener(new NavigationListener(Navigate.NEXT));
 		currentPageLabel = new Label(bottomComposite, SWT.NONE);
 		insertAddTagButton(bottomComposite);
@@ -226,18 +273,17 @@ public final class SearchView {
 
 	private void addPageCheckedButton(Composite parent) {
 		close = new Button(parent, SWT.CHECK);
-		close.setText(Messages.ClosePage);
+		close.setText(Messages.get().ClosePage);
 		close.addListener(SWT.MouseUp, new Listener() {
 			@Override
 			public void handleEvent(org.eclipse.swt.widgets.Event event) {
 				Page page = page(allPages.get(index));
 				page.status().$plus$eq(
-						new Status(
-								DrcUiActivator.instance().currentUser().id(),
-								System.currentTimeMillis(), close
-										.getSelection()));
-				page.saveToDb(DrcUiActivator.instance().currentUser()
-						.collection(), DrcUiActivator.instance().db());
+						new Status(DrcUiActivator.getDefault().currentUser()
+								.id(), System.currentTimeMillis(), close
+								.getSelection()));
+				page.saveToDb(DrcUiActivator.getDefault().currentUser()
+						.collection(), DrcUiActivator.getDefault().db());
 				viewer.setLabelProvider(new SearchViewLabelProvider());
 				reload(close.getParent(), page);
 			}
@@ -246,12 +292,12 @@ public final class SearchView {
 
 	private void insertAddTagButton(Composite bottomComposite) {
 		Label label = new Label(bottomComposite, SWT.NONE);
-		label.setText(Messages.AddTag);
+		label.setText(Messages.get().AddTag);
 		tagField = new Text(bottomComposite, SWT.BORDER);
 		Button addComment = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
-		addComment.setToolTipText(Messages.AddNewTagToCurrentPage);
-		addComment.setImage(DrcUiActivator.instance()
-				.loadImage("icons/add.gif")); //$NON-NLS-1$
+		addComment.setToolTipText(Messages.get().AddNewTagToCurrentPage);
+		addComment.setImage(DrcUiActivator.getDefault().loadImage(
+				"icons/add.gif")); //$NON-NLS-1$
 		SelectionListener listener = new SelectionListener() {
 			@Override
 			// on button click
@@ -270,10 +316,10 @@ public final class SearchView {
 				if (input != null && input.trim().length() != 0) {
 					Page page = page(allPages.get(index));
 					page.tags().$plus$eq(
-							new Tag(input, DrcUiActivator.instance()
+							new Tag(input, DrcUiActivator.getDefault()
 									.currentUser().id()));
-					page.saveToDb(DrcUiActivator.instance().currentUser()
-							.collection(), DrcUiActivator.instance().db());
+					page.saveToDb(DrcUiActivator.getDefault().currentUser()
+							.collection(), DrcUiActivator.getDefault().db());
 					setCurrentPageLabel(page);
 					viewer.setLabelProvider(new SearchViewLabelProvider());
 					text.setText(""); //$NON-NLS-1$
@@ -282,9 +328,10 @@ public final class SearchView {
 		};
 		addComment.addSelectionListener(listener);
 		tagField.addSelectionListener(listener);
+		// FIXME: Insertion of special characters
+		// tagField.addFocusListener(new
+		// SpecialCharacterView.TextFocusListener(tagField));
 	}
-
-	String selected;
 
 	private Page page(String string) {
 		volumes.getDisplay().syncExec(new Runnable() {
@@ -295,9 +342,9 @@ public final class SearchView {
 		});
 		return Page
 				.fromXml(DrcUiActivator
-						.instance()
+						.getDefault()
 						.db()
-						.getXml(DrcUiActivator.instance().currentUser()
+						.getXml(DrcUiActivator.getDefault().currentUser()
 								.collection()
 								+ "/" + selected, JavaConversions.asScalaBuffer(Arrays.asList(string))).get() //$NON-NLS-1$
 						.head());
@@ -309,21 +356,20 @@ public final class SearchView {
 			setCurrentPageLabel(page);
 			StructuredSelection selection = new StructuredSelection(
 					new Page[] { page });
-			selectionService.setSelection(selection.toList());
+			viewer.setSelection(selection);
 			reload(viewer.getTree().getParent(), page);
 		}
 	}
 
 	private void reload(final Composite parent, final Page page) {
-		if (selectionService.getSelection() instanceof List
-				&& ((List<?>) selectionService.getSelection()).size() == 1) {
-			System.out.println(Messages.ReloadingPage + page);
+		if (viewer.getSelection() instanceof List
+				&& ((List<?>) viewer.getSelection()).size() == 1) {
+			System.out.println(Messages.get().ReloadingPage + page);
 			parent.getDisplay().asyncExec(new Runnable() {
 				@Override
 				public void run() {
 					Page reloaded = page(page.id());
-					selectionService.setSelection(new StructuredSelection(
-							reloaded).toList());
+					viewer.setSelection(new StructuredSelection(reloaded));
 				}
 			});
 		}
@@ -331,38 +377,11 @@ public final class SearchView {
 
 	private void setCurrentPageLabel(Page page) {
 		currentPageLabel
-				.setText(String
-						.format(Messages.CurrentPageVolume
-								+ " %s, " + Messages.Page + " %s", volumes.getItem(volumes.getSelectionIndex()), //$NON-NLS-1$ //$NON-NLS-2$
-								mets.label(page.number())));
+				.setText(String.format(
+						Messages.get().CurrentPageVolume
+								+ " %s, " + Messages.get().Page + " %s", volumes.getItem(volumes.getSelectionIndex()), //$NON-NLS-1$ //$NON-NLS-2$
+						mets.label(page.number())));
 		close.setSelection(page.done());
-	}
-
-	/**
-	 * Select the last word edited by this user.
-	 */
-	@PostConstruct
-	public void select() {
-		String latestPage = DrcUiActivator.instance().currentUser()
-				.latestPage();
-		String volume = latestPage.split("_")[1].split("-")[0]; //$NON-NLS-1$ //$NON-NLS-2$
-		volumes.select(Index.RF().indexOf(volume));
-		setInput();
-		if (viewer.getTree().getItems().length == 0) {
-			throw new IllegalArgumentException(Messages.NoEntries);
-		}
-		allPages = new ArrayList<String>(
-				JavaConversions.asJavaList(content.modelIndex.pages()));
-		Collections.sort(allPages);
-		for (String pageId : allPages) {
-			if (pageId.equals(latestPage)) {
-				select(pageId);
-				break;
-			}
-		}
-		if (viewer.getSelection().isEmpty()) {
-			viewer.setSelection(new StructuredSelection(allPages.get(0)));
-		}
 	}
 
 	private void select(String pageId) {
@@ -383,19 +402,22 @@ public final class SearchView {
 		searchField = new Text(parent, SWT.BORDER);
 		searchField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		searchField.addSelectionListener(searchListener);
+		// searchField
+		// .addFocusListener(new SpecialCharacterView.TextFocusListener(
+		// searchField));
 	}
 
 	private void initOptionsCombo(final Composite searchComposite) {
 		Label label = new Label(searchComposite, SWT.NONE);
-		label.setText(Messages.In);
-		options.put(Messages.Text, SearchOption.all());
-		options.put(Messages.Tags, SearchOption.tags());
-		options.put(Messages.Comments, SearchOption.comments());
+		label.setText(Messages.get().In);
+		options.put(Messages.get().Text, SearchOption.all());
+		options.put(Messages.get().Tags, SearchOption.tags());
+		options.put(Messages.get().Comments, SearchOption.comments());
 		searchOptions = new Combo(searchComposite, SWT.READ_ONLY);
 		searchOptions.setItems(options.keySet().toArray(
 				new String[options.keySet().size()]));
 		searchOptions.select(new ArrayList<String>(options.keySet())
-				.indexOf(Messages.Text));
+				.indexOf(Messages.get().Text));
 		searchOptions.addSelectionListener(searchListener);
 	}
 
@@ -414,10 +436,10 @@ public final class SearchView {
 	private void updateResultCount(int count) {
 		resultCount
 				.setText(String
-						.format("%s %s " + Messages.For, count, count == 1 ? Messages.Hit : Messages.Hits)); //$NON-NLS-1$
+						.format("%s %s " + Messages.get().For, count, count == 1 ? Messages.get().Hit : Messages.get().Hits)); //$NON-NLS-1$
 	}
 
-	private boolean initial = true;
+	// private boolean initial = true;
 
 	private void initTableViewer(final Composite parent) {
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.V_SCROLL
@@ -427,25 +449,19 @@ public final class SearchView {
 			public void selectionChanged(final SelectionChangedEvent event) {
 				busyCursorWhile(viewer.getControl().getDisplay(),
 						new Runnable() {
+							@SuppressWarnings("unchecked")
 							@Override
 							public void run() {
 								final IStructuredSelection selection = (IStructuredSelection) event
 										.getSelection();
-								if (selectionService.getSelection() != selection
-										&& selection.getFirstElement() instanceof Page) {
-									final Page page = (Page) selection
-											.getFirstElement();
+								Object item = selection.getFirstElement();
+								if (item instanceof Page) {
+									final Page page = (Page) item;
+									toExport = (List<Page>) selection.toList();
+									index = allPages.indexOf(page.id());
 									setCurrentPageLabel(page);
-									selectionService.setSelection(selection
-											.toList());
-									if (!initial) { // don't reload initial page
-										reload(parent, page);
-										setCurrentPageLabel(page(allPages
-												.get(index)));
-									} else {
-										initial = false;
-									}
 								}
+
 							}
 						});
 			}
@@ -453,7 +469,9 @@ public final class SearchView {
 		initTable();
 		viewer.setContentProvider(new SearchViewContentProvider());
 		viewer.setLabelProvider(new SearchViewLabelProvider());
-		setInput();
+		// setInput();
+		DrcUiActivator.getDefault().register(this);
+		getSite().setSelectionProvider(viewer);
 	}
 
 	private void busyCursorWhile(final Display display, final Runnable runnable) {
@@ -466,30 +484,15 @@ public final class SearchView {
 		});
 	}
 
-	/**
-	 * @param pages
-	 *            The selected pages
-	 */
-	@Inject
-	public void setSelection(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final List<Page> pages) {
-		if (pages != null && pages.size() > 0) {
-			Page page = pages.get(0);
-			if (allPages != null) {
-				index = allPages.indexOf(page.id());
-			}
-		}
-	}
-
 	private void initTable() {
 		final int[] columns = new int[] { 60, 50, 60, 400, 200, 150, 100 };
 		createColumn("", columns[0]); //$NON-NLS-1$
-		createColumn(Messages.Volume, columns[1]);
-		createColumn(Messages.Page, columns[2]);
-		createColumn(Messages.Text, columns[3]);
-		createColumn(Messages.Modified, columns[4]);
-		createColumn(Messages.Tags, columns[5]);
-		createColumn(Messages.Comments, columns[6]);
+		createColumn(Messages.get().Volume, columns[1]);
+		createColumn(Messages.get().Page, columns[2]);
+		createColumn(Messages.get().Text, columns[3]);
+		createColumn(Messages.get().Modified, columns[4]);
+		createColumn(Messages.get().Tags, columns[5]);
+		createColumn(Messages.get().Comments, columns[6]);
 		Tree tree = viewer.getTree();
 		tree.setHeaderVisible(true);
 		tree.setLinesVisible(true);
@@ -507,9 +510,9 @@ public final class SearchView {
 	private MetsTransformer mets;
 	private String last = JavaConversions.asJavaList(Index.RF()).get(0);
 
-	private void setInput() {
+	public void setInput() {
 		String current = selected(volumes);
-		XmlDb db = DrcUiActivator.instance().db();
+		XmlDb db = DrcUiActivator.getDefault().db();
 		if (content == null || !current.equals(last)) {
 			loadData();
 			allPages = new ArrayList<String>(
@@ -536,7 +539,7 @@ public final class SearchView {
 			if (meta) {
 				chapter = mets.chapter(fileNumber, Count.File());
 			} else {
-				chapter = new Chapter(0, 1, Messages.NoMeta);
+				chapter = new Chapter(0, 1, Messages.get().NoMeta);
 			}
 			List<Object> pagesInChapter = chapters.get(chapter);
 			if (pagesInChapter == null) {
@@ -562,32 +565,66 @@ public final class SearchView {
 	}
 
 	private void loadData() {
-		ProgressMonitorDialog dialog = new ProgressMonitorDialog(
-				searchField.getShell());
-		dialog.open();
+		// IRunnableWithProgress runnable = new IRunnableWithProgress() {
+		// @Override
+		// public void run(IProgressMonitor monitor) throws
+		// InvocationTargetException,
+		// InterruptedException {
+		// content = new SearchViewModelProvider(monitor);
+		// }
+		// };
+		// ProgressMonitorDialog dialog = new
+		// ProgressMonitorDialog(searchField.getShell());
+		// try {
+		// dialog.run(true, false, runnable);
+		// } catch (InvocationTargetException e) {
+		// e.printStackTrace();
+		// } catch (InterruptedException e) {
+		// e.printStackTrace();
+		// }
+
 		try {
-			dialog.run(true, true, new IRunnableWithProgress() {
+			IRunnableWithProgress op = new IRunnableWithProgress() {
+
 				@Override
-				public void run(final IProgressMonitor m)
+				public void run(IProgressMonitor monitor)
 						throws InvocationTargetException, InterruptedException {
-					content = new SearchViewModelProvider(m);
+					content = new SearchViewModelProvider(monitor);
 				}
-			});
+			};
+			new ProgressMonitorDialog(searchField.getShell()).run(true, true,
+					op);
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
 		}
+		// ProgressMonitorDialog dialog = new ProgressMonitorDialog(
+		// searchField.getShell());
+		// // dialog.open();
+		// try {
+		// dialog.run(false, true, new IRunnableWithProgress() {
+		// @Override
+		// public void run(final IProgressMonitor monitor)
+		// throws InvocationTargetException, InterruptedException {
+		// content = new SearchViewModelProvider(monitor);
+		// }
+		// });
+		// } catch (InvocationTargetException e) {
+		// e.printStackTrace();
+		// } catch (InterruptedException e) {
+		// e.printStackTrace();
+		// }
+
+		// content = new SearchViewModelProvider(new NullProgressMonitor());
 	}
 
 	private SearchViewModelProvider content = null;
 
 	private final class SearchViewModelProvider {
-
 		Index modelIndex;
 		String modelSelected = null;
+		private Job job;
 
-		private SearchViewModelProvider(final IProgressMonitor m) {
+		private SearchViewModelProvider(IProgressMonitor monitor) {
 			viewer.getTree().getDisplay().syncExec(new Runnable() {
 				@Override
 				public void run() {
@@ -595,27 +632,73 @@ public final class SearchView {
 				}
 			});
 			List<String> ids = JavaConversions.asJavaList(DrcUiActivator
-					.instance()
+					.getDefault()
 					.db()
-					.getIds(DrcUiActivator.instance().currentUser()
+					.getIds(DrcUiActivator.getDefault().currentUser()
 							.collection()
 							+ "/" + modelSelected).get()); //$NON-NLS-1$
 			// we only load the XML files
-			m.beginTask(Messages.LoadingData, ids.size() / 2);
+			monitor.beginTask(Messages.get().LoadingData, ids.size() / 2);
 			List<String> pages = new ArrayList<String>();
 			for (String id : ids) {
 				if (id.endsWith(".xml")) { //$NON-NLS-1$
-					m.subTask(id);
+					monitor.subTask(id);
 					pages.add(id);
-					m.worked(1);
+					monitor.worked(1);
 				}
-				if (m.isCanceled()) {
+				if (monitor.isCanceled()) {
 					break;
 				}
 			}
 			modelIndex = new Index(JavaConversions.asScalaBuffer(pages)
-					.toList(), DrcUiActivator.instance().db(), modelSelected);
-			m.done();
+					.toList(), DrcUiActivator.getDefault().db(), modelSelected);
+			monitor.done();
+		}
+
+		private void setContent() {
+			final String message = Messages.get().LoadingData;
+			job = new Job("Loading Data") {
+				protected IStatus run(final IProgressMonitor monitor) {
+					viewer.getTree().getDisplay().syncExec(new Runnable() {
+						@Override
+						public void run() {
+							modelSelected = selected(volumes);
+						}
+					});
+					List<String> ids = JavaConversions
+							.asJavaList(DrcUiActivator
+									.getDefault()
+									.db()
+									.getIds(DrcUiActivator.getDefault()
+											.currentUser().collection()
+											+ "/" + modelSelected).get()); //$NON-NLS-1$
+					monitor.beginTask(message, ids.size() / 2);
+					List<String> pages = new ArrayList<String>();
+					for (int i = 0; i < ids.size(); i++) {
+						if (ids.get(i).endsWith(".xml")) { //$NON-NLS-1$
+							monitor.subTask(ids.get(i));
+							pages.add(ids.get(i));
+							monitor.worked(1);
+							System.err.println(ids.get(i));
+						}
+						if (monitor.isCanceled()) {
+							monitor.done();
+							return org.eclipse.core.runtime.Status.CANCEL_STATUS;
+						}
+					}
+					modelIndex = new Index(JavaConversions.asScalaBuffer(pages)
+							.toList(), DrcUiActivator.getDefault().db(),
+							modelSelected);
+					monitor.done();
+
+					return org.eclipse.core.runtime.Status.OK_STATUS;
+				}
+			};
+			job.setName(job.getName() + " " + job.hashCode()); //$NON-NLS-1$
+			job.setUser(true);
+			job.setThread(Thread.currentThread());
+			job.schedule();
+			content = this;
 		}
 
 		Object[] search;
@@ -632,28 +715,36 @@ public final class SearchView {
 					public void run(final IProgressMonitor m)
 							throws InvocationTargetException,
 							InterruptedException {
+
 						if (term.trim().equals("")) { //$NON-NLS-1$
 							search = JavaConversions.asJavaList(
-									modelIndex.pages())
-									.toArray(new String[] {});
+									modelIndex.pages()).toArray(
+									new String[modelIndex.pages().size()]);
 						} else {
-							m.beginTask(Messages.SearchingIn + " " //$NON-NLS-1$
+
+							m.beginTask(Messages.get().SearchingIn + " " //$NON-NLS-1$
 									+ modelIndex.pages().size() + " " //$NON-NLS-1$
-									+ Messages.Pages, modelIndex.pages().size());
+									+ Messages.get().Pages, modelIndex.pages()
+									.size());
+
 							search = null;
 							new Thread(new Runnable() {
 								@Override
 								public void run() {
 									while (search == null) {
+
 										m.worked(1);
+
 										try {
 											Thread.sleep(10);
 										} catch (InterruptedException e) {
 											e.printStackTrace();
 										}
+
 										if (m.isCanceled()) {
 											m.done();
 										}
+
 									}
 								}
 							}).start();
@@ -782,7 +873,7 @@ public final class SearchView {
 			if (columnIndex == 0 && element instanceof Page) {
 				Page page = (Page) element;
 				return DrcUiActivator
-						.instance()
+						.getDefault()
 						.loadImage(
 								page.done() ? "icons/complete_status.gif" //$NON-NLS-1$
 										: page.edits() == 0 ? "icons/page.gif" : "icons/edited.gif"); //$NON-NLS-1$ //$NON-NLS-2$

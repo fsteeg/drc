@@ -9,7 +9,6 @@
 package de.uni_koeln.ub.drc.ui.login;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,11 +18,9 @@ import javax.security.auth.callback.NameCallback;
 import javax.security.auth.callback.PasswordCallback;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.operation.ModalContext;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -39,8 +36,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.PlatformUI;
 
-import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 import de.uni_koeln.ub.drc.ui.Messages;
 
 /**
@@ -51,10 +48,15 @@ import de.uni_koeln.ub.drc.ui.Messages;
 public class SimpleLoginDialog extends /* TitleArea */Dialog implements
 		CallbackHandler {
 
-	private static final String TITLE = Messages.LoginToDrc;
-	private static final String LOGIN = Messages.Login;
+	/**
+	 * The class / CallbackHandler ID
+	 */
+	public static final String ID = SimpleLoginDialog.class.getName()
+			.toLowerCase();
+	private static final String TITLE = Messages.get().LoginToDrc;
+	private static final String LOGIN = Messages.get().Login;
 	private static final Point SIZE = new Point(300, 175);
-	private boolean inputProcessed = false;
+	private volatile boolean inputProcessed = false;
 	private List<Callback> callbacks;
 
 	/**
@@ -75,45 +77,44 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements
 	public void handle(final Callback[] callbacks) throws IOException {
 		this.callbacks = Arrays.asList(callbacks);
 		openDialog();
-		ModalContext.setAllowReadAndDispatch(true);
-		try {
-			ModalContext.run(waitForButtonPress(), true,
-					new NullProgressMonitor(), Display.getDefault());
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		// ModalContext.setAllowReadAndDispatch(true);
+		// System.out.println("Waiting...");
+		// try {
+		// ModalContext.run(waitForButtonPress(), true,
+		// new NullProgressMonitor(), Display.getDefault());
+		// } catch (InvocationTargetException e) {
+		// e.printStackTrace();
+		// } catch (InterruptedException e) {
+		// e.printStackTrace();
+		// }
 	}
 
 	private void openDialog() {
-		Display.getDefault().syncExec(new Runnable() {
-			@Override
-			public void run() {
-				setBlockOnOpen(false);
-				open();
-				hookIntoOkButton();
-			}
-		});
+		setBlockOnOpen(true);
+		open();
 	}
 
+	@SuppressWarnings("unused")
 	private IRunnableWithProgress waitForButtonPress() {
 		final int interval = 100;
 		return new IRunnableWithProgress() {
 			@Override
 			public void run(final IProgressMonitor monitor) {
 				while (!inputProcessed) {
+					System.out.println("Not processed.");
 					try {
 						Thread.sleep(interval);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
+				monitor.done();
 				inputProcessed = false;
 			}
 		};
 	}
 
+	@SuppressWarnings("unused")
 	private void hookIntoOkButton() {
 		final Button okButton = getButton(IDialogConstants.OK_ID);
 		okButton.setText(LOGIN);
@@ -136,15 +137,16 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements
 	 */
 	@Override
 	protected void cancelPressed() {
+		PlatformUI.getWorkbench().close();
 		/* If the login is cancelled, we shut down: */
-		DrcUiActivator activator = DrcUiActivator.instance();
-		try {
-			activator.stop(activator.getBundle().getBundleContext());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.exit(0); // OK here?
-	};
+		// Activator activator = Activator.getDefault();
+		// try {
+		// activator.stop(activator.getBundle().getBundleContext());
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		// System.exit(0); // OK here?
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -221,5 +223,6 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements
 				callback.setName(text.getText());
 			}
 		});
+		text.setFocus();
 	}
 }

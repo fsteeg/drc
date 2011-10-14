@@ -11,15 +11,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Named;
 
-import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.core.services.events.IEventBroker;
-import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
@@ -38,6 +34,11 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.ui.ISelectionListener;
+import org.eclipse.ui.ISelectionService;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.ViewPart;
 
 import scala.collection.JavaConversions;
 import de.uni_koeln.ub.drc.data.Comment;
@@ -51,13 +52,13 @@ import de.uni_koeln.ub.drc.ui.views.WordViewModel.WordViewLabelProvider;
  * 
  * @author Fabian Steeg (fsteeg)
  */
-public final class CommentsView {
+public final class CommentsView extends ViewPart {
 
+	/**
+	 * The class / CommentsView ID
+	 */
+	public static final String ID = CommentsView.class.getName().toLowerCase();
 	static final String NEW_COMMENT = "new_comment"; //$NON-NLS-1$
-	@Inject
-	private IEclipseContext context;
-	@Inject
-	private IEventBroker eventBroker;
 	private TableViewer viewer;
 	private Page page;
 	private Text commentField;
@@ -66,47 +67,74 @@ public final class CommentsView {
 	 * @param parent
 	 *            The parent composite for this part
 	 */
-	@Inject
-	public CommentsView(final Composite parent) {
+	@Override
+	public void createPartControl(final Composite parent) {
 		initAddCommentBar(parent);
 		initTableViewer(parent);
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
+		attachSelectionListener();
 	}
 
-	/**
-	 * @param pages
-	 *            The selected pages
-	 */
-	@Inject
-	public void setSelection(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final List<Page> pages) {
-		if (pages != null && pages.size() > 0) {
-			page = pages.get(0);
-			setInput();
-		}
+	@Override
+	public void setFocus() {
 	}
 
-	/**
-	 * @param text
-	 *            The selected text widget
-	 */
-	@Inject
-	public void setSelection(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final Text text) {
-		Page page = null;
-		if (text != null
-				&& (page = (Page) text.getData(Page.class.toString())) != null) {
-			this.page = page;
-			setInput();
-		}
+	private void attachSelectionListener() {
+		ISelectionService selectionService = (ISelectionService) getSite()
+				.getService(ISelectionService.class);
+		selectionService.addSelectionListener(new ISelectionListener() {
+
+			@SuppressWarnings("unchecked")
+			public void selectionChanged(IWorkbenchPart part,
+					ISelection selection) {
+				IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+				if (structuredSelection.getFirstElement() instanceof Page) {
+					List<Page> pages = (List<Page>) structuredSelection
+							.toList();
+					if (pages != null && pages.size() > 0) {
+						page = pages.get(0);
+						setInput();
+					}
+				}
+			}
+		});
 	}
+
+	// /**
+	// * @param text
+	// * The selected text widget
+	// */
+	// @Inject
+	// public void setSelection(
+	// @Optional @Named(IServiceConstants.ACTIVE_SELECTION) final Text text) {
+	// Page page = null;
+	// if (text != null
+	// && (page = (Page) text.getData(Page.class.toString())) != null) {
+	// this.page = page;
+	// setInput();
+	// }
+	// }
+
+	// /**
+	// * @param pages
+	// * The selected pages
+	// */
+	// @Inject
+	// public void setSelection(
+	// @Optional @Named(IServiceConstants.ACTIVE_SELECTION) final List<Page>
+	// pages) {
+	// if (pages != null && pages.size() > 0) {
+	// page = pages.get(0);
+	// setInput();
+	// }
+	// }
 
 	/* DI */@SuppressWarnings("unused")
 	@PostConstruct
 	private void addFocusListener() {
 		commentField
 				.addFocusListener(new SpecialCharacterView.TextFocusListener(
-						context, commentField));
+						commentField));
 	}
 
 	private void initAddCommentBar(Composite parent) {
@@ -115,8 +143,8 @@ public final class CommentsView {
 		commentField = new Text(comp, SWT.BORDER);
 		commentField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		Button add = new Button(comp, SWT.PUSH | SWT.FLAT);
-		add.setImage(DrcUiActivator.instance().loadImage("icons/add.gif")); //$NON-NLS-1$
-		add.setToolTipText(Messages.AddNewComment);
+		add.setImage(DrcUiActivator.getDefault().loadImage("icons/add.gif")); //$NON-NLS-1$
+		add.setToolTipText(Messages.get().AddNewComment);
 		SelectionListener listener = new SelectionListener() {
 			@Override
 			// on button click
@@ -134,13 +162,17 @@ public final class CommentsView {
 				String text = commentField.getText().trim();
 				if (text.length() > 0) {
 					page.comments().$plus$eq(
-							new Comment(DrcUiActivator.instance().currentUser()
-									.id(), text, System.currentTimeMillis()));
+							new Comment(DrcUiActivator.getDefault()
+									.currentUser().id(), text, System
+									.currentTimeMillis()));
 					setInput();
-					page.saveToDb(DrcUiActivator.instance().currentUser()
-							.collection(), DrcUiActivator.instance().db());
+					page.saveToDb(DrcUiActivator.getDefault().currentUser()
+							.collection(), DrcUiActivator.getDefault().db());
 					commentField.setText(""); //$NON-NLS-1$
-					eventBroker.post(CommentsView.NEW_COMMENT, page);
+					SearchView sv = (SearchView) PlatformUI.getWorkbench()
+							.getActiveWorkbenchWindow().getActivePage()
+							.findView(SearchView.ID);
+					sv.updateTreeViewer();
 				}
 			}
 		};
@@ -158,11 +190,11 @@ public final class CommentsView {
 	}
 
 	private void initTable() {
-		final int[] columns = new int[] { 25, 500, 300, 150 };
+		final int[] columns = new int[] { 25, 500, 350, 250 };
 		createColumn("", columns[0]); //$NON-NLS-1$
-		createColumn(Messages.Comment, columns[1]);
-		createColumn(Messages.Author, columns[2]);
-		createColumn(Messages.Date, columns[3]);
+		createColumn(Messages.get().Comment, columns[1]);
+		createColumn(Messages.get().Author, columns[2]);
+		createColumn(Messages.get().Date, columns[3]);
 		Table table = viewer.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
@@ -238,9 +270,10 @@ public final class CommentsView {
 		@Override
 		public Image getColumnImage(final Object element, final int columnIndex) {
 			if (columnIndex == 0) {
-				return DrcUiActivator.instance().loadImage("icons/write.gif"); //$NON-NLS-1$
+				return DrcUiActivator.getDefault().loadImage("icons/write.gif"); //$NON-NLS-1$
 			}
 			return null;
 		}
 	}
+
 }
