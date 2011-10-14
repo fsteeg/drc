@@ -61,15 +61,17 @@ public final class SimpleLoginModule implements LoginModule {
 	 */
 	@Override
 	public boolean login() throws LoginException {
-		NameCallback userCallback = new NameCallback(Messages.User);
-		PasswordCallback passCallback = new PasswordCallback(Messages.Password,
-				false);
+		NameCallback userCallback = new NameCallback(Messages.get().User);
+		PasswordCallback passCallback = new PasswordCallback(
+				Messages.get().Password, false);
 		try {
 			callbackHandler.handle(new Callback[] {
 			/*
-			 * new TextOutputCallback(TextOutputCallback.INFORMATION,
-			 * "Please login"),
-			 */userCallback, passCallback });
+			 * new
+			 * TextOutputCallback(TextOutputCallback.INFORMATION,"Please login"
+			 * ),
+			 */
+			userCallback, passCallback });
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (UnsupportedCallbackException e) {
@@ -86,7 +88,7 @@ public final class SimpleLoginModule implements LoginModule {
 		User candidate = null;
 		try {
 			candidate = User.withId(Index.DefaultCollection(), DrcUiActivator
-					.instance().userDb(), name);
+					.getDefault().userDb(), name);
 		} catch (Throwable x) {
 			x.printStackTrace();
 		}
@@ -94,6 +96,7 @@ public final class SimpleLoginModule implements LoginModule {
 			currentUser = candidate;
 			loggedIn = true;
 			System.out.println("Logged in: " + currentUser); //$NON-NLS-1$
+
 		}
 		return loggedIn;
 	}

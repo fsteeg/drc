@@ -7,93 +7,30 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.handlers;
 
-import java.lang.reflect.InvocationTargetException;
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.ui.PlatformUI;
 
-import javax.inject.Named;
-
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.e4.core.contexts.ContextInjectionFactory;
-import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.e4.core.di.annotations.Execute;
-import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.ui.di.Persist;
-import org.eclipse.e4.ui.model.application.MContribution;
-import org.eclipse.e4.ui.model.application.ui.MDirtyable;
-import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.e4.ui.services.IStylingEngine;
-import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Shell;
+import de.uni_koeln.ub.drc.ui.views.EditView;
 
 /**
  * Handles document saving, hooked into the menu via Application.xmi.
  * 
  * @author Fabian Steeg (fsteeg)
  */
-public final class SaveHandler {
+public final class SaveHandler extends AbstractHandler {
 
-	/**
-	 * @param dirtyable
-	 *            The dirtyable
-	 * @return True if the dirtyable is dirty, else false
-	 */
-	public boolean canExecute(
-			@Optional @Named(IServiceConstants.ACTIVE_PART) MDirtyable dirtyable) {
-		return dirtyable.isDirty();
-	}
+	public static final String ID = SaveHandler.class.getName().toLowerCase();
 
-	/**
-	 * @param context
-	 *            The context
-	 * @param engine
-	 *            The syling engine
-	 * @param shell
-	 *            The active shell
-	 * @param contribution
-	 *            The active part
-	 * @throws InvocationTargetException
-	 *             From progress dialiog
-	 * @throws InterruptedException
-	 *             From progress dialiog
-	 */
-	@Execute
-	public void execute(
-			IEclipseContext context,
-			@Optional final IStylingEngine engine,
-			@Optional @Named(IServiceConstants.ACTIVE_SHELL) final Shell shell,
-			@Optional @Named(IServiceConstants.ACTIVE_PART) final MContribution contribution)
-			throws InvocationTargetException, InterruptedException {
-
-		final IEclipseContext pmContext = context.createChild();
-		ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
-		dialog.open();
-		applyDialogStyles(engine, dialog.getShell());
-
-		dialog.run(true, true, new IRunnableWithProgress() {
-			@Override
-			public void run(final IProgressMonitor monitor)
-					throws InvocationTargetException, InterruptedException {
-				pmContext.set(IProgressMonitor.class.getName(), monitor);
-				Object clientObject = contribution.getObject();
-				ContextInjectionFactory.invoke(clientObject, Persist.class,
-						pmContext, null);
-			}
-		});
-
-		pmContext.dispose();
-	}
-
-	static void applyDialogStyles(final IStylingEngine engine,
-			final Control control) {
-		if (engine != null) {
-			Shell shell = control.getShell();
-			if (shell.getBackgroundMode() == SWT.INHERIT_NONE) {
-				shell.setBackgroundMode(SWT.INHERIT_DEFAULT);
-			}
-			engine.style(shell);
-		}
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		EditView ev = (EditView) PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage()
+				.findView(EditView.ID);
+		if (ev.isDirty())
+			ev.doSave(null);
+		return null;
 	}
 
 }

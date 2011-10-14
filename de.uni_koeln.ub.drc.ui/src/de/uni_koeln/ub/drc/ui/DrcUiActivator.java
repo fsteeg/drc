@@ -1,19 +1,7 @@
-/**************************************************************************************************
- * Copyright (c) 2010 Fabian Steeg. All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 which accompanies this
- * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
- * <p/>
- * Contributors: Fabian Steeg - initial API and implementation
- *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
-import java.util.Set;
 
 import javax.security.auth.login.LoginException;
 
@@ -23,21 +11,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.IJobChangeEvent;
-import org.eclipse.core.runtime.jobs.JobChangeAdapter;
-import org.eclipse.equinox.p2.core.IProvisioningAgent;
-import org.eclipse.equinox.p2.core.ProvisionException;
-import org.eclipse.equinox.p2.metadata.IInstallableUnit;
-import org.eclipse.equinox.p2.operations.InstallOperation;
-import org.eclipse.equinox.p2.operations.ProvisioningJob;
-import org.eclipse.equinox.p2.operations.ProvisioningSession;
-import org.eclipse.equinox.p2.query.QueryUtil;
-import org.eclipse.equinox.p2.repository.artifact.IArtifactRepositoryManager;
-import org.eclipse.equinox.p2.repository.metadata.IMetadataRepository;
-import org.eclipse.equinox.p2.repository.metadata.IMetadataRepositoryManager;
 import org.eclipse.equinox.security.auth.ILoginContext;
-import org.eclipse.equinox.security.auth.LoginContextFactory;
-import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.BundleContext;
@@ -46,197 +20,83 @@ import com.quui.sinist.XmlDb;
 
 import de.uni_koeln.ub.drc.data.Index;
 import de.uni_koeln.ub.drc.data.User;
+import de.uni_koeln.ub.drc.ui.views.SearchView;
 
 /**
- * Bundle activator.
- * 
- * @author Fabian Steeg (fsteeg)
+ * The activator class controls the plug-in life cycle
  */
-public final class DrcUiActivator extends Plugin {
+public class DrcUiActivator extends Plugin {
 
-	/**
-	 * The Plugin ID
-	 */
+	// The plug-in ID
 	public static final String PLUGIN_ID = "de.uni_koeln.ub.drc.ui"; //$NON-NLS-1$
-
-	private static final String JAAS_CONFIG_FILE = "jaas_config"; //$NON-NLS-1$
-
-	/**
-	 * The portal page root adress for a user
-	 */
-	public static final String PROFILE_ROOT = "http://hydra1.spinfo.uni-koeln.de:9000/application/user?id="; //$NON-NLS-1$
+	// The shared instance
+	private static DrcUiActivator plugin;
+	private XmlDb db;
+	//	private static final String JAAS_CONFIG_FILE = "jaas_config"; //$NON-NLS-1$
+	private ILoginContext loginContext;
+	private SearchView searchView;
 
 	/**
 	 * The user ID of the OCR
 	 */
 	public static final String OCR_ID = "OCR"; //$NON-NLS-1$
 
-	private XmlDb db = null;
+	/**
+	 * The portal page root address for a user
+	 */
+	public static final String PROFILE_ROOT = "http://hydra1.spinfo.uni-koeln.de:9000/application/user?id="; //$NON-NLS-1$
 
-	private static DrcUiActivator instance;
-	private ILoginContext loginContext;
+	/**
+	 * The constructor
+	 */
+	public DrcUiActivator() {
+	}
 
-	@Override
-	public void start(final BundleContext context) throws Exception {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+	 * )
+	 */
+	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		instance = this;
-		update(context);
-		login(context);
+		plugin = this;
+		// login(context);
 	}
 
-	private void update(BundleContext context) throws URISyntaxException {
-		//URI repo = new URI("http://hydra2.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
-		URI repo = new URI("http://hydra1.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
-		//URI repo = new URI("file:///Users/fsteeg/Documents/workspaces/drc/de.uni_koeln.ub.drc.rcp/target/repository"); //$NON-NLS-1$
-		String productId = "de.uni_koeln.ub.drc.rcp"; //$NON-NLS-1$
-		InstallOperation op = createInstallOperation(context, repo, productId);
-		if (op != null) {
-			IStatus status = null;
-			try {
-				status = op.resolveModal(null);
-			} catch (IllegalArgumentException x) {
-				getLog().log(
-						new Status(IStatus.ERROR, PLUGIN_ID, x.getMessage()));
-				return;
-			}
-			getLog().log(
-					new Status(
-							IStatus.INFO,
-							PLUGIN_ID,
-							String.format(
-									"Resolved operation status: %s, details: %s", status, op.getResolutionDetails()))); //$NON-NLS-1$
-			ProvisioningJob job = op.getProvisioningJob(null);
-			if (job != null) {
-				job.addJobChangeListener(new JobChangeAdapter() {
-					@Override
-					public void done(IJobChangeEvent event) {
-						getLog().log(
-								new Status(IStatus.INFO, PLUGIN_ID,
-										"Update Done: " + event.getResult())); //$NON-NLS-1$
-					}
-				});
-				job.schedule();
-			}
-		}
-	}
-
-	private InstallOperation createInstallOperation(BundleContext context,
-			URI repo, String productId) {
-		try {
-			final IProvisioningAgent agent = (IProvisioningAgent) context
-					.getService(context
-							.getServiceReference(IProvisioningAgent.SERVICE_NAME));
-			IMetadataRepository metadataRepo = ((IMetadataRepositoryManager) agent
-					.getService(IMetadataRepositoryManager.SERVICE_NAME))
-					.loadRepository(repo, null);
-			((IArtifactRepositoryManager) agent
-					.getService(IArtifactRepositoryManager.SERVICE_NAME))
-					.loadRepository(repo, null);
-			Set<IInstallableUnit> toInstall = metadataRepo.query(
-					QueryUtil.createIUQuery(productId), null)
-					.toUnmodifiableSet();
-			getLog().log(
-					new Status(IStatus.INFO, PLUGIN_ID,
-							"Attempting to install: " + toInstall)); //$NON-NLS-1$
-			return new InstallOperation(new ProvisioningSession(agent),
-					toInstall);
-		} catch (ProvisionException e) {
-			e.printStackTrace();
-		} catch (NullPointerException e) { // failing update for inner workbench
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	/**
-	 * @return The user that is currently logged in
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+	 * )
 	 */
-	public User currentUser() {
-		User user = null;
-		try {
-			user = (User) getLoginContext().getSubject()
-					.getPrivateCredentials().iterator().next();
-		} catch (LoginException e) {
-			e.printStackTrace();
-		}
-		return user;
-	}
-
-	private void login(final BundleContext context) throws Exception {
-		String configName = "SIMPLE"; //$NON-NLS-1$
-		URL configUrl = context.getBundle().getEntry(JAAS_CONFIG_FILE);
-		loginContext = LoginContextFactory.createContext(configName, configUrl);
-		try {
-			loginContext.login();
-		} catch (LoginException e) {
-			IStatus status = new Status(IStatus.ERROR,
-					"de.uni_koeln.ub.drc.ui", "Login failed", e); //$NON-NLS-1$ //$NON-NLS-2$
-			int result = ErrorDialog.openError(null, Messages.Error,
-					Messages.LoginFailed, status);
-			if (result == ErrorDialog.CANCEL) {
-				stop(context);
-				System.exit(0);
-			} else {
-				login(context);
-			}
-		}
-	}
-
-	/**
-	 * @return The active bundle, or null
-	 */
-	public static DrcUiActivator instance() {
-		return instance;
-	}
-
-	/**
-	 * @return The context for the logged in user.
-	 */
-	public ILoginContext getLoginContext() {
-		return loginContext;
-	}
-
-	@Override
-	public void stop(final BundleContext context) throws Exception {
-		instance = null;
+	public void stop(BundleContext context) throws Exception {
+		plugin = null;
 		super.stop(context);
 	}
 
 	/**
-	 * @param location
-	 *            The name of the file to retrieve, relative to the bundle root
-	 * @return The file at the given location
+	 * Returns the shared instance
+	 * 
+	 * @return the shared instance
 	 */
-	public File fileFromBundle(final String location) {
-		try {
-			URL resource = getBundle().getResource(location);
-			if (resource == null) {
-				getLog().log(
-						new Status(IStatus.ERROR, PLUGIN_ID,
-								"Could not resolve: " + location)); //$NON-NLS-1$
-				return null;
-			}
-			return new File(FileLocator.resolve(resource).toURI());
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public static DrcUiActivator getDefault() {
+		return plugin;
 	}
 
-	/**
-	 * @param location
-	 *            The bundle path of the image to load
-	 * @return The loaded image
-	 */
-	public Image loadImage(String location) {
-		IPath path = new Path(location);
-		URL url = FileLocator.find(this.getBundle(), path,
-				Collections.EMPTY_MAP);
-		ImageDescriptor desc = ImageDescriptor.createFromURL(url);
-		return desc.createImage();
-	}
+	// /**
+	// * Returns an image descriptor for the image file at the given plug-in
+	// * relative path
+	// *
+	// * @param path
+	// * the path
+	// * @return the image descriptor
+	// */
+	// public static ImageDescriptor getImageDescriptor(String path) {
+	// return imageDescriptorFromPlugin(PLUGIN_ID, path);
+	// }
 
 	/**
 	 * @return The data DB we are using
@@ -260,6 +120,74 @@ public final class DrcUiActivator extends Plugin {
 	public XmlDb userDb() {
 		return Index.LocalDb().isAvailable() ? Index.LocalDb() : new XmlDb(
 				"hydra1.spinfo.uni-koeln.de", 8080, "guest", "guest"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	}
+
+	/**
+	 * @return The user that is currently logged in
+	 */
+	// public User currentUser() {
+	// return User.withId(Index.DefaultCollection(), db, "matana");
+	// }
+
+	public User currentUser() {
+		User user = null;
+		try {
+			ILoginContext context = getLoginContext();
+			user = (User) context.getSubject().getPrivateCredentials()
+					.iterator().next();
+		} catch (LoginException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+
+	/**
+	 * @return The context for the logged in user.
+	 */
+	public ILoginContext getLoginContext() {
+		return loginContext;
+	}
+
+	/**
+	 * @param location
+	 *            The bundle path of the image to load
+	 * @return The loaded image
+	 */
+	public Image loadImage(String location) {
+		IPath path = new Path(location);
+		URL url = FileLocator.find(this.getBundle(), path,
+				Collections.EMPTY_MAP);
+		ImageDescriptor desc = ImageDescriptor.createFromURL(url);
+		return desc.createImage();
+	}
+
+	// private void login(BundleContext bundleContext) throws Exception {
+	//		String configName = "SIMPLE"; //$NON-NLS-1$
+	// URL configUrl = bundleContext.getBundle().getEntry(JAAS_CONFIG_FILE);
+	// loginContext = LoginContextFactory.createContext(configName, configUrl);
+	// try {
+	// loginContext.login();
+	// } catch (LoginException e) {
+	// IStatus status = new Status(IStatus.ERROR,
+	//					"de.uni_koeln.ub.drc.ui", "Login failed", e); //$NON-NLS-1$ //$NON-NLS-2$
+	// int result = ErrorDialog.openError(null, Messages.Error,
+	// Messages.LoginFailed, status);
+	// if (result == ErrorDialog.CANCEL) {
+	// stop(bundleContext);
+	// System.exit(0);
+	// } else {
+	// login(bundleContext);
+	// }
+	// }
+	// }
+
+	public void setLoginContext(ILoginContext loginContext) {
+		this.loginContext = loginContext;
+		this.searchView.setInput();
+	}
+
+	public void register(SearchView searchView) {
+		this.searchView = searchView;
 	}
 
 }
