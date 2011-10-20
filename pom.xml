@@ -28,6 +28,7 @@
   <modules>
     <module>de.uni_koeln.ub.drc.feature</module>
     <module>de.uni_koeln.ub.drc.ui</module>
+    <module>de.uni_koeln.ub.drc.ui.rcp</module>
     <module>de.uni_koeln.ub.drc.rcp</module>
   </modules>
   <build>
