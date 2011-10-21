@@ -93,11 +93,6 @@
             id="de.uni_koeln.ub.drc.ui.handlers.exithandler"
             name="%Exit">
       </command>
-      <command
-            defaultHandler="de.uni_koeln.ub.drc.ui.handlers.ExportHandler"
-            id="de.uni_koeln.ub.drc.ui.handlers.exporthandler"
-            name="%Export">
-      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -107,12 +102,6 @@
          <menu
                id="fileMenu"
                label="%File">
-            <command
-                  commandId="de.uni_koeln.ub.drc.ui.handlers.exporthandler"
-                  icon="icons/export.gif"
-                  label="%Export"
-                  style="push">
-            </command>
             <command
                   commandId="de.uni_koeln.ub.drc.ui.handlers.savehandler"
                   icon="icons/save.gif"
@@ -125,7 +114,7 @@
             </separator>
             <command
                   commandId="de.uni_koeln.ub.drc.ui.handlers.exithandler"
-                  icon="icons/placeholder.png"
+                  icon="icons/exit.gif"
                   label="%Exit"
                   style="push">
             </command>
