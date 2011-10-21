@@ -27,7 +27,8 @@ public class NLSHelperImpl extends NLSHelper {
 	private Object internalGet(final ResourceBundle bundle, final Class<?> clazz) {
 		Object result;
 		try {
-			Constructor<?> constructor = clazz.getDeclaredConstructor((Class<?>[]) null);
+			Constructor<?> constructor = clazz
+					.getDeclaredConstructor((Class<?>[]) null);
 			constructor.setAccessible(true);
 			result = constructor.newInstance((Object[]) null);
 		} catch (final Exception ex) {

@@ -7,7 +7,6 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.facades;
 
-import org.eclipse.rwt.lifecycle.WidgetUtil;
 
 public class CSSSWTConstantsHelperImpl extends CSSSWTConstantsHelper {
 

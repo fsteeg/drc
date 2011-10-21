@@ -34,20 +34,25 @@ import org.osgi.framework.BundleContext;
 
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
-
 /**
  * This class controls all aspects of the application's execution
+ * 
+ * @author Mihail Atanassov (matana), Fabian Steeg (fsteeg)
  */
 public class Application implements IApplication {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.IApplicationContext)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.
+	 * IApplicationContext)
 	 */
 	public Object start(IApplicationContext context) throws Exception {
-	  update(DrcUiActivator.getDefault().getBundleContext());
+		update(DrcUiActivator.getDefault().getBundleContext());
 		Display display = PlatformUI.createDisplay();
 		try {
-			int returnCode = PlatformUI.createAndRunWorkbench(display, new ApplicationWorkbenchAdvisor());
+			int returnCode = PlatformUI.createAndRunWorkbench(display,
+					new ApplicationWorkbenchAdvisor());
 			if (returnCode == PlatformUI.RETURN_RESTART)
 				return IApplication.EXIT_RESTART;
 			else
@@ -55,10 +60,12 @@ public class Application implements IApplication {
 		} finally {
 			display.dispose();
 		}
-		
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.equinox.app.IApplication#stop()
 	 */
 	public void stop() {
@@ -73,68 +80,78 @@ public class Application implements IApplication {
 			}
 		});
 	}
-	
-	private void update(BundleContext context) throws URISyntaxException {
-    //URI repo = new URI("http://hydra2.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
-    URI repo = new URI("http://hydra1.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
-    //URI repo = new URI("file:///Users/fsteeg/Documents/workspaces/drc/de.uni_koeln.ub.drc.rcp/target/repository"); //$NON-NLS-1$
-    String productId = "de.uni_koeln.ub.drc.rcp"; //$NON-NLS-1$
-    InstallOperation op = createInstallOperation(context, repo, productId);
-    if (op != null) {
-      IStatus status = null;
-      try {
-        status = op.resolveModal(null);
-      } catch (IllegalArgumentException x) {
-        DrcUiActivator.getDefault().getLog().log(
-            new Status(IStatus.ERROR, DrcUiActivator.PLUGIN_ID, x.getMessage()));
-        return;
-      }
-      DrcUiActivator.getDefault().getLog().log(
-          new Status(
-              IStatus.INFO,
-              DrcUiActivator.PLUGIN_ID,
-              String.format(
-                  "Resolved operation status: %s, details: %s", status, op.getResolutionDetails()))); //$NON-NLS-1$
-      ProvisioningJob job = op.getProvisioningJob(null);
-      if (job != null) {
-        job.addJobChangeListener(new JobChangeAdapter() {
-          @Override
-          public void done(IJobChangeEvent event) {
-            DrcUiActivator.getDefault().getLog().log(
-                new Status(IStatus.INFO, DrcUiActivator.PLUGIN_ID,
-                    "Update Done: " + event.getResult())); //$NON-NLS-1$
-          }
-        });
-        job.schedule();
-      }
-    }
-  }
 
-  private InstallOperation createInstallOperation(BundleContext context,
-      URI repo, String productId) {
-    try {
-      final IProvisioningAgent agent = (IProvisioningAgent) context
-          .getService(context
-              .getServiceReference(IProvisioningAgent.SERVICE_NAME));
-      IMetadataRepository metadataRepo = ((IMetadataRepositoryManager) agent
-          .getService(IMetadataRepositoryManager.SERVICE_NAME))
-          .loadRepository(repo, null);
-      ((IArtifactRepositoryManager) agent
-          .getService(IArtifactRepositoryManager.SERVICE_NAME))
-          .loadRepository(repo, null);
-      Set<IInstallableUnit> toInstall = metadataRepo.query(
-          QueryUtil.createIUQuery(productId), null)
-          .toUnmodifiableSet();
-      DrcUiActivator.getDefault().getLog().log(
-          new Status(IStatus.INFO, DrcUiActivator.PLUGIN_ID,
-              "Attempting to install: " + toInstall)); //$NON-NLS-1$
-      return new InstallOperation(new ProvisioningSession(agent),
-          toInstall);
-    } catch (ProvisionException e) {
-      e.printStackTrace();
-    } catch (NullPointerException e) { // failing update for inner workbench
-      e.printStackTrace();
-    }
-    return null;
-  }
+	private void update(BundleContext context) throws URISyntaxException {
+		//URI repo = new URI("http://hydra2.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
+		URI repo = new URI("http://hydra1.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
+		//URI repo = new URI("file:///Users/fsteeg/Documents/workspaces/drc/de.uni_koeln.ub.drc.rcp/target/repository"); //$NON-NLS-1$
+		String productId = "de.uni_koeln.ub.drc.rcp"; //$NON-NLS-1$
+		InstallOperation op = createInstallOperation(context, repo, productId);
+		if (op != null) {
+			IStatus status = null;
+			try {
+				status = op.resolveModal(null);
+			} catch (IllegalArgumentException x) {
+				DrcUiActivator
+						.getDefault()
+						.getLog()
+						.log(new Status(IStatus.ERROR,
+								DrcUiActivator.PLUGIN_ID, x.getMessage()));
+				return;
+			}
+			DrcUiActivator
+					.getDefault()
+					.getLog()
+					.log(new Status(
+							IStatus.INFO,
+							DrcUiActivator.PLUGIN_ID,
+							String.format(
+									"Resolved operation status: %s, details: %s", status, op.getResolutionDetails()))); //$NON-NLS-1$
+			ProvisioningJob job = op.getProvisioningJob(null);
+			if (job != null) {
+				job.addJobChangeListener(new JobChangeAdapter() {
+					@Override
+					public void done(IJobChangeEvent event) {
+						DrcUiActivator
+								.getDefault()
+								.getLog()
+								.log(new Status(IStatus.INFO,
+										DrcUiActivator.PLUGIN_ID,
+										"Update Done: " + event.getResult())); //$NON-NLS-1$
+					}
+				});
+				job.schedule();
+			}
+		}
+	}
+
+	private InstallOperation createInstallOperation(BundleContext context,
+			URI repo, String productId) {
+		try {
+			final IProvisioningAgent agent = (IProvisioningAgent) context
+					.getService(context
+							.getServiceReference(IProvisioningAgent.SERVICE_NAME));
+			IMetadataRepository metadataRepo = ((IMetadataRepositoryManager) agent
+					.getService(IMetadataRepositoryManager.SERVICE_NAME))
+					.loadRepository(repo, null);
+			((IArtifactRepositoryManager) agent
+					.getService(IArtifactRepositoryManager.SERVICE_NAME))
+					.loadRepository(repo, null);
+			Set<IInstallableUnit> toInstall = metadataRepo.query(
+					QueryUtil.createIUQuery(productId), null)
+					.toUnmodifiableSet();
+			DrcUiActivator
+					.getDefault()
+					.getLog()
+					.log(new Status(IStatus.INFO, DrcUiActivator.PLUGIN_ID,
+							"Attempting to install: " + toInstall)); //$NON-NLS-1$
+			return new InstallOperation(new ProvisioningSession(agent),
+					toInstall);
+		} catch (ProvisionException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) { // failing update for inner workbench
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

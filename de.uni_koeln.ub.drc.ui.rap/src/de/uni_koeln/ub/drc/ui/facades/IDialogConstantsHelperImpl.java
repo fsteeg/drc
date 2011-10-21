@@ -7,7 +7,6 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.facades;
 
-import org.eclipse.jface.dialogs.IDialogConstants;
 
 public class IDialogConstantsHelperImpl extends IDialogConstantsHelper {
 

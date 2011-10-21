@@ -11,28 +11,6 @@ import java.net.URL;
 
 import javax.security.auth.login.LoginException;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.equinox.security.auth.ILoginContext;
-import org.eclipse.equinox.security.auth.LoginContextFactory;
-import org.eclipse.jface.dialogs.ErrorDialog;
-import org.eclipse.rwt.RWT;
-import org.eclipse.rwt.internal.lifecycle.JavaScriptResponseWriter;
-import org.eclipse.rwt.internal.service.ContextProvider;
-import org.eclipse.rwt.lifecycle.PhaseEvent;
-import org.eclipse.rwt.lifecycle.PhaseId;
-import org.eclipse.rwt.lifecycle.PhaseListener;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.application.IWorkbenchConfigurer;
-import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
-import org.eclipse.ui.application.WorkbenchAdvisor;
-import org.eclipse.ui.application.WorkbenchWindowAdvisor;
-import org.osgi.framework.BundleContext;
-
-import de.uni_koeln.ub.drc.ui.ApplicationWorkbenchWindowAdvisor;
-import de.uni_koeln.ub.drc.ui.DrcUiActivator;
-import de.uni_koeln.ub.drc.ui.Messages;
-
 /**
  * This workbench advisor creates the window advisor, and specifies the
  * perspective id for the initial window.
