@@ -47,6 +47,7 @@ public class DrcUiActivator extends Plugin {
 	private XmlDb db;
 	private ILoginContext loginContext;
 	private SearchView searchView;
+	private BundleContext context;
 
 	/**
 	 * The user ID of the OCR
@@ -67,6 +68,7 @@ public class DrcUiActivator extends Plugin {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+		this.context = context;
 		plugin = this;
 	}
 
@@ -159,6 +161,13 @@ public class DrcUiActivator extends Plugin {
 	 */
 	public void register(SearchView searchView) {
 		this.searchView = searchView;
+	}
+
+	/**
+	 * @return The BundleContext
+	 */
+	public BundleContext getBundleContext() {
+		return context;
 	}
 
 }
