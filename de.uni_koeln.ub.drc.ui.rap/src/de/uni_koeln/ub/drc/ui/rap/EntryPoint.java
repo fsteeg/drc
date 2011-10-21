@@ -7,9 +7,19 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.rap;
 
+import org.eclipse.rwt.lifecycle.IEntryPoint;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.application.WorkbenchAdvisor;
 
+/**
+ * @author Mihail Atanassov (matana)
+ */
 public class EntryPoint implements IEntryPoint {
 
+	/**
+	 * The class ID
+	 */
 	public static final String ID = EntryPoint.class.getName().toLowerCase();
 
 	@Override

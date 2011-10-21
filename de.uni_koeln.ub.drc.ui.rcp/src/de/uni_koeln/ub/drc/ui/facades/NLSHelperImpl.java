@@ -14,6 +14,9 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+/**
+ * @author Mihail Atanassov (matana)
+ */
 public class NLSHelperImpl extends NLSHelper {
 
 	@Override
@@ -49,7 +52,7 @@ public class NLSHelperImpl extends NLSHelper {
 						}
 					} catch (final MissingResourceException mre) {
 						fieldArray[i].setAccessible(true);
-						fieldArray[i].set(result, "");
+						fieldArray[i].set(result, ""); //$NON-NLS-1$
 						mre.printStackTrace();
 					}
 				}

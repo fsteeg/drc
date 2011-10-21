@@ -7,7 +7,11 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.facades;
 
+import org.eclipse.rwt.lifecycle.WidgetUtil;
 
+/**
+ * @author Mihail Atanassov (matana)
+ */
 public class CSSSWTConstantsHelperImpl extends CSSSWTConstantsHelper {
 
 	@Override

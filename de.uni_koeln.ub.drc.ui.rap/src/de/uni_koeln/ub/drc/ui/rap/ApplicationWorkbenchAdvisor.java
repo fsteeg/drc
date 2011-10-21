@@ -11,22 +11,47 @@ import java.net.URL;
 
 import javax.security.auth.login.LoginException;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.equinox.security.auth.ILoginContext;
+import org.eclipse.equinox.security.auth.LoginContextFactory;
+import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.rwt.RWT;
+import org.eclipse.rwt.internal.lifecycle.JavaScriptResponseWriter;
+import org.eclipse.rwt.internal.service.ContextProvider;
+import org.eclipse.rwt.lifecycle.PhaseEvent;
+import org.eclipse.rwt.lifecycle.PhaseId;
+import org.eclipse.rwt.lifecycle.PhaseListener;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.application.IWorkbenchConfigurer;
+import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
+import org.eclipse.ui.application.WorkbenchAdvisor;
+import org.eclipse.ui.application.WorkbenchWindowAdvisor;
+import org.osgi.framework.BundleContext;
+
+import de.uni_koeln.ub.drc.ui.ApplicationWorkbenchWindowAdvisor;
+import de.uni_koeln.ub.drc.ui.DrcUiActivator;
+import de.uni_koeln.ub.drc.ui.Messages;
+
 /**
  * This workbench advisor creates the window advisor, and specifies the
  * perspective id for the initial window.
+ * 
+ * @author Mihail Atanassov (matana)
  */
-@SuppressWarnings("restriction")
 public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
 	private static final String JAAS_CONFIG_FILE = "jaas_config"; //$NON-NLS-1$
 	private ILoginContext loginContext;
-	private static final String PERSPECTIVE_ID = "de.uni_koeln.ub.drc.ui.perspective";
+	private static final String PERSPECTIVE_ID = "de.uni_koeln.ub.drc.ui.perspective"; //$NON-NLS-1$
 
+	@Override
 	public WorkbenchWindowAdvisor createWorkbenchWindowAdvisor(
 			IWorkbenchWindowConfigurer configurer) {
 		return new ApplicationWorkbenchWindowAdvisor(configurer);
 	}
 
+	@Override
 	public String getInitialWindowPerspectiveId() {
 		return PERSPECTIVE_ID;
 	}
@@ -50,7 +75,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
 	private void login(BundleContext bundleContext) throws Exception {
 		String configName = "SIMPLE"; //$NON-NLS-1$
-		System.out.println("bundleContext : "
+		System.out.println("bundleContext : " //$NON-NLS-1$
 				+ bundleContext.getClass().getName().toLowerCase());
 		URL configUrl = bundleContext.getBundle().getEntry(JAAS_CONFIG_FILE);
 		loginContext = LoginContextFactory.createContext(configName, configUrl);
@@ -93,6 +118,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
 			private static final long serialVersionUID = 1L;
 
+			@Override
 			public void afterPhase(PhaseEvent event) {
 				if (Display.getCurrent() == null
 						|| display == Display.getCurrent()) {
@@ -100,18 +126,20 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 					// solution
 					JavaScriptResponseWriter writer = ContextProvider
 							.getStateInfo().getResponseWriter();
-					String url = "http://www.crestomazia.ch/";
-					writer.write("window.location.href=\"" + url + "\";");
+					String url = "http://www.crestomazia.ch/"; //$NON-NLS-1$
+					writer.write("window.location.href=\"" + url + "\";"); //$NON-NLS-1$ //$NON-NLS-2$
 					RWT.getRequest().getSession().setMaxInactiveInterval(1);
 					RWT.getLifeCycle().removePhaseListener(this);
 					logout();
 				}
 			}
 
+			@Override
 			public PhaseId getPhaseId() {
 				return PhaseId.ANY;
 			}
 
+			@Override
 			public void beforePhase(PhaseEvent event) {
 			};
 

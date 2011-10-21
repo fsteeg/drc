@@ -7,6 +7,13 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.facades;
 
+import org.eclipse.rwt.RWT;
+
+import de.uni_koeln.ub.drc.ui.Messages;
+
+/**
+ * @author Mihail Atanassov (matana)
+ */
 public class NLSHelperImpl extends NLSHelper {
 
 	@Override
