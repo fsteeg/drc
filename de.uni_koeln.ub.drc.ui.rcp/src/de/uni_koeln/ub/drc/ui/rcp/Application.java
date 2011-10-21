@@ -47,6 +47,7 @@ public class Application implements IApplication {
 	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.
 	 * IApplicationContext)
 	 */
+	@Override
 	public Object start(IApplicationContext context) throws Exception {
 		update(DrcUiActivator.getDefault().getBundleContext());
 		Display display = PlatformUI.createDisplay();
@@ -55,8 +56,7 @@ public class Application implements IApplication {
 					new ApplicationWorkbenchAdvisor());
 			if (returnCode == PlatformUI.RETURN_RESTART)
 				return IApplication.EXIT_RESTART;
-			else
-				return IApplication.EXIT_OK;
+			return IApplication.EXIT_OK;
 		} finally {
 			display.dispose();
 		}
@@ -68,12 +68,14 @@ public class Application implements IApplication {
 	 * 
 	 * @see org.eclipse.equinox.app.IApplication#stop()
 	 */
+	@Override
 	public void stop() {
 		if (!PlatformUI.isWorkbenchRunning())
 			return;
 		final IWorkbench workbench = PlatformUI.getWorkbench();
 		final Display display = workbench.getDisplay();
 		display.syncExec(new Runnable() {
+			@Override
 			public void run() {
 				if (!display.isDisposed())
 					workbench.close();

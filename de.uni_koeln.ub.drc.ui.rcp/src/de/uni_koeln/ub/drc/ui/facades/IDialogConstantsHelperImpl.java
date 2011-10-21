@@ -9,6 +9,9 @@ package de.uni_koeln.ub.drc.ui.facades;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
 
+/**
+ * @author Mihail Atanassov (matana)
+ */
 public class IDialogConstantsHelperImpl extends IDialogConstantsHelper {
 
 	@Override

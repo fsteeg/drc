@@ -9,7 +9,9 @@ package de.uni_koeln.ub.drc.ui.facades;
 
 import org.eclipse.e4.ui.css.swt.CSSSWTConstants;
 
-@SuppressWarnings("restriction")
+/**
+ * @author Mihail Atanassov (matana)
+ */
 public class CSSSWTConstantsHelperImpl extends CSSSWTConstantsHelper {
 
 	@Override

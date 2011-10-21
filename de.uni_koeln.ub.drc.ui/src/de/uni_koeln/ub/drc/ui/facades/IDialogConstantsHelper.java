@@ -9,7 +9,6 @@ package de.uni_koeln.ub.drc.ui.facades;
 
 /**
  * @author Mihail Atanassov (matana)
- * 
  */
 public abstract class IDialogConstantsHelper {
 
