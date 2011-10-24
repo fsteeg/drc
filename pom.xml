@@ -26,12 +26,12 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <modules>
+    <module>de.uni_koeln.ub.drc.ui.rap</module>
+    <module>de.uni_koeln.ub.drc.ui.rap.feature</module>
     <module>de.uni_koeln.ub.drc.feature</module>
     <module>de.uni_koeln.ub.drc.ui</module>
     <module>de.uni_koeln.ub.drc.ui.rcp</module>
     <module>de.uni_koeln.ub.drc.rcp</module>
-    <module>de.uni_koeln.ub.drc.ui.rap</module>
-    <module>de.uni_koeln.ub.drc.ui.rap.feature</module>
   </modules>
   <build>
     <plugins>

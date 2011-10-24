@@ -12,6 +12,10 @@
 	<artifactId>de.uni_koeln.ub.drc.ui.rap.feature</artifactId>
 	<version>0.2.0-SNAPSHOT</version>
 	<packaging>eclipse-feature</packaging>
+	<properties>
+		<output-directory>${basedir}/target/WEB-INF</output-directory>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
