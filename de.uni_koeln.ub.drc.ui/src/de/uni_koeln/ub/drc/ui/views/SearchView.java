@@ -7,7 +7,6 @@
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.views;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,10 +18,7 @@ import java.util.TreeMap;
 
 import javax.annotation.PostConstruct;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -473,45 +469,13 @@ public final class SearchView extends ViewPart {
 	 * Load SearchView content
 	 */
 	public void setInput() {
-		String current = selected(volumes);
-		XmlDb db = DrcUiActivator.getDefault().db();
-		if (content == null || !current.equals(last)) {
-			loadData();
-			allPages = new ArrayList<String>(
-					JavaConversions.asJavaList(content.modelIndex.pages()));
-			pingCollection(current, page(allPages.get(0)), db);
-			Collections.sort(allPages);
-		}
-		last = current;
-		Object[] pages = content.getPages(searchField.getText().trim()
-				.toLowerCase());
-		Arrays.sort(pages, comp);
-		chapters = new TreeMap<Chapter, List<Object>>();
-		boolean meta = true;
-		try {
-			mets = new MetsTransformer(current + ".xml", db); //$NON-NLS-1$
-		} catch (NullPointerException x) {
-			// No matadata available for selected volume
-			meta = false;
-		}
-		for (Object page : pages) {
-			int fileNumber = page instanceof Page ? ((Page) page).number()
-					: new Page(null, (String) page).number();
-			Chapter chapter = null;
-			if (meta) {
-				chapter = mets.chapter(fileNumber, Count.File());
-			} else {
-				chapter = new Chapter(0, 1, Messages.get().NoMeta);
-			}
-			List<Object> pagesInChapter = chapters.get(chapter);
-			if (pagesInChapter == null) {
-				pagesInChapter = new ArrayList<Object>();
-				chapters.put(chapter, pagesInChapter);
-			}
-			pagesInChapter.add(page);
-		}
-		viewer.setInput(chapters);
-		updateResultCount(pages.length);
+		BusyIndicator.showWhile(viewer.getControl().getDisplay(),
+				new Runnable() {
+					@Override
+					public void run() {
+						load();
+					}
+				});
 	}
 
 	private void pingCollection(final String current, final Page page,
@@ -527,20 +491,7 @@ public final class SearchView extends ViewPart {
 	}
 
 	private void loadData() {
-		try {
-			IRunnableWithProgress op = new IRunnableWithProgress() {
-
-				@Override
-				public void run(IProgressMonitor monitor)
-						throws InvocationTargetException, InterruptedException {
-					content = new SearchViewModelProvider(monitor);
-				}
-			};
-			new ProgressMonitorDialog(searchField.getShell()).run(true, true,
-					op);
-		} catch (InvocationTargetException e) {
-		} catch (InterruptedException e) {
-		}
+		content = new SearchViewModelProvider();
 	}
 
 	private SearchViewModelProvider content = null;
@@ -550,7 +501,7 @@ public final class SearchView extends ViewPart {
 		Index modelIndex;
 		String modelSelected = null;
 
-		private SearchViewModelProvider(IProgressMonitor monitor) {
+		private SearchViewModelProvider() {
 			viewer.getTree().getDisplay().syncExec(new Runnable() {
 				@Override
 				public void run() {
@@ -564,21 +515,14 @@ public final class SearchView extends ViewPart {
 							.collection()
 							+ "/" + modelSelected).get()); //$NON-NLS-1$
 			// we only load the XML files
-			monitor.beginTask(Messages.get().LoadingData, ids.size() / 2);
 			List<String> pages = new ArrayList<String>();
 			for (String id : ids) {
 				if (id.endsWith(".xml")) { //$NON-NLS-1$
-					monitor.subTask(id);
 					pages.add(id);
-					monitor.worked(1);
-				}
-				if (monitor.isCanceled()) {
-					break;
 				}
 			}
 			modelIndex = new Index(JavaConversions.asScalaBuffer(pages)
 					.toList(), DrcUiActivator.getDefault().db(), modelSelected);
-			monitor.done();
 		}
 
 		Object[] search;
@@ -586,59 +530,15 @@ public final class SearchView extends ViewPart {
 		public Object[] getPages(final String term) {
 			final String type = searchOptions.getItem(searchOptions
 					.getSelectionIndex());
-			ProgressMonitorDialog dialog = new ProgressMonitorDialog(
-					searchField.getShell());
-			dialog.open();
-			try {
-				dialog.run(true, true, new IRunnableWithProgress() {
-					@Override
-					public void run(final IProgressMonitor m)
-							throws InvocationTargetException,
-							InterruptedException {
-
-						if (term.trim().equals("")) { //$NON-NLS-1$
-							search = JavaConversions.asJavaList(
-									modelIndex.pages()).toArray(
-									new String[modelIndex.pages().size()]);
-						} else {
-
-							m.beginTask(Messages.get().SearchingIn + " " //$NON-NLS-1$
-									+ modelIndex.pages().size() + " " //$NON-NLS-1$
-									+ Messages.get().Pages, modelIndex.pages()
-									.size());
-
-							search = null;
-							new Thread(new Runnable() {
-								@Override
-								public void run() {
-									while (search == null) {
-
-										m.worked(1);
-
-										try {
-											Thread.sleep(10);
-										} catch (InterruptedException e) {
-											e.printStackTrace();
-										}
-
-										if (m.isCanceled()) {
-											m.done();
-										}
-
-									}
-								}
-							}).start();
-							search = modelIndex.search(term, options.get(type));
-							System.out.println(String
-									.format("Searching for '%s' in %s returned %s results", //$NON-NLS-1$
-											term, type, search.length));
-						}
-					}
-				});
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			if (term.trim().equals("")) { //$NON-NLS-1$
+				search = JavaConversions.asJavaList(modelIndex.pages())
+						.toArray(new String[modelIndex.pages().size()]);
+			} else {
+				search = null;
+				search = modelIndex.search(term, options.get(type));
+				System.out.println(String.format(
+						"Searching for '%s' in %s returned %s results", //$NON-NLS-1$
+						term, type, search.length));
 			}
 			return search;
 		}
@@ -703,6 +603,48 @@ public final class SearchView extends ViewPart {
 
 	private Page asPage(Object element) {
 		return (Page) element;
+	}
+
+	private void load() {
+		String current = selected(volumes);
+		XmlDb db = DrcUiActivator.getDefault().db();
+		if (content == null || !current.equals(last)) {
+			loadData();
+			allPages = new ArrayList<String>(
+					JavaConversions.asJavaList(content.modelIndex.pages()));
+			pingCollection(current, page(allPages.get(0)), db);
+			Collections.sort(allPages);
+		}
+		last = current;
+		Object[] pages = content.getPages(searchField.getText().trim()
+				.toLowerCase());
+		Arrays.sort(pages, comp);
+		chapters = new TreeMap<Chapter, List<Object>>();
+		boolean meta = true;
+		try {
+			mets = new MetsTransformer(current + ".xml", db); //$NON-NLS-1$
+		} catch (NullPointerException x) {
+			// No matadata available for selected volume
+			meta = false;
+		}
+		for (Object page : pages) {
+			int fileNumber = page instanceof Page ? ((Page) page).number()
+					: new Page(null, (String) page).number();
+			Chapter chapter = null;
+			if (meta) {
+				chapter = mets.chapter(fileNumber, Count.File());
+			} else {
+				chapter = new Chapter(0, 1, Messages.get().NoMeta);
+			}
+			List<Object> pagesInChapter = chapters.get(chapter);
+			if (pagesInChapter == null) {
+				pagesInChapter = new ArrayList<Object>();
+				chapters.put(chapter, pagesInChapter);
+			}
+			pagesInChapter.add(page);
+		}
+		viewer.setInput(chapters);
+		updateResultCount(pages.length);
 	}
 
 	private final class SearchViewLabelProvider extends LabelProvider implements
