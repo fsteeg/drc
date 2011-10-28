@@ -253,7 +253,7 @@ public class EditComposite extends Composite {
 				CheckView cv = (CheckView) PlatformUI.getWorkbench()
 						.getActiveWorkbenchWindow().getActivePage()
 						.findView(CheckView.ID);
-				cv.highlight(word, text);
+				cv.setSelection(text);
 				SpecialCharacterView scv = (SpecialCharacterView) PlatformUI
 						.getWorkbench().getActiveWorkbenchWindow()
 						.getActivePage().findView(SpecialCharacterView.ID);
