@@ -134,6 +134,7 @@ object Index {
     "0008",
     "0009",
     "0011",
+    "0003",
     "0030",
     "0012",
     "0017",
@@ -145,8 +146,7 @@ object Index {
     "0037",
     "0038",
     "0033",
-    "0014",
-    "0003")
+    "0014")
 
   /** Mapping of RF ids to Octopus labels */
   val Volumes: Map[Int, String] = Map(
@@ -154,6 +154,7 @@ object Index {
     8 -> "I, 2. - 3.",
     9 -> "II, 1.",
     11 -> "II, 2. - 3.",
+    3 -> "III",
     30 -> "IV",
     12 -> "V",
     17 -> "VI",
@@ -165,8 +166,7 @@ object Index {
     37 -> "XI",
     38 -> "XII",
     33 -> "XIII",
-    14 -> "XIV, 1.",
-    3 -> "XIV, 2.")
+    14 -> "XIV")
 
   //def collection(s:String) = "drc/" + s
   val DefaultCollection = "drc"
