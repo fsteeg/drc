@@ -18,3 +18,7 @@ Portal:
 * Install play-1.2, run @play install scala-0.9@
 * Run @play eclipsify drcp@, import project in eclipse
 * Run @play start drcp@, browse to localhost:9000
+
+h3. Git setup
+
+!git-setup.png!

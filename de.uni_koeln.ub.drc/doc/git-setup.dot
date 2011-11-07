@@ -1,0 +1,19 @@
+digraph {
+	rankdir=LR
+	node[shape=box]
+	graph[layout=circo]
+	
+	"feature-X"[style=dashed]
+	"bugfix-X"[style=dashed]
+	
+	master -> stable [label=branch style=dashed]
+	master -> "feature-X" [label=branch style=dashed] 
+	"feature-X" -> master [label=merge]
+	
+	stable -> "bugfix-X" [label=branch style=dashed]
+	"bugfix-X" -> stable [label=merge]
+	"bugfix-X" -> master [label=merge]
+	
+	release[shape=none]
+	stable -> release [style=dotted label="Jenkins"] 
+}
