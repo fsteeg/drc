@@ -11,11 +11,9 @@ import java.net.URL;
 
 import javax.security.auth.login.LoginException;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.equinox.security.auth.ILoginContext;
 import org.eclipse.equinox.security.auth.LoginContextFactory;
-import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.rwt.RWT;
 import org.eclipse.rwt.internal.lifecycle.JavaScriptResponseWriter;
 import org.eclipse.rwt.internal.service.ContextProvider;
@@ -85,11 +83,9 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
 		} catch (LoginException e) {
 			e.printStackTrace();
-			IStatus status = new Status(IStatus.ERROR,
-					"de.uni_koeln.ub.drc.ui", "Login failed", e); //$NON-NLS-1$ //$NON-NLS-2$
-			int result = ErrorDialog.openError(null, Messages.get().Error,
-					Messages.get().LoginFailed, status);
-			if (result == ErrorDialog.CANCEL) {
+			boolean retry = MessageDialog.openQuestion(null,
+					Messages.get().Error, Messages.get().LoginFailed);
+			if (!retry) {
 				redirect();
 			} else {
 				login(bundleContext);

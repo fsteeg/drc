@@ -17,26 +17,19 @@ import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.NameCallback;
 import javax.security.auth.callback.PasswordCallback;
 
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.PlatformUI;
 
 import de.uni_koeln.ub.drc.ui.Messages;
 
@@ -54,9 +47,7 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements
 	public static final String ID = SimpleLoginDialog.class.getName()
 			.toLowerCase();
 	private static final String TITLE = Messages.get().LoginToDrc;
-	private static final String LOGIN = Messages.get().Login;
 	private static final Point SIZE = new Point(300, 175);
-	private volatile boolean inputProcessed = false;
 	private List<Callback> callbacks;
 
 	/**
@@ -84,41 +75,6 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements
 		open();
 	}
 
-	@SuppressWarnings("unused")
-	private IRunnableWithProgress waitForButtonPress() {
-		final int interval = 100;
-		return new IRunnableWithProgress() {
-			@Override
-			public void run(final IProgressMonitor monitor) {
-				while (!inputProcessed) {
-					try {
-						Thread.sleep(interval);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				monitor.done();
-				inputProcessed = false;
-			}
-		};
-	}
-
-	@SuppressWarnings("unused")
-	private void hookIntoOkButton() {
-		final Button okButton = getButton(IDialogConstants.OK_ID);
-		okButton.setText(LOGIN);
-		okButton.addSelectionListener(new SelectionListener() {
-			@Override
-			public void widgetSelected(final SelectionEvent event) {
-				inputProcessed = true;
-			}
-
-			@Override
-			public void widgetDefaultSelected(final SelectionEvent event) {
-			}
-		});
-	}
-
 	/**
 	 * {@inheritDoc}
 	 * 
@@ -126,7 +82,7 @@ public class SimpleLoginDialog extends /* TitleArea */Dialog implements
 	 */
 	@Override
 	protected void cancelPressed() {
-		PlatformUI.getWorkbench().close();
+		this.close();
 	}
 
 	/**

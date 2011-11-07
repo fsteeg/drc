@@ -11,13 +11,11 @@ import java.net.URL;
 
 import javax.security.auth.login.LoginException;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.e4.ui.css.swt.theme.IThemeEngine;
 import org.eclipse.e4.ui.css.swt.theme.IThemeManager;
 import org.eclipse.equinox.security.auth.ILoginContext;
 import org.eclipse.equinox.security.auth.LoginContextFactory;
-import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.application.IWorkbenchConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
@@ -97,11 +95,9 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 			DrcUiActivator.getDefault().setLoginContext(loginContext);
 		} catch (LoginException e) {
 			e.printStackTrace();
-			IStatus status = new Status(IStatus.ERROR,
-					"de.uni_koeln.ub.drc.ui", "Login failed", e); //$NON-NLS-1$ //$NON-NLS-2$
-			int result = ErrorDialog.openError(null, Messages.get().Error,
-					Messages.get().LoginFailed, status);
-			if (result == ErrorDialog.CANCEL) {
+			boolean retry = MessageDialog.openQuestion(null,
+					Messages.get().Error, Messages.get().LoginFailed);
+			if (!retry) {
 				stop(bundleContext);
 				System.exit(0);
 			} else {
