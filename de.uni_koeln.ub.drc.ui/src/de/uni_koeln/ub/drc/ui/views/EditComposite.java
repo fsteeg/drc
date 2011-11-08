@@ -35,6 +35,7 @@ import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 import de.uni_koeln.ub.drc.ui.Messages;
 import de.uni_koeln.ub.drc.ui.facades.CSSSWTConstantsHelper;
+import de.uni_koeln.ub.drc.ui.facades.TextHelper;
 
 /**
  * Composite holding the edit area. Used by the {@link EditView}.
@@ -131,7 +132,8 @@ public class EditComposite extends Composite {
 			} else {
 				Text text = new Text(lineComposite, SWT.NONE);
 				setCssName(text);
-				text.setText(word.history().top().form());
+				text.setText(TextHelper.fixForDisplay(word.history().top()
+						.form()));
 				handleEmptyText(text);
 				// option: word.isPossibleError() ? UNCHECKED : DEFAULT
 				text.setForeground(parent.getDisplay().getSystemColor(DEFAULT));

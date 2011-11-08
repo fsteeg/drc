@@ -43,6 +43,7 @@ import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 import de.uni_koeln.ub.drc.ui.Messages;
 import de.uni_koeln.ub.drc.ui.facades.IDialogConstantsHelper;
+import de.uni_koeln.ub.drc.ui.facades.TextHelper;
 import de.uni_koeln.ub.drc.util.PlainTextCopy;
 
 /**
@@ -220,7 +221,7 @@ public final class EditView extends ViewPart implements ISaveablePart {
 			}
 
 			private void addToHistory(Text text) {
-				String newText = text.getText();
+				String newText = TextHelper.fixForSave(text.getText());
 				Word word = (Word) text.getData(Word.class.toString());
 				Stack<Modification> history = word.history();
 				Modification oldMod = history.top();
