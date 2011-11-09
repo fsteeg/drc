@@ -1,0 +1,3 @@
+<user latestPage="" upvoted="0" pass="drc" region="Silico" latestWord="0" edits="0" name="Auto Correction" downvoted="0" downvotes="0" upvotes="0" id="auto">
+    <db collection="drc" port="7777" server="hydra2.spinfo.uni-koeln.de"/>
+</user>

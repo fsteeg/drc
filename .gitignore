@@ -15,6 +15,7 @@ de.uni_koeln.ub.drc/res/rom/*
 de.uni_koeln.ub.drc.ui/lib/*
 de.uni_koeln.ub.drc.ui/pages/*
 target
+.target
 de.uni_koeln.ub.drc/res/*.txt
 drcp/.classpath
 drcp/.project
@@ -27,3 +28,5 @@ drcp/eclipse/*.launch
 drcp/test-result
 drcp/lib/drc-*.jar
 .cache
+de.uni_koeln.ub.drc/.classpath
+de.uni_koeln.ub.drc/.project

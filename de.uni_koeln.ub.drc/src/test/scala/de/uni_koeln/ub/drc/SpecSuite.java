@@ -11,6 +11,7 @@ package de.uni_koeln.ub.drc;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import de.uni_koeln.ub.drc.data.SpecCasbah;
 import de.uni_koeln.ub.drc.data.SpecDrcDb;
 import de.uni_koeln.ub.drc.data.SpecIndex;
 import de.uni_koeln.ub.drc.data.SpecModification;
@@ -21,9 +22,12 @@ import de.uni_koeln.ub.drc.util.SpecMetsTransformer;
 
 /**
  * Main test suite.
+ * 
  * @author Fabian Steeg (fsteeg)
  */
-@RunWith( Suite.class )
-@Suite.SuiteClasses( { SpecWord.class, SpecPage.class, SpecIndex.class,
-        SpecUser.class, SpecModification.class, SpecDrcDb.class, SpecMetsTransformer.class } )
-public final class SpecSuite {}
+@RunWith(Suite.class)
+@Suite.SuiteClasses({ SpecWord.class, SpecPage.class, SpecIndex.class,
+		SpecUser.class, SpecModification.class, SpecDrcDb.class,
+		SpecMetsTransformer.class, SpecCasbah.class })
+public final class SpecSuite {
+}
