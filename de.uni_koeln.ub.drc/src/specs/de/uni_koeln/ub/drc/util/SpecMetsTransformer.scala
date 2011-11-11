@@ -58,8 +58,8 @@ class SpecMetsTransformer extends Spec with ShouldMatchers {
       expect((1, "Daniel Bonifaci")) { val c = mets.chapter(8, mode); (c.number, c.title) }
       expect((2, "Gion Antoni Calvenzano")) { val c = mets.chapter(9, mode); (c.number, c.title) }
       expect((2, "Gion Antoni Calvenzano")) { val c = mets.chapter(29, mode); (c.number, c.title) }
-      expect((Integer.MAX_VALUE, "Nachwort")) { val c = mets.chapter(209, mode); (c.number, c.title) }
-      expect((Integer.MAX_VALUE, "Nachwort")) { val c = mets.chapter(218, mode); (c.number, c.title) }
+      expect((39, "Nachwort")) { val c = mets.chapter(209, mode); (c.number, c.title) }
+      expect((39, "Nachwort")) { val c = mets.chapter(218, mode); (c.number, c.title) }
     }
     
     it("should return chapters for specific pages, using physical file numbers") {
@@ -68,8 +68,8 @@ class SpecMetsTransformer extends Spec with ShouldMatchers {
       expect((1, "Daniel Bonifaci")) { val c = mets.chapter(14, mode); (c.number, c.title) }
       expect((2, "Gion Antoni Calvenzano")) { val c = mets.chapter(15, mode); (c.number, c.title) }
       expect((2, "Gion Antoni Calvenzano")) { val c = mets.chapter(35, mode); (c.number, c.title) }
-      expect((Integer.MAX_VALUE, "Nachwort")) { val c = mets.chapter(215, mode); (c.number, c.title) }
-      expect((Integer.MAX_VALUE, "Nachwort")) { val c = mets.chapter(224, mode); (c.number, c.title) }
+      expect((39, "Nachwort")) { val c = mets.chapter(215, mode); (c.number, c.title) }
+      expect((39, "Nachwort")) { val c = mets.chapter(224, mode); (c.number, c.title) }
     }
     
     it("provides a fallback result for unknown pages") {
