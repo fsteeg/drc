@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="DRC Target" sequenceNumber="38">
+<target name="DRC RAP" sequenceNumber="38">
 <locations>
 <location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.rap.runtime.sdk.feature.group" version="1.4.1.20110914-1945"/>
