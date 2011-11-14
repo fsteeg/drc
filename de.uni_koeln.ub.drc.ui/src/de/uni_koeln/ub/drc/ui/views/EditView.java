@@ -43,6 +43,7 @@ import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 import de.uni_koeln.ub.drc.ui.Messages;
 import de.uni_koeln.ub.drc.ui.facades.IDialogConstantsHelper;
+import de.uni_koeln.ub.drc.ui.facades.ScrolledCompositeHelper;
 import de.uni_koeln.ub.drc.ui.facades.TextHelper;
 import de.uni_koeln.ub.drc.util.PlainTextCopy;
 
@@ -120,6 +121,7 @@ public final class EditView extends ViewPart implements ISaveablePart {
 	private void attachSelectionListener() {
 		ISelectionService selectionService = (ISelectionService) getSite()
 				.getService(ISelectionService.class);
+		ScrolledCompositeHelper.fixWrapping(sc, editComposite);
 		selectionService.addSelectionListener(new ISelectionListener() {
 			@Override
 			@SuppressWarnings("unchecked")
