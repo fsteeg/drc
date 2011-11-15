@@ -129,6 +129,7 @@ public final class EditView extends ViewPart implements ISaveablePart {
 					ISelection selection) {
 				IStructuredSelection structuredSelection = (IStructuredSelection) selection;
 				if (structuredSelection.getFirstElement() instanceof Page) {
+					@SuppressWarnings("unchecked")
 					List<Page> pages = structuredSelection.toList();
 					if (pages != null && pages.size() > 0) {
 						Page page = pages.get(0);
