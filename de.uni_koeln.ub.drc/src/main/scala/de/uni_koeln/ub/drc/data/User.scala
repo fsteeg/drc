@@ -13,6 +13,7 @@ import scala.xml._
 import java.io._
 import com.quui.sinist.XmlDb
 import scala.collection.JavaConversions._
+import com.mongodb.DBObject
 /**
  * Initial user representation: id, full name, region, reputation and XML persistence.
  * @author Fabian Steeg (fsteeg)
@@ -31,8 +32,10 @@ case class User(id: String, name: String, region: String, pass: String, collecti
     <user id={ id } name={ name } region={ region } pass={ pass } edits={ edits.toString } upvotes={ upvotes.toString } upvoted={ upvoted.toString } downvotes={ downvotes.toString } downvoted={ downvoted.toString } latestPage={ latestPage } latestWord={ latestWord.toString }>
       <db server={ db.server } port={ db.port.toString } collection={ collection }/>
     </user>
-  def toMap = Map(
-    "id" -> id, "name" -> name, "region" -> region, "pass" -> pass, "edits" -> edits.toString, "upvotes" -> upvotes.toString, "upvoted" -> upvoted.toString, "downvotes" -> downvotes.toString, "downvoted" -> downvoted.toString, "latestPage" -> latestPage, "latestWord" -> latestWord.toString, "server" -> db.server, "port" -> db.port.toString, "collection" -> collection)
+  def toDBObject: DBObject = {
+    import com.mongodb.casbah.Imports._
+    Map("id" -> id, "name" -> name, "region" -> region, "pass" -> pass, "edits" -> edits.toString, "upvotes" -> upvotes.toString, "upvoted" -> upvoted.toString, "downvotes" -> downvotes.toString, "downvoted" -> downvoted.toString, "latestPage" -> latestPage, "latestWord" -> latestWord.toString, "server" -> db.server, "port" -> db.port.toString, "collection" -> collection).asDBObject
+  }
   def save(db: XmlDb) = db.putXml(toXml, collection + "/" + "users", id + ".xml")
 }
 
@@ -59,7 +62,8 @@ object User {
     u
   }
 
-  def fromMap(map: java.util.Map[String, AnyRef]): User = {
+  def fromDBObject(dbo: DBObject): User = {
+    val map = dbo.toMap.asInstanceOf[java.util.Map[String, AnyRef]]
     val u = User(map("id").toString, map("name").toString, map("region").toString, map("pass").toString, map("collection").toString,
       if (!map.contains("server")) defaultDb else XmlDb(map("server").toString, map("port").toString.toInt))
     u.edits = map("edits").toString.trim.toInt
@@ -70,7 +74,6 @@ object User {
     u.latestPage = map("latestPage").toString.trim
     val lw = map("latestWord").toString.trim
     if (lw != "") u.latestWord = lw.toInt
-    println(u)
     u
   }
 

@@ -12,6 +12,8 @@ package de.uni_koeln.ub.drc.data
 import scala.xml._
 import scala.collection.mutable.ListBuffer
 import scala.collection.JavaConversions._
+import com.mongodb.DBObject
+import scala.collection.JavaConversions
 /**
  * Represent a modification made to a word, consisting of the form the word is modified to and the
  * author of that modification (to maintain a modificaiton history for review and correction), as
@@ -34,9 +36,11 @@ case class Modification(form: String, author: String) {
     <modification form={ form } author={ author } score={ score.toString } date={ date.toString }>
       <voters> { voters.map((id: String) => <voter name={ id }/>) } </voters>
     </modification>
-  def toMap =
+  def toDBObject: DBObject = {
+    import com.mongodb.casbah.Imports._
     Map("form" -> form, "author" -> author, "score" -> score.toString, "date" -> date.toString,
-      "voters" -> voters.map((id: String) => "name" -> id))
+      "voters" -> JavaConversions.asJavaList(voters.toList)).asDBObject
+  }
 
 }
 
@@ -50,12 +54,13 @@ object Modification {
     m.date = (mod \ "@date").text.toLong
     m
   }
-  def fromMap(map: Map[String, AnyRef]): Modification = {
+  def fromDBObject(dbo: DBObject): Modification = {
+    val map = dbo.toMap.asInstanceOf[java.util.Map[String, AnyRef]]
     val m = Modification(map("form").toString.trim, (map("author")).toString.trim)
     val trimmed = map("score").toString.trim
     m.score = if (trimmed.size == 0) 0 else trimmed.toInt
     m.voters = scala.collection.mutable.Set[String]() ++
-      map("voters").asInstanceOf[Iterable[(String, AnyRef)]].map(_._2.toString.trim)
+      map("voters").asInstanceOf[java.util.List[String]]
     m.date = map("date").toString.toLong
     m
   }

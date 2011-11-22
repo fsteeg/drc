@@ -11,6 +11,7 @@
 package de.uni_koeln.ub.drc.data
 import scala.xml._
 import scala.collection.JavaConversions._
+import com.mongodb.DBObject
 
 /**
  * A box represents the position of a word in the original scanned document.
@@ -24,12 +25,14 @@ import scala.collection.JavaConversions._
 case class Box(x: Int, y: Int, width: Int, height: Int) {
   def toXml =
     <box x={ x.toString } y={ y.toString } width={ width.toString } height={ height.toString }/>
-  def toMap =
+  def toDBObject: DBObject = {
+    import com.mongodb.casbah.Imports._
     Map(
       "x" -> x.toString,
       "y" -> y.toString,
       "width" -> width.toString,
-      "height" -> height.toString)
+      "height" -> height.toString).asDBObject
+  }
 }
 
 object Box {
@@ -41,7 +44,8 @@ object Box {
       (box \ "@height").text.trim.toInt)
   }
 
-  def fromMap(map: Map[String, AnyRef]): Box = {
+  def fromDBObject(dbo: DBObject): Box = {
+    val map = dbo.toMap.asInstanceOf[java.util.Map[String, AnyRef]]
     Box(
       map("x").toString.trim.toInt,
       map("y").toString.trim.toInt,

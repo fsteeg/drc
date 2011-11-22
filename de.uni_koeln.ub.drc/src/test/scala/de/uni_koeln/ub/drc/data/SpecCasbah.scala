@@ -44,55 +44,68 @@ class SpecCasbah extends FlatSpec with ShouldMatchers {
   collection += item2
 
   "Casbah" should "allow access to all DB items" in {
-    for (item <- collection) println(item)
+    for (item <- collection) println("DB item: " + item)
   }
 
-  "Casbah" should "allow access to specific DB items" in {
+  it should "allow access to specific DB items" in {
     val i1: MongoDBObject = collection.findOne(item1).get
     i1("foo") should equal { "bar1" }
-    i1("x").asInstanceOf[BasicBSONList].get(0).asInstanceOf[DBObject].get("y") should equal { "nested" }
+    i1("x").asInstanceOf[java.util.List[_]].get(0).asInstanceOf[DBObject].get("y") should equal { "nested" }
     i1("pie") should equal { 3.14 }
     i1("spam") should equal { "eggs" }
   }
 
-  "Casbah" should "be able to convert maps to db objects" in {
+  it should "be able to convert maps to db objects" in {
     val v: DBObject = Map("foo" -> "bar", "a" -> "b").asDBObject
   }
 
-  "Casbah" should "allow access to all DB items containing specific key" in {
+  it should "allow access to all DB items containing a specific key" in {
     val q: DBObject = "foo" $exists true
     val fooHolders = for (x <- collection.find(q)) yield x
     fooHolders.size should equal { 2 }
   }
 
-  "Casbah" should "allow access to all DB items containing specific key and value" in {
+  it should "allow access to all DB items containing a specific key and value" in {
     val q: DBObject = "foo" $ne "bar1"
     val result = for (x <- collection.find(q)) yield x
     result.size should equal { 1 }
   }
 
-  "A mapper for our user domain objects" should "convert users to maps" in {
-    val userFromXml = User.fromXml(XML.loadFile("res/tests/auto.xml"))
-    val dbObject: DBObject = userFromXml.toMap
-    collection.drop()
-    collection += dbObject
-    val fromDb = collection.findOne(dbObject).get
-    val map = fromDb.toMap.asInstanceOf[java.util.Map[String, AnyRef]]
-    val userFromMap = User.fromMap(map)
+  val userFromXml = User.fromXml(XML.loadFile("res/tests/auto.xml"))
+  val pageFromXml = Page.fromXml(XML.loadFile("res/tests/PPN345572629_0004-0007.xml"))
+
+  "A mapper for our domain objects" should "convert users to maps" in {
+    val userFromMap = User.fromDBObject(userFromXml.toDBObject)
     userFromMap should equal { userFromXml }
   }
 
-  "A mapper for our page domain objects" should "convert pages to maps" in {
-    val pageFromXml = Page.fromXml(XML.loadFile("res/tests/PPN345572629_0004-0007.xml"))
-    val pageFromMap = Page.fromMap(asJavaMap(pageFromXml.toMap))
+  it should "store users as DBObjects" in {
+    val userFromXml = User.fromXml(XML.loadFile("res/tests/auto.xml"))
+    val dbObject: DBObject = userFromXml.toDBObject
+    collection.drop()
+    collection += dbObject
+    val fromDb = collection.findOne(dbObject).get
+    val userFromMap = User.fromDBObject(fromDb)
+    userFromMap should equal { userFromXml }
+  }
+
+  it should "convert pages to maps" in {
+    val pageFromMap = Page.fromDBObject(pageFromXml.toDBObject)
     pageFromMap should equal { pageFromXml }
-    val objectForDb = pageFromXml.toMap.asDBObject
+  }
+
+  it should "store pages as DBObjects" in {
+    val pageFromMap = Page.fromDBObject(pageFromXml.toDBObject)
+    val objectForDb = pageFromXml.toDBObject
     collection.drop()
     collection += objectForDb
     val objectFromDb: DBObject = collection.findOne(objectForDb).get
-    println("Page from DB: " + objectFromDb)
-    // TODO load page object from db entry:
-    // val pageFromDb = Page.fromMap(fromDb.toMap.asInstanceOf[java.util.Map[String, AnyRef]])
+    val pageFromDb = Page.fromDBObject(objectFromDb)
+    pageFromDb.words.size should equal { pageFromXml.words.size }
+    pageFromDb.tags.size should equal { pageFromXml.tags.size }
+    pageFromDb.comments.size should equal { pageFromXml.comments.size }
+    pageFromDb.status.size should equal { pageFromXml.status.size }
+    // TODO: preserve order of words in retrieved pages
     // pageFromDb should equal { pageFromXml }
   }
 

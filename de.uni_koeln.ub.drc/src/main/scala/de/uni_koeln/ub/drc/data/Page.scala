@@ -19,6 +19,7 @@ import java.io._
 import java.util.zip._
 import de.uni_koeln.ub.drc.reader.Point
 import scala.collection.JavaConversions._
+import com.mongodb.DBObject
 
 /**
  * Representation of a scanned page.
@@ -47,12 +48,14 @@ case class Page(words: List[Word], id: String) {
       { status.map(_.toXml) }
     </page>
 
-  def toMap =
+  def toDBObject: DBObject = {
+    import com.mongodb.casbah.Imports._
     Map("id" -> id,
-      "words" -> words.map(_.toMap),
-      "tags" -> tags.map(_.toMap),
-      "comments" -> comments.map(_.toMap),
-      "status" -> status.map(_.toMap))
+      "words" -> asJavaList(words.map(_.toDBObject)),
+      "tags" -> asJavaList(tags.map(_.toDBObject)),
+      "comments" -> asJavaList(comments.map(_.toDBObject)),
+      "status" -> asJavaList(status.map(_.toDBObject))).asDBObject
+  }
 
   def toText(delim: String) =
     ("" /: words)(_ + " " + _.history.top.form.replace(Page.ParagraphMarker, delim))
@@ -92,22 +95,29 @@ object Page {
   val ParagraphMarker = "@"
 
   def fromXml(page: Node): Page = {
-    val p = Page(for (word <- (page \ "word").toList) yield Word.fromXml(word), (page \ "@id").text)
+    val p = Page(for (word <- (page \ "word").toList)
+      yield Word.fromXml(word), (page \ "@id").text)
     for (tag <- (page \ "tag")) p.tags += Tag.fromXml(tag)
     for (comment <- (page \ "comment")) p.comments += Comment.fromXml(comment)
     for (status <- (page \ "status")) p.status += Status.fromXml(status)
     p
   }
 
-  def fromMap(map: java.util.Map[String, AnyRef]): Page = {
-    val p = Page((for (word <- asMaps(map("words"))) yield Word.fromMap(word)).toList, map("id").toString)
-    for (tag <- asMaps(map("tags"))) p.tags += Tag.fromMap(tag)
-    for (comment <- asMaps(map("comments"))) p.comments += Comment.fromMap(comment)
-    for (status <- asMaps(map("status"))) p.status += Status.fromMap(status)
+  def fromDBObject(dbo: DBObject): Page = {
+    val map = dbo.toMap.asInstanceOf[java.util.Map[String, AnyRef]]
+    val p = Page((for (word <- asDBObjects(map("words")))
+      yield Word.fromDBObject(word)).toList, map("id").toString)
+    for (tag <- asDBObjects(map("tags"))) p.tags += Tag.fromDBObject(tag)
+    for (comment <- asDBObjects(map("comments"))) p.comments += Comment.fromDBObject(comment)
+    for (status <- asDBObjects(map("status"))) p.status += Status.fromDBObject(status)
     p
   }
 
-  def asMaps(any: AnyRef) = any.asInstanceOf[Iterable[Map[String, AnyRef]]]
+  def asDBObjects(any: AnyRef) =
+    any.asInstanceOf[java.util.List[DBObject]].flatMap(e => e match {
+      case e: java.util.List[DBObject] => e.toMap().values().map(_.asInstanceOf[DBObject])
+      case e: AnyRef => List(e)
+    })
 
   def fromPdf(pdf: String): Page = { PdfToPage.convert(pdf) }
 
@@ -115,7 +125,7 @@ object Page {
    * This models what we get from the OCR: the original word forms as recognized by the OCR,
    * together with their coordinates in the scan result (originally a PDF with absolute values).
    */
-  private val map = Map(
+  private val mockMap = Map(
     "daniel" -> Box(130, 283, 150, 30),
     "bonifaci" -> Box(280, 285, 180, 30),
     "catechismus" -> Box(70, 330, 80, 20),
@@ -129,7 +139,7 @@ object Page {
   val mock: Page =
     Page(
       for (w <- "Daniel Bonifaci Catechismus Als Slaunt".split(" ").toList)
-        yield Word(w, map(w.toLowerCase)), "testing-mock")
+        yield Word(w, mockMap(w.toLowerCase)), "testing-mock")
 
   /**
    * @param lists The lists of pages to merge (each independently edited, e.g. by different users)
@@ -152,36 +162,45 @@ object Page {
   }
 
 }
-
+import com.mongodb.casbah.Imports._
 private[data] case class Comment(user: String, text: String, date: Long) {
   def toXml = <comment user={ user } date={ date.toString }>{ text }</comment>
-  def toMap = Map("user" -> user, "date" -> date.toString, "text" -> text)
+  def toDBObject: DBObject = Map("user" -> user, "date" -> date.toString, "text" -> text).asDBObject
 }
 
 private[data] object Comment {
   def fromXml(xml: Node) = Comment((xml \ "@user").text, xml.text, (xml \ "@date").text.toLong)
-  def fromMap(map: Map[String, AnyRef]) = Comment(map("user").toString, map("text").toString, map("date").toString.toLong)
+  def fromDBObject(dbo: DBObject) = {
+    val map = dbo.toMap.asInstanceOf[java.util.Map[String, AnyRef]]
+    Comment(map("user").toString, map("text").toString, map("date").toString.toLong)
+  }
 }
 
 private[data] case class Status(user: String, date: Long, finished: Boolean) {
   def toXml = <status user={ user } date={ date.toString } finished={ finished.toString }></status>
-  def toMap = Map("user" -> user, "date" -> date.toString, "finished" -> finished.toString)
+  def toDBObject: DBObject = Map("user" -> user, "date" -> date.toString, "finished" -> finished.toString).asDBObject
 }
 
 private[data] object Status {
   def fromXml(xml: Node) = Status((xml \ "@user").text, (xml \ "@date").text.toLong, (xml \ "@finished").text.toBoolean)
-  def fromMap(map: Map[String, AnyRef]) = Status(map("user").toString, map("date").toString.toLong, map("finished").toString.toBoolean)
+  def fromDBObject(dbo: DBObject) = {
+    val map = dbo.toMap.asInstanceOf[java.util.Map[String, AnyRef]]
+    Status(map("user").toString, map("date").toString.toLong, map("finished").toString.toBoolean)
+  }
 }
 
 private[data] case class Tag(text: String, user: String) {
   def toXml = <tag user={ user } text={ text }/>
-  def toMap = Map("user" -> user, "text" -> text)
+  def toDBObject: DBObject = Map("user" -> user, "text" -> text).asDBObject
   override def toString = text
 }
 
 private[data] object Tag {
   def fromXml(xml: Node) = Tag((xml \ "@text").text, (xml \ "@user").text)
-  def fromMap(map: Map[String, AnyRef]) = Tag(map("text").toString, map("user").toString)
+  def fromDBObject(dbo: DBObject) = {
+    val map = dbo.toMap.asInstanceOf[java.util.Map[String, AnyRef]]
+    Tag(map("text").toString, map("user").toString)
+  }
 }
 
 /**
