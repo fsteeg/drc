@@ -14,6 +14,7 @@ import scala.xml._
 import java.io.{ InputStreamReader, FileInputStream, BufferedReader }
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
+import scala.collection.JavaConversions._
 
 /**
  * Experimental representation of a Word, the basic unit of work when editing. Conceptually, it is
@@ -91,6 +92,13 @@ case class Word(original: String, position: Box) {
       { history.map(_.toXml) }
       { annotations.map(_.toXml) }
     </word>
+
+  def toMap =
+    Map(
+      "original" -> original,
+      "position" -> position.toMap,
+      "modifications" -> history.map(_.toMap),
+      "annotations" -> annotations.map(_.toMap))
 }
 
 object Word {
@@ -105,13 +113,29 @@ object Word {
     w
   }
 
+  def fromMap(map: Map[String, AnyRef]): Word = {
+    val w = Word(map("original").toString.trim, Box.fromMap(map("position").asInstanceOf[Map[String, AnyRef]]))
+    w.history.clear()
+    (asMaps(map("modifications")).toList.reverse.foreach(mm => {
+      val mod = Modification.fromMap(mm)
+      w.history.push(mod)
+    }))
+    asMaps(map("annotations")).foreach(a => { w.annotations += Annotation.fromMap(a) })
+    w
+  }
+  def asMaps(any: AnyRef) = any.asInstanceOf[Iterable[Map[String, AnyRef]]]
 }
 
 private[data] case class Annotation(key: String, value: String, user: String, date: Long) {
   def toXml = <annotation key={ key } value={ value } user={ user } date={ date.toString }/>
+  def toMap = Map("key" -> key, "value" -> value, "user" -> user, "date" -> date.toString)
 }
 
 private[data] object Annotation {
   def fromXml(xml: Node) =
     Annotation((xml \ "@key").text, (xml \ "@value").text, (xml \ "@user").text, (xml \ "@date").text.toLong)
+  def fromMap(map: Map[String, AnyRef]) = {
+    Annotation(map("key").toString, map("value").toString, map("user").toString, map("date").toString.toLong)
+  }
+
 }

@@ -18,6 +18,7 @@ import scala.xml._
 import java.io._
 import java.util.zip._
 import de.uni_koeln.ub.drc.reader.Point
+import scala.collection.JavaConversions._
 
 /**
  * Representation of a scanned page.
@@ -45,6 +46,13 @@ case class Page(words: List[Word], id: String) {
       { comments.map(_.toXml) }
       { status.map(_.toXml) }
     </page>
+
+  def toMap =
+    Map("id" -> id,
+      "words" -> words.map(_.toMap),
+      "tags" -> tags.map(_.toMap),
+      "comments" -> comments.map(_.toMap),
+      "status" -> status.map(_.toMap))
 
   def toText(delim: String) =
     ("" /: words)(_ + " " + _.history.top.form.replace(Page.ParagraphMarker, delim))
@@ -90,6 +98,16 @@ object Page {
     for (status <- (page \ "status")) p.status += Status.fromXml(status)
     p
   }
+
+  def fromMap(map: java.util.Map[String, AnyRef]): Page = {
+    val p = Page((for (word <- asMaps(map("words"))) yield Word.fromMap(word)).toList, map("id").toString)
+    for (tag <- asMaps(map("tags"))) p.tags += Tag.fromMap(tag)
+    for (comment <- asMaps(map("comments"))) p.comments += Comment.fromMap(comment)
+    for (status <- asMaps(map("status"))) p.status += Status.fromMap(status)
+    p
+  }
+
+  def asMaps(any: AnyRef) = any.asInstanceOf[Iterable[Map[String, AnyRef]]]
 
   def fromPdf(pdf: String): Page = { PdfToPage.convert(pdf) }
 
@@ -137,27 +155,33 @@ object Page {
 
 private[data] case class Comment(user: String, text: String, date: Long) {
   def toXml = <comment user={ user } date={ date.toString }>{ text }</comment>
+  def toMap = Map("user" -> user, "date" -> date.toString, "text" -> text)
 }
 
 private[data] object Comment {
   def fromXml(xml: Node) = Comment((xml \ "@user").text, xml.text, (xml \ "@date").text.toLong)
+  def fromMap(map: Map[String, AnyRef]) = Comment(map("user").toString, map("text").toString, map("date").toString.toLong)
 }
 
 private[data] case class Status(user: String, date: Long, finished: Boolean) {
   def toXml = <status user={ user } date={ date.toString } finished={ finished.toString }></status>
+  def toMap = Map("user" -> user, "date" -> date.toString, "finished" -> finished.toString)
 }
 
 private[data] object Status {
   def fromXml(xml: Node) = Status((xml \ "@user").text, (xml \ "@date").text.toLong, (xml \ "@finished").text.toBoolean)
+  def fromMap(map: Map[String, AnyRef]) = Status(map("user").toString, map("date").toString.toLong, map("finished").toString.toBoolean)
 }
 
 private[data] case class Tag(text: String, user: String) {
   def toXml = <tag user={ user } text={ text }/>
+  def toMap = Map("user" -> user, "text" -> text)
   override def toString = text
 }
 
 private[data] object Tag {
   def fromXml(xml: Node) = Tag((xml \ "@text").text, (xml \ "@user").text)
+  def fromMap(map: Map[String, AnyRef]) = Tag(map("text").toString, map("user").toString)
 }
 
 /**

@@ -12,7 +12,7 @@ package de.uni_koeln.ub.drc.data
 import scala.xml._
 import java.io._
 import com.quui.sinist.XmlDb
-import scala.collection.JavaConversions
+import scala.collection.JavaConversions._
 /**
  * Initial user representation: id, full name, region, reputation and XML persistence.
  * @author Fabian Steeg (fsteeg)
@@ -59,9 +59,7 @@ object User {
     u
   }
 
-  def fromMap(m: java.util.Map[String, AnyRef]): User = {
-    val map = JavaConversions.asScalaMap(m)
-    println(map)
+  def fromMap(map: java.util.Map[String, AnyRef]): User = {
     val u = User(map("id").toString, map("name").toString, map("region").toString, map("pass").toString, map("collection").toString,
       if (!map.contains("server")) defaultDb else XmlDb(map("server").toString, map("port").toString.toInt))
     u.edits = map("edits").toString.trim.toInt

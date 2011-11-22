@@ -13,7 +13,8 @@ import org.scalatest.matchers.ShouldMatchers
 import scala.xml._
 import org.scalatest.FlatSpec
 import com.mongodb.casbah.Imports._
-import scala.collection.JavaConversions
+import scala.collection.JavaConversions._
+import org.bson.types.BasicBSONList
 
 /**
  * Test MongoDB access using Casbah (http://api.mongodb.org/scala/casbah/2.1.5.0/).
@@ -29,7 +30,7 @@ class SpecCasbah extends FlatSpec with ShouldMatchers {
 
   val item1 = MongoDBObject(
     "foo" -> "bar1",
-    "x" -> MongoDBObject("y" -> "nested"),
+    "x" -> List(Map("y" -> "nested").asDBObject),
     "pie" -> 3.14,
     "spam" -> "eggs")
 
@@ -49,7 +50,7 @@ class SpecCasbah extends FlatSpec with ShouldMatchers {
   "Casbah" should "allow access to specific DB items" in {
     val i1: MongoDBObject = collection.findOne(item1).get
     i1("foo") should equal { "bar1" }
-    i1("x").asInstanceOf[DBObject].get("y") should equal { "nested" }
+    i1("x").asInstanceOf[BasicBSONList].get(0).asInstanceOf[DBObject].get("y") should equal { "nested" }
     i1("pie") should equal { 3.14 }
     i1("spam") should equal { "eggs" }
   }
@@ -76,14 +77,23 @@ class SpecCasbah extends FlatSpec with ShouldMatchers {
     collection.drop()
     collection += dbObject
     val fromDb = collection.findOne(dbObject).get
-    val map = fromDb.toMap().asInstanceOf[java.util.Map[String, AnyRef]]
+    val map = fromDb.toMap.asInstanceOf[java.util.Map[String, AnyRef]]
     val userFromMap = User.fromMap(map)
     userFromMap should equal { userFromXml }
   }
 
   "A mapper for our page domain objects" should "convert pages to maps" in {
-    val page = Page.fromXml(XML.loadFile("res/tests/PPN345572629_0004-0007.xml"))
-    //val obj: DBObject = page.toMap
+    val pageFromXml = Page.fromXml(XML.loadFile("res/tests/PPN345572629_0004-0007.xml"))
+    val pageFromMap = Page.fromMap(asJavaMap(pageFromXml.toMap))
+    pageFromMap should equal { pageFromXml }
+    val objectForDb = pageFromXml.toMap.asDBObject
+    collection.drop()
+    collection += objectForDb
+    val objectFromDb: DBObject = collection.findOne(objectForDb).get
+    println("Page from DB: " + objectFromDb)
+    // TODO load page object from db entry:
+    // val pageFromDb = Page.fromMap(fromDb.toMap.asInstanceOf[java.util.Map[String, AnyRef]])
+    // pageFromDb should equal { pageFromXml }
   }
 
 }
