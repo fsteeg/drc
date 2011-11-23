@@ -15,6 +15,7 @@ import org.scalatest.FlatSpec
 import com.mongodb.casbah.Imports._
 import scala.collection.JavaConversions._
 import org.bson.types.BasicBSONList
+import org.bson.types.Binary
 
 /**
  * Test MongoDB access using Casbah (http://api.mongodb.org/scala/casbah/2.1.5.0/).
@@ -71,6 +72,15 @@ class SpecCasbah extends FlatSpec with ShouldMatchers {
     result.size should equal { 1 }
   }
 
+  it should "allow storing binary data" in {
+    val data: Array[Byte] = "some data".getBytes()
+    val bin = new Binary(0, data)
+    val dbo = MongoDBObject("data" -> bin)
+    collection += dbo
+    val fromDB = collection.findOne(dbo)
+    fromDB.get("data") should equal { dbo("data").asInstanceOf[Binary].getData() }
+  }
+
   val userFromXml = User.fromXml(XML.loadFile("res/tests/auto.xml"))
   val pageFromXml = Page.fromXml(XML.loadFile("res/tests/PPN345572629_0004-0007.xml"))
 
@@ -92,6 +102,12 @@ class SpecCasbah extends FlatSpec with ShouldMatchers {
   it should "convert pages to maps" in {
     val pageFromMap = Page.fromDBObject(pageFromXml.toDBObject)
     pageFromMap should equal { pageFromXml }
+  }
+
+  it should "be able to load images for page objects" in {
+    val bytesFromCasbah: Array[Byte] = Casbah.imageFor(pageFromXml)
+    val bytesFromExist: Array[Byte] = Index.loadImageFor(db = Index.LocalDb, page = pageFromXml)
+    bytesFromCasbah should equal { bytesFromExist }
   }
 
   it should "store pages as DBObjects" in {
