@@ -28,31 +28,17 @@ object Application extends Controller with Secure {
   
   import views.Application._
 
-  val server = "hydra1.spinfo.uni-koeln.de"
-  val port = 8080
+  val server = "hydra2.spinfo.uni-koeln.de"
+  val port = 7777
   val db = XmlDb(server, port)
   val col = "drc"
   
   val Prefix = "PPN345572629_"
   val Plain = "drc-plain/"
-  val Meta: Map[Int, MetsTransformer] = Map(
-    4 -> meta("0004"),
-    8 -> meta("0008"),
-    9 -> meta("0009"),
-    11 -> meta("0011"),
-    30 -> meta("0030"),
-    12 -> meta("0012"),
-    17 -> meta("0017"),
-    18 -> meta("0018"),
-    24 -> meta("0024"),
-    27 -> meta("0027"),
-    35 -> meta("0035"),
-    36 -> meta("0036"),
-    37 -> meta("0037"),
-    38 -> meta("0038"),
-    33 -> meta("0033"),
-    14 -> null, 3 -> null) // no metadata for volume 14 and 14.2 (0003)
   
+  val CachedMeta: Map[String, MetsTransformer] = 
+    for((k,v)<-Index.Volumes; if(k!="0014_RC")) yield k -> meta(k) // no metadata for volume 0014_RC
+    
   private def meta(id:String) = new MetsTransformer(Prefix + id + ".xml", db)
 
   def loadUsers =
@@ -90,8 +76,8 @@ object Application extends Controller with Secure {
     val user:User = User.withId(col, db, id)
     val hasEdited = !user.latestPage.trim.isEmpty
     val page: Page = if(hasEdited) new Page(null, user.latestPage) else null
-    val meta: MetsTransformer = if(page != null) Meta(page.volume) else null
-    html.user(user, imageLink(user.latestPage), page, meta)
+    val mets: MetsTransformer = if(page != null) CachedMeta(page.volume) else null
+    html.user(user, imageLink(user.latestPage), page, mets)
   }
 
   def signup = html.signup()
@@ -211,7 +197,7 @@ object Application extends Controller with Secure {
     val q = db.query(Plain + vol, configure(query))
     val rows = (q \ "tr")
     val hits: Seq[Hit] = (for (row <- rows) yield parse(row)).sorted
-    val label = if (volume.toInt - 1 >= 0) Index.Volumes(volumes(volume.toInt - 1).toInt) else ""
+    val label = if (volume.toInt - 1 >= 0) Index.Volumes(volumes(volume.toInt - 1)) else ""
     html.search(term, label, hits, volume)
   }
 
@@ -264,10 +250,9 @@ object Application extends Controller with Secure {
   def parse(elem: Node): Hit = {
     val ds: Seq[Node] = elem \ "td"
     val link = (ds(1) \ "a" \ "@href").text
-    val file = link.split("/").last.split("_").last.split("-")
-    val (volume, page) = (file.head, file.last.split("\\.").head)
-    val mappedVolume = Index.Volumes(volume.toInt)
-    val mappedPage = if (Meta(volume.toInt) != null) Meta(volume.toInt).label(page.toInt) else "n/a"
+    val Page.VolumePageExtractor(volume, page) = link
+    val mappedVolume = Index.Volumes(volume)
+    val mappedPage = if (CachedMeta(volume) != null) CachedMeta(volume).label(page.toInt) else "n/a"
     Hit(
       term = ds(1).text.trim,
       before = ds(0).text.trim,

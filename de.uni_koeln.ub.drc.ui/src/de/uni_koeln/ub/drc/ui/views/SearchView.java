@@ -168,8 +168,7 @@ public final class SearchView extends ViewPart {
 		volumes = new Combo(searchComposite, SWT.READ_ONLY);
 		String[] volumeLabels = new String[Index.RF().size()];
 		for (int i = 0; i < Index.RF().size(); i++) {
-			volumeLabels[i] = Index.Volumes()
-					.get(Integer.parseInt(Index.RF().apply(i))).get();
+			volumeLabels[i] = Index.Volumes().get(Index.RF().apply(i)).get();
 		}
 		volumes.setItems(volumeLabels);
 		volumes.setData(JavaConversions.asJavaList(Index.RF()));
@@ -302,13 +301,14 @@ public final class SearchView extends ViewPart {
 			}
 		});
 		return Page
-				.fromXml(DrcUiActivator
-						.getDefault()
-						.db()
-						.getXml(DrcUiActivator.getDefault().currentUser()
-								.collection()
-								+ "/" + selected, JavaConversions.asScalaBuffer(Arrays.asList(string))).get() //$NON-NLS-1$
-						.head());
+				.fromXml(
+						DrcUiActivator
+								.getDefault()
+								.db()
+								.getXml(DrcUiActivator.getDefault()
+										.currentUser().collection()
+										+ "/" + selected, JavaConversions.asScalaBuffer(Arrays.asList(string))).get() //$NON-NLS-1$
+								.head(), ""); //$NON-NLS-1$
 	}
 
 	private void updateSelection() {

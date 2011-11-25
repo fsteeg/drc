@@ -136,7 +136,7 @@ class MetsTransformer(xml: Elem, name: String = "") {
   }
 
   private def attribute(s: String, n: NodeSeq): String = {
-    val regex = new Regex("""<METS:.* xlink:""" + s + """="(.*?)".*>""")
+    val regex = new Regex("""<(?:METS|mets):.* xlink:""" + s + """="(.*?)".*>""")
     val regex(fileUrl) = n.toString.split("\n")(0)
     fileUrl
   }
