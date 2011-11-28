@@ -162,6 +162,8 @@ public final class SearchView extends ViewPart {
 		}
 	};
 
+	private Combo show;
+
 	private void initVolumeSelector(Composite searchComposite) {
 		Label label1 = new Label(searchComposite, SWT.NONE);
 		label1.setText(Messages.get().Volume);
@@ -218,7 +220,7 @@ public final class SearchView extends ViewPart {
 
 	private void addPageInfoBar(Composite parent) {
 		Composite bottomComposite = new Composite(parent, SWT.NONE);
-		bottomComposite.setLayout(new GridLayout(7, false));
+		bottomComposite.setLayout(new GridLayout(9, false));
 		Button prev = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
 		prev.setImage(DrcUiActivator.getDefault().loadImage("icons/prev.gif")); //$NON-NLS-1$
 		prev.addSelectionListener(new NavigationListener(Navigate.PREV));
@@ -226,6 +228,12 @@ public final class SearchView extends ViewPart {
 		next.setImage(DrcUiActivator.getDefault().loadImage("icons/next.gif")); //$NON-NLS-1$
 		next.addSelectionListener(new NavigationListener(Navigate.NEXT));
 		currentPageLabel = new Label(bottomComposite, SWT.NONE);
+		Label label = new Label(bottomComposite, SWT.NONE);
+		label.setText(Messages.get().Show + ": "); //$NON-NLS-1$
+		show = new Combo(bottomComposite, SWT.READ_ONLY);
+		show.setItems(new String[] { Messages.get().All, Messages.get().Open });
+		show.select(0);
+		show.addSelectionListener(searchListener);
 		insertAddTagButton(bottomComposite);
 		currentPageLabel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		addPageCheckedButton(bottomComposite);
@@ -360,6 +368,7 @@ public final class SearchView extends ViewPart {
 
 	private void initSearchField(final Composite parent) {
 		resultCount = new Label(parent, SWT.NONE);
+		updateResultCount(-1);
 		searchField = new Text(parent, SWT.BORDER);
 		searchField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		searchField.addSelectionListener(searchListener);
@@ -394,7 +403,7 @@ public final class SearchView extends ViewPart {
 	private void updateResultCount(int count) {
 		resultCount
 				.setText(String
-						.format("%s %s " + Messages.get().For, count, count == 1 ? Messages.get().Hit : Messages.get().Hits)); //$NON-NLS-1$
+						.format("%s %s " + Messages.get().For, count == -1 ? "[no]" : count, count == 1 ? Messages.get().Hit : Messages.get().Hits)); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private void initTableViewer(final Composite parent) {
@@ -572,8 +581,11 @@ public final class SearchView extends ViewPart {
 			List<Object> ids = chapters.get(parentElement);
 			List<Page> pages = new ArrayList<Page>();
 			for (Object object : ids) {
-				pages.add(object instanceof String ? page((String) object)
-						: (Page) object);
+				Page page = object instanceof String ? page((String) object)
+						: (Page) object;
+				if (show.getSelectionIndex() == 0 || !page.done()) {
+					pages.add(page);
+				}
 			}
 			return pages.toArray(new Page[] {});
 		}
