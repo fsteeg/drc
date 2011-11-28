@@ -79,6 +79,12 @@ object Application extends Controller with Secure {
     val mets: MetsTransformer = if(page != null) CachedMeta(page.volume) else null
     html.user(user, imageLink(user.latestPage), page, mets)
   }
+  
+  def browse(id:String) = {
+    val ids = (db.getIds(Plain + vol(id)).getOrElse(all)).sorted
+    val text = loadText(ids, "<br/>")
+    html.browse(text, Index.Volumes(Index.RF(id.toInt - 1)))
+  }
 
   def signup = html.signup()
 
@@ -163,15 +169,29 @@ object Application extends Controller with Secure {
   def text = html.text()
   
   def load() = {
-    val volume = params.get("volume")
-    val volumes = Index.RF
-    val vol = if (volume.toInt - 1 >= 0) Prefix + volumes(volume.toInt - 1) else "drc-all"
-    val ids = (db.getIds(Plain + vol).getOrElse(all)).sorted
-    val file = write(ids, vol)
+    val v = params.get("volume")
+    val ids = (db.getIds(Plain + vol(v)).getOrElse(all)).sorted
+    val text = loadText(ids,"\n")
+    val file = write(text, vol(v))
     println("Generated: " + file.getAbsolutePath())
     response.contentType = "application/download"
     response.setHeader("Content-Disposition", "attachment; filename=" + file.getName())
     response.direct = file
+  }
+  
+  private def vol(v:String) = {
+    val volume = v
+    val volumes = Index.RF
+    if (volume.toInt - 1 >= 0) Prefix + volumes(volume.toInt - 1) else "drc-all"
+  }
+  
+  private def loadText(ids: List[String], delim: String) = {
+    val builder = new StringBuilder
+    for(id <- ids) {
+      val e: Elem = db.getXml(Plain + id.split("-")(0), id).get(0)
+      if(!e.text.trim.isEmpty()) builder.append(delim*2).append(id).append(delim*2).append(e.text)
+    }
+    builder.toString.trim.replaceFirst(delim*2, "")
   }
   
   private def all:List[String] = {
@@ -180,14 +200,9 @@ object Application extends Controller with Secure {
     buf.toList
   }
   
-  private def write(ids:List[String], vol:String): File = {
+  private def write(text:String, vol:String): File = {
     val tmp = File.createTempFile(vol+"_",".utf8.txt"); tmp.deleteOnExit()
-    val builder = new StringBuilder
-    for(id <- ids) {
-      val e: Elem = db.getXml(Plain + id.split("-")(0), id).get(0)
-      builder.append("\n").append(id).append("\n\n").append(e.text)
-    }
-    val fw = new FileWriter(tmp); fw.write(builder.toString.trim); fw.close; tmp
+    val fw = new FileWriter(tmp); fw.write(text); fw.close; tmp
   }
   
   def search(@Required term: String, @Required volume: String) = {
