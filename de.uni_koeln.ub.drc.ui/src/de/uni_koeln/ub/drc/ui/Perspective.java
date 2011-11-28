@@ -9,15 +9,26 @@ package de.uni_koeln.ub.drc.ui;
 
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.contexts.IContextService;
 
 /**
  * @author Mihail Atanassov (matana)
  */
 public class Perspective implements IPerspectiveFactory {
 
+	private static final String Perspective_CONTEXT_ID = "de.uni_koeln.ub.drc.ui.perspectivecontext"; //$NON-NLS-1$
+
 	@Override
 	public void createInitialLayout(IPageLayout layout) {
 		layout.setEditorAreaVisible(false);
 		layout.setFixed(true);
+		activateContext();
+	}
+
+	private void activateContext() {
+		IContextService contextService = ((IContextService) PlatformUI
+				.getWorkbench().getService(IContextService.class));
+		contextService.activateContext(Perspective_CONTEXT_ID);
 	}
 }

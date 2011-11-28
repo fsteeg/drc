@@ -59,6 +59,7 @@ public final class EditView extends ViewPart implements ISaveablePart {
 	 * The class / EditView ID
 	 */
 	public static final String ID = EditView.class.getName().toLowerCase();
+	private static final String VIEW_CONTEXT_ID = "de.uni_koeln.ub.drc.ui.editcontext"; //$NON-NLS-1$
 
 	static final String SAVED = "pagesaved"; //$NON-NLS-1$
 	EditComposite editComposite;
@@ -78,8 +79,8 @@ public final class EditView extends ViewPart implements ISaveablePart {
 		editComposite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
 		attachSelectionListener();
-		activateContext();
 		focusLatestWord();
+		activateContext();
 	}
 
 	@Override
@@ -108,7 +109,7 @@ public final class EditView extends ViewPart implements ISaveablePart {
 	private void activateContext() {
 		IContextService contextService = (IContextService) getSite()
 				.getService(IContextService.class);
-		contextService.activateContext(ID);
+		contextService.activateContext(VIEW_CONTEXT_ID);
 	}
 
 	protected void setDirty(boolean dirty) {
@@ -124,7 +125,6 @@ public final class EditView extends ViewPart implements ISaveablePart {
 		ScrolledCompositeHelper.fixWrapping(sc, editComposite);
 		selectionService.addSelectionListener(new ISelectionListener() {
 			@Override
-			@SuppressWarnings("unchecked")
 			public void selectionChanged(IWorkbenchPart part,
 					ISelection selection) {
 				IStructuredSelection structuredSelection = (IStructuredSelection) selection;
@@ -146,7 +146,7 @@ public final class EditView extends ViewPart implements ISaveablePart {
 									0);
 							dialog.create();
 							if (dialog.open() == Window.OK) {
-								doSave(null);
+								doSave(new NullProgressMonitor());
 							}
 						}
 						editComposite.update(page);

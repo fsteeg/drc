@@ -2,6 +2,27 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
+         id="de.uni_koeln.ub.drc.ui.product"
+         name="DRC product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="de.uni_koeln.ub.drc.ui.DrcUiActivator"
+            name="DRC">
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+         <property
+               name="appName"
+               value="DRC">
+         </property>
+         <property
+               name="startupMessageRect"
+               value="0,0,0,0">
+         </property>
+      </product>
+   </extension>
+   <extension
          point="org.eclipse.ui.views">
       <view
             class="de.uni_koeln.ub.drc.ui.views.SearchView"
@@ -206,23 +227,35 @@
       </perspectiveExtension>
    </extension>
    <extension
-         id="product"
-         point="org.eclipse.core.runtime.products">
-      <product
-            application="de.uni_koeln.ub.drc.ui.application"
-            name="DRC RCP">
-         <property
-               name="preferenceCustomization"
-               value="plugin_customization.ini">
-         </property>
-         <property
-               name="appName"
-               value="DRC RCP">
-         </property>
-         <property
-               name="startupMessageRect"
-               value="0,0,0,0">
-         </property>
-      </product>
+         point="org.eclipse.ui.bindings">
+      <scheme
+            id="de.uni_koeln.ub.drc.ui.scheme"
+            name="de.uni_koeln.ub.drc.ui.scheme"
+            parentId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </scheme>
+      <key
+            commandId="de.uni_koeln.ub.drc.ui.handlers.savehandler"
+            contextId="de.uni_koeln.ub.drc.ui.perspectivecontext"
+            schemeId="de.uni_koeln.ub.drc.ui.scheme"
+            sequence="M1+S">
+      </key>
+      <key
+            commandId="de.uni_koeln.ub.drc.ui.handlers.exithandler"
+            contextId="de.uni_koeln.ub.drc.ui.perspectivecontext"
+            schemeId="de.uni_koeln.ub.drc.ui.scheme"
+            sequence="M1+Q">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            id="de.uni_koeln.ub.drc.ui.editcontext"
+            name="Edit context"
+            parentId="org.eclipse.ui.contexts.dialogAndWindow">
+      </context>
+      <context
+            id="de.uni_koeln.ub.drc.ui.perspectivecontext"
+            name="Perspective context">
+      </context>
    </extension>
 </plugin>
