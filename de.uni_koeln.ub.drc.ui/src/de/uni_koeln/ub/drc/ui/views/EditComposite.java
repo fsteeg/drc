@@ -26,7 +26,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.PlatformUI;
 
 import scala.collection.JavaConversions;
 import de.uni_koeln.ub.drc.data.Page;
@@ -252,22 +251,10 @@ public class EditComposite extends Composite {
 									+ " '%s' " + Messages.get().IsLocked, text.getText())); //$NON-NLS-1$
 				}
 				text.setEditable(!word.isLocked() && !page.done());
-				CheckView cv = (CheckView) PlatformUI.getWorkbench()
-						.getActiveWorkbenchWindow().getActivePage()
-						.findView(CheckView.ID);
-				cv.setSelection(text);
-				SpecialCharacterView scv = (SpecialCharacterView) PlatformUI
-						.getWorkbench().getActiveWorkbenchWindow()
-						.getActivePage().findView(SpecialCharacterView.ID);
-				scv.setText(text);
-				WordView wv = (WordView) PlatformUI.getWorkbench()
-						.getActiveWorkbenchWindow().getActivePage()
-						.findView(WordView.ID);
-				wv.selectedWord(word, text);
-				TagView tv = (TagView) PlatformUI.getWorkbench()
-						.getActiveWorkbenchWindow().getActivePage()
-						.findView(TagView.ID);
-				tv.setWord(word);
+				DrcUiActivator.find(CheckView.class).setSelection(text);
+				DrcUiActivator.find(SpecialCharacterView.class).setText(text);
+				DrcUiActivator.find(WordView.class).selectedWord(word, text);
+				DrcUiActivator.find(TagView.class).setWord(word);
 				text.setToolTipText(word.formattedHistory());
 				if (prev != null
 						&& !prev.isDisposed()

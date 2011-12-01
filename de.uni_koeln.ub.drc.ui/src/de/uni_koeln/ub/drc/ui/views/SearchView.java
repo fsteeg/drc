@@ -363,6 +363,8 @@ public final class SearchView extends ViewPart {
 		}
 		viewer.refresh(chapter);
 		viewer.setSelection(new StructuredSelection(page));
+		EditView view = DrcUiActivator.find(EditView.class);
+		view.focusLatestWord();
 	}
 
 	private void initSearchField(final Composite parent) {

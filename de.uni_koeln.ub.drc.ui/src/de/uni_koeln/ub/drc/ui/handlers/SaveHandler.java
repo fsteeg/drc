@@ -10,8 +10,8 @@ package de.uni_koeln.ub.drc.ui.handlers;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.ui.PlatformUI;
 
+import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 import de.uni_koeln.ub.drc.ui.views.EditView;
 
 /**
@@ -27,9 +27,7 @@ public final class SaveHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		EditView ev = (EditView) PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage()
-				.findView(EditView.ID);
+		EditView ev = DrcUiActivator.find(EditView.class);
 		if (ev.isDirty())
 			ev.doSave(null);
 		return null;
