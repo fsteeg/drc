@@ -153,6 +153,7 @@ public class DrcUiActivator extends Plugin {
 	public void setLoginContext(ILoginContext loginContext) {
 		this.loginContext = loginContext;
 		this.searchView.setInput();
+		this.searchView.select();
 	}
 
 	/**

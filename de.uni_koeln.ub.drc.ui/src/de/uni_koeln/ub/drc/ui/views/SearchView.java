@@ -122,7 +122,6 @@ public final class SearchView extends ViewPart {
 	/**
 	 * Select the last word edited by this user.
 	 */
-	@PostConstruct
 	public void select() {
 		String latestPage = DrcUiActivator.getDefault().currentUser()
 				.latestPage();
