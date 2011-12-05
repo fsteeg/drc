@@ -1,4 +1,4 @@
-@(top:List[de.uni_koeln.ub.drc.data.User])
+@(top:List[de.uni_koeln.ub.drc.data.User], fields:List[String])
 @import play.i18n.Messages._
 @main("crestomazia.ch") {
 <div id="left">
@@ -10,11 +10,11 @@
 		<tr class="form">
 			<td class="form"><label for="term">@Html(get("views.index.search.term"))</label>
 			</td>
-			<td class="form"><input type="text" name="term" id="term"
+			<td class="form"><input class="text" type="text" name="term" id="term"
 				/>
 			</td>
 			<td class="form"> 
-			<select name="volume" size="1" id="volume">
+			<select class="small" name="volume" size="1" id="volume">
 					<option value="0" selected="selected">@Html(get("views.index.search.all")) </option>
 					<option value="1">@Html(get("views.index.search.volume")) I, 1.</option>
 					<option value="2">@Html(get("views.index.search.volume")) I, 2. - 3.</option>
@@ -34,7 +34,13 @@
 					<option value="16">@Html(get("views.index.search.volume")) XIII</option>
 					<option value="17">@Html(get("views.index.search.volume")) XIV</option>
 			</select></td>
-			<td class="form"><input type="submit" value="@Html(get("views.index.search.button"))" />
+			<td class="form"> 
+			<select class="small" name="field" size="1" id="field">
+					<option value="0" selected="selected">@Html(get(fields(0)))</option>
+					<option value="1">@Html(get(fields(1)))</option>
+					<option value="2">@Html(get(fields(2)))</option>
+			</select></td>
+			<td class="form"><input class="button" type="submit" value="@Html(get("views.index.search.button"))" />
 			</td>
 		</tr>
 	</table>

@@ -40,6 +40,12 @@ object Application extends Controller with Secure {
     for((k,v)<-Index.Volumes; if(k!="0014_RC")) yield k -> meta(k) // no metadata for volume 0014_RC
     
   private def meta(id:String) = new MetsTransformer(Prefix + id + ".xml", db)
+    
+  private val fields = List(
+      ("/page/text", "$m", "views.index.search.text"),
+      ("/page/tag/attribute::text", "<exist:match>text</exist:match>", "views.index.search.tags"),
+      ("/page/comment", "$m", "views.index.search.comments")
+  )
 
   def loadUsers =
     (for (u <- db.getXml(col + "/users").get) yield User.fromXml(u))
@@ -47,7 +53,7 @@ object Application extends Controller with Secure {
 
   def index = {
     val top = loadUsers.take(5)
-    html.index(top)
+    html.index(top, fields.map(_._3))
   }
   
   def edit = html.edit(User.withId(col, db, currentUser))
@@ -163,7 +169,8 @@ object Application extends Controller with Secure {
   def find() = {
     val term = params.get("term")
     val volume = params.get("volume")
-    search(term, volume)
+    val field = params.get("field")
+    search(term, volume, field)
   }
   
   def text = html.text()
@@ -205,15 +212,15 @@ object Application extends Controller with Secure {
     val fw = new FileWriter(tmp); fw.write(text); fw.close; tmp
   }
   
-  def search(@Required term: String, @Required volume: String) = {
+  def search(@Required term: String, @Required volume: String, @Required field: String) = {
     val volumes = Index.RF
     val vol = if (volume.toInt - 1 >= 0) Prefix + volumes(volume.toInt - 1) else ""
-    val query = createQuery("/page/text", term)
+    val query = createQuery(fields(field.toInt), term)
     val q = db.query(Plain + vol, configure(query))
     val rows = (q \ "tr")
     val hits: Seq[Hit] = (for (row <- rows) yield parse(row)).sorted
     val label = if (volume.toInt - 1 >= 0) Index.Volumes(volumes(volume.toInt - 1)) else ""
-    html.search(term, label, hits, volume)
+    html.search(term, label, hits, volume, fields(field.toInt)._3)
   }
 
   def withLink(elems: String) = {
@@ -222,14 +229,14 @@ object Application extends Controller with Secure {
     XML.loadString(<i>{ Unparsed(elems.replace(id,textLink(imageLink(id)))) }</i>.toString) \"td"
   }
 
-  def createQuery(selector: String, term: String) = {
+  def createQuery(selector: (String, String, String), term: String) = {
     """
       import module namespace kwic="http://exist-db.org/xquery/kwic";
       declare option exist:serialize "omit-xml-declaration=no encoding=utf-8";
       for $m in %s[ft:query(., '%s')]
       order by ft:score($m) descending
-      return kwic:summarize($m, <config width="40" table="yes" link="{$m/../attribute::id}"/>)
-      """.format(selector, term.toLowerCase)
+      return kwic:summarize(%s, <config width="40" table="yes" link="{$m/ancestor::page/attribute::id}"/>)
+      """.format(selector._1, term.toLowerCase, selector._2)
   }
 
   private def configure(query: String): scala.xml.Elem = {

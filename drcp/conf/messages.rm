@@ -102,6 +102,10 @@ views.index.users.name = Num
 views.index.users.region = Regiun
 views.index.users.points = Puncts
 
+views.index.search.text=Text
+views.index.search.tags=Chavazzins
+views.index.search.comments=Commentaris
+
 ##################
 ##   info.html  ##
 ##################
