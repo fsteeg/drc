@@ -24,9 +24,9 @@ import de.uni_koeln.ub.drc.util.Postprocessor
  * @author Fabian Steeg (fsteeg)
  *
  */
-class Index(val pages: List[String], val db: XmlDb, val selected: String) {
+class Index(val pages: List[String], val db: XmlDb, val collection: String, val root: String = Index.DefaultCollection) {
 
-  lazy val pageObjects = pages.toArray.map((id: String) => Page.fromXml(db.getXml(selected, id).get(0)))
+  lazy val pageObjects = pages.toArray.map((id: String) => Page.fromXml(db.getXml(collection, id).get(0)))
 
   /**
    * Search for pages containing a given term.
@@ -43,16 +43,16 @@ class Index(val pages: List[String], val db: XmlDb, val selected: String) {
    */
   def search(term: String, option: SearchOption.Value): Array[Page] =
     (option match {
-      case SearchOption.all => queryFast("/page", term) //query("//modification/attribute::form", term)
+      case SearchOption.all => queryFast("/page/text", term) //query("//modification/attribute::form", term)
       case SearchOption.tags => query("//tag/attribute::text", term)
       case SearchOption.comments => query("//comment", term)
     })
 
   private def queryFast(selector: String, term: String) = {
-    val query = "for $m in %s[ft:query(., '%s')] return string($m/attribute::id)".format(selector, term.toLowerCase)
-    val c = Index.DefaultCollection + PlainTextCopy.suffix + "/" + selected
+    val query = "for $m in %s[ft:query(., '%s')] return string($m/../attribute::id)".format(selector, term.toLowerCase)
+    val c = root + PlainTextCopy.suffix + "/" + collection
     val q = db.query(c, configure(query))
-    ((q \ "value").map((n: Node) => Page.fromXml(db.getXml(Index.DefaultCollection + "/" + selected, n.text).get(0)))).toArray
+    ((q \ "value").map((n: Node) => Page.fromXml(db.getXml(root + "/" + collection, n.text).get(0)))).toArray
   }
 
   private def configure(query: String): scala.xml.Elem = {
@@ -64,7 +64,7 @@ class Index(val pages: List[String], val db: XmlDb, val selected: String) {
   }
 
   private def query(select: String, term: String) = {
-    val res = db.query(Index.DefaultCollection + "/" + selected,
+    val res = db.query(root + "/" + collection,
       "for $m in %s[ft:query(., '%s')]/ancestor::page return $m".format(select, term.toLowerCase))
     (res \ "page").map(Page.fromXml(_)).toArray
   }
@@ -90,19 +90,18 @@ object SearchOption extends Enumeration {
 
 object Import extends Application {
 
-  private val db = Index.LocalDb
-  //val db = XmlDb("hydra2.spinfo.uni-koeln.de", 7777)
+  //private val db = Index.LocalDb
+  val db = XmlDb("hydra2.spinfo.uni-koeln.de", 7777)
   //val db = XmlDb("hydra1.spinfo.uni-koeln.de", 8080)
 
   val folder = "res/rom/"
   val prefix = "PPN345572629_"
-  val volumes = List( /*"0003", "0004", "0008", "0009", "0011", "0012", "0014", "0017", "0018",
-  "0024", "0027", "0030", "0033", "0035", "0036", "0037", "0038" */ )
+  val volumes = Index.RF // List("0004", "0008")
 
   for (volume <- volumes) {
     // Stuff to do for every volume:
-    Index.initialImport(db = db, location = folder + prefix + volume)
-    Postprocessor.process(prefix + volume, db)
+    //Index.initialImport(db = db, location = folder + prefix + volume)
+    //Postprocessor.process(prefix + volume, db)
     PlainTextCopy.process(prefix + volume, db)
   }
 
@@ -211,5 +210,6 @@ object Index {
     }
   }
 
-  def apply(pages: List[String], db: XmlDb, collection: String) = new Index(pages, db, collection)
+  def apply(pages: List[String], db: XmlDb, collection: String, root: String = Index.DefaultCollection) =
+    new Index(pages, db, collection, root)
 }

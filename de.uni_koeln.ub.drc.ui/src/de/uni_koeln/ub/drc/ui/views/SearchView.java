@@ -532,7 +532,8 @@ public final class SearchView extends ViewPart {
 				}
 			}
 			modelIndex = new Index(JavaConversions.asScalaBuffer(pages)
-					.toList(), DrcUiActivator.getDefault().db(), modelSelected);
+					.toList(), DrcUiActivator.getDefault().db(), modelSelected,
+					Index.DefaultCollection());
 		}
 
 		Object[] search;

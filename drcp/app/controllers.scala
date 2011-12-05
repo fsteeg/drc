@@ -28,7 +28,7 @@ object Application extends Controller with Secure {
   
   import views.Application._
 
-  val server = "hydra2.spinfo.uni-koeln.de"
+  val server = "localhost"
   val port = 7777
   val db = XmlDb(server, port)
   val col = "drc"
@@ -208,7 +208,7 @@ object Application extends Controller with Secure {
   def search(@Required term: String, @Required volume: String) = {
     val volumes = Index.RF
     val vol = if (volume.toInt - 1 >= 0) Prefix + volumes(volume.toInt - 1) else ""
-    val query = createQuery("/page", term)
+    val query = createQuery("/page/text", term)
     val q = db.query(Plain + vol, configure(query))
     val rows = (q \ "tr")
     val hits: Seq[Hit] = (for (row <- rows) yield parse(row)).sorted
@@ -228,7 +228,7 @@ object Application extends Controller with Secure {
       declare option exist:serialize "omit-xml-declaration=no encoding=utf-8";
       for $m in %s[ft:query(., '%s')]
       order by ft:score($m) descending
-      return kwic:summarize($m, <config width="40" table="yes" link="{$m/attribute::id}"/>)
+      return kwic:summarize($m, <config width="40" table="yes" link="{$m/../attribute::id}"/>)
       """.format(selector, term.toLowerCase)
   }
 
@@ -267,7 +267,7 @@ object Application extends Controller with Secure {
     val link = (ds(1) \ "a" \ "@href").text
     val Page.VolumePageExtractor(volume, page) = link
     val mappedVolume = Index.Volumes(volume)
-    val mappedPage = if (CachedMeta(volume) != null) CachedMeta(volume).label(page.toInt) else "n/a"
+    val mappedPage = if (CachedMeta.contains(volume)) CachedMeta(volume).label(page.toInt) else "n/a"
     Hit(
       term = ds(1).text.trim,
       before = ds(0).text.trim,
