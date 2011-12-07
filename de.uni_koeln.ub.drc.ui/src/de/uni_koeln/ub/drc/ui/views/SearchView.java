@@ -354,7 +354,7 @@ public final class SearchView extends ViewPart {
 
 	private void select(String pageId) {
 		Page page = page(pageId);
-		Chapter chapter = mets.chapter(page.number(), Count.File());
+		Chapter chapter = mets.chapters(page.number(), Count.File()).head();
 		TreeItem[] items = viewer.getTree().getItems();
 		for (TreeItem treeItem : items) {
 			if (treeItem.getText(3).contains(chapter.title())) {
@@ -644,18 +644,17 @@ public final class SearchView extends ViewPart {
 		for (Object page : pages) {
 			int fileNumber = page instanceof Page ? ((Page) page).number()
 					: new Page(null, (String) page).number();
-			Chapter chapter = null;
-			if (meta) {
-				chapter = mets.chapter(fileNumber, Count.File());
-			} else {
-				chapter = new Chapter(0, 1, Messages.get().NoMeta);
+			List<Chapter> chaptersForPage = meta ? /**/
+			JavaConversions.asJavaList(mets.chapters(fileNumber, Count.File()))
+					: Arrays.asList(new Chapter(0, 1, Messages.get().NoMeta));
+			for (Chapter chapter : chaptersForPage) {
+				List<Object> pagesInChapter = chapters.get(chapter);
+				if (pagesInChapter == null) {
+					pagesInChapter = new ArrayList<Object>();
+					chapters.put(chapter, pagesInChapter);
+				}
+				pagesInChapter.add(page);
 			}
-			List<Object> pagesInChapter = chapters.get(chapter);
-			if (pagesInChapter == null) {
-				pagesInChapter = new ArrayList<Object>();
-				chapters.put(chapter, pagesInChapter);
-			}
-			pagesInChapter.add(page);
 		}
 		viewer.setInput(chapters);
 		updateResultCount(pages.length);
