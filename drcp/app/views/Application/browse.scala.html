@@ -1,0 +1,6 @@
+@(text:String, volume:String)
+@import play.i18n.Messages._
+@main("crestomazia.ch") {
+<h1>@Html(get("views.index.search.volume")) @volume</h1>
+@Html(text)
+}

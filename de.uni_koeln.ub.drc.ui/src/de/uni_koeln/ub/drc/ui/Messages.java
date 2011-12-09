@@ -89,6 +89,9 @@ public class Messages {
 	public String ZoomToolTip;
 	public String ClosePage;
 	public String NoMeta;
+	public String Show;
+	public String All;
+	public String Open;
 
 	private Messages() {
 		// prevent instantiation

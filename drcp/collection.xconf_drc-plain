@@ -6,7 +6,11 @@
         <lucene>
             <analyzer class="org.apache.lucene.analysis.standard.StandardAnalyzer"/>
             <analyzer id="ws" class="org.apache.lucene.analysis.WhitespaceAnalyzer"/>
-            <text match="/page"/>
+            <text match="/page/text"/>
+            <text match="/page/comment"/>
+            <text match="/page/comment/@user"/>
+            <text match="/page/tag/@text"/>
+            <text match="/page/tag/@user"/>
         </lucene>
     </index>
 </collection>

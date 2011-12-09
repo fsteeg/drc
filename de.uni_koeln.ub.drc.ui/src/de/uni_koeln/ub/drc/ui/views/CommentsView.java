@@ -37,7 +37,6 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 import scala.collection.JavaConversions;
@@ -140,9 +139,7 @@ public final class CommentsView extends ViewPart {
 					page.saveToDb(DrcUiActivator.getDefault().currentUser()
 							.collection(), DrcUiActivator.getDefault().db());
 					commentField.setText(""); //$NON-NLS-1$
-					SearchView sv = (SearchView) PlatformUI.getWorkbench()
-							.getActiveWorkbenchWindow().getActivePage()
-							.findView(SearchView.ID);
+					SearchView sv = DrcUiActivator.find(SearchView.class);
 					sv.updateTreeViewer();
 				}
 			}

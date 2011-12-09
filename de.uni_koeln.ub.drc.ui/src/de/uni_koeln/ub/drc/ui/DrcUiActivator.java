@@ -21,6 +21,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.equinox.security.auth.ILoginContext;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.BundleContext;
 
 import com.quui.sinist.XmlDb;
@@ -153,6 +155,7 @@ public class DrcUiActivator extends Plugin {
 	public void setLoginContext(ILoginContext loginContext) {
 		this.loginContext = loginContext;
 		this.searchView.setInput();
+		this.searchView.select();
 	}
 
 	/**
@@ -170,4 +173,28 @@ public class DrcUiActivator extends Plugin {
 		return context;
 	}
 
+	/**
+	 * @param clazz
+	 *            The class literal of the view to find (needs an ID field)
+	 * @return The view corresponding to the given class literal, or null
+	 */
+	public static <T extends IViewPart> T find(Class<T> clazz) {
+		try {
+			String id = (String) clazz.getField("ID").get(null); //$NON-NLS-1$
+			@SuppressWarnings("unchecked")
+			// safe because class is passed
+			T view = (T) PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+					.getActivePage().findView(id);
+			return view;
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

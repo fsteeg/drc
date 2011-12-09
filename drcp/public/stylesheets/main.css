@@ -113,3 +113,15 @@ p.error {
 p.attention {
 	color: darkgreen;
 }
+
+select.small {
+	width: 75px;
+}
+
+input.text {
+	width: 100px;
+}
+
+input.button {
+	width: 75px;
+}

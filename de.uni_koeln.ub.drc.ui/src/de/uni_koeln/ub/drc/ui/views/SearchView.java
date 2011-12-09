@@ -122,7 +122,6 @@ public final class SearchView extends ViewPart {
 	/**
 	 * Select the last word edited by this user.
 	 */
-	@PostConstruct
 	public void select() {
 		String latestPage = DrcUiActivator.getDefault().currentUser()
 				.latestPage();
@@ -162,14 +161,15 @@ public final class SearchView extends ViewPart {
 		}
 	};
 
+	private Combo show;
+
 	private void initVolumeSelector(Composite searchComposite) {
 		Label label1 = new Label(searchComposite, SWT.NONE);
 		label1.setText(Messages.get().Volume);
 		volumes = new Combo(searchComposite, SWT.READ_ONLY);
 		String[] volumeLabels = new String[Index.RF().size()];
 		for (int i = 0; i < Index.RF().size(); i++) {
-			volumeLabels[i] = Index.Volumes()
-					.get(Integer.parseInt(Index.RF().apply(i))).get();
+			volumeLabels[i] = Index.Volumes().get(Index.RF().apply(i)).get();
 		}
 		volumes.setItems(volumeLabels);
 		volumes.setData(JavaConversions.asJavaList(Index.RF()));
@@ -219,7 +219,7 @@ public final class SearchView extends ViewPart {
 
 	private void addPageInfoBar(Composite parent) {
 		Composite bottomComposite = new Composite(parent, SWT.NONE);
-		bottomComposite.setLayout(new GridLayout(7, false));
+		bottomComposite.setLayout(new GridLayout(9, false));
 		Button prev = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
 		prev.setImage(DrcUiActivator.getDefault().loadImage("icons/prev.gif")); //$NON-NLS-1$
 		prev.addSelectionListener(new NavigationListener(Navigate.PREV));
@@ -227,6 +227,12 @@ public final class SearchView extends ViewPart {
 		next.setImage(DrcUiActivator.getDefault().loadImage("icons/next.gif")); //$NON-NLS-1$
 		next.addSelectionListener(new NavigationListener(Navigate.NEXT));
 		currentPageLabel = new Label(bottomComposite, SWT.NONE);
+		Label label = new Label(bottomComposite, SWT.NONE);
+		label.setText(Messages.get().Show + ": "); //$NON-NLS-1$
+		show = new Combo(bottomComposite, SWT.READ_ONLY);
+		show.setItems(new String[] { Messages.get().All, Messages.get().Open });
+		show.select(0);
+		show.addSelectionListener(searchListener);
 		insertAddTagButton(bottomComposite);
 		currentPageLabel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		addPageCheckedButton(bottomComposite);
@@ -302,13 +308,14 @@ public final class SearchView extends ViewPart {
 			}
 		});
 		return Page
-				.fromXml(DrcUiActivator
-						.getDefault()
-						.db()
-						.getXml(DrcUiActivator.getDefault().currentUser()
-								.collection()
-								+ "/" + selected, JavaConversions.asScalaBuffer(Arrays.asList(string))).get() //$NON-NLS-1$
-						.head());
+				.fromXml(
+						DrcUiActivator
+								.getDefault()
+								.db()
+								.getXml(DrcUiActivator.getDefault()
+										.currentUser().collection()
+										+ "/" + selected, JavaConversions.asScalaBuffer(Arrays.asList(string))).get() //$NON-NLS-1$
+								.head(), ""); //$NON-NLS-1$
 	}
 
 	private void updateSelection() {
@@ -347,7 +354,7 @@ public final class SearchView extends ViewPart {
 
 	private void select(String pageId) {
 		Page page = page(pageId);
-		Chapter chapter = mets.chapter(page.number(), Count.File());
+		Chapter chapter = mets.chapters(page.number(), Count.File()).head();
 		TreeItem[] items = viewer.getTree().getItems();
 		for (TreeItem treeItem : items) {
 			if (treeItem.getText(3).contains(chapter.title())) {
@@ -356,10 +363,13 @@ public final class SearchView extends ViewPart {
 		}
 		viewer.refresh(chapter);
 		viewer.setSelection(new StructuredSelection(page));
+		EditView view = DrcUiActivator.find(EditView.class);
+		view.focusLatestWord();
 	}
 
 	private void initSearchField(final Composite parent) {
 		resultCount = new Label(parent, SWT.NONE);
+		updateResultCount(-1);
 		searchField = new Text(parent, SWT.BORDER);
 		searchField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		searchField.addSelectionListener(searchListener);
@@ -394,7 +404,7 @@ public final class SearchView extends ViewPart {
 	private void updateResultCount(int count) {
 		resultCount
 				.setText(String
-						.format("%s %s " + Messages.get().For, count, count == 1 ? Messages.get().Hit : Messages.get().Hits)); //$NON-NLS-1$
+						.format("%s %s " + Messages.get().For, count == -1 ? "[no]" : count, count == 1 ? Messages.get().Hit : Messages.get().Hits)); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private void initTableViewer(final Composite parent) {
@@ -522,7 +532,8 @@ public final class SearchView extends ViewPart {
 				}
 			}
 			modelIndex = new Index(JavaConversions.asScalaBuffer(pages)
-					.toList(), DrcUiActivator.getDefault().db(), modelSelected);
+					.toList(), DrcUiActivator.getDefault().db(), modelSelected,
+					Index.DefaultCollection());
 		}
 
 		Object[] search;
@@ -572,8 +583,11 @@ public final class SearchView extends ViewPart {
 			List<Object> ids = chapters.get(parentElement);
 			List<Page> pages = new ArrayList<Page>();
 			for (Object object : ids) {
-				pages.add(object instanceof String ? page((String) object)
-						: (Page) object);
+				Page page = object instanceof String ? page((String) object)
+						: (Page) object;
+				if (show.getSelectionIndex() == 0 || !page.done()) {
+					pages.add(page);
+				}
 			}
 			return pages.toArray(new Page[] {});
 		}
@@ -630,18 +644,17 @@ public final class SearchView extends ViewPart {
 		for (Object page : pages) {
 			int fileNumber = page instanceof Page ? ((Page) page).number()
 					: new Page(null, (String) page).number();
-			Chapter chapter = null;
-			if (meta) {
-				chapter = mets.chapter(fileNumber, Count.File());
-			} else {
-				chapter = new Chapter(0, 1, Messages.get().NoMeta);
+			List<Chapter> chaptersForPage = meta ? /**/
+			JavaConversions.asJavaList(mets.chapters(fileNumber, Count.File()))
+					: Arrays.asList(new Chapter(0, 1, Messages.get().NoMeta));
+			for (Chapter chapter : chaptersForPage) {
+				List<Object> pagesInChapter = chapters.get(chapter);
+				if (pagesInChapter == null) {
+					pagesInChapter = new ArrayList<Object>();
+					chapters.put(chapter, pagesInChapter);
+				}
+				pagesInChapter.add(page);
 			}
-			List<Object> pagesInChapter = chapters.get(chapter);
-			if (pagesInChapter == null) {
-				pagesInChapter = new ArrayList<Object>();
-				chapters.put(chapter, pagesInChapter);
-			}
-			pagesInChapter.add(page);
 		}
 		viewer.setInput(chapters);
 		updateResultCount(pages.length);

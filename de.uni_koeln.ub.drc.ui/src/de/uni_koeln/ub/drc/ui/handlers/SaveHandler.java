@@ -10,10 +10,8 @@ package de.uni_koeln.ub.drc.ui.handlers;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.handlers.HandlerUtil;
 
+import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 import de.uni_koeln.ub.drc.ui.views.EditView;
 
 /**
@@ -29,13 +27,10 @@ public final class SaveHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IWorkbenchWindow activeWorkbenchWindow = HandlerUtil
-				.getActiveWorkbenchWindow(event);
-		EditView ev = (EditView) activeWorkbenchWindow.getActivePage()
-				.findView(EditView.ID);
-		if (ev != null && ev.isDirty())
-			ev.doSave(new NullProgressMonitor());
-		return ev;
+		EditView ev = DrcUiActivator.find(EditView.class);
+		if (ev.isDirty())
+			ev.doSave(null);
+		return null;
 	}
 
 }

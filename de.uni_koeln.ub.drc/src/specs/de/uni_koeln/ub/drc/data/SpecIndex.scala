@@ -1,10 +1,12 @@
-/**************************************************************************************************
+/**
+ * ************************************************************************************************
  * Copyright (c) 2010 Fabian Steeg. All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0 which accompanies this
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * <p/>
  * Contributors: Fabian Steeg - initial API and implementation
- *************************************************************************************************/
+ * ***********************************************************************************************
+ */
 package de.uni_koeln.ub.drc.data
 
 import org.scalatest._
@@ -24,12 +26,16 @@ class SpecIndex extends Spec with ShouldMatchers {
   page.tags += Tag("testtag", "me")
   val pages = Page.mock :: page :: Nil
   val db = Index.LocalDb
+  val root = "test" + "/" + Index.DefaultCollection
   val coll = "testing"
-  for(p<-pages) {db.putXml(p.toXml, "drc/" + coll, p.id); PlainTextCopy.saveToDb(p,"drc-plain/",coll, db)}
+  for (p <- pages) {
+    db.putXml(p.toXml, root + "/" + coll, p.id)
+    PlainTextCopy.saveToDb(p, root + PlainTextCopy.suffix + "/", coll, db)
+  }
   val ids = pages map (_.id)
 
   describe("The Index") {
-    val index = Index(ids, db, coll)
+    val index = Index(ids, db, coll, root)
     it("allows full text search for a list of pages") {
       expect(1) { index.search("catechismus").length }
       expect(1) { index.search("Test").length }

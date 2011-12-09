@@ -32,10 +32,10 @@ class SpecPage extends Spec with ShouldMatchers {
     }
 
     it("provides some meta data") {
-      expect(4) { Page(List(), "PPN345572629_0004-0001.xml").volume }
+      expect("0004") { Page(List(), "PPN345572629_0004-0001.xml").volume }
       expect(1) { Page(List(), "PPN345572629_0004-0001.xml").number }
       expect(9999) { Page(List(), "PPN345572629_0004-9999.xml").number }
-      intercept[IllegalStateException] { Page(List(), "PPN345572629.xml").number }
+      intercept[MatchError] { Page(List(), "PPN345572629.xml").number }
     }
 
     it("can be tagged") {

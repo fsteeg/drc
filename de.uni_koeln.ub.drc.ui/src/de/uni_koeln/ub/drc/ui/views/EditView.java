@@ -27,7 +27,6 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartConstants;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.part.ViewPart;
 
@@ -165,12 +164,14 @@ public final class EditView extends ViewPart implements ISaveablePart {
 
 	}
 
-	private void focusLatestWord() {
+	void focusLatestWord() {
 		if (editComposite != null && editComposite.getWords() != null) {
 			Text text = editComposite.getWords().get(
 					DrcUiActivator.getDefault().currentUser().latestWord());
-			// text.setFocus(); // FIXME collides with page selection sometimes
+			text.setFocus();
 			sc.showControl(text);
+			CheckView view = DrcUiActivator.find(CheckView.class);
+			view.setSelection(text);
 		}
 	}
 
@@ -196,16 +197,10 @@ public final class EditView extends ViewPart implements ISaveablePart {
 				}
 				saveToXml(page);
 				plainTextCopy(page);
-				SearchView sv = (SearchView) PlatformUI.getWorkbench()
-						.getActiveWorkbenchWindow().getActivePage()
-						.findView(SearchView.ID);
-				sv.updateTreeViewer();
-				WordView wv = (WordView) PlatformUI.getWorkbench()
-						.getActiveWorkbenchWindow().getActivePage()
-						.findView(WordView.ID);
+				DrcUiActivator.find(SearchView.class).updateTreeViewer();
 				Text text = editComposite.getPrev();
 				Word word = (Word) text.getData(Word.class.toString());
-				wv.selectedWord(word, text);
+				DrcUiActivator.find(WordView.class).selectedWord(word, text);
 			}
 
 			private void plainTextCopy(final Page page) {

@@ -27,9 +27,8 @@ import de.uni_koeln.ub.drc.reader.Point
  */
 case class Page(words: List[Word], id: String) {
 
-  private val toks = id.split("""[-_.]""")
-  def volume = if (toks.size == 4) toks(1).toInt else throw new IllegalStateException(id)
-  def number = if (toks.size == 4) toks(2).toInt else throw new IllegalStateException(id)
+  def volume: String = { val Page.VolumePageExtractor(vol, _) = id; vol }
+  def number: Int = { val Page.VolumePageExtractor(_, num) = id; num.toInt }
   def edits = (0 /: words)(_ + _.history.size) - words.size
 
   val tags: ListBuffer[Tag] = new ListBuffer()
@@ -81,10 +80,12 @@ case class Page(words: List[Word], id: String) {
 
 object Page {
 
+  // PPN345572629_0014_02-0001.xml or PPN345572629_0004-0001.xml
+  val VolumePageExtractor = """[^_]+_([^\-]+)-([^\.]+)\.xml""".r
   val ParagraphMarker = "@"
 
-  def fromXml(page: Node): Page = {
-    val p = Page(for (word <- (page \ "word").toList) yield Word.fromXml(word), (page \ "@id").text)
+  def fromXml(page: Node, id: String = ""): Page = {
+    val p = Page(for (word <- (page \ "word").toList) yield Word.fromXml(word), if (id == "") (page \ "@id").text else id)
     for (tag <- (page \ "tag")) p.tags += Tag.fromXml(tag)
     for (comment <- (page \ "comment")) p.comments += Comment.fromXml(comment)
     for (status <- (page \ "status")) p.status += Status.fromXml(status)
