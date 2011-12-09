@@ -27,3 +27,4 @@ drcp/eclipse/*.launch
 drcp/test-result
 drcp/lib/drc-*.jar
 .cache
+wintest

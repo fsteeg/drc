@@ -1,0 +1,11 @@
+h1. Basic setup for UI testing of the DRC editor with WindowTester
+
+* Install WindowTester (see their documentation for details and basic usage)
+* Set up a recording session with the DRC product and WindowTester bundles
+* Pass login credentials as VM arguments, e.g. @-Duser.name=fsteeg@ and @-Duser.pass=drc@
+* When the editor is running, press the record button, use the editor, close it, and save the resulting test
+* Fix the MANIFEST by making the RAP and UI bundles optional (overwritten by WindowTester)
+* Run the generated test as a JUnit Plug-in test with the correct product and VM arguments as above, and all bundles
+
+This folder contains some very basic sample tests, which can be executed by running the included launch config.
+ 
