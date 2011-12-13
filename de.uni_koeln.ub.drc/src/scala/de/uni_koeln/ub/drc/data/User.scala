@@ -54,7 +54,7 @@ object User {
     if(lw!="") u.latestWord = lw.toInt
     u
   }
-  def initialImport(collection:String=Index.DefaultCollection, db: XmlDb, folder: String): Unit = {
-    for (user <- new File(folder).listFiles) db.put(user, XmlDb.Format.XML, collection+"/"+"users", user.getName)
+  def initialImport(collection:String=Index.DefaultCollection, db: XmlDb, folder: String, target: String = "users"): Unit = {
+    for (user <- new File(folder).listFiles) db.put(user, XmlDb.Format.XML, collection+"/"+target, user.getName)
   }
 }

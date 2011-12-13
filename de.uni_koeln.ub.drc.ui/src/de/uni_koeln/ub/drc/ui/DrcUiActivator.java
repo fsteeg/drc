@@ -59,7 +59,7 @@ public class DrcUiActivator extends Plugin {
 	/**
 	 * The portal page root address for a user
 	 */
-	public static final String PROFILE_ROOT = "http://hydra1.spinfo.uni-koeln.de:9000/application/user?id="; //$NON-NLS-1$
+	public static final String PROFILE_ROOT = "http://bob.spinfo.uni-koeln.de:9000/application/user?id="; //$NON-NLS-1$
 
 	/**
 	 * The constructor
@@ -110,7 +110,7 @@ public class DrcUiActivator extends Plugin {
 	 */
 	public XmlDb userDb() {
 		return Index.LocalDb().isAvailable() ? Index.LocalDb() : new XmlDb(
-				"hydra1.spinfo.uni-koeln.de", 8080, "guest", "guest"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				"bob.spinfo.uni-koeln.de", 8080, "drc", "crd"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	/**
