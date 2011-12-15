@@ -1,5 +1,9 @@
 Git repository for the "DRC":http://www.spinfo.phil-fak.uni-koeln.de/forschung-drc.html project (Digital Romansch Chrestomathy).
 
+h1. Beta 7 (2011 December 15)
+
+Beta 7 (tag: b7) adds new features to both the editor and the portal: in the editor, it is now possible to show only incomplete (open) pages. The editor will also return to the last edit position of the user logging in. The portal now allows browsing of the plain text (in addition to text downloads), as well as searching in comments and tags. This version also fixes various UI and data issues, and adds a basic UI testing setup. For a full list of changes see the "commits":https://github.com/spinfo/drc/commits/master. You can visit the portal and sign up at "http://www.crestomazia.ch":http://www.crestomazia.ch.
+
 h1. Beta 6 (2011 November 14)
 
 Beta 6 (tag: b6) contains a codebase that was backported from Eclipse 4.x to Eclipse 3.x to allow single-sourcing of the RCP desktop variant and a web variant based on RAP. The Tycho build (@mvn clean install@ in the repo root) creates the RCP application (in @de.uni_koeln.ub.drc.rcp/target@):
