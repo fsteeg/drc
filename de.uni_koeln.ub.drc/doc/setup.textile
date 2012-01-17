@@ -2,7 +2,7 @@ h3. Some notes for clean setup
 
 DB:
 
-* Install exist, run on port 7777 (setup in jetty.xml)
+* Install exist, run on port 7070 (setup in jetty.xml)
 * Upload drcp/collection.xconf_drc to db/system/config/db/drc
 * Upload drcp/collection.xconf_drc-plain to db/system/config/db/drc-plain
 * Copy rom.zip content to local res/rom, run @ant import@, run @ant@

@@ -125,6 +125,9 @@ public final class SearchView extends ViewPart {
 	public void select() {
 		String latestPage = DrcUiActivator.getDefault().currentUser()
 				.latestPage();
+		if (latestPage.trim().isEmpty()) {
+			return;
+		}
 		String volume = latestPage.split("_")[1].split("-")[0]; //$NON-NLS-1$ //$NON-NLS-2$
 		volumes.select(Index.RF().indexOf(volume));
 		setInput();

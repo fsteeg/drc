@@ -85,7 +85,7 @@ public class Application implements IApplication {
 
 	private void update(BundleContext context) throws URISyntaxException {
 		//URI repo = new URI("http://hydra2.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
-		URI repo = new URI("http://hydra1.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
+		URI repo = new URI("http://bob.spinfo.uni-koeln.de/p2"); //$NON-NLS-1$
 		//URI repo = new URI("file:///Users/fsteeg/Documents/workspaces/drc/de.uni_koeln.ub.drc.rcp/target/repository"); //$NON-NLS-1$
 		String productId = "de.uni_koeln.ub.drc.rcp"; //$NON-NLS-1$
 		InstallOperation op = createInstallOperation(context, repo, productId);
