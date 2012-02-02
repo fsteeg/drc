@@ -54,30 +54,6 @@ class MetsTransformer(xml: Elem, name: String = "") {
   private var fileMap: Map[String, String] = buildFileMap // file -> physID, e.g. 205 -> phys206
   private var logMap: Map[String, (String, String)] = log._2 // logID -> chapter, e.g. log16 -> (Chapter 8, Canzun)
   private var physMap: Map[String, String] = buildPhysMap // physID -> label, e.g. phys562 -> 549
-<<<<<<< HEAD
-  private var linkMap: Map[String, String] = buildLinkMap // physID -> logID, e.g. phys562 -> log67
-
-  def label(file: Int): String = { // result is String, can be "XVI"
-    val rf = physMap(fileMap(file.toString))
-    name match {
-      case s: String if s.contains("_0008.") => "%s (RF)".format(rf) // only correct in RF
-      case s: String if s.contains("_0011.") => "%s (RF)".format(rf) // ""
-      case s: String if s.contains("_0036.") => "%s (RF)".format(rf) // ""
-      case _ => rf // same page numbers in RF and book edition
-    }
-  }
-
-  def chapter(page: Int, mode: Count.Value = Count.File): Chapter = {
-    lazy val labelMap = physMap.map(_.swap)
-
-    val chapter = try {
-      logMap(linkMap(mode match {
-        case Count.Label => labelMap(page.toString)
-        case Count.File => fileMap(page.toString)
-      }))
-    } catch {
-      case nse: NoSuchElementException => ("Unknown", "Unknown")
-=======
   private var linkMap: Map[String, List[String]] = buildLinkMap // physID -> logID, e.g. phys562 -> List(log67, log68)
 
   def label(file: Int): String = { // result is String, can be "XVI"
@@ -87,30 +63,9 @@ class MetsTransformer(xml: Elem, name: String = "") {
       case s: String if s.contains("_0011.") => "%s (RF)".format(rf) // ""
       case s: String if s.contains("_0036.") => "%s (RF)".format(rf) // ""
       case _ => rf // same page numbers in RF and book edition
->>>>>>> refs/remotes/spinfo/master
     }
-<<<<<<< HEAD
-    val labels = List(
-      "Chapter",
-      "Appendix",
-      "Epilogue",
-      "Remarks",
-      "TableOfContents",
-      "TitlePage",
-      "Dedication",
-      "Introduction",
-      "Preface",
-      "List",
-      "Figure")
-
-    val number = if (labels.exists(chapter._1.contains(_))) chapter._1.split(" ")(1).toInt else Integer.MAX_VALUE
-    Chapter(4, number, chapter._2) // TODO get volume from initial metadata location, or init with volume number
-=======
->>>>>>> refs/remotes/spinfo/master
   }
 
-<<<<<<< HEAD
-=======
   /**
    * @return
    *   Returns the chapters the given page is part of, ordered from the most recent chapter
@@ -148,7 +103,6 @@ class MetsTransformer(xml: Elem, name: String = "") {
       "List",
       "Figure").exists(chapter._1.contains(_))
 
->>>>>>> refs/remotes/spinfo/master
   private[util] def transform(): String = {
     val builder = new StringBuilder()
     val lines: List[String] = List()
@@ -178,14 +132,6 @@ class MetsTransformer(xml: Elem, name: String = "") {
 
     def processStructLinks(physId: String, fileUrl: String) = {
       if (linkMap.contains(physId)) {
-<<<<<<< HEAD
-        val logId = linkMap(physId)
-        if (logMap.contains(logId)) {
-          val vals = logMap(logId)
-          /** Print the line in the tabstop-sep. file for one scanned file: */
-          val fileName = fileUrl.substring(fileUrl.lastIndexOf('/') + 1)
-          tabbed(List("1", vals._1 + ": " + vals._2, physMap(physId), "", "", "", "", "", "", "", "", "", "o", fileName))
-=======
         for (logId <- linkMap(physId)) {
           if (logMap.contains(logId)) {
             val vals = logMap(logId)
@@ -193,7 +139,6 @@ class MetsTransformer(xml: Elem, name: String = "") {
             val fileName = fileUrl.substring(fileUrl.lastIndexOf('/') + 1)
             tabbed(List("1", vals._1 + ": " + vals._2, physMap(physId), "", "", "", "", "", "", "", "", "", "o", fileName))
           }
->>>>>>> refs/remotes/spinfo/master
         }
       }
     }
@@ -201,11 +146,7 @@ class MetsTransformer(xml: Elem, name: String = "") {
   }
 
   private def attribute(s: String, n: NodeSeq): String = {
-<<<<<<< HEAD
-    val regex = new Regex("""<METS:.* xlink:""" + s + """="(.*?)".*>""")
-=======
     val regex = new Regex("""<(?:METS|mets):.* xlink:""" + s + """="(.*?)".*>""")
->>>>>>> refs/remotes/spinfo/master
     val regex(fileUrl) = n.toString.split("\n")(0)
     fileUrl
   }
@@ -300,12 +241,6 @@ class MetsTransformer(xml: Elem, name: String = "") {
 
   private def buildLinkMap = {
     /* Map physical IDs to logical IDs: */
-<<<<<<< HEAD
-    var linkMap: Map[String, String] = Map()
-    xml \ "structLink" \ "smLink" foreach { (link) =>
-      /* physId -> logId */
-      linkMap += attribute("to", link) -> attribute("from", link)
-=======
     var linkMap: Map[String, List[String]] = Map()
     xml \ "structLink" \ "smLink" foreach { (link) =>
       /* physId -> List(logId2, logId1) */
@@ -313,7 +248,6 @@ class MetsTransformer(xml: Elem, name: String = "") {
       val logId = attribute("from", link)
       val logIds = if (linkMap.contains(physId)) linkMap(physId) else List()
       linkMap += physId -> (logId :: logIds) // prepend latest hit
->>>>>>> refs/remotes/spinfo/master
     }
     linkMap
   }
