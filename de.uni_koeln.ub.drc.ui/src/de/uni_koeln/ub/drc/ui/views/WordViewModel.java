@@ -26,9 +26,10 @@ import de.uni_koeln.ub.drc.ui.Messages;
 /**
  * Model, content and label providers for the {@link WordView}.
  * 
- * @author Fabian Steeg (fsteeg)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
 final class WordViewModel {
+
 	public static final WordViewModel CONTENT = new WordViewModel();
 
 	public Modification[] getDetails(final Word word) {
@@ -83,9 +84,9 @@ final class WordViewModel {
 		static String userDetails(String id) {
 			if (id.equals("OCR"))return "--"; //$NON-NLS-1$ //$NON-NLS-2$
 			User user = User.withId(Index.DefaultCollection(), DrcUiActivator
-					.instance().userDb(), id);
+					.getDefault().userDb(), id);
 			return String
-					.format("%s " + Messages.From + " %s (%s, %s)", user.name(), user.region(), user.id(), //$NON-NLS-1$ //$NON-NLS-2$
+					.format("%s " + Messages.get().From + " %s (%s, %s)", user.name(), user.region(), user.id(), //$NON-NLS-1$ //$NON-NLS-2$
 							user.reputation());
 		}
 

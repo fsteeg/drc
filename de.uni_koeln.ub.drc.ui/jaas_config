@@ -1,5 +1,5 @@
 SIMPLE {
     org.eclipse.equinox.security.auth.module.ExtensionLoginModule required
-        extensionId="de.uni_koeln.ub.drc.ui.simpleLoginModule";
+        extensionId="de.uni_koeln.ub.drc.ui.simpleloginmodule";
 
 };

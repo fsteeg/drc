@@ -1,65 +1,32 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: DRC UI
+Bundle-Name: DRC
 Bundle-SymbolicName: de.uni_koeln.ub.drc.ui;singleton:=true
 Bundle-Version: 0.2.0.qualifier
+Bundle-Activator: de.uni_koeln.ub.drc.ui.DrcUiActivator
+Require-Bundle: org.eclipse.equinox.p2.core;resolution:=optional,
+ org.eclipse.equinox.p2.metadata;resolution:=optional,
+ org.eclipse.equinox.p2.operations;resolution:=optional,
+ org.eclipse.equinox.p2.repository;resolution:=optional,
+ org.eclipse.equinox.security;bundle-version="1.1.0",
+ org.eclipse.osgi.services;bundle-version="3.3.0",
+ org.eclipse.core.runtime;bundle-version="3.7.0",
+ org.eclipse.rap.ui;bundle-version="1.4.1";resolution:=optional,
+ org.eclipse.ui;bundle-version="3.7.0";resolution:=optional
+Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: javax.inject;bundle-version="1.0.0",
- org.eclipse.core.runtime;bundle-version="3.6.0",
- org.eclipse.equinox.ds;bundle-version="1.2.0",
- org.eclipse.equinox.event;bundle-version="1.2.0",
- org.eclipse.jface;bundle-version="3.6.0",
- org.eclipse.osgi.services;bundle-version="3.2.100",
- org.eclipse.core.databinding;bundle-version="1.3.0",
- org.eclipse.jface.databinding;bundle-version="1.4.0",
- org.eclipse.osgi,
- org.eclipse.equinox.security;bundle-version="1.0.200",
- org.eclipse.e4.core.commands;bundle-version="0.9.0",
- org.eclipse.e4.core.contexts;bundle-version="0.9.0",
- org.eclipse.e4.core.di;bundle-version="0.9.0",
- org.eclipse.e4.core.di.extensions;bundle-version="0.9.0",
- org.eclipse.e4.core.services;bundle-version="0.9.1",
- org.eclipse.e4.ui.di;bundle-version="0.9.0",
- org.eclipse.e4.ui.services;bundle-version="0.9.1",
- org.eclipse.e4.ui.workbench;bundle-version="0.9.1",
- org.eclipse.e4.ui.workbench.renderers.swt;bundle-version="0.9.1",
- org.eclipse.e4.ui.workbench.swt;bundle-version="0.9.1",
- org.eclipse.e4.ui.workbench.addons.swt;bundle-version="0.9.0",
- org.eclipse.e4.ui.css.swt;bundle-version="0.9.1",
- org.eclipse.equinox.p2.core;bundle-version="2.0.0",
- org.eclipse.equinox.p2.director;bundle-version="2.0.0",
- org.eclipse.equinox.p2.engine;bundle-version="2.0.0",
- org.eclipse.equinox.p2.metadata;bundle-version="2.0.0",
- org.eclipse.equinox.p2.operations;bundle-version="2.0.0",
- org.eclipse.equinox.p2.ql;bundle-version="2.0.0",
- org.eclipse.equinox.p2.repository;bundle-version="2.0.0",
- org.eclipse.equinox.p2.touchpoint.eclipse;bundle-version="2.0.0",
- org.eclipse.equinox.p2.ui;bundle-version="2.0.0",
- org.eclipse.equinox.p2.touchpoint.natives;bundle-version="1.0.300"
-Bundle-Vendor: University of Cologne
-Bundle-ClassPath: lib/scala-dbc-src.jar,
- lib/scala-dbc.jar,
- lib/scala-library-src.jar,
+Bundle-ClassPath: lib/commons-codec-1.2.jar,
+ lib/commons-httpclient-3.1.jar,
+ lib/commons-logging-1.0.4.jar,
+ lib/drc-scala.jar,
+ lib/exist.jar,
+ lib/log4j-1.2.15.jar,
  lib/scala-library.jar,
- lib/scala-swing-src.jar,
- lib/scala-swing.jar,
+ lib/sinist_2.8.1-0.2.0.jar,
  lib/ws-commons-util-1.0.2.jar,
  lib/xercesImpl.jar,
  lib/xmldb.jar,
  lib/xmlrpc-client-3.1.2.jar,
  lib/xmlrpc-common-3.1.2.jar,
- lib/exist.jar,
- lib/log4j-1.2.15.jar,
- lib/drc-scala.jar,
- lib/sinist_2.8.1-0.2.0.jar,
- lib/commons-codec-1.2.jar,
- lib/commons-codec-1.3.jar,
- lib/commons-httpclient-3.1.jar,
- lib/commons-logging-1.0.4.jar,
- lib/commons-logging-1.1.1.jar,
- lib/httpclient-4.0.1.jar,
- lib/httpcore-4.0.1.jar,
  .
-Bundle-Activator: de.uni_koeln.ub.drc.ui.DrcUiActivator
-Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin

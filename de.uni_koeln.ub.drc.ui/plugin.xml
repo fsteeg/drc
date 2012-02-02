@@ -1,56 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.6"?>
+<?eclipse version="3.4"?>
 <plugin>
    <extension
-         id="product"
-         point="org.eclipse.core.runtime.products">
-      <product
-            application="org.eclipse.e4.ui.workbench.swt.E4Application"
-            name="DRC RCP">
-         <property
-               name="appName"
-               value="DRC RCP">
-         </property>
-         <property
-               name="applicationXMI"
-               value="de.uni_koeln.ub.drc.ui/Application.e4xmi">
-         </property>
-         <property
-               name="preferenceCustomization"
-               value="plugin_customization.ini">
-         </property>
-         <property
-               name="cssTheme"
-               value="de.uni_koeln.ub.drc.ui.themes.default">
-         </property>
-         <property
-               name="startupForegroundColor"
-               value="000000">
-         </property>
-         <property
-               name="startupMessageRect"
-               value="7,252,445,20">
-         </property>
-         <property
-               name="startupProgressRect"
-               value="5,275,445,15">
-         </property>
-      </product>
+         point="org.eclipse.ui.views">
+      <view
+            class="de.uni_koeln.ub.drc.ui.views.SearchView"
+            icon="icons/part_search.gif"
+            id="de.uni_koeln.ub.drc.ui.views.searchview"
+            name="SearchView"
+            restorable="true">
+      </view>
+      <view
+            class="de.uni_koeln.ub.drc.ui.views.CheckView"
+            icon="icons/part_check.gif"
+            id="de.uni_koeln.ub.drc.ui.views.checkview"
+            name="CheckView"
+            restorable="true">
+      </view>
+      <view
+            class="de.uni_koeln.ub.drc.ui.views.SpecialCharacterView"
+            icon="icons/part_chars.gif"
+            id="de.uni_koeln.ub.drc.ui.views.specialcharacterview"
+            name="SpecialCharacterView"
+            restorable="true">
+      </view>
+      <view
+            class="de.uni_koeln.ub.drc.ui.views.EditView"
+            icon="icons/part_edit.gif"
+            id="de.uni_koeln.ub.drc.ui.views.editview"
+            name="EditView"
+            restorable="true">
+      </view>
+      <view
+            class="de.uni_koeln.ub.drc.ui.views.CommentsView"
+            icon="icons/part_comments.gif"
+            id="de.uni_koeln.ub.drc.ui.views.commentsview"
+            name="CommentsView"
+            restorable="true">
+      </view>
+      <view
+            class="de.uni_koeln.ub.drc.ui.views.WordView"
+            icon="icons/part_history.gif"
+            id="de.uni_koeln.ub.drc.ui.views.wordview"
+            name="WordView"
+            restorable="true">
+      </view>
+      <view
+            class="de.uni_koeln.ub.drc.ui.views.TagView"
+            icon="icons/part_tags.gif"
+            id="de.uni_koeln.ub.drc.ui.views.tagview"
+            name="TagView"
+            restorable="true">
+      </view>
+      <view
+            class="de.uni_koeln.ub.drc.ui.views.UserView"
+            id="de.uni_koeln.ub.drc.ui.views.userview"
+            name="UserView"
+            restorable="true">
+      </view>
    </extension>
-   
-   <!-- Theming -->
    <extension
-         point="org.eclipse.e4.ui.css.swt.theme">
-      <theme
-            basestylesheeturi="css/dafault.css"
-            id="de.uni_koeln.ub.drc.ui.themes.default"
-            label="Default DRC Theme">
-      </theme>
-   </extension>
-  
-  <!-- Authentication, Login, Security -->
-   <extension
-         id="simpleLoginModule"
+         id="de.uni_koeln.ub.drc.ui.simpleloginmodule"
          point="org.eclipse.equinox.security.loginModule">
       <loginModule
             class="de.uni_koeln.ub.drc.ui.login.SimpleLoginModule"
@@ -58,17 +68,161 @@
       </loginModule>
    </extension>
    <extension
-         id="simpleCallbackHandler"
+         id="de.uni_koeln.ub.drc.ui.login.simplelogindialog"
          point="org.eclipse.equinox.security.callbackHandler">
       <callbackHandler
             class="de.uni_koeln.ub.drc.ui.login.SimpleLoginDialog">
       </callbackHandler>
    </extension>
-   <extension
-         point="org.eclipse.equinox.security.callbackHandlerMapping">
+   <extension 
+   		point="org.eclipse.equinox.security.callbackHandlerMapping">
       <callbackHandlerMapping
-            callbackHandlerId="de.uni_koeln.ub.drc.ui.simpleCallbackHandler"
+            callbackHandlerId="de.uni_koeln.ub.drc.ui.login.simplelogindialog"
             configName="SIMPLE">
       </callbackHandlerMapping>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="de.uni_koeln.ub.drc.ui.handlers.SaveHandler"
+            id="de.uni_koeln.ub.drc.ui.handlers.savehandler"
+            name="%Save">
+      </command>
+      <command
+            defaultHandler="de.uni_koeln.ub.drc.ui.handlers.ExitHandler"
+            id="de.uni_koeln.ub.drc.ui.handlers.exithandler"
+            name="%Exit">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               id="fileMenu"
+               label="%File">
+            <command
+                  commandId="de.uni_koeln.ub.drc.ui.handlers.savehandler"
+                  icon="icons/save.gif"
+                  label="%Save"
+                  style="push">
+            </command>
+            <separator
+                  name="de.uni_koeln.ub.drc.ui.separator"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="de.uni_koeln.ub.drc.ui.handlers.exithandler"
+                  icon="icons/exit.gif"
+                  label="%Exit"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+      <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="de.uni_koeln.ub.drc.ui.Perspective"
+            id="de.uni_koeln.ub.drc.ui.perspective"
+            name="DRC Perspective">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="*">
+         <view
+               closeable="false"
+               id="de.uni_koeln.ub.drc.ui.views.searchview"
+               minimized="false"
+               moveable="true"
+               ratio="0.35f"
+               relationship="top"
+               relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
+         <view
+               closeable="false"
+               id="de.uni_koeln.ub.drc.ui.views.editview"
+               minimized="false"
+               moveable="true"
+               ratio="0.50f"
+               relationship="top"
+               relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
+         <view
+               closeable="false"
+               id="de.uni_koeln.ub.drc.ui.views.checkview"
+               minimized="false"
+               moveable="true"
+               ratio="0.15f"
+               relationship="top"
+               relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
+         <view
+               closeable="false"
+               id="de.uni_koeln.ub.drc.ui.views.specialcharacterview"
+               minimized="false"
+               moveable="true"
+               ratio="0.15f"
+               relationship="stack"
+               relative="de.uni_koeln.ub.drc.ui.views.checkview"
+               visible="true">
+         </view>
+         <view
+               closeable="false"
+               id="de.uni_koeln.ub.drc.ui.views.wordview"
+               minimized="false"
+               moveable="true"
+               ratio="0.15f"
+               relationship="stack"
+               relative="de.uni_koeln.ub.drc.ui.views.checkview"
+               visible="true">
+         </view>
+         <view
+               closeable="false"
+               id="de.uni_koeln.ub.drc.ui.views.tagview"
+               minimized="false"
+               moveable="true"
+               ratio="0.15f"
+               relationship="stack"
+               relative="de.uni_koeln.ub.drc.ui.views.checkview"
+               visible="true">
+         </view>
+         <view
+               closeable="false"
+               id="de.uni_koeln.ub.drc.ui.views.commentsview"
+               minimized="false"
+               moveable="true"
+               ratio="0.15f"
+               relationship="stack"
+               relative="de.uni_koeln.ub.drc.ui.views.checkview"
+               visible="true">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="de.uni_koeln.ub.drc.ui.application"
+            name="DRC RCP">
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+         <property
+               name="appName"
+               value="DRC RCP">
+         </property>
+         <property
+               name="startupMessageRect"
+               value="0,0,0,0">
+         </property>
+      </product>
    </extension>
 </plugin>

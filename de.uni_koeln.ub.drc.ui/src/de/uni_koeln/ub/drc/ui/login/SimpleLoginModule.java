@@ -28,7 +28,7 @@ import de.uni_koeln.ub.drc.ui.Messages;
 /**
  * Simple login module implementation.
  * 
- * @author Fabian Steeg (fsteeg)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
 public final class SimpleLoginModule implements LoginModule {
 
@@ -61,32 +61,32 @@ public final class SimpleLoginModule implements LoginModule {
 	 */
 	@Override
 	public boolean login() throws LoginException {
-		NameCallback userCallback = new NameCallback(Messages.User);
-		PasswordCallback passCallback = new PasswordCallback(Messages.Password,
-				false);
-		try {
-			callbackHandler.handle(new Callback[] {
-			/*
-			 * new TextOutputCallback(TextOutputCallback.INFORMATION,
-			 * "Please login"),
-			 */userCallback, passCallback });
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (UnsupportedCallbackException e) {
-			e.printStackTrace();
+		String userName = System.getProperty("user.name"); //$NON-NLS-1$
+		String userPass = System.getProperty("user.pass"); //$NON-NLS-1$
+		if (userName == null || userPass == null) {
+			NameCallback userCallback = new NameCallback(Messages.get().User);
+			PasswordCallback passCallback = new PasswordCallback(
+					Messages.get().Password, false);
+			try {
+				callbackHandler.handle(new Callback[] { userCallback,
+						passCallback });
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (UnsupportedCallbackException e) {
+				e.printStackTrace();
+			}
+			userName = userCallback.getName();
+			userPass = passCallback.getPassword() != null ? new String(
+					passCallback.getPassword()) : ""; //$NON-NLS-1$
 		}
-		return authenticate(userCallback, passCallback);
+		return authenticate(userName, userPass);
 	}
 
-	private boolean authenticate(final NameCallback userCallback,
-			final PasswordCallback passCallback) {
-		String name = userCallback.getName();
-		String pass = passCallback.getPassword() != null ? new String(
-				passCallback.getPassword()) : ""; //$NON-NLS-1$
+	private boolean authenticate(final String name, final String pass) {
 		User candidate = null;
 		try {
 			candidate = User.withId(Index.DefaultCollection(), DrcUiActivator
-					.instance().userDb(), name);
+					.getDefault().userDb(), name);
 		} catch (Throwable x) {
 			x.printStackTrace();
 		}
@@ -94,6 +94,7 @@ public final class SimpleLoginModule implements LoginModule {
 			currentUser = candidate;
 			loggedIn = true;
 			System.out.println("Logged in: " + currentUser); //$NON-NLS-1$
+
 		}
 		return loggedIn;
 	}

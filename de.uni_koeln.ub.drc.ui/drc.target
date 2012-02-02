@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="DRC Target" sequenceNumber="33">
+<target name="DRC RCP" sequenceNumber="57">
 <locations>
-<location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.e4.runtime.feature.feature.group" version="0.9.1.v20100917-1000-7R77F9wF9JgLWVN4kcCmbZE"/>
+<unit id="org.eclipse.e4.ui.css.feature.feature.group" version="0.9.1.v20100603-1900-798A0FAiKQ6jV7i2Rsuo9"/>
+<unit id="org.eclipse.e4.ui.feature.feature.group" version="0.10.0.v20110613-2030-78Ab6FQFxCMosQTedwtB227B74"/>
 <repository location="http://download.eclipse.org/e4/downloads/drops/R-0.11-201106201631/repository"/>
 </location>
-<location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.platform.sdk" version="4.1.0.I20110620-1631"/>
-<repository location="http://download.eclipse.org/e4/sdk/drops/R-4.1-201106201631/repository"/>
+<location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.rcp.source.feature.group" version="3.7.1.r37x_v20110729-9DB5FmNFnFLSFCtLxnRfMqt15A4A"/>
+<repository location="http://download.eclipse.org/releases/indigo"/>
 </location>
-<location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.equinox.p2.core.feature.feature.group" version="1.0.0.v20110519-8290FZ-FWmE7gdAgmOPL2_C"/>
-<unit id="org.eclipse.pde.junit.runtime.addon.feature.group" version="1.0.100.v20110331-7C7GDHAkHgHr9v0L4DF585202816"/>
+<location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.platform.sdk" version="3.7.1.M20110909-1335"/>
+<unit id="org.eclipse.equinox.core.feature.feature.group" version="1.0.1.R37x_v20110907-7K7VFBYDzbeA3ynMZ98cDL15A4A"/>
+<unit id="org.eclipse.pde.junit.runtime.standalone.feature.group" version="1.0.100.v20110331-7a7xFB_F9juKSw7cQtELoIX78B7J"/>
 <repository location="http://download.eclipse.org/eclipse/updates/3.7"/>
+</location>
+<location includeAllPlatforms="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="com.windowtester.launcher.feature.group" version="6.0.0.r37x201108222304"/>
+<unit id="com.windowtester.runtime.feature.group" version="6.0.0.r37x201108222321"/>
+<repository location="http://dl.google.com/eclipse/inst/windowtester/beta/3.7"/>
 </location>
 </locations>
 </target>

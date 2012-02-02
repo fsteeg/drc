@@ -1,0 +1,19 @@
+/**************************************************************************************************
+ * Copyright (c) 2010 Fabian Steeg. All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0 which accompanies this
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * <p/>
+ * Contributors: Fabian Steeg - initial API and implementation
+ *************************************************************************************************/
+
+Combo {font: 12px 'Verdana';background-color: white;}
+CTabItem:selected{background-color:#F3F3F3;}
+CTabItem:disabled{background-color:#FAFAFA;}
+Button, Display, Canvas, CBanner, Composite, CoolBar, CTabItem, ToolBar, Shell {background-color: white;}
+Label {font: 12px 'Verdana';color: black ;background-color: white;}
+Text {font: 14px 'Times';}
+TreeItem {background-color:white;}
+TreeItem:hover {background-color:#FAFAFA;}
+TreeItem:selected {background-color:#F3F3F3;color:black;}
+.editComposite {background-color: #FDFCDC;}
+.specialCharacter {font: bold 15px 'Verdana';}

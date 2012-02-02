@@ -8,15 +8,11 @@
 package de.uni_koeln.ub.drc.ui.views;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
@@ -36,6 +32,10 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.ui.ISelectionListener;
+import org.eclipse.ui.ISelectionService;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.part.ViewPart;
 
 import scala.collection.JavaConversions;
 import de.uni_koeln.ub.drc.data.Annotation;
@@ -49,9 +49,14 @@ import de.uni_koeln.ub.drc.ui.views.TagViewModel.TagViewLabelProvider;
 /**
  * View containing tag details for the currently selected word.
  * 
- * @author Fabian Steeg (fsteeg)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
-public final class TagView {
+public final class TagView extends ViewPart {
+
+	/**
+	 * The class / TagView ID
+	 */
+	public static final String ID = TagView.class.getName().toLowerCase();
 
 	private Word word;
 	private TableViewer viewer;
@@ -63,11 +68,50 @@ public final class TagView {
 	 * @param parent
 	 *            The parent composite for this part
 	 */
-	@Inject
-	public TagView(final Composite parent) {
+	@Override
+	public void createPartControl(Composite parent) {
 		initTableViewer(parent);
 		addNewTagBar(parent);
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
+		attachSelectionListener();
+	}
+
+	@Override
+	public void setFocus() {
+	}
+
+	/**
+	 * @param word
+	 *            The selected word
+	 */
+	public void setWord(final Word word) {
+		this.word = word;
+		updateLabel();
+		setTableInput();
+	}
+
+	private void attachSelectionListener() {
+		ISelectionService selectionService = (ISelectionService) getSite()
+				.getService(ISelectionService.class);
+		selectionService.addSelectionListener(new ISelectionListener() {
+			@Override
+			public void selectionChanged(IWorkbenchPart part,
+					ISelection selection) {
+				IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+				if (structuredSelection.getFirstElement() instanceof Page) {
+					Page page = (Page) structuredSelection.getFirstElement();
+					if (page != null) {
+						setPage(page);
+						setTableInput();
+					}
+
+				}
+			}
+		});
+	}
+
+	private void setPage(Page page) {
+		this.page = page;
 	}
 
 	private void addNewTagBar(Composite parent) {
@@ -85,8 +129,8 @@ public final class TagView {
 		final Text tagFieldVal = new Text(bottomComposite, SWT.BORDER);
 		addTag = new Button(bottomComposite, SWT.PUSH | SWT.FLAT);
 		addTag.setEnabled(word != null);
-		addTag.setToolTipText(Messages.AddAnnotationTo);
-		addTag.setImage(DrcUiActivator.instance().loadImage("icons/add.gif")); //$NON-NLS-1$
+		addTag.setToolTipText(Messages.get().AddAnnotationTo);
+		addTag.setImage(DrcUiActivator.getDefault().loadImage("icons/add.gif")); //$NON-NLS-1$
 		SelectionListener listener = new SelectionListener() {
 			@Override
 			// on button click
@@ -107,10 +151,10 @@ public final class TagView {
 						&& inputVal != null && inputVal.trim().length() != 0) {
 					word.annotations().$plus$eq(
 							new Annotation(inputKey, inputVal, DrcUiActivator
-									.instance().currentUser().id(), System
+									.getDefault().currentUser().id(), System
 									.currentTimeMillis()));
-					page.saveToDb(DrcUiActivator.instance().currentUser()
-							.collection(), DrcUiActivator.instance().db());
+					page.saveToDb(DrcUiActivator.getDefault().currentUser()
+							.collection(), DrcUiActivator.getDefault().db());
 					setTableInput();
 					key.setText(""); //$NON-NLS-1$
 					val.setText(""); //$NON-NLS-1$
@@ -126,46 +170,12 @@ public final class TagView {
 		if (addTag != null)
 			addTag.setEnabled(this.word != null);
 		if (label != null) {
-			label.setText(String.format(Messages.AddAnnotationTo + " '%s'", //$NON-NLS-1$
-					word == null ? "*" + Messages.NoWordSelected + "*" : word //$NON-NLS-1$//$NON-NLS-2$
-							.history().top().form()));
+			label.setText(String.format(
+					Messages.get().AddAnnotationTo + " '%s'", //$NON-NLS-1$
+					word == null ? "*" + Messages.get().NoWordSelected + "*" : word //$NON-NLS-1$//$NON-NLS-2$
+									.history().top().form()));
 			label.getParent().pack();
 		}
-	}
-
-	/**
-	 * @param text
-	 *            The selected text widget
-	 */
-	@Inject
-	public void setSelection(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final Text text) {
-		Word word = null;
-		Page page = null;
-		if (text != null
-				&& (word = (Word) text.getData(Word.class.toString())) != null
-				&& (page = (Page) text.getData(Page.class.toString())) != null) {
-			this.word = word;
-			this.page = page;
-		}
-		updateLabel();
-		setTableInput();
-	}
-
-	/**
-	 * @param pages
-	 *            The selected pages
-	 */
-	@Inject
-	public void setSelection(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final List<Page> pages) {
-		if (pages != null && pages.size() > 0) {
-			Page page = pages.get(0);
-			System.out.println(Messages.SettingPage + page);
-			this.page = page;
-			this.word = null;
-		}
-		updateLabel();
 	}
 
 	private void initTableViewer(final Composite parent) {
@@ -179,10 +189,10 @@ public final class TagView {
 
 	private void initTable() {
 		final int[] columns = new int[] { 150, 150, 350, 250 };
-		createColumn(Messages.Key, columns[0], viewer);
-		createColumn(Messages.Value, columns[1], viewer);
-		createColumn(Messages.User, columns[2], viewer);
-		createColumn(Messages.Date, columns[3], viewer);
+		createColumn(Messages.get().Key, columns[0], viewer);
+		createColumn(Messages.get().Value, columns[1], viewer);
+		createColumn(Messages.get().User, columns[2], viewer);
+		createColumn(Messages.get().Date, columns[3], viewer);
 		Table table = viewer.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
@@ -218,6 +228,7 @@ public final class TagView {
 		}
 
 	}
+
 }
 
 /**

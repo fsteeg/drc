@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: de.uni_koeln.ub.drc.ui.rap
+Bundle-SymbolicName: de.uni_koeln.ub.drc.ui.rap;singleton:=true
+Bundle-Version: 0.2.0.qualifier
+Fragment-Host: de.uni_koeln.ub.drc.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: javax.servlet,
+ javax.servlet.http
+Require-Bundle: org.eclipse.rap.ui

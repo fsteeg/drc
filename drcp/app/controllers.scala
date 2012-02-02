@@ -28,32 +28,24 @@ object Application extends Controller with Secure {
   
   import views.Application._
 
-  val server = "hydra1.spinfo.uni-koeln.de"
+  val server = "bob.spinfo.uni-koeln.de"
   val port = 8080
-  val db = XmlDb(server, port)
+  val db = XmlDb(server, port, "drc", "crd")
   val col = "drc"
   
   val Prefix = "PPN345572629_"
   val Plain = "drc-plain/"
-  val Meta: Map[Int, MetsTransformer] = Map(
-    4 -> meta("0004"),
-    8 -> meta("0008"),
-    9 -> meta("0009"),
-    11 -> meta("0011"),
-    30 -> meta("0030"),
-    12 -> meta("0012"),
-    17 -> meta("0017"),
-    18 -> meta("0018"),
-    24 -> meta("0024"),
-    27 -> meta("0027"),
-    35 -> meta("0035"),
-    36 -> meta("0036"),
-    37 -> meta("0037"),
-    38 -> meta("0038"),
-    33 -> meta("0033"),
-    14 -> null, 3 -> null) // no metadata for volume 14 and 14.2 (0003)
   
+  val CachedMeta: Map[String, MetsTransformer] = 
+    for((k,v)<-Index.Volumes; if(k!="0014_RC")) yield k -> meta(k) // no metadata for volume 0014_RC
+    
   private def meta(id:String) = new MetsTransformer(Prefix + id + ".xml", db)
+    
+  private val fields = List(
+      ("/page/text", "$m", "views.index.search.text"),
+      ("/page/tag/attribute::text", "<exist:match>text</exist:match>", "views.index.search.tags"),
+      ("/page/comment", "$m", "views.index.search.comments")
+  )
 
   def loadUsers =
     (for (u <- db.getXml(col + "/users").get) yield User.fromXml(u))
@@ -61,7 +53,7 @@ object Application extends Controller with Secure {
 
   def index = {
     val top = loadUsers.take(5)
-    html.index(top)
+    html.index(top, fields.map(_._3))
   }
   
   def edit = html.edit(User.withId(col, db, currentUser))
@@ -90,8 +82,14 @@ object Application extends Controller with Secure {
     val user:User = User.withId(col, db, id)
     val hasEdited = !user.latestPage.trim.isEmpty
     val page: Page = if(hasEdited) new Page(null, user.latestPage) else null
-    val meta: MetsTransformer = if(page != null) Meta(page.volume) else null
-    html.user(user, imageLink(user.latestPage), page, meta)
+    val mets: MetsTransformer = if(page != null) CachedMeta(page.volume) else null
+    html.user(user, imageLink(user.latestPage), page, mets)
+  }
+  
+  def browse(id:String) = {
+    val ids = (db.getIds(Plain + vol(id)).getOrElse(all)).sorted
+    val text = loadText(ids, "<br/>")
+    html.browse(text, Index.Volumes(Index.RF(id.toInt - 1)))
   }
 
   def signup = html.signup()
@@ -171,21 +169,36 @@ object Application extends Controller with Secure {
   def find() = {
     val term = params.get("term")
     val volume = params.get("volume")
-    search(term, volume)
+    val field = params.get("field")
+    search(term, volume, field)
   }
   
   def text = html.text()
   
   def load() = {
-    val volume = params.get("volume")
-    val volumes = Index.RF
-    val vol = if (volume.toInt - 1 >= 0) Prefix + volumes(volume.toInt - 1) else "drc-all"
-    val ids = (db.getIds(Plain + vol).getOrElse(all)).sorted
-    val file = write(ids, vol)
+    val v = params.get("volume")
+    val ids = (db.getIds(Plain + vol(v)).getOrElse(all)).sorted
+    val text = loadText(ids,"\n")
+    val file = write(text, vol(v))
     println("Generated: " + file.getAbsolutePath())
     response.contentType = "application/download"
     response.setHeader("Content-Disposition", "attachment; filename=" + file.getName())
     response.direct = file
+  }
+  
+  private def vol(v:String) = {
+    val volume = v
+    val volumes = Index.RF
+    if (volume.toInt - 1 >= 0) Prefix + volumes(volume.toInt - 1) else "drc-all"
+  }
+  
+  private def loadText(ids: List[String], delim: String) = {
+    val builder = new StringBuilder
+    for(id <- ids) {
+      val e: Elem = db.getXml(Plain + id.split("-")(0), id).get(0)
+      if(!e.text.trim.isEmpty()) builder.append(delim*2).append(id).append(delim*2).append(e.text)
+    }
+    builder.toString.trim.replaceFirst(delim*2, "")
   }
   
   private def all:List[String] = {
@@ -194,25 +207,20 @@ object Application extends Controller with Secure {
     buf.toList
   }
   
-  private def write(ids:List[String], vol:String): File = {
+  private def write(text:String, vol:String): File = {
     val tmp = File.createTempFile(vol+"_",".utf8.txt"); tmp.deleteOnExit()
-    val builder = new StringBuilder
-    for(id <- ids) {
-      val e: Elem = db.getXml(Plain + id.split("-")(0), id).get(0)
-      builder.append("\n").append(id).append("\n\n").append(e.text)
-    }
-    val fw = new FileWriter(tmp); fw.write(builder.toString.trim); fw.close; tmp
+    val fw = new FileWriter(tmp); fw.write(text); fw.close; tmp
   }
   
-  def search(@Required term: String, @Required volume: String) = {
+  def search(@Required term: String, @Required volume: String, @Required field: String) = {
     val volumes = Index.RF
     val vol = if (volume.toInt - 1 >= 0) Prefix + volumes(volume.toInt - 1) else ""
-    val query = createQuery("/page", term)
+    val query = createQuery(fields(field.toInt), term)
     val q = db.query(Plain + vol, configure(query))
     val rows = (q \ "tr")
     val hits: Seq[Hit] = (for (row <- rows) yield parse(row)).sorted
-    val label = if (volume.toInt - 1 >= 0) Index.Volumes(volumes(volume.toInt - 1).toInt) else ""
-    html.search(term, label, hits, volume)
+    val label = if (volume.toInt - 1 >= 0) Index.Volumes(volumes(volume.toInt - 1)) else ""
+    html.search(term, label, hits, volume, fields(field.toInt)._3)
   }
 
   def withLink(elems: String) = {
@@ -221,14 +229,14 @@ object Application extends Controller with Secure {
     XML.loadString(<i>{ Unparsed(elems.replace(id,textLink(imageLink(id)))) }</i>.toString) \"td"
   }
 
-  def createQuery(selector: String, term: String) = {
+  def createQuery(selector: (String, String, String), term: String) = {
     """
       import module namespace kwic="http://exist-db.org/xquery/kwic";
       declare option exist:serialize "omit-xml-declaration=no encoding=utf-8";
       for $m in %s[ft:query(., '%s')]
       order by ft:score($m) descending
-      return kwic:summarize($m, <config width="40" table="yes" link="{$m/attribute::id}"/>)
-      """.format(selector, term.toLowerCase)
+      return kwic:summarize(%s, <config width="40" table="yes" link="{$m/ancestor::page/attribute::id}"/>)
+      """.format(selector._1, term.toLowerCase, selector._2)
   }
 
   private def configure(query: String): scala.xml.Elem = {
@@ -264,10 +272,9 @@ object Application extends Controller with Secure {
   def parse(elem: Node): Hit = {
     val ds: Seq[Node] = elem \ "td"
     val link = (ds(1) \ "a" \ "@href").text
-    val file = link.split("/").last.split("_").last.split("-")
-    val (volume, page) = (file.head, file.last.split("\\.").head)
-    val mappedVolume = Index.Volumes(volume.toInt)
-    val mappedPage = if (Meta(volume.toInt) != null) Meta(volume.toInt).label(page.toInt) else "n/a"
+    val Page.VolumePageExtractor(volume, page) = link
+    val mappedVolume = Index.Volumes(volume)
+    val mappedPage = if (CachedMeta.contains(volume)) CachedMeta(volume).label(page.toInt) else "n/a"
     Hit(
       term = ds(1).text.trim,
       before = ds(0).text.trim,

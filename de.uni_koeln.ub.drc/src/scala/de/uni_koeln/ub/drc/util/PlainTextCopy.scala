@@ -28,8 +28,8 @@ object PlainTextCopy {
   def process(volume: String, db: XmlDb): Unit = {
     val ids = db.getIds(col + "/" + volume).get.sorted.filter(_.endsWith(".xml"))
     for (id <- ids) {
-      val words: List[Word] = ((db.getXml(col + "/" + volume, id).get(0) \ "word") map (Word.fromXml(_))).toList
-      val page = new Page(words, id)
+      val xml = db.getXml(col + "/" + volume, id).get(0)
+      val page = Page.fromXml(xml, id)
       saveToDb(page, col + suffix, volume, db)
       println("Copied %s".format(id))
     }
@@ -37,7 +37,9 @@ object PlainTextCopy {
 
   def saveToDb(page: Page, collection: String, volume: String, db: XmlDb): Node = {
     val c = collection + "/" + volume
-    val root = <page id={ page.id }>{ page.toText("\n") }</page>
+    val root = <page id={ page.id }>
+                 <text>{ page.toText("\n") }</text>{ page.tags.map(_.toXml) }{ page.comments.map(_.toXml) }
+               </page>
     val formatted = format(root)
     db.putXml(root, c, page.id.split("/").last)
     root

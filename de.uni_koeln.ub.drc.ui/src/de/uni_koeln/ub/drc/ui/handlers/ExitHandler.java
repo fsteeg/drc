@@ -1,42 +1,29 @@
 /**************************************************************************************************
- * Copyright (c) 2010 Fabian Steeg. All rights reserved. This program and the accompanying materials
+ * Copyright (c) 2010 Mihail Atanassov. All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0 which accompanies this
  * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * <p/>
- * Contributors: Fabian Steeg - initial API and implementation
+ * Contributors: Mihail Atanassov - initial API and implementation
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.handlers;
 
-import java.util.Collections;
-
-import javax.inject.Inject;
-
-import org.eclipse.core.commands.ParameterizedCommand;
-import org.eclipse.e4.core.commands.ECommandService;
-import org.eclipse.e4.core.commands.EHandlerService;
-import org.eclipse.e4.core.di.annotations.Execute;
-import org.eclipse.e4.ui.workbench.IWorkbench;
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.ui.PlatformUI;
 
 /**
- * Handles application exit, hooked into the menu via Application.xmi.
- * 
- * @author Fabian Steeg (fsteeg)
+ * @author Mihail Atanassov (matana)
  */
-public final class ExitHandler {
-	@Inject
-	private ECommandService commandService;
-	@Inject
-	private EHandlerService handlerService;
-
+public class ExitHandler extends AbstractHandler {
 	/**
-	 * @param workbench
-	 *            The workbench to close after sending a save command
+	 * The class / ExitHandler ID
 	 */
-	@Execute
-	public void execute(final IWorkbench workbench) {
-		ParameterizedCommand saveCommand = commandService.createCommand(
-				"page.save", Collections.EMPTY_MAP); //$NON-NLS-1$
-		handlerService.executeHandler(saveCommand);
-		workbench.close();
+	public static final String ID = ExitHandler.class.getName().toLowerCase();
+
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		return PlatformUI.getWorkbench().close();
 	}
+
 }

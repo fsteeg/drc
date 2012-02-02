@@ -10,13 +10,8 @@ package de.uni_koeln.ub.drc.ui.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.swing.UIManager;
 
-import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.e4.ui.css.swt.CSSSWTConstants;
-import org.eclipse.e4.ui.model.application.ui.MDirtyable;
-import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ControlListener;
@@ -38,34 +33,34 @@ import de.uni_koeln.ub.drc.data.User;
 import de.uni_koeln.ub.drc.data.Word;
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 import de.uni_koeln.ub.drc.ui.Messages;
+import de.uni_koeln.ub.drc.ui.facades.CSSSWTConstantsHelper;
+import de.uni_koeln.ub.drc.ui.facades.TextHelper;
 
 /**
  * Composite holding the edit area. Used by the {@link EditView}.
  * 
- * @author Fabian Steeg (fsteeg)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
-public final class EditComposite extends Composite {
+public class EditComposite extends Composite {
 
-	private MDirtyable dirtyable;
 	private Composite parent;
 	private Page page;
 	private boolean commitChanges = false;
 	private List<Text> words;
 	private List<Composite> lines = new ArrayList<Composite>();
-	private IEclipseContext context;
 	private Label status;
+	private EditView editView;
 
 	/**
 	 * @param editView
 	 *            The parent edit view for this composite
 	 * @param style
-	 *            The syle bits for this composite
+	 *            The style bits for this composite
 	 */
-	@Inject
 	public EditComposite(final EditView editView, final int style) {
 		super(editView.sc, style);
+		this.editView = editView;
 		this.parent = editView.sc;
-		this.dirtyable = editView.dirtyable;
 		this.status = editView.label;
 		parent.getShell().setBackgroundMode(SWT.INHERIT_DEFAULT);
 		GridLayout layout = new GridLayout(1, false);
@@ -136,7 +131,8 @@ public final class EditComposite extends Composite {
 			} else {
 				Text text = new Text(lineComposite, SWT.NONE);
 				setCssName(text);
-				text.setText(word.history().top().form());
+				text.setText(TextHelper.fixForDisplay(word.history().top()
+						.form()));
 				handleEmptyText(text);
 				// option: word.isPossibleError() ? UNCHECKED : DEFAULT
 				text.setForeground(parent.getDisplay().getSystemColor(DEFAULT));
@@ -151,8 +147,8 @@ public final class EditComposite extends Composite {
 		return list;
 	}
 
-	private void setCssName(Control control) {
-		control.setData(CSSSWTConstants.CSS_CLASS_NAME_KEY, "editComposite"); //$NON-NLS-1$
+	private void setCssName(final Control control) {
+		control.setData(CSSSWTConstantsHelper.getCSS(), "editComposite"); //$NON-NLS-1$
 	}
 
 	private void setLineLayout(final Composite lineComposite) {
@@ -177,11 +173,18 @@ public final class EditComposite extends Composite {
 	final static int DEFAULT = SWT.COLOR_BLACK;
 	final static int UNCHECKED = SWT.COLOR_BLACK; // no coloring for now
 
+	/**
+	 * @return The previous text widget
+	 */
+	public Text getPrev() {
+		return prev;
+	}
+
 	private void addModifyListener(final Text text) {
 		text.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(final ModifyEvent e) {
-				User user = DrcUiActivator.instance().currentUser();
+				User user = DrcUiActivator.getDefault().currentUser();
 				user.latestPage_$eq(page.id());
 				user.latestWord_$eq(words.indexOf(text));
 				/*
@@ -190,7 +193,7 @@ public final class EditComposite extends Composite {
 				 */
 				text.setForeground(text.getDisplay().getSystemColor(ACTIVE));
 				if (commitChanges) {
-					dirtyable.setDirty(true);
+					editView.setDirty(true);
 				}
 				handleEmptyText(text);
 				text.pack(true);
@@ -219,8 +222,8 @@ public final class EditComposite extends Composite {
 			@Override
 			public void focusLost(final FocusEvent e) {
 				prev = text; // remember so we can clear only when new focus
-								// gained, not when lost
-				context.modify(IServiceConstants.ACTIVE_SELECTION, null);
+				// gained, not when lost
+				// FIXME: Wrong layout of '&' in rap
 				checkWordValidity(text);
 			}
 
@@ -232,7 +235,7 @@ public final class EditComposite extends Composite {
 						|| (current.contains(" ") && !reference.contains(" "))) { //$NON-NLS-1$ //$NON-NLS-2$
 					text.setForeground(text.getDisplay()
 							.getSystemColor(DUBIOUS));
-					setMessage(Messages.YourRecentEdit);
+					setMessage(Messages.get().YourRecentEdit);
 				} else {
 					status.setText(""); //$NON-NLS-1$
 				}
@@ -243,11 +246,15 @@ public final class EditComposite extends Composite {
 				text.clearSelection(); // use only our persistent marking below
 				Word word = (Word) text.getData(Word.class.toString());
 				if (word.isLocked()) {
-					setMessage(String.format(Messages.Entry
-							+ " '%s' " + Messages.IsLocked, text.getText())); //$NON-NLS-1$
+					setMessage(String.format(
+							Messages.get().Entry
+									+ " '%s' " + Messages.get().IsLocked, text.getText())); //$NON-NLS-1$
 				}
 				text.setEditable(!word.isLocked() && !page.done());
-				context.modify(IServiceConstants.ACTIVE_SELECTION, text);
+				DrcUiActivator.find(CheckView.class).setSelection(text);
+				DrcUiActivator.find(SpecialCharacterView.class).setText(text);
+				DrcUiActivator.find(WordView.class).selectedWord(word, text);
+				DrcUiActivator.find(TagView.class).setWord(word);
 				text.setToolTipText(word.formattedHistory());
 				if (prev != null
 						&& !prev.isDisposed()
@@ -265,9 +272,5 @@ public final class EditComposite extends Composite {
 						.getSystemColor(DUBIOUS));
 			}
 		});
-	}
-
-	void setContext(IEclipseContext context) {
-		this.context = context;
 	}
 }

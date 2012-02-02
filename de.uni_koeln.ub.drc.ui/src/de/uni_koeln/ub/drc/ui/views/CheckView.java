@@ -13,23 +13,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.GC;
@@ -40,10 +38,15 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Scale;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.ISelectionListener;
+import org.eclipse.ui.ISelectionService;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.part.ViewPart;
 
 import de.uni_koeln.ub.drc.data.Box;
 import de.uni_koeln.ub.drc.data.Index;
@@ -56,11 +59,17 @@ import de.uni_koeln.ub.drc.ui.Messages;
  * View containing the scanned page used to check the original word while
  * editing.
  * 
- * @author Fabian Steeg (fsteeg)
+ * @author Fabian Steeg (fsteeg), Mihail Atanassov (matana)
  */
-public final class CheckView {
+public final class CheckView extends ViewPart {
+
+	/**
+	 * The class / CheckView ID
+	 */
+	public static final String ID = CheckView.class.getName().toLowerCase();
+
 	private Composite parent;
-	private Label imageLabel;
+	private Canvas imageCanvas;
 	private boolean imageLoaded = false;
 	private ScrolledComposite scrolledComposite;
 	private ImageData imageData;
@@ -78,31 +87,61 @@ public final class CheckView {
 	private int originalHeight;
 	private int originalWidth;
 
+	@Override
+	public void setFocus() {
+	}
+
 	/**
 	 * @param parent
 	 *            The parent composite for this part
 	 */
-	@Inject
-	public CheckView(final Composite parent) {
+	@Override
+	public void createPartControl(Composite parent) {
 		this.parent = parent;
 		scale();
 		scrolledComposite = new ScrolledComposite(parent, SWT.V_SCROLL
 				| SWT.H_SCROLL | SWT.BORDER);
-		imageLabel = new Label(scrolledComposite, SWT.BORDER | SWT.CENTER);
-		scrolledComposite.setContent(imageLabel);
+		imageCanvas = new Canvas(scrolledComposite, SWT.BORDER | SWT.CENTER);
+		scrolledComposite.setContent(imageCanvas);
 		scrolledComposite.setExpandVertical(true);
 		scrolledComposite.setExpandHorizontal(true);
 		addSuggestions();
+		attachSelectionListener();
+		imageCanvas.addPaintListener(new PaintListener() {
+			@Override
+			public void paintControl(PaintEvent e) {
+				if (word != null && !word.isDisposed()) {
+					markPosition(word, e.gc, wordFromWidget(word));
+				}
+			}
+		});
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
+	}
+
+	private void attachSelectionListener() {
+		ISelectionService selectionService = (ISelectionService) getSite()
+				.getService(ISelectionService.class);
+		selectionService.addSelectionListener(new ISelectionListener() {
+
+			@Override
+			public void selectionChanged(IWorkbenchPart part,
+					ISelection selection) {
+				IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+				if (structuredSelection.getFirstElement() instanceof Page) {
+					List<Page> pages = Arrays.asList((Page) structuredSelection
+							.getFirstElement());
+					setSelection(pages);
+				}
+			}
+		});
+
 	}
 
 	/**
 	 * @param pages
 	 *            The selected pages
 	 */
-	@Inject
-	public void setSelection(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final List<Page> pages) {
+	public void setSelection(final List<Page> pages) {
 		if (pages != null && pages.size() > 0
 				&& (page == null || !page.equals(pages.get(0)))) {
 			page = pages.get(0);
@@ -122,14 +161,14 @@ public final class CheckView {
 	 * @param text
 	 *            The active text widget
 	 */
-	@Inject
-	public void setSelection(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final Text text) {
+	public void setSelection(final Text text) {
 		Word word = null;
 		if (imageLoaded && text != null && !text.isDisposed()
-				&& (word = (Word) text.getData(Word.class.toString())) != null) {
+				&& (word = wordFromWidget(text)) != null) {
 			this.word = text;
-			markPosition(text);
+
+			imageCanvas.redraw();
+			scrollTo(word);
 			if (job != null) {
 				/*
 				 * If a word is selected while we had a Job running for the
@@ -138,18 +177,25 @@ public final class CheckView {
 				job.cancel();
 			}
 			if (!check.getSelection()) {
-				suggestions.setText(Messages.EditSuggestionsDisabled);
+				suggestions.setText(Messages.get().EditSuggestionsDisabled);
 				disposeButtons();
 			} else if (word.isLocked()) {
-				suggestions.setText(Messages.NoEditSuggestionsWordIsLocked);
+				suggestions
+						.setText(Messages.get().NoEditSuggestionsWordIsLocked);
 			} else {
 				findEditSuggestions(word, text);
 				job.setPriority(Job.DECORATE);
 				job.schedule();
 			}
 		} else if (text == null) {
-			suggestions.setText(Messages.NoWordSelected);
+			suggestions.setText(Messages.get().NoWordSelected);
 		}
+	}
+
+	private void scrollTo(Word word) {
+		Point p = newOrigin(word.position(), originalHeight, originalWidth,
+				imageCanvas.getBackgroundImage());
+		scrolledComposite.setOrigin(p);
 	}
 
 	private void scale() {
@@ -157,43 +203,45 @@ public final class CheckView {
 		GridLayout layout = new GridLayout(4, false);
 		zoomBottom.setLayout(layout);
 		Label zoomLabel = new Label(zoomBottom, SWT.NONE);
-		zoomLabel.setText(Messages.Zoom);
+		zoomLabel.setText(Messages.get().Zoom);
 		Label downScaleLabel = new Label(zoomBottom, SWT.NONE);
-		downScaleLabel.setText(Messages.Minus);
+		downScaleLabel.setText(Messages.get().Minus);
 		scale = new Scale(zoomBottom, SWT.NONE);
 		Label upScaleLabel = new Label(zoomBottom, SWT.NONE);
-		upScaleLabel.setText(Messages.Plus);
+		upScaleLabel.setText(Messages.get().Plus);
 		Rectangle clientArea = zoomBottom.getClientArea();
 		scale.setBounds(clientArea.x, clientArea.y, 200, 64);
 		scale.setOrientation(SWT.LEFT_TO_RIGHT);
 		scale.setMinimum(30);
 		scale.setMaximum(100);
 		scale.setSelection(100);
-		scale.setToolTipText(Messages.ZoomToolTip);
-		addListener();
+		scale.setToolTipText(Messages.get().ZoomToolTip);
+		addListenerToScaleWidget();
 	}
 
-	private void addListener() {
-		scale.addMouseListener(new MouseListener() {
-
+	private void addListenerToScaleWidget() {
+		scale.addSelectionListener(new SelectionListener() {
 			@Override
-			public void mouseUp(MouseEvent event) {
+			public void widgetSelected(SelectionEvent e) {
 				scaleFactor = scale.getSelection() / 100F;
-				if (word != null)
-					try {
-						updateImage(page);
-						markPosition(word);
-					} catch (IOException e) {
-						e.printStackTrace();
+				scale.getDisplay().asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							updateImage(page);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						imageCanvas.redraw();
+						if (word != null && !word.isDisposed()) {
+							scrollTo(wordFromWidget(word));
+						}
 					}
+				});
 			}
 
 			@Override
-			public void mouseDown(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseDoubleClick(MouseEvent e) {
+			public void widgetDefaultSelected(SelectionEvent e) {
 			}
 		});
 	}
@@ -203,7 +251,7 @@ public final class CheckView {
 		GridLayout layout = new GridLayout(7, false);
 		bottom.setLayout(layout);
 		check = new Button(bottom, SWT.CHECK);
-		check.setToolTipText(Messages.SuggestCorrections);
+		check.setToolTipText(Messages.get().SuggestCorrections);
 		check.setSelection(false);
 		check.addSelectionListener(new SelectionListener() {
 			@Override
@@ -276,8 +324,8 @@ public final class CheckView {
 
 	private void findEditSuggestions(final Word word, final Text text) {
 		disposeButtons();
-		suggestions.setText(Messages.FindingEditSuggestions);
-		job = new Job(Messages.EditSuggestionsSearchJob) {
+		suggestions.setText(Messages.get().FindingEditSuggestions);
+		job = new Job(Messages.get().EditSuggestionsSearchJob) {
 			@Override
 			protected IStatus run(final IProgressMonitor monitor) {
 				final boolean complete = word.prepSuggestions();
@@ -285,14 +333,15 @@ public final class CheckView {
 					@Override
 					public void run() {
 						if (!complete) {
-							suggestions
-									.setText(Messages.FindingEditSuggestions);
+							suggestions.setText(Messages.get().FindingEditSuggestions);
 						} else {
-							String info = (word.suggestions().size() == 0) ? Messages.NoReasonableEditSuggestionsFound
-									: String.format(Messages.SuggestionsFor
-											+ " %s (" + Messages.Originally //$NON-NLS-1$
-											+ " '%s'):", word.history().top() //$NON-NLS-1$
-											.form(), word.original());
+							String info = (word.suggestions().size() == 0) ? Messages
+									.get().NoReasonableEditSuggestionsFound
+									: String.format(
+											Messages.get().SuggestionsFor
+													+ " %s (" + Messages.get().Originally //$NON-NLS-1$
+													+ " '%s'):", word.history().top() //$NON-NLS-1$
+													.form(), word.original());
 
 							if (!bottom.isDisposed())
 								displaySuggestionButtons(word, text);
@@ -308,14 +357,15 @@ public final class CheckView {
 			@Override
 			protected void canceling() {
 				word.cancelled_$eq(true);
-				suggestions.setText(Messages.FindingEditSuggestions);
+				suggestions.setText(Messages.get().FindingEditSuggestions);
 			};
 		};
 	}
 
 	private void handle(Exception e) {
-		MessageDialog.openError(parent.getShell(), Messages.CouldNotLoadScan,
-				Messages.CouldNotLoadImageForCurrentPage);
+		MessageDialog.openError(parent.getShell(),
+				Messages.get().CouldNotLoadScan,
+				Messages.get().CouldNotLoadImageForCurrentPage);
 		e.printStackTrace();
 	}
 
@@ -326,25 +376,18 @@ public final class CheckView {
 		return newImage;
 	}
 
-	private void markPosition(final Text text) {
-		if (imageLabel.getImage() != null) {
-			imageLabel.getImage().dispose();
-
-			Word word = (Word) text.getData(Word.class.toString());
+	private void markPosition(final Text text, GC gc, Word word) {
+		if (imageCanvas.getBackgroundImage() != null) {
 			Box box = word.position();
 			Rectangle rect = getScaledRect(box);
-
-			Image displayedImage = new Image(parent.getDisplay(),
-					cachedImage.getImageData());
-
-			GC gc = new GC(displayedImage);
 			drawBoxArea(rect, gc);
 			drawBoxBorder(rect, gc);
-			gc.dispose();
-
-			imageLabel.setImage(displayedImage);
+			scrolledComposite.setMinSize(imageCanvas.getBackgroundImage()
+					.getBounds().width, imageCanvas.getBackgroundImage()
+					.getBounds().height);
+			scrolledComposite.layout(true, true);
 			Point p = newOrigin(box, originalHeight, originalWidth,
-					displayedImage);
+					imageCanvas.getBackgroundImage());
 			scrolledComposite.setOrigin(p);
 		}
 	}
@@ -352,15 +395,11 @@ public final class CheckView {
 	private void cacheImage(final Image img) {
 		if (cachedImage != null)
 			cachedImage.dispose();
-		cachedImage = new Image(parent.getDisplay(), new Rectangle(
-				img.getBounds().x, img.getBounds().y, img.getBounds().width,
-				img.getBounds().height));
-		GC gc = new GC(cachedImage);
-		gc.drawImage(img, 0, 0);
-		gc.dispose();
+		cachedImage = new Image(parent.getDisplay(), img, SWT.IMAGE_COPY);
 		if (scaleFactor < 1) {
 			cachedImage = scaleImage(cachedImage);
 		}
+		imageCanvas.setBackgroundImage(cachedImage);
 		originalHeight = cachedImage.getBounds().height;
 		originalWidth = cachedImage.getBounds().width;
 	}
@@ -391,26 +430,30 @@ public final class CheckView {
 	}
 
 	private void updateImage(final Page page) throws IOException {
-		if (imageLabel != null && imageLabel.getImage() != null
-				&& !imageLabel.getImage().isDisposed())
-			imageLabel.getImage().dispose();
+		if (imageCanvas != null && imageCanvas.getBackgroundImage() != null
+				&& !imageCanvas.getBackgroundImage().isDisposed())
+			imageCanvas.getBackgroundImage().dispose();
 		cacheImage(loadImage(page));
-		Image dispayedImage = new Image(parent.getDisplay(),
+		Image displayedImage = new Image(parent.getDisplay(),
 				cachedImage.getImageData());
-		imageData = dispayedImage.getImageData();
-		if (imageLabel != null)
-			imageLabel.setImage(dispayedImage);
+		imageData = displayedImage.getImageData();
+		if (imageCanvas != null)
+			imageCanvas.setBackgroundImage(displayedImage);
 		imageLoaded = true;
-		scrolledComposite.setMinSize(scrolledComposite.getContent()
-				.computeSize(SWT.DEFAULT, SWT.DEFAULT, true));
+		scrolledComposite.setMinSize(displayedImage.getBounds().width,
+				displayedImage.getBounds().height);
 		scrolledComposite.layout(true, true);
 	}
 
 	private InputStream getInputStream(final Page page) {
 		InputStream in = new BufferedInputStream(new ByteArrayInputStream(
-				Index.loadImageFor(DrcUiActivator.instance().currentUser()
-						.collection(), DrcUiActivator.instance().db(), page)));
+				Index.loadImageFor(DrcUiActivator.getDefault().currentUser()
+						.collection(), DrcUiActivator.getDefault().db(), page)));
 		return in;
+	}
+
+	private Word wordFromWidget(Text text) {
+		return (Word) text.getData(Word.class.toString());
 	}
 
 }

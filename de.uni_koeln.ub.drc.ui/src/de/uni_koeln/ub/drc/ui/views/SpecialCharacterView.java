@@ -1,19 +1,12 @@
 /**************************************************************************************************
- * Copyright (c) 2010 Mihail Atanassov. All rights reserved. This program and the accompanying
- * materials are made available under the terms of the Eclipse Public License v1.0 which accompanies
- * this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2010 Fabian Steeg. All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0 which accompanies this
+ * distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
  * <p/>
  * Contributors: Mihail Atanassov - initial API and implementation
  *************************************************************************************************/
 package de.uni_koeln.ub.drc.ui.views;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.ui.css.swt.CSSSWTConstants;
-import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.FocusEvent;
@@ -25,17 +18,23 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.part.ViewPart;
+
+import de.uni_koeln.ub.drc.ui.facades.CSSSWTConstantsHelper;
 
 /**
- * View containing buttons for insertion of special characters.
+ * A view representing special characters.
  * 
  * @author Mihail Atanassov (matana)
  */
-
-public final class SpecialCharacterView {
+public class SpecialCharacterView extends ViewPart {
+	/**
+	 * The class / SpecialCharacterView ID
+	 */
+	public static final String ID = SpecialCharacterView.class.getName()
+			.toLowerCase();
 
 	private Text text;
-
 	private static final char[] SC = new char[] { /* A */'\u00C0', '\u00E0',
 			'\u00C1', '\u00E1', '\u00C2', '\u00E2', '\u00C3', '\u00E3',
 			'\u00C4', '\u00E4', '\u00C6', '\u00E6', '\u1EA0', '\u1EA1', /* E */
@@ -50,12 +49,8 @@ public final class SpecialCharacterView {
 			'\u016A', '\u016B', /* N */
 			'\u00D1', '\u00F1', /* long S '\u017F' */};
 
-	/**
-	 * @param parent
-	 *            The parent composite for this part
-	 */
-	@Inject
-	public SpecialCharacterView(final Composite parent) {
+	@Override
+	public void createPartControl(Composite parent) {
 		ScrolledComposite scrolledComposite = new ScrolledComposite(parent,
 				SWT.V_SCROLL | SWT.BORDER);
 		Composite specialCharacterComposite = new Composite(scrolledComposite,
@@ -72,37 +67,8 @@ public final class SpecialCharacterView {
 				SWT.MIN, SWT.DEFAULT));
 	}
 
-	/**
-	 * @param text
-	 *            The selected text widget
-	 */
-	@Inject
-	public void setSelection(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final Text text) {
-		if (text != null) {
-			this.text = text;
-		}
-	}
-
-	protected static class TextFocusListener implements FocusListener {
-
-		private IEclipseContext context;
-		private Text text;
-
-		public TextFocusListener(final IEclipseContext context, final Text text) {
-			this.context = context;
-			this.text = text;
-		}
-
-		@Override
-		public void focusGained(FocusEvent e) {
-			context.modify(IServiceConstants.ACTIVE_SELECTION, text);
-		}
-
-		@Override
-		public void focusLost(FocusEvent e) {
-			context.modify(IServiceConstants.ACTIVE_SELECTION, null);
-		}
+	@Override
+	public void setFocus() {
 	}
 
 	private void initSCButtons(final Composite specialCharacterComposite) {
@@ -111,8 +77,7 @@ public final class SpecialCharacterView {
 					SWT.PUSH | SWT.FLAT);
 			RowData rowData = new RowData(30, 30);
 			button.setLayoutData(rowData);
-			button.setData(CSSSWTConstants.CSS_CLASS_NAME_KEY,
-					"specialCharacter"); //$NON-NLS-1$
+			button.setData(CSSSWTConstantsHelper.getCSS(), "specialCharacter"); //$NON-NLS-1$
 			button.setText("" + SC[i]); //$NON-NLS-1$
 			button.addSelectionListener(new SelectionListener() {
 
@@ -122,7 +87,7 @@ public final class SpecialCharacterView {
 				}
 
 				private void insert(final String character) {
-					if (text != null) {
+					if (text != null && !text.isDisposed()) {
 						int pos = text.getCaretPosition();
 						text.insert(character);
 						text.setSelection(pos + 1);
@@ -135,6 +100,31 @@ public final class SpecialCharacterView {
 				}
 			});
 		}
+	}
+
+	protected static class TextFocusListener implements FocusListener {
+
+		public Text text;
+
+		public TextFocusListener(final Text text) {
+			this.text = text;
+		}
+
+		@Override
+		public void focusGained(FocusEvent e) {
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+		}
+	}
+
+	/**
+	 * @param text
+	 *            The selected text widget
+	 */
+	public void setText(final Text text) {
+		this.text = text;
 	}
 
 }

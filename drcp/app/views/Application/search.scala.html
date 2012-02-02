@@ -1,9 +1,9 @@
-@(term:String, label:String, pages:Seq[controllers.Application.Hit], volume:String)
+@(term:String, label:String, pages:Seq[controllers.Application.Hit], volume:String, field:String)
 @import play.i18n.Messages._
 @main("crestomazia.ch") {
 
 <h1>@Html(get("views.search.mode", term)) @if(volume != "0") { @Html(get("views.search.volume")) @label
-	} else { @Html(get("views.search.volumes")) }</h1>
+	} else { @Html(get("views.search.volumes")) } (@get(field))</h1>
 
 <p>
 @Html(get("views.search.result", pages.size.toString))

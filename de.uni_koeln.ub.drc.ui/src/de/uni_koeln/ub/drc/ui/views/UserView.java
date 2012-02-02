@@ -11,7 +11,6 @@ package de.uni_koeln.ub.drc.ui.views;
 import java.security.Principal;
 import java.util.Set;
 
-import javax.inject.Inject;
 import javax.security.auth.Subject;
 import javax.security.auth.login.LoginException;
 
@@ -22,6 +21,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.part.ViewPart;
 
 import de.uni_koeln.ub.drc.ui.DrcUiActivator;
 
@@ -30,7 +30,12 @@ import de.uni_koeln.ub.drc.ui.DrcUiActivator;
  * 
  * @author Fabian Steeg (fsteeg)
  */
-public final class UserView {
+public final class UserView extends ViewPart {
+
+	/**
+	 * The class / UserView ID
+	 */
+	public static final String ID = UserView.class.getName().toLowerCase();
 
 	private TreeViewer subjectViewer;
 	private Subject subject;
@@ -39,12 +44,13 @@ public final class UserView {
 	 * @param parent
 	 *            The parent composite for this part
 	 */
-	@Inject
-	public UserView(final Composite parent) {
+	@Override
+	public void createPartControl(final Composite parent) {
 		subjectViewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL
 				| SWT.V_SCROLL);
 		try {
-			subject = DrcUiActivator.instance().getLoginContext().getSubject();
+			subject = DrcUiActivator.getDefault().getLoginContext()
+					.getSubject();
 		} catch (LoginException e) {
 			e.printStackTrace();
 		}
@@ -52,6 +58,10 @@ public final class UserView {
 		subjectViewer.setLabelProvider(new SubjectLabelProvider(subject));
 		subjectViewer.setInput(subject);
 		GridLayoutFactory.fillDefaults().generateLayout(parent);
+	}
+
+	@Override
+	public void setFocus() {
 	}
 
 	private static class SubjectLabelProvider extends LabelProvider {
