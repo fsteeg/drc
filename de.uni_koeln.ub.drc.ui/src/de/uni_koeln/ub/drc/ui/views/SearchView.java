@@ -827,8 +827,8 @@ public final class SearchView extends ViewPart {
 				return isPage(element) ? volumes.getItem(volumes
 						.getSelectionIndex()) : ""; //$NON-NLS-1$
 			case 2:
-				return isPage(element) ? String.valueOf(((Page) element)
-						.number()) : ""; //$NON-NLS-1$
+				return isPage(element) ? physMap.get(((Page) element).id())
+						: ""; //$NON-NLS-1$
 			case 3: {
 				if (isPage(element)) {
 					String text = asPage(element).toText("|"); //$NON-NLS-1$
