@@ -246,8 +246,11 @@ class MetsTransformer(xml: Elem, name: String = "") {
       /* physId -> List(logId2, logId1) */
       val physId = attribute("to", link)
       val logId = attribute("from", link)
-      val logIds = if (linkMap.contains(physId)) linkMap(physId) else List()
+      val logIds = if (linkMap.contains(physId)) linkMap(physId)
+      else List()
+      if (logMap.contains(logId)) { // only if in logMap
       linkMap += physId -> (logId :: logIds) // prepend latest hit
+      }
     }
     linkMap
   }

@@ -91,8 +91,8 @@ object SearchOption extends Enumeration {
 object Import extends Application {
 
   //private val db = Index.LocalDb
-  val db = XmlDb("bob.spinfo.uni-koeln.de", 7070)
-  //val db = XmlDb("hydra1.spinfo.uni-koeln.de", 8080)
+  //val db = XmlDb("bob.spinfo.uni-koeln.de", 7070)
+  val db = XmlDb("hydra1.spinfo.uni-koeln.de", 8080)
 
   val folder = "res/rom/"
   val prefix = "PPN345572629_"
@@ -169,7 +169,7 @@ object Index {
 
   //def collection(s:String) = "drc/" + s
   val DefaultCollection = "drc"
-  val LocalDb = XmlDb("localhost", 7070, "guest", "guest")
+  val LocalDb = XmlDb("localhost", 7777, "guest", "guest")
 
   lazy val lexicon: Set[String] =
     (Set() ++ scala.io.Source.fromInputStream(
