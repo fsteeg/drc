@@ -721,12 +721,7 @@ public final class SearchView extends ViewPart {
 			SAXException, IOException {
 		Map<Chapter, List<Object>> chapters = new TreeMap<Chapter, List<Object>>();
 		physMap = new TreeMap<String, String>();
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		Document doc = dBuilder.parse(getInputStream(selectedVolume));
-		doc.getDocumentElement().normalize();
-		NodeList nodeList = doc.getElementsByTagName(XmlAttributes.Chapter
-				.toString().toLowerCase());
+		NodeList nodeList = getNodeList(selectedVolume);
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node node = nodeList.item(i);
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -759,6 +754,17 @@ public final class SearchView extends ViewPart {
 			}
 		}
 		return chapters;
+	}
+
+	private NodeList getNodeList(final String selectedVolume)
+			throws ParserConfigurationException, SAXException, IOException {
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+		Document doc = dBuilder.parse(getInputStream(selectedVolume));
+		doc.getDocumentElement().normalize();
+		NodeList nodeList = doc.getElementsByTagName(XmlAttributes.Chapter
+				.toString().toLowerCase());
+		return nodeList;
 	}
 
 	enum XmlAttributes {
