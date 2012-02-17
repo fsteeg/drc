@@ -366,6 +366,12 @@ public final class SearchView extends ViewPart {
 	}
 
 	private void setCurrentPageLabel(Page page) {
+		// currentPageLabel
+		// .setText(String.format(
+		// Messages.get().CurrentPageVolume
+		//								+ " %s, " + Messages.get().Page + " %s", volumes.getItem(volumes.getSelectionIndex()), //$NON-NLS-1$ //$NON-NLS-2$
+		// mets.label(page.number())));
+		// close.setSelection(page.done());
 		currentPageLabel
 				.setText(String.format(
 						Messages.get().CurrentPageVolume
@@ -390,7 +396,7 @@ public final class SearchView extends ViewPart {
 				}
 
 			}
-
+		// Chapter chapter = mets.chapters(page.number(), Count.File()).head();
 		TreeItem[] items = viewer.getTree().getItems();
 		for (TreeItem treeItem : items) {
 			if (treeItem.getText(3).contains(chapter.title())) {
@@ -670,6 +676,30 @@ public final class SearchView extends ViewPart {
 		Object[] pages = content.getPages(searchField.getText().trim()
 				.toLowerCase());
 		Arrays.sort(pages, comp);
+		chapters = new TreeMap<Chapter, List<Object>>();
+
+		// boolean meta = true;
+		// try {
+		//			mets = new MetsTransformer(selectedVolume + ".xml", db); //$NON-NLS-1$
+		// } catch (NullPointerException x) {
+		// // No matadata available for selected volume
+		// meta = false;
+		// }
+		// for (Object page : pages) {
+		// int fileNumber = page instanceof Page ? ((Page) page).number()
+		// : new Page(null, (String) page).number();
+		// List<Chapter> chaptersForPage = meta ? /**/
+		// JavaConversions.asJavaList(mets.chapters(fileNumber, Count.File()))
+		// : Arrays.asList(new Chapter(0, 1, Messages.get().NoMeta));
+		// for (Chapter chapter : chaptersForPage) {
+		// List<Object> pagesInChapter = chapters.get(chapter);
+		// if (pagesInChapter == null) {
+		// pagesInChapter = new ArrayList<Object>();
+		// chapters.put(chapter, pagesInChapter);
+		// }
+		// pagesInChapter.add(page);
+		// }
+		// }
 
 		try {
 			chapters = getChapters(selectedVolume, pages);
@@ -680,6 +710,8 @@ public final class SearchView extends ViewPart {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		// Use if no compressed meta data is available
+		// generateXML();
 		viewer.setInput(chapters);
 		updateResultCount(pages.length);
 	}
@@ -693,16 +725,20 @@ public final class SearchView extends ViewPart {
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document doc = dBuilder.parse(getInputStream(selectedVolume));
 		doc.getDocumentElement().normalize();
-		NodeList nodeList = doc.getElementsByTagName("chapter"); //$NON-NLS-1$		
+		NodeList nodeList = doc.getElementsByTagName(XmlAttributes.Chapter
+				.toString().toLowerCase());
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node node = nodeList.item(i);
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
 				Element element = (Element) node;
-				String chapterTitle = element.getAttribute("title"); //$NON-NLS-1$
+				String chapterTitle = element.getAttribute(XmlAttributes.Title
+						.toString().toLowerCase());
 				int chapterNumber = Integer.parseInt(element
-						.getAttribute("number")); //$NON-NLS-1$
+						.getAttribute(XmlAttributes.Number.toString()
+								.toLowerCase()));
 				String s = selectedVolume
-						.substring(13, selectedVolume.length());
+						.substring(13, selectedVolume.length()).replaceAll(
+								"[^\\d]", "");//$NON-NLS-1$ //$NON-NLS-2$
 				Chapter c = new Chapter(Integer.parseInt(s), chapterNumber,
 						chapterTitle);
 				NodeList childNodes = element.getChildNodes();
@@ -711,8 +747,10 @@ public final class SearchView extends ViewPart {
 					Node child = childNodes.item(j);
 					if (child.getNodeType() == Node.ELEMENT_NODE) {
 						Element e = (Element) child;
-						String pageID = e.getAttribute("id"); //$NON-NLS-1$
-						String physID = e.getAttribute("physID"); //$NON-NLS-1$
+						String pageID = e.getAttribute(XmlAttributes.Id
+								.toString().toLowerCase());
+						String physID = e.getAttribute(XmlAttributes.PhysId
+								.toString().toLowerCase());
 						physMap.put(pageID, physID);
 						list.add(pageID);
 					}
@@ -723,13 +761,16 @@ public final class SearchView extends ViewPart {
 		return chapters;
 	}
 
+	enum XmlAttributes {
+		Chapter, Id, Number, Page, PhysId, Title, Volume
+	}
+
 	private InputStream getInputStream(String selectedVolume) {
-		// FIXME Needs a connection to database and retrieval should work for
-		// single XML-files by name
 		InputStream openStream = null;
 		try {
-			URL url = new URL("http://localhost:7777/exist/rest/db/drc/" //$NON-NLS-1$
-					+ selectedVolume + "/" + selectedVolume + ".xml");//$NON-NLS-1$//$NON-NLS-2$
+			XmlDb db = DrcUiActivator.getDefault().db();
+			URL url = new URL(db.restRoot() + "drc-meta-comp/" //$NON-NLS-1$
+					+ selectedVolume + ".xml");//$NON-NLS-1$
 			openStream = url.openStream();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -769,7 +810,6 @@ public final class SearchView extends ViewPart {
 			DOMSource source = new DOMSource(doc);
 			StreamResult result = new StreamResult(new File(
 					"C:\\" + volume + ".xml")); //$NON-NLS-1$ //$NON-NLS-2$
-			// StreamResult result = new StreamResult(System.out);
 			transformer.transform(source, result);
 		} catch (TransformerConfigurationException e) {
 			e.printStackTrace();
@@ -780,25 +820,32 @@ public final class SearchView extends ViewPart {
 
 	private void createPageElement(final Document doc,
 			final Element chapterElement, final String pageID, final int number) {
-		Element pageElement = doc.createElement("page"); //$NON-NLS-1$
-		pageElement.setAttribute("id", pageID); //$NON-NLS-1$
-		pageElement.setAttribute("physID", mets.label(number)); //$NON-NLS-1$
+		Element pageElement = doc.createElement(XmlAttributes.Id.toString()
+				.toLowerCase());
+		pageElement.setAttribute(XmlAttributes.Id.toString().toLowerCase(),
+				pageID);
+		pageElement.setAttribute(XmlAttributes.PhysId.toString().toLowerCase(),
+				mets.label(number));
 		chapterElement.appendChild(pageElement);
 	}
 
 	private Element createChapterElement(final Document doc,
 			final Element volumeElement, final Chapter chapter) {
-		Element chapterElement = doc.createElement("chapter"); //$NON-NLS-1$
+		Element chapterElement = doc.createElement(XmlAttributes.Chapter
+				.toString().toLowerCase());
 		volumeElement.appendChild(chapterElement);
-		chapterElement.setAttribute("title", chapter.title()); //$NON-NLS-1$
-		chapterElement.setAttribute("number", String.valueOf(chapter.number())); //$NON-NLS-1$
+		chapterElement.setAttribute(XmlAttributes.Title.toString()
+				.toLowerCase(), chapter.title());
+		chapterElement.setAttribute(XmlAttributes.Number.toString()
+				.toLowerCase(), String.valueOf(chapter.number()));
 		return chapterElement;
 	}
 
 	private Element createVolumeElement(final Document doc, final String title) {
-		Element volume = doc.createElement("volume"); //$NON-NLS-1$
+		Element volume = doc.createElement(XmlAttributes.Volume.toString()
+				.toLowerCase());
 		doc.appendChild(volume);
-		volume.setAttribute("title", title); //$NON-NLS-1$
+		volume.setAttribute(XmlAttributes.Title.toString().toLowerCase(), title);
 		return volume;
 	}
 
@@ -827,6 +874,8 @@ public final class SearchView extends ViewPart {
 				return isPage(element) ? volumes.getItem(volumes
 						.getSelectionIndex()) : ""; //$NON-NLS-1$
 			case 2:
+				// return isPage(element) && mets != null ? mets.label(asPage(
+				// element).number()) + "" : ""; //$NON-NLS-1$ //$NON-NLS-2$
 				return isPage(element) ? physMap.get(((Page) element).id())
 						: ""; //$NON-NLS-1$
 			case 3: {
