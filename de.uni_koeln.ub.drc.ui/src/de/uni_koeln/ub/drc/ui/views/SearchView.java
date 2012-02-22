@@ -382,25 +382,31 @@ public final class SearchView extends ViewPart {
 
 	private void select(String pageId) {
 		Page page = page(pageId);
-		// FIXME NullPointerException
 		Chapter chapter = new Chapter(0, 0, ""); //$NON-NLS-1$
-		if (chapters != null)
+		if (chapters != null) {
+			boolean flag = false;
 			for (Chapter c : chapters.keySet()) {
-				List<Object> list = chapters.get(chapter);
+				List<Object> list = chapters.get(c);
 				for (Object o : list) {
 					String id = o instanceof Page ? ((Page) o).id() : new Page(
 							null, (String) o).id();
 					if (pageId.equals(id)) {
 						chapter = c;
+						flag = true;
+						break;
 					}
 				}
-
+				if (flag)
+					break;
 			}
+		}
+
 		// Chapter chapter = mets.chapters(page.number(), Count.File()).head();
 		TreeItem[] items = viewer.getTree().getItems();
 		for (TreeItem treeItem : items) {
 			if (treeItem.getText(3).contains(chapter.title())) {
 				treeItem.setExpanded(true);
+				break;
 			}
 		}
 		viewer.refresh(chapter);
@@ -719,6 +725,15 @@ public final class SearchView extends ViewPart {
 	private Map<Chapter, List<Object>> getChapters(final String selectedVolume,
 			final Object[] pages) throws ParserConfigurationException,
 			SAXException, IOException {
+
+		// use pageIDs for filtering by search result
+		ArrayList<String> pageIDs = new ArrayList<String>();
+		for (Object page : pages) {
+			String pageID = page instanceof Page ? ((Page) page).id()
+					: new Page(null, (String) page).id();
+			pageIDs.add(pageID);
+		}
+
 		Map<Chapter, List<Object>> chapters = new TreeMap<Chapter, List<Object>>();
 		physMap = new TreeMap<String, String>();
 		NodeList nodeList = getNodeList(selectedVolume);
@@ -747,24 +762,15 @@ public final class SearchView extends ViewPart {
 						String physID = e.getAttribute(XmlAttributes.PhysId
 								.toString().toLowerCase());
 						physMap.put(pageID, physID);
-						list.add(pageID);
+						if (pageIDs.contains(pageID)) // filter by search result
+							list.add(pageID);
 					}
-					chapters.put(c, list);
+					if (!list.isEmpty()) // non-empty chapters only
+						chapters.put(c, list);
 				}
 			}
 		}
 		return chapters;
-	}
-
-	private NodeList getNodeList(final String selectedVolume)
-			throws ParserConfigurationException, SAXException, IOException {
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		Document doc = dBuilder.parse(getInputStream(selectedVolume));
-		doc.getDocumentElement().normalize();
-		NodeList nodeList = doc.getElementsByTagName(XmlAttributes.Chapter
-				.toString().toLowerCase());
-		return nodeList;
 	}
 
 	enum XmlAttributes {
@@ -775,7 +781,7 @@ public final class SearchView extends ViewPart {
 		InputStream openStream = null;
 		try {
 			XmlDb db = DrcUiActivator.getDefault().db();
-			URL url = new URL(db.restRoot() + "drc-meta-comp/" //$NON-NLS-1$
+			URL url = new URL(db.restRoot() + "drc/drc-meta-comp/" //$NON-NLS-1$
 					+ selectedVolume + ".xml");//$NON-NLS-1$
 			openStream = url.openStream();
 		} catch (MalformedURLException e) {
@@ -815,7 +821,8 @@ public final class SearchView extends ViewPart {
 			transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
 			StreamResult result = new StreamResult(new File(
-					"C:\\" + volume + ".xml")); //$NON-NLS-1$ //$NON-NLS-2$
+			//"C:\\" + volume + ".xml")); //$NON-NLS-1$ //$NON-NLS-2$
+					"/drc-meta/" + volume + ".xml")); //$NON-NLS-1$ //$NON-NLS-2$
 			transformer.transform(source, result);
 		} catch (TransformerConfigurationException e) {
 			e.printStackTrace();
@@ -867,6 +874,17 @@ public final class SearchView extends ViewPart {
 			e.printStackTrace();
 		}
 		return doc;
+	}
+
+	private NodeList getNodeList(final String selectedVolume)
+			throws ParserConfigurationException, SAXException, IOException {
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+		Document doc = dBuilder.parse(getInputStream(selectedVolume));
+		doc.getDocumentElement().normalize();
+		NodeList nodeList = doc.getElementsByTagName(XmlAttributes.Chapter
+				.toString().toLowerCase());
+		return nodeList;
 	}
 
 	private final class SearchViewLabelProvider extends LabelProvider implements
