@@ -140,20 +140,33 @@
                   style="push">
             </command>
          </menu>
+         <menu
+               label="Layout">
+            <command
+                  commandId="org.eclipse.ui.perspectives.showPerspective"
+                  label="Layout auswählen"
+                  style="push">
+            </command>
+         </menu>
       </menuContribution>
    </extension>
       <extension
          point="org.eclipse.ui.perspectives">
+         <perspective
+               class="de.uni_koeln.ub.drc.ui.Perspective"
+               id="de.uni_koeln.ub.drc.ui.perspective"
+               name="DRC Layout 1">
+         </perspective>
       <perspective
-            class="de.uni_koeln.ub.drc.ui.Perspective"
-            id="de.uni_koeln.ub.drc.ui.perspective"
-            name="DRC Perspective">
+            class="de.uni_koeln.ub.drc.ui.PerspectiveAlternative"
+            id="de.uni_koeln.ub.drc.ui.perspectivealternative"
+            name="DRC Layout 2 ">
       </perspective>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
-            targetID="*">
+            targetID="de.uni_koeln.ub.drc.ui.perspective">
          <view
                closeable="false"
                id="de.uni_koeln.ub.drc.ui.views.searchview"
@@ -162,6 +175,46 @@
                ratio="0.35f"
                relationship="top"
                relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
+         <view
+               closeable="false"
+               id="de.uni_koeln.ub.drc.ui.views.specialcharacterview"
+               minimized="false"
+               moveable="true"
+               ratio="0.35f"
+               relationship="stack"
+               relative="de.uni_koeln.ub.drc.ui.views.searchview"
+               visible="true">
+         </view>
+         <view
+               closeable="false"
+               id="de.uni_koeln.ub.drc.ui.views.wordview"
+               minimized="false"
+               moveable="true"
+               ratio="0.35f"
+               relationship="stack"
+               relative="de.uni_koeln.ub.drc.ui.views.searchview"
+               visible="true">
+         </view>
+         <view
+               closeable="false"
+               id="de.uni_koeln.ub.drc.ui.views.tagview"
+               minimized="false"
+               moveable="true"
+               ratio="0.35f"
+               relationship="stack"
+               relative="de.uni_koeln.ub.drc.ui.views.searchview"
+               visible="true">
+         </view>
+         <view
+               closeable="false"
+               id="de.uni_koeln.ub.drc.ui.views.commentsview"
+               minimized="false"
+               moveable="true"
+               ratio="0.35f"
+               relationship="stack"
+               relative="de.uni_koeln.ub.drc.ui.views.searchview"
                visible="true">
          </view>
          <view
@@ -184,14 +237,27 @@
                relative="org.eclipse.ui.editorss"
                visible="true">
          </view>
+      </perspectiveExtension>
+      <perspectiveExtension
+            targetID="de.uni_koeln.ub.drc.ui.perspectivealternative">
+         <view
+               closeable="false"
+               id="de.uni_koeln.ub.drc.ui.views.searchview"
+               minimized="false"
+               moveable="true"
+               ratio="0.35f"
+               relationship="left"
+               relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
          <view
                closeable="false"
                id="de.uni_koeln.ub.drc.ui.views.specialcharacterview"
                minimized="false"
                moveable="true"
-               ratio="0.15f"
+               ratio="0.35f"
                relationship="stack"
-               relative="de.uni_koeln.ub.drc.ui.views.checkview"
+               relative="de.uni_koeln.ub.drc.ui.views.searchview"
                visible="true">
          </view>
          <view
@@ -199,9 +265,9 @@
                id="de.uni_koeln.ub.drc.ui.views.wordview"
                minimized="false"
                moveable="true"
-               ratio="0.15f"
+               ratio="0.35f"
                relationship="stack"
-               relative="de.uni_koeln.ub.drc.ui.views.checkview"
+               relative="de.uni_koeln.ub.drc.ui.views.searchview"
                visible="true">
          </view>
          <view
@@ -209,9 +275,9 @@
                id="de.uni_koeln.ub.drc.ui.views.tagview"
                minimized="false"
                moveable="true"
-               ratio="0.15f"
+               ratio="0.35f"
                relationship="stack"
-               relative="de.uni_koeln.ub.drc.ui.views.checkview"
+               relative="de.uni_koeln.ub.drc.ui.views.searchview"
                visible="true">
          </view>
          <view
@@ -219,9 +285,29 @@
                id="de.uni_koeln.ub.drc.ui.views.commentsview"
                minimized="false"
                moveable="true"
-               ratio="0.15f"
+               ratio="0.35f"
                relationship="stack"
-               relative="de.uni_koeln.ub.drc.ui.views.checkview"
+               relative="de.uni_koeln.ub.drc.ui.views.searchview"
+               visible="true">
+         </view>
+         <view
+               closeable="false"
+               id="de.uni_koeln.ub.drc.ui.views.editview"
+               minimized="false"
+               moveable="true"
+               ratio="0.50f"
+               relationship="top"
+               relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
+         <view
+               closeable="false"
+               id="de.uni_koeln.ub.drc.ui.views.checkview"
+               minimized="false"
+               moveable="true"
+               ratio="0.15f"
+               relationship="top"
+               relative="org.eclipse.ui.editorss"
                visible="true">
          </view>
       </perspectiveExtension>
@@ -255,7 +341,11 @@
       </context>
       <context
             id="de.uni_koeln.ub.drc.ui.perspectivecontext"
-            name="Perspective context">
+            name="Perspective default">
+      </context>
+      <context
+            id="de.uni_koeln.ub.drc.ui.alternativecontext"
+            name="Perspective alternative">
       </context>
    </extension>
 </plugin>
