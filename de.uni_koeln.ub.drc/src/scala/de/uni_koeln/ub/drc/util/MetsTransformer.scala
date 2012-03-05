@@ -201,6 +201,10 @@ class MetsTransformer(xml: Elem, name: String = "") {
         else if (loc.contains("_0024") &&
           (subdiv \ "@ID").toString() == "log5") {
           addToLogMap(subdiv, label)
+        } //special case #3: recognize misspelled label "crestomathie" in vol. III (0014_02)
+        else if (parentLabel.contains("Crestomathie")) {
+          fullTitle = parentLabel
+          addToLogMap(subdiv, label)
         }
         //default: correct metadata
         if (parentLabel.contains("Chrestomathie")) {
@@ -246,8 +250,11 @@ class MetsTransformer(xml: Elem, name: String = "") {
       /* physId -> List(logId2, logId1) */
       val physId = attribute("to", link)
       val logId = attribute("from", link)
-      val logIds = if (linkMap.contains(physId)) linkMap(physId) else List()
-      linkMap += physId -> (logId :: logIds) // prepend latest hit
+      val logIds = if (linkMap.contains(physId)) linkMap(physId)
+      else List()
+      if (logMap.contains(logId)) { // only if in logMap
+        linkMap += physId -> (logId :: logIds) // prepend latest hit
+      }
     }
     linkMap
   }
